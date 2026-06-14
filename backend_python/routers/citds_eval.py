@@ -1,6 +1,7 @@
 from fastapi import APIRouter, Depends
 from sqlalchemy.orm import Session
 
+import controlled_failure
 import evidence_service
 import models
 import relevance
@@ -50,6 +51,17 @@ def citds_self_test(
         "details": "Every reconstructed action must carry evidence ids E.",
     })
     checks.append({
+        "name": "controlled_failure_object_contract",
+        "passed": all(field in controlled_failure.make_controlled_failure(
+            controlled_failure.STATUS_ABSTAIN,
+            controlled_failure.REASON_EPISTEMIC,
+            {},
+            {},
+            "The answer cannot be found in the document.",
+        ) for field in ["status", "reason", "evidenceState", "policyState", "safeOutput", "nextSteps", "trace"]),
+        "details": "Controlled failure must expose the PDF contract fields without leaking source content.",
+    })
+    checks.append({
         "name": "known_demo_open_count",
         "passed": len(open_items) in {0, 4} or len(open_items) >= 1,
         "details": "For the seeded demo scenario, the expected open count is 4. For real imports, non-zero is acceptable.",
@@ -88,13 +100,16 @@ def implementation_status(user_id: str = Depends(security.get_current_user_id)):
         {"component": "governance_prefilter", "status": "implemented", "notes": "Full/Aggregate/Metadata/Deny policy decisions"},
         {"component": "aggregate_only_hardening", "status": "implemented", "notes": "raw content withheld, aggregate-safe facts allowed"},
         {"component": "metadata_only_mode", "status": "implemented", "notes": "metadata visible, content withheld"},
+        {"component": "controlled_failure_object", "status": "implemented", "notes": "status, reason, evidenceState, policyState, safeOutput, nextSteps, trace"},
+        {"component": "output_mode_selection", "status": "implemented", "notes": "full, abstain, refuse, restricted, aggregate, metadata-only, clarify/escalate-ready statuses"},
         {"component": "evidence_checking", "status": "implemented", "notes": "role summary, primary/aggregate/contrastive warnings"},
         {"component": "action_list_reconstruction", "status": "implemented", "notes": "primary/contextual/contrastive evidence grouping"},
         {"component": "browser_history_contextual_rule", "status": "implemented", "notes": "BrowserHistory cannot create obligations alone"},
+        {"component": "safe_next_steps", "status": "implemented", "notes": "controlled failures return non-leaking next steps"},
         {"component": "gmail_import", "status": "connector_contract", "notes": "Gmail-shaped import endpoint maps messages to EvidenceUnit"},
         {"component": "browser_history_import", "status": "connector_contract", "notes": "history-shaped import endpoint maps visits to contextual EvidenceUnit"},
         {"component": "classifier", "status": "implemented", "notes": "deterministic classifier with optional LLM refinement"},
-        {"component": "audit_trace", "status": "implemented", "notes": "chat trace, coverage, evidence_check in audit logs"},
+        {"component": "audit_trace", "status": "implemented", "notes": "chat trace, coverage, evidence_check and controlled_failure object in audit logs"},
         {"component": "benchmark", "status": "self_test_implemented", "notes": "deterministic sanity checks; full research gold-set benchmark not included"},
     ]
     implemented = [c for c in components if c["status"] in {"implemented", "self_test_implemented", "connector_contract"}]

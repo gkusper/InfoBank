@@ -9,12 +9,13 @@ import relevance
 import evidence_service
 import security
 import policy_engine
+import controlled_failure
 from database import get_db
 
 router = APIRouter(prefix="/api", tags=["Chat"])
 
 
-def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywords: list, sources: list, status: str, query_profile: dict = None, governance: dict = None, evidence_check: dict = None):
+def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywords: list, sources: list, status: str, query_profile: dict = None, governance: dict = None, evidence_check: dict = None, controlled_failure_obj: dict = None, output_mode: str = None):
     details = json.dumps({
         "question": question,
         "answer": answer,
@@ -25,6 +26,8 @@ def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywor
         "sources_used": [s.get("file_name") for s in sources] if sources else [],
         "governance": governance or {},
         "evidence_check": evidence_check or {},
+        "controlled_failure": controlled_failure_obj,
+        "output_mode": output_mode,
         "status": status
     }, ensure_ascii=False)
     log_entry = models.AuditLog(id=str(uuid.uuid4()), user_id=user_id, action="CHAT_ASK", details=details)
@@ -119,8 +122,6 @@ def is_aggregate_statistics_question(question: str) -> bool:
 
 
 def query_retrieved_sources(db: Session, question: str, question_vector: list[float], query_profile: dict, governance_context: dict, doc_ids: list[str], n_results: int = 4) -> tuple[list[dict], list[str]]:
-    """Query Chroma for a specific governance tier and build safe source/context blocks."""
-
     if not doc_ids:
         return [], []
     where_clause = {"document_id": doc_ids[0]} if len(doc_ids) == 1 else {"document_id": {"$in": doc_ids}}
@@ -163,7 +164,7 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
     return sources, blocks
 
 
-def chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list):
+def chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, controlled_failure_obj=None, output_mode="full_answer"):
     return {
         "status": "success",
         "question": question,
@@ -173,9 +174,25 @@ def chat_success_payload(question, question_keywords, query_profile, governance_
         "source_role_summary": role_summary,
         "relevance_level_summary": relevance_level_summary,
         "evidence_check": evidence_check,
+        "controlled_failure": controlled_failure_obj,
+        "output_mode": output_mode,
         "searched_documents_count": len(governance_context.get("usable_doc_ids", [])),
         "answer": answer,
         "sources": sources_list,
+    }
+
+
+def controlled_failure_payload(message: str, query_profile: dict, governance_context: dict, evidence_check: dict, cf: dict, sources_list: list | None = None) -> dict:
+    return {
+        "status": "controlled_failure",
+        "message": message,
+        "answer": message,
+        "query_profile": query_profile,
+        "governance": governance_context,
+        "evidence_check": evidence_check,
+        "controlled_failure": cf,
+        "output_mode": cf.get("status"),
+        "sources": sources_list or [],
     }
 
 
@@ -227,8 +244,18 @@ async def ask_infobank(
 
         if not candidate_doc_ids:
             msg = "There is no document related to the question in the InfoBank."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, [], "rejected", query_profile, {}, {})
-            return {"status": "controlled_failure", "message": msg, "query_profile": query_profile}
+            cf = controlled_failure.make_controlled_failure(
+                controlled_failure.STATUS_ABSTAIN,
+                controlled_failure.REASON_EPISTEMIC,
+                controlled_failure.evidence_state([], query_profile, False),
+                controlled_failure.safe_policy_state({}),
+                msg,
+                ["Upload or connect a permitted source that is relevant to the question."],
+                {"gate": "candidate_retrieval"},
+            )
+            evidence_check = {"decision": "controlled_failure", "controlled_failure": cf, "output_mode": cf["status"]}
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, [], "rejected", query_profile, {}, evidence_check, cf, cf["status"])
+            return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf)
 
         governance_context = policy_engine.resolve_document_access_bulk(
             db=db,
@@ -280,30 +307,53 @@ async def ask_infobank(
         role_summary = relevance.summarize_source_roles(sources_list)
         relevance_level_summary = relevance.summarize_relevance_levels(sources_list)
         evidence_check = evidence_service.check_rag_evidence(sources_list, query_profile, governance_context)
+        output_gate = controlled_failure.select_rag_output_mode(
+            question=question,
+            sources=sources_list,
+            query_profile=query_profile,
+            governance=governance_context,
+            context_blocks_available=bool(context_blocks),
+            aggregate_request=is_aggregate_statistics_question(question),
+        )
+        evidence_check["output_mode"] = output_gate.get("output_mode")
+        evidence_check["output_gate"] = output_gate.get("trace", {})
+        if output_gate.get("controlled_failure"):
+            evidence_check["decision"] = "controlled_failure"
+            evidence_check["controlled_failure"] = output_gate["controlled_failure"]
 
         if not content_doc_ids and metadata_doc_ids:
-            msg = "Only metadata-level sources are available for this question; document content is withheld by policy, so the answer cannot be found in the document content."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "metadata_only", query_profile, governance_context, evidence_check)
-            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list)
+            cf = output_gate.get("controlled_failure")
+            msg = cf.get("safeOutput") if cf else "Only metadata-level sources are available for this question; document content is withheld by policy, so the answer cannot be found in the document content."
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "metadata_only", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
+            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"))
 
         if not content_doc_ids:
-            msg = "There is no permitted source that can be used for this question in the InfoBank."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "rejected", query_profile, governance_context, evidence_check)
-            return {"status": "controlled_failure", "message": msg, "query_profile": query_profile, "governance": governance_context, "evidence_check": evidence_check}
+            cf = output_gate.get("controlled_failure")
+            msg = cf.get("safeOutput") if cf else "There is no permitted source that can be used for this question in the InfoBank."
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "rejected", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
+            return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf or {}, sources_list)
 
         has_primary = role_summary.get(relevance.SOURCE_ROLE_PRIMARY, 0) > 0
         has_aggregate = role_summary.get(relevance.SOURCE_ROLE_AGGREGATE_ONLY, 0) > 0
         if not has_primary and has_aggregate and not is_aggregate_statistics_question(question):
-            msg = "The answer cannot be found in the document."
+            cf = output_gate.get("controlled_failure")
+            msg = cf.get("safeOutput") if cf else "The answer cannot be found in the document."
             evidence_check.setdefault("warnings", []).append("aggregate_only_not_sufficient_for_specific_content_claim")
             evidence_check["decision"] = "controlled_failure"
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "not_found", query_profile, governance_context, evidence_check)
-            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list)
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "not_found", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
+            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"))
 
         if not context_blocks:
-            msg = "The answer cannot be found in the document."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "not_found", query_profile, governance_context, evidence_check)
-            return {"status": "success", "answer": msg, "query_profile": query_profile, "governance": governance_context, "evidence_check": evidence_check, "sources": sources_list}
+            cf = output_gate.get("controlled_failure")
+            msg = cf.get("safeOutput") if cf else "The answer cannot be found in the document."
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "not_found", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
+            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"))
+
+        if output_gate.get("decision") == "controlled_failure":
+            cf = output_gate["controlled_failure"]
+            msg = cf.get("safeOutput") or "The answer cannot be found in the document."
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "not_found", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
+            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"))
 
         context_text = "\n\n---\n\n".join(context_blocks)
         system_instruction = (
@@ -324,15 +374,35 @@ async def ask_infobank(
             temperature=0.1,
         )
         answer = final_response.choices[0].message.content
+        final_cf = None
+        output_mode = output_gate.get("output_mode", controlled_failure.STATUS_FULL_ANSWER)
         if is_browser_history_action_rule_question(question):
             answer = "No. Browser history or activity traces can provide contextual support, refine details, or help prioritize an existing task, but they cannot create an action item by themselves without primary evidence such as an official request, assignment, calendar obligation, or user commitment."
+            final_cf = controlled_failure.make_controlled_failure(
+                controlled_failure.STATUS_RESTRICTED_ANSWER,
+                controlled_failure.REASON_EVIDENTIAL,
+                controlled_failure.evidence_state(sources_list, query_profile, bool(context_blocks)),
+                controlled_failure.safe_policy_state(governance_context),
+                answer,
+                ["Use browser history only as contextual support and connect a primary source before creating an obligation."],
+                {"gate": "output_mode_selection", "rule": "browser_history_contextual_only"},
+            )
+            output_mode = final_cf["status"]
             evidence_check.setdefault("warnings", []).append("browser_history_contextual_only_rule_applied")
-            evidence_check["decision"] = "architectural_rule_answer"
+            evidence_check["decision"] = "restricted_answer"
+            evidence_check["controlled_failure"] = final_cf
+            evidence_check["output_mode"] = output_mode
 
         final_status = "not_found" if "The answer cannot be found in the document." in answer else "success"
-        background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, sources_list, final_status, query_profile, governance_context, evidence_check)
-        return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list)
+        if final_status == "not_found":
+            final_cf = controlled_failure.from_not_found_answer(question, sources_list, query_profile, governance_context)
+            output_mode = final_cf["status"]
+            evidence_check["decision"] = "controlled_failure"
+            evidence_check["controlled_failure"] = final_cf
+            evidence_check["output_mode"] = output_mode
+        background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, sources_list, final_status, query_profile, governance_context, evidence_check, final_cf, output_mode)
+        return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, final_cf, output_mode)
     except Exception as e:
         db.rollback()
-        background_tasks.add_task(log_chat_event, db, user_id, question, str(e), [], [], "error", query_profile, governance_context, evidence_check)
+        background_tasks.add_task(log_chat_event, db, user_id, question, str(e), [], [], "error", query_profile, governance_context, evidence_check, None, None)
         raise HTTPException(status_code=500, detail=str(e))

@@ -141,6 +141,6 @@ def get_my_citds_coverage(
         "summary": {
             "passed": passed,
             "total": len(coverage),
-            "score": round(passed / max(1, len(coverage)),
+            "score": round(passed / max(1, len(coverage)), 3),
         },
     }

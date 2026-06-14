@@ -395,7 +395,7 @@ def select_rag_output_mode(
         return blocked_output(cf)
 
     if has_primary and _question_mentions_current_status(question, query_profile) and not state["has_current_temporal_signal"]:
-        return _restricted_output(
+        cf = make_controlled_failure(
             STATUS_ASK_CLARIFICATION,
             REASON_TEMPORAL_STATUS,
             state,
@@ -404,6 +404,7 @@ def select_rag_output_mode(
             ["Provide a time window or connect a current source such as a recent email, calendar event, or status record."],
             {**trace, "gate": "temporal_status_check"},
         )
+        return blocked_output(cf)
 
     if has_primary and has_contrastive:
         return _restricted_output(

@@ -68,6 +68,8 @@ def get_my_citds_traces(
             "question": details.get("question"),
             "answer": details.get("answer"),
             "status": details.get("status"),
+            "output_mode": details.get("output_mode"),
+            "controlled_failure": details.get("controlled_failure"),
             "query_profile": details.get("query_profile", {}),
             "source_roles": details.get("source_roles", {}),
             "relevance_levels": details.get("relevance_levels", {}),
@@ -102,6 +104,8 @@ def get_my_citds_coverage(
         "metadata_only": False,
         "contrastive": False,
         "controlled_failure": False,
+        "controlled_failure_object": False,
+        "output_mode_selection": False,
     }
 
     for log in logs:
@@ -125,6 +129,10 @@ def get_my_citds_coverage(
             coverage["metadata_only"] = True
         if details.get("status") in {"not_found", "rejected", "metadata_only"}:
             coverage["controlled_failure"] = True
+        if details.get("controlled_failure"):
+            coverage["controlled_failure_object"] = True
+        if details.get("output_mode"):
+            coverage["output_mode_selection"] = True
 
     passed = sum(1 for v in coverage.values() if v)
     return {

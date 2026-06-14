@@ -147,6 +147,109 @@ def citds_self_test(
     }
 
 
+REVIEW_EVALUATION_CRITERIA = [
+    {
+        "criterion": "retrieval_quality",
+        "reviewers": ["Review 2", "Review 3", "Review 4"],
+        "metric": "role-aware evidence sufficiency checks and action evidence coverage",
+        "checks": ["primary_evidence_required_for_open_items", "all_open_items_have_evidence_ids", "contextual_only_does_not_create_open_task"],
+        "baseline": "standard RAG would retrieve semantically similar chunks without checking primary/contextual/contrastive roles",
+        "paper_result_slot": "Retrieval quality / source-role sufficiency",
+    },
+    {
+        "criterion": "answer_correctness",
+        "reviewers": ["Review 3", "Review 4"],
+        "metric": "deterministic expected output mode for benchmark scenarios; live LLM answer correctness remains a manual or gold-set evaluation",
+        "checks": ["controlled_failure_object_contract", "clarification_mode_for_underspecified_question", "temporal_status_mode", "conflict_defeat_restricted_answer"],
+        "baseline": "standard RAG may answer directly even when the expected output mode is clarification, abstention, or restricted answer",
+        "paper_result_slot": "Answer correctness / output-mode correctness",
+    },
+    {
+        "criterion": "citation_quality",
+        "reviewers": ["Review 4"],
+        "metric": "answers expose source roles, relevance levels, and source ids; full citation correctness needs live labelled QA cases",
+        "checks": ["controlled_failure_object_contract", "all_open_items_have_evidence_ids"],
+        "baseline": "standard RAG citation list without governance role labels",
+        "paper_result_slot": "Citation traceability",
+    },
+    {
+        "criterion": "permission_enforcement",
+        "reviewers": ["Review 2", "Review 3", "Review 4"],
+        "metric": "Full/Aggregate/Metadata/Deny policy gates and non-leaking safe outputs",
+        "checks": ["metadata_only_governance_failure", "aggregate_answer_mode", "source_prompt_injection_shield"],
+        "baseline": "standard RAG over all uploaded content without governed use decisions",
+        "paper_result_slot": "Governance correctness",
+    },
+    {
+        "criterion": "controlled_failure_behavior",
+        "reviewers": ["Review 2", "Review 3", "Review 4"],
+        "metric": "correct refusal, abstention, restricted, aggregate, metadata-only, clarification, and escalation modes",
+        "checks": [
+            "pre_generation_safety_refusal",
+            "pre_generation_prompt_injection_refusal",
+            "pre_generation_escalation_for_action_boundary",
+            "clarification_mode_for_underspecified_question",
+            "metadata_only_governance_failure",
+            "aggregate_answer_mode",
+            "temporal_status_mode",
+            "conflict_defeat_restricted_answer",
+        ],
+        "baseline": "standard RAG would attempt generation unless an external guardrail blocks it",
+        "paper_result_slot": "Controlled failure evaluation",
+    },
+    {
+        "criterion": "implemented_vs_future_work_separation",
+        "reviewers": ["Review 2", "Review 3", "Review 4"],
+        "metric": "implementation-status endpoint separates implemented, connector-contract, self-test, and research future-work items",
+        "checks": [],
+        "baseline": "not applicable",
+        "paper_result_slot": "Prototype scope and limitations",
+    },
+]
+
+
+def _summarize_named_checks(checks, names):
+    selected = [check for check in checks if check.get("name") in names]
+    if not names:
+        return {"status": "descriptive", "passed": None, "total": 0, "score": None, "missing_checks": []}
+    found = {check.get("name") for check in selected}
+    passed = sum(1 for check in selected if check.get("passed"))
+    total = len(selected)
+    missing = [name for name in names if name not in found]
+    return {
+        "status": "measured" if not missing else "partially_measured",
+        "passed": passed,
+        "total": total,
+        "score": round(passed / max(1, total), 3),
+        "missing_checks": missing,
+    }
+
+
+@router.get("/review-evaluation")
+def review_evaluation(user_id: str = Depends(security.get_current_user_id), db: Session = Depends(get_db)):
+    self_test = citds_self_test(user_id=user_id, db=db)
+    checks = self_test.get("checks", [])
+    criteria = []
+    for item in REVIEW_EVALUATION_CRITERIA:
+        measured = _summarize_named_checks(checks, item["checks"])
+        criteria.append({**item, "measurement": measured})
+    measured_items = [item for item in criteria if item["measurement"]["status"] in {"measured", "partially_measured"}]
+    passed = sum(item["measurement"].get("passed") or 0 for item in measured_items)
+    total = sum(item["measurement"].get("total") or 0 for item in measured_items)
+    return {
+        "status": "success",
+        "summary": {
+            "review_requested_criteria": len(criteria),
+            "measured_criteria": len(measured_items),
+            "check_passed": passed,
+            "check_total": total,
+            "check_score": round(passed / max(1, total), 3),
+        },
+        "criteria": criteria,
+        "self_test_summary": self_test.get("summary", {}),
+    }
+
+
 @router.get("/implementation-status")
 def implementation_status(user_id: str = Depends(security.get_current_user_id)):
     components = [
@@ -172,6 +275,7 @@ def implementation_status(user_id: str = Depends(security.get_current_user_id)):
         {"component": "browser_history_import", "status": "connector_contract", "notes": "history-shaped import endpoint maps visits to contextual EvidenceUnit"},
         {"component": "classifier", "status": "implemented", "notes": "deterministic classifier with optional LLM refinement"},
         {"component": "benchmark", "status": "self_test_implemented", "notes": "deterministic scenario checks for all paper controlled-failure reason classes and statuses"},
+        {"component": "review_evaluation_matrix", "status": "implemented", "notes": "review-requested retrieval, answer, citation, permission, baseline, and controlled-failure criteria exposed at /api/citds/review-evaluation"},
     ]
     implemented = [c for c in components if c["status"] in {"implemented", "self_test_implemented", "connector_contract"}]
     return {

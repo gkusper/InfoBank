@@ -1,0 +1,23 @@
+services:
+  db:
+    image: mariadb:11.4
+    container_name: infobank-mariadb
+    restart: unless-stopped
+    environment:
+      MARIADB_DATABASE: infobank_db
+      MARIADB_USER: infobank
+      MARIADB_PASSWORD: infobank_dev_password
+      MARIADB_ROOT_PASSWORD: infobank_root_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - infobank_db_data:/var/lib/mysql
+      - ./infobank_db.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+volumes:
+  infobank_db_data:

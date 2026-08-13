@@ -12,6 +12,12 @@ from database import get_db
 router = APIRouter(prefix="/api/evidence", tags=["Evidence"])
 
 
+def model_to_dict(model: BaseModel) -> Dict[str, Any]:
+    if hasattr(model, "model_dump"):
+        return model.model_dump()
+    return model.dict()
+
+
 class EvidenceUnitIn(BaseModel):
     source_type: str = "Other"
     title: str
@@ -64,7 +70,7 @@ def import_evidence_units(
     db: Session = Depends(get_db),
 ):
     try:
-        created = evidence_service.import_evidence_units(db, user_id, [unit.model_dump() for unit in payload.units])
+        created = evidence_service.import_evidence_units(db, user_id, [model_to_dict(unit) for unit in payload.units])
         return {"status": "success", "imported": len(created), "ids": [unit.id for unit in created]}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))

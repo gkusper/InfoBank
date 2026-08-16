@@ -6,6 +6,7 @@ backend_python/.venv_eval/
 backend_python/.env.eval
 chroma_data/
 backend_python/chroma_eval/
+evaluation/results/
 temp_*.pdf
 *.sqlite3
 *.db

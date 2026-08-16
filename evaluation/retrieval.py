@@ -38,10 +38,14 @@ def run_shared_retrieval(
     embedding_model: str | None = None,
     db: Any | None = None,
     query_profile: dict[str, Any] | None = None,
+    document_ids: list[str] | None = None,
 ) -> SharedRetrievalResult:
-    ensure_backend_path()
-    import ai_service
+    ai_service = None
+    if embedding_model is None or embedding_client is None or collection is None:
+        ensure_backend_path()
+        import ai_service as backend_ai_service
 
+        ai_service = backend_ai_service
     model = embedding_model or ai_service.EMBEDDING_MODEL
     query_profile = query_profile or build_query_profile(question)
     client = embedding_client or ai_service.openai_client
@@ -49,11 +53,14 @@ def run_shared_retrieval(
     embedding = response.data[0].embedding
     usage = usage_from_openai_response(response, embedding_calls=1)
     coll = collection or ai_service.collection
-    results = coll.query(
-        query_embeddings=[embedding],
-        n_results=top_k,
-        include=["documents", "metadatas", "distances"],
-    )
+    query_args: dict[str, Any] = {
+        "query_embeddings": [embedding],
+        "n_results": top_k,
+        "include": ["documents", "metadatas", "distances"],
+    }
+    if document_ids:
+        query_args["where"] = _document_where_clause(document_ids)
+    results = coll.query(**query_args)
     ids = (results.get("ids") or [[]])[0]
     documents = (results.get("documents") or [[]])[0]
     metadatas = (results.get("metadatas") or [[]])[0]
@@ -98,3 +105,10 @@ def _lookup_file_name(db: Any | None, document_id: str) -> str | None:
         return doc.file_path if doc else None
     except Exception:
         return None
+
+
+def _document_where_clause(document_ids: list[str]) -> dict[str, Any]:
+    unique_ids = list(dict.fromkeys(document_ids))
+    if len(unique_ids) == 1:
+        return {"document_id": unique_ids[0]}
+    return {"document_id": {"$in": unique_ids}}

@@ -7,6 +7,7 @@ backend_python/.env.eval
 chroma_data/
 backend_python/chroma_eval/
 evaluation/results/
+evaluation/generated_fixtures/
 temp_*.pdf
 *.sqlite3
 *.db

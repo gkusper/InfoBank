@@ -1,8 +1,11 @@
 **/__pycache__/
 *.pyc
 .venv/
+backend_python/.venv_eval/
 .env
+backend_python/.env.eval
 chroma_data/
+backend_python/chroma_eval/
 temp_*.pdf
 *.sqlite3
 *.db

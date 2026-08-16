@@ -10,8 +10,9 @@ load_dotenv(dotenv_path=ENV_PATH)
 
 MODEL_NAME = "gpt-4o-mini"
 EMBEDDING_MODEL = "text-embedding-3-small"
+CHROMA_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_data")
 
-chroma_client = chromadb.PersistentClient(path="./chroma_data")
+chroma_client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
 collection = chroma_client.get_or_create_collection(name="infobank_vectors")
 
 _openai_client = None

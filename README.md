@@ -173,6 +173,21 @@ http://127.0.0.1:8000/api
 
 Keep the backend running while using the frontend.
 
+## Research Evaluation Status
+
+The repository currently contains a pre-pilot research evaluation state. The
+production prototype, isolated evaluation environment, three-mode document-RAG
+harness, 40-case synthetic fixture set, and manual seven-case pilot runner are
+available. Real final benchmark results are not yet published.
+
+See:
+
+- [Evaluation status](docs/evaluation/STATUS.md)
+- [Independent reproduction guide](docs/evaluation/INDEPENDENT_REPRODUCTION.md)
+- [Functional validation summary](docs/evaluation/FUNCTIONAL_VALIDATION.md)
+- [Evaluation harness README](evaluation/README.md)
+- [Fixture README](evaluation/fixtures/README.md)
+
 ## Optional Integrations
 
 ### OpenAI

@@ -71,3 +71,65 @@ Fixture schema parsing supports future YAML or JSON synthetic benchmark
 definitions. The benchmark dataset is intentionally not included yet. Future
 synthetic fixtures should be tracked in Git; measured outputs should remain
 local by default.
+
+## Manual Real-API Pilot Run
+
+The manual pilot runner is for the seven-case, 21-record real-API pilot only.
+It does not run the full benchmark and does not calculate final metrics.
+
+Before running it from a normal Windows PowerShell window:
+
+1. MariaDB must already be running at `127.0.0.1:3307`.
+2. `backend_python/.env.eval` must exist and point `DATABASE_URL` to `infobank_eval`.
+3. `CHROMA_PERSIST_DIR` in `backend_python/.env.eval` must resolve to `backend_python/chroma_eval`; the recommended value is `./chroma_eval`.
+4. The evaluation DB and the `backend_python/chroma_eval` Chroma store must be empty.
+5. `OPENAI_API_KEY` must be visible in the PowerShell process. If it was set with `setx`, open a new PowerShell window.
+
+Run the preflight check:
+
+```powershell
+Set-Location "<repository root>"
+.\evaluation\run_document_rag_pilot.ps1 -CheckOnly
+```
+
+Run the real pilot:
+
+```powershell
+Set-Location "<repository root>"
+.\evaluation\run_document_rag_pilot.ps1
+```
+
+The runner uses exactly:
+
+- cases: `FULL_01`, `METADATA_01`, `DENY_01`, `AGG_SAFE_01`, `AGG_INDIVIDUAL_01`, `MIXED_PRIMARY_01`, `CONTEXT_ONLY_01`
+- modes: `standard_rag`, `governance_only_rag`, `role_aware_rag`
+- repetitions: `1`
+- retrieval top-k: `4`
+- embedding model: `text-embedding-3-small`
+- generator model: `gpt-4o-mini`
+- generation temperature: `0.0`
+
+A successful run writes 21 raw result records under a unique ignored directory:
+
+```text
+evaluation/results/pilot_<UTC timestamp>/
+```
+
+The expected artifacts are:
+
+```text
+results.jsonl
+run_manifest.json
+fixture_subset_manifest.json
+shared_retrieval.jsonl
+pilot_inspection.json
+```
+
+If a failure occurs, the runner also writes `pilot_failure.json` with sanitized
+stage, case, mode, and error information. Credentials are never printed or
+serialized.
+
+Pilot data remains loaded in `infobank_eval` and `backend_python/chroma_eval`
+after a successful real run so the raw state can be inspected. Reset the
+evaluation database and Chroma store before another pilot or before the full
+experiment.

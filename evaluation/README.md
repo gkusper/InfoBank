@@ -90,6 +90,65 @@ Validate it with:
 python scripts/mailex/validate_evidence_benchmark.py --benchmark data/benchmarks/evidence_unit_v1
 ```
 
+## Combined D1-D8 Development Pilot
+
+Use the combined runner for the frozen development pilot that joins D1-D5
+document-RAG with D6-D8 EvidenceUnit action reconstruction:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\evaluation\bootstrap_reproduction.ps1 -ResetEvaluationState -SkipPackageInstall -RunPilotCheck
+.\evaluation\run_d1_d8_pilot.ps1 -CheckOnly
+.\evaluation\run_d1_d8_pilot.ps1 -MockGeneration
+.\evaluation\run_d1_d8_pilot.ps1
+```
+
+The isolated runtime is mandatory:
+
+```text
+database: infobank_eval at 127.0.0.1:3307
+Chroma: backend_python/chroma_eval
+env file: backend_python/.env.eval
+Python: backend_python/.venv_eval
+```
+
+The real run uses `OPENAI_API_KEY` only from the current process environment;
+do not put it in `.env.eval`. If the key is absent, the combined runner skips
+real D1-D5 generation, runs the deterministic EvidenceUnit phase when selected,
+and prints the exact command for completing the real document phase later.
+
+The combined pilot writes one ignored directory:
+
+```text
+evaluation/results/d1_d8_pilot_<UTC timestamp>/
+```
+
+Expected root artifacts include:
+
+```text
+run_manifest.json
+document_results.jsonl
+document_scores.jsonl
+evidence_results.jsonl
+evidence_scores.jsonl
+combined_case_summary.jsonl
+metrics.json
+api_usage.json
+baseline_evidence_diagnostic.json
+final_evidence_diagnostic.json
+pilot_report.md
+```
+
+`document_results.jsonl` contains 21 records: seven D1-D5 cases across
+`standard_rag`, `governance_only_rag`, and `role_aware_rag`. `evidence_results.jsonl`
+contains 32 records from the production `evidence_service.reconstruct_action_list`
+path in the single `role_aware_action_reconstruction` mode. D6-D8 uses no
+external LLM calls unless the production service is changed later.
+
+Current D6-D8 values are development-pilot results after observing and fixing
+baseline failures on this same frozen set. Treat them as reproducibility and
+implementation diagnostics, not as held-out benchmark performance.
+
 ## Manual Real-API Pilot Run
 
 The manual pilot runner is for the seven-case, 21-record real-API pilot only.

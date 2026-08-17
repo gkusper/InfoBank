@@ -9,6 +9,8 @@ from unittest import mock
 
 from evaluation import run_document_rag_pilot as pilot
 from evaluation.clean_state import CleanStateError
+from evaluation.fixture_schema import load_fixture
+from evaluation.score_document_results import score_results
 
 
 class DocumentRagPilotRunnerTests(unittest.TestCase):
@@ -120,6 +122,21 @@ class DocumentRagPilotRunnerTests(unittest.TestCase):
         start = source.index("async def ask_infobank(")
         signature = source[start:source.index("):", start)]
         self.assertNotIn("mode", signature)
+
+    def test_m_document_scorer_accepts_structured_source_roles(self) -> None:
+        fixture = load_fixture(pilot.REPO_ROOT / "evaluation" / "fixtures" / "document_rag_v2.yaml")
+        case = next(item for item in fixture.cases if item.case_id == "FULL_01")
+        records = [
+            {
+                "case_id": "FULL_01",
+                "mode": "role_aware_rag",
+                "answer": case.acceptable_answer_markers[0],
+                "source_roles": {"sources": [{"document_id": "doc-a", "role": "primary"}]},
+                "api_usage": {"generation_calls": 1},
+            }
+        ]
+        scores, _ = score_results(records, fixture)
+        self.assertEqual(scores[0]["observed_source_roles"], ["primary"])
 
     def _run_mock_pilot(self, results_dir: str) -> Path:
         code = pilot.main(["--mock-generation", "--results-dir", results_dir])

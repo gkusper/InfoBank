@@ -5,10 +5,17 @@ This guide describes how another researcher can reproduce the current pre-pilot 
 ## 1. Clone and Check Out the Pre-Pilot State
 
 ```powershell
-git clone https://github.com/hunti-ekke/InfoBank_LJ.git
-Set-Location .\InfoBank_LJ
+git clone https://github.com/gkusper/InfoBank.git
+Set-Location .\InfoBank
 git fetch --all --tags
 git checkout pre-pilot-v0.1
+```
+
+If Git fails with a local Windows Schannel TLS error, retry the clone with the
+OpenSSL backend:
+
+```powershell
+git -c http.sslBackend=openssl clone https://github.com/gkusper/InfoBank.git
 ```
 
 If the tag is not available yet, use the branch:
@@ -35,15 +42,44 @@ docker compose ps
 Test-NetConnection 127.0.0.1 -Port 3307
 ```
 
+If `docker` is not found in this PowerShell session, start Docker Desktop and
+make sure the Docker CLI is on `PATH`. If MariaDB is already running, the
+evaluation bootstrap script below can still continue when `127.0.0.1:3307` is
+reachable.
+
 The normal development database is `infobank_db`. The evaluation database is separate and named `infobank_eval`.
 
 ## 3. Create a Python 3.12 Evaluation Environment
+
+Recommended automated setup:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\evaluation\bootstrap_reproduction.ps1 -PrepareEvalDatabase -RunUnitTests -RunPilotCheck
+```
+
+The bootstrap script detects `py -3.12`, `python`, or `python3`, creates
+`backend_python\.venv_eval`, uses a repository-local `.pip-cache`, creates the
+normal and evaluation `.env` files if missing, and prints clear warnings for
+local Docker/PATH issues. Use `-ResetEvaluationState` only when you explicitly
+want to drop `infobank_eval` and remove `backend_python\chroma_eval` before a
+fresh run.
+
+Manual setup:
 
 ```powershell
 py -3.12 -m venv backend_python\.venv_eval
 .\backend_python\.venv_eval\Scripts\python.exe -m pip install --upgrade pip
 .\backend_python\.venv_eval\Scripts\python.exe -m pip install -r backend_python\requirements.txt
 .\backend_python\.venv_eval\Scripts\python.exe -m pip check
+```
+
+If the Python launcher `py` is not installed, use a `python` executable that
+reports Python 3.12. If pip cannot write to the user cache directory, use a
+repository-local cache:
+
+```powershell
+.\backend_python\.venv_eval\Scripts\python.exe -m pip install --cache-dir .\.pip-cache -r backend_python\requirements.txt
 ```
 
 Expected dependency check:
@@ -119,6 +155,14 @@ Remove-Variable schema
 ```
 
 This procedure is idempotent where practical: it creates the database if missing and uses `CREATE TABLE IF NOT EXISTS` schema statements.
+
+If Docker CLI is not available but MariaDB is already reachable at
+`127.0.0.1:3307`, the bootstrap script can prepare the same database through
+the installed Python/PyMySQL runtime:
+
+```powershell
+.\evaluation\bootstrap_reproduction.ps1 -SkipDocker -PrepareEvalDatabase
+```
 
 ## 7. Configure Evaluation Runtime
 

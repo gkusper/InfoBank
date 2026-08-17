@@ -85,6 +85,18 @@ Before running it from a normal Windows PowerShell window:
 4. The evaluation DB and the `backend_python/chroma_eval` Chroma store must be empty.
 5. `OPENAI_API_KEY` must be visible in the PowerShell process. If it was set with `setx`, open a new PowerShell window.
 
+For a reproducibility-oriented setup helper, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\evaluation\bootstrap_reproduction.ps1 -PrepareEvalDatabase -RunUnitTests -RunPilotCheck
+```
+
+The helper uses `backend_python/.venv_eval`, installs dependencies with a
+repository-local `.pip-cache`, creates missing local `.env` files, checks the
+MariaDB port, and can prepare `infobank_eval` even when Docker CLI is not
+available but the database is already running.
+
 Run the preflight check:
 
 ```powershell
@@ -108,6 +120,9 @@ The runner uses exactly:
 - embedding model: `text-embedding-3-small`
 - generator model: `gpt-4o-mini`
 - generation temperature: `0.0`
+
+For a concise methods-paper version of the reproduction procedure, see
+`docs/evaluation/PAPER_REPRODUCTION_SECTION.md`.
 
 A successful run writes 21 raw result records under a unique ignored directory:
 

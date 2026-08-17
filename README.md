@@ -185,6 +185,7 @@ See:
 - [Evaluation status](docs/evaluation/STATUS.md)
 - [Independent reproduction guide](docs/evaluation/INDEPENDENT_REPRODUCTION.md)
 - [Functional validation summary](docs/evaluation/FUNCTIONAL_VALIDATION.md)
+- [Paper-ready reproduction section](docs/evaluation/PAPER_REPRODUCTION_SECTION.md)
 - [Evaluation harness README](evaluation/README.md)
 - [Fixture README](evaluation/fixtures/README.md)
 

@@ -2,6 +2,7 @@
 *.pyc
 .venv/
 backend_python/.venv_eval/
+.pip-cache/
 .env
 backend_python/.env.eval
 chroma_data/

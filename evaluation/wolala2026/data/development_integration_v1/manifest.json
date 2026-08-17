@@ -1,0 +1,46 @@
+{
+  "case_count": 10,
+  "case_hash": "fdf35c6550f8cc7ec085f72ba734050ca4beba88f59c036069aab2754e87e906",
+  "case_ids": [
+    "DEV_P1_01A",
+    "DEV_P1_01B",
+    "DEV_P2_01A",
+    "DEV_P2_01B",
+    "DEV_P3_01A",
+    "DEV_P3_01B",
+    "DEV_P4_01A",
+    "DEV_P4_01B",
+    "DEV_P5_01A",
+    "DEV_P5_01B"
+  ],
+  "created_by": "evaluation.wolala2026.pilot_data",
+  "dataset_checksum": "df847ef72fa28e55277f153989add2cf94b06471f1ff068cae4bbf15cc95f0f4",
+  "dataset_name": "development_integration_v1",
+  "development_or_heldout": "development",
+  "families": {
+    "P1": 2,
+    "P2": 2,
+    "P3": 2,
+    "P4": 2,
+    "P5": 2
+  },
+  "file_checksums": {
+    "README.md": "80b9b17314c1c9d754c2ed388bf9b9ba7390ad07e7e356c7d9542eefc2dfcb68",
+    "cases.jsonl": "2a7f75c748c9ceeaceb5b903ba3aa64a1521cd615400203ae0f099b7d8a45e20",
+    "gold.jsonl": "680cf660179aaf156044efc62d731fed9039fa48cd799fec3be34c3f7cf84338",
+    "manifest.json": "73e07361b33360adef2e652f6dabbb1fa2c2dabde67d38c4500eaf017eec60ce",
+    "provenance.csv": "9e69332639a2ccfb464f3b0083877f0eb2e8bde4802a7cab4e9f1714b80439b0"
+  },
+  "gold_hash": "8a5f8c4954226bd8b03d101bc151c0e13b53a403e3a4d5a4a85a01c63a06ba76",
+  "heldout_mode_execution_count": null,
+  "pair_count": 5,
+  "pair_ids": [
+    "DEV_P1_01",
+    "DEV_P2_01",
+    "DEV_P3_01",
+    "DEV_P4_01",
+    "DEV_P5_01"
+  ],
+  "provenance_hash": "7d7167e4d07520a30d8bd9aacf5b15721f96cf82a34073b42cd9bf44c5b13e36",
+  "schema_version": "wolala-pilot-case-v1"
+}

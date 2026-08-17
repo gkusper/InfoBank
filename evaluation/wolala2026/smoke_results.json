@@ -4,23 +4,25 @@
       "case_id": "S1_FULL_PRIMARY",
       "external_cfaf_gate_used": false,
       "mode": "standard_rag",
-      "notes": "Prepared stub: later Standard RAG receives raw retrieved content and bypasses CFAF enforcement.",
-      "raw_context_count": 1
+      "observed_top_level_mode": "CFAF",
+      "raw_context_count": 1,
+      "retrieval_snapshot_hash": "25bc1cf56017b034c3a3a24a2e60158c93daca55ab68f190a25fb75479166536"
     },
     {
       "case_id": "S1_FULL_PRIMARY",
       "external_cfaf_gate_used": false,
-      "instruction": "Abstain or restrict when the prompt says evidence or permission is insufficient.",
       "mode": "prompt_only_control",
-      "notes": "Prepared stub: later prompt-only control gets the same raw content as Standard RAG plus refusal instructions.",
-      "raw_context_count": 1
+      "observed_top_level_mode": "CFAF",
+      "raw_context_count": 1,
+      "retrieval_snapshot_hash": "25bc1cf56017b034c3a3a24a2e60158c93daca55ab68f190a25fb75479166536"
     },
     {
       "case_id": "S1_FULL_PRIMARY",
       "external_cfaf_gate_used": true,
-      "generation_skipped": false,
       "mode": "cfaf_pipeline",
-      "top_level_mode": "FULL"
+      "observed_top_level_mode": "FULL",
+      "raw_context_count": 1,
+      "retrieval_snapshot_hash": "25bc1cf56017b034c3a3a24a2e60158c93daca55ab68f190a25fb75479166536"
     }
   ],
   "case_count": 13,
@@ -29,48 +31,48 @@
   "latency_summary": {
     "access_and_safety_resolution_ms": {
       "count": 13,
-      "p50_ms": 0.0712,
-      "p95_ms": 0.20503999999999997
+      "p50_ms": 0.1412,
+      "p95_ms": 0.23997999999999997
     },
     "candidate_retrieval_ms": {
       "count": 13,
-      "p50_ms": 0.0569,
-      "p95_ms": 0.11834
+      "p50_ms": 0.1554,
+      "p95_ms": 0.25406
     },
     "end_to_end_ms": {
       "count": 13,
-      "p50_ms": 6.3924,
-      "p95_ms": 10.06682
+      "p50_ms": 14.1996,
+      "p95_ms": 17.77802
     },
     "evidence_labelling_ms": {
       "count": 13,
-      "p50_ms": 0.0628,
-      "p95_ms": 0.10658
+      "p50_ms": 0.1261,
+      "p95_ms": 0.24847999999999998
     },
     "query_profiling_ms": {
       "count": 13,
-      "p50_ms": 0.0698,
-      "p95_ms": 0.13308
+      "p50_ms": 0.1567,
+      "p95_ms": 0.3945
     },
     "response_realization_ms": {
       "count": 13,
-      "p50_ms": 0.058,
-      "p95_ms": 0.14114000000000002
+      "p50_ms": 0.1438,
+      "p95_ms": 0.33866
     },
     "sufficiency_and_permitted_output_ms": {
       "count": 13,
-      "p50_ms": 0.055,
-      "p95_ms": 0.10546
+      "p50_ms": 0.0976,
+      "p95_ms": 0.15892
     },
     "top_level_mode_selection_ms": {
       "count": 13,
-      "p50_ms": 0.0383,
-      "p95_ms": 0.08256000000000001
+      "p50_ms": 0.0723,
+      "p95_ms": 0.12053999999999998
     },
     "validation_trace_and_feedback_ms": {
       "count": 13,
-      "p50_ms": 0.0768,
-      "p95_ms": 0.18364
+      "p50_ms": 0.1298,
+      "p95_ms": 0.32488
     }
   },
   "paid_api_calls_executed": false,
@@ -98,15 +100,15 @@
       "observed_top_level_mode": "FULL",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0745,
-        "candidate_retrieval_ms": 0.0826,
-        "end_to_end_ms": 6.3924,
-        "evidence_labelling_ms": 0.0528,
-        "query_profiling_ms": 0.104,
-        "response_realization_ms": 0.1129,
-        "sufficiency_and_permitted_output_ms": 0.0618,
-        "top_level_mode_selection_ms": 0.0303,
-        "validation_trace_and_feedback_ms": 0.0768
+        "access_and_safety_resolution_ms": 0.2276,
+        "candidate_retrieval_ms": 0.1632,
+        "end_to_end_ms": 19.8812,
+        "evidence_labelling_ms": 0.1533,
+        "query_profiling_ms": 0.1567,
+        "response_realization_ms": 0.2987,
+        "sufficiency_and_permitted_output_ms": 0.1127,
+        "top_level_mode_selection_ms": 0.0978,
+        "validation_trace_and_feedback_ms": 0.2584
       },
       "validation_status": "PASS"
     },
@@ -131,15 +133,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0976,
-        "candidate_retrieval_ms": 0.0781,
-        "end_to_end_ms": 5.0953,
-        "evidence_labelling_ms": 0.0779,
-        "query_profiling_ms": 0.1413,
-        "response_realization_ms": 0.0494,
-        "sufficiency_and_permitted_output_ms": 0.0522,
-        "top_level_mode_selection_ms": 0.0728,
-        "validation_trace_and_feedback_ms": 0.0426
+        "access_and_safety_resolution_ms": 0.2425,
+        "candidate_retrieval_ms": 0.1762,
+        "end_to_end_ms": 12.3301,
+        "evidence_labelling_ms": 0.3047,
+        "query_profiling_ms": 0.2308,
+        "response_realization_ms": 0.0638,
+        "sufficiency_and_permitted_output_ms": 0.1448,
+        "top_level_mode_selection_ms": 0.0723,
+        "validation_trace_and_feedback_ms": 0.2327
       },
       "validation_status": "PASS"
     },
@@ -165,15 +167,15 @@
       "observed_top_level_mode": "FULL",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.2022,
-        "candidate_retrieval_ms": 0.0444,
-        "end_to_end_ms": 7.0067,
-        "evidence_labelling_ms": 0.0629,
-        "query_profiling_ms": 0.0503,
-        "response_realization_ms": 0.1094,
-        "sufficiency_and_permitted_output_ms": 0.055,
-        "top_level_mode_selection_ms": 0.0319,
-        "validation_trace_and_feedback_ms": 0.1034
+        "access_and_safety_resolution_ms": 0.2383,
+        "candidate_retrieval_ms": 0.1639,
+        "end_to_end_ms": 16.3759,
+        "evidence_labelling_ms": 0.1949,
+        "query_profiling_ms": 0.5049,
+        "response_realization_ms": 0.2809,
+        "sufficiency_and_permitted_output_ms": 0.1801,
+        "top_level_mode_selection_ms": 0.0586,
+        "validation_trace_and_feedback_ms": 0.1334
       },
       "validation_status": "PASS"
     },
@@ -198,15 +200,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0837,
-        "candidate_retrieval_ms": 0.0569,
-        "end_to_end_ms": 6.4523,
-        "evidence_labelling_ms": 0.0683,
-        "query_profiling_ms": 0.1119,
-        "response_realization_ms": 0.093,
-        "sufficiency_and_permitted_output_ms": 0.0705,
-        "top_level_mode_selection_ms": 0.0972,
-        "validation_trace_and_feedback_ms": 0.0783
+        "access_and_safety_resolution_ms": 0.1483,
+        "candidate_retrieval_ms": 0.2471,
+        "end_to_end_ms": 15.5262,
+        "evidence_labelling_ms": 0.138,
+        "query_profiling_ms": 0.265,
+        "response_realization_ms": 0.3986,
+        "sufficiency_and_permitted_output_ms": 0.1371,
+        "top_level_mode_selection_ms": 0.1314,
+        "validation_trace_and_feedback_ms": 0.128
       },
       "validation_status": "PASS"
     },
@@ -232,15 +234,15 @@
       "observed_top_level_mode": "FULL",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0666,
-        "candidate_retrieval_ms": 0.0745,
-        "end_to_end_ms": 8.4924,
-        "evidence_labelling_ms": 0.0675,
-        "query_profiling_ms": 0.0824,
-        "response_realization_ms": 0.1562,
-        "sufficiency_and_permitted_output_ms": 0.0845,
-        "top_level_mode_selection_ms": 0.072,
-        "validation_trace_and_feedback_ms": 0.1575
+        "access_and_safety_resolution_ms": 0.0882,
+        "candidate_retrieval_ms": 0.0578,
+        "end_to_end_ms": 8.4904,
+        "evidence_labelling_ms": 0.0692,
+        "query_profiling_ms": 0.1192,
+        "response_realization_ms": 0.1438,
+        "sufficiency_and_permitted_output_ms": 0.0537,
+        "top_level_mode_selection_ms": 0.0751,
+        "validation_trace_and_feedback_ms": 0.1073
       },
       "validation_status": "PASS"
     },
@@ -265,15 +267,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.082,
-        "candidate_retrieval_ms": 0.1127,
-        "end_to_end_ms": 6.6233,
-        "evidence_labelling_ms": 0.0522,
-        "query_profiling_ms": 0.1276,
-        "response_realization_ms": 0.0564,
-        "sufficiency_and_permitted_output_ms": 0.0531,
-        "top_level_mode_selection_ms": 0.0501,
-        "validation_trace_and_feedback_ms": 0.0534
+        "access_and_safety_resolution_ms": 0.0925,
+        "candidate_retrieval_ms": 0.1019,
+        "end_to_end_ms": 9.0999,
+        "evidence_labelling_ms": 0.089,
+        "query_profiling_ms": 0.1198,
+        "response_realization_ms": 0.0527,
+        "sufficiency_and_permitted_output_ms": 0.0687,
+        "top_level_mode_selection_ms": 0.0811,
+        "validation_trace_and_feedback_ms": 0.1144
       },
       "validation_status": "PASS"
     },
@@ -298,15 +300,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0504,
-        "candidate_retrieval_ms": 0.0495,
-        "end_to_end_ms": 4.1062,
-        "evidence_labelling_ms": 0.0274,
-        "query_profiling_ms": 0.0876,
-        "response_realization_ms": 0.0503,
-        "sufficiency_and_permitted_output_ms": 0.0461,
-        "top_level_mode_selection_ms": 0.0321,
-        "validation_trace_and_feedback_ms": 0.0351
+        "access_and_safety_resolution_ms": 0.1245,
+        "candidate_retrieval_ms": 0.1161,
+        "end_to_end_ms": 9.6127,
+        "evidence_labelling_ms": 0.104,
+        "query_profiling_ms": 0.1258,
+        "response_realization_ms": 0.0585,
+        "sufficiency_and_permitted_output_ms": 0.068,
+        "top_level_mode_selection_ms": 0.0607,
+        "validation_trace_and_feedback_ms": 0.0885
       },
       "validation_status": "PASS"
     },
@@ -332,15 +334,15 @@
       "observed_top_level_mode": "FULL",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0712,
-        "candidate_retrieval_ms": 0.0725,
-        "end_to_end_ms": 10.0527,
-        "evidence_labelling_ms": 0.068,
-        "query_profiling_ms": 0.055,
-        "response_realization_ms": 0.1311,
-        "sufficiency_and_permitted_output_ms": 0.0907,
-        "top_level_mode_selection_ms": 0.0383,
-        "validation_trace_and_feedback_ms": 0.1584
+        "access_and_safety_resolution_ms": 0.2197,
+        "candidate_retrieval_ms": 0.2426,
+        "end_to_end_ms": 14.1996,
+        "evidence_labelling_ms": 0.193,
+        "query_profiling_ms": 0.2033,
+        "response_realization_ms": 0.1776,
+        "sufficiency_and_permitted_output_ms": 0.106,
+        "top_level_mode_selection_ms": 0.0462,
+        "validation_trace_and_feedback_ms": 0.0502
       },
       "validation_status": "PASS"
     },
@@ -365,15 +367,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0367,
-        "candidate_retrieval_ms": 0.044,
-        "end_to_end_ms": 3.6419,
-        "evidence_labelling_ms": 0.0218,
-        "query_profiling_ms": 0.0698,
-        "response_realization_ms": 0.0173,
-        "sufficiency_and_permitted_output_ms": 0.0405,
-        "top_level_mode_selection_ms": 0.0358,
-        "validation_trace_and_feedback_ms": 0.0359
+        "access_and_safety_resolution_ms": 0.1164,
+        "candidate_retrieval_ms": 0.1267,
+        "end_to_end_ms": 15.7255,
+        "evidence_labelling_ms": 0.0715,
+        "query_profiling_ms": 0.1431,
+        "response_realization_ms": 0.0957,
+        "sufficiency_and_permitted_output_ms": 0.0733,
+        "top_level_mode_selection_ms": 0.1133,
+        "validation_trace_and_feedback_ms": 0.1842
       },
       "validation_status": "PASS"
     },
@@ -399,15 +401,15 @@
       "observed_top_level_mode": "FULL",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.2093,
-        "candidate_retrieval_ms": 0.1268,
-        "end_to_end_ms": 10.088,
-        "evidence_labelling_ms": 0.1496,
-        "query_profiling_ms": 0.0506,
-        "response_realization_ms": 0.0909,
-        "sufficiency_and_permitted_output_ms": 0.1276,
-        "top_level_mode_selection_ms": 0.0389,
-        "validation_trace_and_feedback_ms": 0.179
+        "access_and_safety_resolution_ms": 0.1615,
+        "candidate_retrieval_ms": 0.2645,
+        "end_to_end_ms": 15.7229,
+        "evidence_labelling_ms": 0.211,
+        "query_profiling_ms": 0.1419,
+        "response_realization_ms": 0.1852,
+        "sufficiency_and_permitted_output_ms": 0.0976,
+        "top_level_mode_selection_ms": 0.0471,
+        "validation_trace_and_feedback_ms": 0.1298
       },
       "validation_status": "PASS"
     },
@@ -432,15 +434,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0021,
-        "candidate_retrieval_ms": 0.0205,
-        "end_to_end_ms": 1.7095,
-        "evidence_labelling_ms": 0.0014,
-        "query_profiling_ms": 0.0662,
-        "response_realization_ms": 0.0182,
-        "sufficiency_and_permitted_output_ms": 0.0251,
-        "top_level_mode_selection_ms": 0.0168,
-        "validation_trace_and_feedback_ms": 0.0279
+        "access_and_safety_resolution_ms": 0.0047,
+        "candidate_retrieval_ms": 0.0064,
+        "end_to_end_ms": 4.9563,
+        "evidence_labelling_ms": 0.0046,
+        "query_profiling_ms": 0.0713,
+        "response_realization_ms": 0.0393,
+        "sufficiency_and_permitted_output_ms": 0.0747,
+        "top_level_mode_selection_ms": 0.0486,
+        "validation_trace_and_feedback_ms": 0.063
       },
       "validation_status": "PASS"
     },
@@ -465,15 +467,15 @@
       "observed_top_level_mode": "CFAF",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0445,
-        "candidate_retrieval_ms": 0.0491,
-        "end_to_end_ms": 5.941,
-        "evidence_labelling_ms": 0.0628,
-        "query_profiling_ms": 0.0458,
-        "response_realization_ms": 0.0366,
-        "sufficiency_and_permitted_output_ms": 0.0572,
-        "top_level_mode_selection_ms": 0.05,
-        "validation_trace_and_feedback_ms": 0.1906
+        "access_and_safety_resolution_ms": 0.1412,
+        "candidate_retrieval_ms": 0.1554,
+        "end_to_end_ms": 13.8343,
+        "evidence_labelling_ms": 0.1261,
+        "query_profiling_ms": 0.1734,
+        "response_realization_ms": 0.1205,
+        "sufficiency_and_permitted_output_ms": 0.1316,
+        "top_level_mode_selection_ms": 0.0986,
+        "validation_trace_and_feedback_ms": 0.1832
       },
       "validation_status": "PASS"
     },
@@ -498,15 +500,15 @@
       "observed_top_level_mode": "FULL",
       "passed": true,
       "stage_timings": {
-        "access_and_safety_resolution_ms": 0.0393,
-        "candidate_retrieval_ms": 0.0463,
-        "end_to_end_ms": 3.4771,
-        "evidence_labelling_ms": 0.0224,
-        "query_profiling_ms": 0.0629,
-        "response_realization_ms": 0.058,
-        "sufficiency_and_permitted_output_ms": 0.0226,
-        "top_level_mode_selection_ms": 0.0096,
-        "validation_trace_and_feedback_ms": 0.0416
+        "access_and_safety_resolution_ms": 0.0801,
+        "candidate_retrieval_ms": 0.115,
+        "end_to_end_ms": 15.9604,
+        "evidence_labelling_ms": 0.0584,
+        "query_profiling_ms": 0.3209,
+        "response_realization_ms": 0.1634,
+        "sufficiency_and_permitted_output_ms": 0.0723,
+        "top_level_mode_selection_ms": 0.0393,
+        "validation_trace_and_feedback_ms": 0.4246
       },
       "validation_status": "FAIL"
     }

@@ -107,7 +107,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "factual_qa"
     },
     {
@@ -121,7 +121,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "personal_planning"
     },
     {
@@ -135,7 +135,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "document_content"
     },
     {
@@ -149,7 +149,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "individual"
     },
     {
@@ -163,7 +163,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "answer"
     },
     {
@@ -177,7 +177,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "current"
     },
     {
@@ -191,7 +191,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "primary"
     },
     {
@@ -205,7 +205,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "metadata_catalogue"
     },
     {
@@ -221,7 +221,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1"
     },
     {
@@ -237,7 +237,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "s4-source"
     },
     {
@@ -253,7 +253,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "Document"
     },
     {
@@ -269,7 +269,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": 1
     },
     {
@@ -285,7 +285,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": 1.0
     },
     {
@@ -301,7 +301,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "deterministic_smoke_retriever"
     },
     {
@@ -317,7 +317,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "fixture_scope_match"
     },
     {
@@ -332,7 +332,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "METADATA"
     },
     {
@@ -347,7 +347,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "PUBLIC"
     },
     {
@@ -362,7 +362,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "WOLALA-POL-META"
     },
     {
@@ -377,7 +377,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "wolala-smoke-policy-v1"
     },
     {
@@ -392,7 +392,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "compatible"
     },
     {
@@ -407,7 +407,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "clean"
     },
     {
@@ -423,7 +423,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "PRIMARY"
     },
     {
@@ -439,7 +439,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "CURRENT"
     },
     {
@@ -455,7 +455,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "SUPPORTS"
     },
     {
@@ -471,7 +471,7 @@
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
         "source_id": "s4-source"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "METADATA_ONLY"
     },
     {
@@ -486,7 +486,7 @@
         "claim_id": "claim-1",
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": false
     },
     {
@@ -500,7 +500,7 @@
       "subject": {
         "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
       },
-      "timestamp": "2026-08-17T21:04:58Z",
+      "timestamp": "2026-08-17T22:38:23Z",
       "value": "CFAF"
     }
   ],
@@ -508,7 +508,7 @@
     "cfaf_realization": "RESTRICT_CONTENT",
     "execution_status": "SUCCESS",
     "fulfilment_status": "RESTRICTED",
-    "internal_trace_id": "trace-2106dfe8-4807-46ca-b7b2-61a36d13819a",
+    "internal_trace_id": "trace-07f6826b-3ce8-487a-b9cd-ba45f617edd9",
     "mode": "CFAF",
     "next_steps": [
       "Request content-level access."
@@ -568,21 +568,21 @@
     "VALIDATION_TRACE_AND_FEEDBACK"
   ],
   "stage_timings": {
-    "access_and_safety_resolution_ms": 0.082,
-    "candidate_retrieval_ms": 0.1127,
-    "end_to_end_ms": 6.6233,
-    "evidence_labelling_ms": 0.0522,
-    "query_profiling_ms": 0.1276,
-    "response_realization_ms": 0.0564,
-    "sufficiency_and_permitted_output_ms": 0.0531,
-    "top_level_mode_selection_ms": 0.0501,
-    "validation_trace_and_feedback_ms": 0.0534
+    "access_and_safety_resolution_ms": 0.0925,
+    "candidate_retrieval_ms": 0.1019,
+    "end_to_end_ms": 9.0999,
+    "evidence_labelling_ms": 0.089,
+    "query_profiling_ms": 0.1198,
+    "response_realization_ms": 0.0527,
+    "sufficiency_and_permitted_output_ms": 0.0687,
+    "top_level_mode_selection_ms": 0.0811,
+    "validation_trace_and_feedback_ms": 0.1144
   },
   "token_usage": {
     "input_tokens": 0,
     "output_tokens": 8
   },
-  "trace_id": "trace-2106dfe8-4807-46ca-b7b2-61a36d13819a",
+  "trace_id": "trace-07f6826b-3ce8-487a-b9cd-ba45f617edd9",
   "validation": {
     "fallback_used": false,
     "status": "PASS",

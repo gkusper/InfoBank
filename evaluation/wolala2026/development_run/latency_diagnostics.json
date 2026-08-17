@@ -1,0 +1,22 @@
+{
+  "diagnostic_only": true,
+  "latency_summaries": {
+    "cfaf_pipeline": {
+      "count": 10,
+      "p50_ms": 4.3333,
+      "p95_ms": 15.69155
+    },
+    "prompt_only_control": {
+      "count": 10,
+      "p50_ms": 0.4082,
+      "p95_ms": 1.110095
+    },
+    "standard_rag": {
+      "count": 10,
+      "p50_ms": 0.03965,
+      "p95_ms": 0.07875499999999999
+    }
+  },
+  "mode_execution_count": 30,
+  "not_publication_ready": true
+}

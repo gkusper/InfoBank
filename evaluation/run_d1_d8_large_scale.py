@@ -11,6 +11,7 @@ import shutil
 import socket
 import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
@@ -81,6 +82,8 @@ PREREGISTRATION = REPO_ROOT / "evaluation" / "preregistration" / "d1_d8_large_sc
 FINAL_REPORT = REPO_ROOT / "docs" / "d1_d8_large_scale_final_evaluation_report.md"
 PAPER_UPDATE_PACKAGE = REPO_ROOT / "docs" / "d1_d8_v2_7_paper_update_package.md"
 EVIDENCE_MODE = "role_aware_action_reconstruction"
+RETRYABLE_GENERATION_ERRORS = {"APIConnectionError", "APITimeoutError", "RateLimitError", "InternalServerError"}
+GENERATION_RETRY_DELAYS_SECONDS = [5, 15, 30, 60, 120]
 
 
 def sha256_file(path: Path) -> str:
@@ -370,6 +373,60 @@ def run_one_document_mode(
     return result.to_dict()
 
 
+def is_retryable_generation_error(record: dict[str, Any]) -> bool:
+    error = record.get("error") or {}
+    return error.get("type") in RETRYABLE_GENERATION_ERRORS
+
+
+def run_one_document_mode_with_retries(
+    *,
+    raw_results_path: Path,
+    mode: str,
+    run_id: str,
+    case_id: str,
+    repetition: int,
+    git_commit: str | None,
+    user_id: str,
+    retrieval: SharedRetrievalResult,
+    generation_config: GenerationConfig,
+    generator: Any,
+    db: Any,
+    policy_context: dict[str, Any],
+    services: Any,
+) -> dict[str, Any]:
+    failed_attempts = 0
+    max_attempts = len(GENERATION_RETRY_DELAYS_SECONDS) + 1
+    for attempt in range(1, max_attempts + 1):
+        record = run_one_document_mode(
+            mode=mode,
+            run_id=run_id,
+            case_id=case_id,
+            repetition=repetition,
+            git_commit=git_commit,
+            user_id=user_id,
+            retrieval=retrieval,
+            generation_config=generation_config,
+            generator=generator,
+            db=db,
+            policy_context=policy_context,
+            services=services,
+        )
+        if not record.get("error"):
+            if failed_attempts:
+                usage = record.setdefault("api_usage", {})
+                usage["retries"] = int(usage.get("retries") or 0) + failed_attempts
+                record["recovered_after_retryable_errors"] = failed_attempts
+            return record
+        record["retry_attempt"] = attempt
+        record["counted_as_measured_record"] = False
+        append_jsonl(raw_results_path, record)
+        failed_attempts += 1
+        if not is_retryable_generation_error(record) or attempt == max_attempts:
+            return record
+        time.sleep(GENERATION_RETRY_DELAYS_SECONDS[attempt - 1])
+    return record
+
+
 def document_record_key(record: dict[str, Any]) -> tuple[str, str, int]:
     return (record["case_id"], record["mode"], int(record["repetition"]))
 
@@ -511,7 +568,8 @@ def run_document_phase(
             services = None if real_services else mock_role_aware_services(policy_context)
             for mode, repetition in remaining:
                 current_mode = mode
-                record = run_one_document_mode(
+                record = run_one_document_mode_with_retries(
+                    raw_results_path=raw_results_path,
                     mode=mode,
                     run_id=run_id,
                     case_id=case.case_id,
@@ -525,7 +583,6 @@ def run_document_phase(
                     policy_context=policy_context,
                     services=services,
                 )
-                append_jsonl(raw_results_path, record)
                 if record.get("error"):
                     raise PilotError(
                         str(record["error"]),
@@ -534,6 +591,7 @@ def run_document_phase(
                         current_case=current_case,
                         current_mode=current_mode,
                     )
+                append_jsonl(raw_results_path, record)
                 successful_keys.add((case.case_id, mode, repetition))
         records = read_jsonl(raw_results_path)
         measured_records = successful_document_records(records)

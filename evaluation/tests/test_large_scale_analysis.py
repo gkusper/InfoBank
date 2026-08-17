@@ -13,7 +13,7 @@ from evaluation.large_scale_analysis import (
     triplet_results,
     wilson_interval,
 )
-from evaluation.run_d1_d8_large_scale import failed_document_attempts, successful_document_records
+from evaluation.run_d1_d8_large_scale import failed_document_attempts, is_retryable_generation_error, successful_document_records
 
 
 def document_score(case_id: str, mode: str, repetition: int, value: bool) -> dict:
@@ -88,6 +88,11 @@ class LargeScaleAnalysisTests(unittest.TestCase):
         ]
         self.assertEqual(len(successful_document_records(records)), 2)
         self.assertEqual(len(failed_document_attempts(records)), 1)
+
+    def test_retryable_generation_error_classifier(self) -> None:
+        self.assertTrue(is_retryable_generation_error({"error": {"type": "APIConnectionError"}}))
+        self.assertTrue(is_retryable_generation_error({"error": {"type": "RateLimitError"}}))
+        self.assertFalse(is_retryable_generation_error({"error": {"type": "BadRequestError"}}))
 
 
 if __name__ == "__main__":

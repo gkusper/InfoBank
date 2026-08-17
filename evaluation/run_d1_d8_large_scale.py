@@ -370,6 +370,23 @@ def run_one_document_mode(
     return result.to_dict()
 
 
+def document_record_key(record: dict[str, Any]) -> tuple[str, str, int]:
+    return (record["case_id"], record["mode"], int(record["repetition"]))
+
+
+def successful_document_records(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    by_key: dict[tuple[str, str, int], dict[str, Any]] = {}
+    for record in records:
+        if record.get("error"):
+            continue
+        by_key[document_record_key(record)] = record
+    return list(by_key.values())
+
+
+def failed_document_attempts(records: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    return [record for record in records if record.get("error")]
+
+
 def run_document_phase(
     *,
     run_dir: Path,
@@ -387,10 +404,11 @@ def run_document_phase(
     phase_dir = run_dir / "document_phase"
     phase_dir.mkdir(parents=True, exist_ok=True)
     raw_results_path = run_dir / "document_raw_results.jsonl"
+    measured_results_path = run_dir / "document_measured_results.jsonl"
     retrieval_path = run_dir / "document_shared_retrieval.jsonl"
     completed_records = read_jsonl(raw_results_path) if resume else []
     successful_keys = {
-        (record["case_id"], record["mode"], int(record["repetition"]))
+        document_record_key(record)
         for record in completed_records
         if not record.get("error")
     }
@@ -508,7 +526,6 @@ def run_document_phase(
                     services=services,
                 )
                 append_jsonl(raw_results_path, record)
-                successful_keys.add((case.case_id, mode, repetition))
                 if record.get("error"):
                     raise PilotError(
                         str(record["error"]),
@@ -517,39 +534,48 @@ def run_document_phase(
                         current_case=current_case,
                         current_mode=current_mode,
                     )
+                successful_keys.add((case.case_id, mode, repetition))
         records = read_jsonl(raw_results_path)
-        scores, metrics_payload = score_document_results(records, fixture)
+        measured_records = successful_document_records(records)
+        failed_attempts = failed_document_attempts(records)
+        write_jsonl(measured_results_path, measured_records)
+        write_jsonl(run_dir / "document_failed_attempts.jsonl", failed_attempts)
+        scores, metrics_payload = score_document_results(measured_records, fixture)
         write_jsonl(run_dir / "document_scored_results.jsonl", scores)
         write_sanitized_json(run_dir / "document_metrics.json", metrics_payload)
         inspection = {
-            "result_record_count": len(records),
+            "raw_attempt_record_count": len(records),
+            "result_record_count": len(measured_records),
+            "failed_attempt_count": len(failed_attempts),
             "retrieval_record_count": len(read_jsonl(retrieval_path)),
-            "retrieval_identity": document_retrieval_identity(records),
+            "retrieval_identity": document_retrieval_identity(measured_records),
         }
         write_sanitized_json(run_dir / "document_pilot_inspection.json", inspection)
         api_usage = summarize_api_usage(
-            records,
+            measured_records,
             fixture_embedding_provider=fixture_embedding_provider,
             query_embedding_client=query_embedding_client,
         )
         write_sanitized_json(phase_dir / "run_manifest.json", {
             "run_id": run_id,
             "mode": "real-api" if real_api else "mocked-test",
-            "result_record_count": len(records),
+            "raw_attempt_record_count": len(records),
+            "result_record_count": len(measured_records),
+            "failed_attempt_count": len(failed_attempts),
             "expected_result_count": expected,
             "retrieval_record_count": len(read_jsonl(retrieval_path)),
             "api_usage": api_usage,
             "artifact_hashes": artifact_hashes(phase_dir),
         })
-        if len(records) != expected:
+        if len(measured_records) != expected:
             raise PilotError(
-                f"Expected {expected} document records, found {len(records)}.",
+                f"Expected {expected} successful document records, found {len(measured_records)}.",
                 stage="artifact persistence",
                 classification="artifact persistence",
                 current_case=current_case,
                 current_mode=current_mode,
             )
-        return {"status": "PASS", "record_count": len(records), "expected_record_count": expected, "api_usage": api_usage}
+        return {"status": "PASS", "record_count": len(measured_records), "raw_attempt_record_count": len(records), "failed_attempt_count": len(failed_attempts), "expected_record_count": expected, "api_usage": api_usage}
     except PilotError:
         raise
     except Exception as exc:
@@ -739,7 +765,13 @@ def score_and_report(
 ) -> dict[str, Any]:
     fixture = load_fixture(document_fixture)
     benchmark = load_benchmark(evidence_benchmark)
-    document_records = read_jsonl(run_dir / "document_raw_results.jsonl")
+    raw_document_records = read_jsonl(run_dir / "document_raw_results.jsonl")
+    measured_path = run_dir / "document_measured_results.jsonl"
+    document_records = read_jsonl(measured_path) if measured_path.exists() else successful_document_records(raw_document_records)
+    document_attempt_failures = failed_document_attempts(raw_document_records)
+    if document_records and not measured_path.exists():
+        write_jsonl(measured_path, document_records)
+        write_jsonl(run_dir / "document_failed_attempts.jsonl", document_attempt_failures)
     evidence_records = read_jsonl(run_dir / "evidence_raw_results.jsonl")
     document_scores, document_metrics = score_document_results(document_records, fixture) if document_records else ([], {})
     evidence_scores, evidence_metrics = score_evidence_results(evidence_records, benchmark.gold) if evidence_records else ([], {})
@@ -758,6 +790,18 @@ def score_and_report(
     determinism = evidence_determinism(evidence_aggregates)
     api_usage = summarize_large_api_usage(document_records, evidence_records)
     failures = failure_rows(document_scores, evidence_scores)
+    for attempt in document_attempt_failures:
+        failures.append(
+            {
+                "phase": "document_rag",
+                "case_id": attempt.get("case_id"),
+                "mode": attempt.get("mode"),
+                "repetition": attempt.get("repetition"),
+                "failure_category": "API failure",
+                "error": attempt.get("error"),
+                "counted_as_measured_record": False,
+            }
+        )
     composition = build_benchmark_composition(document_fixture, evidence_benchmark)
 
     write_jsonl(run_dir / "document_case_aggregates.jsonl", document_aggregates)
@@ -776,6 +820,8 @@ def score_and_report(
         "evidence_unique_case_count": len({row["case_id"] for row in evidence_records}),
         "evidence_record_count": len(evidence_records),
         "total_measured_record_count": len(document_records) + len(evidence_records),
+        "document_raw_attempt_record_count": len(raw_document_records),
+        "document_failed_attempt_count": len(document_attempt_failures),
         "document_metrics": document_metrics,
         "evidence_metrics": evidence_metrics,
         "evidence_determinism": determinism,

@@ -13,6 +13,7 @@ from evaluation.large_scale_analysis import (
     triplet_results,
     wilson_interval,
 )
+from evaluation.run_d1_d8_large_scale import failed_document_attempts, successful_document_records
 
 
 def document_score(case_id: str, mode: str, repetition: int, value: bool) -> dict:
@@ -79,7 +80,15 @@ class LargeScaleAnalysisTests(unittest.TestCase):
         self.assertEqual(evidence_determinism(aggregates)["rate"], 1.0)
         self.assertEqual(triplet_results(aggregates)[0]["triplet_pass"], True)
 
+    def test_failed_document_attempt_is_not_measured_record(self) -> None:
+        records = [
+            {"case_id": "CASE_A", "mode": "role_aware_rag", "repetition": 1, "answer": None, "error": {"type": "APIConnectionError"}},
+            {"case_id": "CASE_A", "mode": "role_aware_rag", "repetition": 1, "answer": "ok", "error": None},
+            {"case_id": "CASE_A", "mode": "standard_rag", "repetition": 1, "answer": "ok", "error": None},
+        ]
+        self.assertEqual(len(successful_document_records(records)), 2)
+        self.assertEqual(len(failed_document_attempts(records)), 1)
+
 
 if __name__ == "__main__":
     unittest.main()
-

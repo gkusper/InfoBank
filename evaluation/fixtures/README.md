@@ -6,11 +6,15 @@ are intentionally kept outside Git.
 
 ## Benchmark Purpose
 
-`document_rag_v1` defines 40 synthetic cases for comparing:
+`document_rag_v1` defines the original 40 synthetic cases for comparing:
 
 - Standard RAG
 - Governance-only RAG
 - Role-Aware RAG
+
+`document_rag_v2` keeps the D1-D4 cases identical to `document_rag_v1` and
+repairs D5 by removing explicit evidential-role hints from generator-visible
+document text. Use v2 for new D1-D5 pilot work.
 
 The benchmark uses shared retrieval. Each case declares an explicit
 `document_scope`, and retrieval should be filtered to only those documents.
@@ -39,6 +43,7 @@ Validate the fixture:
 
 ```powershell
 python -m evaluation.validate_fixtures evaluation/fixtures/document_rag_v1.yaml
+python -m evaluation.validate_fixtures evaluation/fixtures/document_rag_v2.yaml
 ```
 
 Generate deterministic PDFs twice and compare hashes via tests:

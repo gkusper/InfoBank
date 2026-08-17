@@ -67,10 +67,28 @@ Chroma, model, top-k, temperature, and fixture metadata.
 
 ## Fixture Workflow
 
-Fixture schema parsing supports future YAML or JSON synthetic benchmark
-definitions. The benchmark dataset is intentionally not included yet. Future
-synthetic fixtures should be tracked in Git; measured outputs should remain
+Fixture schema parsing supports YAML or JSON synthetic benchmark definitions.
+`evaluation/fixtures/document_rag_v1.yaml` is the original 40-case D1-D5
+document-RAG fixture. `evaluation/fixtures/document_rag_v2.yaml` preserves
+D1-D4 and repairs D5 by removing explicit evidential-role hints from
+generator-visible source prose.
+
+Synthetic fixtures should be tracked in Git; measured outputs should remain
 local by default.
+
+## EvidenceUnit D6-D8 Benchmark
+
+The D6-D8 action-list pilot is stored separately under
+`data/benchmarks/evidence_unit_v1/`. It uses selected, modified MailEx e-mail
+excerpts for D6 and natural D8, plus deterministic synthetic browser/search
+counterfactuals for D7. Runtime inputs are in `cases.jsonl`; hidden scoring
+labels are in `gold.jsonl`.
+
+Validate it with:
+
+```powershell
+python scripts/mailex/validate_evidence_benchmark.py --benchmark data/benchmarks/evidence_unit_v1
+```
 
 ## Manual Real-API Pilot Run
 

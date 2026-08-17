@@ -186,8 +186,10 @@ See:
 - [Independent reproduction guide](docs/evaluation/INDEPENDENT_REPRODUCTION.md)
 - [Functional validation summary](docs/evaluation/FUNCTIONAL_VALIDATION.md)
 - [Paper-ready reproduction section](docs/evaluation/PAPER_REPRODUCTION_SECTION.md)
+- [MailEx D1-D8 preparation report](docs/mailex_d1_d8_preparation_report.md)
 - [Evaluation harness README](evaluation/README.md)
 - [Fixture README](evaluation/fixtures/README.md)
+- [EvidenceUnit v1 benchmark README](data/benchmarks/evidence_unit_v1/README.md)
 
 ## Optional Integrations
 

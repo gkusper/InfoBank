@@ -1,0 +1,76 @@
+{
+  "decisions": [
+    {
+      "affected_benchmark_case": "D8_001",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:blair-l_inbox32.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_002",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:derrick-j_inbox_233.json:turn_2"
+    },
+    {
+      "affected_benchmark_case": "D8_003",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:heard-m_inbox_master_netting291.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_004",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:jones-t_inbox894.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_005",
+      "decision": "superseded",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:lokey-t_inbox_814.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_006",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:martin-t_inbox_144.json:turn_2"
+    },
+    {
+      "affected_benchmark_case": "D8_007",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:mclaughlin-e_inbox166.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_008",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:mclaughlin-e_inbox34.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_009",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:mims-thurston-p_inbox105.json:turn_2"
+    },
+    {
+      "affected_benchmark_case": "D8_010",
+      "decision": "completed",
+      "reason": "Selected as later MailEx Deliver_Action_Data with an explicit completion/cancellation/supersession lexical signal; this is an InfoBank benchmark-level status interpretation.",
+      "source_mailex_identifier": "train:mims-thurston-p_inbox348.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_NONCLOSING_001",
+      "decision": "non_closing_progress",
+      "reason": "Selected as later MailEx action-related material with future/progress wording and no closure lexical signal.",
+      "source_mailex_identifier": "train:blair-l_inbox57.json:turn_1"
+    },
+    {
+      "affected_benchmark_case": "D8_NONCLOSING_002",
+      "decision": "non_closing_progress",
+      "reason": "Selected as later MailEx action-related material with future/progress wording and no closure lexical signal.",
+      "source_mailex_identifier": "train:blair-l_inbox_284.json:turn_2"
+    }
+  ]
+}

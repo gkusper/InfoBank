@@ -18,6 +18,8 @@ EXPECTED_FAMILY_COUNTS = {
     "mixed_or_insufficient_primary_evidence": 8,
 }
 
+ALLOWED_FIXTURE_IDS = {"document_rag_v1", "document_rag_v2"}
+
 ALLOWED_BEHAVIOR_CLASSES = {
     "answer_allowed",
     "metadata_only_answer",
@@ -61,7 +63,7 @@ def validate_fixture(fixture: EvaluationFixture) -> list[str]:
     doc_aliases = [document.alias for document in fixture.documents]
 
     _expect(fixture.schema_version == "1.0", "schema_version must be 1.0", errors)
-    _expect(fixture.fixture_id == "document_rag_v1", "fixture_id must be document_rag_v1", errors)
+    _expect(fixture.fixture_id in ALLOWED_FIXTURE_IDS, f"fixture_id must be one of {sorted(ALLOWED_FIXTURE_IDS)}", errors)
     _expect(fixture.benchmark_family == "document_rag", "benchmark_family must be document_rag", errors)
     _expect(len(fixture.cases) == 40, f"fixture must contain exactly 40 cases, found {len(fixture.cases)}", errors)
     _expect(fixture.case_count == 40, f"case_count must be 40, found {fixture.case_count}", errors)

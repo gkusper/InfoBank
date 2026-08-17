@@ -3,6 +3,8 @@
 .venv/
 backend_python/.venv_eval/
 .pip-cache/
+data/external/
+work/
 .env
 backend_python/.env.eval
 chroma_data/

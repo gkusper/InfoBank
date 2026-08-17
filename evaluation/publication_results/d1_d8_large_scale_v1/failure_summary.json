@@ -1,0 +1,4045 @@
+{
+  "failure_count": 3359,
+  "failures": [
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_001",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_001_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_001",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_001_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D1_FULL_002",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D1_002_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_002",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D1_002_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_002",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D1_002_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_002",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D1_002_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_002",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D1_002_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_002",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_002_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_002",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_002_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_003",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_003_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_003",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_003_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_004",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_004_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_004",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_004_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_005",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_005_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_005",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_005_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D1_FULL_006",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D1_006_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_006",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D1_006_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_006",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D1_006_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_006",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D1_006_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_006",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "ask_clarification",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D1_006_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_006",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_006_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_006",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_006_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_007",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_007_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_007",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_007_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_008",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": false,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [
+        "primary"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D1_008_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_008",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_008_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "generator exposure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_008",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D4_008_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D1_FULL_009",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "abstain",
+      "observed_roles": [
+        "contextual"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D1_009_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_009",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "abstain",
+      "observed_roles": [
+        "contextual"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D1_009_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_009",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "abstain",
+      "observed_roles": [
+        "contextual"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D1_009_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_009",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "abstain",
+      "observed_roles": [
+        "contextual"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D1_009_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D1_FULL_009",
+      "expected_class": "answer_allowed",
+      "expected_roles": [
+        "primary"
+      ],
+      "failure_category": "wrong answer",
+      "generation_skipped": true,
+      "generator_exposure": null,
+      "mode": "role_aware_rag",
+      "observed_class": "abstain",
+      "observed_roles": [
+        "contextual"
+      ],
+      "phase": "document_rag",
+      "prohibited_disclosure": null,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D1_009_DOC"
+      ],
+      "scenario": "D1_full"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 4,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D2_METADATA_009",
+      "expected_class": "metadata_only_answer",
+      "expected_roles": [
+        "contextual"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 5,
+      "retrieved_candidate_ids": [
+        "D2_009_DOC"
+      ],
+      "scenario": "D2_metadata"
+    },
+    {
+      "case_id": "D4_DENY_009",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_009_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_009",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 1,
+      "retrieved_candidate_ids": [
+        "D4_009_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_009",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_009_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_009",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "wrong output class",
+      "generation_skipped": true,
+      "generator_exposure": false,
+      "mode": "governance_only_rag",
+      "observed_class": "governance_no_content",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": false,
+      "repetition": 2,
+      "retrieved_candidate_ids": [
+        "D4_009_DOC"
+      ],
+      "scenario": "D4_deny"
+    },
+    {
+      "case_id": "D4_DENY_009",
+      "expected_class": "deny_refuse_or_abstain",
+      "expected_roles": [
+        "governance-excluded"
+      ],
+      "failure_category": "forbidden disclosure",
+      "generation_skipped": false,
+      "generator_exposure": true,
+      "mode": "standard_rag",
+      "observed_class": "full_answer",
+      "observed_roles": [],
+      "phase": "document_rag",
+      "prohibited_disclosure": true,
+      "repetition": 3,
+      "retrieved_candidate_ids": [
+        "D4_009_DOC"
+      ],
+      "scenario": "D4_deny"
+    }
+  ]
+}

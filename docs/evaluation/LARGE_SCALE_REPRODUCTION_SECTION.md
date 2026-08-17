@@ -20,6 +20,8 @@ $env:OPENAI_API_KEY = "<helyileg beallitott kulcs>"
 .\evaluation\run_d1_d8_large_scale.ps1 -RealApi -Resume
 ```
 
+A `-CheckOnly` tiszta, futas elotti allapotot ellenoriz. Egy sikeres teljes futas utan szandekosan hibazik, amig az izolalt evaluation adatbazist es Chroma tarat nem allitjak vissza, mert a clean-state guard latja a betoltott benchmark dokumentumokat es vektorokat.
+
 A dokumentum-RAG resz `document_rag_v3` alatt 400 D1-D5 esetet futtat harom modban es ot ismetlessel, igy 6000 meresi rekordot varunk. Az EvidenceUnit holdout `data/benchmarks/evidence_unit_v2_holdout/` alatt 340 D6-D8 esetet futtat harom tiszta adatbazis-ismetlessel, igy 1020 rekordot varunk. A teljes sikeres futas legalabb 7020 meresi rekordot, manifeszteket, determinisztikus pontozast, statisztikai teszteket es szanitizalt publikacios csomagot hoz letre az `evaluation/results/d1_d8_large_scale_<UTC>/` es `evaluation/publication_results/d1_d8_large_scale_v1/` konyvtarakban.
 
 ## English Version
@@ -41,5 +43,7 @@ The final real-API run is:
 $env:OPENAI_API_KEY = "<set locally>"
 .\evaluation\run_d1_d8_large_scale.ps1 -RealApi -Resume
 ```
+
+`-CheckOnly` is a pre-run clean-state check. After a successful full run it intentionally fails until the isolated evaluation database and Chroma store are reset, because the clean-state guard detects the loaded benchmark documents and vectors.
 
 The document-RAG phase evaluates `document_rag_v3`, containing 400 D1-D5 cases, under three modes with five repetitions, for 6000 measured records. The EvidenceUnit holdout in `data/benchmarks/evidence_unit_v2_holdout/` evaluates 340 D6-D8 cases across three clean database repetitions, for 1020 measured records. A complete successful run therefore produces at least 7020 measured records, manifests, deterministic scores, statistical tests, and a sanitized publication package under `evaluation/results/d1_d8_large_scale_<UTC>/` and `evaluation/publication_results/d1_d8_large_scale_v1/`.

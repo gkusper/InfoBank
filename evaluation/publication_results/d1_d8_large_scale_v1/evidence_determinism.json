@@ -1,0 +1,27 @@
+{
+  "case_pass_consistent": {
+    "denominator": 340,
+    "numerator": 340,
+    "rate": 1.0,
+    "wilson_95": {
+      "high": 1.0,
+      "low": 0.988828
+    }
+  },
+  "denominator": 340,
+  "numerator": 340,
+  "rate": 1.0,
+  "status_consistent": {
+    "denominator": 340,
+    "numerator": 340,
+    "rate": 1.0,
+    "wilson_95": {
+      "high": 1.0,
+      "low": 0.988828
+    }
+  },
+  "wilson_95": {
+    "high": 1.0,
+    "low": 0.988828
+  }
+}

@@ -1,0 +1,209 @@
+{
+  "document_by_mode": {
+    "governance_only_rag": {
+      "behavioral_conformance_rate": {
+        "denominator": 2000,
+        "numerator": 575,
+        "rate": 0.2875
+      },
+      "controlled_failure_correctness": {
+        "denominator": 2000,
+        "numerator": 1600,
+        "rate": 0.8
+      },
+      "exact_output_class_conformance": {
+        "denominator": 2000,
+        "numerator": 600,
+        "rate": 0.3
+      },
+      "generation_calls": 1200,
+      "generation_skipped_count": 800,
+      "generator_exposure_rate": {
+        "denominator": 1200,
+        "numerator": 200,
+        "rate": 0.166667
+      },
+      "permitted_answer_accuracy": {
+        "denominator": 800,
+        "numerator": 775,
+        "rate": 0.96875
+      },
+      "permitted_answer_correct_rate": 0.96875,
+      "prohibited_disclosure_rate": {
+        "denominator": 1200,
+        "numerator": 136,
+        "rate": 0.113333
+      },
+      "protected_marker_disclosure_rate": 0.113333,
+      "record_count": 2000,
+      "retrieval_target_recall_at_4": {
+        "denominator": 1800,
+        "numerator": 1800,
+        "rate": 1.0
+      },
+      "safe_withholding_rate": {
+        "denominator": 1200,
+        "numerator": 1064,
+        "rate": 0.886667
+      },
+      "source_role_conformance": {
+        "denominator": 2000,
+        "numerator": 0,
+        "rate": 0.0
+      }
+    },
+    "role_aware_rag": {
+      "behavioral_conformance_rate": {
+        "denominator": 2000,
+        "numerator": 1681,
+        "rate": 0.8405
+      },
+      "controlled_failure_correctness": {
+        "denominator": 2000,
+        "numerator": 2000,
+        "rate": 1.0
+      },
+      "exact_output_class_conformance": {
+        "denominator": 2000,
+        "numerator": 1690,
+        "rate": 0.845
+      },
+      "generation_calls": 490,
+      "generation_skipped_count": 1510,
+      "generator_exposure_rate": {
+        "denominator": 1200,
+        "numerator": 0,
+        "rate": 0.0
+      },
+      "permitted_answer_accuracy": {
+        "denominator": 800,
+        "numerator": 481,
+        "rate": 0.60125
+      },
+      "permitted_answer_correct_rate": 0.60125,
+      "prohibited_disclosure_rate": {
+        "denominator": 1200,
+        "numerator": 0,
+        "rate": 0.0
+      },
+      "protected_marker_disclosure_rate": 0.0,
+      "record_count": 2000,
+      "retrieval_target_recall_at_4": {
+        "denominator": 1800,
+        "numerator": 1800,
+        "rate": 1.0
+      },
+      "safe_withholding_rate": {
+        "denominator": 1200,
+        "numerator": 1200,
+        "rate": 1.0
+      },
+      "source_role_conformance": {
+        "denominator": 2000,
+        "numerator": 1920,
+        "rate": 0.96
+      }
+    },
+    "standard_rag": {
+      "behavioral_conformance_rate": {
+        "denominator": 2000,
+        "numerator": 581,
+        "rate": 0.2905
+      },
+      "controlled_failure_correctness": {
+        "denominator": 2000,
+        "numerator": 800,
+        "rate": 0.4
+      },
+      "exact_output_class_conformance": {
+        "denominator": 2000,
+        "numerator": 600,
+        "rate": 0.3
+      },
+      "generation_calls": 2000,
+      "generation_skipped_count": 0,
+      "generator_exposure_rate": {
+        "denominator": 1200,
+        "numerator": 1200,
+        "rate": 1.0
+      },
+      "permitted_answer_accuracy": {
+        "denominator": 800,
+        "numerator": 756,
+        "rate": 0.945
+      },
+      "permitted_answer_correct_rate": 0.945,
+      "prohibited_disclosure_rate": {
+        "denominator": 1200,
+        "numerator": 1102,
+        "rate": 0.918333
+      },
+      "protected_marker_disclosure_rate": 0.918333,
+      "record_count": 2000,
+      "retrieval_target_recall_at_4": {
+        "denominator": 1800,
+        "numerator": 1800,
+        "rate": 1.0
+      },
+      "safe_withholding_rate": {
+        "denominator": 1200,
+        "numerator": 98,
+        "rate": 0.081667
+      },
+      "source_role_conformance": {
+        "denominator": 2000,
+        "numerator": 0,
+        "rate": 0.0
+      }
+    }
+  },
+  "evidence_primary": {
+    "D6_open_action_accuracy": 0.89,
+    "D7_browser_only_false_action_rate": 0.0,
+    "D8_NONCLOSING_open_status_accuracy": 0.8,
+    "D8_closure_status_accuracy": 0.58,
+    "EvidenceUnit_role_accuracy": 0.895588,
+    "clean_run_determinism": {
+      "case_pass_consistent": {
+        "denominator": 340,
+        "numerator": 340,
+        "rate": 1.0,
+        "wilson_95": {
+          "high": 1.0,
+          "low": 0.988828
+        }
+      },
+      "denominator": 340,
+      "numerator": 340,
+      "rate": 1.0,
+      "status_consistent": {
+        "denominator": 340,
+        "numerator": 340,
+        "rate": 1.0,
+        "wilson_95": {
+          "high": 1.0,
+          "low": 0.988828
+        }
+      },
+      "wilson_95": {
+        "high": 1.0,
+        "low": 0.988828
+      }
+    },
+    "triplet_consistency": {
+      "denominator": 100,
+      "numerator": 58,
+      "rate": 0.58,
+      "wilson_95": {
+        "high": 0.672016,
+        "low": 0.482065
+      }
+    }
+  },
+  "record_counts": {
+    "document_records": 6000,
+    "evidence_records": 1020,
+    "total_records": 7020
+  },
+  "source": "evaluation/results large-scale combined_metrics.json"
+}

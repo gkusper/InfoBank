@@ -1,0 +1,26 @@
+{
+  "document_fixture": {
+    "path": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-17\\e\\work\\InfoBank\\evaluation\\fixtures\\document_rag_v3.yaml",
+    "sha256": "612809710b7eabebe2335eacb6402da093ef16c2c7a93f442a7caa3bd34af77e"
+  },
+  "document_statistics": {
+    "path": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-17\\e\\work\\InfoBank\\evaluation\\fixtures\\document_rag_v3_statistics.json",
+    "sha256": "5b3c1e6a946d45d415241630d541e976906b24f4b47fa18c16ab389c123f7820"
+  },
+  "evidence_benchmark": {
+    "files": {
+      "ATTRIBUTION.md": "96cbef9c268c9955da032015c7e4eb796109c68f27dde1bfcd6bd9dee8356c67",
+      "LICENSE_DATA.md": "9918eb11d5d71ed8744b5a8549ea6c9c140a4e61a45308b38e880701ef5c4587",
+      "README.md": "e095ce2f8fd9e5e4d16f7e425bb708628604c51a8d08b817671f20d3498dcc5c",
+      "SOURCE_PROVENANCE.md": "4003706c291ebcd98662b9fb607c75d4e74cca3a8dd351ddbddadb72dab49697",
+      "benchmark_statistics.json": "6573d6ac2222a1a1b07be40195c4e66da9d4666af83ffe9d1e0f9b627d7a2c46",
+      "cases.jsonl": "60164aa6fd7804aeb59fae1c7994064de7491722cb428980149181ac9f790106",
+      "curation_overrides.json": "22ce019755fe78e7035a7a24f1b47d4c2e4a18cb21345520471c346b21ff1eb9",
+      "curation_report.md": "8a24e923b971acf5471c6041368ca826fda1b4fffcb4414c312658e29cef6e6e",
+      "gold.jsonl": "e7fea10eb613cceb32c6a3812d7d3de9d6a7c4f7ab654b3166cb1b1556a19860",
+      "source_manifest.json": "c0d145e1c29c6d5ae1415086ec25f00ed45468b55713caa95abb71437fd3ec6c",
+      "triplets.jsonl": "ea83f2d57337ca665b48b62ca63837f6d171e8a9240da88762ec68ed99431ed1"
+    },
+    "path": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-17\\e\\work\\InfoBank\\data\\benchmarks\\evidence_unit_v2_holdout"
+  }
+}

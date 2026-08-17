@@ -1,0 +1,6264 @@
+{
+  "D6_action_recall": 0.89,
+  "D6_open_action_accuracy": 0.89,
+  "D7_browser_only_false_action_rate": 0.0,
+  "D7_contextual_role_accuracy": 0.98,
+  "D8_NONCLOSING_open_status_accuracy": 0.8,
+  "D8_closure_status_accuracy": 0.58,
+  "D8_primary_contrastive_linking_accuracy": 0.58,
+  "EvidenceUnit_role_accuracy": 0.895588,
+  "OPEN_CLOSED_ABSENT_confusion_matrix": {
+    "ABSENT": {
+      "ABSENT": 300,
+      "CLOSED": 0,
+      "OPEN": 0
+    },
+    "CLOSED": {
+      "ABSENT": 27,
+      "CLOSED": 174,
+      "OPEN": 99
+    },
+    "OPEN": {
+      "ABSENT": 57,
+      "CLOSED": 0,
+      "OPEN": 363
+    }
+  },
+  "OPEN_CLOSED_ABSENT_status_accuracy": 0.820588,
+  "action_F1": 0.823129,
+  "action_precision": 0.785714,
+  "action_recall": 0.864286,
+  "by_scenario_counts": {
+    "D6": 300,
+    "D7": 300,
+    "D8": 300,
+    "D8_NONCLOSING": 120
+  },
+  "external_llm_calls": 0,
+  "failures": [
+    {
+      "case_id": "D7_H_0005",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0c351cd11f51": "contrastive",
+        "EUH_9230337a9655": "contrastive",
+        "EUH_f72b3794aa86": "contrastive"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "ABSENT",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_0c351cd11f51": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_9230337a9655": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_f72b3794aa86": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D7",
+      "seed_id": "HOLDOUT_SEED_0005"
+    },
+    {
+      "case_id": "D8_H_0013",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_017b02738778": "primary",
+        "EUH_cc0b7d1ac589": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_017b02738778": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_cc0b7d1ac589": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0013"
+    },
+    {
+      "case_id": "D6_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_ada0effc6f94": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_ada0effc6f94": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0017"
+    },
+    {
+      "case_id": "D8_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0cc3b477735e": "contrastive",
+        "EUH_13f849409726": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_0cc3b477735e": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_13f849409726": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0017"
+    },
+    {
+      "case_id": "D8_H_0018",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_9c5b9783b667": "primary",
+        "EUH_b947103c0a93": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_9c5b9783b667": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_b947103c0a93": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0018"
+    },
+    {
+      "case_id": "D6_H_0020",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_da69554d15b4": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_da69554d15b4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0020"
+    },
+    {
+      "case_id": "D8_H_0020",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_384ba7340624": "contrastive",
+        "EUH_f6f45887e88e": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_384ba7340624": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_f6f45887e88e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0020"
+    },
+    {
+      "case_id": "D6_H_0024",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6e8307b7def4": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6e8307b7def4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0024"
+    },
+    {
+      "case_id": "D8_H_0024",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_826cb933e8f9": "contextual",
+        "EUH_84c02736c76f": "contrastive"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_826cb933e8f9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_84c02736c76f": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0024"
+    },
+    {
+      "case_id": "D8_H_0031",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_60ffa081daa1": "primary",
+        "EUH_876a9ce9b613": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_60ffa081daa1": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_876a9ce9b613": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0031"
+    },
+    {
+      "case_id": "D6_H_0036",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_b9aff61b2bc2": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_b9aff61b2bc2": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0036"
+    },
+    {
+      "case_id": "D8_H_0036",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2f629c2e5904": "contextual",
+        "EUH_9aa48f5c9bcb": "contrastive"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2f629c2e5904": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9aa48f5c9bcb": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0036"
+    },
+    {
+      "case_id": "D6_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_bd22831213c1": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_bd22831213c1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0040"
+    },
+    {
+      "case_id": "D8_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2aad09f59a3a": "contrastive",
+        "EUH_e6c66ec864ed": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2aad09f59a3a": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_e6c66ec864ed": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0040"
+    },
+    {
+      "case_id": "D8_H_0041",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2ba5aa3c8325": "primary",
+        "EUH_9dcee7991ca9": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2ba5aa3c8325": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_9dcee7991ca9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0041"
+    },
+    {
+      "case_id": "D8_H_0042",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_a43b935b691e": "primary",
+        "EUH_e95d6fc992e9": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_a43b935b691e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_e95d6fc992e9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0042"
+    },
+    {
+      "case_id": "D8_H_0043",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2141406adea6": "primary",
+        "EUH_a3740a9cea0e": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2141406adea6": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_a3740a9cea0e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0043"
+    },
+    {
+      "case_id": "D8_H_0044",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_17e2dd4a4c34": "primary",
+        "EUH_4973a1054060": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_17e2dd4a4c34": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_4973a1054060": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0044"
+    },
+    {
+      "case_id": "D8_H_0045",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_beb910209d68": "primary",
+        "EUH_eca2549cb7db": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_beb910209d68": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_eca2549cb7db": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0045"
+    },
+    {
+      "case_id": "D8_H_0046",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0c27c07f3280": "primary",
+        "EUH_0e96769f9312": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0c27c07f3280": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_0e96769f9312": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0046"
+    },
+    {
+      "case_id": "D8_H_0047",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_5656aea052f6": "primary",
+        "EUH_b8a03c4ee2f9": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_5656aea052f6": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_b8a03c4ee2f9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0047"
+    },
+    {
+      "case_id": "D8_H_0048",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_9d2049ac18e2": "primary",
+        "EUH_f9e6d67dd385": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_9d2049ac18e2": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_f9e6d67dd385": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0048"
+    },
+    {
+      "case_id": "D8_H_0049",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_042257727007": "primary",
+        "EUH_d435b68254d9": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_042257727007": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_d435b68254d9": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0049"
+    },
+    {
+      "case_id": "D8_H_0050",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0277a010c443": "primary",
+        "EUH_0def69ddfe38": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0277a010c443": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_0def69ddfe38": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0050"
+    },
+    {
+      "case_id": "D8_H_0051",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_050dbf93f575": "primary",
+        "EUH_1fa858ee76e8": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_050dbf93f575": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_1fa858ee76e8": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0051"
+    },
+    {
+      "case_id": "D8_H_0052",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_44741e84cc52": "primary",
+        "EUH_fa960ff1e2d5": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_44741e84cc52": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_fa960ff1e2d5": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0052"
+    },
+    {
+      "case_id": "D8_H_0053",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6aa7b7e383b8": "primary",
+        "EUH_ea281c9bfdee": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_6aa7b7e383b8": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_ea281c9bfdee": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0053"
+    },
+    {
+      "case_id": "D8_H_0054",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0290487aa93a": "primary",
+        "EUH_80854c557cdd": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0290487aa93a": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_80854c557cdd": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0054"
+    },
+    {
+      "case_id": "D8_H_0055",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0dd22572352d": "primary",
+        "EUH_cb658d593254": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0dd22572352d": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_cb658d593254": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0055"
+    },
+    {
+      "case_id": "D8_H_0056",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_be8954f8cb4d": "primary",
+        "EUH_f9d397b30ea5": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_be8954f8cb4d": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_f9d397b30ea5": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0056"
+    },
+    {
+      "case_id": "D8_H_0057",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_5c35633dd1bc": "primary",
+        "EUH_ddc60366c7c5": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_5c35633dd1bc": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_ddc60366c7c5": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0057"
+    },
+    {
+      "case_id": "D8_H_0058",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2ed3b31c7f02": "primary",
+        "EUH_ba9eaeb5f519": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2ed3b31c7f02": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_ba9eaeb5f519": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0058"
+    },
+    {
+      "case_id": "D8_H_0059",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_401a18399eae": "primary",
+        "EUH_720aec0e428b": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_401a18399eae": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_720aec0e428b": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0059"
+    },
+    {
+      "case_id": "D8_H_0060",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_02bb1c5eee8f": "primary",
+        "EUH_02f861693cc3": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_02bb1c5eee8f": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_02f861693cc3": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0060"
+    },
+    {
+      "case_id": "D8_H_0061",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_215e1cd9b97e": "primary",
+        "EUH_e4555267457a": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_215e1cd9b97e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_e4555267457a": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0061"
+    },
+    {
+      "case_id": "D8_H_0062",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_24abad27b199": "primary",
+        "EUH_63c6b29a9898": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_24abad27b199": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_63c6b29a9898": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0062"
+    },
+    {
+      "case_id": "D6_H_0063",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6d251d000fa6": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6d251d000fa6": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0063"
+    },
+    {
+      "case_id": "D8_H_0063",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_09c107c7b9a4": "primary",
+        "EUH_76790d129950": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_09c107c7b9a4": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_76790d129950": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0063"
+    },
+    {
+      "case_id": "D8_H_0064",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_7920a57cf788": "primary",
+        "EUH_7c4aeab6ee2a": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_7920a57cf788": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_7c4aeab6ee2a": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0064"
+    },
+    {
+      "case_id": "D8_H_0065",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_65c81aa52390": "primary",
+        "EUH_77fe54508fbd": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_65c81aa52390": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_77fe54508fbd": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0065"
+    },
+    {
+      "case_id": "D6_H_0066",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_187c98d07d43": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_187c98d07d43": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0066"
+    },
+    {
+      "case_id": "D8_H_0066",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_06bcf46aeb49": "contextual",
+        "EUH_fbdb074a6e71": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_06bcf46aeb49": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_fbdb074a6e71": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0066"
+    },
+    {
+      "case_id": "D8_H_0067",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_064b12c87113": "primary",
+        "EUH_81fe83bd7631": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_064b12c87113": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_81fe83bd7631": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0067"
+    },
+    {
+      "case_id": "D8_H_0068",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_c03291ab498e": "primary",
+        "EUH_cf977dcd4500": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_c03291ab498e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_cf977dcd4500": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0068"
+    },
+    {
+      "case_id": "D8_H_0069",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_1fa6218c78c4": "primary",
+        "EUH_b74d8b82eba1": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_1fa6218c78c4": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_b74d8b82eba1": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0069"
+    },
+    {
+      "case_id": "D8_H_0070",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_18e60eb42db7": "primary",
+        "EUH_a04861526c16": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_18e60eb42db7": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_a04861526c16": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0070"
+    },
+    {
+      "case_id": "D6_H_0074",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_a872e7e03ca9": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_a872e7e03ca9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0074"
+    },
+    {
+      "case_id": "D8_H_0074",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_7b3cf9cccab0": "contextual",
+        "EUH_9d3b9ed3366b": "contrastive"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_7b3cf9cccab0": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9d3b9ed3366b": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0074"
+    },
+    {
+      "case_id": "D7_H_0075",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_18c1e1415c21": "contrastive",
+        "EUH_71bba31fa6e3": "contrastive",
+        "EUH_dc4ec2cec68c": "contrastive"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "ABSENT",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_18c1e1415c21": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_71bba31fa6e3": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_dc4ec2cec68c": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D7",
+      "seed_id": "HOLDOUT_SEED_0075"
+    },
+    {
+      "case_id": "D6_H_0076",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2099aae2b34e": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2099aae2b34e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0076"
+    },
+    {
+      "case_id": "D8_H_0076",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_4e21bc5c23ac": "contrastive",
+        "EUH_f2f444c8e11b": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_4e21bc5c23ac": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_f2f444c8e11b": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0076"
+    },
+    {
+      "case_id": "D6_H_0092",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_f4407cac3a07": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_f4407cac3a07": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0092"
+    },
+    {
+      "case_id": "D8_H_0092",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_73cf4e8a9baa": "contrastive",
+        "EUH_9e04c668fbe9": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_73cf4e8a9baa": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_9e04c668fbe9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0092"
+    },
+    {
+      "case_id": "D6_H_0094",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_eaa7c92f6c7e": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_eaa7c92f6c7e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0094"
+    },
+    {
+      "case_id": "D8_H_0094",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_027fcaff4c5d": "contrastive",
+        "EUH_fb4dd26254e4": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_027fcaff4c5d": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_fb4dd26254e4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0094"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0001",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_28fa8d2750dd": "contextual",
+        "EUH_6a4f80a25e28": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_28fa8d2750dd": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_6a4f80a25e28": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0001"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0004",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6fa32b816fa1": "contextual",
+        "EUH_8f502ee0061b": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6fa32b816fa1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_8f502ee0061b": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0004"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0007",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_38e0b33f9449": "contextual",
+        "EUH_a5da8da0e1d1": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_38e0b33f9449": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        },
+        "EUH_a5da8da0e1d1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0007"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0013",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_45d0905932b4": "contextual",
+        "EUH_906960127cce": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_45d0905932b4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_906960127cce": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0013"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_b6fc75f8d831": "contextual",
+        "EUH_f059385de6fe": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_b6fc75f8d831": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_f059385de6fe": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0017"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0019",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_376f866b4195": "contrastive",
+        "EUH_6e3d27f363d0": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_376f866b4195": {
+          "expected": "primary",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_6e3d27f363d0": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0019"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0029",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2dcd8c77694f": "contextual",
+        "EUH_6d49c505bfc9": "contextual"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2dcd8c77694f": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_6d49c505bfc9": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0029"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0038",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_3241c7c29c6c": "primary",
+        "EUH_bf2ea96c3502": "primary"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_3241c7c29c6c": {
+          "expected": "contextual",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_bf2ea96c3502": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0038"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_195f4388a9dd": "contextual",
+        "EUH_9766a40d9615": "contrastive"
+      },
+      "clean_repetition": 1,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_195f4388a9dd": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9766a40d9615": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0040"
+    },
+    {
+      "case_id": "D7_H_0005",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0c351cd11f51": "contrastive",
+        "EUH_9230337a9655": "contrastive",
+        "EUH_f72b3794aa86": "contrastive"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "ABSENT",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_0c351cd11f51": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_9230337a9655": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_f72b3794aa86": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D7",
+      "seed_id": "HOLDOUT_SEED_0005"
+    },
+    {
+      "case_id": "D8_H_0013",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_017b02738778": "primary",
+        "EUH_cc0b7d1ac589": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_017b02738778": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_cc0b7d1ac589": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0013"
+    },
+    {
+      "case_id": "D6_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_ada0effc6f94": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_ada0effc6f94": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0017"
+    },
+    {
+      "case_id": "D8_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0cc3b477735e": "contrastive",
+        "EUH_13f849409726": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_0cc3b477735e": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_13f849409726": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0017"
+    },
+    {
+      "case_id": "D8_H_0018",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_9c5b9783b667": "primary",
+        "EUH_b947103c0a93": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_9c5b9783b667": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_b947103c0a93": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0018"
+    },
+    {
+      "case_id": "D6_H_0020",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_da69554d15b4": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_da69554d15b4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0020"
+    },
+    {
+      "case_id": "D8_H_0020",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_384ba7340624": "contrastive",
+        "EUH_f6f45887e88e": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_384ba7340624": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_f6f45887e88e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0020"
+    },
+    {
+      "case_id": "D6_H_0024",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6e8307b7def4": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6e8307b7def4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0024"
+    },
+    {
+      "case_id": "D8_H_0024",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_826cb933e8f9": "contextual",
+        "EUH_84c02736c76f": "contrastive"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_826cb933e8f9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_84c02736c76f": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0024"
+    },
+    {
+      "case_id": "D8_H_0031",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_60ffa081daa1": "primary",
+        "EUH_876a9ce9b613": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_60ffa081daa1": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_876a9ce9b613": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0031"
+    },
+    {
+      "case_id": "D6_H_0036",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_b9aff61b2bc2": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_b9aff61b2bc2": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0036"
+    },
+    {
+      "case_id": "D8_H_0036",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2f629c2e5904": "contextual",
+        "EUH_9aa48f5c9bcb": "contrastive"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2f629c2e5904": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9aa48f5c9bcb": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0036"
+    },
+    {
+      "case_id": "D6_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_bd22831213c1": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_bd22831213c1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0040"
+    },
+    {
+      "case_id": "D8_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2aad09f59a3a": "contrastive",
+        "EUH_e6c66ec864ed": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2aad09f59a3a": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_e6c66ec864ed": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0040"
+    },
+    {
+      "case_id": "D8_H_0041",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2ba5aa3c8325": "primary",
+        "EUH_9dcee7991ca9": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2ba5aa3c8325": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_9dcee7991ca9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0041"
+    },
+    {
+      "case_id": "D8_H_0042",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_a43b935b691e": "primary",
+        "EUH_e95d6fc992e9": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_a43b935b691e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_e95d6fc992e9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0042"
+    },
+    {
+      "case_id": "D8_H_0043",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2141406adea6": "primary",
+        "EUH_a3740a9cea0e": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2141406adea6": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_a3740a9cea0e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0043"
+    },
+    {
+      "case_id": "D8_H_0044",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_17e2dd4a4c34": "primary",
+        "EUH_4973a1054060": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_17e2dd4a4c34": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_4973a1054060": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0044"
+    },
+    {
+      "case_id": "D8_H_0045",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_beb910209d68": "primary",
+        "EUH_eca2549cb7db": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_beb910209d68": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_eca2549cb7db": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0045"
+    },
+    {
+      "case_id": "D8_H_0046",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0c27c07f3280": "primary",
+        "EUH_0e96769f9312": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0c27c07f3280": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_0e96769f9312": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0046"
+    },
+    {
+      "case_id": "D8_H_0047",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_5656aea052f6": "primary",
+        "EUH_b8a03c4ee2f9": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_5656aea052f6": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_b8a03c4ee2f9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0047"
+    },
+    {
+      "case_id": "D8_H_0048",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_9d2049ac18e2": "primary",
+        "EUH_f9e6d67dd385": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_9d2049ac18e2": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_f9e6d67dd385": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0048"
+    },
+    {
+      "case_id": "D8_H_0049",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_042257727007": "primary",
+        "EUH_d435b68254d9": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_042257727007": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_d435b68254d9": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0049"
+    },
+    {
+      "case_id": "D8_H_0050",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0277a010c443": "primary",
+        "EUH_0def69ddfe38": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0277a010c443": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_0def69ddfe38": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0050"
+    },
+    {
+      "case_id": "D8_H_0051",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_050dbf93f575": "primary",
+        "EUH_1fa858ee76e8": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_050dbf93f575": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_1fa858ee76e8": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0051"
+    },
+    {
+      "case_id": "D8_H_0052",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_44741e84cc52": "primary",
+        "EUH_fa960ff1e2d5": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_44741e84cc52": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_fa960ff1e2d5": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0052"
+    },
+    {
+      "case_id": "D8_H_0053",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6aa7b7e383b8": "primary",
+        "EUH_ea281c9bfdee": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_6aa7b7e383b8": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_ea281c9bfdee": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0053"
+    },
+    {
+      "case_id": "D8_H_0054",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0290487aa93a": "primary",
+        "EUH_80854c557cdd": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0290487aa93a": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_80854c557cdd": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0054"
+    },
+    {
+      "case_id": "D8_H_0055",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0dd22572352d": "primary",
+        "EUH_cb658d593254": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0dd22572352d": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_cb658d593254": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0055"
+    },
+    {
+      "case_id": "D8_H_0056",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_be8954f8cb4d": "primary",
+        "EUH_f9d397b30ea5": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_be8954f8cb4d": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_f9d397b30ea5": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0056"
+    },
+    {
+      "case_id": "D8_H_0057",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_5c35633dd1bc": "primary",
+        "EUH_ddc60366c7c5": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_5c35633dd1bc": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_ddc60366c7c5": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0057"
+    },
+    {
+      "case_id": "D8_H_0058",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2ed3b31c7f02": "primary",
+        "EUH_ba9eaeb5f519": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2ed3b31c7f02": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_ba9eaeb5f519": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0058"
+    },
+    {
+      "case_id": "D8_H_0059",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_401a18399eae": "primary",
+        "EUH_720aec0e428b": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_401a18399eae": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_720aec0e428b": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0059"
+    },
+    {
+      "case_id": "D8_H_0060",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_02bb1c5eee8f": "primary",
+        "EUH_02f861693cc3": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_02bb1c5eee8f": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_02f861693cc3": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0060"
+    },
+    {
+      "case_id": "D8_H_0061",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_215e1cd9b97e": "primary",
+        "EUH_e4555267457a": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_215e1cd9b97e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_e4555267457a": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0061"
+    },
+    {
+      "case_id": "D8_H_0062",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_24abad27b199": "primary",
+        "EUH_63c6b29a9898": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_24abad27b199": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_63c6b29a9898": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0062"
+    },
+    {
+      "case_id": "D6_H_0063",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6d251d000fa6": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6d251d000fa6": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0063"
+    },
+    {
+      "case_id": "D8_H_0063",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_09c107c7b9a4": "primary",
+        "EUH_76790d129950": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_09c107c7b9a4": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_76790d129950": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0063"
+    },
+    {
+      "case_id": "D8_H_0064",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_7920a57cf788": "primary",
+        "EUH_7c4aeab6ee2a": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_7920a57cf788": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_7c4aeab6ee2a": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0064"
+    },
+    {
+      "case_id": "D8_H_0065",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_65c81aa52390": "primary",
+        "EUH_77fe54508fbd": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_65c81aa52390": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_77fe54508fbd": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0065"
+    },
+    {
+      "case_id": "D6_H_0066",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_187c98d07d43": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_187c98d07d43": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0066"
+    },
+    {
+      "case_id": "D8_H_0066",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_06bcf46aeb49": "contextual",
+        "EUH_fbdb074a6e71": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_06bcf46aeb49": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_fbdb074a6e71": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0066"
+    },
+    {
+      "case_id": "D8_H_0067",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_064b12c87113": "primary",
+        "EUH_81fe83bd7631": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_064b12c87113": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_81fe83bd7631": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0067"
+    },
+    {
+      "case_id": "D8_H_0068",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_c03291ab498e": "primary",
+        "EUH_cf977dcd4500": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_c03291ab498e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_cf977dcd4500": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0068"
+    },
+    {
+      "case_id": "D8_H_0069",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_1fa6218c78c4": "primary",
+        "EUH_b74d8b82eba1": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_1fa6218c78c4": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_b74d8b82eba1": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0069"
+    },
+    {
+      "case_id": "D8_H_0070",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_18e60eb42db7": "primary",
+        "EUH_a04861526c16": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_18e60eb42db7": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_a04861526c16": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0070"
+    },
+    {
+      "case_id": "D6_H_0074",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_a872e7e03ca9": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_a872e7e03ca9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0074"
+    },
+    {
+      "case_id": "D8_H_0074",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_7b3cf9cccab0": "contextual",
+        "EUH_9d3b9ed3366b": "contrastive"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_7b3cf9cccab0": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9d3b9ed3366b": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0074"
+    },
+    {
+      "case_id": "D7_H_0075",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_18c1e1415c21": "contrastive",
+        "EUH_71bba31fa6e3": "contrastive",
+        "EUH_dc4ec2cec68c": "contrastive"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "ABSENT",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_18c1e1415c21": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_71bba31fa6e3": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_dc4ec2cec68c": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D7",
+      "seed_id": "HOLDOUT_SEED_0075"
+    },
+    {
+      "case_id": "D6_H_0076",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2099aae2b34e": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2099aae2b34e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0076"
+    },
+    {
+      "case_id": "D8_H_0076",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_4e21bc5c23ac": "contrastive",
+        "EUH_f2f444c8e11b": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_4e21bc5c23ac": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_f2f444c8e11b": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0076"
+    },
+    {
+      "case_id": "D6_H_0092",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_f4407cac3a07": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_f4407cac3a07": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0092"
+    },
+    {
+      "case_id": "D8_H_0092",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_73cf4e8a9baa": "contrastive",
+        "EUH_9e04c668fbe9": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_73cf4e8a9baa": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_9e04c668fbe9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0092"
+    },
+    {
+      "case_id": "D6_H_0094",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_eaa7c92f6c7e": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_eaa7c92f6c7e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0094"
+    },
+    {
+      "case_id": "D8_H_0094",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_027fcaff4c5d": "contrastive",
+        "EUH_fb4dd26254e4": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_027fcaff4c5d": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_fb4dd26254e4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0094"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0001",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_28fa8d2750dd": "contextual",
+        "EUH_6a4f80a25e28": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_28fa8d2750dd": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_6a4f80a25e28": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0001"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0004",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6fa32b816fa1": "contextual",
+        "EUH_8f502ee0061b": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6fa32b816fa1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_8f502ee0061b": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0004"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0007",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_38e0b33f9449": "contextual",
+        "EUH_a5da8da0e1d1": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_38e0b33f9449": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        },
+        "EUH_a5da8da0e1d1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0007"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0013",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_45d0905932b4": "contextual",
+        "EUH_906960127cce": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_45d0905932b4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_906960127cce": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0013"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_b6fc75f8d831": "contextual",
+        "EUH_f059385de6fe": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_b6fc75f8d831": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_f059385de6fe": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0017"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0019",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_376f866b4195": "contrastive",
+        "EUH_6e3d27f363d0": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_376f866b4195": {
+          "expected": "primary",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_6e3d27f363d0": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0019"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0029",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2dcd8c77694f": "contextual",
+        "EUH_6d49c505bfc9": "contextual"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2dcd8c77694f": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_6d49c505bfc9": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0029"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0038",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_3241c7c29c6c": "primary",
+        "EUH_bf2ea96c3502": "primary"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_3241c7c29c6c": {
+          "expected": "contextual",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_bf2ea96c3502": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0038"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_195f4388a9dd": "contextual",
+        "EUH_9766a40d9615": "contrastive"
+      },
+      "clean_repetition": 2,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_195f4388a9dd": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9766a40d9615": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0040"
+    },
+    {
+      "case_id": "D7_H_0005",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0c351cd11f51": "contrastive",
+        "EUH_9230337a9655": "contrastive",
+        "EUH_f72b3794aa86": "contrastive"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "ABSENT",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_0c351cd11f51": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_9230337a9655": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_f72b3794aa86": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D7",
+      "seed_id": "HOLDOUT_SEED_0005"
+    },
+    {
+      "case_id": "D8_H_0013",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_017b02738778": "primary",
+        "EUH_cc0b7d1ac589": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_017b02738778": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_cc0b7d1ac589": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0013"
+    },
+    {
+      "case_id": "D6_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_ada0effc6f94": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_ada0effc6f94": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0017"
+    },
+    {
+      "case_id": "D8_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0cc3b477735e": "contrastive",
+        "EUH_13f849409726": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_0cc3b477735e": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_13f849409726": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0017"
+    },
+    {
+      "case_id": "D8_H_0018",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_9c5b9783b667": "primary",
+        "EUH_b947103c0a93": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_9c5b9783b667": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_b947103c0a93": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0018"
+    },
+    {
+      "case_id": "D6_H_0020",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_da69554d15b4": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_da69554d15b4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0020"
+    },
+    {
+      "case_id": "D8_H_0020",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_384ba7340624": "contrastive",
+        "EUH_f6f45887e88e": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_384ba7340624": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_f6f45887e88e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0020"
+    },
+    {
+      "case_id": "D6_H_0024",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6e8307b7def4": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6e8307b7def4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0024"
+    },
+    {
+      "case_id": "D8_H_0024",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_826cb933e8f9": "contextual",
+        "EUH_84c02736c76f": "contrastive"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_826cb933e8f9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_84c02736c76f": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0024"
+    },
+    {
+      "case_id": "D8_H_0031",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_60ffa081daa1": "primary",
+        "EUH_876a9ce9b613": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_60ffa081daa1": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_876a9ce9b613": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0031"
+    },
+    {
+      "case_id": "D6_H_0036",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_b9aff61b2bc2": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_b9aff61b2bc2": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0036"
+    },
+    {
+      "case_id": "D8_H_0036",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2f629c2e5904": "contextual",
+        "EUH_9aa48f5c9bcb": "contrastive"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2f629c2e5904": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9aa48f5c9bcb": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0036"
+    },
+    {
+      "case_id": "D6_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_bd22831213c1": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_bd22831213c1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0040"
+    },
+    {
+      "case_id": "D8_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2aad09f59a3a": "contrastive",
+        "EUH_e6c66ec864ed": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2aad09f59a3a": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_e6c66ec864ed": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0040"
+    },
+    {
+      "case_id": "D8_H_0041",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2ba5aa3c8325": "primary",
+        "EUH_9dcee7991ca9": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2ba5aa3c8325": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_9dcee7991ca9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0041"
+    },
+    {
+      "case_id": "D8_H_0042",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_a43b935b691e": "primary",
+        "EUH_e95d6fc992e9": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_a43b935b691e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_e95d6fc992e9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0042"
+    },
+    {
+      "case_id": "D8_H_0043",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2141406adea6": "primary",
+        "EUH_a3740a9cea0e": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2141406adea6": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_a3740a9cea0e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0043"
+    },
+    {
+      "case_id": "D8_H_0044",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_17e2dd4a4c34": "primary",
+        "EUH_4973a1054060": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_17e2dd4a4c34": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_4973a1054060": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0044"
+    },
+    {
+      "case_id": "D8_H_0045",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_beb910209d68": "primary",
+        "EUH_eca2549cb7db": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_beb910209d68": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_eca2549cb7db": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0045"
+    },
+    {
+      "case_id": "D8_H_0046",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0c27c07f3280": "primary",
+        "EUH_0e96769f9312": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0c27c07f3280": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_0e96769f9312": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0046"
+    },
+    {
+      "case_id": "D8_H_0047",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_5656aea052f6": "primary",
+        "EUH_b8a03c4ee2f9": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_5656aea052f6": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_b8a03c4ee2f9": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0047"
+    },
+    {
+      "case_id": "D8_H_0048",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_9d2049ac18e2": "primary",
+        "EUH_f9e6d67dd385": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_9d2049ac18e2": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_f9e6d67dd385": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0048"
+    },
+    {
+      "case_id": "D8_H_0049",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_042257727007": "primary",
+        "EUH_d435b68254d9": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_042257727007": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_d435b68254d9": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0049"
+    },
+    {
+      "case_id": "D8_H_0050",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0277a010c443": "primary",
+        "EUH_0def69ddfe38": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0277a010c443": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_0def69ddfe38": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0050"
+    },
+    {
+      "case_id": "D8_H_0051",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_050dbf93f575": "primary",
+        "EUH_1fa858ee76e8": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_050dbf93f575": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_1fa858ee76e8": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0051"
+    },
+    {
+      "case_id": "D8_H_0052",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_44741e84cc52": "primary",
+        "EUH_fa960ff1e2d5": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_44741e84cc52": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_fa960ff1e2d5": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0052"
+    },
+    {
+      "case_id": "D8_H_0053",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6aa7b7e383b8": "primary",
+        "EUH_ea281c9bfdee": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_6aa7b7e383b8": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_ea281c9bfdee": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0053"
+    },
+    {
+      "case_id": "D8_H_0054",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0290487aa93a": "primary",
+        "EUH_80854c557cdd": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0290487aa93a": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_80854c557cdd": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0054"
+    },
+    {
+      "case_id": "D8_H_0055",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_0dd22572352d": "primary",
+        "EUH_cb658d593254": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_0dd22572352d": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_cb658d593254": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0055"
+    },
+    {
+      "case_id": "D8_H_0056",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_be8954f8cb4d": "primary",
+        "EUH_f9d397b30ea5": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_be8954f8cb4d": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_f9d397b30ea5": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0056"
+    },
+    {
+      "case_id": "D8_H_0057",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_5c35633dd1bc": "primary",
+        "EUH_ddc60366c7c5": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_5c35633dd1bc": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_ddc60366c7c5": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0057"
+    },
+    {
+      "case_id": "D8_H_0058",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2ed3b31c7f02": "primary",
+        "EUH_ba9eaeb5f519": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_2ed3b31c7f02": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_ba9eaeb5f519": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0058"
+    },
+    {
+      "case_id": "D8_H_0059",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_401a18399eae": "primary",
+        "EUH_720aec0e428b": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_401a18399eae": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_720aec0e428b": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0059"
+    },
+    {
+      "case_id": "D8_H_0060",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_02bb1c5eee8f": "primary",
+        "EUH_02f861693cc3": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_02bb1c5eee8f": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_02f861693cc3": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0060"
+    },
+    {
+      "case_id": "D8_H_0061",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_215e1cd9b97e": "primary",
+        "EUH_e4555267457a": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_215e1cd9b97e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_e4555267457a": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0061"
+    },
+    {
+      "case_id": "D8_H_0062",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_24abad27b199": "primary",
+        "EUH_63c6b29a9898": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_24abad27b199": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_63c6b29a9898": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0062"
+    },
+    {
+      "case_id": "D6_H_0063",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6d251d000fa6": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6d251d000fa6": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0063"
+    },
+    {
+      "case_id": "D8_H_0063",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_09c107c7b9a4": "primary",
+        "EUH_76790d129950": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_09c107c7b9a4": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_76790d129950": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0063"
+    },
+    {
+      "case_id": "D8_H_0064",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_7920a57cf788": "primary",
+        "EUH_7c4aeab6ee2a": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_7920a57cf788": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_7c4aeab6ee2a": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0064"
+    },
+    {
+      "case_id": "D8_H_0065",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_65c81aa52390": "primary",
+        "EUH_77fe54508fbd": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_65c81aa52390": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_77fe54508fbd": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0065"
+    },
+    {
+      "case_id": "D6_H_0066",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_187c98d07d43": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_187c98d07d43": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0066"
+    },
+    {
+      "case_id": "D8_H_0066",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_06bcf46aeb49": "contextual",
+        "EUH_fbdb074a6e71": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_06bcf46aeb49": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_fbdb074a6e71": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0066"
+    },
+    {
+      "case_id": "D8_H_0067",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_064b12c87113": "primary",
+        "EUH_81fe83bd7631": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_064b12c87113": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_81fe83bd7631": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0067"
+    },
+    {
+      "case_id": "D8_H_0068",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_c03291ab498e": "primary",
+        "EUH_cf977dcd4500": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_c03291ab498e": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        },
+        "EUH_cf977dcd4500": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0068"
+    },
+    {
+      "case_id": "D8_H_0069",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_1fa6218c78c4": "primary",
+        "EUH_b74d8b82eba1": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_1fa6218c78c4": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_b74d8b82eba1": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0069"
+    },
+    {
+      "case_id": "D8_H_0070",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_18e60eb42db7": "primary",
+        "EUH_a04861526c16": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_18e60eb42db7": {
+          "expected": "contrastive",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_a04861526c16": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0070"
+    },
+    {
+      "case_id": "D6_H_0074",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_a872e7e03ca9": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_a872e7e03ca9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0074"
+    },
+    {
+      "case_id": "D8_H_0074",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_7b3cf9cccab0": "contextual",
+        "EUH_9d3b9ed3366b": "contrastive"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_7b3cf9cccab0": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9d3b9ed3366b": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0074"
+    },
+    {
+      "case_id": "D7_H_0075",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_18c1e1415c21": "contrastive",
+        "EUH_71bba31fa6e3": "contrastive",
+        "EUH_dc4ec2cec68c": "contrastive"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "ABSENT",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_18c1e1415c21": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_71bba31fa6e3": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_dc4ec2cec68c": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D7",
+      "seed_id": "HOLDOUT_SEED_0075"
+    },
+    {
+      "case_id": "D6_H_0076",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2099aae2b34e": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2099aae2b34e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0076"
+    },
+    {
+      "case_id": "D8_H_0076",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_4e21bc5c23ac": "contrastive",
+        "EUH_f2f444c8e11b": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_4e21bc5c23ac": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_f2f444c8e11b": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0076"
+    },
+    {
+      "case_id": "D6_H_0092",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_f4407cac3a07": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_f4407cac3a07": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0092"
+    },
+    {
+      "case_id": "D8_H_0092",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_73cf4e8a9baa": "contrastive",
+        "EUH_9e04c668fbe9": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_73cf4e8a9baa": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_9e04c668fbe9": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0092"
+    },
+    {
+      "case_id": "D6_H_0094",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_eaa7c92f6c7e": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "obligation_not_recognized",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_eaa7c92f6c7e": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D6",
+      "seed_id": "HOLDOUT_SEED_0094"
+    },
+    {
+      "case_id": "D8_H_0094",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_027fcaff4c5d": "contrastive",
+        "EUH_fb4dd26254e4": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": false,
+      "expected_status": "CLOSED",
+      "failure_category": "closure_not_recognized_or_unlinked",
+      "linking_pass": false,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_027fcaff4c5d": {
+          "expected": "contrastive",
+          "observed": "contrastive",
+          "pass": true
+        },
+        "EUH_fb4dd26254e4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8",
+      "seed_id": "HOLDOUT_SEED_0094"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0001",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_28fa8d2750dd": "contextual",
+        "EUH_6a4f80a25e28": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_28fa8d2750dd": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_6a4f80a25e28": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0001"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0004",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_6fa32b816fa1": "contextual",
+        "EUH_8f502ee0061b": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_6fa32b816fa1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_8f502ee0061b": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0004"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0007",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_38e0b33f9449": "contextual",
+        "EUH_a5da8da0e1d1": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_38e0b33f9449": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        },
+        "EUH_a5da8da0e1d1": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0007"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0013",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_45d0905932b4": "contextual",
+        "EUH_906960127cce": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_45d0905932b4": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_906960127cce": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0013"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0017",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_b6fc75f8d831": "contextual",
+        "EUH_f059385de6fe": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_b6fc75f8d831": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_f059385de6fe": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0017"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0019",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_376f866b4195": "contrastive",
+        "EUH_6e3d27f363d0": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_376f866b4195": {
+          "expected": "primary",
+          "observed": "contrastive",
+          "pass": false
+        },
+        "EUH_6e3d27f363d0": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0019"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0029",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_2dcd8c77694f": "contextual",
+        "EUH_6d49c505bfc9": "contextual"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_2dcd8c77694f": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_6d49c505bfc9": {
+          "expected": "contextual",
+          "observed": "contextual",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0029"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0038",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_3241c7c29c6c": "primary",
+        "EUH_bf2ea96c3502": "primary"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "evidence_role_mismatch",
+      "linking_pass": true,
+      "observed_presence": true,
+      "observed_status": "OPEN",
+      "open_item_count": 1,
+      "role_checks": {
+        "EUH_3241c7c29c6c": {
+          "expected": "contextual",
+          "observed": "primary",
+          "pass": false
+        },
+        "EUH_bf2ea96c3502": {
+          "expected": "primary",
+          "observed": "primary",
+          "pass": true
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0038"
+    },
+    {
+      "case_id": "D8_NONCLOSING_H_0040",
+      "case_pass": false,
+      "classified_roles": {
+        "EUH_195f4388a9dd": "contextual",
+        "EUH_9766a40d9615": "contrastive"
+      },
+      "clean_repetition": 3,
+      "closed_item_count": 0,
+      "d7_primary_violation": false,
+      "expected_presence": true,
+      "expected_status": "OPEN",
+      "failure_category": "nonclosing_message_treated_as_closure_or_lost_open_item",
+      "linking_pass": true,
+      "observed_presence": false,
+      "observed_status": "ABSENT",
+      "open_item_count": 0,
+      "role_checks": {
+        "EUH_195f4388a9dd": {
+          "expected": "primary",
+          "observed": "contextual",
+          "pass": false
+        },
+        "EUH_9766a40d9615": {
+          "expected": "contextual",
+          "observed": "contrastive",
+          "pass": false
+        }
+      },
+      "role_pass": false,
+      "scenario": "D8_NONCLOSING",
+      "seed_id": "HOLDOUT_NONCLOSING_0040"
+    }
+  ],
+  "matched_triplet_consistency": {
+    "complete_triplets": 100,
+    "correct": 58,
+    "failed_seed_ids": [
+      "HOLDOUT_SEED_0013",
+      "HOLDOUT_SEED_0017",
+      "HOLDOUT_SEED_0018",
+      "HOLDOUT_SEED_0020",
+      "HOLDOUT_SEED_0024",
+      "HOLDOUT_SEED_0031",
+      "HOLDOUT_SEED_0036",
+      "HOLDOUT_SEED_0040",
+      "HOLDOUT_SEED_0041",
+      "HOLDOUT_SEED_0042",
+      "HOLDOUT_SEED_0043",
+      "HOLDOUT_SEED_0044",
+      "HOLDOUT_SEED_0045",
+      "HOLDOUT_SEED_0046",
+      "HOLDOUT_SEED_0047",
+      "HOLDOUT_SEED_0048",
+      "HOLDOUT_SEED_0049",
+      "HOLDOUT_SEED_0050",
+      "HOLDOUT_SEED_0051",
+      "HOLDOUT_SEED_0052",
+      "HOLDOUT_SEED_0053",
+      "HOLDOUT_SEED_0054",
+      "HOLDOUT_SEED_0055",
+      "HOLDOUT_SEED_0056",
+      "HOLDOUT_SEED_0057",
+      "HOLDOUT_SEED_0058",
+      "HOLDOUT_SEED_0059",
+      "HOLDOUT_SEED_0060",
+      "HOLDOUT_SEED_0061",
+      "HOLDOUT_SEED_0062",
+      "HOLDOUT_SEED_0063",
+      "HOLDOUT_SEED_0064",
+      "HOLDOUT_SEED_0065",
+      "HOLDOUT_SEED_0066",
+      "HOLDOUT_SEED_0067",
+      "HOLDOUT_SEED_0068",
+      "HOLDOUT_SEED_0069",
+      "HOLDOUT_SEED_0070",
+      "HOLDOUT_SEED_0074",
+      "HOLDOUT_SEED_0076",
+      "HOLDOUT_SEED_0092",
+      "HOLDOUT_SEED_0094"
+    ],
+    "rate": 0.58
+  },
+  "record_count": 1020
+}

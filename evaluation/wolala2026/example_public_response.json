@@ -1,0 +1,13 @@
+{
+  "case_id": "S4B_CONTENT_WITH_METADATA_ACCESS",
+  "public_trace": {
+    "case_id": "S4B_CONTENT_WITH_METADATA_ACCESS",
+    "fulfilment_status": "RESTRICTED",
+    "mode": "CFAF",
+    "public_reason_class": "GOVERNANCE_PRIVACY",
+    "public_reason_text": "The request exceeds the currently permitted evidence view.",
+    "validation_status": "PASS",
+    "visible_source_count": 1
+  },
+  "response": "The request exceeds the currently permitted evidence view."
+}

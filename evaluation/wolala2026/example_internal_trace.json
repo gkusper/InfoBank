@@ -1,0 +1,591 @@
+{
+  "adapter_mode": "cfaf_pipeline",
+  "api_timings": {
+    "embedding_api_ms": 0.0,
+    "external_api_ms": 0.0,
+    "generation_api_ms": 0.0
+  },
+  "candidates": [
+    {
+      "access_mode": "METADATA",
+      "aggregate_view": null,
+      "allowed_metadata_fields": [
+        "file_type",
+        "created_at"
+      ],
+      "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+      "claim_id": "claim-1",
+      "content": "S4_PRIVATE_CONTENT: The source body contains protected content.",
+      "disposition": "METADATA_ONLY",
+      "evidence_state": "CURRENT",
+      "evidential_role": "PRIMARY",
+      "existence_visibility": "PUBLIC",
+      "metadata": {
+        "created_at": "2026-07-01",
+        "file_type": "email",
+        "owner": "hidden-owner"
+      },
+      "policy_rule_id": "WOLALA-POL-META",
+      "policy_version": "wolala-smoke-policy-v1",
+      "protected_markers": [
+        "S4_PRIVATE_CONTENT"
+      ],
+      "purpose_compatibility": "compatible",
+      "relation": "SUPPORTS",
+      "retrieval_rank": 1,
+      "retrieval_reason": "fixture_scope_match",
+      "retrieval_score": 1.0,
+      "retriever_name": "deterministic_smoke_retriever",
+      "security_status": "clean",
+      "source_id": "s4-source",
+      "source_type": "Document",
+      "title": "Metadata-only source"
+    }
+  ],
+  "case_id": "S4B_CONTENT_WITH_METADATA_ACCESS",
+  "claim_assessments": [
+    {
+      "answer": null,
+      "can_fulfil_request": false,
+      "cfaf_realization": "RESTRICT_CONTENT",
+      "claim_id": "claim-1",
+      "contrastive_evidence_ids": [],
+      "maximum_granularity": "metadata",
+      "permitted_content": "METADATA_ONLY",
+      "reason_class": "GOVERNANCE_PRIVACY",
+      "reason_code": "REQUESTED_CONTENT_EXCEEDS_METADATA_ACCESS",
+      "requested_granularity": "individual",
+      "sufficient": false,
+      "support_status": "INSUFFICIENT",
+      "supporting_evidence_ids": [
+        "s4-source"
+      ]
+    }
+  ],
+  "generation_skipped": true,
+  "generator_context": [
+    {
+      "response_contract": {
+        "allowed_claims": [],
+        "allowed_evidence_views": [
+          {
+            "metadata": {
+              "created_at": "2026-07-01",
+              "file_type": "email"
+            },
+            "source_ref": "s4-source",
+            "view_type": "metadata"
+          }
+        ],
+        "allowed_next_steps": [
+          "Request content-level access."
+        ],
+        "cfaf_realization": "RESTRICT_CONTENT",
+        "forbidden_fields": [
+          "denied_content",
+          "raw_aggregate_individual_content",
+          "metadata_disallowed_content",
+          "hidden_source_identifier",
+          "protected_validation_marker"
+        ],
+        "fulfilment_status": "RESTRICTED",
+        "mode": "CFAF",
+        "public_reason_class": "GOVERNANCE_PRIVACY",
+        "public_reason_text": "The request exceeds the currently permitted evidence view."
+      }
+    }
+  ],
+  "labels": [
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.task",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "factual_qa"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.purpose",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "personal_planning"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.requested_content",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "document_content"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.requested_granularity",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "individual"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.requested_action",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "answer"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.time_horizon",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "current"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.required_evidence_strength",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "primary"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "query_profile.source_scope",
+      "method": "fixture_declared_deterministic",
+      "model_version": null,
+      "producer": "wolala_query_profiler",
+      "rule_id": "WOLALA-QP-001",
+      "stage": "QUERY_PROFILING",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "metadata_catalogue"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.candidate_id",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.source_id",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "s4-source"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.source_type",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "Document"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.retrieval_rank",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": 1
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.retrieval_score",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": 1.0
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.retriever_name",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "deterministic_smoke_retriever"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "retrieval.retrieval_reason",
+      "method": "deterministic_fixture_candidate",
+      "model_version": null,
+      "producer": "wolala_candidate_retrieval",
+      "rule_id": "WOLALA-RET-001",
+      "stage": "CANDIDATE_RETRIEVAL",
+      "subject": {
+        "candidate_id": "S4B_CONTENT_WITH_METADATA_ACCESS-cand-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "fixture_scope_match"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "access.access_mode",
+      "method": "authoritative_fixture_policy",
+      "model_version": null,
+      "producer": "wolala_policy_gate",
+      "rule_id": "WOLALA-POL-META",
+      "stage": "ACCESS_AND_SAFETY_RESOLUTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "METADATA"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "access.existence_visibility",
+      "method": "authoritative_fixture_policy",
+      "model_version": null,
+      "producer": "wolala_policy_gate",
+      "rule_id": "WOLALA-POL-META",
+      "stage": "ACCESS_AND_SAFETY_RESOLUTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "PUBLIC"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "access.policy_rule_id",
+      "method": "authoritative_fixture_policy",
+      "model_version": null,
+      "producer": "wolala_policy_gate",
+      "rule_id": "WOLALA-POL-META",
+      "stage": "ACCESS_AND_SAFETY_RESOLUTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "WOLALA-POL-META"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "access.policy_version",
+      "method": "authoritative_fixture_policy",
+      "model_version": null,
+      "producer": "wolala_policy_gate",
+      "rule_id": "WOLALA-POL-META",
+      "stage": "ACCESS_AND_SAFETY_RESOLUTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "wolala-smoke-policy-v1"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "access.purpose_compatibility",
+      "method": "authoritative_fixture_policy",
+      "model_version": null,
+      "producer": "wolala_policy_gate",
+      "rule_id": "WOLALA-POL-META",
+      "stage": "ACCESS_AND_SAFETY_RESOLUTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "compatible"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "access.security_status",
+      "method": "authoritative_fixture_policy",
+      "model_version": null,
+      "producer": "wolala_policy_gate",
+      "rule_id": "WOLALA-POL-META",
+      "stage": "ACCESS_AND_SAFETY_RESOLUTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "clean"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "evidence.evidential_role",
+      "method": "trusted_fixture_label",
+      "model_version": null,
+      "producer": "wolala_evidence_labeller",
+      "rule_id": "WOLALA-EVID-001",
+      "stage": "EVIDENCE_LABELLING",
+      "subject": {
+        "claim_id": "claim-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "PRIMARY"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "evidence.evidence_state",
+      "method": "trusted_fixture_label",
+      "model_version": null,
+      "producer": "wolala_evidence_labeller",
+      "rule_id": "WOLALA-EVID-001",
+      "stage": "EVIDENCE_LABELLING",
+      "subject": {
+        "claim_id": "claim-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "CURRENT"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "evidence.relation",
+      "method": "trusted_fixture_label",
+      "model_version": null,
+      "producer": "wolala_evidence_labeller",
+      "rule_id": "WOLALA-EVID-001",
+      "stage": "EVIDENCE_LABELLING",
+      "subject": {
+        "claim_id": "claim-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "SUPPORTS"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "disposition",
+      "method": "access_role_state_query_rule",
+      "model_version": null,
+      "producer": "wolala_disposition_deriver",
+      "rule_id": "WOLALA-DISP-001",
+      "stage": "SUFFICIENCY_AND_PERMITTED_OUTPUT",
+      "subject": {
+        "claim_id": "claim-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS",
+        "source_id": "s4-source"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "METADATA_ONLY"
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "claim.can_fulfil_request",
+      "method": "request_relative_rule",
+      "model_version": null,
+      "producer": "wolala_sufficiency_gate",
+      "rule_id": "REQUESTED_CONTENT_EXCEEDS_METADATA_ACCESS",
+      "stage": "SUFFICIENCY_AND_PERMITTED_OUTPUT",
+      "subject": {
+        "claim_id": "claim-1",
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": false
+    },
+    {
+      "confidence": 1.0,
+      "dimension": "top_level_mode",
+      "method": "permitted_output_meets_requested_output_rule",
+      "model_version": null,
+      "producer": "wolala_mode_selector",
+      "rule_id": "WOLALA-MODE-001",
+      "stage": "TOP_LEVEL_MODE_SELECTION",
+      "subject": {
+        "query_id": "query-S4B_CONTENT_WITH_METADATA_ACCESS"
+      },
+      "timestamp": "2026-08-17T21:04:58Z",
+      "value": "CFAF"
+    }
+  ],
+  "mode_decision": {
+    "cfaf_realization": "RESTRICT_CONTENT",
+    "execution_status": "SUCCESS",
+    "fulfilment_status": "RESTRICTED",
+    "internal_trace_id": "trace-2106dfe8-4807-46ca-b7b2-61a36d13819a",
+    "mode": "CFAF",
+    "next_steps": [
+      "Request content-level access."
+    ],
+    "permitted_output": "METADATA_ONLY",
+    "public_reason": "The request exceeds the currently permitted evidence view.",
+    "reason_class": "GOVERNANCE_PRIVACY",
+    "reason_code": "REQUESTED_CONTENT_EXCEEDS_METADATA_ACCESS"
+  },
+  "model_call_count": 0,
+  "query_profile": {
+    "purpose": "personal_planning",
+    "requested_action": "answer",
+    "requested_content": "document_content",
+    "requested_granularity": "individual",
+    "required_evidence_strength": "primary",
+    "source_scope": "metadata_catalogue",
+    "task": "factual_qa",
+    "time_horizon": "current"
+  },
+  "response_contract": {
+    "allowed_claims": [],
+    "allowed_evidence_views": [
+      {
+        "metadata": {
+          "created_at": "2026-07-01",
+          "file_type": "email"
+        },
+        "source_ref": "s4-source",
+        "view_type": "metadata"
+      }
+    ],
+    "allowed_next_steps": [
+      "Request content-level access."
+    ],
+    "cfaf_realization": "RESTRICT_CONTENT",
+    "forbidden_fields": [
+      "denied_content",
+      "raw_aggregate_individual_content",
+      "metadata_disallowed_content",
+      "hidden_source_identifier",
+      "protected_validation_marker"
+    ],
+    "fulfilment_status": "RESTRICTED",
+    "mode": "CFAF",
+    "public_reason_class": "GOVERNANCE_PRIVACY",
+    "public_reason_text": "The request exceeds the currently permitted evidence view."
+  },
+  "stage_sequence": [
+    "QUERY_PROFILING",
+    "CANDIDATE_RETRIEVAL",
+    "ACCESS_AND_SAFETY_RESOLUTION",
+    "EVIDENCE_LABELLING",
+    "SUFFICIENCY_AND_PERMITTED_OUTPUT",
+    "TOP_LEVEL_MODE_SELECTION",
+    "RESPONSE_REALIZATION",
+    "VALIDATION_TRACE_AND_FEEDBACK"
+  ],
+  "stage_timings": {
+    "access_and_safety_resolution_ms": 0.082,
+    "candidate_retrieval_ms": 0.1127,
+    "end_to_end_ms": 6.6233,
+    "evidence_labelling_ms": 0.0522,
+    "query_profiling_ms": 0.1276,
+    "response_realization_ms": 0.0564,
+    "sufficiency_and_permitted_output_ms": 0.0531,
+    "top_level_mode_selection_ms": 0.0501,
+    "validation_trace_and_feedback_ms": 0.0534
+  },
+  "token_usage": {
+    "input_tokens": 0,
+    "output_tokens": 8
+  },
+  "trace_id": "trace-2106dfe8-4807-46ca-b7b2-61a36d13819a",
+  "validation": {
+    "fallback_used": false,
+    "status": "PASS",
+    "violation_codes": []
+  }
+}

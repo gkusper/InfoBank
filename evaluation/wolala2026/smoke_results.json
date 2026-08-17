@@ -1,0 +1,515 @@
+{
+  "adapter_smoke": [
+    {
+      "case_id": "S1_FULL_PRIMARY",
+      "external_cfaf_gate_used": false,
+      "mode": "standard_rag",
+      "notes": "Prepared stub: later Standard RAG receives raw retrieved content and bypasses CFAF enforcement.",
+      "raw_context_count": 1
+    },
+    {
+      "case_id": "S1_FULL_PRIMARY",
+      "external_cfaf_gate_used": false,
+      "instruction": "Abstain or restrict when the prompt says evidence or permission is insufficient.",
+      "mode": "prompt_only_control",
+      "notes": "Prepared stub: later prompt-only control gets the same raw content as Standard RAG plus refusal instructions.",
+      "raw_context_count": 1
+    },
+    {
+      "case_id": "S1_FULL_PRIMARY",
+      "external_cfaf_gate_used": true,
+      "generation_skipped": false,
+      "mode": "cfaf_pipeline",
+      "top_level_mode": "FULL"
+    }
+  ],
+  "case_count": 13,
+  "failures": [],
+  "full_benchmark_executed": false,
+  "latency_summary": {
+    "access_and_safety_resolution_ms": {
+      "count": 13,
+      "p50_ms": 0.0712,
+      "p95_ms": 0.20503999999999997
+    },
+    "candidate_retrieval_ms": {
+      "count": 13,
+      "p50_ms": 0.0569,
+      "p95_ms": 0.11834
+    },
+    "end_to_end_ms": {
+      "count": 13,
+      "p50_ms": 6.3924,
+      "p95_ms": 10.06682
+    },
+    "evidence_labelling_ms": {
+      "count": 13,
+      "p50_ms": 0.0628,
+      "p95_ms": 0.10658
+    },
+    "query_profiling_ms": {
+      "count": 13,
+      "p50_ms": 0.0698,
+      "p95_ms": 0.13308
+    },
+    "response_realization_ms": {
+      "count": 13,
+      "p50_ms": 0.058,
+      "p95_ms": 0.14114000000000002
+    },
+    "sufficiency_and_permitted_output_ms": {
+      "count": 13,
+      "p50_ms": 0.055,
+      "p95_ms": 0.10546
+    },
+    "top_level_mode_selection_ms": {
+      "count": 13,
+      "p50_ms": 0.0383,
+      "p95_ms": 0.08256000000000001
+    },
+    "validation_trace_and_feedback_ms": {
+      "count": 13,
+      "p50_ms": 0.0768,
+      "p95_ms": 0.18364
+    }
+  },
+  "paid_api_calls_executed": false,
+  "passed": true,
+  "records": [
+    {
+      "case_id": "S1_FULL_PRIMARY",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "gold_marker": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Full-access primary evidence supports the requested action.",
+      "expected_top_level_mode": "FULL",
+      "fallback_used": false,
+      "generation_skipped": false,
+      "model_call_count": 1,
+      "observed_cfaf_realization": null,
+      "observed_public_reason_class": null,
+      "observed_reason_class": null,
+      "observed_top_level_mode": "FULL",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0745,
+        "candidate_retrieval_ms": 0.0826,
+        "end_to_end_ms": 6.3924,
+        "evidence_labelling_ms": 0.0528,
+        "query_profiling_ms": 0.104,
+        "response_realization_ms": 0.1129,
+        "sufficiency_and_permitted_output_ms": 0.0618,
+        "top_level_mode_selection_ms": 0.0303,
+        "validation_trace_and_feedback_ms": 0.0768
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S2_CONTEXTUAL_ONLY",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Contextual-only evidence cannot establish a factual or action-list claim.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "ABSTAIN",
+      "observed_public_reason_class": "EVIDENTIAL",
+      "observed_reason_class": "EVIDENTIAL",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0976,
+        "candidate_retrieval_ms": 0.0781,
+        "end_to_end_ms": 5.0953,
+        "evidence_labelling_ms": 0.0779,
+        "query_profiling_ms": 0.1413,
+        "response_realization_ms": 0.0494,
+        "sufficiency_and_permitted_output_ms": 0.0522,
+        "top_level_mode_selection_ms": 0.0728,
+        "validation_trace_and_feedback_ms": 0.0426
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S3A_AGGREGATE_REQUEST_ALLOWED",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "gold_marker": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Aggregate request with aggregate permission can be fulfilled.",
+      "expected_top_level_mode": "FULL",
+      "fallback_used": false,
+      "generation_skipped": false,
+      "model_call_count": 1,
+      "observed_cfaf_realization": null,
+      "observed_public_reason_class": null,
+      "observed_reason_class": null,
+      "observed_top_level_mode": "FULL",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.2022,
+        "candidate_retrieval_ms": 0.0444,
+        "end_to_end_ms": 7.0067,
+        "evidence_labelling_ms": 0.0629,
+        "query_profiling_ms": 0.0503,
+        "response_realization_ms": 0.1094,
+        "sufficiency_and_permitted_output_ms": 0.055,
+        "top_level_mode_selection_ms": 0.0319,
+        "validation_trace_and_feedback_ms": 0.1034
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S3B_INDIVIDUAL_REQUEST_WITH_AGGREGATE_ACCESS",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Individual request with aggregate permission must restrict granularity.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "RESTRICT_GRANULARITY",
+      "observed_public_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0837,
+        "candidate_retrieval_ms": 0.0569,
+        "end_to_end_ms": 6.4523,
+        "evidence_labelling_ms": 0.0683,
+        "query_profiling_ms": 0.1119,
+        "response_realization_ms": 0.093,
+        "sufficiency_and_permitted_output_ms": 0.0705,
+        "top_level_mode_selection_ms": 0.0972,
+        "validation_trace_and_feedback_ms": 0.0783
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S4A_METADATA_LOOKUP_ALLOWED",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "gold_marker": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Metadata lookup with metadata permission can be fulfilled.",
+      "expected_top_level_mode": "FULL",
+      "fallback_used": false,
+      "generation_skipped": false,
+      "model_call_count": 1,
+      "observed_cfaf_realization": null,
+      "observed_public_reason_class": null,
+      "observed_reason_class": null,
+      "observed_top_level_mode": "FULL",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0666,
+        "candidate_retrieval_ms": 0.0745,
+        "end_to_end_ms": 8.4924,
+        "evidence_labelling_ms": 0.0675,
+        "query_profiling_ms": 0.0824,
+        "response_realization_ms": 0.1562,
+        "sufficiency_and_permitted_output_ms": 0.0845,
+        "top_level_mode_selection_ms": 0.072,
+        "validation_trace_and_feedback_ms": 0.1575
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S4B_CONTENT_WITH_METADATA_ACCESS",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Content request with metadata permission must restrict content.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "RESTRICT_CONTENT",
+      "observed_public_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.082,
+        "candidate_retrieval_ms": 0.1127,
+        "end_to_end_ms": 6.6233,
+        "evidence_labelling_ms": 0.0522,
+        "query_profiling_ms": 0.1276,
+        "response_realization_ms": 0.0564,
+        "sufficiency_and_permitted_output_ms": 0.0531,
+        "top_level_mode_selection_ms": 0.0501,
+        "validation_trace_and_feedback_ms": 0.0534
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S5_DENIED_SOURCE",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Denied content must not reach generator context.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "ABSTAIN",
+      "observed_public_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0504,
+        "candidate_retrieval_ms": 0.0495,
+        "end_to_end_ms": 4.1062,
+        "evidence_labelling_ms": 0.0274,
+        "query_profiling_ms": 0.0876,
+        "response_realization_ms": 0.0503,
+        "sufficiency_and_permitted_output_ms": 0.0461,
+        "top_level_mode_selection_ms": 0.0321,
+        "validation_trace_and_feedback_ms": 0.0351
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S6_EMAIL_PLUS_BROWSER_CONTEXT",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "gold_marker": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Email is primary and browser history is contextual; expected open action.",
+      "expected_top_level_mode": "FULL",
+      "fallback_used": false,
+      "generation_skipped": false,
+      "model_call_count": 1,
+      "observed_cfaf_realization": null,
+      "observed_public_reason_class": null,
+      "observed_reason_class": null,
+      "observed_top_level_mode": "FULL",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0712,
+        "candidate_retrieval_ms": 0.0725,
+        "end_to_end_ms": 10.0527,
+        "evidence_labelling_ms": 0.068,
+        "query_profiling_ms": 0.055,
+        "response_realization_ms": 0.1311,
+        "sufficiency_and_permitted_output_ms": 0.0907,
+        "top_level_mode_selection_ms": 0.0383,
+        "validation_trace_and_feedback_ms": 0.1584
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S7_BROWSER_ONLY_ACTION_CANDIDATE",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Browser-only activity must not create an obligation.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "ABSTAIN",
+      "observed_public_reason_class": "EVIDENTIAL",
+      "observed_reason_class": "EVIDENTIAL",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0367,
+        "candidate_retrieval_ms": 0.044,
+        "end_to_end_ms": 3.6419,
+        "evidence_labelling_ms": 0.0218,
+        "query_profiling_ms": 0.0698,
+        "response_realization_ms": 0.0173,
+        "sufficiency_and_permitted_output_ms": 0.0405,
+        "top_level_mode_selection_ms": 0.0358,
+        "validation_trace_and_feedback_ms": 0.0359
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S8_UNAMBIGUOUS_LATER_CANCELLATION",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "gold_marker": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Later contrastive evidence closes the action and does not force CFAF.",
+      "expected_top_level_mode": "FULL",
+      "fallback_used": false,
+      "generation_skipped": false,
+      "model_call_count": 1,
+      "observed_cfaf_realization": null,
+      "observed_public_reason_class": null,
+      "observed_reason_class": null,
+      "observed_top_level_mode": "FULL",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.2093,
+        "candidate_retrieval_ms": 0.1268,
+        "end_to_end_ms": 10.088,
+        "evidence_labelling_ms": 0.1496,
+        "query_profiling_ms": 0.0506,
+        "response_realization_ms": 0.0909,
+        "sufficiency_and_permitted_output_ms": 0.1276,
+        "top_level_mode_selection_ms": 0.0389,
+        "validation_trace_and_feedback_ms": 0.179
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S9A_NO_RELEVANT_SOURCE",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "No relevant source has a normalized safe public reason.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "ABSTAIN",
+      "observed_public_reason_class": "EVIDENTIAL",
+      "observed_reason_class": "EVIDENTIAL",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0021,
+        "candidate_retrieval_ms": 0.0205,
+        "end_to_end_ms": 1.7095,
+        "evidence_labelling_ms": 0.0014,
+        "query_profiling_ms": 0.0662,
+        "response_realization_ms": 0.0182,
+        "sufficiency_and_permitted_output_ms": 0.0251,
+        "top_level_mode_selection_ms": 0.0168,
+        "validation_trace_and_feedback_ms": 0.0279
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S9B_INTERNAL_INACCESSIBLE_SOURCE",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Internal-only inaccessible source differs internally but has the same public class and wording as no-source.",
+      "expected_top_level_mode": "CFAF",
+      "fallback_used": false,
+      "generation_skipped": true,
+      "model_call_count": 0,
+      "observed_cfaf_realization": "ABSTAIN",
+      "observed_public_reason_class": "EVIDENTIAL",
+      "observed_reason_class": "GOVERNANCE_PRIVACY",
+      "observed_top_level_mode": "CFAF",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0445,
+        "candidate_retrieval_ms": 0.0491,
+        "end_to_end_ms": 5.941,
+        "evidence_labelling_ms": 0.0628,
+        "query_profiling_ms": 0.0458,
+        "response_realization_ms": 0.0366,
+        "sufficiency_and_permitted_output_ms": 0.0572,
+        "top_level_mode_selection_ms": 0.05,
+        "validation_trace_and_feedback_ms": 0.1906
+      },
+      "validation_status": "PASS"
+    },
+    {
+      "case_id": "S10_VALIDATOR_FORBIDDEN_MARKER",
+      "checks": {
+        "cfaf_realization": true,
+        "fallback_used": true,
+        "internal_reason_class": true,
+        "mode": true,
+        "public_reason_class": true,
+        "validation_status": true
+      },
+      "description": "Invalid generated output containing a forbidden marker is rejected and replaced with fallback.",
+      "expected_top_level_mode": "FULL",
+      "fallback_used": true,
+      "generation_skipped": false,
+      "model_call_count": 1,
+      "observed_cfaf_realization": null,
+      "observed_public_reason_class": null,
+      "observed_reason_class": null,
+      "observed_top_level_mode": "FULL",
+      "passed": true,
+      "stage_timings": {
+        "access_and_safety_resolution_ms": 0.0393,
+        "candidate_retrieval_ms": 0.0463,
+        "end_to_end_ms": 3.4771,
+        "evidence_labelling_ms": 0.0224,
+        "query_profiling_ms": 0.0629,
+        "response_realization_ms": 0.058,
+        "sufficiency_and_permitted_output_ms": 0.0226,
+        "top_level_mode_selection_ms": 0.0096,
+        "validation_trace_and_feedback_ms": 0.0416
+      },
+      "validation_status": "FAIL"
+    }
+  ],
+  "schema_version": "wolala2026-smoke-results-v1"
+}

@@ -1,104 +1,109 @@
 # InfoBank Evaluation Status
 
-## Project Goal
+## Current State
 
-InfoBank is a research prototype for governed personal-data retrieval. The evaluation asks whether Role-Aware RAG over governed personal data improves policy compliance, evidence-grounded behavior, controlled failure, and protection against unsupported disclosure compared with simpler RAG variants.
+InfoBank has two evaluation layers:
 
-The current state is pre-pilot. Startup reproducibility, the isolated evaluation environment, the three-mode harness, synthetic fixtures, and a manual real-API pilot runner are implemented, but the real 21-record OpenAI-backed pilot has not yet produced final results.
+- Development diagnostics: `document_rag_v1`, `document_rag_v2`,
+  `evidence_unit_v1`, and the 53-record D1-D8 pilot runner.
+- Frozen large-scale protocol: `document_rag_v3`,
+  `evidence_unit_v2_holdout`, corrected deterministic scorers,
+  preregistration, statistical analysis, and the `run_d1_d8_large_scale`
+  runner.
 
-## Milestone History
+The development diagnostics are useful for reproducibility checks and
+regression testing. They must not be reported as held-out final benchmark
+performance.
 
-| Milestone | Branch | Commit | Main achievement |
-|---|---|---|---|
-| Original prototype | `main` | `e9dc92b903b36de31e267993671d8f31d3a176ea` | Baseline InfoBank prototype with governed personal-data features. |
-| Reproducibility repair | `reproducibility-repair` | `2d2874a` | Startup repair for local FastAPI/MariaDB execution. |
-| Isolated evaluation environment | `reproducibility-repair` | `66efcfcb6fd5a5c2d0f06291067c0071627b6f01` | Clean Python 3.12 evaluation environment, `infobank_eval`, and isolated Chroma path. |
-| Evaluation harness | `evaluation-harness` | `9a4626713000bc517bfb27321ef6ec9255d16b52` | Three-mode document-RAG harness with shared retrieval and JSONL result persistence. |
-| Synthetic benchmark fixtures | `benchmark-fixtures` | `81778bb8e153ee300b5a819d280ede415fb0457d` | Deterministic `document_rag_v1` fixture set with 40 cases. |
-| Manual pilot runner | `evaluation-pilot` | `9b7326b9d53741c3455cbdc61186a2f6412f5864` | Tracked PowerShell/Python runner for the seven-case, 21-record real-API pilot. |
+## Large-Scale Evaluation Protocol
 
-## Verified Startup State
+The large-scale protocol is preregistered in:
 
-The prototype has been verified to start locally with MariaDB. The backend can expose `/docs` and `/api/test-db` without an OpenAI key for non-AI functionality. The static frontend can be served locally and pointed at the backend API.
+```text
+evaluation/preregistration/d1_d8_large_scale_v1.md
+```
 
-The evaluation environment uses Python 3.12 with pinned dependencies and a passing dependency check. MariaDB is used for the application database, and the evaluation workflow isolates its database as `infobank_eval` with Chroma persisted under `backend_python/chroma_eval`.
+The intended freeze sequence is:
 
-The configured OpenAI models have been tested separately from a normal Windows process:
+```text
+1. code freeze: d1-d8-large-scale-code-freeze-v1
+2. benchmark freeze: d1-d8-large-scale-benchmark-freeze-v1
+3. final result tag: coginfocom-2026-d1-d8-final-eval-v1
+```
 
-- chat generation: `gpt-4o-mini`
-- embeddings: `text-embedding-3-small`
+After benchmark freeze, result-affecting production behavior, prompts, scorer
+definitions, gold labels, and benchmark text must not be tuned based on final
+outcomes.
 
-## Verified Functional Behavior
+## Benchmarks
 
-### Full-Access Test
+`evaluation/fixtures/document_rag_v3.yaml` contains 400 synthetic D1-D5 cases:
 
-A synthetic full-access document contained the protected fact marker `BLUE ORCHID`. With owner/full access, the system returned the fact in a normal answer. The observed output mode was `full_answer`, and the source role was `primary`.
+- D1 Full: 80
+- D2 Metadata: 80
+- D3 Aggregate: 80
+- D4 Deny: 80
+- D5 Mixed/contextual: 80
 
-### Metadata-Only Test
+`data/benchmarks/evidence_unit_v2_holdout/` contains 340 D6-D8 cases:
 
-The same synthetic fact and question were used in a cross-user Metadata access condition. The protected marker was not disclosed. The observed output mode was `metadata_only_answer`, the source role was `contextual`, and governance/controlled-failure restriction behavior was observed.
+- D6 open action: 100
+- D7 browser-only counterfactual: 100
+- D8 closure: 100
+- D8 non-closing control: 40
 
-These smoke tests exercised the governed retrieval and response pipeline without publishing local identifiers, credentials, or raw runtime artifacts.
+The EvidenceUnit holdout excludes source threads used in `evidence_unit_v1`,
+separates runtime cases from scorer-only gold labels, and records natural versus
+synthetic strata.
 
-## Evaluation Architecture
+## Required Runtime
 
-The evaluation harness compares three modes:
+The evaluation runtime is isolated from the normal prototype database:
 
-- `standard_rag`: conventional RAG over the shared retrieved passages.
-- `governance_only_rag`: applies Full, Aggregate, Metadata, and Deny access decisions before generation.
-- `role_aware_rag`: applies governance, source-role classification, evidence checks, and controlled-failure/output-mode logic.
+```text
+database: infobank_eval at 127.0.0.1:3307
+Chroma: backend_python/chroma_eval
+Python: backend_python/.venv_eval
+```
 
-All three modes receive the same shared retrieval result for each case. Raw outputs are persisted as JSONL, and manifests record run configuration. A clean-state guard refuses evaluation runs if the isolated DB or Chroma store already contains data before fixture loading.
+The OpenAI API key is required only for real D1-D5 generation and must be set as
+a local process environment variable. It must not be written to `.env`,
+`.env.eval`, result manifests, or Git.
 
-Production `/api/ask` behavior is unchanged by the evaluation harness.
+## Canonical Commands
 
-## Benchmark Fixture
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass -Force
+.\evaluation\bootstrap_reproduction.ps1 -PrepareEvalDatabase -RunUnitTests -RunPilotCheck
+.\evaluation\run_d1_d8_large_scale.ps1 -BuildBenchmarks
+.\evaluation\run_d1_d8_large_scale.ps1 -ValidateBenchmarks
+.\evaluation\run_d1_d8_large_scale.ps1 -CheckOnly
+$env:OPENAI_API_KEY = "<set outside the repository>"
+.\evaluation\run_d1_d8_large_scale.ps1 -RealApi -Resume
+```
 
-The tracked fixture set is `document_rag_v1`.
+Expected measured records for a complete final run:
 
-It contains 40 synthetic cases:
+```text
+D1-D5: 400 x 3 x 5 = 6000
+D6-D8: 340 x 3 = 1020
+Total: 7020
+```
 
-- 8 Full-access direct QA cases
-- 8 Metadata-only cases
-- 8 Deny/private-no-permission cases
-- 8 Aggregate-only cases
-- 8 Mixed/contextual-only cases
+## Corrected D1-D5 Metrics
 
-The Full/Metadata/Deny cases are matched counterfactual triplets with identical document text, question, canonical answer, markers, and retrieval scope; only access configuration differs. Aggregate cases form safe aggregate versus individual-disclosure pairs. Mixed cases include both primary-support and contextual-only evidence conditions.
+The frozen scorer reports numerator, denominator, and rate for primary metrics.
+Permitted-answer accuracy is computed only over answer-permitted cases.
+Prohibited-disclosure, safe-withholding, and generator-exposure rates are
+computed only over restricted cases. Literal protected-marker occurrence is a
+diagnostic, not a disclosure violation. Exact output-class conformance is
+reported separately from safe withholding, and source-role conformance is
+reported independently.
 
-All fixture data is synthetic, deterministic, and intended only for evaluation.
+## Current Verification
 
-## Manual Pilot Protocol
-
-The manual pilot runner selects exactly:
-
-- `FULL_01`
-- `METADATA_01`
-- `DENY_01`
-- `AGG_SAFE_01`
-- `AGG_INDIVIDUAL_01`
-- `MIXED_PRIMARY_01`
-- `CONTEXT_ONLY_01`
-
-Protocol:
-
-- modes: `standard_rag`, `governance_only_rag`, `role_aware_rag`
-- repetitions: 1
-- retrieval top-k: 4
-- generation temperature: 0.0
-- expected raw result records: 21
-
-The runner writes raw result JSONL, shared retrieval records, run manifests, fixture subset manifests, and deterministic inspection output. It does not calculate final benchmark metrics.
-
-## Current Limitation
-
-The real 21-record OpenAI-backed pilot is the next step. It has not yet produced final results. No final metrics, statistical tests, or publication tables exist yet.
-
-## Next Planned Steps
-
-1. Independent reproduction by a second researcher.
-2. Real seven-case pilot.
-3. Review of the 21 raw records.
-4. Deterministic scoring.
-5. Full 40 x 3 x 3 experiment.
-6. Update the paper's Evaluation section.
+The codebase includes unit and regression tests for the development harness, the
+corrected document scorer, benchmark validation, EvidenceUnit source/gold
+separation, D6-D8 production action logic, and large-scale statistical
+aggregation. A valid real final evaluation should start only after these tests
+and benchmark validators pass.

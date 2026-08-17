@@ -71,7 +71,8 @@ Fixture schema parsing supports YAML or JSON synthetic benchmark definitions.
 `evaluation/fixtures/document_rag_v1.yaml` is the original 40-case D1-D5
 document-RAG fixture. `evaluation/fixtures/document_rag_v2.yaml` preserves
 D1-D4 and repairs D5 by removing explicit evidential-role hints from
-generator-visible source prose.
+generator-visible source prose. `evaluation/fixtures/document_rag_v3.yaml` is
+the frozen 400-case large-scale D1-D5 benchmark for the final D1-D8 protocol.
 
 Synthetic fixtures should be tracked in Git; measured outputs should remain
 local by default.
@@ -88,6 +89,18 @@ Validate it with:
 
 ```powershell
 python scripts/mailex/validate_evidence_benchmark.py --benchmark data/benchmarks/evidence_unit_v1
+```
+
+The large-scale held-out EvidenceUnit benchmark is
+`data/benchmarks/evidence_unit_v2_holdout/`. It contains 340 runtime cases and
+keeps scorer-only labels in `gold.jsonl`. Raw MailEx downloads remain ignored
+under `data/external/`; the tracked benchmark contains only pseudonymized
+excerpts and controlled synthetic counterfactual/control records.
+
+Validate the v2 holdout with:
+
+```powershell
+python scripts/mailex/validate_evidence_benchmark.py --benchmark data/benchmarks/evidence_unit_v2_holdout
 ```
 
 ## Combined D1-D8 Development Pilot
@@ -148,6 +161,55 @@ external LLM calls unless the production service is changed later.
 Current D6-D8 values are development-pilot results after observing and fixing
 baseline failures on this same frozen set. Treat them as reproducibility and
 implementation diagnostics, not as held-out benchmark performance.
+
+## Frozen Large-Scale D1-D8 Evaluation
+
+The large-scale protocol is preregistered in:
+
+```text
+evaluation/preregistration/d1_d8_large_scale_v1.md
+```
+
+Build and validate frozen benchmarks:
+
+```powershell
+.\evaluation\run_d1_d8_large_scale.ps1 -BuildBenchmarks
+.\evaluation\run_d1_d8_large_scale.ps1 -ValidateBenchmarks
+```
+
+Preflight the isolated runtime:
+
+```powershell
+.\evaluation\run_d1_d8_large_scale.ps1 -CheckOnly
+```
+
+Run the complete real-API evaluation:
+
+```powershell
+$env:OPENAI_API_KEY = "<set outside the repository>"
+.\evaluation\run_d1_d8_large_scale.ps1 -RealApi -Resume
+```
+
+Expected measured records:
+
+```text
+D1-D5: 400 cases x 3 modes x 5 repetitions = 6000
+D6-D8: 340 cases x 3 clean repetitions = 1020
+Total: 7020
+```
+
+The runner supports `-CheckOnly`, `-BuildBenchmarks`, `-ValidateBenchmarks`,
+`-DocumentOnly`, `-EvidenceOnly`, `-RealApi`, `-Resume`, `-ScoreOnly`,
+`-ReportOnly`, and `-ResultsDir`. A complete run writes a local ignored result
+directory `evaluation/results/d1_d8_large_scale_<UTC>/` and a sanitized
+publication package under `evaluation/publication_results/d1_d8_large_scale_v1/`.
+
+Corrected D1-D5 metric denominators are frozen in
+`evaluation/score_document_results.py`: permitted-answer accuracy is computed
+only over permitted cases; prohibited disclosure, safe withholding, and
+generator exposure are computed only over restricted cases; exact output-class
+conformance is separate from safe withholding; source-role conformance is
+reported independently.
 
 ## Manual Real-API Pilot Run
 

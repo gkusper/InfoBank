@@ -100,8 +100,9 @@ def validate(root: str | Path) -> list[str]:
                 errors.append(f"{case_id}/{unit_id}: missing provenance.source_dataset")
 
     by_case = {row["case_id"]: row for row in gold}
+    benchmark_id = manifest.get("benchmark_id")
     scenario_counts = Counter(row.get("scenario") for row in gold)
-    expected_counts = {"D6": 10, "D7": 10, "D8": 10, "D8_NONCLOSING": 2}
+    expected_counts = {"D6": 100, "D7": 100, "D8": 100, "D8_NONCLOSING": 40} if benchmark_id == "evidence_unit_v2_holdout" else {"D6": 10, "D7": 10, "D8": 10, "D8_NONCLOSING": 2}
     for scenario, expected in expected_counts.items():
         if scenario_counts.get(scenario, 0) != expected:
             errors.append(f"{scenario}: expected {expected} cases, found {scenario_counts.get(scenario, 0)}")
@@ -131,7 +132,11 @@ def validate(root: str | Path) -> list[str]:
             if row.get("expected_status") != "ABSENT" or row.get("expected_presence") is not False:
                 errors.append(f"{case_id}: D7 expected gold must be ABSENT/not present")
             for unit in evidence.values():
-                if unit.get("provenance", {}).get("transformation_rule") != "deterministic_topic_trace_v1":
+                rule = unit.get("provenance", {}).get("transformation_rule")
+                if benchmark_id == "evidence_unit_v2_holdout":
+                    if not str(rule or "").startswith("deterministic_") or not str(rule or "").endswith("_v2"):
+                        errors.append(f"{case_id}/{unit.get('evidence_id')}: missing deterministic v2 D7 transformation rule")
+                elif rule != "deterministic_topic_trace_v1":
                     errors.append(f"{case_id}/{unit.get('evidence_id')}: missing deterministic D7 transformation rule")
         elif scenario == "D8":
             if not row.get("primary_evidence_ids") or not row.get("contrastive_evidence_ids"):
@@ -147,8 +152,17 @@ def validate(root: str | Path) -> list[str]:
         elif scenario == "D8_NONCLOSING":
             if row.get("expected_status") != "OPEN" or row.get("expected_presence") is not True:
                 errors.append(f"{case_id}: non-closing D8 must remain OPEN")
-            if row.get("closure_type") != "non_closing_progress":
-                errors.append(f"{case_id}: non-closing D8 closure_type must be non_closing_progress")
+            allowed_nonclosing = {
+                "non_closing_progress",
+                "non_closing_acknowledgement",
+                "non_closing_future_commitment",
+                "non_closing_progress_update",
+                "non_closing_partial_completion",
+                "non_closing_clarification_request",
+                "non_closing_intention_without_completion",
+            }
+            if row.get("closure_type") not in allowed_nonclosing:
+                errors.append(f"{case_id}: non-closing D8 closure_type must be one of {sorted(allowed_nonclosing)}")
 
     by_seed = defaultdict(dict)
     for row in gold:
@@ -165,6 +179,24 @@ def validate(root: str | Path) -> list[str]:
         errors.append("source_manifest.json must record downloaded_archive_sha256")
     if not manifest.get("source_repository_commit"):
         errors.append("source_manifest.json must record source_repository_commit")
+    if benchmark_id == "evidence_unit_v2_holdout":
+        exclusion = manifest.get("source_exclusion_manifest") or {}
+        excluded_threads = set(exclusion.get("excluded_threads") or [])
+        runtime_threads = {
+            (unit.get("provenance") or {}).get("thread_identifier")
+            for case in cases
+            for unit in case.get("evidence_units") or []
+            if (unit.get("provenance") or {}).get("thread_identifier")
+        }
+        overlap = sorted(excluded_threads & runtime_threads)
+        if overlap:
+            errors.append(f"evidence_unit_v2_holdout overlaps excluded v1 source threads: {overlap[:10]}")
+        if not (root / "triplets.jsonl").exists():
+            errors.append("evidence_unit_v2_holdout must include triplets.jsonl")
+        else:
+            triplets = read_jsonl(root / "triplets.jsonl")
+            if len(triplets) != 100:
+                errors.append(f"evidence_unit_v2_holdout must include 100 triplets, found {len(triplets)}")
 
     repo_gitignore = Path(".gitignore")
     if repo_gitignore.exists() and "data/external/" not in repo_gitignore.read_text(encoding="utf-8"):

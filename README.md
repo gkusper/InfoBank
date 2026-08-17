@@ -175,10 +175,14 @@ Keep the backend running while using the frontend.
 
 ## Research Evaluation Status
 
-The repository currently contains a pre-pilot research evaluation state. The
-production prototype, isolated evaluation environment, three-mode document-RAG
-harness, 40-case synthetic fixture set, and manual seven-case pilot runner are
-available. Real final benchmark results are not yet published.
+The repository contains both the earlier development-pilot evaluation harness
+and the large-scale frozen D1-D8 evaluation protocol. The development pilot is
+kept for regression diagnostics. The large-scale branch adds `document_rag_v3`
+(400 D1-D5 cases), `evidence_unit_v2_holdout` (340 D6-D8 cases), corrected
+scorers, preregistration, statistical analysis, and a resume-capable runner.
+Real final benchmark results are valid only after the code-freeze and
+benchmark-freeze tags have been created and the real-API run has produced the
+expected 7020 measured records.
 
 See:
 
@@ -186,10 +190,12 @@ See:
 - [Independent reproduction guide](docs/evaluation/INDEPENDENT_REPRODUCTION.md)
 - [Functional validation summary](docs/evaluation/FUNCTIONAL_VALIDATION.md)
 - [Paper-ready reproduction section](docs/evaluation/PAPER_REPRODUCTION_SECTION.md)
+- [Large-scale reproduction section](docs/evaluation/LARGE_SCALE_REPRODUCTION_SECTION.md)
 - [MailEx D1-D8 preparation report](docs/mailex_d1_d8_preparation_report.md)
 - [Evaluation harness README](evaluation/README.md)
 - [Fixture README](evaluation/fixtures/README.md)
 - [EvidenceUnit v1 benchmark README](data/benchmarks/evidence_unit_v1/README.md)
+- [EvidenceUnit v2 holdout README](data/benchmarks/evidence_unit_v2_holdout/README.md)
 
 ## Optional Integrations
 

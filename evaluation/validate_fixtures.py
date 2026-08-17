@@ -18,7 +18,7 @@ EXPECTED_FAMILY_COUNTS = {
     "mixed_or_insufficient_primary_evidence": 8,
 }
 
-ALLOWED_FIXTURE_IDS = {"document_rag_v1", "document_rag_v2"}
+ALLOWED_FIXTURE_IDS = {"document_rag_v1", "document_rag_v2", "document_rag_v3"}
 
 ALLOWED_BEHAVIOR_CLASSES = {
     "answer_allowed",
@@ -65,6 +65,11 @@ def validate_fixture(fixture: EvaluationFixture) -> list[str]:
     _expect(fixture.schema_version == "1.0", "schema_version must be 1.0", errors)
     _expect(fixture.fixture_id in ALLOWED_FIXTURE_IDS, f"fixture_id must be one of {sorted(ALLOWED_FIXTURE_IDS)}", errors)
     _expect(fixture.benchmark_family == "document_rag", "benchmark_family must be document_rag", errors)
+    if fixture.fixture_id == "document_rag_v3":
+        validate_fixture_v3(fixture, docs, users, case_ids, doc_aliases, errors)
+        if errors:
+            raise FixtureValidationError("\n".join(errors))
+        return []
     _expect(len(fixture.cases) == 40, f"fixture must contain exactly 40 cases, found {len(fixture.cases)}", errors)
     _expect(fixture.case_count == 40, f"case_count must be 40, found {fixture.case_count}", errors)
     _expect(len(case_ids) == len(set(case_ids)), "case IDs must be unique", errors)
@@ -90,6 +95,132 @@ def validate_fixture(fixture: EvaluationFixture) -> list[str]:
     if errors:
         raise FixtureValidationError("\n".join(errors))
     return []
+
+
+def validate_fixture_v3(
+    fixture: EvaluationFixture,
+    docs: dict[str, Any],
+    users: dict[str, Any],
+    case_ids: list[str],
+    doc_aliases: list[str],
+    errors: list[str],
+) -> None:
+    _expect(len(fixture.cases) == 400, f"document_rag_v3 must contain exactly 400 cases, found {len(fixture.cases)}", errors)
+    _expect(fixture.case_count == 400, f"document_rag_v3 case_count must be 400, found {fixture.case_count}", errors)
+    _expect(len(case_ids) == len(set(case_ids)), "case IDs must be unique", errors)
+    _expect(len(doc_aliases) == len(set(doc_aliases)), "document aliases must be unique", errors)
+    counts = Counter(case.metadata.get("scenario") for case in fixture.cases)
+    for scenario, expected in {"D1": 80, "D2": 80, "D3": 80, "D4": 80, "D5": 80}.items():
+        _expect(counts.get(scenario, 0) == expected, f"{scenario} count must be {expected}, found {counts.get(scenario, 0)}", errors)
+    for user in fixture.users:
+        domain = user.email.rsplit("@", 1)[-1]
+        _expect(domain == "example.test" or domain.endswith(".example.test"), f"user {user.alias} must use .example.test email", errors)
+    for case in fixture.cases:
+        validate_case_references(case, docs, users, errors)
+        validate_case_markers_v3(case, docs, fixture.cases, errors)
+        validate_behavior_class(case, errors)
+        validate_secret_patterns(case, docs, errors)
+        for alias in case.scope:
+            _expect(alias in case.document_access, f"{case.case_id}: document_access missing scoped alias {alias}", errors)
+    validate_v3_triplets(fixture, docs, errors)
+    validate_v3_aggregate_pairs(fixture, docs, errors)
+    validate_v3_d5_pairs(fixture, docs, errors)
+    validate_v3_leakage(fixture, docs, errors)
+
+
+def validate_case_markers_v3(case: FixtureCase, docs: dict[str, Any], all_cases: list[FixtureCase], errors: list[str]) -> None:
+    scoped_docs = [docs[alias] for alias in case.scope if alias in docs]
+    scoped_text = "\n".join(document.content for document in scoped_docs)
+    same_family_aliases = {
+        alias
+        for other in all_cases
+        if other.pair_id == case.pair_id
+        for alias in other.scope
+    }
+    unrelated_text = "\n".join(
+        document.content for alias, document in docs.items() if alias not in same_family_aliases
+    )
+    metadata_surface = " ".join(
+        [item.question for item in all_cases]
+        + [document.file_name for document in docs.values()]
+        + [keyword for document in docs.values() for keyword in document.keywords]
+    )
+    for marker in case.protected:
+        _expect(marker in scoped_text, f"{case.case_id}: protected marker {marker!r} missing from scoped protected content", errors)
+        _expect(marker not in metadata_surface, f"{case.case_id}: protected marker {marker!r} leaks into question/filename/keywords", errors)
+        _expect(marker not in unrelated_text, f"{case.case_id}: protected marker {marker!r} leaks outside matched family", errors)
+    if case.canonical_answer is None:
+        _expect(not case.acceptable_answer_markers, f"{case.case_id}: null canonical_answer should not have acceptable markers", errors)
+    else:
+        _expect(bool(case.acceptable_answer_markers), f"{case.case_id}: canonical answer requires acceptable markers", errors)
+        for marker in case.acceptable_answer_markers:
+            _expect(marker in case.canonical_answer, f"{case.case_id}: acceptable marker {marker!r} must appear in canonical answer", errors)
+
+
+def validate_v3_triplets(fixture: EvaluationFixture, docs: dict[str, Any], errors: list[str]) -> None:
+    by_pair: dict[str, list[FixtureCase]] = defaultdict(list)
+    for case in fixture.cases:
+        if case.metadata.get("scenario") in {"D1", "D2", "D4"}:
+            by_pair[case.pair_id or ""].append(case)
+    _expect(len(by_pair) == 80 and "" not in by_pair, f"v3 D1/D2/D4 must form 80 triplets, found {len(by_pair)}", errors)
+    for pair_id, family in by_pair.items():
+        scenarios = sorted(case.metadata.get("scenario") for case in family)
+        _expect(scenarios == ["D1", "D2", "D4"], f"{pair_id}: triplet scenarios must be D1/D2/D4, found {scenarios}", errors)
+        texts = {docs[case.scope[0]].content for case in family if case.scope and case.scope[0] in docs}
+        questions = {case.question for case in family}
+        _expect(len(texts) == 1, f"{pair_id}: D1/D2/D4 source content must be identical", errors)
+        _expect(len(questions) == 1, f"{pair_id}: D1/D2/D4 question must be identical", errors)
+
+
+def validate_v3_aggregate_pairs(fixture: EvaluationFixture, docs: dict[str, Any], errors: list[str]) -> None:
+    by_pair: dict[str, list[FixtureCase]] = defaultdict(list)
+    for case in fixture.cases:
+        if case.metadata.get("scenario") == "D3":
+            by_pair[case.pair_id or ""].append(case)
+    _expect(len(by_pair) == 40 and "" not in by_pair, f"v3 D3 must form 40 pairs, found {len(by_pair)}", errors)
+    for pair_id, family in by_pair.items():
+        subtypes = sorted(case.case_subtype for case in family)
+        _expect(subtypes == ["aggregate_safe", "individual_restricted"], f"{pair_id}: D3 pair subtype mismatch {subtypes}", errors)
+        aliases = {tuple(case.scope) for case in family}
+        _expect(len(aliases) == 1, f"{pair_id}: D3 pair must share the same scoped aggregate document", errors)
+        for case in family:
+            scoped_text = "\n".join(docs[alias].content for alias in case.scope if alias in docs)
+            _expect(bool(extract_aggregate_safe_facts_compatible(scoped_text)), f"{case.case_id}: aggregate text lacks numeric aggregate fact", errors)
+
+
+def validate_v3_d5_pairs(fixture: EvaluationFixture, docs: dict[str, Any], errors: list[str]) -> None:
+    by_pair: dict[str, list[FixtureCase]] = defaultdict(list)
+    for case in fixture.cases:
+        if case.metadata.get("scenario") == "D5":
+            by_pair[case.pair_id or ""].append(case)
+    _expect(len(by_pair) == 40 and "" not in by_pair, f"v3 D5 must form 40 pairs, found {len(by_pair)}", errors)
+    for pair_id, family in by_pair.items():
+        subtypes = sorted(case.case_subtype for case in family)
+        _expect(subtypes == ["contextual_only", "mixed_primary"], f"{pair_id}: D5 pair subtype mismatch {subtypes}", errors)
+        mixed = next(case for case in family if case.case_subtype == "mixed_primary")
+        context = next(case for case in family if case.case_subtype == "contextual_only")
+        _expect(bool(mixed.expected_supporting_document_aliases), f"{mixed.case_id}: mixed case must have primary support", errors)
+        _expect(not context.expected_supporting_document_aliases, f"{context.case_id}: contextual-only case must not have primary support", errors)
+        _expect(set(context.scope).issubset(set(mixed.scope)), f"{pair_id}: contextual-only scope must be subset of mixed scope", errors)
+
+
+def validate_v3_leakage(fixture: EvaluationFixture, docs: dict[str, Any], errors: list[str]) -> None:
+    prohibited = [
+        "primary evidence",
+        "contextual evidence",
+        "authoritative source",
+        "not authoritative",
+        "cannot prove",
+        "insufficient evidence",
+        "background only",
+        "does not include a signed confirmation",
+        "final assignment notice",
+        "this source must not be used",
+    ]
+    for document in docs.values():
+        lowered = document.content.lower()
+        for phrase in prohibited:
+            _expect(phrase not in lowered, f"{document.alias}: D5/source role leakage phrase {phrase!r}", errors)
 
 
 def validate_case_references(case: FixtureCase, docs: dict[str, Any], users: dict[str, Any], errors: list[str]) -> None:

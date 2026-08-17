@@ -140,22 +140,63 @@ def unique_run_dir(base: Path) -> Path:
     return candidate
 
 
-def latest_large_scale_dir(base: Path) -> Path:
+def manifest_execution_mode(path: Path) -> str | None:
+    manifest_path = path / "run_manifest.json"
+    if not manifest_path.exists():
+        return None
+    try:
+        return (read_json(manifest_path) or {}).get("execution_mode")
+    except Exception:
+        return None
+
+
+def result_dir_matches_execution_mode(path: Path, execution_mode: str) -> bool:
+    if manifest_execution_mode(path) != execution_mode:
+        return False
+    combined_path = path / "combined_metrics.json"
+    if combined_path.exists():
+        try:
+            combined_mode = (read_json(combined_path) or {}).get("execution_mode")
+        except Exception:
+            combined_mode = None
+        if combined_mode and combined_mode != execution_mode:
+            return False
+    if execution_mode == "real-api":
+        raw_path = path / "document_raw_results.jsonl"
+        if raw_path.exists():
+            for index, line in enumerate(raw_path.read_text(encoding="utf-8").splitlines()):
+                if index >= 25:
+                    break
+                if "MOCK_GENERATION:" in line:
+                    return False
+    return True
+
+
+def latest_large_scale_dir(base: Path, *, execution_mode: str | None = None) -> Path:
     if base.exists() and base.is_dir() and (base / "run_manifest.json").exists():
+        if execution_mode and not result_dir_matches_execution_mode(base, execution_mode):
+            raise RuntimeError(f"Result directory {base} has execution_mode={manifest_execution_mode(base)!r}, not {execution_mode!r}.")
         return base
     candidates = sorted([path for path in base.glob("d1_d8_large_scale_*") if path.is_dir()])
+    if execution_mode:
+        candidates = [path for path in candidates if result_dir_matches_execution_mode(path, execution_mode)]
     if not candidates:
-        raise RuntimeError(f"No large-scale result directory found under {base}.")
+        raise RuntimeError(f"No matching large-scale result directory found under {base}.")
     return candidates[-1]
 
 
-def resolve_results_dir(value: str, *, create_new: bool, resume: bool) -> Path:
+def resolve_results_dir(value: str, *, create_new: bool, resume: bool, execution_mode: str | None) -> Path:
     path = Path(value)
     if not path.is_absolute():
         path = (REPO_ROOT / path).resolve()
     if create_new:
-        return latest_large_scale_dir(path) if resume else unique_run_dir(path)
-    return latest_large_scale_dir(path)
+        if resume:
+            try:
+                return latest_large_scale_dir(path, execution_mode=execution_mode)
+            except RuntimeError:
+                return unique_run_dir(path)
+        return unique_run_dir(path)
+    return latest_large_scale_dir(path, execution_mode=execution_mode)
 
 
 def tcp_reachable(host: str, port: int) -> bool:
@@ -1099,8 +1140,9 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     create_new = not (args.score_only or args.report_only)
-    run_dir = resolve_results_dir(args.results_dir, create_new=create_new, resume=args.resume)
     execution_mode = "real-api" if args.real_api else "mock-generation"
+    result_mode_filter = execution_mode if create_new or args.real_api or args.mock_generation else None
+    run_dir = resolve_results_dir(args.results_dir, create_new=create_new, resume=args.resume, execution_mode=result_mode_filter)
     phases: dict[str, Any] = {}
     combined_metrics = None
     try:
@@ -1164,4 +1206,3 @@ def main(argv: list[str] | None = None) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

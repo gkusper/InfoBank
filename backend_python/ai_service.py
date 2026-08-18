@@ -1,8 +1,6 @@
 import os
 from pathlib import Path
-from typing import List
-import chromadb
-from openai import OpenAI
+from typing import Any, List
 from dotenv import load_dotenv
 
 ENV_PATH = Path(__file__).resolve().parent / ".env"
@@ -12,15 +10,34 @@ MODEL_NAME = "gpt-4o-mini"
 EMBEDDING_MODEL = "text-embedding-3-small"
 CHROMA_PERSIST_DIR = os.getenv("CHROMA_PERSIST_DIR", "./chroma_data")
 
-chroma_client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
-collection = chroma_client.get_or_create_collection(name="infobank_vectors")
-
+_chroma_client = None
+_collection = None
 _openai_client = None
 
 
-def get_openai_client() -> OpenAI:
+def get_chroma_collection() -> Any:
+    global _chroma_client, _collection
+    if _collection is None:
+        import chromadb
+
+        _chroma_client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
+        _collection = _chroma_client.get_or_create_collection(name="infobank_vectors")
+    return _collection
+
+
+class LazyChromaCollection:
+    def __getattr__(self, name):
+        return getattr(get_chroma_collection(), name)
+
+
+collection = LazyChromaCollection()
+
+
+def get_openai_client() -> Any:
     global _openai_client
     if _openai_client is None:
+        from openai import OpenAI
+
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise RuntimeError("OPENAI_API_KEY is required for OpenAI-backed document ingestion, retrieval, and generation.")

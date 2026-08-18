@@ -1,5 +1,5 @@
 {
-  "baseline_checksum": "e070bb7479dd605ebcb140159c3d6f4fb4dca3c23a0e0bb01d717f925cf6f0da",
+  "baseline_checksum": "3fdda4fdc7260c475642befa011c056c3fb352c1ef6baaca50f52ce82d4171fc",
   "case_id_overlap": [],
   "development_case_count": 10,
   "development_dataset_checksum": "df847ef72fa28e55277f153989add2cf94b06471f1ff068cae4bbf15cc95f0f4",
@@ -17,7 +17,7 @@
   "protected_marker_overlap": [],
   "protocol_checksum": "91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e",
   "protocol_version": "WOLALA2026_PILOT_PROTOCOL_v1",
-  "run_manifest_schema_checksum": "d0fc78d092e700055895930eba53e5612fb5260a036cf7a0c22bdf019c241063",
+  "run_manifest_schema_checksum": "44fd517cbd5510dd60aec3cf876bdce7c62159c9961065bcf7d986e993520c4f",
   "schema_version": "wolala-pilot-readiness-baseline-v1",
   "starting_commit": "1f7c7adbd91a539cd6eb0c05513cec85c11c6875"
 }

@@ -5,7 +5,7 @@ import os
 import time
 import urllib.error
 import urllib.request
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Any, Protocol
 
 
@@ -21,6 +21,7 @@ class ProviderCallResult:
     latency_ms: float
     retry_count: int = 0
     response_id: str | None = None
+    retry_events: list[dict[str, Any]] = field(default_factory=list)
 
 
 @dataclass
@@ -30,6 +31,7 @@ class EmbeddingCallResult:
     input_tokens: int = 0
     retry_count: int = 0
     response_id: str | None = None
+    retry_events: list[dict[str, Any]] = field(default_factory=list)
 
 
 class RealApiProvider(Protocol):

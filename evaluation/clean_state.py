@@ -5,7 +5,6 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-import chromadb
 from sqlalchemy import create_engine, text
 from sqlalchemy.engine import make_url
 
@@ -105,6 +104,8 @@ def read_table_counts(database_url: str, tables: list[str]) -> dict[str, int]:
 
 
 def read_chroma_vector_count(chroma_persist_dir: str, collection_name: str = "infobank_vectors") -> int:
+    import chromadb
+
     client = chromadb.PersistentClient(path=chroma_persist_dir)
     names = {collection.name for collection in client.list_collections()}
     if collection_name not in names:

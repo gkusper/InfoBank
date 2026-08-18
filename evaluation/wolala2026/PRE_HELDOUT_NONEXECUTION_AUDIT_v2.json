@@ -1,0 +1,34 @@
+{
+  "audit_passed": true,
+  "audited_artifact_groups": [
+    "development_run",
+    "development_run_real_api_v1",
+    "smoke_results",
+    "run_manifests",
+    "raw_results",
+    "retrieval_snapshots",
+    "generator_contexts",
+    "case_scores",
+    "pair_scores",
+    "latency_records",
+    "error_records"
+  ],
+  "heldout_case_id_note": "HELD_* identifiers exist in the frozen heldout_pilot_v1 dataset and Protocol v2 planning documents by design. No HELD_* case ID was found in development model outputs, retrieval snapshots, generator contexts, scored model outputs, latency records, or error records.",
+  "heldout_embedding_calls_found": 0,
+  "heldout_generation_calls_found": 0,
+  "heldout_mode_execution_count_sources": {
+    "development_run": 0,
+    "development_run_real_api_v1": 0,
+    "readiness_baseline_manifest": 0
+  },
+  "heldout_output_artifacts_found": false,
+  "prior_heldout_embedding_calls": 0,
+  "prior_heldout_generation_calls": 0,
+  "prior_heldout_mode_execution_count": 0,
+  "schema_version": "wolala-pre-heldout-nonexecution-audit-v2",
+  "search_result": {
+    "development_artifact_held_case_id_matches": 0,
+    "heldout_output_directories": [],
+    "manifests_with_positive_heldout_mode_execution_count": []
+  }
+}

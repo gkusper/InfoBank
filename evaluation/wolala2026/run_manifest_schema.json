@@ -1,5 +1,61 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "actual_provider_attempts": {
+      "type": "integer"
+    },
+    "actual_retry_attempts": {
+      "type": "integer"
+    },
+    "execution_spec_checksum": {
+      "type": "string"
+    },
+    "external_warmup_calls": {
+      "type": "integer"
+    },
+    "invalidation_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latency_definition_checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "max_retries_per_logical_request": {
+      "type": "integer"
+    },
+    "max_total_retry_attempts": {
+      "type": "integer"
+    },
+    "planned_external_requests_without_retries_maximum": {
+      "type": "integer"
+    },
+    "planned_logical_embedding_requests": {
+      "type": "integer"
+    },
+    "planned_logical_generation_requests_maximum": {
+      "type": "integer"
+    },
+    "protocol_v2_checksum": {
+      "type": "string"
+    },
+    "retry_events": {
+      "type": "array"
+    },
+    "run_attempt": {
+      "type": "integer"
+    },
+    "statistical_plan_checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    }
+  },
   "required": [
     "run_id",
     "run_type",

@@ -98,7 +98,7 @@
         "public_internal_reason_labels": true,
         "structured_cfaf_output_gold_labels": true
       },
-      "checksum_or_version_identifier": "43a024888fd6bb36366a6c2b155ee3701ce27994fa9dd2455d1d545f2a63086c",
+      "checksum_or_version_identifier": "304bed52aee2f942e0638e6165c8b7f84f9584e14725670a6fac4fa31fb6d7b5",
       "fixture_used_by_smoke_suite": true,
       "gold_fields_outside_generator_visible_content": true,
       "licence_or_reference": "Repository LICENSE; no personal, health, or confidential real-world data.",

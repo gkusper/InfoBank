@@ -3,14 +3,17 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import time
 from pathlib import Path
 from typing import Any
 
 from .adapters import ALL_MODES, adapter_for_mode, run_adapters_for_case
 from .common import read_json, read_jsonl, sha256_file, stable_hash, write_checksums, write_json, write_jsonl
+from .execution_spec import build_heldout_plan_only, load_execution_spec, validate_execution_spec
 from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASET
 from .retrieval import build_retrieval_snapshot
 from .real_api import EmbeddingCallResult, OpenAIProvider, ProviderCallResult, RealApiProvider
+from .retry_policy import classify_retryable_condition
 from .run_manifest import build_manifest, now_utc, write_schema
 from .score_pilot import write_score_outputs
 
@@ -29,16 +32,57 @@ def run_pilot(
     max_embedding_calls: int,
     max_generation_calls: int,
     max_total_external_calls: int,
+    max_total_retry_attempts: int = 0,
+    max_retries_per_logical_request: int = 0,
     allow_real_api: bool = False,
     allow_heldout: bool = False,
     plan_only: bool = False,
     provider: RealApiProvider | None = None,
+    execution_spec: str | Path | dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    if dataset == HELDOUT_DATASET and not allow_heldout:
-        raise RuntimeError("Held-out pilot execution refused: supply an explicit held-out approval flag for a future run.")
     dataset_dir = DATA_DIR / dataset
     cases = read_jsonl(dataset_dir / "cases.jsonl")
     dataset_manifest = read_json(dataset_dir / "manifest.json")
+    spec = load_execution_spec(execution_spec) if execution_spec is not None else None
+    if dataset == HELDOUT_DATASET and plan_only:
+        if spec is None:
+            raise RuntimeError("Held-out Protocol v2 plan-only validation requires --execution-spec.")
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        plan = build_heldout_plan_only(spec, cases=cases, modes=modes, repetitions=repetitions)
+        write_json(out / "execution_plan.json", plan)
+        return {
+            "completion_status": "PLANNED",
+            "mode_execution_count": plan["planned_mode_executions"],
+            "heldout_mode_execution_count": 0,
+            "heldout_model_execution_count": 0,
+            "planned_mode_executions": plan["planned_mode_executions"],
+            "planned_unique_embedding_requests": plan["planned_unique_embedding_requests"],
+            "planned_generation_requests_maximum": plan["planned_generation_requests_maximum"],
+            "planned_external_requests_without_retries_maximum": plan["planned_external_requests_without_retries_maximum"],
+            "hard_total_external_cap": plan["hard_total_external_cap"],
+            "execution_plan_path": str(out / "execution_plan.json"),
+            "external_api_calls_in_plan_only": 0,
+        }
+    if dataset == HELDOUT_DATASET and not allow_heldout:
+        raise RuntimeError("Held-out pilot execution refused: supply an explicit held-out approval flag for a future run.")
+    if dataset == HELDOUT_DATASET:
+        if spec is None:
+            raise RuntimeError("Held-out Protocol v2 execution requires --execution-spec.")
+        validate_execution_spec(
+            spec,
+            cases=cases,
+            modes=modes,
+            repetitions=repetitions,
+            max_mode_executions=max_mode_executions,
+            max_embedding_calls=max_embedding_calls,
+            max_generation_calls=max_generation_calls,
+            max_total_external_calls=max_total_external_calls,
+        )
+        if not allow_real_api:
+            raise RuntimeError("Protocol v2 held-out execution requires --allow-real-api.")
+        max_total_retry_attempts = int(spec["max_total_retry_attempts"])
+        max_retries_per_logical_request = int(spec["max_retries_per_logical_request"])
     mode_executions = len(cases) * len(modes) * repetitions
     estimated_embedding_calls = len(cases) if allow_real_api else 0
     estimated_generation_calls = mode_executions if allow_real_api else 0
@@ -83,11 +127,14 @@ def run_pilot(
         max_embedding_calls=max_embedding_calls,
         max_generation_calls=max_generation_calls,
         max_total_external_calls=max_total_external_calls,
+        max_total_retry_attempts=max_total_retry_attempts,
+        max_retries_per_logical_request=max_retries_per_logical_request,
     )
     if allow_real_api:
         base_provider = provider or OpenAIProvider()
         active_provider = _BudgetedProvider(base_provider, counters)
-    protocol_checksum = sha256_file(PACKAGE_DIR / "WOLALA2026_PILOT_PROTOCOL_v1.md")
+    protocol_filename = str(spec["protocol"]) if spec else "WOLALA2026_PILOT_PROTOCOL_v1.md"
+    protocol_checksum = sha256_file(PACKAGE_DIR / protocol_filename)
     start_time = now_utc()
     run_id = f"{dataset}_real_api_v1" if allow_real_api else f"{dataset}_deterministic_v1"
     manifest = build_manifest(
@@ -110,6 +157,24 @@ def run_pilot(
     manifest["real_api"] = bool(allow_real_api)
     manifest["mock_or_stub_used"] = bool(active_provider.is_mock) if active_provider else False
     manifest["retry_count"] = 0
+    if spec:
+        manifest["protocol_version"] = Path(protocol_filename).stem
+        manifest["protocol_checksum"] = protocol_checksum
+        manifest["planned_logical_embedding_requests"] = int(spec["planned_unique_embedding_requests"])
+        manifest["planned_logical_generation_requests_maximum"] = int(spec["planned_generation_requests_maximum"])
+        manifest["planned_external_requests_without_retries_maximum"] = int(spec["planned_external_requests_without_retries_maximum"])
+        manifest["actual_provider_attempts"] = 0
+        manifest["actual_retry_attempts"] = 0
+        manifest["max_total_retry_attempts"] = int(spec["max_total_retry_attempts"])
+        manifest["max_retries_per_logical_request"] = int(spec["max_retries_per_logical_request"])
+        manifest["external_warmup_calls"] = int(spec["external_warmup_calls"])
+        manifest["run_attempt"] = int(spec["run_attempt"])
+        manifest["invalidation_class"] = None
+        manifest["retry_events"] = []
+        manifest["protocol_v2_checksum"] = protocol_checksum
+        manifest["statistical_plan_checksum"] = spec.get("checksums", {}).get("statistical_plan")
+        manifest["latency_definition_checksum"] = spec.get("checksums", {}).get("latency_definition")
+        manifest["execution_spec_checksum"] = sha256_file(execution_spec) if isinstance(execution_spec, (str, Path)) else stable_hash(spec)
     manifest["heldout_mode_execution_count"] = 0
     manifest["cold_or_warm_state"] = "cold-real-api-process" if allow_real_api else manifest["cold_or_warm_state"]
     manifest["cache_configuration"] = {"external_cache": "not-used", "retrieval_cache": "shared-once-per-case"}
@@ -161,6 +226,10 @@ def run_pilot(
     manifest["actual_generation_calls"] = counters.generation_calls if allow_real_api else 0
     manifest["actual_total_external_calls"] = counters.total_external_calls if allow_real_api else 0
     manifest["retry_count"] = counters.retry_count
+    if spec:
+        manifest["actual_provider_attempts"] = counters.total_external_calls if allow_real_api else 0
+        manifest["actual_retry_attempts"] = counters.retry_count
+        manifest["retry_events"] = counters.retry_log
     manifest["mode_execution_count"] = mode_executions
     manifest["heldout_mode_execution_count"] = 0 if dataset == DEV_DATASET else mode_executions
     manifest["completion_status"] = completion_status
@@ -204,20 +273,48 @@ def parse_modes(value: str) -> list[str]:
 
 
 class _CallCounters:
-    def __init__(self, *, max_embedding_calls: int, max_generation_calls: int, max_total_external_calls: int) -> None:
+    def __init__(
+        self,
+        *,
+        max_embedding_calls: int,
+        max_generation_calls: int,
+        max_total_external_calls: int,
+        max_total_retry_attempts: int = 0,
+        max_retries_per_logical_request: int = 0,
+    ) -> None:
         self.max_embedding_calls = max_embedding_calls
         self.max_generation_calls = max_generation_calls
         self.max_total_external_calls = max_total_external_calls
+        self.max_total_retry_attempts = max_total_retry_attempts
+        self.max_retries_per_logical_request = max_retries_per_logical_request
         self.embedding_calls = 0
         self.generation_calls = 0
         self.total_external_calls = 0
         self.retry_count = 0
+        self.retry_log: list[dict[str, Any]] = []
 
     def reserve_embedding(self) -> None:
         self._reserve(kind="embedding")
 
     def reserve_generation(self) -> None:
         self._reserve(kind="generation")
+
+    def reserve_retry(self, *, kind: str, reason: str, wait_seconds: float) -> dict[str, Any]:
+        if self.max_retries_per_logical_request < 1:
+            raise RuntimeError("Retry refused: max_retries_per_logical_request is 0.")
+        if self.retry_count + 1 > self.max_total_retry_attempts:
+            raise RuntimeError(f"Retry budget exceeded: requested {self.retry_count + 1}, cap {self.max_total_retry_attempts}.")
+        self._reserve(kind=kind)
+        self.retry_count += 1
+        event = {
+            "retry_attempt": self.retry_count,
+            "logical_request_kind": kind,
+            "retry_reason": reason,
+            "wait_seconds": wait_seconds,
+            "outcome": "PENDING",
+        }
+        self.retry_log.append(event)
+        return event
 
     def _reserve(self, *, kind: str) -> None:
         next_embedding = self.embedding_calls + (1 if kind == "embedding" else 0)
@@ -235,9 +332,10 @@ class _CallCounters:
 
 
 class _BudgetedProvider:
-    def __init__(self, provider: RealApiProvider, counters: _CallCounters) -> None:
+    def __init__(self, provider: RealApiProvider, counters: _CallCounters, *, retry_wait_seconds: float = 2.0) -> None:
         self._provider = provider
         self._counters = counters
+        self._retry_wait_seconds = retry_wait_seconds
         self.provider_name = provider.provider_name
         self.embedding_model = provider.embedding_model
         self.generator_model = provider.generator_model
@@ -245,20 +343,40 @@ class _BudgetedProvider:
 
     def embed_query(self, query: str) -> EmbeddingCallResult:
         self._counters.reserve_embedding()
-        result = self._provider.embed_query(query)
-        self._counters.retry_count += result.retry_count
-        return result
+        return self._call_with_single_retry("embedding", lambda: self._provider.embed_query(query))
 
     def generate_json(self, *, mode_name: str, system_prompt: str, user_payload: dict[str, Any], max_output_tokens: int) -> ProviderCallResult:
         self._counters.reserve_generation()
-        result = self._provider.generate_json(
-            mode_name=mode_name,
-            system_prompt=system_prompt,
-            user_payload=user_payload,
-            max_output_tokens=max_output_tokens,
+        return self._call_with_single_retry(
+            "generation",
+            lambda: self._provider.generate_json(
+                mode_name=mode_name,
+                system_prompt=system_prompt,
+                user_payload=user_payload,
+                max_output_tokens=max_output_tokens,
+            ),
         )
-        self._counters.retry_count += result.retry_count
-        return result
+
+    def _call_with_single_retry(self, kind: str, call: Any) -> Any:
+        try:
+            return call()
+        except Exception as exc:
+            classification = classify_retryable_condition(exc)
+            if not classification.retryable:
+                raise
+            event = self._counters.reserve_retry(kind=kind, reason=classification.reason, wait_seconds=self._retry_wait_seconds)
+            if self._retry_wait_seconds:
+                time.sleep(self._retry_wait_seconds)
+            try:
+                result = call()
+            except Exception as retry_exc:
+                event["outcome"] = "FAILED"
+                event["retry_error"] = str(retry_exc)
+                raise RuntimeError(f"Provider {kind} retry failed after {classification.reason}: {retry_exc}") from retry_exc
+            event["outcome"] = "SUCCEEDED"
+            result.retry_count += 1
+            result.retry_events.append(dict(event))
+            return result
 
 
 def _execution_plan(
@@ -612,9 +730,12 @@ def main() -> None:
     parser.add_argument("--max-embedding-calls", type=int, required=True)
     parser.add_argument("--max-generation-calls", type=int, required=True)
     parser.add_argument("--max-total-external-calls", type=int, required=True)
+    parser.add_argument("--max-total-retry-attempts", type=int, default=0)
+    parser.add_argument("--max-retries-per-logical-request", type=int, default=0)
     parser.add_argument("--allow-real-api", action="store_true")
     parser.add_argument("--allow-heldout", action="store_true")
     parser.add_argument("--plan-only", action="store_true")
+    parser.add_argument("--execution-spec")
     args = parser.parse_args()
     manifest = run_pilot(
         dataset=args.dataset,
@@ -625,11 +746,32 @@ def main() -> None:
         max_embedding_calls=args.max_embedding_calls,
         max_generation_calls=args.max_generation_calls,
         max_total_external_calls=args.max_total_external_calls,
+        max_total_retry_attempts=args.max_total_retry_attempts,
+        max_retries_per_logical_request=args.max_retries_per_logical_request,
         allow_real_api=args.allow_real_api,
         allow_heldout=args.allow_heldout,
         plan_only=args.plan_only,
+        execution_spec=args.execution_spec,
     )
-    print(json.dumps({"completion_status": manifest["completion_status"], "mode_execution_count": manifest["mode_execution_count"]}, sort_keys=True))
+    print(
+        json.dumps(
+            {
+                key: manifest[key]
+                for key in [
+                    "completion_status",
+                    "mode_execution_count",
+                    "heldout_mode_execution_count",
+                    "planned_mode_executions",
+                    "planned_unique_embedding_requests",
+                    "planned_generation_requests_maximum",
+                    "hard_total_external_cap",
+                    "external_api_calls_in_plan_only",
+                ]
+                if key in manifest
+            },
+            sort_keys=True,
+        )
+    )
 
 
 if __name__ == "__main__":

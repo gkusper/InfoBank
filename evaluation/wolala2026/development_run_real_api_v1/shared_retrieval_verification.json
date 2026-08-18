@@ -1,0 +1,223 @@
+{
+  "all_cases_share_retrieval": true,
+  "records": [
+    {
+      "candidate_ids": [
+        "cand-dev_p1_01a-brief"
+      ],
+      "candidate_order": [
+        "cand-dev_p1_01a-brief"
+      ],
+      "case_id": "DEV_P1_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "de3b1f9c16c57a63f1c2219b987a21e007f2bedc9f4e57bf22a5c9135ed633d1"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p1_01b-context"
+      ],
+      "candidate_order": [
+        "cand-dev_p1_01b-context"
+      ],
+      "case_id": "DEV_P1_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "0297d8a3be46a29845ae0d8310217ae9e33c80560272bb5093aa056ccd0a0966"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p2_01a-aggregate"
+      ],
+      "candidate_order": [
+        "cand-dev_p2_01a-aggregate"
+      ],
+      "case_id": "DEV_P2_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "bea911770ed6188edf9ca49bc695a271d66fc732be767e318296bb10b184e294"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p2_01b-aggregate"
+      ],
+      "candidate_order": [
+        "cand-dev_p2_01b-aggregate"
+      ],
+      "case_id": "DEV_P2_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "93a5cf17fd2f9bd72dfb5d9d6568ad63fe7cc70bf0c30ef992188ab11b26505a"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p3_01a-metadata"
+      ],
+      "candidate_order": [
+        "cand-dev_p3_01a-metadata"
+      ],
+      "case_id": "DEV_P3_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "09ec6cf8e3b6ad51bb38d55878b28ae3a4e478a2b31913a5bfdf4e4f6d0b7419"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p3_01b-metadata"
+      ],
+      "candidate_order": [
+        "cand-dev_p3_01b-metadata"
+      ],
+      "case_id": "DEV_P3_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "cd852e0f77fd53d2818f30ab82bf2590b68409b236cc362f4c197823453f0f12"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p4_01a-email",
+        "cand-dev_p4_01a-browser"
+      ],
+      "candidate_order": [
+        "cand-dev_p4_01a-email",
+        "cand-dev_p4_01a-browser"
+      ],
+      "case_id": "DEV_P4_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0,
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "507ea7273c2c65df57cdc4e04859c9215292d803cb81554b3b3639e65680e560"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p4_01b-browser"
+      ],
+      "candidate_order": [
+        "cand-dev_p4_01b-browser"
+      ],
+      "case_id": "DEV_P4_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "09f53efdab5eaaf0a49f804ddf596f991b67d223eec4bd1bc1b09a29cfe62eb7"
+      ]
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "DEV_P5_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "bbbe60393c321ed83edd41a3858766c49f47b9ca8c54c43e370c15bbb7f41cca"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-dev_p5_01b-internal"
+      ],
+      "candidate_order": [
+        "cand-dev_p5_01b-internal"
+      ],
+      "case_id": "DEV_P5_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "13ee46c51270b9e945822c70695c94385d522efa482d51b635a070175e4ad607"
+      ]
+    }
+  ],
+  "schema_version": "wolala-shared-retrieval-verification-v1"
+}

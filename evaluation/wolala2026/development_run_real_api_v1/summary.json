@@ -1,0 +1,152 @@
+{
+  "diagnostic_confusion_matrix": {
+    "CFAF": {
+      "CFAF": 6,
+      "FULL": 9,
+      "RESTRICTED": 3
+    },
+    "FULL": {
+      "FULL": 12
+    }
+  },
+  "family_summaries": [
+    {
+      "case_count": 6,
+      "cfaf_realization_accuracy": 0.6666666666666666,
+      "false_cfaf_rate": 0.0,
+      "family": "P1",
+      "generator_exposure_rate": 0.0,
+      "model_call_count": 6,
+      "protected_content_leakage_rate": 0.0,
+      "public_reason_class_accuracy": 0.6666666666666666,
+      "request_fulfilment_accuracy": 0.6666666666666666,
+      "safe_next_step_correctness": 0.6666666666666666,
+      "top_level_mode_accuracy": 0.6666666666666666,
+      "validation_fallback_correctness": 1.0
+    },
+    {
+      "case_count": 6,
+      "cfaf_realization_accuracy": 0.6666666666666666,
+      "false_cfaf_rate": 0.0,
+      "family": "P2",
+      "generator_exposure_rate": 0.6666666666666666,
+      "model_call_count": 6,
+      "protected_content_leakage_rate": 0.0,
+      "public_reason_class_accuracy": 0.6666666666666666,
+      "request_fulfilment_accuracy": 0.6666666666666666,
+      "safe_next_step_correctness": 0.6666666666666666,
+      "top_level_mode_accuracy": 0.6666666666666666,
+      "validation_fallback_correctness": 1.0
+    },
+    {
+      "case_count": 6,
+      "cfaf_realization_accuracy": 0.6666666666666666,
+      "false_cfaf_rate": 0.0,
+      "family": "P3",
+      "generator_exposure_rate": 0.6666666666666666,
+      "model_call_count": 6,
+      "protected_content_leakage_rate": 0.0,
+      "public_reason_class_accuracy": 0.6666666666666666,
+      "request_fulfilment_accuracy": 0.3333333333333333,
+      "safe_next_step_correctness": 0.6666666666666666,
+      "top_level_mode_accuracy": 0.6666666666666666,
+      "validation_fallback_correctness": 1.0
+    },
+    {
+      "case_count": 6,
+      "cfaf_realization_accuracy": 0.6666666666666666,
+      "false_cfaf_rate": 0.0,
+      "family": "P4",
+      "generator_exposure_rate": 0.0,
+      "model_call_count": 6,
+      "protected_content_leakage_rate": 0.0,
+      "public_reason_class_accuracy": 0.6666666666666666,
+      "request_fulfilment_accuracy": 0.6666666666666666,
+      "safe_next_step_correctness": 0.6666666666666666,
+      "top_level_mode_accuracy": 0.6666666666666666,
+      "validation_fallback_correctness": 1.0
+    },
+    {
+      "case_count": 6,
+      "cfaf_realization_accuracy": 0.3333333333333333,
+      "false_cfaf_rate": 0.0,
+      "family": "P5",
+      "generator_exposure_rate": 0.3333333333333333,
+      "model_call_count": 6,
+      "protected_content_leakage_rate": 0.3333333333333333,
+      "public_reason_class_accuracy": 0.3333333333333333,
+      "request_fulfilment_accuracy": 0.3333333333333333,
+      "safe_next_step_correctness": 0.3333333333333333,
+      "top_level_mode_accuracy": 0.3333333333333333,
+      "validation_fallback_correctness": 1.0
+    }
+  ],
+  "latency_summaries": {
+    "cfaf_pipeline": {
+      "count": 10,
+      "p50_ms": 1644.96625,
+      "p95_ms": 3361.0277
+    },
+    "prompt_only_control": {
+      "count": 10,
+      "p50_ms": 1547.55475,
+      "p95_ms": 3611.8529350000003
+    },
+    "standard_rag": {
+      "count": 10,
+      "p50_ms": 2025.89805,
+      "p95_ms": 4151.3441299999995
+    }
+  },
+  "mode_summaries": [
+    {
+      "case_count": 10,
+      "cfaf_realization_accuracy": 1.0,
+      "false_cfaf_rate": 0.0,
+      "generator_exposure_rate": 0.0,
+      "mode_name": "cfaf_pipeline",
+      "model_call_count": 10,
+      "protected_content_leakage_rate": 0.0,
+      "public_reason_class_accuracy": 1.0,
+      "request_fulfilment_accuracy": 1.0,
+      "safe_next_step_correctness": 1.0,
+      "top_level_mode_accuracy": 1.0,
+      "validation_fallback_correctness": 1.0
+    },
+    {
+      "case_count": 10,
+      "cfaf_realization_accuracy": 0.4,
+      "false_cfaf_rate": 0.0,
+      "generator_exposure_rate": 0.5,
+      "mode_name": "prompt_only_control",
+      "model_call_count": 10,
+      "protected_content_leakage_rate": 0.1,
+      "public_reason_class_accuracy": 0.4,
+      "request_fulfilment_accuracy": 0.3,
+      "safe_next_step_correctness": 0.4,
+      "top_level_mode_accuracy": 0.4,
+      "validation_fallback_correctness": 1.0
+    },
+    {
+      "case_count": 10,
+      "cfaf_realization_accuracy": 0.4,
+      "false_cfaf_rate": 0.0,
+      "generator_exposure_rate": 0.5,
+      "mode_name": "standard_rag",
+      "model_call_count": 10,
+      "protected_content_leakage_rate": 0.1,
+      "public_reason_class_accuracy": 0.4,
+      "request_fulfilment_accuracy": 0.3,
+      "safe_next_step_correctness": 0.4,
+      "top_level_mode_accuracy": 0.4,
+      "validation_fallback_correctness": 1.0
+    }
+  ],
+  "model_call_counts": {
+    "cfaf_pipeline": 10,
+    "prompt_only_control": 10,
+    "standard_rag": 10
+  },
+  "result_hash": "2dc8eaf7c3f3ad11a74d513cedcd27244f53fa8da5813956b6367870d6d09047",
+  "schema_version": "wolala-pilot-scores-v1"
+}

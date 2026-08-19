@@ -178,19 +178,17 @@ def _run_scale_case(query: QueryCase, mode: RoutingMode, documents: tuple[Synthe
     started = time.perf_counter_ns()
     retrieved = _retrieve(query, routing.candidate_document_ids, documents)
     retrieval_ms = (time.perf_counter_ns() - started) / 1_000_000
-    started = time.perf_counter_ns()
     retrieved_ids = [item["document_id"] for item in retrieved]
     gold = set(query.gold_document_ids)
     found_gold = gold & set(retrieved_ids)
-    answer_correct = (found_gold == gold) if gold else True
-    citation_correct = all(
+    gold_document_retrieval_complete = (found_gold == gold) if gold else True
+    gold_page_retrieval_correct = all(
         any(
             item["document_id"] == document_id and item["page_number"] in set(query.gold_pages.get(document_id, ()))
             for item in retrieved
         )
         for document_id in gold
     ) if gold else True
-    generation_ms = (time.perf_counter_ns() - started) / 1_000_000
     ranks = [retrieved_ids.index(document_id) + 1 for document_id in gold if document_id in retrieved_ids]
     return {
         "case_id": query.id,
@@ -205,15 +203,17 @@ def _run_scale_case(query: QueryCase, mode: RoutingMode, documents: tuple[Synthe
         "precision_at_k": len(found_gold) / len(retrieved_ids) if gold and retrieved_ids else (0.0 if gold else None),
         "found": bool(found_gold) if gold else None,
         "target_rank": min(ranks) if ranks else None,
-        "answer_correct": answer_correct,
-        "unsupported_answer": False,
-        "citation_correct": citation_correct,
-        "citation_coverage": len(found_gold) / len(gold) if gold else 1.0,
-        "output_class": query.expected_output,
+        "gold_document_retrieval_complete": gold_document_retrieval_complete,
+        "gold_page_retrieval_correct": gold_page_retrieval_correct,
+        "gold_document_retrieval_coverage": len(found_gold) / len(gold) if gold else 1.0,
+        "answer_text": None,
+        "answer_correctness": "NOT_EVALUATED",
+        "unsupported_answer_rate": "NOT_EVALUATED",
+        "output_class": "NOT_EVALUATED",
         "routing_ms": routing_ms,
         "retrieval_ms": retrieval_ms,
-        "generation_ms": generation_ms,
-        "total_ms": routing_ms + retrieval_ms + generation_ms,
+        "generation_ms": None,
+        "total_ms": routing_ms + retrieval_ms,
     }
 
 
@@ -238,14 +238,20 @@ def _summarize_scale(size: int, mode: RoutingMode, records: list[dict[str, Any]]
         "routing_p95_ms": round(_percentile([record["routing_ms"] for record in selected], 0.95), 6),
         "retrieval_p50_ms": round(_percentile([record["retrieval_ms"] for record in selected], 0.50), 6),
         "retrieval_p95_ms": round(_percentile([record["retrieval_ms"] for record in selected], 0.95), 6),
-        "answer_correctness": round(mean(record["answer_correct"] for record in selected), 6),
-        "unsupported_answer_rate": round(mean(record["unsupported_answer"] for record in selected), 6),
-        "citation_correctness": round(mean(record["citation_correct"] for record in selected), 6),
-        "citation_coverage": round(mean(record["citation_coverage"] for record in selected), 6),
+        "gold_document_retrieval_completeness": round(
+            mean(record["gold_document_retrieval_complete"] for record in selected), 6
+        ),
+        "unsupported_answer_rate": "NOT_EVALUATED",
+        "gold_page_retrieval_correctness": round(
+            mean(record["gold_page_retrieval_correct"] for record in selected), 6
+        ),
+        "gold_document_retrieval_coverage": round(
+            mean(record["gold_document_retrieval_coverage"] for record in selected), 6
+        ),
         "total_p50_ms": round(_percentile([record["total_ms"] for record in selected], 0.50), 6),
         "total_p95_ms": round(_percentile([record["total_ms"] for record in selected], 0.95), 6),
-        "provider": "deterministic-mock",
-        "model": "infobank-deterministic-v1",
+        "provider": "none_retrieval_only",
+        "model": "not_applicable",
     }
 
 

@@ -27,12 +27,13 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - W3 is executed by `evaluation/c_gate.py`; the recorded development safety counts are all zero.
 - Scale stress uses the same 24 gold queries at 50, 250, and 1000 documents. Exact measurements and limitations are in `docs/integration/CORPUS_SCALE_STRESS.md`; raw records are ignored under `artifacts/c_gate/scale/`.
 
-## Review D tested facts
+## Review D tested facts and status correction
 
 - `backend_python/aggregate_executor.py` requires a configurable distinct-contributor threshold (default 3), deduplicates contributors, excludes Metadata/Deny, and exposes no individual values or identifiers in output, generator context, trace, or citations.
 - Controlled failure uses `controlled-failure-v3`; the development scorer is `infocom-controlled-failure-scorer-v1` and the citation scorer is `infocom-citation-scorer-v1`.
-- `evaluation/d_gate.py` executes isolated B0-B3 development configurations. B3 exact output conformance, reason accuracy, abstention F1, and permitted-answer accuracy were 1.0 on the generated 54-case candidate; its false-answer rate was 0. These are generated-development results, not final E1 claims.
-- B3 prohibited disclosure, generator exposure, Aggregate individual leakage, source-existence leakage, protected-path exposure, wrong-permission citations, and archived-source use were all 0.
+- The current pre-hardening D-GATE B0-B3 records were deterministic contract simulations. Gold output classes, reason codes, source IDs, or pages were used by the simulator to construct some predictions and citations. Those numbers must not be used as final system-performance estimates.
+- Controlled-failure specification, scorer schemas, run-record fields, and deterministic contract tests are implemented. Actual gold-blind B0-B3 empirical evaluation is pending; final E1 has not started.
+- Historical zero B3 safety counters are contract-simulation results. Actual-pipeline safety must be recalculated by scanning produced candidates, retrieval traces, generator context, answers, citations, and public wording.
 - The action/closure development set contained 120 generated threads and 60 browser-only counterfactuals. Open/status/closure/linking accuracy and action F1 were 1.0; browser-only false actions were 0. Human MailEx evaluation remains pending.
 
 ## Pre-freeze tested facts
@@ -40,11 +41,12 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - `evaluation/reviewer_v2_candidate.py` and `scripts/build_reviewer_v2_candidate.py` generate six packages, 30 PDFs, 90 balanced query candidates, 60 permission groups, 60 browser-only cases, and 120 generated mail threads.
 - The 90 queries contain six candidates in each required class. Splits are disjoint by object family, template family, and document package.
 - Twenty-four mail threads are assigned for a pending second annotation; no human validation, agreement, adjudication, citation audit, or no-health sign-off is claimed.
-- `scripts/build_mailex_candidate.py` is a source/licence-aware transformation path. It has not been run on MailEx because no authorized local source/licence manifest was found.
+- A local `data.zip` contains MailEx-style train/dev/test/full-data JSON and raw-thread files. No licence/readme evidence was found inside it; status is `LICENCE_PENDING_HUMAN_CONFIRMATION`. Actual-format transformation is pending and raw content is not tracked.
 
 ## Known limitations
 
-- All A2/C scale and candidate measurements are synthetic development evidence; no final E1 or human citation audit has run.
+- The C scale runner is a synthetic lexical/IDF retrieval microbenchmark. Recall@3 and candidate reduction remain valid retrieval observations; it produced no answer text, so answer correctness and unsupported-answer claims are not valid.
+- No actual-pipeline B0–B3 empirical evaluation, final E1, or human citation audit has run.
 - The candidate holdout is not frozen and is forbidden for threshold tuning.
 - The local-compatible provider is a deterministic interface smoke, not a production inference-quality result.
 - Chroma/MariaDB/source storage do not share one atomic transaction.

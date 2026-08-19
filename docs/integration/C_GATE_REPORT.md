@@ -1,6 +1,12 @@
 # C-GATE report
 
-Status: `PASS_WITH_LIMITATIONS`
+Implementation/tooling status: `PASS`
+
+Deterministic routing microbenchmark status: `PASS`
+
+Actual answer-quality empirical validation: `PENDING`
+
+Final frozen response/governance evaluation: `PENDING`
 
 Final E1 has not run. All results in this report are deterministic synthetic development evidence.
 
@@ -37,7 +43,7 @@ Happy path: Reader grant → Full decision → three-source Aggregate decision/r
 
 ## Scale result
 
-All six size/mode combinations had Recall@3 1.0, false exclusions 0, answer correctness 1.0, unsupported-answer rate 0, and citation coverage 1.0. Keyword routing reduced the mean candidate set to one third of `ROUTING_OFF`; its hard-negative candidate-inclusion rate was 0.233333 versus 1.0. Exact latency and citation-correctness values are in `docs/integration/CORPUS_SCALE_STRESS.md` and ignored `artifacts/c_gate/scale/summary.json`.
+All six size/mode combinations had Recall@3 1.0, zero false exclusions, and gold-document retrieval completeness 1.0. Keyword routing reduced the mean candidate set to one third of `ROUTING_OFF`; its hard-negative candidate-inclusion rate was 0.233333 versus 1.0. Precision@3 and mean target rank did not improve. The runner generated no answer text, so answer correctness, unsupported-answer rate, hallucination reduction, and production answer quality were not evaluated. Exact routing and page-retrieval values are in `docs/integration/CORPUS_SCALE_STRESS.md`; raw output remains ignored under `artifacts/c_gate/scale/`.
 
 ## Candidate QA
 
@@ -51,7 +57,7 @@ All six size/mode combinations had Recall@3 1.0, false exclusions 0, answer corr
 ## Limitations
 
 - Scale retrieval is an isolated deterministic lexical/vector-proxy development runner, not a concurrent production load test.
-- Citation correctness was 0.916667 at 50/250 and 0.958333 at 1000 because some correct multi-page target documents returned a non-gold page; document coverage remained 1.0. D-GATE adds a formal citation scorer.
+- Gold-page retrieval correctness was 0.916667 at 50/250 and 0.958333 at 1000 because some correct multi-page target documents returned a non-gold page; gold-document retrieval coverage remained 1.0. These are retrieval measures, not answer-citation faithfulness. D-GATE supplies scorer infrastructure, while actual-pipeline and human citation evaluation remain pending.
 - Candidate holdout is neither final nor frozen and was not used for tuning.
 - Human annotation, manual citation audit, licence adjudication, and final no-health sign-off remain pending.
 

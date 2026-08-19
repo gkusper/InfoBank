@@ -35,13 +35,16 @@ def test_scale_stress_runs_same_gold_queries_and_reports_all_metrics(tmp_path) -
         "recall_at_k", "precision_at_k", "target_found_rate", "mean_target_rank",
         "mean_candidate_set_size", "hard_negative_inclusion", "false_exclusions",
         "routing_p50_ms", "routing_p95_ms", "retrieval_p50_ms", "retrieval_p95_ms",
-        "answer_correctness", "unsupported_answer_rate", "citation_correctness",
-        "citation_coverage", "total_p50_ms", "total_p95_ms",
+        "gold_document_retrieval_completeness", "unsupported_answer_rate",
+        "gold_page_retrieval_correctness", "gold_document_retrieval_coverage",
+        "total_p50_ms", "total_p95_ms",
     }
     for summary in summaries:
         assert required <= set(summary)
         assert summary["false_exclusions"] == 0
-        assert summary["unsupported_answer_rate"] == 0
+        assert summary["unsupported_answer_rate"] == "NOT_EVALUATED"
+        assert "answer_correctness" not in summary
+        assert "citation_correctness" not in summary
     for size in SCALE_SIZES:
         raw = (tmp_path / "scale" / str(size) / "raw_results.jsonl").read_text(encoding="utf-8").splitlines()
         assert len(raw) == len(QUERIES) * 2

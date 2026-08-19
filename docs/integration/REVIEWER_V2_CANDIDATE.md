@@ -2,6 +2,8 @@
 
 Status: `READY_FOR_HUMAN_QA`. This candidate is not final, frozen, or held-out evaluation evidence.
 
+The candidate builder does not itself establish empirical system performance. The historical D-GATE simulator consumed combined case/gold fields and is deprecated for performance claims; execution inputs and gold annotations must be separated before actual evaluation.
+
 ## Reproducible composition
 
 `scripts/build_reviewer_v2_candidate.py` produces ignored artifacts at `artifacts/pre_freeze/reviewer_v2_candidate/`:
@@ -27,7 +29,7 @@ The output directory must be empty/nonexistent for a build. The builder refuses 
 
 ## MailEx path and fallback
 
-No MailEx dataset or licence manifest was found in the authorized repository or adjacent evaluation-artifact directory on 2026-08-19. The candidate therefore uses clearly marked generated synthetic threads. `scripts/build_mailex_candidate.py` provides the preferred MailEx-derived path when an authorized local source and licence identifier are supplied. It preserves threads, pseudonymizes addresses, excludes an entire thread on a configured no-health term, records the source SHA-256 and licence identifier, and leaves licence confirmation and annotation pending. Its derived output must remain under ignored `artifacts/pre_freeze/` until a human licence decision permits otherwise.
+A local `data.zip` source is now present and has passed the read-only path-safety preflight, but no licence, licence identifier, README or COPYING file was found inside it. Status is therefore `LICENCE_PENDING_HUMAN_CONFIRMATION`. The existing synthetic fallback remains separately labelled. `scripts/build_mailex_candidate.py` is only a generic JSON/JSONL prototype and must not be represented as having parsed the actual local format until the local-format parser and transformation milestone completes. Any derived output must remain ignored until a human licence decision permits otherwise.
 
 Example after authorized source acquisition:
 

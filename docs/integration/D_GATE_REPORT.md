@@ -1,6 +1,14 @@
 # D-GATE development report
 
-Status: `PASS_WITH_LIMITATIONS`
+Controlled-failure specification: `PASS`
+
+Scorer and run-record infrastructure: `PASS`
+
+Deterministic contract simulation: `PASS`
+
+Actual gold-blind B0–B3 empirical evaluation: `PENDING`
+
+Final frozen E1: `NOT_STARTED`
 
 This is development evaluation on a generated, non-frozen candidate. No final dataset/scorer/config/code freeze occurred, no final E1 claim is made, and the 40-response manual citation audit remains pending human work.
 
@@ -15,13 +23,15 @@ This is development evaluation on a generated, non-frozen candidate. No final da
 - Provider/model: `deterministic-mock` / `infobank-deterministic-v1`.
 - B0/B1 database/vector paths are isolated evaluation identifiers. Production exposes only the B3 governed behavior; no B0/B1 switch exists in the production API.
 
-## Development calibration
+## Deprecated contract-simulation calibration
 
-Six configurations (support thresholds 0.4/0.5/0.6 crossed with minimum primary sources 1/2) were all recorded. Selection used exact-output conformance, then false-answer rate, reason accuracy, and config hash. Only the 27-case development split was used; candidate holdout and frozen D1–D8 v1 were not used.
+Six configurations (support thresholds 0.4/0.5/0.6 crossed with minimum primary sources 1/2) were recorded by the pre-hardening simulator. Selection used exact-output conformance, then false-answer rate, reason accuracy, and config hash. Only the 27-case development split was used; candidate holdout and frozen D1–D8 v1 were not used. The helper constructed some predictions from gold output classes and reason codes, so this is contract-test evidence, not empirical calibration.
 
 Selected config: minimum support 0.5, minimum primary sources 1, hash `3eb526bebe2f9cc879e51273df65689cc1c7313b0cc6b6fe2be143575ff136f7`. Development calibration scores: exact output conformance 1.0, reason accuracy 1.0, abstention precision/recall/F1 1.0/1.0/1.0, false-answer rate 0.0. These perfect values reflect deterministic generated templates and are not a final generalization claim.
 
-## B0–B3 development results (54 cases per mode)
+## Deprecated B0–B3 deterministic contract simulation (54 cases per mode)
+
+The following table is retained for provenance only. The simulator used gold output classes, reason codes, document IDs, or page ranges to construct parts of predictions, retrieval traces, or citations. Safety counters and latency/token values were also partly assigned or simulated. These numbers must not be used as system-performance estimates.
 
 | Mode | Output conformance | Reason accuracy | Abstention F1 | Permitted accuracy | False answer | Skip rate | Citation precision | Citation coverage | P50/P95 ms | Tokens |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
@@ -30,9 +40,9 @@ Selected config: minimum support 0.5, minimum primary sources 1, hash `3eb526beb
 | B2_PERMISSION_FILTERED | 0.777778 | 0.444444 | 0.909091 | 1.000000 | 0.111111 | 0.555556 | 0.750000 | 1.000000 | 0.247 / 0.457 | 2400 |
 | B3_FULL_ROLE_AWARE | 1.000000 | 1.000000 | 1.000000 | 1.000000 | 0.000000 | 0.666667 | 1.000000 | 1.000000 | 0.359 / 0.569 | 1908 |
 
-Latencies are deterministic stage-instrumentation values for the local mocked pipeline, not external-provider or production-load timings. Cost is 0 and retries are 0 in every mode.
+Latencies in this table are simulated deterministic instrumentation values, not measured actual-pipeline or provider latency. Cost is 0 and retries are 0 by construction.
 
-## Citation metrics
+## Deprecated simulated citation metrics
 
 | Mode | Support precision | Coverage | Wrong page | Unsupported claim | Invalid association | Inaccessible citation |
 |---|---:|---:|---:|---:|---:|---:|
@@ -41,25 +51,25 @@ Latencies are deterministic stage-instrumentation values for the local mocked pi
 | B2 | 0.750000 | 1.000000 | 0.000000 | 0.111111 | 0 | 0.000000 |
 | B3 | 1.000000 | 1.000000 | 0.000000 | 0.000000 | 0 | 0.000000 |
 
-## Safety and utility
+## Deprecated simulated safety and utility
 
-B3 counts are zero for prohibited disclosure, generator exposure, Aggregate individual leakage, source-existence leakage, protected local paths, wrong-permission citations, and archived-source use. B2 is also zero on those counters.
+B3 counters were zero in the contract simulation, but some counters were assigned by construction rather than calculated by scanning actual produced traces. They validate expected schema/invariant behavior only.
 
 B0/B1 intentionally disable governance in an isolated synthetic evaluation and therefore record 18 generator/source-existence/wrong-permission exposures, 6 Aggregate leaks, and 6 archived-source uses per mode. These baseline violations are the measured ablation effect; they are not reachable from production and are not represented as safe. No real protected or personal data is present.
 
-B3 permitted-answer accuracy is 1.0 (development target >=0.80 met), false/unsupported-answer rate 0, and generation-skip rate 0.666667. Failure taxonomy is: retrieval, routing, role classification, evidence threshold, output class, generation skip, generation content, citation, and scorer/parsing.
+The former B3 permitted-answer accuracy, false-answer rate, and generation-skip values are deprecated as performance claims. An actual gold-blind pipeline run must produce raw answers and traces before post-run scoring. Failure taxonomy remains: retrieval, routing, role classification, evidence threshold, output class, generation skip, generation content, citation, and scorer/parsing.
 
 ## Action/closure development
 
 The new engine defines `ActionCandidate`, normalized action keys, request, acceptance, completion, cancellation, rejection, postponement, reminder, acknowledgement, status-update and supersession events. Linking uses relation/thread/reply first, then participant + temporal + semantic evidence; semantic similarity is secondary. States are `OPEN`, `CLOSED_COMPLETED`, `CLOSED_CANCELLED`, and `SUPERSEDED`.
 
-The generated set contains 120 threads / 240 email messages and 60 browser-only cases. Results: open-action accuracy 1.0, closure/linking accuracy 1.0, overall status accuracy 1.0, action precision/recall/F1 1.0/1.0/1.0, browser-only false actions 0. MailEx was not available/used in this development run; data is marked generated synthetic and redistributable. Perfect scores reflect the controlled templates and are not frozen-benchmark claims.
+The generated set contains 120 threads / 240 email messages and 60 browser-only cases. Its perfect scores are deterministic template contract results, not action-system performance estimates. Actual local MailEx transformation and human primary/second annotation remain required. The browser-only false-action invariant is covered by deterministic tests.
 
 ## Artifacts and limitations
 
 Ignored output under `artifacts/d_gate/` includes raw JSONL, summary CSV/JSON/Markdown/LaTeX, calibration records, safety/utility/citation fields, action records, and the pending 40-row manual audit sheet. Tracked code/config/docs reproduce them.
 
-Limitations: generated templates are simpler than natural provider output and real email; latency/cost are mocked local measurements; manual citation review is incomplete; MailEx licensing/source selection and human action annotation remain pre-freeze tasks; candidate holdout is non-frozen. Scale stress remains the C-GATE 50/250/1000 run and is not rerun inside each B mode.
+Limitations: the historical B0–B3 runner is a gold-informed deterministic contract simulator, not an actual-pipeline empirical evaluator. Its latency, usage, citation, safety, and perfect B3 metrics are deprecated as performance claims. Manual citation review, local MailEx licensing/source processing, human action annotation, actual-pipeline evaluation, and final frozen E1 remain pending.
 
 ## Validation
 

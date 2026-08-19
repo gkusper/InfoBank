@@ -515,6 +515,10 @@ def build_document_list(user_id: str, db: Session):
         keyword_rows = db.query(models.Keyword.word).join(
             models.DocumentKeyword, models.Keyword.id == models.DocumentKeyword.keyword_id
         ).filter(models.DocumentKeyword.document_id == document.id).all()
+        chunk_count = db.query(models.DocumentChunk).filter(models.DocumentChunk.document_id == document.id).count()
+        provenance_rows = db.query(models.DocumentMetadataProvenance).filter(
+            models.DocumentMetadataProvenance.document_id == document.id
+        ).order_by(models.DocumentMetadataProvenance.field_name.asc()).all()
         documents.append(
             {
                 "document_id": document.id,
@@ -528,6 +532,23 @@ def build_document_list(user_id: str, db: Session):
                 "source_sha256": document.source_sha256,
                 "page_count": document.page_count,
                 "processing_status": document.processing_status,
+                "chunk_count": chunk_count,
+                "provenance": [
+                    {
+                        "field": row.field_name,
+                        "type": row.provenance_type.value if hasattr(row.provenance_type, "value") else str(row.provenance_type),
+                        "method": row.method,
+                    }
+                    for row in provenance_rows
+                ],
+                "reviewer_links": {
+                    "source": f"/api/documents/{document.id}/source",
+                    "processing_report": f"/api/documents/{document.id}/processing-report",
+                    "reindex": f"/api/documents/{document.id}/reindex",
+                    "archive": f"/api/documents/{document.id}/archive",
+                    "restore": f"/api/documents/{document.id}/restore",
+                    "permission": f"/api/policy/resolve/document/{document.id}",
+                },
             }
         )
     return {"status": "success", "documents": documents}
@@ -556,6 +577,7 @@ def update_keywords(
     )
     db.query(models.DocumentKeyword).filter(models.DocumentKeyword.document_id == doc_id).delete()
     _persist_keywords(db, doc_id, result, preserve_user=False)
+    db.flush()
     for relation in db.query(models.DocumentKeyword).filter(models.DocumentKeyword.document_id == doc_id).all():
         relation.user_edited = True
         relation.provenance_type = models.ProvenanceType.User

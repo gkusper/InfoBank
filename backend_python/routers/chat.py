@@ -19,7 +19,7 @@ from database import get_db
 router = APIRouter(prefix="/api", tags=["Chat"])
 
 
-def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywords: list, sources: list, status: str, query_profile: dict = None, governance: dict = None, evidence_check: dict = None, controlled_failure_obj: dict = None, output_mode: str = None):
+def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywords: list, sources: list, status: str, query_profile: dict = None, governance: dict = None, evidence_check: dict = None, controlled_failure_obj: dict = None, output_mode: str = None, audit_id: str | None = None):
     details = json.dumps({
         "question": question,
         "answer": answer,
@@ -34,7 +34,7 @@ def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywor
         "output_mode": output_mode,
         "status": status
     }, ensure_ascii=False)
-    log_entry = models.AuditLog(id=str(uuid.uuid4()), user_id=user_id, action="CHAT_ASK", details=details)
+    log_entry = models.AuditLog(id=audit_id or str(uuid.uuid4()), user_id=user_id, action="CHAT_ASK", details=details)
     db.add(log_entry)
     db.commit()
 
@@ -201,7 +201,7 @@ def aggregate_config_from_environment() -> AggregateConfig:
     return AggregateConfig(k_threshold=threshold)
 
 
-def chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, controlled_failure_obj=None, output_mode="full_answer"):
+def chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, controlled_failure_obj=None, output_mode="full_answer", audit_id=None):
     return {
         "status": "success",
         "question": question,
@@ -213,13 +213,14 @@ def chat_success_payload(question, question_keywords, query_profile, governance_
         "evidence_check": evidence_check,
         "controlled_failure": controlled_failure_obj,
         "output_mode": output_mode,
+        "audit_id": audit_id,
         "searched_documents_count": len(governance_context.get("usable_doc_ids", [])),
         "answer": answer,
         "sources": sources_list,
     }
 
 
-def controlled_failure_payload(message: str, query_profile: dict, governance_context: dict, evidence_check: dict, cf: dict, sources_list: list | None = None) -> dict:
+def controlled_failure_payload(message: str, query_profile: dict, governance_context: dict, evidence_check: dict, cf: dict, sources_list: list | None = None, audit_id: str | None = None) -> dict:
     return {
         "status": "controlled_failure",
         "message": message,
@@ -229,6 +230,7 @@ def controlled_failure_payload(message: str, query_profile: dict, governance_con
         "evidence_check": evidence_check,
         "controlled_failure": cf,
         "output_mode": cf.get("status"),
+        "audit_id": audit_id,
         "sources": sources_list or [],
     }
 
@@ -261,6 +263,7 @@ async def ask_infobank(
     user_id: str = Depends(security.get_current_user_id),
     db: Session = Depends(get_db),
 ):
+    audit_id = str(uuid.uuid4())
     query_profile = relevance.build_query_profile(question, [])
     governance_context = {}
     evidence_check = {}
@@ -271,8 +274,8 @@ async def ask_infobank(
             cf = pre_gate["controlled_failure"]
             msg = cf.get("safeOutput") or "The request cannot be answered safely."
             evidence_check = {"decision": "controlled_failure", "controlled_failure": cf, "output_mode": cf["status"], "output_gate": pre_gate.get("trace", {})}
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], cf["status"], query_profile, {}, evidence_check, cf, cf["status"])
-            return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf)
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], cf["status"], query_profile, {}, evidence_check, cf, cf["status"], audit_id)
+            return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf, audit_id=audit_id)
 
         routing_scope_doc_ids = get_permitted_fallback_doc_ids(db, user_id)
         pre_routing_governance = policy_engine.resolve_document_access_bulk(
@@ -293,8 +296,8 @@ async def ask_infobank(
             cf = output_gate["controlled_failure"]
             msg = cf["safeOutput"]
             evidence_check = {"decision": "controlled_failure", "controlled_failure": cf, "output_mode": cf["status"]}
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], "rejected", query_profile, pre_routing_governance, evidence_check, cf, cf["status"])
-            return controlled_failure_payload(msg, query_profile, pre_routing_governance, evidence_check, cf)
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], "rejected", query_profile, pre_routing_governance, evidence_check, cf, cf["status"], audit_id)
+            return controlled_failure_payload(msg, query_profile, pre_routing_governance, evidence_check, cf, audit_id=audit_id)
 
         keyword_rows = db.query(
             models.DocumentKeyword.document_id,
@@ -344,8 +347,8 @@ async def ask_infobank(
                 {"gate": "candidate_retrieval"},
             )
             evidence_check = {"decision": "controlled_failure", "controlled_failure": cf, "output_mode": cf["status"]}
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, [], "rejected", query_profile, {}, evidence_check, cf, cf["status"])
-            return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf)
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, [], "rejected", query_profile, {}, evidence_check, cf, cf["status"], audit_id)
+            return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf, audit_id=audit_id)
 
         governance_context = policy_engine.resolve_document_access_bulk(
             db=db,
@@ -402,6 +405,25 @@ async def ask_infobank(
         role_summary = relevance.summarize_source_roles(sources_list)
         relevance_level_summary = relevance.summarize_relevance_levels(sources_list)
         evidence_check = evidence_service.check_rag_evidence(sources_list, query_profile, governance_context)
+        support_check = evidence_service.question_source_support(question, sources_list)
+        evidence_check["question_source_support"] = support_check
+        if support_check["reason"] == "wrong_object_identifier":
+            msg = "No permitted source matches the requested object identifier, so no answer was generated."
+            cf = controlled_failure.make_controlled_failure(
+                controlled_failure.STATUS_REFUSE_NO_MATCH,
+                controlled_failure.REASON_EPISTEMIC,
+                controlled_failure.evidence_state([], query_profile, False),
+                controlled_failure.safe_policy_state(governance_context),
+                msg,
+                ["Check the object identifier or add a permitted source for that exact object."],
+                {"gate": "exact_object_match", "requested_identifier_count": len(support_check["requested_object_identifiers"])},
+            )
+            evidence_check.update({"decision": "controlled_failure", "controlled_failure": cf, "output_mode": cf["status"]})
+            background_tasks.add_task(
+                log_chat_event, db, user_id, question, msg, question_keywords, [], "wrong_object_no_match",
+                query_profile, governance_context, evidence_check, cf, cf["status"], audit_id,
+            )
+            return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf, [], audit_id)
         aggregate_request = is_aggregate_statistics_question(question)
         aggregate_execution = None
         if aggregate_request and governance_context.get("has_aggregate_evidence") and not governance_context.get("has_primary_evidence"):
@@ -415,7 +437,7 @@ async def ask_infobank(
             sources=sources_list,
             query_profile=query_profile,
             governance=governance_context,
-            context_blocks_available=bool(context_blocks) or bool(aggregate_execution and aggregate_execution["aggregate"]),
+            context_blocks_available=(bool(context_blocks) and support_check["sufficient"]) or bool(aggregate_execution and aggregate_execution["aggregate"]),
             aggregate_request=aggregate_request,
         )
         evidence_check["output_mode"] = output_gate.get("output_mode")
@@ -427,14 +449,14 @@ async def ask_infobank(
         if not content_doc_ids and metadata_doc_ids:
             cf = output_gate.get("controlled_failure")
             msg = cf.get("safeOutput") if cf else "Only metadata-level sources are available for this question; document content is withheld by policy, so the answer cannot be found in the document content."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "metadata_only", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
-            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"))
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "metadata_only", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"), audit_id)
+            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"), audit_id)
 
         if not content_doc_ids:
             cf = output_gate.get("controlled_failure")
             msg = cf.get("safeOutput") if cf else "There is no permitted source that can be used for this question in the InfoBank."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "rejected", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
-            return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf or {}, sources_list)
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "rejected", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"), audit_id)
+            return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf or {}, sources_list, audit_id)
 
         if aggregate_execution is not None:
             public_aggregate_governance = {
@@ -464,18 +486,18 @@ async def ask_infobank(
                 public_evidence_check["decision"] = "controlled_failure"
                 public_evidence_check["controlled_failure"] = cf
                 public_evidence_check["output_mode"] = aggregate_execution["output_class"]
-                background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, [], "aggregate_threshold", query_profile, public_aggregate_governance, public_evidence_check, cf, aggregate_execution["output_class"])
-                return controlled_failure_payload(answer, query_profile, public_aggregate_governance, public_evidence_check, cf, [])
+                background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, [], "aggregate_threshold", query_profile, public_aggregate_governance, public_evidence_check, cf, aggregate_execution["output_class"], audit_id)
+                return controlled_failure_payload(answer, query_profile, public_aggregate_governance, public_evidence_check, cf, [], audit_id)
             public_evidence_check["decision"] = "aggregate_result"
             public_evidence_check["output_mode"] = aggregate_execution["output_class"]
-            background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, [], "aggregate_result", query_profile, public_aggregate_governance, public_evidence_check, None, aggregate_execution["output_class"])
-            return chat_success_payload(question, question_keywords, query_profile, public_aggregate_governance, {}, {}, public_evidence_check, answer, [], None, aggregate_execution["output_class"])
+            background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, [], "aggregate_result", query_profile, public_aggregate_governance, public_evidence_check, None, aggregate_execution["output_class"], audit_id)
+            return chat_success_payload(question, question_keywords, query_profile, public_aggregate_governance, {}, {}, public_evidence_check, answer, [], None, aggregate_execution["output_class"], audit_id)
 
         if output_gate.get("decision") == "controlled_failure":
             cf = output_gate["controlled_failure"]
             msg = cf.get("safeOutput") or "The answer cannot be found in the document."
-            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, cf.get("status", "not_found"), query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
-            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"))
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, cf.get("status", "not_found"), query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"), audit_id)
+            return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, msg, sources_list, cf, output_gate.get("output_mode"), audit_id)
 
         generation_cf = output_gate.get("controlled_failure")
         output_mode = output_gate.get("output_mode", controlled_failure.STATUS_FULL_ANSWER)
@@ -527,9 +549,9 @@ async def ask_infobank(
             evidence_check["controlled_failure"] = final_cf
             evidence_check["output_mode"] = output_mode
             evidence_check["decision"] = output_gate.get("decision", "restricted_generation_allowed")
-        background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, sources_list, final_status, query_profile, governance_context, evidence_check, final_cf, output_mode)
-        return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, final_cf, output_mode)
+        background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, sources_list, final_status, query_profile, governance_context, evidence_check, final_cf, output_mode, audit_id)
+        return chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, final_cf, output_mode, audit_id)
     except Exception as e:
         db.rollback()
-        background_tasks.add_task(log_chat_event, db, user_id, question, str(e), [], [], "error", query_profile, governance_context, evidence_check, None, None)
+        background_tasks.add_task(log_chat_event, db, user_id, question, str(e), [], [], "error", query_profile, governance_context, evidence_check, None, None, audit_id)
         raise HTTPException(status_code=500, detail=str(e))

@@ -636,3 +636,58 @@ def check_rag_evidence(sources: Iterable[Dict[str, Any]], query_profile: Dict[st
         "has_metadata_only": has_metadata_only,
         "warnings": warnings,
     }
+
+
+_SUPPORT_STOP_WORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "by", "can", "does", "for", "from",
+    "how", "i", "in", "is", "it", "of", "on", "or", "the", "this", "to", "what",
+    "when", "where", "which", "who", "why", "with", "you", "your",
+}
+_OBJECT_IDENTIFIER = re.compile(
+    r"\b(?=[A-Z0-9-]{4,}\b)(?=[A-Z0-9-]*[A-Z])(?=[A-Z0-9-]*\d)[A-Z0-9]+(?:-[A-Z0-9]+)+\b"
+)
+
+
+def question_source_support(question: str, sources: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
+    """Return a deterministic, policy-preserving pre-generation support signal."""
+
+    source_rows = list(sources)
+    searchable = " ".join(
+        " ".join(
+            str(value or "")
+            for value in (
+                row.get("file_name"),
+                row.get("text"),
+                " ".join(row.get("usable_relevance", {}).get("genre", [])),
+            )
+        )
+        for row in source_rows
+        if row.get("use_decision") == relevance.USE_FULL
+    )
+    requested_ids = sorted(set(_OBJECT_IDENTIFIER.findall(question or "")))
+    matched_ids = [identifier for identifier in requested_ids if identifier.lower() in searchable.lower()]
+    object_match = not requested_ids or len(matched_ids) == len(requested_ids)
+
+    def tokens(text: str) -> set[str]:
+        return {
+            token
+            for token in re.findall(r"[a-z0-9][a-z0-9_-]{2,}", (text or "").lower())
+            if token not in _SUPPORT_STOP_WORDS
+        }
+
+    question_tokens = tokens(question) - {identifier.lower() for identifier in requested_ids}
+    source_tokens = tokens(searchable)
+    matched_tokens = sorted(question_tokens & source_tokens)
+    coverage = len(matched_tokens) / len(question_tokens) if question_tokens else (1.0 if object_match else 0.0)
+    sufficient = bool(source_rows) and object_match and coverage >= 0.34
+    reason = "supported" if sufficient else ("wrong_object_identifier" if not object_match else "insufficient_lexical_support")
+    return {
+        "sufficient": sufficient,
+        "reason": reason,
+        "requested_object_identifiers": requested_ids,
+        "matched_object_identifiers": matched_ids,
+        "question_term_count": len(question_tokens),
+        "matched_question_terms": matched_tokens,
+        "support_coverage": round(coverage, 6),
+        "threshold": 0.34,
+    }

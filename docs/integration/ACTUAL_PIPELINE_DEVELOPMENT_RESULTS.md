@@ -22,10 +22,10 @@ Two B3 configurations ran over all 20 development inputs. The rule required zero
 
 | Mode | Output class accuracy | Reason accuracy | Permitted-answer accuracy | False/unsupported-answer rate | Citation document coverage | Page correctness | Safety findings | Mean wall-clock ms | Provider input/output tokens | Generation skipped |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| B0 vector only | 0.10 | 0.00 | 0.17 | 1.00 | 0.50 | 0.25 | 4 | 37.70 | 2108 / 299 | 0/20 |
-| B1 vector+routing | 0.10 | 0.00 | 0.33 | 1.00 | 0.60 | 0.30 | 6 | 30.92 | 1757 / 298 | 0/20 |
-| B2 permission-filtered | 0.70 | 0.70 | 0.50 | 0.14 | 0.50 | 0.83 | 0 | 151.82 | 636 / 136 | 14/20 |
-| B3 full role-aware | 1.00 | 1.00 | 1.00 | 0.00 | 1.00 | 1.00 | 0 | 119.05 | 860 / 80 | 16/20 |
+| B0 vector only | 0.10 | 0.00 | 0.17 | 1.00 | 0.50 | 0.25 | 4 | 38.51 | 2108 / 299 | 0/20 |
+| B1 vector+routing | 0.10 | 0.00 | 0.33 | 1.00 | 0.60 | 0.30 | 6 | 31.59 | 1757 / 298 | 0/20 |
+| B2 permission-filtered | 0.70 | 0.70 | 0.50 | 0.14 | 0.50 | 0.83 | 0 | 155.25 | 636 / 136 | 14/20 |
+| B3 full role-aware | 1.00 | 1.00 | 1.00 | 0.00 | 1.00 | 1.00 | 0 | 117.41 | 860 / 80 | 16/20 |
 
 The latency values are measured local wall-clock observations for one run and are not deterministic performance guarantees. Token counts are explicitly labelled deterministic local provider estimates; retries and cost are zero. B0/B1 safety findings arise from intentionally removing governance in an isolated synthetic ablation and do not represent a production route.
 
@@ -41,6 +41,6 @@ The old D-GATE table remains in `D_GATE_REPORT.md` for provenance only. It built
 
 ## Reproducibility and limitations
 
-Two complete B0-B3 runs produced identical timing-independent content hashes. Their full raw hashes differ because actual wall-clock timings are retained separately and are expected to differ. Both runs had zero runtime errors in B3. Generated output is ignored under `artifacts/actual_pipeline/`; no raw result, database, Chroma file, PDF, or source-storage payload is tracked.
+Two complete B0-B3 runs produced identical timing-independent content hashes. Their full raw hashes were `b14a7f50a18d7f9e6968d8e9f59de481ae43609831b7548c998b98df6d9752b2` and `d67c22467358404f72da9e52d3a9c3b78fa05d975967723dd3a36010fbd1f5c3`; the difference is expected because actual wall-clock timings are retained separately. Both runs had zero runtime errors in B3. Generated output is ignored under `artifacts/actual_pipeline/`; no raw result, database, Chroma file, PDF, or source-storage payload is tracked.
 
 Limitations: 20 synthetic development cases, deterministic embeddings/generation, no concurrency/load claim, no external provider quality claim, no human-validated gold, no human citation audit, no candidate-holdout result, and no final E1.

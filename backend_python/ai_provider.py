@@ -46,7 +46,7 @@ class ProviderGenerationResult:
     output_tokens: int
     total_tokens: int
     retries: int
-    cost: float
+    cost: float | None
     usage_source: str
 
     def to_dict(self) -> dict[str, Any]:
@@ -191,6 +191,49 @@ class OpenAIProvider(AIProvider):
             temperature=temperature,
         )
         return str(response.choices[0].message.content or "")
+
+    def generate_with_usage(
+        self,
+        messages: Sequence[dict[str, str]],
+        *,
+        model: str,
+        temperature: float = 0.0,
+    ) -> ProviderGenerationResult:
+        """Return provider-reported tokens and explicit adapter retry count.
+
+        Monetary cost remains ``None`` here because the adapter has no
+        authoritative local pricing table.  Evaluation tooling may calculate
+        it only from a caller-supplied pricing configuration.
+        """
+
+        retries = 0
+        last_error: Exception | None = None
+        for attempt in range(3):
+            try:
+                response = self._get_client().chat.completions.create(
+                    model=model,
+                    messages=list(messages),
+                    temperature=temperature,
+                )
+                usage = getattr(response, "usage", None)
+                input_tokens = int(getattr(usage, "prompt_tokens", 0) or 0)
+                output_tokens = int(getattr(usage, "completion_tokens", 0) or 0)
+                total_tokens = int(getattr(usage, "total_tokens", input_tokens + output_tokens) or 0)
+                return ProviderGenerationResult(
+                    text=str(response.choices[0].message.content or ""),
+                    input_tokens=input_tokens,
+                    output_tokens=output_tokens,
+                    total_tokens=total_tokens,
+                    retries=retries,
+                    cost=None,
+                    usage_source="provider_reported",
+                )
+            except Exception as exc:
+                last_error = exc
+                if attempt == 2:
+                    raise
+                retries += 1
+        raise RuntimeError("OpenAI generation retry loop ended unexpectedly") from last_error
 
 
 class DeterministicMockProvider(AIProvider):

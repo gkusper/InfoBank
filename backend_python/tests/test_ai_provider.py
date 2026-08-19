@@ -8,7 +8,7 @@ import pytest
 
 import ai_service
 import relevance
-from ai_provider import DeterministicMockProvider, LocalCompatibleProvider, create_provider
+from ai_provider import DeterministicMockProvider, LocalCompatibleProvider, OpenAIProvider, create_provider
 
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
@@ -127,3 +127,30 @@ def test_openai_adapter_remains_lazy_and_never_calls_network_during_manifest(mon
     assert manifest["provider"] == "openai"
     assert manifest["external_network_required"] is True
     assert called is False
+
+
+def test_openai_usage_and_retry_metadata_are_provider_reported() -> None:
+    class Completions:
+        def __init__(self) -> None:
+            self.calls = 0
+
+        def create(self, **kwargs):
+            del kwargs
+            self.calls += 1
+            if self.calls == 1:
+                raise RuntimeError("transient synthetic provider error")
+            usage = type("Usage", (), {"prompt_tokens": 11, "completion_tokens": 7, "total_tokens": 18})()
+            message = type("Message", (), {"content": "synthetic answer"})()
+            choice = type("Choice", (), {"message": message})()
+            return type("Response", (), {"usage": usage, "choices": [choice]})()
+
+    completions = Completions()
+    client = type("Client", (), {"chat": type("Chat", (), {"completions": completions})()})()
+    result = OpenAIProvider(client_factory=lambda: client).generate_with_usage(
+        [{"role": "user", "content": "synthetic"}], model="fixed-model", temperature=0.0
+    )
+    assert result.text == "synthetic answer"
+    assert (result.input_tokens, result.output_tokens, result.total_tokens) == (11, 7, 18)
+    assert result.retries == 1
+    assert result.cost is None
+    assert result.usage_source == "provider_reported"

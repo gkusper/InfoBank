@@ -1,3 +1,5 @@
+import datetime as dt
+
 from fastapi import APIRouter, Depends, Form, HTTPException
 from sqlalchemy.orm import Session
 
@@ -67,64 +69,6 @@ def revoke_persistent_document_permission(
         raise HTTPException(status_code=400, detail=str(exc)) from exc
 
 
-@router.post("/documents/{doc_id}/permissions")
-def grant_document_permission(
-    doc_id: str,
-    target_username: str = Form(...),
-    permission_type: str = Form(...),
-    user_id: str = Depends(security.get_current_user_id),
-    db: Session = Depends(get_db),
-):
-    target = db.query(models.User).filter(models.User.username == target_username).first()
-    if not target:
-        raise HTTPException(status_code=404, detail="The target user was not found.")
-    try:
-        relation = policy_engine.grant_document_permission(
-            db,
-            owner_user_id=user_id,
-            document_id=doc_id,
-            target_user_id=target.id,
-            permission_type=permission_type,
-        )
-        db.commit()
-        return {
-            "status": "success",
-            "document_id": doc_id,
-            "target_user_id": target.id,
-            "permission_type": relation.permission_type.value,
-        }
-    except PermissionError as exc:
-        db.rollback()
-        raise HTTPException(status_code=403, detail=str(exc)) from exc
-    except (ValueError, LookupError) as exc:
-        db.rollback()
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-
-
-@router.delete("/documents/{doc_id}/permissions/{target_user_id}")
-def revoke_document_permission(
-    doc_id: str,
-    target_user_id: str,
-    user_id: str = Depends(security.get_current_user_id),
-    db: Session = Depends(get_db),
-):
-    try:
-        removed = policy_engine.revoke_document_permission(
-            db,
-            owner_user_id=user_id,
-            document_id=doc_id,
-            target_user_id=target_user_id,
-        )
-        db.commit()
-        return {"status": "success", "document_id": doc_id, "revoked": removed}
-    except PermissionError as exc:
-        db.rollback()
-        raise HTTPException(status_code=403, detail=str(exc)) from exc
-    except ValueError as exc:
-        db.rollback()
-        raise HTTPException(status_code=400, detail=str(exc)) from exc
-
-
 @router.get("/rules")
 def list_my_policy_rules(
     user_id: str = Depends(security.get_current_user_id),
@@ -155,6 +99,8 @@ def create_policy_rule(
     target_id: str = Form(...),
     purpose: str = Form("any"),
     access_mode: str = Form(...),
+    valid_from: dt.datetime | None = Form(None),
+    valid_until: dt.datetime | None = Form(None),
     user_id: str = Depends(security.get_current_user_id),
     db: Session = Depends(get_db),
 ):
@@ -162,6 +108,8 @@ def create_policy_rule(
         raise HTTPException(status_code=400, detail="target_type must be Document or EvidenceUnit.")
     if access_mode not in {"Full", "Aggregate", "Metadata", "Deny"}:
         raise HTTPException(status_code=400, detail="access_mode must be Full, Aggregate, Metadata, or Deny.")
+    if valid_from and valid_until and valid_until <= valid_from:
+        raise HTTPException(status_code=400, detail="valid_until must be later than valid_from.")
 
     if target_type == policy_engine.TARGET_DOCUMENT:
         owner_perm = db.query(models.UserDocumentPermission).filter(
@@ -184,8 +132,17 @@ def create_policy_rule(
             target_id=target_id,
             purpose=purpose,
             access_mode=access_mode,
+            valid_from=valid_from,
+            valid_until=valid_until,
         )
-        return {"status": "success", "rule_id": rule.id}
+        return {
+            "status": "success",
+            "rule_id": rule.id,
+            "purpose": rule.purpose,
+            "access_mode": rule.access_mode.value,
+            "valid_from": rule.valid_from.isoformat() if rule.valid_from else None,
+            "valid_until": rule.valid_until.isoformat() if rule.valid_until else None,
+        }
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail=str(e))

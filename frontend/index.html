@@ -48,7 +48,13 @@
                         <i class="fas fa-network-wired w-5 text-center"></i><span>Semantic Co-occurrence Graph</span>
                     </button>
                     <button onclick="switchView('manager')" id="btn-manager" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
-                        <i class="fas fa-tasks w-5 text-center"></i><span>Management</span>
+                        <i class="fas fa-database w-5 text-center"></i><span>Documents</span>
+                    </button>
+                    <button onclick="switchView('policy')" id="btn-policy" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
+                        <i class="fas fa-user-shield w-5 text-center"></i><span>Permissions</span>
+                    </button>
+                    <button onclick="switchView('actions')" id="btn-actions" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
+                        <i class="fas fa-clipboard-check w-5 text-center"></i><span>Actions & Evidence</span>
                     </button>
                     <button onclick="switchView('connectors')" id="btn-connectors" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
                         <i class="fas fa-plug w-5 text-center"></i><span>Connectors</span>
@@ -92,8 +98,8 @@
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <thead class="bg-gray-50 font-bold text-gray-500 uppercase">
                             <tr>
-                                <th class="px-6 py-3 text-left tracking-wider">Document</th>
-                                <th class="px-6 py-3 text-left tracking-wider w-1/2">Keywords</th>
+                                <th class="px-6 py-3 text-left tracking-wider">Document / audit identity</th>
+                                <th class="px-6 py-3 text-left tracking-wider">Keywords / provenance</th>
                                 <th class="px-6 py-3 text-left tracking-wider">Visibility</th>
                                 <th class="px-6 py-3 text-center tracking-wider">Actions</th>
                             </tr>
@@ -113,6 +119,64 @@
                         <option value="Metadata">Metadata Only</option>
                     </select>
                     <button onclick="uploadDocument()" id="btn-upload" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 transition ml-2">Upload & Ingest</button>
+                </div>
+            </div>
+
+            <div id="view-policy" class="view-section hidden flex-1 p-6 overflow-y-auto bg-gray-50" data-reviewer-screen="policy">
+                <div class="max-w-5xl mx-auto space-y-6">
+                    <div class="bg-white rounded-2xl border shadow-sm p-6">
+                        <h2 class="text-lg font-bold text-gray-800">Persistent document permissions</h2>
+                        <p class="text-sm text-gray-500 mt-1">Grant or replace Reader, Aggregate, or Metadata access. Ownership transfer remains an explicit document action.</p>
+                        <div class="grid md:grid-cols-4 gap-3 mt-4">
+                            <input id="policy-doc-id" data-reviewer-field="document-uuid" placeholder="Document UUID" class="border rounded-lg p-2 text-sm md:col-span-2">
+                            <input id="policy-target-username" data-reviewer-field="target-user" placeholder="Target username" class="border rounded-lg p-2 text-sm">
+                            <select id="policy-grant-type" data-reviewer-field="owner-reader-aggregate" class="border rounded-lg p-2 text-sm">
+                                <option value="Reader">Reader / Full</option><option value="Aggregate">Aggregate</option><option value="Metadata">Metadata</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <button onclick="grantReviewerPermission()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Grant / change</button>
+                            <button onclick="revokeReviewerPermission()" class="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm font-bold">Revoke last target</button>
+                            <button onclick="resolveReviewerPolicy()" class="bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-bold">Resolve effective access</button>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-2xl border shadow-sm p-6">
+                        <h2 class="text-lg font-bold text-gray-800">Purpose and expiry rule</h2>
+                        <div class="grid md:grid-cols-4 gap-3 mt-4">
+                            <input id="policy-purpose" value="grounded_question_answering" data-reviewer-field="purpose" class="border rounded-lg p-2 text-sm">
+                            <select id="policy-access-mode" data-reviewer-field="effective-full-aggregate-metadata-deny" class="border rounded-lg p-2 text-sm">
+                                <option>Full</option><option>Aggregate</option><option>Metadata</option><option>Deny</option>
+                            </select>
+                            <input id="policy-valid-from" type="datetime-local" data-reviewer-field="valid-from" class="border rounded-lg p-2 text-sm">
+                            <input id="policy-valid-until" type="datetime-local" data-reviewer-field="expiry" class="border rounded-lg p-2 text-sm">
+                        </div>
+                        <button onclick="createReviewerPolicyRule()" class="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Create scoped rule</button>
+                    </div>
+                    <pre id="policy-review-output" data-reviewer-field="policy-resolution" class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-auto min-h-[180px] whitespace-pre-wrap">Select a document from the Documents screen or enter its UUID.</pre>
+                </div>
+            </div>
+
+            <div id="view-actions" class="view-section hidden flex-1 p-6 overflow-y-auto bg-gray-50" data-reviewer-screen="actions-evidence">
+                <div class="max-w-6xl mx-auto space-y-6">
+                    <div class="grid md:grid-cols-4 gap-3" data-reviewer-field="action-closure-states">
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4"><b>OPEN</b><p class="text-xs mt-1">Current primary evidence supports an obligation.</p></div>
+                        <div class="bg-slate-50 border rounded-xl p-4"><b>CLOSED_COMPLETED</b><p class="text-xs mt-1">Completion evidence closes the action.</p></div>
+                        <div class="bg-slate-50 border rounded-xl p-4"><b>CLOSED_CANCELLED</b><p class="text-xs mt-1">Cancellation evidence defeats the action.</p></div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><b>SUPERSEDED</b><p class="text-xs mt-1">A later authoritative record replaces it.</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl border shadow-sm p-6">
+                        <div class="flex items-center justify-between gap-3">
+                            <div><h2 class="text-lg font-bold">Evidence-role reviewer</h2><p class="text-sm text-gray-500">Primary, contextual, and contrastive evidence remain visibly distinct. Browser-only evidence cannot create an action.</p></div>
+                            <button onclick="loadReviewerActions()" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Load action evidence</button>
+                        </div>
+                        <div class="mt-3 flex flex-wrap gap-2 text-xs" data-reviewer-field="evidence-roles">
+                            <span class="px-2 py-1 rounded-full bg-green-100 text-green-800">primary</span>
+                            <span class="px-2 py-1 rounded-full bg-blue-100 text-blue-800">contextual · browser-only</span>
+                            <span class="px-2 py-1 rounded-full bg-red-100 text-red-800">contrastive</span>
+                            <span class="px-2 py-1 rounded-full bg-gray-100 text-gray-700">correction / audit trail</span>
+                        </div>
+                    </div>
+                    <pre id="action-review-output" data-reviewer-field="action-audit-trail" class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-auto min-h-[260px] whitespace-pre-wrap">No evidence loaded.</pre>
                 </div>
             </div>
 

@@ -33,6 +33,9 @@ RUNNER_VERSION = "infobank-actual-pipeline-runner-v1"
 RAW_SCHEMA_VERSION = "infobank-actual-raw-record-v1"
 SEAL_SCHEMA_VERSION = "infobank-raw-run-seal-v1"
 DEFAULT_MODEL = "infobank-deterministic-extractive-v1"
+GENERATION_PROMPT_VERSION = "actual-pipeline-answer-v1"
+ROUTING_PROMPT_VERSION = "routing-keyword-v1"
+GENERATION_TEMPERATURE = 0.0
 MODES = tuple(item.value for item in EvaluationMode)
 
 
@@ -168,11 +171,16 @@ class PipelineRuntime:
         chroma_dir: Path,
         source_storage_dir: Path,
         config: ActualPipelineConfig,
+        provider_name: str = "deterministic-mock",
+        allow_network_provider: bool = False,
+        cache_dir: Path | None = None,
+        pricing_config_path: Path | None = None,
     ) -> None:
         ensure_backend_path()
         os.environ["DATABASE_URL"] = database_url
-        os.environ["AI_PROVIDER"] = "deterministic-mock"
-        os.environ.pop("OPENAI_API_KEY", None)
+        os.environ["AI_PROVIDER"] = provider_name
+        if provider_name != "openai":
+            os.environ.pop("OPENAI_API_KEY", None)
 
         import chromadb
         from sqlalchemy import create_engine, text
@@ -202,7 +210,22 @@ class PipelineRuntime:
         self.document_by_id = {item.document_id: item for item in documents}
         self.fixtures = fixtures
         self.config = config
-        self.provider = ai_provider.DeterministicMockProvider()
+        provider = ai_provider.create_provider(provider_name)
+        if provider.external_network_required and not allow_network_provider:
+            raise RuntimeError(
+                "External evaluation provider requires explicit --allow-network-provider approval; no mock fallback is permitted."
+            )
+        if cache_dir is not None:
+            from .provider_readiness import CachedEvaluationProvider, ReadinessConfig, load_pricing
+
+            readiness = ReadinessConfig(
+                provider=provider.provider_name,
+                generation_model=config.generation_model,
+                embedding_model=config.embedding_model,
+            )
+            pricing, _ = load_pricing(pricing_config_path, config.generation_model)
+            provider = CachedEvaluationProvider(provider, cache_dir, readiness.config_hash, pricing)
+        self.provider = provider
         self.engine = create_engine(database_url, pool_pre_ping=True)
         if self.engine.dialect.name == "mysql":
             database_name = self.engine.url.database or ""
@@ -220,7 +243,7 @@ class PipelineRuntime:
         chroma_dir.mkdir(parents=True, exist_ok=True)
         self.chroma = chromadb.PersistentClient(path=str(chroma_dir))
         self.collection = self.chroma.get_or_create_collection(
-            name=f"actual_{config.config_hash[:16]}",
+            name=f"actual_{hashlib.sha256(f'{provider.provider_name}:{config.config_hash}'.encode()).hexdigest()[:16]}",
             metadata={"hnsw:space": "cosine"},
         )
         self.source_storage = source_storage.SourceStorage(source_storage_dir)
@@ -373,7 +396,7 @@ class PipelineRuntime:
             question,
             model=self.config.generation_model,
             prompt="Select governed routing tags.",
-            prompt_version="routing-keyword-v1",
+            prompt_version=ROUTING_PROMPT_VERSION,
             available_keywords=available,
             limit=4,
         )
@@ -701,7 +724,7 @@ class PipelineRuntime:
                         generated = self.provider.generate_with_usage(
                             messages,
                             model=self.config.generation_model,
-                            temperature=0.0,
+                            temperature=GENERATION_TEMPERATURE,
                         )
                         answer = generated.text
                         provider_usage = generated.to_dict()
@@ -839,6 +862,11 @@ def run_actual_pipeline(
     run_id: str,
     modes: Iterable[str] = MODES,
     config: ActualPipelineConfig = ActualPipelineConfig(),
+    provider_name: str = "deterministic-mock",
+    allow_network_provider: bool = False,
+    cache_dir: str | Path | None = None,
+    max_cases: int | None = None,
+    pricing_config_path: str | Path | None = None,
 ) -> dict[str, Any]:
     """Run, write and seal raw results without opening any annotation file."""
 
@@ -849,6 +877,10 @@ def run_actual_pipeline(
         raise FileExistsError(f"Refusing to overwrite raw run output: {destination}")
     destination.mkdir(parents=True, exist_ok=True)
     queries = load_query_inputs(queries_path)
+    if max_cases is not None:
+        if max_cases < 1:
+            raise ValueError("max_cases must be positive")
+        queries = queries[:max_cases]
     documents, fixtures, corpus_metadata = load_corpus_fixture(corpus_path)
     resolved_modes = [EvaluationMode(mode).value for mode in modes]
     runtime = PipelineRuntime(
@@ -858,6 +890,10 @@ def run_actual_pipeline(
         chroma_dir=Path(chroma_dir),
         source_storage_dir=Path(source_storage_dir),
         config=config,
+        provider_name=provider_name,
+        allow_network_provider=allow_network_provider,
+        cache_dir=Path(cache_dir) if cache_dir is not None else None,
+        pricing_config_path=Path(pricing_config_path) if pricing_config_path is not None else None,
     )
     records: list[dict[str, Any]] = []
     timing_rows: list[dict[str, Any]] = []
@@ -895,6 +931,12 @@ def run_actual_pipeline(
         "record_count": len(records),
         "modes": resolved_modes,
         "wall_clock_separated_from_deterministic_hash": True,
+        "generation_temperature": GENERATION_TEMPERATURE,
+        "generation_prompt_version": GENERATION_PROMPT_VERSION,
+        "routing_prompt_version": ROUTING_PROMPT_VERSION,
+        "network_provider_explicitly_allowed": bool(allow_network_provider),
+        "output_cache_enabled": cache_dir is not None,
+        "local_pricing_config_supplied": pricing_config_path is not None,
         "scoring_started": False,
     }
     seal_path = destination / "run_seal.json"

@@ -186,6 +186,18 @@ function renderGovernanceTrace(res) {
         </div>`;
 }
 
+function renderAnswerReviewHeader(res) {
+    const evidence = res.evidence_check || {};
+    const failure = res.controlled_failure || evidence.controlled_failure || {};
+    const nextStep = (failure.nextSteps || [])[0] || 'Open a cited source page before relying on the answer.';
+    return `<div class="grid grid-cols-2 md:grid-cols-4 gap-2 mb-3 text-[10px]" data-reviewer-field="answer-audit-summary">
+        <span class="bg-indigo-50 text-indigo-800 rounded px-2 py-1"><b>Output:</b> ${escapeHtml(res.output_mode || 'UNCLASSIFIED')}</span>
+        <span class="bg-emerald-50 text-emerald-800 rounded px-2 py-1"><b>Evidence:</b> ${escapeHtml(evidence.decision || 'not evaluated')}</span>
+        <span class="bg-slate-100 text-slate-700 rounded px-2 py-1"><b>Audit:</b> ${escapeHtml(res.audit_id || 'N/A')}</span>
+        <span class="bg-amber-50 text-amber-800 rounded px-2 py-1"><b>Next:</b> ${escapeHtml(nextStep)}</span>
+    </div>`;
+}
+
 async function doRegister() {
     const d = {
         username: document.getElementById('reg-name').value,
@@ -357,7 +369,7 @@ async function actionListChatResponse(q) {
         source_role_summary: evidenceRoleSummary(units),
         relevance_level_summary: evidenceLevelSummary(units),
         evidence_check: {
-            decision: open?.length ? 'answer_allowed' : 'controlled_failure_or_no_open_items',
+            decision: (data.open_items || []).length ? 'answer_allowed' : 'controlled_failure_or_no_open_items',
             counts: data.counts || {},
         },
         sources: evidenceSources(units),
@@ -392,6 +404,7 @@ async function askQuestion() {
         if (res.status === "success") {
             const formattedText = escapeHtml(res.answer).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
             const governanceTraceHTML = renderGovernanceTrace(res);
+            const reviewerHeader = renderAnswerReviewHeader(res);
             let sourcesHTML = "";
             if (res.sources && res.sources.length > 0) {
                 const srcBlocks = res.sources.map(src => `
@@ -399,17 +412,19 @@ async function askQuestion() {
                         <div class="font-bold text-gray-700 mb-1 flex items-center gap-2 flex-wrap">
                             <i class="far fa-file-pdf text-red-500"></i> ${escapeHtml(src.file_name)}
                             ${roleBadge(src.role)}
-                            <span class="px-2 py-0.5 rounded-full bg-white border text-[10px] text-gray-500 uppercase">${escapeHtml(src.use_decision || 'unknown')}</span>
+                            <span class="px-2 py-0.5 rounded-full bg-white border text-[10px] text-gray-500 uppercase" data-reviewer-field="permission-badge">${escapeHtml(src.use_decision || 'unknown')}</span>
                         </div>
+                        <div class="text-[10px] text-slate-500 mb-1" data-reviewer-field="page-message-citation">Document ${escapeHtml(src.citation?.document_id || src.document_id || 'N/A')} · page/message ${escapeHtml(src.citation?.page_number || 'N/A')} · chunk ${escapeHtml(src.citation?.chunk_id || 'N/A')}</div>
+                        ${src.citation?.source_view_url ? `<button onclick="openAuthorizedSource('${escapeHtml(src.citation.source_view_url)}')" class="mb-2 text-blue-600 font-bold">Open cited source page</button>` : ''}
                         <div class="italic leading-relaxed max-h-24 overflow-y-auto pr-1 text-[11px] whitespace-pre-wrap">${escapeHtml(src.text)}</div>
                         ${renderSourceProfile(src.usable_relevance)}
                     </div>`).join('');
                 sourcesHTML = `<div class="mt-4 pt-3 border-t border-gray-100"><details class="group"><summary class="text-xs text-blue-500 font-bold cursor-pointer list-none flex items-center gap-1 hover:text-blue-700 transition"><i class="fas fa-chevron-down transition-transform duration-300 group-open:rotate-180"></i>View Retrieved Sources & Roles</summary><div class="mt-3 space-y-2">${srcBlocks}</div></details></div>`;
             }
-            box.innerHTML += `<div class="flex justify-start w-full mb-2"><div class="bg-white border border-gray-200 p-5 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-2xl text-gray-800 shadow-sm text-sm leading-relaxed"><div class="flex items-center space-x-2 mb-3 pb-3 border-b border-gray-100 text-[10px] text-gray-500 uppercase tracking-widest font-bold"><i class="fas fa-filter text-blue-500"></i><span>Semantic Routing: ${escapeHtml(res.extracted_keywords?.join(', ') || 'N/A')}</span></div><p style="white-space: pre-wrap;">${formattedText}</p>${governanceTraceHTML}${sourcesHTML}</div></div>`;
+            box.innerHTML += `<div class="flex justify-start w-full mb-2"><div class="bg-white border border-gray-200 p-5 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-2xl text-gray-800 shadow-sm text-sm leading-relaxed">${reviewerHeader}<div class="flex items-center space-x-2 mb-3 pb-3 border-b border-gray-100 text-[10px] text-gray-500 uppercase tracking-widest font-bold"><i class="fas fa-filter text-blue-500"></i><span>Semantic Routing: ${escapeHtml(res.extracted_keywords?.join(', ') || 'N/A')}</span></div><p style="white-space: pre-wrap;">${formattedText}</p>${governanceTraceHTML}${sourcesHTML}</div></div>`;
         } else if (res.status === "controlled_failure") {
             const trace = renderGovernanceTrace(res);
-            box.innerHTML += `<div class="flex justify-start w-full mb-2"><div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-2xl max-w-[80%] md:max-w-xl text-red-800 shadow-sm text-sm"><h3 class="font-bold mb-1"><i class="fas fa-shield-alt mr-2"></i>Governance Control</h3><p>${escapeHtml(res.message)}</p>${trace}</div></div>`;
+            box.innerHTML += `<div class="flex justify-start w-full mb-2"><div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-2xl max-w-[80%] md:max-w-xl text-red-800 shadow-sm text-sm">${renderAnswerReviewHeader(res)}<h3 class="font-bold mb-1"><i class="fas fa-shield-alt mr-2"></i>Governance Control</h3><p>${escapeHtml(res.message)}</p>${trace}</div></div>`;
         }
     } catch(e) {
         removeTyping();
@@ -462,14 +477,16 @@ async function loadDocs() {
             const isOwner = doc.is_owner === true;
             const iconClass = isOwner ? 'fa-trash-alt' : 'fa-unlink';
             const iconTitle = isOwner ? 'Permanent Delete' : 'Unsubscribe';
-            const transferBtn = isOwner ? `<button onclick="openTransferModal('${doc.document_id}')" class="text-blue-500 hover:text-blue-700 transition ml-3" title="Transfer Ownership"><i class="fas fa-exchange-alt"></i></button>` : '';
+            const transferBtn = isOwner ? `<button onclick="openTransferModal('${doc.document_id}')" class="text-blue-500 hover:text-blue-700 transition ml-2" title="Transfer Ownership"><i class="fas fa-exchange-alt"></i></button>` : '';
+            const lifecycleButtons = isOwner ? `<button onclick="reindexDoc('${doc.document_id}')" class="text-indigo-500 ml-2" title="Re-index"><i class="fas fa-sync"></i></button><button onclick="archiveDoc('${doc.document_id}')" class="text-amber-600 ml-2" title="Archive"><i class="fas fa-archive"></i></button><button onclick="restoreDoc('${doc.document_id}')" class="text-green-600 ml-2" title="Restore"><i class="fas fa-trash-restore"></i></button>` : '';
             const selectId = `perm-${doc.document_id}`;
+            const provenance = (doc.provenance || []).map(item => `${item.field}:${item.type}`).slice(0, 4).join(' · ');
             tbody.innerHTML += `
                 <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4 font-medium text-gray-800 whitespace-nowrap"><i class="far fa-file-pdf text-red-500 mr-2"></i>${escapeHtml(doc.file_name)}</td>
-                    <td class="px-6 py-4"><div class="flex items-center space-x-2"><input type="text" id="kw-${doc.document_id}" value="${escapeHtml(doc.keywords.join(', '))}" class="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-xs outline-none focus:ring-2 focus:ring-blue-400"><button onclick="saveKW('${doc.document_id}')" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-1.5 transition"><i class="fas fa-save"></i></button></div></td>
+                    <td class="px-6 py-4 text-gray-800"><div class="font-medium"><i class="far fa-file-pdf text-red-500 mr-2"></i>${escapeHtml(doc.file_name)}</div><div class="mt-1 text-[10px] font-mono text-gray-500" data-reviewer-field="document-uuid-hash">UUID ${escapeHtml(doc.document_id)}<br>SHA ${escapeHtml(doc.source_sha256 || 'N/A')}</div><div class="mt-1 text-[10px]">${escapeHtml(doc.processing_status)} · ${escapeHtml(doc.source_status)} · ${escapeHtml(doc.page_count ?? 0)} page · ${escapeHtml(doc.chunk_count ?? 0)} chunk</div></td>
+                    <td class="px-6 py-4"><div class="flex items-center space-x-2"><input type="text" id="kw-${doc.document_id}" value="${escapeHtml(doc.keywords.join(', '))}" class="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-xs outline-none focus:ring-2 focus:ring-blue-400"><button onclick="saveKW('${doc.document_id}')" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-1.5 transition"><i class="fas fa-save"></i></button></div><div class="text-[10px] text-gray-400 mt-1" data-reviewer-field="provenance">${escapeHtml(provenance || 'No provenance')}</div></td>
                     <td class="px-6 py-4"><select id="${selectId}" data-current="${escapeHtml(doc.permission)}" onchange="savePerm('${doc.document_id}', this.value, this)" ${!isOwner?'disabled':''} class="text-xs border border-gray-300 rounded-md p-2 outline-none ${!isOwner?'opacity-50 cursor-not-allowed bg-gray-100':'bg-white focus:ring-2 focus:ring-blue-400'}">${rightsOptions(doc.permission, isOwner)}</select></td>
-                    <td class="px-6 py-4 text-center"><button onclick="deleteDoc('${doc.document_id}', '${isOwner}')" class="text-gray-400 hover:text-red-600 transition" title="${iconTitle}"><i class="fas ${iconClass}"></i></button>${transferBtn}</td>
+                    <td class="px-6 py-4 text-center whitespace-nowrap"><button onclick="openAuthorizedSource('/api/documents/${doc.document_id}/source?page=1')" class="text-blue-600" title="Open page 1"><i class="fas fa-external-link-alt"></i></button><button onclick="selectPolicyDocument('${doc.document_id}')" class="text-purple-600 ml-2" title="Permission link"><i class="fas fa-user-shield"></i></button>${lifecycleButtons}<button onclick="deleteDoc('${doc.document_id}', '${isOwner}')" class="text-gray-400 hover:text-red-600 transition ml-2" title="${iconTitle}"><i class="fas ${iconClass}"></i></button>${transferBtn}</td>
                 </tr>`;
         });
     } catch (e) {
@@ -524,6 +541,112 @@ async function deleteDoc(id, isOwnerStr) {
     } catch(e) {
         alert("Delete failed: " + e.message);
     }
+}
+
+async function documentLifecycle(id, action) {
+    try {
+        const r = await fetch(`${API}/documents/${id}/${action}`, {method: 'POST', headers: authHeaders()});
+        await readApiResponse(r);
+        await loadDocs();
+    } catch (e) { alert(`${action} failed: ${e.message}`); }
+}
+
+function reindexDoc(id) { return documentLifecycle(id, 'reindex'); }
+function archiveDoc(id) { return documentLifecycle(id, 'archive'); }
+function restoreDoc(id) { return documentLifecycle(id, 'restore'); }
+
+async function openAuthorizedSource(path) {
+    try {
+        const url = path.startsWith('/api/') ? `${API.replace('/api', '')}${path}` : `${API}${path}`;
+        const r = await fetch(url, {headers: authHeaders()});
+        if (!r.ok) throw new Error((await r.json()).detail || `HTTP ${r.status}`);
+        const type = r.headers.get('content-type') || '';
+        if (type.includes('application/json')) {
+            const data = await r.json();
+            const win = window.open('', '_blank');
+            win.document.write(`<pre style="white-space:pre-wrap;font-family:system-ui;padding:2rem">${escapeHtml(data.text || JSON.stringify(data, null, 2))}</pre>`);
+        } else {
+            window.open(URL.createObjectURL(await r.blob()), '_blank');
+        }
+    } catch (e) { alert(`Source open failed: ${e.message}`); }
+}
+
+let lastPolicyTargetUserId = null;
+
+function selectPolicyDocument(id) {
+    document.getElementById('policy-doc-id').value = id;
+    switchView('policy');
+}
+
+function policyOutput(data) {
+    document.getElementById('policy-review-output').textContent = JSON.stringify(data, null, 2);
+}
+
+async function grantReviewerPermission() {
+    const docId = document.getElementById('policy-doc-id').value.trim();
+    const fd = new FormData();
+    fd.append('target_username', document.getElementById('policy-target-username').value.trim());
+    fd.append('permission_type', document.getElementById('policy-grant-type').value);
+    try {
+        const r = await fetch(`${API}/policy/documents/${docId}/permissions`, {method:'POST', headers:authHeaders(), body:fd});
+        const data = await readApiResponse(r);
+        lastPolicyTargetUserId = data.target_user_id;
+        policyOutput(data);
+    } catch(e) { policyOutput({error:e.message}); }
+}
+
+async function revokeReviewerPermission() {
+    const docId = document.getElementById('policy-doc-id').value.trim();
+    if (!lastPolicyTargetUserId) return policyOutput({error:'Grant or change a target first so its opaque user ID is known.'});
+    try {
+        const r = await fetch(`${API}/policy/documents/${docId}/permissions/${lastPolicyTargetUserId}`, {method:'DELETE', headers:authHeaders()});
+        policyOutput(await readApiResponse(r));
+    } catch(e) { policyOutput({error:e.message}); }
+}
+
+async function resolveReviewerPolicy(showEmpty = true) {
+    const docId = document.getElementById('policy-doc-id')?.value.trim();
+    if (!docId) { if(showEmpty) policyOutput({status:'Select a document UUID.'}); return; }
+    const purpose = encodeURIComponent(document.getElementById('policy-purpose').value || 'grounded_question_answering');
+    try {
+        const r = await fetch(`${API}/policy/resolve/document/${docId}?purpose=${purpose}`, {headers:authHeaders()});
+        policyOutput(await readApiResponse(r));
+    } catch(e) { policyOutput({error:e.message}); }
+}
+
+async function createReviewerPolicyRule() {
+    const fd = new FormData();
+    fd.append('target_type', 'Document');
+    fd.append('target_id', document.getElementById('policy-doc-id').value.trim());
+    fd.append('purpose', document.getElementById('policy-purpose').value || 'any');
+    fd.append('access_mode', document.getElementById('policy-access-mode').value);
+    const from = document.getElementById('policy-valid-from').value;
+    const until = document.getElementById('policy-valid-until').value;
+    if(from) fd.append('valid_from', from);
+    if(until) fd.append('valid_until', until);
+    try {
+        const r = await fetch(`${API}/policy/rules`, {method:'POST', headers:authHeaders(), body:fd});
+        policyOutput(await readApiResponse(r));
+    } catch(e) { policyOutput({error:e.message}); }
+}
+
+async function loadReviewerActions() {
+    const output = document.getElementById('action-review-output');
+    if (!output || !ACCESS_TOKEN) return;
+    try {
+        const r = await fetch(`${API}/evidence/action-list`, {headers:authHeaders()});
+        const data = await readApiResponse(r);
+        output.textContent = JSON.stringify({
+            closure_states: ['OPEN','CLOSED_COMPLETED','CLOSED_CANCELLED','SUPERSEDED'],
+            browser_only_rule: 'contextual evidence cannot create an action by itself',
+            counts: data.counts,
+            open_items: data.open_items,
+            closed_items: data.closed_items,
+            contextual_only: data.contextual_only,
+            evidence_roles: ['primary','contextual','contrastive'],
+            audit_and_correction: 'Evidence-unit IDs and controlled-failure feedback preserve reviewer traceability.'
+        }, null, 2);
+    } catch(e) { output.textContent = JSON.stringify({error:e.message}, null, 2); }
 }
 
 async function submitTransfer() {

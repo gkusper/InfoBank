@@ -36,9 +36,17 @@ def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywor
 
 
 def get_permitted_fallback_doc_ids(db: Session, user_id: str) -> list[str]:
-    direct_records = db.query(models.UserDocumentPermission.document_id).filter(models.UserDocumentPermission.user_id == user_id).all()
+    direct_records = db.query(models.UserDocumentPermission.document_id).join(
+        models.Document, models.Document.id == models.UserDocumentPermission.document_id
+    ).filter(
+        models.UserDocumentPermission.user_id == user_id,
+        models.Document.source_status == "ACTIVE",
+    ).all()
     direct_doc_ids = [r[0] for r in direct_records]
-    public_records = db.query(models.Document.id).filter(models.Document.visibility.in_(["Aggregate", "Metadata"])).all()
+    public_records = db.query(models.Document.id).filter(
+        models.Document.visibility.in_(["Aggregate", "Metadata"]),
+        models.Document.source_status == "ACTIVE",
+    ).all()
     public_doc_ids = [r[0] for r in public_records]
     return list(set(direct_doc_ids + public_doc_ids))
 
@@ -101,6 +109,7 @@ def metadata_only_source(db: Session, doc_id: str) -> dict:
         },
         "text": meta.get("content", "[metadata-only: document content withheld]"),
         "metadata": meta,
+        "citation": {"available": False, "reason": "metadata_only_content_withheld"},
     }
 
 
@@ -121,7 +130,7 @@ def is_aggregate_statistics_question(question: str) -> bool:
     return any(marker in q for marker in markers)
 
 
-def prompt_injection_source(doc_id: str, file_name: str, source_profile: dict) -> dict:
+def prompt_injection_source(doc_id: str, file_name: str, source_profile: dict, citation: dict | None = None) -> dict:
     warnings = source_profile.setdefault("evidence_warnings", [])
     for warning in [controlled_failure.SOURCE_ATTACK_WARNING, controlled_failure.LEAKAGE_WARNING]:
         if warning not in warnings:
@@ -136,6 +145,37 @@ def prompt_injection_source(doc_id: str, file_name: str, source_profile: dict) -
         "usable_relevance": source_profile,
         "text": "[Source withheld: instruction-like content was detected and was not sent to the generator.]",
         "security": {"prompt_injection_detected": True},
+        "citation": citation or {"available": False, "reason": "source_withheld"},
+    }
+
+
+def citation_from_chunk(document: models.Document | None, chunk: models.DocumentChunk | None, use_decision: str) -> dict:
+    if use_decision != relevance.USE_FULL or not document or not chunk:
+        return {"available": False, "reason": "raw_source_not_permitted"}
+    if (
+        not document.source_storage_path
+        or chunk.document_id != document.id
+        or chunk.page_number is None
+        or chunk.char_start is None
+        or chunk.char_end is None
+        or chunk.char_start < 0
+        or chunk.char_end <= chunk.char_start
+        or not chunk.content_sha256
+    ):
+        return {"available": False, "reason": "traceability_unavailable"}
+    return {
+        "available": True,
+        "document_id": document.id,
+        "chunk_id": chunk.id,
+        "original_filename": document.original_filename or document.file_path,
+        "page_number": chunk.page_number,
+        "chunk_index": chunk.chunk_index,
+        "char_start": chunk.char_start,
+        "char_end": chunk.char_end,
+        "content_hash": chunk.content_sha256,
+        "source_view_url": f"/api/documents/{document.id}/source?page={chunk.page_number}",
+        "evidence_role": relevance.SOURCE_ROLE_PRIMARY,
+        "effective_use_decision": use_decision,
     }
 
 
@@ -150,14 +190,22 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
         return sources, blocks
 
     seen = set()
-    for chunk_text, meta in zip(results['documents'][0], results['metadatas'][0]):
+    result_ids = results.get("ids", [[]])[0]
+    for vector_id, chunk_text, meta in zip(result_ids, results['documents'][0], results['metadatas'][0]):
         doc_id = meta.get("document_id")
-        dedupe_key = (doc_id, chunk_text[:160])
+        chunk_id = meta.get("chunk_id") or vector_id
+        dedupe_key = (doc_id, chunk_id)
         if dedupe_key in seen:
             continue
         seen.add(dedupe_key)
         doc_record = db.query(models.Document).filter(models.Document.id == doc_id).first()
-        file_name = doc_record.file_path if doc_record else "Unknown document"
+        if not doc_record or doc_record.source_status != "ACTIVE":
+            continue
+        chunk_record = db.query(models.DocumentChunk).filter(
+            models.DocumentChunk.id == chunk_id,
+            models.DocumentChunk.document_id == doc_id,
+        ).first()
+        file_name = (doc_record.original_filename or doc_record.file_path) if doc_record else "Unknown document"
         base_role = governance_context["source_roles"].get(doc_id, relevance.SOURCE_ROLE_CONTEXTUAL)
         use_decision = governance_context["use_decisions"].get(doc_id, relevance.USE_DENY)
         source_profile = relevance.classify_chunk_profile(
@@ -168,8 +216,11 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
             base_role=base_role,
             use_decision=use_decision,
         )
+        citation = citation_from_chunk(doc_record, chunk_record, use_decision)
+        if citation.get("available"):
+            citation["evidence_role"] = source_profile["role"]
         if controlled_failure.detect_prompt_injection(chunk_text).get("detected"):
-            sources.append(prompt_injection_source(doc_id, file_name, source_profile))
+            sources.append(prompt_injection_source(doc_id, file_name, source_profile, citation))
             continue
         role = source_profile["role"]
         safe_chunk_text = make_generator_safe_chunk(role, chunk_text, source_profile)
@@ -181,6 +232,7 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
             "use_decision": use_decision,
             "usable_relevance": source_profile,
             "text": relevance.public_source_text(role, chunk_text),
+            "citation": citation,
         })
     return sources, blocks
 
@@ -284,6 +336,13 @@ async def ask_infobank(
                 kw_ids = [kw.id for kw in matched_keywords]
                 matched_doc_records = db.query(models.DocumentKeyword.document_id).filter(models.DocumentKeyword.keyword_id.in_(kw_ids)).distinct().all()
                 candidate_doc_ids = [record[0] for record in matched_doc_records]
+
+        if candidate_doc_ids:
+            active_ids = db.query(models.Document.id).filter(
+                models.Document.id.in_(candidate_doc_ids),
+                models.Document.source_status == "ACTIVE",
+            ).all()
+            candidate_doc_ids = [record[0] for record in active_ids]
 
         if not candidate_doc_ids:
             fallback_used = True

@@ -94,6 +94,16 @@ def resolve_document_access(db: Session, user_id: str, doc_id: str, purpose: str
             "policy_rule_id": None,
         }
 
+    if getattr(doc, "source_status", "ACTIVE") == "ARCHIVED":
+        return {
+            "target_id": doc_id,
+            "target_type": TARGET_DOCUMENT,
+            "use_decision": relevance.USE_DENY,
+            "source_role": relevance.SOURCE_ROLE_GOVERNANCE_EXCLUDED,
+            "reason": "document_archived",
+            "policy_rule_id": None,
+        }
+
     rule = _strongest_active_rule(db, TARGET_DOCUMENT, doc_id, purpose)
     if rule:
         decision = _mode_to_use_decision(_mode_value(rule.access_mode))

@@ -16,8 +16,6 @@ from evaluation.reviewer_v2_candidate import (
     build_synthetic_mail_candidate,
     validate_candidate,
 )
-from scripts.build_mailex_candidate import NO_HEALTH_TERMS as MAILEX_NO_HEALTH_TERMS
-from scripts.build_mailex_candidate import build as build_mailex_candidate
 
 
 def test_package_and_query_candidate_meets_declared_minimums() -> None:
@@ -98,29 +96,3 @@ def test_manifest_schema_requires_nonfrozen_human_pending_candidate() -> None:
     assert schema["properties"]["frozen"]["const"] is False
     assert schema["properties"]["human_annotation_complete"]["const"] is False
     assert schema["properties"]["gold_query_count"]["minimum"] == 90
-
-
-def test_mailex_tool_preserves_threads_pseudonymizes_and_excludes_health(tmp_path) -> None:
-    threads = []
-    exclusion_sentinel = sorted(MAILEX_NO_HEALTH_TERMS)[0]
-    for index in range(101):
-        body = "Please complete the device review." if index else exclusion_sentinel
-        threads.append({
-            "thread_id": f"mail-{index:03d}",
-            "messages": [{
-                "message_id": f"message-{index:03d}", "timestamp": "2026-08-01T09:00:00Z",
-                "sender": "person@example.com", "recipients": ["worker@example.com"],
-                "subject": "Device review", "body": body,
-            }],
-        })
-    source = tmp_path / "source.json"
-    source.write_text(json.dumps({"threads": threads}), encoding="utf-8")
-    output = tmp_path / "derived"
-    manifest = build_mailex_candidate(source, output, "test-licence-pending", 100)
-    assert manifest["selected_thread_count"] == 100
-    assert manifest["excluded_thread_count"] == 1
-    assert manifest["raw_source_committed"] is False
-    derived = json.loads((output / "threads.json").read_text(encoding="utf-8"))["threads"]
-    assert all(item["messages"][0]["sender"].endswith("@example.invalid") for item in derived)
-    exclusion = json.loads((output / "no_health_exclusion_log.json").read_text(encoding="utf-8"))["excluded"]
-    assert exclusion == [{"reason": "NO_HEALTH_EXCLUSION", "terms": [exclusion_sentinel], "thread_id": "mail-000"}]

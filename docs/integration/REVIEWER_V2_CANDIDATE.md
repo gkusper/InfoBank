@@ -29,15 +29,14 @@ The output directory must be empty/nonexistent for a build. The builder refuses 
 
 ## MailEx path and fallback
 
-A local `data.zip` source is now present and has passed the read-only path-safety preflight, but no licence, licence identifier, README or COPYING file was found inside it. Status is therefore `LICENCE_PENDING_HUMAN_CONFIRMATION`. The existing synthetic fallback remains separately labelled. `scripts/build_mailex_candidate.py` is only a generic JSON/JSONL prototype and must not be represented as having parsed the actual local format until the local-format parser and transformation milestone completes. Any derived output must remain ignored until a human licence decision permits otherwise.
+A local `data.zip` source passed the read-only path-safety preflight, but no licence, licence identifier, README or COPYING file was found. Status is `LICENCE_PENDING_HUMAN_CONFIRMATION`. `scripts/build_mailex_candidate.py` now parses the actual token/event JSON and delimiter-separated raw-thread format and produced an ignored 120-thread candidate. The synthetic fallback remains separately labelled. Derived output must remain untracked until a human licence decision permits otherwise.
 
-Example after authorized source acquisition:
+Local build command:
 
 ```powershell
 python scripts/build_mailex_candidate.py `
-  --source C:\authorized\mailex\threads.jsonl `
-  --output artifacts/pre_freeze/mailex_candidate `
-  --licence-id PENDING-CONFIRMATION `
+  --source-zip <local-data-zip> `
+  --output artifacts/mailex_local/candidate `
   --limit 120
 ```
 
@@ -49,4 +48,4 @@ The JSON manifest contract is `evaluation/schemas/reviewer_v2_candidate.schema.j
 
 ## Limits
 
-Generated templates are suitable for deterministic engineering and reviewer preparation, not external-validity claims. Human source/page/message verification, MailEx selection or a documented synthetic-only decision, second annotation, adjudication, manual citation audit, manual no-health sign-off, and final freeze approval remain outstanding.
+Generated templates and the pseudonymized MailEx candidate are suitable for engineering and reviewer preparation, not external-validity claims. Human source/page/message verification, MailEx licence approval, primary and second annotation, adjudication, manual citation audit, manual no-health sign-off, and final freeze approval remain outstanding.

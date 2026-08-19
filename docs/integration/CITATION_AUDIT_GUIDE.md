@@ -1,6 +1,6 @@
 # Citation audit guide
 
-Automatic scorer: `infocom-citation-scorer-v1` in `evaluation/d_gate.py`.
+Current automatic scorer: `infobank-actual-pipeline-scorer-v1` in `evaluation/actual_pipeline_scorer.py`. The earlier `infocom-citation-scorer-v1` in `evaluation/d_gate.py` is retained only with the deprecated contract simulation.
 
 ## Automatic metrics
 
@@ -15,7 +15,7 @@ The automatic scorer checks case identity before scoring. It does not judge pros
 
 ## Pending manual audit
 
-`scripts/run_d_gate.py` preselects 40 B3 candidate responses into ignored `artifacts/d_gate/b0_b3/manual_citation_audit_40.csv`. Rows contain fixed case/mode/output/citation fields and blank human fields:
+`scripts/build_human_qa_package.py` preselects exactly 40 B3 responses from the two sealed actual-pipeline development runs. The ignored CSV contains fixed answer/claim/citation/source-reference fields and blank or pending human fields:
 
 - `support_label`;
 - `coverage_label`;

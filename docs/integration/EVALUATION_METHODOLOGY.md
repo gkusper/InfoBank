@@ -47,4 +47,4 @@ The pre-hardening D-GATE B0–B3 records are deterministic contract simulations.
 
 The C scale runner did not generate answer text. Its former `answer_correctness` is `gold_document_retrieval_completeness`; unsupported-answer rate is `NOT_EVALUATED`. Page retrieval correctness is not human citation faithfulness.
 
-Actual gold-blind pipeline development evaluation, human citation audit, human MailEx annotation and final frozen E1 remain pending.
+Actual gold-blind pipeline development evaluation now passes on the generated development fixture. Human citation audit, human MailEx annotation, approved network-provider evaluation, and final frozen E1 remain pending.

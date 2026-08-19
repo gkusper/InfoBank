@@ -355,9 +355,9 @@ def build_candidate(output_dir: Path) -> dict[str, Any]:
     }
     licence_report = {
         "generated_source_count": len(files) + len(threads), "external_source_count": 0,
-        "mailex_available_locally": False, "unresolved_redistribution_cases": [],
+        "mailex_used_in_this_synthetic_build": False, "unresolved_redistribution_cases": [],
         "repository_license_reference": "LICENSE",
-        "note": "No local MailEx source or licence manifest was found; synthetic candidate threads were generated instead.",
+        "note": "This synthetic builder does not read MailEx. The separate local MailEx candidate has unresolved licence status.",
     }
     manifest = {
         "dataset_version": DATASET_VERSION, "builder_version": BUILDER_VERSION,

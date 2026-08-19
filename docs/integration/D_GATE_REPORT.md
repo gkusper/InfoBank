@@ -65,13 +65,13 @@ The former B3 permitted-answer accuracy, false-answer rate, and generation-skip 
 
 The new engine defines `ActionCandidate`, normalized action keys, request, acceptance, completion, cancellation, rejection, postponement, reminder, acknowledgement, status-update and supersession events. Linking uses relation/thread/reply first, then participant + temporal + semantic evidence; semantic similarity is secondary. States are `OPEN`, `CLOSED_COMPLETED`, `CLOSED_CANCELLED`, and `SUPERSEDED`.
 
-The generated set contains 120 threads / 240 email messages and 60 browser-only cases. Its perfect scores are deterministic template contract results, not action-system performance estimates. Actual local MailEx transformation and human primary/second annotation remain required. The browser-only false-action invariant is covered by deterministic tests.
+The generated set contains 120 threads / 240 email messages and 60 browser-only cases. Its perfect scores are deterministic template contract results, not action-system performance estimates. A separate actual-format local MailEx transformation now produces an untracked 120-thread candidate with 120 primary and 24 second-annotation assignments; all human annotation and adjudication remain pending. The browser-only false-action invariant is covered by deterministic tests.
 
 ## Artifacts and limitations
 
 Ignored output under `artifacts/d_gate/` includes raw JSONL, summary CSV/JSON/Markdown/LaTeX, calibration records, safety/utility/citation fields, action records, and the pending 40-row manual audit sheet. Tracked code/config/docs reproduce them.
 
-Limitations: the historical B0–B3 runner is a gold-informed deterministic contract simulator and remains deprecated as performance evidence. A separate actual-pipeline development evaluator now exists, but its synthetic deterministic results are not final or frozen. Manual citation review, local MailEx licensing/source processing, human action annotation, approved real-provider evaluation, and final frozen E1 remain pending.
+Limitations: the historical B0–B3 runner is a gold-informed deterministic contract simulator and remains deprecated as performance evidence. A separate actual-pipeline development evaluator now exists, but its synthetic deterministic results are not final or frozen. Manual citation review, local MailEx licence approval and human action annotation, approved real-provider evaluation, and final frozen E1 remain pending.
 
 ## Validation
 

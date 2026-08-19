@@ -41,7 +41,7 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - `evaluation/reviewer_v2_candidate.py` and `scripts/build_reviewer_v2_candidate.py` generate six packages, 30 PDFs, 90 balanced query candidates, 60 permission groups, 60 browser-only cases, and 120 generated mail threads.
 - The 90 queries contain six candidates in each required class. Splits are disjoint by object family, template family, and document package.
 - Twenty-four mail threads are assigned for a pending second annotation; no human validation, agreement, adjudication, citation audit, or no-health sign-off is claimed.
-- A local `data.zip` contains MailEx-style train/dev/test/full-data JSON and raw-thread files. No licence/readme evidence was found inside it; status is `LICENCE_PENDING_HUMAN_CONFIRMATION`. Actual-format transformation is pending and raw content is not tracked.
+- Local `data.zip` SHA-256 is `dda3ce5da5ffc3452dd9e5a58cd69e19e68bd655eafe1deec48e87204f6c37b4`; it contains train/dev/test/full-data JSON plus raw threads. The actual-format parser built an untracked, pseudonymized 120-thread candidate with 120 primary and 24 second-annotation rows. No licence/readme evidence was found; status remains `LICENCE_PENDING_HUMAN_CONFIRMATION`, and raw/derived content is not tracked.
 
 ## Known limitations
 

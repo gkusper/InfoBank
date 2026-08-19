@@ -5,16 +5,22 @@ import re
 from typing import Any, Dict, Iterable, List
 
 import relevance
+from controlled_failure_config import load_controlled_failure_config
 
 
-STATUS_FULL_ANSWER = "full_answer"
-STATUS_ABSTAIN = "abstain"
-STATUS_REFUSE = "refuse"
-STATUS_RESTRICTED_ANSWER = "restricted_answer"
-STATUS_AGGREGATE_ANSWER = "aggregate_answer"
-STATUS_METADATA_ONLY_ANSWER = "metadata_only_answer"
-STATUS_ASK_CLARIFICATION = "ask_clarification"
-STATUS_ESCALATE = "escalate_to_human"
+_CONFIG = load_controlled_failure_config()
+
+STATUS_FULL_ANSWER = "FULL_ANSWER"
+STATUS_ABSTAIN = "REFUSE_INSUFFICIENT_EVIDENCE"
+STATUS_REFUSE = "REFUSE_PERMISSION"
+STATUS_RESTRICTED_ANSWER = "CONSTRAINED_ANSWER"
+STATUS_AGGREGATE_ANSWER = "AGGREGATE_RESULT"
+STATUS_METADATA_ONLY_ANSWER = "METADATA_ONLY"
+STATUS_ASK_CLARIFICATION = "CLARIFICATION"
+STATUS_ESCALATE = "ESCALATE_TO_HUMAN"
+STATUS_REFUSE_NO_MATCH = "REFUSE_NO_MATCH"
+STATUS_REFUSE_AGGREGATION_THRESHOLD = "REFUSE_AGGREGATION_THRESHOLD"
+STATUS_REFUSE_CONFLICT = "REFUSE_CONFLICT"
 
 REASON_EPISTEMIC = "epistemic"
 REASON_EVIDENTIAL = "evidential"
@@ -24,7 +30,8 @@ REASON_CONFLICT_DEFEAT = "conflict_defeat"
 REASON_TEMPORAL_STATUS = "temporal_status"
 REASON_OPERATIONAL_SECURITY = "operational_security"
 
-CONTROLLED_FAILURE_VERSION = "controlled-failure-v2"
+CONTROLLED_FAILURE_VERSION = _CONFIG["config_version"]
+CONTROLLED_FAILURE_CONFIG_HASH = _CONFIG["config_hash"]
 
 PROMPT_INJECTION_PATTERNS = [
     r"ignore\s+(all\s+)?(previous|prior|above|system|developer)\s+instructions",
@@ -217,6 +224,7 @@ def make_controlled_failure(
 ) -> Dict[str, Any]:
     return {
         "version": CONTROLLED_FAILURE_VERSION,
+        "config_hash": CONTROLLED_FAILURE_CONFIG_HASH,
         "status": status,
         "reason": reason,
         "evidenceState": evidence_state_value,
@@ -310,7 +318,7 @@ def select_rag_output_mode(
     if not policy["content_source_count"]:
         reason = REASON_GOVERNANCE if policy["denied_source_count"] else REASON_EPISTEMIC
         cf = make_controlled_failure(
-            STATUS_REFUSE if reason == REASON_GOVERNANCE else STATUS_ABSTAIN,
+            STATUS_REFUSE if reason == REASON_GOVERNANCE else STATUS_REFUSE_NO_MATCH,
             reason,
             state,
             policy,

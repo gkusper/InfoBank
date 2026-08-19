@@ -16,6 +16,7 @@ artifacts/local_quality_gate/
 artifacts/a_gate_demo/
 artifacts/a_gate_phase2/
 artifacts/c_gate/
+artifacts/d_gate/
 backend_python/runtime/source_storage/
 .pytest_cache/
 temp_*.pdf

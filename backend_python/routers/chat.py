@@ -10,6 +10,7 @@ import evidence_service
 import security
 import policy_engine
 import controlled_failure
+from routing import RoutingMode, route_documents
 from database import get_db
 
 router = APIRouter(prefix="/api", tags=["Chat"])
@@ -48,7 +49,7 @@ def get_permitted_fallback_doc_ids(db: Session, user_id: str) -> list[str]:
         models.Document.source_status == "ACTIVE",
     ).all()
     public_doc_ids = [r[0] for r in public_records]
-    return list(set(direct_doc_ids + public_doc_ids))
+    return sorted(set(direct_doc_ids + public_doc_ids))
 
 
 def extract_aggregate_safe_facts(chunk_text: str, max_facts: int = 3) -> list[str]:
@@ -310,8 +311,41 @@ async def ask_infobank(
             background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], cf["status"], query_profile, {}, evidence_check, cf, cf["status"])
             return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf)
 
-        all_kws = db.query(models.Keyword.word).all()
-        db_keywords_str = ", ".join([k[0] for k in all_kws])
+        routing_scope_doc_ids = get_permitted_fallback_doc_ids(db, user_id)
+        pre_routing_governance = policy_engine.resolve_document_access_bulk(
+            db=db,
+            user_id=user_id,
+            doc_ids=routing_scope_doc_ids,
+            purpose=query_profile.get("purpose", "grounded_question_answering"),
+        )
+        permitted_doc_ids = pre_routing_governance["usable_doc_ids"]
+        if not permitted_doc_ids:
+            output_gate = controlled_failure.select_rag_output_mode(
+                question=question,
+                sources=[],
+                query_profile=query_profile,
+                governance=pre_routing_governance,
+                context_blocks_available=False,
+            )
+            cf = output_gate["controlled_failure"]
+            msg = cf["safeOutput"]
+            evidence_check = {"decision": "controlled_failure", "controlled_failure": cf, "output_mode": cf["status"]}
+            background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], "rejected", query_profile, pre_routing_governance, evidence_check, cf, cf["status"])
+            return controlled_failure_payload(msg, query_profile, pre_routing_governance, evidence_check, cf)
+
+        keyword_rows = db.query(
+            models.DocumentKeyword.document_id,
+            models.Keyword.word,
+        ).join(
+            models.Keyword, models.Keyword.id == models.DocumentKeyword.keyword_id,
+        ).filter(
+            models.DocumentKeyword.document_id.in_(permitted_doc_ids),
+        ).all()
+        document_keywords: dict[str, list[str]] = {doc_id: [] for doc_id in permitted_doc_ids}
+        for doc_id, word in keyword_rows:
+            document_keywords.setdefault(doc_id, []).append(word)
+        permitted_keywords = sorted({word for _, word in keyword_rows}, key=lambda value: value.lower())
+        db_keywords_str = ", ".join(permitted_keywords)
         kw_prompt = f"""
         Analyze the following question: "{question}"
         Here is the list of available document tags in our database:
@@ -325,28 +359,17 @@ async def ask_infobank(
             temperature=0.1,
         )
         raw_result = kw_response.choices[0].message.content.strip()
-        fallback_used = False
         question_keywords = [] if raw_result == "NONE" else [k.strip() for k in raw_result.split(',') if k.strip()]
         query_profile = relevance.build_query_profile(question, question_keywords)
-
-        candidate_doc_ids = []
-        if question_keywords:
-            matched_keywords = db.query(models.Keyword).filter(models.Keyword.word.in_(question_keywords)).all()
-            if matched_keywords:
-                kw_ids = [kw.id for kw in matched_keywords]
-                matched_doc_records = db.query(models.DocumentKeyword.document_id).filter(models.DocumentKeyword.keyword_id.in_(kw_ids)).distinct().all()
-                candidate_doc_ids = [record[0] for record in matched_doc_records]
-
-        if candidate_doc_ids:
-            active_ids = db.query(models.Document.id).filter(
-                models.Document.id.in_(candidate_doc_ids),
-                models.Document.source_status == "ACTIVE",
-            ).all()
-            candidate_doc_ids = [record[0] for record in active_ids]
-
-        if not candidate_doc_ids:
-            fallback_used = True
-            candidate_doc_ids = get_permitted_fallback_doc_ids(db, user_id)
+        routing_decision = route_documents(
+            permitted_document_ids=permitted_doc_ids,
+            document_keywords=document_keywords,
+            selected_keywords=question_keywords,
+            mode=RoutingMode.KEYWORD_ROUTING,
+        )
+        candidate_doc_ids = list(routing_decision.candidate_document_ids)
+        query_profile["routing_trace"] = routing_decision.to_trace()
+        if routing_decision.fallback_used:
             query_profile["retrieval_strategy"] = "permitted_corpus_fallback"
         else:
             query_profile["retrieval_strategy"] = "keyword_routed"
@@ -372,7 +395,11 @@ async def ask_infobank(
             doc_ids=candidate_doc_ids,
             purpose=query_profile.get("purpose", "grounded_question_answering"),
         )
-        governance_context["fallback_used"] = fallback_used
+        governance_context["governance_before_routing"] = True
+        governance_context["pre_routing_usable_count"] = len(permitted_doc_ids)
+        governance_context["pre_routing_denied_count"] = len(pre_routing_governance["denied_doc_ids"])
+        governance_context["routing_trace"] = routing_decision.to_trace()
+        governance_context["fallback_used"] = routing_decision.fallback_used
         content_doc_ids = governance_context["content_doc_ids"]
         metadata_doc_ids = governance_context["metadata_only_doc_ids"]
 

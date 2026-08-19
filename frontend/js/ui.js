@@ -43,7 +43,7 @@ function switchView(v) {
     document.querySelectorAll('.view-section').forEach(s => s.classList.add('hidden'));
     document.getElementById('view-'+v).classList.remove('hidden');
     document.getElementById('chat-bar').style.display = (v === 'chat' ? 'block' : 'none');
-    document.getElementById('view-title').innerText = v === 'ontology' ? 'Smart Ontology' : v.charAt(0).toUpperCase() + v.slice(1);
+    document.getElementById('view-title').innerText = v === 'ontology' ? 'Semantic Co-occurrence Graph' : v.charAt(0).toUpperCase() + v.slice(1);
     
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.replace('bg-blue-50', 'text-gray-600'));
     document.getElementById('btn-'+v).classList.replace('text-gray-600', 'bg-blue-50');

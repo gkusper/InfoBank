@@ -14,6 +14,7 @@ evaluation/results/
 evaluation/generated_fixtures/
 artifacts/local_quality_gate/
 artifacts/a_gate_demo/
+artifacts/a_gate_phase2/
 backend_python/runtime/source_storage/
 .pytest_cache/
 temp_*.pdf

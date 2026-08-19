@@ -250,7 +250,7 @@ def blocked_output(cf: Dict[str, Any]) -> Dict[str, Any]:
 
 def _question_mentions_current_status(question: str, query_profile: Dict[str, Any]) -> bool:
     q = (question or "").lower()
-    if any(term in q for term in CURRENT_STATUS_TERMS):
+    if any(re.search(rf"\b{re.escape(term)}\b", q) for term in CURRENT_STATUS_TERMS):
         return True
     return query_profile.get("task_intent") in {"current_action_list", "deadline_or_status"}
 

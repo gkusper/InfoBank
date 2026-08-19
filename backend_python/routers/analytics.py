@@ -1,8 +1,10 @@
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
-from sqlalchemy import func
 import models
 import security
+import policy_engine
+import relevance
+from semantic_graph import build_semantic_cooccurrence_graph
 from database import get_db
 
 router = APIRouter(prefix="/api", tags=["Analytics"])
@@ -26,22 +28,15 @@ def get_knowledge_map(
 
 def build_knowledge_map(user_id: str, db: Session):
     try:
-        results = db.query(
-            models.Keyword.word,
-            func.count(models.DocumentKeyword.document_id).label('doc_count')
-        ).join(
-            models.DocumentKeyword, models.Keyword.id == models.DocumentKeyword.keyword_id
-        ).join(
-            models.UserDocumentPermission, models.DocumentKeyword.document_id == models.UserDocumentPermission.document_id
-        ).filter(
-            models.UserDocumentPermission.user_id == user_id
-        ).group_by(
-            models.Keyword.word
-        ).order_by(
-            func.count(models.DocumentKeyword.document_id).desc()
-        ).all()
-
-        return {"status": "success", "map": [{"keyword": r[0], "count": r[1]} for r in results]}
+        graph = _build_governed_graph(user_id, db)
+        return {
+            "status": "success",
+            "scope": graph["scope"],
+            "map": [
+                {"keyword": node["keyword"], "count": node["document_frequency"]}
+                for node in sorted(graph["nodes"], key=lambda item: (-item["document_frequency"], item["keyword"]))
+            ],
+        }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
 
@@ -51,6 +46,11 @@ def get_my_ontology(user_id: str = Depends(security.get_current_user_id), db: Se
     return build_ontology(user_id, db)
 
 
+@router.get("/semantic-cooccurrence-graph/me")
+def get_my_semantic_cooccurrence_graph(user_id: str = Depends(security.get_current_user_id), db: Session = Depends(get_db)):
+    return _build_governed_graph(user_id, db)
+
+
 @router.get("/ontology/{requested_user_id}")
 def get_ontology(
     requested_user_id: str,
@@ -58,45 +58,63 @@ def get_ontology(
     db: Session = Depends(get_db),
 ):
     if requested_user_id != user_id:
-        raise HTTPException(status_code=403, detail="You can only access your own ontology.")
+        raise HTTPException(status_code=403, detail="You can only access your own semantic graph.")
     return build_ontology(user_id, db)
 
 
+@router.get("/semantic-cooccurrence-graph/{requested_user_id}")
+def get_semantic_cooccurrence_graph(
+    requested_user_id: str,
+    user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
+    if requested_user_id != user_id:
+        raise HTTPException(status_code=403, detail="You can only access your own semantic graph.")
+    return _build_governed_graph(user_id, db)
+
+
+def _build_governed_graph(user_id: str, db: Session) -> dict:
+    direct_records = db.query(models.UserDocumentPermission.document_id).filter(
+        models.UserDocumentPermission.user_id == user_id,
+    ).all()
+    public_records = db.query(models.Document.id).filter(
+        models.Document.visibility.in_(["Aggregate", "Metadata"]),
+        models.Document.source_status == "ACTIVE",
+    ).all()
+    candidate_ids = sorted({record[0] for record in direct_records + public_records})
+    governance = policy_engine.resolve_document_access_bulk(
+        db=db,
+        user_id=user_id,
+        doc_ids=candidate_ids,
+        purpose="semantic_graph_visualization",
+    )
+    visible_ids = sorted(
+        doc_id for doc_id in governance["usable_doc_ids"]
+        if governance["use_decisions"].get(doc_id) in {relevance.USE_FULL, relevance.USE_METADATA}
+    )
+    rows = []
+    if visible_ids:
+        rows = db.query(models.DocumentKeyword.document_id, models.Keyword.word).join(
+            models.Keyword, models.Keyword.id == models.DocumentKeyword.keyword_id,
+        ).filter(models.DocumentKeyword.document_id.in_(visible_ids)).all()
+    document_keywords: dict[str, list[str]] = {doc_id: [] for doc_id in visible_ids}
+    for document_id, keyword in rows:
+        document_keywords[document_id].append(keyword)
+    graph = build_semantic_cooccurrence_graph(document_keywords)
+    graph["governance"] = {
+        "policy_order": "governance_before_graph_export",
+        "included_document_count": len(visible_ids),
+        "aggregate_excluded_count": sum(
+            1 for value in governance["use_decisions"].values() if value == relevance.USE_AGGREGATE
+        ),
+        "denied_document_count": len(governance["denied_doc_ids"]),
+    }
+    return graph
+
+
 def build_ontology(user_id: str, db: Session):
+    """Compatibility alias for the former endpoint; output is not an ontology."""
     try:
-        permissions = db.query(models.UserDocumentPermission).filter(models.UserDocumentPermission.user_id == user_id).all()
-        doc_ids = [p.document_id for p in permissions]
-
-        if not doc_ids:
-            return {"nodes": [], "links": []}
-
-        doc_kws = db.query(models.DocumentKeyword).filter(models.DocumentKeyword.document_id.in_(doc_ids)).all()
-        doc_to_kw = {}
-        kw_counts = {}
-        all_kw_ids = set()
-
-        for dk in doc_kws:
-            if dk.document_id not in doc_to_kw:
-                doc_to_kw[dk.document_id] = []
-            doc_to_kw[dk.document_id].append(dk.keyword_id)
-            kw_counts[dk.keyword_id] = kw_counts.get(dk.keyword_id, 0) + 1
-            all_kw_ids.add(dk.keyword_id)
-
-        kws = db.query(models.Keyword).filter(models.Keyword.id.in_(list(all_kw_ids))).all()
-        kw_id_to_word = {kw.id: kw.word for kw in kws}
-
-        nodes = [{"id": kw_id_to_word[k_id], "val": count} for k_id, count in kw_counts.items()]
-        links_dict = {}
-
-        for doc_id, k_ids in doc_to_kw.items():
-            for i in range(len(k_ids)):
-                for j in range(i + 1, len(k_ids)):
-                    kw1 = kw_id_to_word[k_ids[i]]
-                    kw2 = kw_id_to_word[k_ids[j]]
-                    pair = tuple(sorted([kw1, kw2]))
-                    links_dict[pair] = links_dict.get(pair, 0) + 1
-
-        links = [{"source": pair[0], "target": pair[1], "value": weight} for pair, weight in links_dict.items()]
-        return {"status": "success", "nodes": nodes, "links": links}
+        return _build_governed_graph(user_id, db)
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

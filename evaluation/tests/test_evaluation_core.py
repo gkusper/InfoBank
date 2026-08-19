@@ -1,7 +1,6 @@
 from __future__ import annotations
 
 import json
-import re
 from pathlib import Path
 
 import pytest
@@ -63,13 +62,33 @@ def test_deterministic_serialization_and_hashing() -> None:
     assert stable_hash({"z": 1, "a": 2}) == stable_hash({"a": 2, "z": 1})
 
 
-def test_manifest_and_file_hashing_are_stable(tmp_path: Path) -> None:
+def test_manifest_and_file_hashing_are_stable(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
     path = tmp_path / "dataset.json"
     path.write_text('{"case":1}\n', encoding="utf-8")
     assert sha256_file(path) == sha256_file(path)
-    commit, branch = git_identity()
-    assert re.fullmatch(r"[0-9a-f]{40}", commit)
-    assert branch == "integration/main-rebuild-2026-08"
+
+    expected_commit = "a" * 40
+    expected_branch = "test-branch"
+
+    def fake_git(repo_root: Path, *args: str) -> str:
+        responses = {
+            ("rev-parse", "HEAD"): expected_commit,
+            ("branch", "--show-current"): expected_branch,
+        }
+        try:
+            return responses[args]
+        except KeyError as exc:
+            raise AssertionError(f"Unexpected git command: {args}") from exc
+
+    monkeypatch.setattr("evaluation.manifest._git", fake_git)
+
+    commit, branch = git_identity(tmp_path)
+
+    assert commit == expected_commit
+    assert branch == expected_branch
 
 
 def test_required_fields_and_generic_modes_are_enforced() -> None:

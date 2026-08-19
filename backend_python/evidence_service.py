@@ -26,7 +26,69 @@ ACTION_ROLE_CONTEXTUAL = "contextual"
 ACTION_ROLE_CONTRASTIVE = "contrastive"
 ACTION_ROLE_EXCLUDED = "governance-excluded"
 
-ACTION_VERBS = ["review", "announce", "book", "answer", "reply", "prepare", "submit", "send"]
+ACTION_VERBS = [
+    "advise",
+    "agree",
+    "announce",
+    "answer",
+    "apply",
+    "book",
+    "calculate",
+    "call",
+    "check",
+    "complete",
+    "confirm",
+    "contact",
+    "digest",
+    "disregard",
+    "distribute",
+    "draft",
+    "email",
+    "e-mail",
+    "file",
+    "forward",
+    "give",
+    "move",
+    "prepare",
+    "provide",
+    "redo",
+    "re-do",
+    "reply",
+    "return",
+    "review",
+    "run",
+    "send",
+    "sign",
+    "stick",
+    "submit",
+    "update",
+    "verify",
+]
+REQUEST_SIGNAL_RE = re.compile(
+    r"\b(please|need to|needs to|must|required|assigned|could you|can you|"
+    r"would you|should be|requested|reminder)\b",
+    re.IGNORECASE,
+)
+COMPLETION_SIGNAL_RE = re.compile(
+    r"\b(done|completed|finished|sent|provided|attached|resolved|submitted|"
+    r"forwarded|reviewed|drafted|prepared|paid|filed|delivered|handed\s+off|"
+    r"passed\s+on|have\s+done|have\s+finished|have\s+forwarded|have\s+asked|"
+    r"agree\s+with|accepted|signed)\b",
+    re.IGNORECASE,
+)
+CANCELLATION_SIGNAL_RE = re.compile(
+    r"\b(cancelled|canceled|withdrawn|no longer needed|not needed|disregard\s+the\s+request)\b",
+    re.IGNORECASE,
+)
+SUPERSESSION_SIGNAL_RE = re.compile(
+    r"\b(replaced|superseded|new version|instead|revised|red-lined|updated language)\b",
+    re.IGNORECASE,
+)
+NONCLOSING_SIGNAL_RE = re.compile(
+    r"\b(working on|started|start(?:ed)? reviewing|will do|will be|going to|intend|"
+    r"expect|plan|should be able|in progress)\b",
+    re.IGNORECASE,
+)
 NON_ACTION_PATTERNS = [
     r"temporary\s+chatgpt\s+login\s+code",
     r"login\s+code",
@@ -146,23 +208,50 @@ def is_unowned_outbound_request(text: str) -> bool:
     return any(re.search(rf"\bplease\s+{verb}\b", lowered) for verb in ACTION_VERBS)
 
 
+def _body_excerpt(text: str) -> str:
+    match = re.search(r"Body excerpt:\s*(.+)", text, flags=re.IGNORECASE | re.DOTALL)
+    if match:
+        return match.group(1).strip()
+    return text.strip()
+
+
+def _starts_with_action_verb(text: str) -> bool:
+    body = _body_excerpt(text).lower().strip(" .:-")
+    if re.match(r"^(agree\s+with|have\s+asked|have\s+forwarded|have\s+finished|have\s+done|had\s+)", body):
+        return False
+    return any(re.match(rf"^{re.escape(verb)}\b", body) for verb in ACTION_VERBS)
+
+
 def has_obligation_signal(text: str) -> bool:
     lowered = text.lower()
     if is_non_action_notification(text):
         return False
     if "action:" in lowered or "official request" in lowered:
         return True
-    if any(re.search(rf"\bplease\s+{verb}\b", lowered) for verb in ACTION_VERBS):
+    if REQUEST_SIGNAL_RE.search(text):
+        return True
+    if _starts_with_action_verb(text):
         return True
     if any(re.search(rf"\b{verb}\b", lowered) for verb in ACTION_VERBS) and any(marker in lowered for marker in ["deadline", "due", " by 20"]):
-        return True
-    if any(marker in lowered for marker in ["must", "required", "assigned", "obligation", "reminder", "overdue"]):
         return True
     return False
 
 
+def has_request_obligation_signal(text: str) -> bool:
+    return has_obligation_signal(text) and (bool(REQUEST_SIGNAL_RE.search(text)) or _starts_with_action_verb(text))
+
+
+def has_closure_signal(text: str) -> bool:
+    return bool(COMPLETION_SIGNAL_RE.search(text) or CANCELLATION_SIGNAL_RE.search(text) or SUPERSESSION_SIGNAL_RE.search(text))
+
+
+def has_nonclosing_signal(text: str) -> bool:
+    return bool(NONCLOSING_SIGNAL_RE.search(text)) and not has_closure_signal(text)
+
+
 def classify_evidence_unit(unit: models.EvidenceUnit, policy_resolution: Dict[str, Any] | None = None) -> Dict[str, Any]:
     text = f"{unit.title}\n{unit.content}"
+    signal_text = unit.content or text
     source_type = unit.source_type.value if hasattr(unit.source_type, "value") else str(unit.source_type)
     policy_resolution = policy_resolution or {
         "use_decision": relevance.USE_FULL,
@@ -183,18 +272,47 @@ def classify_evidence_unit(unit: models.EvidenceUnit, policy_resolution: Dict[st
     action_role = _citds_role_to_action_role(classifier_result.get("source_role"), source_type, use_decision)
     warnings = classifier_result.setdefault("warnings", [])
     if use_decision != relevance.USE_METADATA and action_role == ACTION_ROLE_PRIMARY:
-        if is_non_action_notification(text):
+        if is_non_action_notification(signal_text):
             action_role = ACTION_ROLE_CONTEXTUAL
             classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTEXTUAL
             warnings.append("non_action_system_or_marketing_notification")
-        elif is_unowned_outbound_request(text):
+        elif is_unowned_outbound_request(signal_text):
             action_role = ACTION_ROLE_CONTEXTUAL
             classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTEXTUAL
             warnings.append("outbound_request_contextual_not_user_obligation")
-        elif not has_obligation_signal(text):
+        elif source_type in {"BrowserHistory", "ActivityTrace"}:
+            action_role = ACTION_ROLE_CONTEXTUAL
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTEXTUAL
+            warnings.append("activity_trace_contextual_not_obligation")
+        elif has_closure_signal(signal_text) and not has_request_obligation_signal(signal_text):
+            action_role = ACTION_ROLE_CONTRASTIVE
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTRASTIVE
+            warnings.append("completion_cancellation_or_supersession_signal")
+        elif has_obligation_signal(signal_text):
+            action_role = ACTION_ROLE_PRIMARY
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_PRIMARY
+        elif not has_obligation_signal(signal_text):
             action_role = ACTION_ROLE_CONTEXTUAL
             classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTEXTUAL
             warnings.append("no_explicit_user_obligation_signal")
+    elif use_decision != relevance.USE_METADATA and action_role == ACTION_ROLE_CONTEXTUAL:
+        if source_type not in {"BrowserHistory", "ActivityTrace"} and has_request_obligation_signal(signal_text):
+            action_role = ACTION_ROLE_PRIMARY
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_PRIMARY
+            warnings.append("generic_obligation_signal_promoted_to_primary")
+        elif source_type not in {"BrowserHistory", "ActivityTrace"} and has_closure_signal(signal_text):
+            action_role = ACTION_ROLE_CONTRASTIVE
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTRASTIVE
+            warnings.append("generic_closure_signal_promoted_to_contrastive")
+    elif use_decision != relevance.USE_METADATA and action_role == ACTION_ROLE_CONTRASTIVE:
+        if has_request_obligation_signal(signal_text):
+            action_role = ACTION_ROLE_PRIMARY
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_PRIMARY
+            warnings.append("obligation_signal_overrides_false_closure")
+        elif has_nonclosing_signal(signal_text):
+            action_role = ACTION_ROLE_CONTEXTUAL
+            classifier_result["source_role"] = relevance.SOURCE_ROLE_CONTEXTUAL
+            warnings.append("nonclosing_progress_or_future_commitment")
 
     status = "unknown"
     if action_role == ACTION_ROLE_EXCLUDED:
@@ -208,9 +326,9 @@ def classify_evidence_unit(unit: models.EvidenceUnit, policy_resolution: Dict[st
     elif action_role == ACTION_ROLE_PRIMARY:
         status = "open"
 
-    due = None if use_decision == relevance.USE_METADATA else extract_due_date(text)
-    action = "[metadata-only: evidence content withheld]" if use_decision == relevance.USE_METADATA else extract_action_text(text)
-    object_label = None if use_decision == relevance.USE_METADATA else extract_object_label(text)
+    due = None if use_decision == relevance.USE_METADATA else extract_due_date(signal_text)
+    action = "[metadata-only: evidence content withheld]" if use_decision == relevance.USE_METADATA else extract_action_text(signal_text)
+    object_label = None if use_decision == relevance.USE_METADATA else extract_object_label(signal_text)
     content_summary = "[metadata-only: evidence content withheld]" if use_decision == relevance.USE_METADATA else summarize_text(unit.content)
 
     return {
@@ -261,11 +379,16 @@ def extract_action_text(text: str) -> str:
     if match:
         return _clean_action(match.group(1))
 
-    subject_match = re.search(r"Subject:\s*(please\s+(?:review|announce|book|answer|reply|prepare|submit|send)[^\.\n]*)", text, flags=re.IGNORECASE)
+    body_match = re.search(r"Body excerpt:\s*([^\n]+)", text, flags=re.IGNORECASE)
+    if body_match:
+        return _clean_action(body_match.group(1))
+
+    verb_group = "|".join(re.escape(verb) for verb in ACTION_VERBS)
+    subject_match = re.search(rf"Subject:\s*(please\s+(?:{verb_group})[^\.\n]*)", text, flags=re.IGNORECASE)
     if subject_match:
         return _clean_action(subject_match.group(1))
 
-    please_match = re.search(r"\bplease\s+(review|announce|book|answer|reply|prepare|submit|send)\b([^\.\n]*)", text, flags=re.IGNORECASE)
+    please_match = re.search(rf"\bplease\s+({verb_group})\b([^\.\n]*)", text, flags=re.IGNORECASE)
     if please_match:
         return _clean_action(" ".join(part for part in please_match.groups() if part))
 
@@ -305,6 +428,8 @@ def _normalise_action_key(value: str) -> str:
 
 
 def _group_key(item: Dict[str, Any]) -> str:
+    if item.get("relation_key"):
+        return f"relation:{item['relation_key']}"
     if item.get("role") in {ACTION_ROLE_PRIMARY, ACTION_ROLE_CONTRASTIVE} and item.get("action"):
         action_key = _normalise_action_key(item.get("action") or "")
         if action_key and action_key != "unspecified action":
@@ -312,8 +437,29 @@ def _group_key(item: Dict[str, Any]) -> str:
     return item.get("relation_key") or item["id"]
 
 
-def reconstruct_action_list(db: Session, user_id: str) -> Dict[str, Any]:
-    raw_units = db.query(models.EvidenceUnit).filter(models.EvidenceUnit.user_id == user_id).all()
+def _timestamp_value(item: Dict[str, Any]) -> Optional[datetime.datetime]:
+    return parse_timestamp(item.get("timestamp"))
+
+
+def _valid_later_contrastive(primary: List[Dict[str, Any]], contrastive: List[Dict[str, Any]]) -> List[Dict[str, Any]]:
+    primary_times = [_timestamp_value(item) for item in primary]
+    primary_times = [value for value in primary_times if value is not None]
+    if not primary_times:
+        return contrastive
+    earliest_primary = min(primary_times)
+    valid = []
+    for item in contrastive:
+        timestamp = _timestamp_value(item)
+        if timestamp and timestamp > earliest_primary:
+            valid.append(item)
+    return valid
+
+
+def reconstruct_action_list(db: Session, user_id: str, as_of: datetime.datetime | None = None) -> Dict[str, Any]:
+    query = db.query(models.EvidenceUnit).filter(models.EvidenceUnit.user_id == user_id)
+    if as_of is not None:
+        query = query.filter((models.EvidenceUnit.source_timestamp == None) | (models.EvidenceUnit.source_timestamp <= as_of))
+    raw_units = query.all()
     units = dedupe_evidence_units(raw_units)
     unit_ids = [unit.id for unit in units]
     policy_context = policy_engine.resolve_evidence_unit_access_bulk(
@@ -376,7 +522,9 @@ def reconstruct_action_list(db: Session, user_id: str) -> Dict[str, Any]:
     for group in grouped.values():
         primary = group["primary_evidence"]
         contextual = group["contextual_support"]
-        contrastive = group["contrastive_evidence"]
+        contrastive = _valid_later_contrastive(primary, group["contrastive_evidence"])
+        invalid_contrastive = [item for item in group["contrastive_evidence"] if item not in contrastive]
+        contextual = contextual + invalid_contrastive
         excluded = group["excluded_evidence"]
         metadata = group["metadata_only_evidence"]
         if primary and not contrastive:

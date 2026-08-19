@@ -275,6 +275,7 @@ def select_rag_output_mode(
     governance: Dict[str, Any],
     context_blocks_available: bool,
     aggregate_request: bool = False,
+    conflict_policy: str = "query_sensitive",
 ) -> Dict[str, Any]:
     state = evidence_state(sources, query_profile, context_blocks_available)
     policy = safe_policy_state(governance)
@@ -415,6 +416,22 @@ def select_rag_output_mode(
         return blocked_output(cf)
 
     if has_primary and has_contrastive:
+        authority_sensitive = bool(re.search(
+            r"\b(final authority|authoritative source|resolve (?:the )?conflict|which source (?:is|has)|binding authority)\b",
+            question or "",
+            flags=re.IGNORECASE,
+        ))
+        if conflict_policy == "authority_required" or (conflict_policy == "query_sensitive" and authority_sensitive):
+            cf = make_controlled_failure(
+                STATUS_REFUSE_CONFLICT,
+                REASON_CONFLICT_DEFEAT,
+                state,
+                policy,
+                "The available permitted sources conflict, and the evidence does not establish which source has final authority.",
+                ["Resolve the source authority or provide an authoritative record before relying on the disputed claim."],
+                {**trace, "gate": "conflict_defeat_check", "conflict_policy": conflict_policy},
+            )
+            return blocked_output(cf)
         return _restricted_output(
             STATUS_RESTRICTED_ANSWER,
             REASON_CONFLICT_DEFEAT,

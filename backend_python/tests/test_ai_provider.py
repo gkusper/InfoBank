@@ -29,12 +29,40 @@ def test_network_free_provider_contract_is_deterministic(provider) -> None:
         prompt_version="test-v1",
     )
     assert provider.embed([text], model="embedding-test") == provider.embed([text], model="embedding-test")
-    assert provider.generate(
-        [{"role": "user", "content": "REFERENCE_ANSWER: deterministic result"}], model="generation-test"
-    ) == "deterministic result"
+    messages = [
+        {
+            "role": "user",
+            "content": "Question: What is the setup fact?\n\nContext from the document(s):\nThe setup fact is deterministic.",
+        }
+    ]
+    assert provider.generate(messages, model="generation-test") == "The setup fact is deterministic."
+    usage = provider.generate_with_usage(messages, model="generation-test")
+    assert usage.text == "The setup fact is deterministic."
+    assert usage.total_tokens == usage.input_tokens + usage.output_tokens
+    assert usage.retries == 0 and usage.cost == 0.0
     manifest = provider.manifest("model-test")
     assert manifest["external_network_required"] is False
     assert len(manifest["config_hash"]) == 64
+
+
+def test_deterministic_provider_is_context_only_and_ignores_external_labels() -> None:
+    provider = DeterministicMockProvider()
+    messages = [
+        {
+            "role": "user",
+            "content": "Question: What is stated?\n\nContext from the document(s):\nOnly this context sentence is stated.",
+        }
+    ]
+    baseline = provider.generate_with_usage(messages, model="test")
+    for irrelevant in (
+        {"case_id": "renamed"},
+        {"case_order": [9, 1]},
+        {"annotation": None},
+        {"reference": "modified outside the provider input"},
+    ):
+        assert irrelevant
+        assert provider.generate_with_usage(messages, model="test") == baseline
+    assert "reference_answer" not in BACKEND_DIR.joinpath("ai_provider.py").read_text(encoding="utf-8")
 
 
 def test_provider_selection_and_missing_configuration_fail_clearly(monkeypatch: pytest.MonkeyPatch) -> None:

@@ -11,6 +11,7 @@ import evidence_service
 import security
 import policy_engine
 import controlled_failure
+import citation_service
 from aggregate_executor import AggregateConfig, AggregateContribution, execute_aggregate
 from routing import RoutingMode, route_documents
 from database import get_db
@@ -122,33 +123,7 @@ def prompt_injection_source(doc_id: str, file_name: str, source_profile: dict, c
 
 
 def citation_from_chunk(document: models.Document | None, chunk: models.DocumentChunk | None, use_decision: str) -> dict:
-    if use_decision != relevance.USE_FULL or not document or not chunk:
-        return {"available": False, "reason": "raw_source_not_permitted"}
-    if (
-        not document.source_storage_path
-        or chunk.document_id != document.id
-        or chunk.page_number is None
-        or chunk.char_start is None
-        or chunk.char_end is None
-        or chunk.char_start < 0
-        or chunk.char_end <= chunk.char_start
-        or not chunk.content_sha256
-    ):
-        return {"available": False, "reason": "traceability_unavailable"}
-    return {
-        "available": True,
-        "document_id": document.id,
-        "chunk_id": chunk.id,
-        "original_filename": document.original_filename or document.file_path,
-        "page_number": chunk.page_number,
-        "chunk_index": chunk.chunk_index,
-        "char_start": chunk.char_start,
-        "char_end": chunk.char_end,
-        "content_hash": chunk.content_sha256,
-        "source_view_url": f"/api/documents/{document.id}/source?page={chunk.page_number}",
-        "evidence_role": relevance.SOURCE_ROLE_PRIMARY,
-        "effective_use_decision": use_decision,
-    }
+    return citation_service.citation_from_chunk(document, chunk, use_decision)
 
 
 def query_retrieved_sources(db: Session, question: str, question_vector: list[float], query_profile: dict, governance_context: dict, doc_ids: list[str], n_results: int = 4) -> tuple[list[dict], list[str], list[AggregateContribution]]:

@@ -37,6 +37,22 @@ class ProviderManifest:
         return payload
 
 
+@dataclass(frozen=True)
+class ProviderGenerationResult:
+    """Provider-neutral generated text plus auditable usage metadata."""
+
+    text: str
+    input_tokens: int
+    output_tokens: int
+    total_tokens: int
+    retries: int
+    cost: float
+    usage_source: str
+
+    def to_dict(self) -> dict[str, Any]:
+        return asdict(self)
+
+
 class AIProvider(ABC):
     """Small interface for keywording, embeddings, and answer generation."""
 
@@ -72,6 +88,37 @@ class AIProvider(ABC):
             model=model,
             external_network_required=self.external_network_required,
         ).to_dict()
+
+    def generate_with_usage(
+        self,
+        messages: Sequence[dict[str, str]],
+        *,
+        model: str,
+        temperature: float = 0.0,
+    ) -> ProviderGenerationResult:
+        """Generate through the provider interface and return explicit usage.
+
+        Adapters without native usage reporting use a labelled deterministic
+        whitespace-token estimate.  They must never present that estimate as
+        provider-billed usage.
+        """
+
+        text = self.generate(messages, model=model, temperature=temperature)
+        input_tokens = sum(len(self._usage_tokens(item.get("content", ""))) for item in messages)
+        output_tokens = len(self._usage_tokens(text))
+        return ProviderGenerationResult(
+            text=text,
+            input_tokens=input_tokens,
+            output_tokens=output_tokens,
+            total_tokens=input_tokens + output_tokens,
+            retries=0,
+            cost=0.0,
+            usage_source="deterministic_local_estimate",
+        )
+
+    @staticmethod
+    def _usage_tokens(text: str) -> list[str]:
+        return re.findall(r"\S+", text or "")
 
 
 class OpenAIProvider(AIProvider):
@@ -201,14 +248,34 @@ class DeterministicMockProvider(AIProvider):
     def generate(self, messages: Sequence[dict[str, str]], *, model: str, temperature: float = 0.0) -> str:
         del model, temperature
         user_text = "\n".join(message.get("content", "") for message in messages if message.get("role") == "user")
-        reference = re.search(r"REFERENCE_ANSWER:\s*(.+)", user_text)
-        if reference:
-            return reference.group(1).strip().splitlines()[0]
         context = re.search(r"Context from the document\(s\):\s*(.+)", user_text, flags=re.DOTALL)
         if context:
-            candidate = re.sub(r"\s+", " ", context.group(1)).strip()
-            if candidate:
-                return candidate[:320]
+            context_text = context.group(1).strip()
+            question_match = re.search(r"Question:\s*(.+?)(?:\n|$)", user_text)
+            question_tokens = set(self._tokens(question_match.group(1) if question_match else ""))
+            # Context blocks contain trace labels followed by wrapped source
+            # text. Drop labels, rejoin wrapped lines, and rank factual
+            # sentences only by query/context overlap.
+            content_lines: list[str] = []
+            for block in re.split(r"\n\s*---\s*\n", context_text):
+                text_lines = [
+                    re.sub(r"\s+", " ", line).strip()
+                    for line in block.splitlines()
+                    if line.strip() and not line.lstrip().startswith("[")
+                ]
+                if text_lines:
+                    content_lines.append(" ".join(text_lines))
+            facts = list(dict.fromkeys(content_lines))
+            ranked = sorted(
+                facts,
+                key=lambda fact: (
+                    -len(question_tokens.intersection(self._tokens(fact))),
+                    facts.index(fact),
+                ),
+            )
+            multi_fact = bool(re.search(r"\b(and|both|conflict|compare|multi-source)\b", question_match.group(1) if question_match else "", re.IGNORECASE))
+            if facts:
+                return " ".join(ranked[: 2 if multi_fact else 1])[:640]
         return "The answer cannot be found in the document."
 
 

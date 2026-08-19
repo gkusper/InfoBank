@@ -4,7 +4,7 @@ Status: `READY_FOR_HUMAN_QA`
 
 This report covers a reproducible pre-freeze candidate only. No dataset, scorer, configuration, code, or evaluation result is frozen, and final E1 has not run.
 
-Methodology correction: the pre-hardening D-GATE B0–B3 outputs are deterministic contract simulations, not actual empirical pipeline results. `READY_FOR_HUMAN_QA` applies to candidate construction only; actual gold-blind pipeline evaluation and raw-run sealing remain required before any freeze decision.
+Methodology correction: the pre-hardening D-GATE B0–B3 outputs are deterministic contract simulations, not actual empirical pipeline results. A separate gold-blind actual-pipeline development run and raw-run sealing now pass; `READY_FOR_HUMAN_QA` still applies only to candidate construction and does not authorize freeze or final E1.
 
 ## Exact versions
 
@@ -52,7 +52,7 @@ The current source PDFs and mail threads are generated synthetic project artifac
 - Manual citation audit is pending.
 - Manual no-health sign-off is pending.
 - The local MailEx ZIP contains no locally evidenced licence/readme file; human licence and redistribution confirmation is pending.
-- The final freeze/version decision has not been approved.
+- The approved network-provider run and final freeze/version decision have not occurred.
 
 These are intentional human-only gates, not automated test failures.
 

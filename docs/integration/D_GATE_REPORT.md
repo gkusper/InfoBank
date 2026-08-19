@@ -6,11 +6,13 @@ Scorer and run-record infrastructure: `PASS`
 
 Deterministic contract simulation: `PASS`
 
-Actual gold-blind B0–B3 empirical evaluation: `PENDING`
+Actual gold-blind B0–B3 development evaluation: `PASS`
 
 Final frozen E1: `NOT_STARTED`
 
 This is development evaluation on a generated, non-frozen candidate. No final dataset/scorer/config/code freeze occurred, no final E1 claim is made, and the 40-response manual citation audit remains pending human work.
+
+The corrected actual-pipeline results are reported separately in `ACTUAL_PIPELINE_DEVELOPMENT_RESULTS.md`. They use 20 synthetic development inputs, actual isolated MariaDB/Chroma/source storage, production domain stages, a context-only deterministic provider, raw-run sealing, and post-run scoring. They do not supersede the need for human QA, candidate holdout, an approved provider run, or final E1.
 
 ## Versions and isolation
 
@@ -69,7 +71,7 @@ The generated set contains 120 threads / 240 email messages and 60 browser-only 
 
 Ignored output under `artifacts/d_gate/` includes raw JSONL, summary CSV/JSON/Markdown/LaTeX, calibration records, safety/utility/citation fields, action records, and the pending 40-row manual audit sheet. Tracked code/config/docs reproduce them.
 
-Limitations: the historical B0–B3 runner is a gold-informed deterministic contract simulator, not an actual-pipeline empirical evaluator. Its latency, usage, citation, safety, and perfect B3 metrics are deprecated as performance claims. Manual citation review, local MailEx licensing/source processing, human action annotation, actual-pipeline evaluation, and final frozen E1 remain pending.
+Limitations: the historical B0–B3 runner is a gold-informed deterministic contract simulator and remains deprecated as performance evidence. A separate actual-pipeline development evaluator now exists, but its synthetic deterministic results are not final or frozen. Manual citation review, local MailEx licensing/source processing, human action annotation, approved real-provider evaluation, and final frozen E1 remain pending.
 
 ## Validation
 

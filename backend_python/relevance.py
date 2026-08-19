@@ -241,6 +241,11 @@ def classify_chunk_profile(question: str, chunk_text: str, file_name: str, query
 
     ontological_links = infer_ontological_links(query_entities, chunk_entities, text)
     pragmatic_match = infer_pragmatic_match(query_profile.get("task_intent"), genres, speech_acts, temporal_signals)
+    conflict_signal = bool(re.search(
+        r"\b(contradict(?:s|ed|ion|ory)?|conflict(?:s|ed|ing)?|unverified|must not override|supersed(?:e|ed|es))\b",
+        text,
+        flags=re.IGNORECASE,
+    ))
     refined_role = refine_source_role(
         base_role=base_role,
         use_decision=use_decision,
@@ -249,6 +254,7 @@ def classify_chunk_profile(question: str, chunk_text: str, file_name: str, query
         temporal_signals=temporal_signals,
         pragmatic_match=pragmatic_match,
         task_intent=query_profile.get("task_intent", "general_document_question"),
+        conflict_signal=conflict_signal,
     )
 
     scores = {
@@ -276,6 +282,7 @@ def classify_chunk_profile(question: str, chunk_text: str, file_name: str, query
         "speech_acts": speech_acts,
         "temporal_status": temporal_signals,
         "pragmatic_match": pragmatic_match,
+        "conflict_signal": conflict_signal,
         "evidence_warnings": evidence_warnings(refined_role, use_decision, temporal_signals, speech_acts),
     }
 
@@ -306,13 +313,16 @@ def infer_pragmatic_match(task_intent: str, genres: List[str], speech_acts: List
     return True
 
 
-def refine_source_role(base_role: str, use_decision: str, genres: List[str], speech_acts: List[str], temporal_signals: List[str], pragmatic_match: bool, task_intent: str = "general_document_question") -> str:
+def refine_source_role(base_role: str, use_decision: str, genres: List[str], speech_acts: List[str], temporal_signals: List[str], pragmatic_match: bool, task_intent: str = "general_document_question", conflict_signal: bool = False) -> str:
     if use_decision == USE_DENY:
         return SOURCE_ROLE_GOVERNANCE_EXCLUDED
     if use_decision == USE_AGGREGATE:
         return SOURCE_ROLE_AGGREGATE_ONLY
     if use_decision == USE_METADATA:
         return SOURCE_ROLE_CONTEXTUAL
+
+    if conflict_signal:
+        return SOURCE_ROLE_CONTRASTIVE
 
     # For ordinary grounded/factual document QA, a full-access owned source remains
     # primary even if the chunk also contains incidental closed/completed/activity

@@ -315,20 +315,30 @@ def extract_keywords(
     ai_candidates: list[tuple[str, dict[str, Any]]] = []
     if client is not None:
         try:
-            response = client.chat.completions.create(
-                model=model,
-                messages=[
-                    {"role": "system", "content": KEYWORD_PROMPT},
-                    {"role": "user", "content": text[:10000]},
-                ],
-                temperature=0.0,
-            )
-            raw = str(response.choices[0].message.content or "")
-            for value in raw.split(","):
+            provider_name = str(getattr(client, "provider_name", "compatible-chat"))
+            if hasattr(client, "extract_keywords"):
+                raw_values = client.extract_keywords(
+                    text,
+                    model=model,
+                    prompt=KEYWORD_PROMPT,
+                    prompt_version=prompt_version,
+                    limit=5,
+                )
+            else:
+                response = client.chat.completions.create(
+                    model=model,
+                    messages=[
+                        {"role": "system", "content": KEYWORD_PROMPT},
+                        {"role": "user", "content": text[:10000]},
+                    ],
+                    temperature=0.0,
+                )
+                raw_values = str(response.choices[0].message.content or "").split(",")
+            for value in raw_values:
                 normalized = _normalize_keyword(value)
                 if normalized:
                     ai_candidates.append(
-                        (normalized, {"type": "AI", "method": "openai-chat", "model": model, "prompt_version": prompt_version})
+                        (normalized, {"type": "AI", "method": provider_name, "model": model, "prompt_version": prompt_version})
                     )
             if not ai_candidates:
                 raise ValueError("AI keyword output contained no valid keywords")

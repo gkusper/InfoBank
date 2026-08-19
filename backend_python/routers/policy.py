@@ -9,6 +9,122 @@ from database import get_db
 router = APIRouter(prefix="/api/policy", tags=["Policy"])
 
 
+@router.post("/documents/{doc_id}/permissions")
+def grant_persistent_document_permission(
+    doc_id: str,
+    target_username: str = Form(...),
+    permission_type: str = Form(...),
+    user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
+    target = db.query(models.User).filter(models.User.username == target_username).first()
+    if not target:
+        raise HTTPException(status_code=404, detail="The target user was not found.")
+    try:
+        relation = policy_engine.grant_document_permission(
+            db,
+            owner_user_id=user_id,
+            document_id=doc_id,
+            target_user_id=target.id,
+            permission_type=permission_type,
+        )
+        db.commit()
+        return {
+            "status": "success",
+            "document_id": doc_id,
+            "target_user_id": target.id,
+            "permission_type": relation.permission_type.value,
+        }
+    except PermissionError as exc:
+        db.rollback()
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except (ValueError, LookupError) as exc:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.delete("/documents/{doc_id}/permissions/{target_user_id}")
+def revoke_persistent_document_permission(
+    doc_id: str,
+    target_user_id: str,
+    user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
+    try:
+        removed = policy_engine.revoke_document_permission(
+            db,
+            owner_user_id=user_id,
+            document_id=doc_id,
+            target_user_id=target_user_id,
+        )
+        db.commit()
+        return {"status": "success", "document_id": doc_id, "revoked": removed}
+    except PermissionError as exc:
+        db.rollback()
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except ValueError as exc:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.post("/documents/{doc_id}/permissions")
+def grant_document_permission(
+    doc_id: str,
+    target_username: str = Form(...),
+    permission_type: str = Form(...),
+    user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
+    target = db.query(models.User).filter(models.User.username == target_username).first()
+    if not target:
+        raise HTTPException(status_code=404, detail="The target user was not found.")
+    try:
+        relation = policy_engine.grant_document_permission(
+            db,
+            owner_user_id=user_id,
+            document_id=doc_id,
+            target_user_id=target.id,
+            permission_type=permission_type,
+        )
+        db.commit()
+        return {
+            "status": "success",
+            "document_id": doc_id,
+            "target_user_id": target.id,
+            "permission_type": relation.permission_type.value,
+        }
+    except PermissionError as exc:
+        db.rollback()
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except (ValueError, LookupError) as exc:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
+@router.delete("/documents/{doc_id}/permissions/{target_user_id}")
+def revoke_document_permission(
+    doc_id: str,
+    target_user_id: str,
+    user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
+    try:
+        removed = policy_engine.revoke_document_permission(
+            db,
+            owner_user_id=user_id,
+            document_id=doc_id,
+            target_user_id=target_user_id,
+        )
+        db.commit()
+        return {"status": "success", "document_id": doc_id, "revoked": removed}
+    except PermissionError as exc:
+        db.rollback()
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except ValueError as exc:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+
+
 @router.get("/rules")
 def list_my_policy_rules(
     user_id: str = Depends(security.get_current_user_id),

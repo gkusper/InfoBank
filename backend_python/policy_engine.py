@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import datetime
 import json
+import uuid
+import uuid
 from typing import Any, Dict, Iterable
 
 from sqlalchemy.orm import Session
@@ -21,6 +23,16 @@ import relevance
 
 TARGET_DOCUMENT = "Document"
 TARGET_EVIDENCE_UNIT = "EvidenceUnit"
+GRANTABLE_PERMISSION_TYPES = {
+    models.PermissionType.Reader,
+    models.PermissionType.Aggregate,
+    models.PermissionType.Metadata,
+}
+GRANTABLE_PERMISSION_TYPES = {
+    models.PermissionType.Reader,
+    models.PermissionType.Aggregate,
+    models.PermissionType.Metadata,
+}
 
 
 def _now() -> datetime.datetime:
@@ -327,3 +339,219 @@ def create_policy_rule(
     db.commit()
     db.refresh(rule)
     return rule
+
+
+def grant_document_permission(
+    db: Session,
+    *,
+    owner_user_id: str,
+    document_id: str,
+    target_user_id: str,
+    permission_type: models.PermissionType | str,
+) -> models.UserDocumentPermission:
+    """Create or replace a non-owner persistent document relation."""
+
+    owner = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == owner_user_id,
+        models.UserDocumentPermission.permission_type == models.PermissionType.Owner,
+    ).first()
+    if not owner:
+        raise PermissionError("Only the document Owner may grant persistent access")
+    if owner_user_id == target_user_id:
+        raise ValueError("The Owner relation cannot be replaced by a grant")
+    target = db.query(models.User).filter(models.User.id == target_user_id).first()
+    if not target:
+        raise LookupError("Target user was not found")
+    normalized = permission_type if isinstance(permission_type, models.PermissionType) else models.PermissionType(str(permission_type))
+    if normalized not in GRANTABLE_PERMISSION_TYPES:
+        raise ValueError("Grant type must be Reader, Aggregate, or Metadata")
+    existing = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == target_user_id,
+    ).first()
+    if existing:
+        if existing.permission_type == models.PermissionType.Owner:
+            raise ValueError("An Owner relation cannot be overwritten")
+        existing.permission_type = normalized
+        db.flush()
+        return existing
+    relation = models.UserDocumentPermission(
+        id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"infobank:permission:{document_id}:{target_user_id}")),
+        document_id=document_id,
+        user_id=target_user_id,
+        permission_type=normalized,
+    )
+    db.add(relation)
+    db.flush()
+    return relation
+
+
+def revoke_document_permission(
+    db: Session,
+    *,
+    owner_user_id: str,
+    document_id: str,
+    target_user_id: str,
+) -> bool:
+    """Remove a non-owner persistent relation without touching the document."""
+
+    owner = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == owner_user_id,
+        models.UserDocumentPermission.permission_type == models.PermissionType.Owner,
+    ).first()
+    if not owner:
+        raise PermissionError("Only the document Owner may revoke persistent access")
+    relation = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == target_user_id,
+    ).first()
+    if not relation:
+        return False
+    if relation.permission_type == models.PermissionType.Owner:
+        raise ValueError("Ownership must be transferred, not revoked")
+    db.delete(relation)
+    db.flush()
+    return True
+
+
+def transfer_document_ownership(
+    db: Session,
+    *,
+    owner_user_id: str,
+    document_id: str,
+    target_user_id: str,
+) -> models.UserDocumentPermission:
+    """Move the sole Owner relation while preserving document identity."""
+
+    if owner_user_id == target_user_id:
+        raise ValueError("Ownership cannot be transferred to the same user")
+    current = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == owner_user_id,
+        models.UserDocumentPermission.permission_type == models.PermissionType.Owner,
+    ).first()
+    if not current:
+        raise PermissionError("Only the current Owner may transfer ownership")
+    if not db.query(models.User).filter(models.User.id == target_user_id).first():
+        raise LookupError("Target user was not found")
+    existing = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == target_user_id,
+    ).first()
+    if existing and existing is not current:
+        db.delete(existing)
+        db.flush()
+    current.user_id = target_user_id
+    current.permission_type = models.PermissionType.Owner
+    db.flush()
+    return current
+
+
+def grant_document_permission(
+    db: Session,
+    *,
+    owner_user_id: str,
+    document_id: str,
+    target_user_id: str,
+    permission_type: models.PermissionType | str,
+) -> models.UserDocumentPermission:
+    """Create or replace a non-owner persistent document relation."""
+
+    owner = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == owner_user_id,
+        models.UserDocumentPermission.permission_type == models.PermissionType.Owner,
+    ).first()
+    if not owner:
+        raise PermissionError("Only the document Owner may grant persistent access")
+    if owner_user_id == target_user_id:
+        raise ValueError("The Owner relation cannot be replaced by a grant")
+    target = db.query(models.User).filter(models.User.id == target_user_id).first()
+    if not target:
+        raise LookupError("Target user was not found")
+    normalized = permission_type if isinstance(permission_type, models.PermissionType) else models.PermissionType(str(permission_type))
+    if normalized not in GRANTABLE_PERMISSION_TYPES:
+        raise ValueError("Grant type must be Reader, Aggregate, or Metadata")
+    existing = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == target_user_id,
+    ).first()
+    if existing:
+        if existing.permission_type == models.PermissionType.Owner:
+            raise ValueError("An Owner relation cannot be overwritten")
+        existing.permission_type = normalized
+        db.flush()
+        return existing
+    relation = models.UserDocumentPermission(
+        id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"infobank:permission:{document_id}:{target_user_id}")),
+        document_id=document_id,
+        user_id=target_user_id,
+        permission_type=normalized,
+    )
+    db.add(relation)
+    db.flush()
+    return relation
+
+
+def revoke_document_permission(
+    db: Session,
+    *,
+    owner_user_id: str,
+    document_id: str,
+    target_user_id: str,
+) -> bool:
+    """Remove a non-owner persistent relation without touching the document."""
+
+    owner = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == owner_user_id,
+        models.UserDocumentPermission.permission_type == models.PermissionType.Owner,
+    ).first()
+    if not owner:
+        raise PermissionError("Only the document Owner may revoke persistent access")
+    relation = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == target_user_id,
+    ).first()
+    if not relation:
+        return False
+    if relation.permission_type == models.PermissionType.Owner:
+        raise ValueError("Ownership must be transferred, not revoked")
+    db.delete(relation)
+    db.flush()
+    return True
+
+
+def transfer_document_ownership(
+    db: Session,
+    *,
+    owner_user_id: str,
+    document_id: str,
+    target_user_id: str,
+) -> models.UserDocumentPermission:
+    """Move the sole Owner relation while preserving document identity."""
+
+    if owner_user_id == target_user_id:
+        raise ValueError("Ownership cannot be transferred to the same user")
+    current = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == owner_user_id,
+        models.UserDocumentPermission.permission_type == models.PermissionType.Owner,
+    ).first()
+    if not current:
+        raise PermissionError("Only the current Owner may transfer ownership")
+    if not db.query(models.User).filter(models.User.id == target_user_id).first():
+        raise LookupError("Target user was not found")
+    existing = db.query(models.UserDocumentPermission).filter(
+        models.UserDocumentPermission.document_id == document_id,
+        models.UserDocumentPermission.user_id == target_user_id,
+    ).first()
+    if existing and existing is not current:
+        db.delete(existing)
+        db.flush()
+    current.user_id = target_user_id
+    current.permission_type = models.PermissionType.Owner
+    db.flush()
+    return current

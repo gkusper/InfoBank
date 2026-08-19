@@ -44,6 +44,14 @@ def test_core_modules_import_without_openai_key(tmp_path: Path) -> None:
     assert "R1B_IMPORT_OK" in completed.stdout
 
 
+def test_openapi_schema_builds_with_unique_operation_models() -> None:
+    from main import app
+
+    schema = app.openapi()
+    assert "/api/policy/documents/{doc_id}/permissions" in schema["paths"]
+    assert "/api/documents/transfer" in schema["paths"]
+
+
 def test_openai_client_fails_clearly_only_when_invoked(monkeypatch: pytest.MonkeyPatch) -> None:
     monkeypatch.delenv("OPENAI_API_KEY", raising=False)
     monkeypatch.setattr(ai_service, "_openai_client", None)

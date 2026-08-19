@@ -89,17 +89,16 @@ def _audit(db: Session, user_id: str, action: str, document_id: str, details: di
 
 def _keyword_client() -> Any | None:
     try:
-        return ai_service.get_openai_client()
+        return ai_service.get_ai_provider()
     except Exception:
         return None
 
 
 def _embed_chunks(chunks, embedding_model: str = DEFAULT_PROCESSING_CONFIG.embedding_model) -> dict[str, list[float]]:
-    embeddings: dict[str, list[float]] = {}
-    for chunk in chunks:
-        response = ai_service.openai_client.embeddings.create(input=chunk.text, model=embedding_model)
-        embeddings[chunk.id] = response.data[0].embedding
-    return embeddings
+    vectors = ai_service.embed_texts([chunk.text for chunk in chunks], model=embedding_model)
+    if len(vectors) != len(chunks):
+        raise RuntimeError("AI provider returned an invalid embedding count")
+    return {chunk.id: vector for chunk, vector in zip(chunks, vectors)}
 
 
 def _empty_vector_snapshot() -> dict[str, list[Any]]:
@@ -383,6 +382,10 @@ def process_document_source(
         config=config,
         started_at=started_at,
     )
+    report["providers"] = {
+        "keyword": ai_service.provider_manifest(operation="keyword_extraction", model=config.keyword_model),
+        "embedding": ai_service.provider_manifest(operation="embedding", model=config.embedding_model),
+    }
     db.add(
         models.DocumentProcessingReport(
             id=str(uuid.uuid4()),
@@ -868,18 +871,23 @@ def delete_document(doc_id: str = Form(...), user_id: str = Depends(security.get
 
 @router.post("/documents/transfer")
 def transfer_document_ownership(doc_id: str = Form(...), new_username: str = Form(...), user_id: str = Depends(security.get_current_user_id), db: Session = Depends(get_db)):
-    current_permission = require_owner(db, doc_id, user_id)
     target_user = db.query(models.User).filter(models.User.username == new_username).first()
     if not target_user:
         raise HTTPException(status_code=404, detail="The provided user was not found in the system.")
     if target_user.id == user_id:
         raise HTTPException(status_code=400, detail="You are not permitted to transfer this document to yourself.")
-    existing = db.query(models.UserDocumentPermission).filter(
-        models.UserDocumentPermission.document_id == doc_id,
-        models.UserDocumentPermission.user_id == target_user.id,
-    ).first()
-    if existing:
-        db.delete(existing)
-    current_permission.user_id = target_user.id
-    db.commit()
+    try:
+        policy_engine.transfer_document_ownership(
+            db,
+            owner_user_id=user_id,
+            document_id=doc_id,
+            target_user_id=target_user.id,
+        )
+        db.commit()
+    except PermissionError as exc:
+        db.rollback()
+        raise HTTPException(status_code=403, detail=str(exc)) from exc
+    except (ValueError, LookupError) as exc:
+        db.rollback()
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
     return {"status": "success", "message": f"Ownership successfully transferred to the user: {target_user.username}"}

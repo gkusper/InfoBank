@@ -1,5 +1,6 @@
 import uuid
 import json
+import os
 import re
 from fastapi import APIRouter, Depends, Form, HTTPException, BackgroundTasks
 from sqlalchemy.orm import Session
@@ -10,6 +11,7 @@ import evidence_service
 import security
 import policy_engine
 import controlled_failure
+from aggregate_executor import AggregateConfig, AggregateContribution, execute_aggregate
 from routing import RoutingMode, route_documents
 from database import get_db
 
@@ -52,40 +54,9 @@ def get_permitted_fallback_doc_ids(db: Session, user_id: str) -> list[str]:
     return sorted(set(direct_doc_ids + public_doc_ids))
 
 
-def extract_aggregate_safe_facts(chunk_text: str, max_facts: int = 3) -> list[str]:
-    aggregate_markers = [
-        "average", "mean", "median", "count", "total", "statistics", "statistic",
-        "aggregate", "pilot", "approval time", "rate", "percentage", "percent",
-        "days", "hours", "items", "documents", "users",
-    ]
-    text = re.sub(r"\s+", " ", chunk_text).strip()
-    sentences = re.split(r"(?<=[.!?])\s+", text)
-    facts: list[str] = []
-    for sentence in sentences:
-        lowered = sentence.lower()
-        has_marker = any(marker in lowered for marker in aggregate_markers)
-        has_number = bool(re.search(r"\b\d+(?:\.\d)?\b", sentence))
-        if not (has_marker and has_number):
-            continue
-        safe = re.sub(r"[\w\.-]+@[\w\.-]+", "[redacted-email]", sentence)
-        safe = re.sub(r"\b[A-Z][a-z]+\s+[A-Z][a-z]+\b", "[redacted-person]", safe)
-        facts.append(safe[:220])
-        if len(facts) >= max_facts:
-            break
-    return facts
-
-
 def make_generator_safe_chunk(role: str, chunk_text: str, source_profile: dict) -> str:
     if role == relevance.SOURCE_ROLE_AGGREGATE_ONLY:
-        semantic_hits = ", ".join(source_profile.get("semantic_hits", [])) or "none"
-        facts = extract_aggregate_safe_facts(chunk_text)
-        fact_text = " | ".join(facts) if facts else "No aggregate-safe numeric/statistical fact extracted from this chunk."
-        return (
-            "[Aggregate-only non-quotable source. Individual text is withheld. "
-            f"Semantic hits: {semantic_hits}. "
-            f"Aggregate-safe facts: {fact_text}. "
-            "Use only for governed aggregate/statistical statements. Do not infer or reveal document-specific identifiers, names, codenames, project labels, or other individual content.]"
-        )
+        return "[Aggregate-only source withheld. Use only the thresholded aggregate executor result.]"
     if role == relevance.SOURCE_ROLE_GOVERNANCE_EXCLUDED:
         return "[Governance-excluded source. Content withheld and must not be used.]"
     return chunk_text
@@ -180,15 +151,16 @@ def citation_from_chunk(document: models.Document | None, chunk: models.Document
     }
 
 
-def query_retrieved_sources(db: Session, question: str, question_vector: list[float], query_profile: dict, governance_context: dict, doc_ids: list[str], n_results: int = 4) -> tuple[list[dict], list[str]]:
+def query_retrieved_sources(db: Session, question: str, question_vector: list[float], query_profile: dict, governance_context: dict, doc_ids: list[str], n_results: int = 4) -> tuple[list[dict], list[str], list[AggregateContribution]]:
     if not doc_ids:
-        return [], []
+        return [], [], []
     where_clause = {"document_id": doc_ids[0]} if len(doc_ids) == 1 else {"document_id": {"$in": doc_ids}}
     results = ai_service.collection.query(query_embeddings=[question_vector], n_results=n_results, where=where_clause)
     sources: list[dict] = []
     blocks: list[str] = []
+    aggregate_contributions: list[AggregateContribution] = []
     if not results.get('documents') or not results['documents'][0]:
-        return sources, blocks
+        return sources, blocks, aggregate_contributions
 
     seen = set()
     result_ids = results.get("ids", [[]])[0]
@@ -225,7 +197,14 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
             continue
         role = source_profile["role"]
         safe_chunk_text = make_generator_safe_chunk(role, chunk_text, source_profile)
-        blocks.append(relevance.make_context_block(source_profile, file_name, safe_chunk_text))
+        if role == relevance.SOURCE_ROLE_AGGREGATE_ONLY:
+            numeric = re.search(r"(?<![A-Za-z0-9])(-?\d+(?:\.\d+)?)(?![A-Za-z0-9])", chunk_text)
+            if numeric:
+                aggregate_contributions.append(
+                    AggregateContribution(source_id=doc_id, contributor_id=doc_id, value=float(numeric.group(1)))
+                )
+        else:
+            blocks.append(relevance.make_context_block(source_profile, file_name, safe_chunk_text))
         sources.append({
             "document_id": doc_id,
             "file_name": file_name,
@@ -235,7 +214,16 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
             "text": relevance.public_source_text(role, chunk_text),
             "citation": citation,
         })
-    return sources, blocks
+    return sources, blocks, aggregate_contributions
+
+
+def aggregate_config_from_environment() -> AggregateConfig:
+    raw = os.getenv("AGGREGATE_K_THRESHOLD", "3")
+    try:
+        threshold = int(raw)
+    except ValueError as exc:
+        raise RuntimeError("AGGREGATE_K_THRESHOLD must be an integer of at least 2") from exc
+    return AggregateConfig(k_threshold=threshold)
 
 
 def chat_success_payload(question, question_keywords, query_profile, governance_context, role_summary, relevance_level_summary, evidence_check, answer, sources_list, controlled_failure_obj=None, output_mode="full_answer"):
@@ -345,21 +333,16 @@ async def ask_infobank(
         for doc_id, word in keyword_rows:
             document_keywords.setdefault(doc_id, []).append(word)
         permitted_keywords = sorted({word for _, word in keyword_rows}, key=lambda value: value.lower())
-        db_keywords_str = ", ".join(permitted_keywords)
-        kw_prompt = f"""
-        Analyze the following question: "{question}"
-        Here is the list of available document tags in our database:
-        [{db_keywords_str}]
-        Select up to 3 exact tags from the list that are semantically related to the question. If unrelated to all tags, output NONE.
-        Return ONLY a comma-separated list or NONE.
-        """
-        kw_response = ai_service.openai_client.chat.completions.create(
-            model=ai_service.MODEL_NAME,
-            messages=[{"role": "user", "content": kw_prompt}],
-            temperature=0.1,
+        question_keywords = ai_service.extract_provider_keywords(
+            question,
+            available_keywords=permitted_keywords,
+            limit=3,
+            prompt=(
+                "Select exact permitted document tags that are semantically related to the question. "
+                "The supplied allowed list has already passed governance filtering."
+            ),
+            prompt_version="routing-keyword-v1",
         )
-        raw_result = kw_response.choices[0].message.content.strip()
-        question_keywords = [] if raw_result == "NONE" else [k.strip() for k in raw_result.split(',') if k.strip()]
         query_profile = relevance.build_query_profile(question, question_keywords)
         routing_decision = route_documents(
             permitted_document_ids=permitted_doc_ids,
@@ -405,10 +388,10 @@ async def ask_infobank(
 
         sources_list = [metadata_only_source(db, doc_id) for doc_id in metadata_doc_ids]
         context_blocks = []
+        aggregate_contributions: list[AggregateContribution] = []
 
         if content_doc_ids:
-            response = ai_service.openai_client.embeddings.create(input=question, model=ai_service.EMBEDDING_MODEL)
-            question_vector = response.data[0].embedding
+            question_vector = ai_service.embed_text(question, model=ai_service.EMBEDDING_MODEL)
 
             primary_doc_ids = [
                 doc_id for doc_id in content_doc_ids
@@ -424,7 +407,7 @@ async def ask_infobank(
                 ("aggregate_only", aggregate_doc_ids),
             ]
             for tier_name, tier_doc_ids in retrieval_tiers:
-                tier_sources, tier_blocks = query_retrieved_sources(
+                tier_sources, tier_blocks, tier_aggregate = query_retrieved_sources(
                     db=db,
                     question=question,
                     question_vector=question_vector,
@@ -436,6 +419,7 @@ async def ask_infobank(
                 if tier_sources:
                     sources_list.extend(tier_sources)
                     context_blocks.extend(tier_blocks)
+                    aggregate_contributions.extend(tier_aggregate)
                     query_profile["retrieval_tier_used"] = tier_name
                     if tier_name != "aggregate_only":
                         break
@@ -443,13 +427,21 @@ async def ask_infobank(
         role_summary = relevance.summarize_source_roles(sources_list)
         relevance_level_summary = relevance.summarize_relevance_levels(sources_list)
         evidence_check = evidence_service.check_rag_evidence(sources_list, query_profile, governance_context)
+        aggregate_request = is_aggregate_statistics_question(question)
+        aggregate_execution = None
+        if aggregate_request and governance_context.get("has_aggregate_evidence") and not governance_context.get("has_primary_evidence"):
+            aggregate_execution = execute_aggregate(
+                aggregate_contributions,
+                governance_context["use_decisions"],
+                aggregate_config_from_environment(),
+            )
         output_gate = controlled_failure.select_rag_output_mode(
             question=question,
             sources=sources_list,
             query_profile=query_profile,
             governance=governance_context,
-            context_blocks_available=bool(context_blocks),
-            aggregate_request=is_aggregate_statistics_question(question),
+            context_blocks_available=bool(context_blocks) or bool(aggregate_execution and aggregate_execution["aggregate"]),
+            aggregate_request=aggregate_request,
         )
         evidence_check["output_mode"] = output_gate.get("output_mode")
         evidence_check["output_gate"] = output_gate.get("trace", {})
@@ -468,6 +460,41 @@ async def ask_infobank(
             msg = cf.get("safeOutput") if cf else "There is no permitted source that can be used for this question in the InfoBank."
             background_tasks.add_task(log_chat_event, db, user_id, question, msg, question_keywords, sources_list, "rejected", query_profile, governance_context, evidence_check, cf, output_gate.get("output_mode"))
             return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf or {}, sources_list)
+
+        if aggregate_execution is not None:
+            public_aggregate_governance = {
+                "policy_enforced": True,
+                "aggregate_threshold_applied": True,
+                "individual_sources_withheld": True,
+            }
+            public_evidence_check = {
+                "aggregate_execution": {
+                "output_class": aggregate_execution["output_class"],
+                "reason_code": aggregate_execution["reason_code"],
+                "public_trace": aggregate_execution["public_trace"],
+                "generation_skipped": True,
+                }
+            }
+            answer = aggregate_execution["safe_output"]
+            if aggregate_execution["output_class"] == "REFUSE_AGGREGATION_THRESHOLD":
+                cf = controlled_failure.make_controlled_failure(
+                    "REFUSE_AGGREGATION_THRESHOLD",
+                    aggregate_execution["reason_code"],
+                    controlled_failure.evidence_state([], query_profile, False),
+                    controlled_failure.safe_policy_state({}),
+                    answer,
+                    ["Request a governed aggregate only after the configured privacy threshold can be satisfied."],
+                    {"gate": "aggregate_threshold", **aggregate_execution["public_trace"]},
+                )
+                public_evidence_check["decision"] = "controlled_failure"
+                public_evidence_check["controlled_failure"] = cf
+                public_evidence_check["output_mode"] = aggregate_execution["output_class"]
+                background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, [], "aggregate_threshold", query_profile, public_aggregate_governance, public_evidence_check, cf, aggregate_execution["output_class"])
+                return controlled_failure_payload(answer, query_profile, public_aggregate_governance, public_evidence_check, cf, [])
+            public_evidence_check["decision"] = "aggregate_result"
+            public_evidence_check["output_mode"] = aggregate_execution["output_class"]
+            background_tasks.add_task(log_chat_event, db, user_id, question, answer, question_keywords, [], "aggregate_result", query_profile, public_aggregate_governance, public_evidence_check, None, aggregate_execution["output_class"])
+            return chat_success_payload(question, question_keywords, query_profile, public_aggregate_governance, {}, {}, public_evidence_check, answer, [], None, aggregate_execution["output_class"])
 
         if output_gate.get("decision") == "controlled_failure":
             cf = output_gate["controlled_failure"]
@@ -488,15 +515,14 @@ async def ask_infobank(
             "If the Output mode gate contains a controlled_failure object, obey its safeOutput and nextSteps while still answering only within the allowed restriction. "
             "If information is missing or unclear, answer strictly with: 'The answer cannot be found in the document.' No hallucinations."
         )
-        final_response = ai_service.openai_client.chat.completions.create(
-            model=ai_service.MODEL_NAME,
-            messages=[
+        answer = ai_service.generate_answer(
+            [
                 {"role": "system", "content": system_instruction},
                 {"role": "user", "content": f"Question: {question}\n\nQuery profile:\n{json.dumps(query_profile, ensure_ascii=False)}\n\nGovernance/source-role summary:\n{json.dumps(governance_context, ensure_ascii=False)}\n\nSource role summary:\n{json.dumps(role_summary, ensure_ascii=False)}\n\nRelevance level summary:\n{json.dumps(relevance_level_summary, ensure_ascii=False)}\n\nEvidence check:\n{json.dumps(evidence_check, ensure_ascii=False)}\n\nOutput mode gate:\n{json.dumps(output_gate, ensure_ascii=False)}\n\nContext from the document(s):\n{context_text}"},
             ],
+            model=ai_service.MODEL_NAME,
             temperature=0.1,
         )
-        answer = final_response.choices[0].message.content
         final_cf = generation_cf
         if is_browser_history_action_rule_question(question):
             answer = "No. Browser history or activity traces can provide contextual support, refine details, or help prioritize an existing task, but they cannot create an action item by themselves without primary evidence such as an official request, assignment, calendar obligation, or user commitment."

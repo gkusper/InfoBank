@@ -121,12 +121,11 @@ Source text:
 {text[:4000]}
 """
     try:
-        response = ai_service.openai_client.chat.completions.create(
+        raw = ai_service.generate_answer(
+            [{"role": "user", "content": prompt}],
             model=ai_service.MODEL_NAME,
-            messages=[{"role": "user", "content": prompt}],
             temperature=0.0,
-        )
-        raw = response.choices[0].message.content.strip()
+        ).strip()
         parsed = json.loads(raw)
         required = {"genre", "speech_acts", "temporal_status", "source_role", "confidence", "warnings"}
         if not required.issubset(parsed.keys()):

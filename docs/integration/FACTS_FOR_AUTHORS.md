@@ -8,7 +8,8 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - Review C/D implementation branch: `feature/infocom-cd-gates`, created from the A2 commit.
 - Protected `origin/main` observed at task start: `077c85c44f570c6a6b3f15edcd584f834f335ea1`.
 - C-GATE source version: `infocom-c-gate-v1`.
-- Candidate dataset version: `reviewer-v2-candidate-v1`; development-only, non-final, non-frozen.
+- C/D development candidate version: `reviewer-v2-candidate-v1`; development-only, non-final, non-frozen.
+- Pre-freeze candidate version: `reviewer-v2-pre-freeze-candidate-v1`; status `READY_FOR_HUMAN_QA`, non-final, non-frozen.
 
 ## Review A tested facts
 
@@ -26,10 +27,20 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - W3 is executed by `evaluation/c_gate.py`; the recorded development safety counts are all zero.
 - Scale stress uses the same 24 gold queries at 50, 250, and 1000 documents. Exact measurements and limitations are in `docs/integration/CORPUS_SCALE_STRESS.md`; raw records are ignored under `artifacts/c_gate/scale/`.
 
-## Review D tested facts available before D-GATE
+## Review D tested facts
 
 - `backend_python/aggregate_executor.py` requires a configurable distinct-contributor threshold (default 3), deduplicates contributors, excludes Metadata/Deny, and exposes no individual values or identifiers in output, generator context, trace, or citations.
-- The current controlled-failure implementation is `backend_python/controlled_failure.py`. Formal output-class specification, calibration, B0-B3 execution, citation scoring, and action/closure development measurement are D-GATE work and are not claimed complete here.
+- Controlled failure uses `controlled-failure-v3`; the development scorer is `infocom-controlled-failure-scorer-v1` and the citation scorer is `infocom-citation-scorer-v1`.
+- `evaluation/d_gate.py` executes isolated B0-B3 development configurations. B3 exact output conformance, reason accuracy, abstention F1, and permitted-answer accuracy were 1.0 on the generated 54-case candidate; its false-answer rate was 0. These are generated-development results, not final E1 claims.
+- B3 prohibited disclosure, generator exposure, Aggregate individual leakage, source-existence leakage, protected-path exposure, wrong-permission citations, and archived-source use were all 0.
+- The action/closure development set contained 120 generated threads and 60 browser-only counterfactuals. Open/status/closure/linking accuracy and action F1 were 1.0; browser-only false actions were 0. Human MailEx evaluation remains pending.
+
+## Pre-freeze tested facts
+
+- `evaluation/reviewer_v2_candidate.py` and `scripts/build_reviewer_v2_candidate.py` generate six packages, 30 PDFs, 90 balanced query candidates, 60 permission groups, 60 browser-only cases, and 120 generated mail threads.
+- The 90 queries contain six candidates in each required class. Splits are disjoint by object family, template family, and document package.
+- Twenty-four mail threads are assigned for a pending second annotation; no human validation, agreement, adjudication, citation audit, or no-health sign-off is claimed.
+- `scripts/build_mailex_candidate.py` is a source/licence-aware transformation path. It has not been run on MailEx because no authorized local source/licence manifest was found.
 
 ## Known limitations
 

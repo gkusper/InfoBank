@@ -17,6 +17,7 @@ artifacts/a_gate_demo/
 artifacts/a_gate_phase2/
 artifacts/c_gate/
 artifacts/d_gate/
+artifacts/pre_freeze/
 backend_python/runtime/source_storage/
 .pytest_cache/
 temp_*.pdf

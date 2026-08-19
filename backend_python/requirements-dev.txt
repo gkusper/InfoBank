@@ -1,0 +1,4 @@
+-r requirements.txt
+
+# Local R1B quality gate and regression tests
+pytest==8.3.5

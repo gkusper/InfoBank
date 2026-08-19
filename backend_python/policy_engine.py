@@ -202,7 +202,7 @@ def resolve_document_access_bulk(db: Session, user_id: str, doc_ids: Iterable[st
     reasons: Dict[str, str] = {}
     policy_rule_ids: Dict[str, str | None] = {}
 
-    for doc_id in set(doc_ids):
+    for doc_id in sorted(set(doc_ids)):
         resolved = resolve_document_access(db, user_id, doc_id, purpose)
         decisions[doc_id] = resolved["use_decision"]
         roles[doc_id] = resolved["source_role"]
@@ -235,7 +235,7 @@ def resolve_evidence_unit_access_bulk(db: Session, user_id: str, unit_ids: Itera
     reasons: Dict[str, str] = {}
     policy_rule_ids: Dict[str, str | None] = {}
 
-    for unit_id in set(unit_ids):
+    for unit_id in sorted(set(unit_ids)):
         resolved = resolve_evidence_unit_access(db, user_id, unit_id, purpose)
         decisions[unit_id] = resolved["use_decision"]
         roles[unit_id] = resolved["source_role"]

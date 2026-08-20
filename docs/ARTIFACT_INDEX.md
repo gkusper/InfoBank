@@ -12,6 +12,9 @@ Status: `PRE_FREEZE`
 - tests: `backend_python/tests/`, `evaluation/tests/`;
 - commands: `scripts/` and `docs/REPRODUCTION.md`;
 - reports: `docs/integration/` plus manuals in `docs/`.
+- E1 planning: `evaluation/provider_readiness.py`,
+  `scripts/run_real_provider_evaluation.py`, and
+  `docs/integration/E1_ESTIMATE_ONLY_PLAN.md`.
 
 Stable current evidence hashes include MailEx source ZIP
 `dda3ce5da5ffc3452dd9e5a58cd69e19e68bd655eafe1deec48e87204f6c37b4`
@@ -26,6 +29,8 @@ The screenshot manifest records its own exact commit and PNG hashes.
 - `artifacts/pre_freeze/`: operation dumps, copied stores, restore/repair reports;
 - `artifacts/human_qa/`: pending assignment/annotation packages;
 - `artifacts/actual_pipeline/`, `evaluation/results/`: development/provider raw and scored runs;
+- `artifacts/pre_freeze/e1_estimate_only/`: deterministic JSON/CSV estimates
+  for one, two and three repeats and the separate optional scale subset;
 - `artifacts/local_quality_gate/`: JUnit and gate summaries;
 - external sibling artifact root: MailEx candidate and reconciliation runs.
 

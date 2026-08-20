@@ -18,8 +18,10 @@ requested OpenAI run to a mock.
 - config hash: `56d8ed701f154e84c615944e34c4d5ff843c28b2c72e404311e3762e79404908`.
 
 `scripts/run_real_provider_evaluation.py` exposes `--provider openai`,
-`--allow-network-provider`, `--max-cases`, `--estimated-cost-only`, and
-`--max-estimated-cost`. An actual OpenAI execution requires both the provider
+`--allow-network-provider`, `--max-cases`, `--estimate-only` (with the legacy
+`--estimated-cost-only` alias), `--repeats`, `--modes`,
+`--include-scale-subset`, `--pricing-config`,
+`--average-provider-latency-ms`, `--max-estimated-cost`, and `--output`. An actual OpenAI execution requires both the provider
 selection and network-approval flag. Missing credentials or provider errors
 are hard failures. The sealed runner records provider/model identifiers,
 prompt versions, temperature, retry count, provider-reported token usage,
@@ -31,22 +33,21 @@ cache identity contains the input hash, provider, model, prompt version, and
 evaluation config hash. Keyword, embedding, and generation operations use
 separate cache namespaces.
 
-## Network-free estimate
+## Network-free complete E1 estimates
 
-The following development estimate was executed without an API key or network
-provider call:
+The full estimator reads and verifies the current pre-freeze manifest, query
+file, source manifest and PDF hashes. The estimate path returns before runtime
+provider imports and does not read an API key. It produced:
 
-```powershell
-backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation.py `
-  --provider openai --estimated-cost-only --max-cases 20 `
-  --query-input artifacts\actual_pipeline\development-20260819\dataset\query_inputs.jsonl `
-  --corpus-fixture artifacts\actual_pipeline\development-20260819\dataset\corpus_fixture.json
-```
+- 45 candidate-holdout queries, 4 modes and 180/360/540 cases for one/two/three repeats;
+- 272632/545264/817896 estimated total generation tokens;
+- 406/812/1218 estimated provider requests under the documented cold, repeat-scoped cache model;
+- a separate optional 24-query, two-routing-mode, 1000-document scale subset: 48 cases and 121 estimated requests.
 
-Result: 20 cases, estimated 13,273 input tokens and 10,240 output tokens. The
-method is an explicitly labelled local character-count estimate, not provider
-billing data. No pricing configuration was supplied, so projected cost is
-`null` with status `NO_LOCAL_PRICING_CONFIG`; no price was invented.
+No pricing configuration or latency assumption was supplied. Projected costs
+are `null` with `NO_LOCAL_PRICING_CONFIG`; provider runtime is `UNKNOWN`. The
+method and commands are in `E1_ESTIMATE_ONLY_PLAN.md`. No price or latency was
+invented and no provider call occurred.
 
 ## Approval-only command shape
 
@@ -66,3 +67,5 @@ backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation
 
 This document is readiness evidence only. It is not provider-run approval, a
 dataset/config freeze, or final E1 evidence.
+
+`DO_NOT_RUN_FINAL_E1_YET`

@@ -55,10 +55,13 @@ backend_python\.venv_r1a\Scripts\python.exe .\scripts\compute_annotation_agreeme
 ## E1 estimate-only
 
 ```powershell
-backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 1 --modes B0_NO_RETRIEVAL B1_ROUTING_OFF B2_KEYWORD_ROUTING B3_FULL_ROLE_AWARE --output .\artifacts\pre_freeze\e1-estimate-r1.json
+$modes = 'B0_VECTOR_ONLY','B1_VECTOR_ROUTING','B2_PERMISSION_FILTERED','B3_FULL_ROLE_AWARE'
+backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 1 --modes $modes --include-scale-subset --output .\artifacts\pre_freeze\e1_estimate_only\e1-r1.json
+backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 2 --modes $modes --output .\artifacts\pre_freeze\e1_estimate_only\e1-r2.json
+backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 3 --modes $modes --output .\artifacts\pre_freeze\e1_estimate_only\e1-r3.json
 ```
 
-Repeat with `--repeats 2` and `3`; optional scale is separately enabled with
-`--include-scale-subset`. Final provider execution is
+The optional scale estimate is a separate row/bundle scope and is never added
+to the base counts. Final provider execution is
 `NOT_AUTHORIZED / DO_NOT_RUN_YET`; do not remove `--estimate-only` and do not
 provide a real API key before human provider/cost and freeze approval.

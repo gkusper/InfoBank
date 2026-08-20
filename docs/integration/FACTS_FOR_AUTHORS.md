@@ -44,6 +44,12 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - The 90 queries contain six candidates in each required class. Splits are disjoint by object family, template family, and document package.
 - Twenty-four mail threads are assigned for a pending second annotation; no human validation, agreement, adjudication, citation audit, or no-health sign-off is claimed.
 - Local `data.zip` SHA-256 is `dda3ce5da5ffc3452dd9e5a58cd69e19e68bd655eafe1deec48e87204f6c37b4`; it contains train/dev/test/full-data JSON plus raw threads. The actual-format parser built an untracked, pseudonymized 120-thread candidate with 120 primary and 24 second-annotation rows. No licence/readme evidence was found; status remains `LICENCE_PENDING_HUMAN_CONFIRMATION`, and raw/derived content is not tracked.
+- The network-free E1 estimator read 45 candidate-holdout queries, 15 PDFs and
+  30 pages from the current pre-freeze artifacts. Four modes produce 180, 360
+  and 540 cases for one, two and three repeats. With no local pricing or latency
+  assumption, cost is `null`, pricing status is `NO_LOCAL_PRICING_CONFIG`, and
+  runtime is `UNKNOWN`. The separate 1000-document scale estimate covers 24
+  queries in two routing modes (48 cases). No provider call or final E1 occurred.
 
 ## Known limitations
 

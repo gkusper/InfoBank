@@ -53,6 +53,9 @@ The tracked candidate builder uses generated synthetic source PDFs and mail. A s
 - Manual no-health sign-off is pending.
 - The local MailEx ZIP contains no locally evidenced licence/readme file; human licence and redistribution confirmation is pending.
 - The approved network-provider run and final freeze/version decision have not occurred.
+- Complete local E1 estimates now exist for one, two and three B0-B3 repeats,
+  plus a separately reported optional scale subset. Cost remains `null` and
+  runtime `UNKNOWN` because no local pricing or latency assumption was approved.
 
 These are intentional human-only gates, not automated test failures.
 
@@ -79,6 +82,10 @@ powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_local_quality_
 ```
 
 Before execution, the D runner must be pointed at the approved frozen reviewer-v2 manifest rather than its generated development candidate, and the final run must record the frozen dataset/scorer/config/code hashes. That wiring and authorization are deliberately not asserted complete here.
+
+The current network-free estimator and exact counts are documented in
+`E1_ESTIMATE_ONLY_PLAN.md`. Its status is `DO_NOT_RUN_FINAL_E1_YET` and it made
+no provider call.
 
 ## Decision required
 

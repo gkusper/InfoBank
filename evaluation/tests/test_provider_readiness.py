@@ -9,11 +9,15 @@ from ai_provider import DeterministicMockProvider
 from evaluation.actual_pipeline_dataset import build_development_dataset
 from evaluation.provider_readiness import (
     CachedEvaluationProvider,
+    E1_MODES,
     ReadinessConfig,
     cache_key,
     estimate_evaluation,
+    estimate_full_e1,
     validate_provider_request,
+    write_e1_estimate_bundle,
 )
+from evaluation.reviewer_v2_candidate import build_candidate
 
 
 def test_openai_requires_explicit_network_approval_and_has_no_fallback() -> None:
@@ -80,6 +84,83 @@ def test_cache_identity_and_generation_cache_cover_required_fields(tmp_path: Pat
 def test_real_provider_cli_exposes_required_guards() -> None:
     source = (Path(__file__).parents[2] / "scripts/run_real_provider_evaluation.py").read_text(encoding="utf-8")
     for flag in (
-        "--provider", "--allow-network-provider", "--max-cases", "--estimated-cost-only", "--max-estimated-cost",
+        "--provider", "--allow-network-provider", "--max-cases", "--estimated-cost-only", "--estimate-only",
+        "--repeats", "--modes", "--include-scale-subset", "--pricing-config",
+        "--average-provider-latency-ms", "--max-estimated-cost", "--output",
     ):
         assert flag in source
+
+
+def test_full_e1_estimate_reads_holdout_counts_and_keeps_unknowns_explicit(tmp_path: Path) -> None:
+    candidate = tmp_path / "candidate"
+    manifest = build_candidate(candidate)
+    result = estimate_full_e1(
+        dataset_manifest_path=candidate / "dataset_manifest.json",
+        gold_queries_path=candidate / "gold_queries.json",
+        source_manifest_path=candidate / "source_manifest.json",
+        repeats=2,
+    )
+    assert manifest["gold_query_count"] == 90
+    assert result["source_scope"]["query_count"] == 45
+    assert result["source_scope"]["document_count"] == 15
+    assert result["source_scope"]["page_count"] == 30
+    assert result["base_e1"]["modes"] == list(E1_MODES)
+    assert result["base_e1"]["total_case_count"] == 360
+    assert result["base_e1"]["generation_operations"] == 360
+    assert result["pricing_status"] == "NO_LOCAL_PRICING_CONFIG"
+    assert result["combined_projected_cost"] is None
+    assert result["base_e1"]["provider_runtime_estimate"] == "UNKNOWN"
+    assert result["base_e1"]["estimated_provider_wall_clock_ms"] is None
+    assert result["network_called"] is False
+    assert result["api_key_read"] is False
+    assert result["authorization_status"] == "DO_NOT_RUN_FINAL_E1_YET"
+
+
+def test_full_e1_estimate_supports_local_pricing_latency_scale_and_csv(tmp_path: Path) -> None:
+    candidate = tmp_path / "candidate"
+    build_candidate(candidate)
+    from evaluation.c_gate import scale_manifest
+
+    scale_path = tmp_path / "scale.json"
+    scale_path.write_text(json.dumps(scale_manifest(50), sort_keys=True), encoding="utf-8")
+    pricing_path = tmp_path / "pricing.json"
+    pricing_path.write_text(json.dumps({
+        "gpt-4o-mini": {"input_per_million": 1.0, "output_per_million": 2.0},
+        "text-embedding-3-small": {"input_per_million": 0.5},
+    }), encoding="utf-8")
+    result = estimate_full_e1(
+        dataset_manifest_path=candidate / "dataset_manifest.json",
+        gold_queries_path=candidate / "gold_queries.json",
+        source_manifest_path=candidate / "source_manifest.json",
+        repeats=1,
+        modes=["B2_PERMISSION_FILTERED", "B3_FULL_ROLE_AWARE"],
+        include_scale_subset=True,
+        scale_manifest_path=scale_path,
+        pricing_config=pricing_path,
+        average_provider_latency_ms=100.0,
+    )
+    assert result["base_e1"]["total_case_count"] == 90
+    assert result["base_e1"]["projected_cost"] > 0
+    assert result["base_e1"]["provider_runtime_estimate"] == "LOCAL_LATENCY_ASSUMPTION"
+    assert result["optional_scale_subset"]["query_count"] == 24
+    assert result["optional_scale_subset"]["total_case_count"] == 48
+    assert result["optional_scale_subset"]["separate_from_base_e1"] is True
+    json_path, csv_path = write_e1_estimate_bundle(result, tmp_path / "estimate.json")
+    assert json_path.is_file() and csv_path.is_file()
+    assert len(csv_path.read_text(encoding="utf-8").splitlines()) == 3
+
+
+def test_full_e1_estimate_rejects_manifest_count_drift(tmp_path: Path) -> None:
+    candidate = tmp_path / "candidate"
+    build_candidate(candidate)
+    manifest_path = candidate / "dataset_manifest.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    manifest["gold_query_count"] = 89
+    manifest_path.write_text(json.dumps(manifest), encoding="utf-8")
+    with pytest.raises(ValueError, match="gold_query_count"):
+        estimate_full_e1(
+            dataset_manifest_path=manifest_path,
+            gold_queries_path=candidate / "gold_queries.json",
+            source_manifest_path=candidate / "source_manifest.json",
+            repeats=1,
+        )

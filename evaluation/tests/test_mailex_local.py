@@ -8,6 +8,7 @@ from pathlib import Path
 from evaluation.actual_pipeline_dataset import build_development_dataset
 from evaluation.human_qa import build_human_qa_package
 from evaluation.mailex_local import build_local_mailex_candidate
+from evaluation.mailex_reconciliation import build_mailex_reconciliation
 
 
 def _source_zip(path: Path) -> None:
@@ -101,3 +102,48 @@ def test_human_qa_package_has_exact_pending_rows_and_no_fabricated_decisions(tmp
     citation_rows = list(csv.DictReader((tmp_path / "qa/citation_audit_40.csv").open(encoding="utf-8")))
     assert all(item["review_status"] == "PENDING_HUMAN_AUDIT" for item in citation_rows)
     assert all(item["reviewer_id"] == "" and item["human_notes"] == "" for item in citation_rows)
+
+
+def test_reconciliation_accounts_alias_duplicate_unmatched_and_macos_metadata(tmp_path: Path) -> None:
+    source = tmp_path / "data.zip"
+    _source_zip(source)
+    with zipfile.ZipFile(source, "a", compression=zipfile.ZIP_DEFLATED) as archive:
+        alias_json = {
+            "events": {},
+            "sentences": [
+                ["Please", "review", "synthetic", "item", "1"],
+                ["Completed", "synthetic", "item", "1"],
+            ],
+        }
+        archive.writestr("root/data/full_data/alias-record.json", json.dumps(alias_json))
+        duplicate_raw = archive.read("root/data/raw_threads/thread_001")
+        archive.writestr("root/data/raw_threads/content-alias", duplicate_raw)
+        archive.writestr("root/data/raw_threads/content-alias-duplicate", duplicate_raw)
+        archive.writestr(
+            "root/data/raw_threads/unmatched-record",
+            "From: Unmatched <unmatched@example.test>\nSubject: Separate fixture\n\nNo aligned JSON annotation exists.",
+        )
+        archive.writestr("root/data/.DS_Store", b"finder-metadata")
+        archive.writestr("__MACOSX/root/data/._prompt_data.txt", b"apple-double")
+
+    output = tmp_path / "reconciliation"
+    summary = build_mailex_reconciliation(source, output)
+    assert summary["status"] == "PASS"
+    assert summary["alias_relationship_count"] >= 1
+    assert summary["duplicate_raw_count"] >= 1
+    assert summary["unmatched_raw_count"] == 1
+    assert summary["unmatched_json_count"] == 0
+    assert summary["unexplained_count"] == 0
+    assert summary["logical_entry_count_after_all_macos_metadata"] == summary["non_directory_entry_count"] - 2
+    for filename in (
+        "source_entry_inventory.jsonl",
+        "json_raw_match_table.csv",
+        "unmatched_json_records.csv",
+        "unmatched_raw_records.csv",
+        "duplicate_or_alias_records.csv",
+        "reconciliation_summary.json",
+        "reconciliation_checksums.csv",
+    ):
+        assert (output / filename).is_file()
+    serialized = "".join(path.read_text(encoding="utf-8") for path in output.iterdir())
+    assert "No aligned JSON annotation exists" not in serialized

@@ -323,8 +323,8 @@ def select_rag_output_mode(
             reason,
             state,
             policy,
-            "There is no permitted source that can be used for this question in the InfoBank.",
-            ["Upload, connect, or grant a permitted source for this purpose."],
+            "The request cannot be answered from the sources available for this purpose.",
+            ["Use a permitted source for this purpose or ask about an object in the available scope."],
             {**trace, "gate": "policy_and_safety_filtering"},
         )
         return blocked_output(cf)

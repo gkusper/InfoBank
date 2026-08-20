@@ -5,6 +5,7 @@ import datetime as dt
 import pytest
 
 import models
+import controlled_failure
 import policy_engine
 import relevance
 
@@ -216,3 +217,79 @@ def test_archived_document_and_deny_override_stay_hard_after_grant(db_session) -
     resolved = policy_engine.resolve_document_access(db_session, USER_ID, document.id)
     assert resolved["use_decision"] == relevance.USE_DENY
     assert resolved["reason"] == "document_archived"
+
+
+def _assert_permission_refusal(db_session, document_ids: list[str]) -> None:
+    governance = policy_engine.resolve_document_access_bulk(
+        db_session,
+        USER_ID,
+        document_ids,
+        "grounded_question_answering",
+    )
+    decision = controlled_failure.select_rag_output_mode(
+        question="What is the governed source status?",
+        sources=[],
+        query_profile={"purpose": "grounded_question_answering", "task_intent": "fact_lookup"},
+        governance=governance,
+        context_blocks_available=False,
+    )
+    assert decision["output_mode"] == controlled_failure.STATUS_REFUSE
+    assert decision["controlled_failure"]["reason"] == controlled_failure.REASON_GOVERNANCE
+    assert governance["content_doc_ids"] == []
+
+
+def test_revoke_explicit_deny_purpose_expiry_and_archive_map_to_permission_refusal(db_session) -> None:
+    reader_id = "00000000-0000-0000-0000-000000000009"
+    add_user(db_session)
+    db_session.add(models.User(
+        id=reader_id,
+        email="policy-reader@example.invalid",
+        username="policy-reader",
+        password_hash="not-used",
+    ))
+    now = dt.datetime.now(dt.UTC).replace(tzinfo=None)
+    for doc_id in ("revoked", "explicit-deny", "purpose", "expired", "archived"):
+        add_document(db_session, doc_id)
+    add_permission(db_session, "revoked", models.PermissionType.Owner)
+    policy_engine.grant_document_permission(
+        db_session,
+        owner_user_id=USER_ID,
+        document_id="revoked",
+        target_user_id=reader_id,
+        permission_type=models.PermissionType.Reader,
+    )
+    assert policy_engine.revoke_document_permission(
+        db_session,
+        owner_user_id=USER_ID,
+        document_id="revoked",
+        target_user_id=reader_id,
+    )
+    add_rule(db_session, "explicit-deny", models.PolicyAccessMode.Deny)
+    add_rule(db_session, "purpose", models.PolicyAccessMode.Full, purpose="action_reconstruction")
+    add_rule(db_session, "expired", models.PolicyAccessMode.Full, valid_until=now - dt.timedelta(hours=1))
+    archived = db_session.query(models.Document).filter(models.Document.id == "archived").one()
+    archived.source_status = "ARCHIVED"
+    db_session.flush()
+
+    original_user = USER_ID
+    governance = policy_engine.resolve_document_access_bulk(
+        db_session,
+        reader_id,
+        ["revoked", "explicit-deny", "purpose", "expired", "archived"],
+        "grounded_question_answering",
+    )
+    decision = controlled_failure.select_rag_output_mode(
+        question="What is the governed source status?",
+        sources=[],
+        query_profile={"purpose": "grounded_question_answering", "task_intent": "fact_lookup"},
+        governance=governance,
+        context_blocks_available=False,
+    )
+    assert original_user == USER_ID
+    assert decision["output_mode"] == "REFUSE_PERMISSION"
+    assert governance["content_doc_ids"] == []
+    assert set(governance["policy_reasons"].values()) == {
+        "private_no_permission",
+        "explicit_policy_deny",
+        "document_archived",
+    }

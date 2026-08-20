@@ -397,7 +397,17 @@ def _run_workflows(client: Any, database: Any, models: Any, ai_service: Any, out
             "W3", f"revoke-remaining-{index}", "DELETE", f"/api/policy/documents/{doc_id}/permissions/{reader_id}", token=owner_token,
             checks=lambda response, body: {"revoked": response.status_code == 200 and body.get("revoked") is True},
         )
-    _ask(api, "W3", "immediate-exclusion-after-revoke", reader_token, "What is the average aggregate approval time statistics?", "REFUSE_NO_MATCH")
+    revoked = _ask(
+        api,
+        "W3",
+        "immediate-permission-refusal-after-revoke",
+        reader_token,
+        "What is the average aggregate approval time statistics?",
+        "REFUSE_PERMISSION",
+    )
+    revoked_public = json.dumps(revoked, sort_keys=True)
+    for denied_identifier in aggregate_ids:
+        _assert(denied_identifier not in revoked_public, "W3 revoked response disclosed a denied document identifier")
 
     ownership = _upload(
         api, "W3", "upload-transfer-object", owner_token, "own-700-transfer.pdf", "OWN-700 Ownership",

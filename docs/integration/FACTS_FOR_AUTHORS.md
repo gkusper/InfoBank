@@ -23,6 +23,7 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - `backend_python/ai_provider.py` supplies OpenAI, deterministic-mock, and network-free local-compatible adapters for keywords, embeddings, and generation. Selection uses `AI_PROVIDER`.
 - Provider/model/config hashes are recorded in document processing and evaluation manifests.
 - Persistent grant/revoke endpoints are `POST /api/policy/documents/{doc_id}/permissions` and `DELETE /api/policy/documents/{doc_id}/permissions/{target_user_id}`.
+- Runtime policy resolution precedes routing: revoke, explicit Deny, archive, purpose mismatch, expiry/future validity, and stale-index rejection produce internal `REFUSE_PERMISSION`; `REFUSE_NO_MATCH` is reserved for a genuine miss inside a permitted scope. Public failure payloads do not enumerate denied sources.
 - Ownership transfer remains `POST /api/documents/transfer` and preserves the document ID.
 - W3 is executed by `evaluation/c_gate.py`; the recorded development safety counts are all zero.
 - Scale stress uses the same 24 gold queries at 50, 250, and 1000 documents. Exact measurements and limitations are in `docs/integration/CORPUS_SCALE_STRESS.md`; raw records are ignored under `artifacts/c_gate/scale/`.
@@ -35,6 +36,7 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 - Controlled-failure specification, separate QueryInput/GoldAnnotation schemas, raw-run seals, post-run scorer, and gold-blind actual B0-B3 development execution are implemented. The corrected 20-case synthetic B3 run produced 1.0 output/reason/permitted-answer and citation-development metrics with zero scanned safety findings; this is development-only deterministic evidence, not a human-validated or final result. Final E1 has not started.
 - Historical zero B3 safety counters are contract-simulation results. Actual-pipeline safety must be recalculated by scanning produced candidates, retrieval traces, generator context, answers, citations, and public wording.
 - The action/closure development set contained 120 generated threads and 60 browser-only counterfactuals. Open/status/closure/linking accuracy and action F1 were 1.0; browser-only false actions were 0. Human MailEx evaluation remains pending.
+- Local MailEx reconciliation accounts for all 1500 full-data JSON records: 1496 normalized-stem one-to-one relations, four content aliases, two alternate raw duplicates, six explicitly unmatched raw files, zero unmatched JSON, and zero unexplained records. Licence remains `LICENCE_PENDING_HUMAN_CONFIRMATION`.
 
 ## Pre-freeze tested facts
 

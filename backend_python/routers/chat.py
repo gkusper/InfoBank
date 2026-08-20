@@ -55,6 +55,55 @@ def get_permitted_fallback_doc_ids(db: Session, user_id: str) -> list[str]:
     return sorted(set(direct_doc_ids + public_doc_ids))
 
 
+def get_governance_scope_doc_ids(db: Session) -> list[str]:
+    """Return identifiers for internal policy resolution, never public routing.
+
+    Policy must run before routing so revoked, archived, expired, purpose-bound,
+    and explicit-Deny sources remain distinguishable from a genuine no-match.
+    The resulting denied identifiers are kept in the privileged audit trace and
+    are removed from the public response by ``_public_governance_context``.
+    """
+
+    return sorted(row[0] for row in db.query(models.Document.id).all())
+
+
+def _public_routing_trace(trace: dict | None) -> dict:
+    trace = trace or {}
+    return {
+        key: trace[key]
+        for key in (
+            "mode",
+            "candidate_set_size",
+            "governed_input_count",
+            "fallback_used",
+            "fallback_reason",
+            "selected_keywords",
+            "matched_keywords",
+            "config_version",
+            "config_hash",
+        )
+        if key in trace
+    }
+
+
+def _public_query_profile(query_profile: dict | None) -> dict:
+    public = dict(query_profile or {})
+    if "routing_trace" in public:
+        public["routing_trace"] = _public_routing_trace(public.get("routing_trace"))
+    return public
+
+
+def _public_governance_context(governance: dict | None) -> dict:
+    governance = governance or {}
+    public = {
+        "policy_enforced": True,
+        **controlled_failure.safe_policy_state(governance),
+    }
+    if governance.get("routing_trace"):
+        public["routing_trace"] = _public_routing_trace(governance.get("routing_trace"))
+    return public
+
+
 def make_generator_safe_chunk(role: str, chunk_text: str, source_profile: dict) -> str:
     if role == relevance.SOURCE_ROLE_AGGREGATE_ONLY:
         return "[Aggregate-only source withheld. Use only the thresholded aggregate executor result.]"
@@ -225,8 +274,8 @@ def controlled_failure_payload(message: str, query_profile: dict, governance_con
         "status": "controlled_failure",
         "message": message,
         "answer": message,
-        "query_profile": query_profile,
-        "governance": governance_context,
+        "query_profile": _public_query_profile(query_profile),
+        "governance": _public_governance_context(governance_context),
         "evidence_check": evidence_check,
         "controlled_failure": cf,
         "output_mode": cf.get("status"),
@@ -277,7 +326,7 @@ async def ask_infobank(
             background_tasks.add_task(log_chat_event, db, user_id, question, msg, [], [], cf["status"], query_profile, {}, evidence_check, cf, cf["status"], audit_id)
             return controlled_failure_payload(msg, query_profile, {}, evidence_check, cf, audit_id=audit_id)
 
-        routing_scope_doc_ids = get_permitted_fallback_doc_ids(db, user_id)
+        routing_scope_doc_ids = get_governance_scope_doc_ids(db)
         pre_routing_governance = policy_engine.resolve_document_access_bulk(
             db=db,
             user_id=user_id,
@@ -336,9 +385,9 @@ async def ask_infobank(
             query_profile["retrieval_strategy"] = "keyword_routed"
 
         if not candidate_doc_ids:
-            msg = "There is no document related to the question in the InfoBank."
+            msg = "No source available to this request matches the question, so no answer was generated."
             cf = controlled_failure.make_controlled_failure(
-                controlled_failure.STATUS_ABSTAIN,
+                controlled_failure.STATUS_REFUSE_NO_MATCH,
                 controlled_failure.REASON_EPISTEMIC,
                 controlled_failure.evidence_state([], query_profile, False),
                 controlled_failure.safe_policy_state({}),

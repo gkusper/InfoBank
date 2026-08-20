@@ -49,7 +49,7 @@ def _safe_members(archive: zipfile.ZipFile) -> list[zipfile.ZipInfo]:
     safe: list[zipfile.ZipInfo] = []
     for item in archive.infolist():
         path = PurePosixPath(item.filename)
-        if item.is_dir() or item.filename.startswith("__MACOSX/"):
+        if item.is_dir() or item.filename.startswith("__MACOSX/") or path.name == ".DS_Store":
             continue
         if path.is_absolute() or ".." in path.parts or re.match(r"^[A-Za-z]:", item.filename):
             raise ValueError(f"Unsafe ZIP member: {item.filename!r}")
@@ -214,15 +214,24 @@ def build_local_mailex_candidate(source_zip: Path, output_dir: Path, limit: int 
             for name in json_by_split.get(split, []):
                 split_by_stem[_normalized_stem(name)].add(split)
         raw_names = [name for name in names if "/raw_threads/" in f"/{name}"]
-        raw_by_stem = {_normalized_stem(name): name for name in raw_names}
         full_names = sorted(json_by_split.get("full_data", []))
+
+        # Filename normalization is not unique in the local ZIP. Use the
+        # content-audited reconciliation plan so colliding and corrected raw
+        # records are paired deterministically instead of being overwritten by
+        # a dict comprehension.
+        from .mailex_reconciliation import build_match_plan
+
+        match_plan = build_match_plan(archive, full_names, raw_names)
+        raw_for_json = match_plan["json_to_raw"]
+        duplicate_stem_counts = Counter(_normalized_stem(name) for name in full_names)
 
         selected: list[dict[str, Any]] = []
         excluded: list[dict[str, Any]] = []
-        unmatched = sum(_normalized_stem(name) not in raw_by_stem for name in full_names)
+        unmatched = sum(json_name not in raw_for_json for json_name in full_names)
         for json_name in full_names:
             stem = _normalized_stem(json_name)
-            raw_name = raw_by_stem.get(stem)
+            raw_name = raw_for_json.get(json_name)
             if not raw_name:
                 continue
             annotation_bytes = archive.read(json_name)
@@ -231,7 +240,8 @@ def build_local_mailex_candidate(source_zip: Path, output_dir: Path, limit: int 
             raw_text = raw_bytes.decode("utf-8", errors="replace")
             parsed_messages = [_parsed_message(item) for item in _split_messages(raw_text)]
             pre_hits = _topic_hits({"messages": parsed_messages, "annotations": annotation_value})
-            source_hash = _stable_id("source-thread", stem, 24)
+            source_key = stem if duplicate_stem_counts[stem] == 1 else f"{stem}|{json_name}"
+            source_hash = _stable_id("source-thread", source_key, 24)
             if pre_hits:
                 excluded.append({"source_thread_hash": source_hash, "reason_category": "NO_HEALTH_THREAD_EXCLUSION", "matched_term_categories": pre_hits})
                 continue
@@ -248,7 +258,7 @@ def build_local_mailex_candidate(source_zip: Path, output_dir: Path, limit: int 
                 recipient_addresses = getaddresses([headers.get("to", ""), headers.get("cc", "")])
                 sender_value = (sender_addresses[0][1] or sender_addresses[0][0]) if sender_addresses else "unknown-sender"
                 recipients = [address or name for name, address in recipient_addresses if address or name]
-                source_message = headers.get("message-id") or f"{stem}:{order}"
+                source_message = headers.get("message-id") or f"{source_key}:{order}"
                 messages.append({
                     "message_id": str(uuid.uuid5(uuid.NAMESPACE_URL, f"infobank:mailex:{source_message}")),
                     "source_message_id_hash": _stable_id("message", source_message, 24),
@@ -321,6 +331,8 @@ def build_local_mailex_candidate(source_zip: Path, output_dir: Path, limit: int 
             "selected_thread_count": len(selected),
             "excluded_thread_count": len(excluded),
             "unmatched_full_data_count": unmatched,
+            "source_reconciliation_version": match_plan["version"],
+            "source_reconciliation_unexplained_count": match_plan["unexplained_count"],
             "primary_annotation_count": len(assignments),
             "second_annotation_count": second_count,
             "split_counts": dict(sorted(split_counts.items())),
@@ -352,7 +364,7 @@ def build_local_mailex_candidate(source_zip: Path, output_dir: Path, limit: int 
                 "Date/Sent where present",
                 "Message-ID where present",
             ],
-            "thread_identifier_strategy": "normalized source filename retained only as irreversible hash",
+            "thread_identifier_strategy": "normalized source filename retained only as an irreversible hash; colliding normalized stems include the logical JSON path in the hashed key",
             "selected_parser": "zip-direct JSON parser plus delimiter/RFC-822-compatible raw-thread parser",
             "unresolved_issues": [
                 "No licence/readme evidence was found locally; human licence and redistribution confirmation is required.",

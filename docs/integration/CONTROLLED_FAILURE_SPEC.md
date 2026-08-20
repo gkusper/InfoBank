@@ -19,7 +19,7 @@ Development scorer: `infocom-controlled-failure-scorer-v1` in `evaluation/d_gate
 | `CLARIFICATION` | Object, source, time window, or current status is underspecified. | Skipped. |
 | `REFUSE_PERMISSION` | Hard authorization, archive, Deny, or security policy blocks use. | Skipped. |
 | `REFUSE_INSUFFICIENT_EVIDENCE` | Permitted candidates exist but lack supporting evidence. | Skipped. |
-| `REFUSE_NO_MATCH` | No permitted match exists. | Skipped. |
+| `REFUSE_NO_MATCH` | A permitted search scope exists but no relevant object/source match exists. | Skipped. |
 | `REFUSE_AGGREGATION_THRESHOLD` | Distinct permitted contributors do not satisfy k. | Skipped; no count or source existence is disclosed. |
 | `REFUSE_CONFLICT` | An authority-sensitive conflict cannot be resolved safely. | Skipped. |
 | `ESCALATE_TO_HUMAN` | A state-changing request must use an explicit audited action workflow. | Skipped. |
@@ -59,15 +59,18 @@ Calibration may compare soft thresholds on the development split only. It may no
 
 Supporting-chunk rule: every indispensable gold document must have at least one accessible, traceable chunk on an allowed page. A citation must match document ID, chunk-document association, and page range. Source-diversity greater than one is required only when a case definition marks multiple documents indispensable.
 
-## Safe public wording
+## Safe public wording and internal distinction
 
-- Permission: “There is no permitted source that can be used for this question in the InfoBank.”
+- Permission: “The request cannot be answered from the sources available for this purpose.”
+- No match: “No source available to this request matches the question, so no answer was generated.”
 - Insufficient evidence: “The answer cannot be found in the document.”
 - Aggregate threshold: “A governed aggregate result is unavailable for this request.”
 - Conflict: identify that evidence conflicts, but not a winner unless authority is established.
 - Clarification: request only the missing object, source, time period, or claim.
 
-The aggregate-threshold response uses an empty public source list, sanitized governance state, no citation, and a trace without excluded/available source counts.
+`REFUSE_PERMISSION` is selected when policy resolution observes Deny, revoke/missing persistent permission, archive, purpose mismatch, expiry/future validity, or stale-index rejection. `REFUSE_NO_MATCH` is selected only after a permitted scope exists and matching fails. Both responses use an empty public source list and an identifier-free governance/routing projection. Denied filenames, UUIDs, hashes, page counts, previous availability, and source identities remain only in privileged audit data.
+
+The aggregate-threshold response also uses an empty public source list, sanitized governance state, no citation, and a trace without excluded/available source counts.
 
 ## Pseudocode
 
@@ -76,7 +79,7 @@ profile(query)
 if unsafe_or_mutating(query): return safe_refusal_or_escalation
 
 permitted = resolve_policy_before_routing(user, purpose, all_candidates)
-if no permitted candidate: return REFUSE_PERMISSION or REFUSE_NO_MATCH
+if denied candidates exist and no permitted candidate: return REFUSE_PERMISSION
 
 routed = route(permitted)                 # routing cannot expand permitted
 resolved = resolve_policy_again(routed)   # stale index defense
@@ -89,7 +92,7 @@ if aggregate_request:
     return AGGREGATE_RESULT without calling the generator
 
 if metadata_only: return METADATA_ONLY
-if no match: return REFUSE_NO_MATCH
+if permitted scope exists but no object/source match: return REFUSE_NO_MATCH
 if missing indispensable supporting chunk: return REFUSE_INSUFFICIENT_EVIDENCE
 if current question lacks temporal signal: return CLARIFICATION
 if authority-sensitive conflict: return REFUSE_CONFLICT
@@ -104,4 +107,4 @@ return FULL_ANSWER with accessible document/page/chunk citations
 - Runtime gate: `backend_python/controlled_failure.py` and `backend_python/routers/chat.py`.
 - Aggregate gate: `backend_python/aggregate_executor.py`.
 - Development calibration/scorer and error taxonomy: `evaluation/d_gate.py`.
-- Tests: `evaluation/tests/test_d_gate.py`, `backend_python/tests/test_aggregate_executor.py`, and existing evidence/routing tests.
+- Tests: `evaluation/tests/test_d_gate.py`, `backend_python/tests/test_aggregate_executor.py`, `backend_python/tests/test_policy_invariants.py`, `backend_python/tests/test_reviewer_contracts.py`, and API W3.

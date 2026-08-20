@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import evidence_service
@@ -37,6 +38,41 @@ def test_chat_response_contract_exposes_same_audit_id_for_success_and_failure() 
     success = chat_success_payload("q", [], {}, {}, {}, {}, {}, "a", [], audit_id=audit_id)
     failure = controlled_failure_payload("safe", {}, {}, {}, {"status": "REFUSE_NO_MATCH"}, audit_id=audit_id)
     assert success["audit_id"] == failure["audit_id"] == audit_id
+
+
+def test_permission_and_no_match_public_failures_remove_source_identifiers() -> None:
+    denied_id = "11111111-1111-1111-1111-111111111111"
+    query_profile = {
+        "routing_trace": {
+            "mode": "KEYWORD_ROUTING",
+            "candidate_set_size": 0,
+            "candidate_document_ids": [denied_id],
+            "excluded_document_ids": [denied_id],
+        }
+    }
+    governance = {
+        "content_doc_ids": [],
+        "metadata_only_doc_ids": [],
+        "denied_doc_ids": [denied_id],
+        "usable_doc_ids": [],
+        "use_decisions": {denied_id: "deny"},
+        "policy_reasons": {denied_id: "private_no_permission"},
+    }
+    for output_mode in ("REFUSE_PERMISSION", "REFUSE_NO_MATCH"):
+        payload = controlled_failure_payload(
+            "The request cannot be answered from the sources available for this purpose.",
+            query_profile,
+            governance,
+            {},
+            {"status": output_mode},
+            audit_id="00000000-0000-0000-0000-000000000123",
+        )
+        serialized = json.dumps(payload, sort_keys=True)
+        assert denied_id not in serialized
+        assert "candidate_document_ids" not in serialized
+        assert "excluded_document_ids" not in serialized
+        assert payload["sources"] == []
+        assert payload["governance"]["denied_source_count"] == 1
 
 
 def test_reviewer_frontend_has_four_screens_fields_and_api_wiring() -> None:

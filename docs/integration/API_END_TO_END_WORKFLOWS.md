@@ -58,7 +58,8 @@ Result: `PASS`.
 - Changed the relation to `Aggregate`, granted two more aggregate sources, and
   obtained `AGGREGATE_RESULT` at k=3 without individual citations.
 - Revoking one source produced `REFUSE_AGGREGATION_THRESHOLD`; revoking the
-  remaining relations produced immediate `REFUSE_NO_MATCH` exclusion.
+  remaining relations produced immediate internal `REFUSE_PERMISSION` with an
+  empty source list and no denied document identifier in the public response.
 - Transferred an isolated OWN-700 document. The old owner immediately received
   a source-not-found response, while the new owner could open the page and
   obtain a cited grounded answer.

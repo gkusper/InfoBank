@@ -9,7 +9,7 @@ Candidate status: `READY_FOR_HUMAN_ANNOTATION_NOT_FREEZE`
 - Source ZIP basename: `data.zip`.
 - ZIP SHA-256: `dda3ce5da5ffc3452dd9e5a58cd69e19e68bd655eafe1deec48e87204f6c37b4`.
 - ZIP size: 5,476,134 bytes.
-- Non-directory entries: 4,754; logical entries after ignoring macOS resource metadata: 4,508.
+- Non-directory entries: 4,754. There are 246 `__MACOSX` entries and one `.DS_Store`; excluding all 247 macOS metadata entries leaves 4,507 logical entries. The earlier 4,508 value excluded only the `__MACOSX` directory and is retained as a documented legacy-parser count, not the corrected logical count.
 - Split JSON files: train 1,200; dev 150; test 150; full_data 1,500.
 - Raw-thread files: 1,506.
 - Other logical source file: `prompt_data.txt`.
@@ -30,7 +30,9 @@ Transformation version: `infobank-mailex-local-transform-v1`.
 
 For every selected thread the ignored candidate records an irreversible source-record hash, source split, stable pseudonymous participants, ordered messages, transformed annotations, source ZIP hash, selected raw-thread hash, selected annotation-file hash, and pending human state. Email addresses, observed participant display names, URLs, phone-like values, and local paths are deterministically pseudonymized. The candidate contains no raw absolute extraction path.
 
-The automated source audit found 1,498 normalized JSON/raw matches across the complete 1,500-record full-data set, leaving 2 unmatched full-data JSON records. The deterministic selection traversed the source until 120 usable threads were selected. Three encountered threads were excluded in full by the automated no-health filter. The selected split counts are train 99, dev 9, and test 12.
+The content-based reconciliation found 1,496 normalized-stem one-to-one relations and four alias relations. Two aliases account for the previously unmatched full-data JSON records by high content overlap with already matched raw threads; two replace misleading direct filenames with exact content aliases. Two remaining raw records are alternate duplicates and six are explicitly unmatched raw records. Therefore all 1,500 full-data JSON records are accounted for, unmatched JSON is zero, and unexplained records are zero. Details are in `MAILEX_RECONCILIATION.md`.
+
+The corrected parser no longer overwrites normalized-stem collisions. It selects raw records by deterministic content evidence and uses a collision-qualified irreversible identifier where two JSON logical paths normalize to the same stem. The rebuilt candidate still contains 120 usable threads, 322 messages, split counts train 99/dev 9/test 12, and three complete no-health exclusions. Duplicate selected thread IDs are zero.
 
 ## Candidate and annotation work
 
@@ -49,6 +51,7 @@ The automated exclusion is not claimed sufficient for release. A human must revi
 ## Unresolved issues
 
 - Licence and redistribution permission are not locally evidenced.
+- Six raw records have no sufficiently supported JSON relationship; they remain explicitly `UNMATCHED_RAW`, not unexplained.
 - Most raw messages lack source Message-ID and timestamp fields.
 - Human primary annotation, second annotation, agreement calculation, and adjudication have not occurred.
 - Manual no-health sign-off has not occurred.

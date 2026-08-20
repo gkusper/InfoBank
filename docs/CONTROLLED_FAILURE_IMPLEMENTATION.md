@@ -24,8 +24,8 @@ The backend returns a `controlled_failure` object whenever the system must avoid
 | --- | --- |
 | `FULL_ANSWER` | Permitted, sufficiently supported answer mode. |
 | `REFUSE_INSUFFICIENT_EVIDENCE` | Permitted candidate exists but lacks supporting evidence. |
-| `REFUSE_NO_MATCH` | No permitted match exists. |
-| `REFUSE_PERMISSION` | Governance-denied, unsafe, or prompt-injection request. |
+| `REFUSE_NO_MATCH` | A permitted search scope exists but no relevant object/source match exists. |
+| `REFUSE_PERMISSION` | Revoke/missing permission, Deny, archive, purpose/validity rejection, unsafe request, or prompt-injection request. |
 | `CONSTRAINED_ANSWER` | Contextual-only, bounded conflict/defeat, browser-history-only, or qualified answer mode. |
 | `AGGREGATE_RESULT` | K-thresholded aggregate result with individual content withheld. |
 | `REFUSE_AGGREGATION_THRESHOLD` | Aggregate threshold not met; source count and existence withheld. |
@@ -61,6 +61,9 @@ The backend returns a `controlled_failure` object whenever the system must avoid
 
 ## Runtime behavior
 
+- Policy resolution runs over the internal document scope before routing. Denied identifiers stay in privileged audit data and are removed from the public failure payload.
+- Revoke, explicit Deny, archive, purpose mismatch, expiry/future validity, and stale-index rejection return internal `REFUSE_PERMISSION`; a wrong object inside an otherwise permitted scope returns `REFUSE_NO_MATCH`.
+- Both public failure shapes are non-enumerating, contain no denied filename/UUID/hash/page count or citation, and expose only counts plus an identifier-free routing trace.
 - Metadata-only sources return `metadata_only_answer` and never expose raw content.
 - Aggregate-only sources can answer aggregate/statistical questions but not specific content claims.
 - Contextual/activity sources cannot create obligations by themselves.

@@ -50,11 +50,12 @@ function switchView(v) {
     document.getElementById('btn-'+v).classList.replace('text-gray-600', 'bg-blue-50');
     document.getElementById('btn-'+v).classList.add('text-blue-700');
     
+    const reviewerEvidenceMode = document.body.classList.contains('reviewer-evidence-mode');
     if(v==='map') loadMap(); 
-    if(v==='manager') loadDocs();
+    if(v==='manager' && !reviewerEvidenceMode) loadDocs();
     if(v==='ontology') loadOntology();
-    if(v==='policy') resolveReviewerPolicy(false);
-    if(v==='actions') loadReviewerActions();
+    if(v==='policy' && !reviewerEvidenceMode) resolveReviewerPolicy(false);
+    if(v==='actions' && !reviewerEvidenceMode) loadReviewerActions();
 }
 
 function updateFileLabel() {

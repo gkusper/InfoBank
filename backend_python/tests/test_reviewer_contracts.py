@@ -94,6 +94,13 @@ def test_reviewer_frontend_has_four_screens_fields_and_api_wiring() -> None:
         assert endpoint in javascript
     for action in ("reindexDoc", "archiveDoc", "restoreDoc"):
         assert action in javascript
+    assert "aria-label=\"Re-index document\"" in javascript
+    assert "aria-label=\"Archive document\"" in javascript
+    assert "aria-label=\"Restore document\"" in javascript
+    assert "loadReviewerDemoSeed" in javascript
+    assert "expandedSources: true" in javascript
+    assert "complete-question" in javascript
+    assert "Policy valid from" in html and "Policy valid until" in html
 
 
 def test_policy_router_has_no_duplicate_http_method_path_pairs() -> None:

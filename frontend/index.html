@@ -10,6 +10,7 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reviewer_evidence.css">
 </head>
 <body class="bg-gray-50 h-screen flex overflow-hidden">
 
@@ -147,8 +148,8 @@
                             <select id="policy-access-mode" data-reviewer-field="effective-full-aggregate-metadata-deny" class="border rounded-lg p-2 text-sm">
                                 <option>Full</option><option>Aggregate</option><option>Metadata</option><option>Deny</option>
                             </select>
-                            <input id="policy-valid-from" type="datetime-local" data-reviewer-field="valid-from" class="border rounded-lg p-2 text-sm">
-                            <input id="policy-valid-until" type="datetime-local" data-reviewer-field="expiry" class="border rounded-lg p-2 text-sm">
+                            <label class="text-xs font-semibold text-gray-600">Valid from<input id="policy-valid-from" type="datetime-local" data-reviewer-field="valid-from" class="mt-1 w-full border rounded-lg p-2 text-sm" aria-label="Policy valid from"></label>
+                            <label class="text-xs font-semibold text-gray-600">Valid until<input id="policy-valid-until" type="datetime-local" data-reviewer-field="expiry" class="mt-1 w-full border rounded-lg p-2 text-sm" aria-label="Policy valid until"></label>
                         </div>
                         <button onclick="createReviewerPolicyRule()" class="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Create scoped rule</button>
                     </div>
@@ -176,7 +177,7 @@
                             <span class="px-2 py-1 rounded-full bg-gray-100 text-gray-700">correction / audit trail</span>
                         </div>
                     </div>
-                    <pre id="action-review-output" data-reviewer-field="action-audit-trail" class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-auto min-h-[260px] whitespace-pre-wrap">No evidence loaded.</pre>
+                    <div id="action-review-output" data-reviewer-field="action-audit-trail" class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-auto min-h-[260px]">No evidence loaded.</div>
                 </div>
             </div>
 

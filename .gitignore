@@ -22,6 +22,7 @@ artifacts/actual_pipeline/
 artifacts/mailex_local/
 artifacts/human_qa/
 artifacts/api_workflows/
+artifacts/reviewer_screenshots/
 backend_python/runtime/source_storage/
 .pytest_cache/
 temp_*.pdf

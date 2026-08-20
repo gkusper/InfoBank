@@ -61,6 +61,8 @@ function normalizeRightsUI() {
 async function restoreSession() {
     normalizeRightsUI();
 
+    if (await loadReviewerDemoSeed()) return;
+
     const legacyLogoutBtn = document.querySelector('button[onclick="location.reload()"]');
     if (legacyLogoutBtn) legacyLogoutBtn.onclick = logout;
 
@@ -196,6 +198,39 @@ function renderAnswerReviewHeader(res) {
         <span class="bg-slate-100 text-slate-700 rounded px-2 py-1"><b>Audit:</b> ${escapeHtml(res.audit_id || 'N/A')}</span>
         <span class="bg-amber-50 text-amber-800 rounded px-2 py-1"><b>Next:</b> ${escapeHtml(nextStep)}</span>
     </div>`;
+}
+
+function renderSourceBlocks(sources, expanded = false) {
+    if (!sources || sources.length === 0) return '';
+    const srcBlocks = sources.map(src => `
+        <div class="bg-gray-50 p-3 rounded-lg text-xs text-gray-600 border border-gray-200 shadow-sm">
+            <div class="font-bold text-gray-700 mb-1 flex items-center gap-2 flex-wrap">
+                <i class="far fa-file-pdf text-red-500"></i> ${escapeHtml(src.file_name)}
+                ${roleBadge(src.role)}
+                <span class="px-2 py-0.5 rounded-full bg-white border text-[10px] text-gray-500 uppercase" data-reviewer-field="permission-badge">${escapeHtml(src.use_decision || src.citation?.effective_use_decision || 'unknown')}</span>
+            </div>
+            <div class="text-[10px] text-slate-500 mb-1" data-reviewer-field="page-message-citation">Document ${escapeHtml(src.citation?.document_id || src.document_id || 'N/A')} · page/message ${escapeHtml(src.citation?.page_number || 'N/A')} · chunk ${escapeHtml(src.citation?.chunk_id || 'N/A')}</div>
+            ${src.citation?.source_view_url ? `<button onclick="openAuthorizedSource('${escapeHtml(src.citation.source_view_url)}')" class="mb-2 text-blue-600 font-bold" aria-label="Open cited source page">Open cited source page</button>` : ''}
+            <div class="italic leading-relaxed max-h-24 overflow-y-auto pr-1 text-[11px] whitespace-pre-wrap">${escapeHtml(src.text)}</div>
+            ${renderSourceProfile(src.usable_relevance)}
+        </div>`).join('');
+    return `<div class="mt-4 pt-3 border-t border-gray-100"><details class="group" ${expanded ? 'open' : ''}><summary class="text-xs text-blue-500 font-bold cursor-pointer list-none flex items-center gap-1 hover:text-blue-700 transition"><i class="fas fa-chevron-down transition-transform duration-300 group-open:rotate-180"></i>View Retrieved Sources & Roles</summary><div class="mt-3 space-y-2">${srcBlocks}</div></details></div>`;
+}
+
+function renderAssistantExchange(question, res, { expandedSources = false, replace = false, includeQuestion = true } = {}) {
+    const box = document.getElementById('view-chat');
+    const formattedText = escapeHtml(res.answer).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    const routingMode = res.query_profile?.routing_trace?.mode || res.governance?.routing_trace?.mode || res.query_profile?.retrieval_strategy || 'N/A';
+    const questionHtml = includeQuestion ? `<div class="flex justify-end w-full mb-2"><div class="bg-blue-600 text-white p-3 px-5 rounded-2xl rounded-tr-none max-w-[80%] md:max-w-3xl shadow-sm text-sm" data-reviewer-field="complete-question">${escapeHtml(question)}</div></div>` : '';
+    const exchange = `
+        ${questionHtml}
+        <div class="flex justify-start w-full mb-2"><div class="bg-white border border-gray-200 p-5 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-3xl text-gray-800 shadow-sm text-sm leading-relaxed">
+            ${renderAnswerReviewHeader(res)}
+            <div class="flex items-center space-x-2 mb-3 pb-3 border-b border-gray-100 text-[10px] text-gray-500 uppercase tracking-widest font-bold"><i class="fas fa-filter text-blue-500"></i><span>Routing: ${escapeHtml(routingMode)} · keywords: ${escapeHtml(res.extracted_keywords?.join(', ') || 'N/A')}</span></div>
+            <p style="white-space: pre-wrap;">${formattedText}</p>${renderGovernanceTrace(res)}${renderSourceBlocks(res.sources, expandedSources)}
+        </div></div>`;
+    if (replace) box.innerHTML = exchange;
+    else box.innerHTML += exchange;
 }
 
 async function doRegister() {
@@ -383,7 +418,7 @@ async function askQuestion() {
     const q = input.value.trim();
     if(!q) return;
 
-    box.innerHTML += `<div class="flex justify-end w-full mb-2"><div class="bg-blue-600 text-white p-3 px-5 rounded-2xl rounded-tr-none max-w-[80%] md:max-w-2xl shadow-sm text-sm">${escapeHtml(q)}</div></div>`;
+    box.innerHTML += `<div class="flex justify-end w-full mb-2"><div class="bg-blue-600 text-white p-3 px-5 rounded-2xl rounded-tr-none max-w-[80%] md:max-w-3xl shadow-sm text-sm" data-reviewer-field="complete-question">${escapeHtml(q)}</div></div>`;
     input.value = "";
     input.disabled = true;
     btn.disabled = true;
@@ -402,26 +437,7 @@ async function askQuestion() {
         }
         removeTyping();
         if (res.status === "success") {
-            const formattedText = escapeHtml(res.answer).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-            const governanceTraceHTML = renderGovernanceTrace(res);
-            const reviewerHeader = renderAnswerReviewHeader(res);
-            let sourcesHTML = "";
-            if (res.sources && res.sources.length > 0) {
-                const srcBlocks = res.sources.map(src => `
-                    <div class="bg-gray-50 p-3 rounded-lg text-xs text-gray-600 border border-gray-200 shadow-sm">
-                        <div class="font-bold text-gray-700 mb-1 flex items-center gap-2 flex-wrap">
-                            <i class="far fa-file-pdf text-red-500"></i> ${escapeHtml(src.file_name)}
-                            ${roleBadge(src.role)}
-                            <span class="px-2 py-0.5 rounded-full bg-white border text-[10px] text-gray-500 uppercase" data-reviewer-field="permission-badge">${escapeHtml(src.use_decision || 'unknown')}</span>
-                        </div>
-                        <div class="text-[10px] text-slate-500 mb-1" data-reviewer-field="page-message-citation">Document ${escapeHtml(src.citation?.document_id || src.document_id || 'N/A')} · page/message ${escapeHtml(src.citation?.page_number || 'N/A')} · chunk ${escapeHtml(src.citation?.chunk_id || 'N/A')}</div>
-                        ${src.citation?.source_view_url ? `<button onclick="openAuthorizedSource('${escapeHtml(src.citation.source_view_url)}')" class="mb-2 text-blue-600 font-bold">Open cited source page</button>` : ''}
-                        <div class="italic leading-relaxed max-h-24 overflow-y-auto pr-1 text-[11px] whitespace-pre-wrap">${escapeHtml(src.text)}</div>
-                        ${renderSourceProfile(src.usable_relevance)}
-                    </div>`).join('');
-                sourcesHTML = `<div class="mt-4 pt-3 border-t border-gray-100"><details class="group"><summary class="text-xs text-blue-500 font-bold cursor-pointer list-none flex items-center gap-1 hover:text-blue-700 transition"><i class="fas fa-chevron-down transition-transform duration-300 group-open:rotate-180"></i>View Retrieved Sources & Roles</summary><div class="mt-3 space-y-2">${srcBlocks}</div></details></div>`;
-            }
-            box.innerHTML += `<div class="flex justify-start w-full mb-2"><div class="bg-white border border-gray-200 p-5 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-2xl text-gray-800 shadow-sm text-sm leading-relaxed">${reviewerHeader}<div class="flex items-center space-x-2 mb-3 pb-3 border-b border-gray-100 text-[10px] text-gray-500 uppercase tracking-widest font-bold"><i class="fas fa-filter text-blue-500"></i><span>Semantic Routing: ${escapeHtml(res.extracted_keywords?.join(', ') || 'N/A')}</span></div><p style="white-space: pre-wrap;">${formattedText}</p>${governanceTraceHTML}${sourcesHTML}</div></div>`;
+            renderAssistantExchange(q, res, {includeQuestion: false});
         } else if (res.status === "controlled_failure") {
             const trace = renderGovernanceTrace(res);
             box.innerHTML += `<div class="flex justify-start w-full mb-2"><div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-r-2xl max-w-[80%] md:max-w-xl text-red-800 shadow-sm text-sm">${renderAnswerReviewHeader(res)}<h3 class="font-bold mb-1"><i class="fas fa-shield-alt mr-2"></i>Governance Control</h3><p>${escapeHtml(res.message)}</p>${trace}</div></div>`;
@@ -477,16 +493,16 @@ async function loadDocs() {
             const isOwner = doc.is_owner === true;
             const iconClass = isOwner ? 'fa-trash-alt' : 'fa-unlink';
             const iconTitle = isOwner ? 'Permanent Delete' : 'Unsubscribe';
-            const transferBtn = isOwner ? `<button onclick="openTransferModal('${doc.document_id}')" class="text-blue-500 hover:text-blue-700 transition ml-2" title="Transfer Ownership"><i class="fas fa-exchange-alt"></i></button>` : '';
-            const lifecycleButtons = isOwner ? `<button onclick="reindexDoc('${doc.document_id}')" class="text-indigo-500 ml-2" title="Re-index"><i class="fas fa-sync"></i></button><button onclick="archiveDoc('${doc.document_id}')" class="text-amber-600 ml-2" title="Archive"><i class="fas fa-archive"></i></button><button onclick="restoreDoc('${doc.document_id}')" class="text-green-600 ml-2" title="Restore"><i class="fas fa-trash-restore"></i></button>` : '';
+            const transferBtn = isOwner ? `<button onclick="openTransferModal('${doc.document_id}')" class="text-blue-500 hover:text-blue-700 transition ml-2" title="Transfer ownership" aria-label="Transfer ownership"><i class="fas fa-exchange-alt"></i></button>` : '';
+            const lifecycleButtons = isOwner ? `<button onclick="reindexDoc('${doc.document_id}')" class="text-indigo-500 ml-2" title="Re-index document" aria-label="Re-index document"><i class="fas fa-sync"></i></button><button onclick="archiveDoc('${doc.document_id}')" class="text-amber-600 ml-2" title="Archive document" aria-label="Archive document"><i class="fas fa-archive"></i></button><button onclick="restoreDoc('${doc.document_id}')" class="text-green-600 ml-2" title="Restore document" aria-label="Restore document"><i class="fas fa-trash-restore"></i></button>` : '';
             const selectId = `perm-${doc.document_id}`;
             const provenance = (doc.provenance || []).map(item => `${item.field}:${item.type}`).slice(0, 4).join(' · ');
             tbody.innerHTML += `
                 <tr class="hover:bg-gray-50 transition">
                     <td class="px-6 py-4 text-gray-800"><div class="font-medium"><i class="far fa-file-pdf text-red-500 mr-2"></i>${escapeHtml(doc.file_name)}</div><div class="mt-1 text-[10px] font-mono text-gray-500" data-reviewer-field="document-uuid-hash">UUID ${escapeHtml(doc.document_id)}<br>SHA ${escapeHtml(doc.source_sha256 || 'N/A')}</div><div class="mt-1 text-[10px]">${escapeHtml(doc.processing_status)} · ${escapeHtml(doc.source_status)} · ${escapeHtml(doc.page_count ?? 0)} page · ${escapeHtml(doc.chunk_count ?? 0)} chunk</div></td>
-                    <td class="px-6 py-4"><div class="flex items-center space-x-2"><input type="text" id="kw-${doc.document_id}" value="${escapeHtml(doc.keywords.join(', '))}" class="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-xs outline-none focus:ring-2 focus:ring-blue-400"><button onclick="saveKW('${doc.document_id}')" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-1.5 transition"><i class="fas fa-save"></i></button></div><div class="text-[10px] text-gray-400 mt-1" data-reviewer-field="provenance">${escapeHtml(provenance || 'No provenance')}</div></td>
+                    <td class="px-6 py-4"><div class="flex items-center space-x-2"><input type="text" id="kw-${doc.document_id}" value="${escapeHtml(doc.keywords.join(', '))}" class="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-xs outline-none focus:ring-2 focus:ring-blue-400"><button onclick="saveKW('${doc.document_id}')" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-1.5 transition" title="Save reviewed keywords" aria-label="Save reviewed keywords"><i class="fas fa-save"></i></button></div><div class="text-[10px] text-gray-400 mt-1" data-reviewer-field="provenance">${escapeHtml(provenance || 'No provenance')}</div></td>
                     <td class="px-6 py-4"><select id="${selectId}" data-current="${escapeHtml(doc.permission)}" onchange="savePerm('${doc.document_id}', this.value, this)" ${!isOwner?'disabled':''} class="text-xs border border-gray-300 rounded-md p-2 outline-none ${!isOwner?'opacity-50 cursor-not-allowed bg-gray-100':'bg-white focus:ring-2 focus:ring-blue-400'}">${rightsOptions(doc.permission, isOwner)}</select></td>
-                    <td class="px-6 py-4 text-center whitespace-nowrap"><button onclick="openAuthorizedSource('/api/documents/${doc.document_id}/source?page=1')" class="text-blue-600" title="Open page 1"><i class="fas fa-external-link-alt"></i></button><button onclick="selectPolicyDocument('${doc.document_id}')" class="text-purple-600 ml-2" title="Permission link"><i class="fas fa-user-shield"></i></button>${lifecycleButtons}<button onclick="deleteDoc('${doc.document_id}', '${isOwner}')" class="text-gray-400 hover:text-red-600 transition ml-2" title="${iconTitle}"><i class="fas ${iconClass}"></i></button>${transferBtn}</td>
+                    <td class="px-6 py-4 text-center whitespace-nowrap"><button onclick="openAuthorizedSource('/api/documents/${doc.document_id}/source?page=1')" class="text-blue-600" title="Open page 1" aria-label="Open page 1"><i class="fas fa-external-link-alt"></i></button><button onclick="selectPolicyDocument('${doc.document_id}')" class="text-purple-600 ml-2" title="Review permissions" aria-label="Review permissions"><i class="fas fa-user-shield"></i></button>${lifecycleButtons}<button onclick="deleteDoc('${doc.document_id}', '${isOwner}')" class="text-gray-400 hover:text-red-600 transition ml-2" title="${iconTitle}" aria-label="${iconTitle}"><i class="fas ${iconClass}"></i></button>${transferBtn}</td>
                 </tr>`;
         });
     } catch (e) {
@@ -636,7 +652,7 @@ async function loadReviewerActions() {
     try {
         const r = await fetch(`${API}/evidence/action-list`, {headers:authHeaders()});
         const data = await readApiResponse(r);
-        output.textContent = JSON.stringify({
+        renderActionEvidencePanel({
             closure_states: ['OPEN','CLOSED_COMPLETED','CLOSED_CANCELLED','SUPERSEDED'],
             browser_only_rule: 'contextual evidence cannot create an action by itself',
             counts: data.counts,
@@ -645,8 +661,68 @@ async function loadReviewerActions() {
             contextual_only: data.contextual_only,
             evidence_roles: ['primary','contextual','contrastive'],
             audit_and_correction: 'Evidence-unit IDs and controlled-failure feedback preserve reviewer traceability.'
-        }, null, 2);
+        });
     } catch(e) { output.textContent = JSON.stringify({error:e.message}, null, 2); }
+}
+
+function renderActionEvidencePanel(data) {
+    const output = document.getElementById('action-review-output');
+    const actions = data.actions || [...(data.open_items || []), ...(data.closed_items || [])];
+    const actionCards = actions.map(item => `
+        <div class="rounded-lg border border-slate-700 bg-slate-800 p-3">
+            <div class="flex items-center justify-between gap-2"><b>${escapeHtml(item.status || 'UNKNOWN')}</b><span class="text-slate-400">${escapeHtml(item.action_id || item.id || 'N/A')}</span></div>
+            <div class="mt-1 text-slate-200">${escapeHtml(item.normalized_action_key || item.action || 'Action evidence')}</div>
+            <div class="mt-1 text-slate-400">thread/evidence: ${escapeHtml((item.linked_evidence_ids || item.E || []).join(', ') || item.request_evidence_id || 'N/A')}</div>
+            <div class="mt-1 text-slate-400">roles: ${escapeHtml(JSON.stringify(item.R || item.evidence_roles || {}))} · events: ${escapeHtml((item.event_types || []).join(', ') || 'N/A')}</div>
+        </div>`).join('');
+    const contextual = data.contextual_only || data.contextual_only_evidence_ids || [];
+    output.innerHTML = `
+        <div class="mb-3 flex flex-wrap gap-2"><span class="rounded bg-green-900/50 px-2 py-1">primary evidence</span><span class="rounded bg-red-900/50 px-2 py-1">contrastive evidence</span><span class="rounded bg-blue-900/50 px-2 py-1">contextual · browser-only · no action</span></div>
+        <div class="grid md:grid-cols-2 gap-3">${actionCards || '<div>No action evidence.</div>'}</div>
+        <div class="mt-3 border-t border-slate-700 pt-3 text-slate-300"><b>Contextual-only evidence:</b> ${escapeHtml(contextual.map(item => item.id || item).join(', ') || 'none')} · browser-only false actions: ${escapeHtml(data.browser_only_false_actions ?? 0)}</div>
+        <div class="mt-1 text-slate-400"><b>Correction / audit trail:</b> ${escapeHtml(data.audit_and_correction || 'Evidence IDs and engine version preserve correction traceability.')} · engine ${escapeHtml(data.engine_version || 'runtime')}</div>`;
+}
+
+function renderReviewerDemoDocuments(documents) {
+    const tbody = document.getElementById('docs-tbody');
+    tbody.innerHTML = '';
+    documents.forEach(doc => {
+        const provenance = (doc.provenance || []).map(item => `${item.field}:${item.type}`).join(' · ');
+        tbody.innerHTML += `<tr class="hover:bg-gray-50 transition">
+            <td class="px-6 py-4 text-gray-800"><div class="font-medium">${escapeHtml(doc.file_name)}</div><div class="mt-1 text-[10px] font-mono text-gray-500" data-reviewer-field="document-uuid-hash">UUID ${escapeHtml(doc.document_id)}<br>SHA ${escapeHtml(doc.source_sha256)}</div><div class="mt-1 text-[10px]">${escapeHtml(doc.processing_status)} · ${escapeHtml(doc.source_status)} · ${escapeHtml(doc.page_count)} page · ${escapeHtml(doc.chunk_count)} chunk</div></td>
+            <td class="px-6 py-4"><div>${escapeHtml(doc.keywords.join(', '))}</div><div class="text-[10px] text-gray-400 mt-1" data-reviewer-field="provenance">${escapeHtml(provenance)}</div></td>
+            <td class="px-6 py-4"><span class="rounded bg-blue-50 px-2 py-1 text-blue-800">${escapeHtml(doc.permission)}</span></td>
+            <td class="px-6 py-4 text-center whitespace-nowrap"><button class="text-blue-600" title="Open page 1" aria-label="Open page 1">source</button><button class="text-purple-600 ml-2" title="Review permissions" aria-label="Review permissions">policy</button><button class="text-indigo-600 ml-2" title="Re-index document" aria-label="Re-index document">re-index</button><button class="text-amber-600 ml-2" title="Archive document" aria-label="Archive document">archive</button><button class="text-green-600 ml-2" title="Restore document" aria-label="Restore document">restore</button></td>
+        </tr>`;
+    });
+}
+
+async function loadReviewerDemoSeed() {
+    const params = new URLSearchParams(window.location.search);
+    const seedPath = params.get('reviewer_demo');
+    if (!seedPath || !['127.0.0.1', 'localhost'].includes(window.location.hostname)) return false;
+    const response = await fetch(seedPath);
+    if (!response.ok) throw new Error(`Reviewer demo seed failed: HTTP ${response.status}`);
+    const seed = await response.json();
+    document.body.classList.add('reviewer-evidence-mode');
+    CURRENT_USER_ID = 'reviewer-demo';
+    ACCESS_TOKEN = 'local-demo-no-api';
+    showAppShell();
+    document.getElementById('sidebar-display-username').innerText = 'reviewer-demo';
+    renderAvatar('sidebar-avatar-container', '', 'reviewer-demo');
+    renderAssistantExchange(seed.assistant.question, seed.assistant.response, {expandedSources: true, replace: true});
+    renderReviewerDemoDocuments(seed.documents);
+    document.getElementById('policy-doc-id').value = seed.policy.document_id;
+    document.getElementById('policy-target-username').value = seed.policy.target_username;
+    document.getElementById('policy-grant-type').value = seed.policy.persistent_permission;
+    document.getElementById('policy-purpose').value = seed.policy.purpose;
+    document.getElementById('policy-access-mode').value = seed.policy.selected_rule;
+    document.getElementById('policy-valid-from').value = seed.policy.valid_from;
+    document.getElementById('policy-valid-until').value = seed.policy.valid_until;
+    policyOutput(seed.policy.effective_resolution);
+    renderActionEvidencePanel(seed.actions);
+    window.__INFOBANK_REVIEWER_DEMO__ = {version: seed.demo_seed_version, privacy_safe: seed.privacy_safe, source_trace_sha256: seed.source_trace_sha256};
+    return true;
 }
 
 async function submitTransfer() {

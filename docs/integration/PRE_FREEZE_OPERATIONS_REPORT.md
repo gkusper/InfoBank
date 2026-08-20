@@ -5,6 +5,8 @@ Status: `PASS`
 The automated smoke is implemented in
 `scripts/run_pre_freeze_operations_smoke.ps1`. It creates only explicitly named
 `infobank_eval_prefreeze_ops_*` databases and new ignored artifact directories.
+Backup-manifest names are relativized against a resolved backup root, so a
+repository path containing a `.` segment cannot truncate a filename.
 It runs the actual W1/W2/W3 API workflow, creates a MariaDB logical dump, copies
 Chroma/source/config backup scope, restores every store separately, reruns the
 grounded W2 query, validates citations/audit and compares identities/hashes.

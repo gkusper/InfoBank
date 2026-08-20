@@ -118,7 +118,8 @@ if ($LASTEXITCODE -ne 0 -or $rollbackRead.Trim() -ne "rollback-fixture") { throw
 & $pythonPath .\scripts\run_orphan_fixture_smoke.py --output (Join-Path $output "orphan_fixture_report.json")
 if ($LASTEXITCODE -ne 0) { throw "Orphan fixture smoke failed" }
 
-$files = Get-ChildItem -LiteralPath $backup -File -Recurse | Sort-Object FullName | ForEach-Object { [ordered]@{ name=$_.FullName.Substring($backup.Length).TrimStart('\').Replace('\','/'); sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant(); byte_size=$_.Length } }
+$backupRoot = (Resolve-Path -LiteralPath $backup).Path
+$files = Get-ChildItem -LiteralPath $backupRoot -File -Recurse | Sort-Object FullName | ForEach-Object { [ordered]@{ name=$_.FullName.Substring($backupRoot.Length).TrimStart('\').Replace('\','/'); sha256=(Get-FileHash -LiteralPath $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant(); byte_size=$_.Length } }
 $manifest = [ordered]@{
     schema_version = "infobank-pre-freeze-backup-v1"
     status = "PASS"

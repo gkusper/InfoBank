@@ -25,6 +25,9 @@ Development scorer: `infocom-controlled-failure-scorer-v1` in `evaluation/d_gate
 | `ESCALATE_TO_HUMAN` | A state-changing request must use an explicit audited action workflow. | Skipped. |
 
 `REFUSE_CONFLICT` is used by evaluation cases that require authority resolution. Runtime conflicts that can be reported without choosing a winner use `CONSTRAINED_ANSWER`.
+Conflict defeat is query-scoped: a marker-bearing source is contrastive only when the marker sentence overlaps the question's disputed subject (or an explicit conflict/authority question matches the same object). An unrelated conflict notice is contextual and cannot constrain an otherwise supported claim.
+
+Evidence sufficiency is claim-relation-aware. Object and token overlap alone do not support a different predicate: an exclusion cannot support a causal claim, and a duration conflict cannot constrain an exclusion claim. A permitted but syntactically ambiguous relationship maps to `CLARIFICATION`; an explicitly requested relationship absent from the permitted source maps to `REFUSE_INSUFFICIENT_EVIDENCE`. After generation, relation labels, object identifiers, and numeric facts are validated again against the permitted full-source text. A failed post-generation check is replaced by an audited `REFUSE_INSUFFICIENT_EVIDENCE` at the `generation_grounding_validation` gate.
 
 ## Precedence and decision table
 
@@ -57,6 +60,8 @@ The soft evidence gate uses the versioned defaults:
 
 Calibration may compare soft thresholds on the development split only. It may not modify authorization precedence or use the candidate holdout or frozen D1–D8 v1.
 
+Runtime question support reads `minimum_support_score` from the same versioned configuration. A separate hard-coded runtime support threshold is not permitted.
+
 Supporting-chunk rule: every indispensable gold document must have at least one accessible, traceable chunk on an allowed page. A citation must match document ID, chunk-document association, and page range. Source-diversity greater than one is required only when a case definition marks multiple documents indispensable.
 
 ## Safe public wording and internal distinction
@@ -68,7 +73,7 @@ Supporting-chunk rule: every indispensable gold document must have at least one 
 - Conflict: identify that evidence conflicts, but not a winner unless authority is established.
 - Clarification: request only the missing object, source, time period, or claim.
 
-`REFUSE_PERMISSION` is selected when policy resolution observes Deny, revoke/missing persistent permission, archive, purpose mismatch, expiry/future validity, or stale-index rejection. `REFUSE_NO_MATCH` is selected only after a permitted scope exists and matching fails. Both responses use an empty public source list and an identifier-free governance/routing projection. Denied filenames, UUIDs, hashes, page counts, previous availability, and source identities remain only in privileged audit data.
+`REFUSE_PERMISSION` is selected when policy resolution observes Deny, revoke/missing persistent permission, archive, purpose mismatch, expiry/future validity, or stale-index rejection. `REFUSE_NO_MATCH` is selected only after a permitted scope exists and matching fails. Both responses use an empty public source list and an identifier-free governance/routing projection. Denied filenames, UUIDs, hashes, page counts, denied-source counts, previous availability, and source identities remain only in privileged audit data.
 
 The aggregate-threshold response also uses an empty public source list, sanitized governance state, no citation, and a trace without excluded/available source counts.
 

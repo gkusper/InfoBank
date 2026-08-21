@@ -4,6 +4,7 @@ import csv
 import datetime as dt
 import io
 import json
+import os
 import time
 import uuid
 from pathlib import Path
@@ -36,6 +37,8 @@ from source_storage import SourceStorage
 
 router = APIRouter(prefix="/api", tags=["Documents"])
 source_storage = SourceStorage()
+DEFAULT_MAX_UPLOAD_BYTES = 25 * 1024 * 1024
+ALLOWED_PDF_CONTENT_TYPES = {"application/pdf", "application/x-pdf"}
 
 
 def require_owner(db: Session, doc_id: str, user_id: str) -> models.UserDocumentPermission:
@@ -75,6 +78,33 @@ def _safe_original_filename(filename: str | None) -> str:
     return sanitized[:512] or "document.pdf"
 
 
+def _max_upload_bytes() -> int:
+    raw = os.getenv("MAX_UPLOAD_BYTES", str(DEFAULT_MAX_UPLOAD_BYTES))
+    try:
+        value = int(raw)
+    except ValueError as exc:
+        raise RuntimeError("MAX_UPLOAD_BYTES must be a positive integer") from exc
+    if value <= 0:
+        raise RuntimeError("MAX_UPLOAD_BYTES must be a positive integer")
+    return value
+
+
+async def _read_validated_pdf_upload(file: UploadFile) -> tuple[bytes, str]:
+    filename = _safe_original_filename(file.filename)
+    if Path(filename).suffix.casefold() != ".pdf":
+        raise ValueError("Only .pdf source files are accepted")
+    declared_type = (file.content_type or "").split(";", 1)[0].strip().casefold()
+    if declared_type not in ALLOWED_PDF_CONTENT_TYPES:
+        raise ValueError("The upload MIME type must be application/pdf")
+    max_bytes = _max_upload_bytes()
+    content = await file.read(max_bytes + 1)
+    if len(content) > max_bytes:
+        raise ValueError(f"The uploaded PDF exceeds the configured {max_bytes}-byte limit")
+    if b"%PDF-" not in content[:1024]:
+        raise ValueError("The uploaded source does not have a valid PDF signature")
+    return content, filename
+
+
 def _audit(db: Session, user_id: str, action: str, document_id: str, details: dict[str, Any]) -> None:
     db.add(
         models.AuditLog(
@@ -85,6 +115,44 @@ def _audit(db: Session, user_id: str, action: str, document_id: str, details: di
             details=json.dumps(details, ensure_ascii=False, sort_keys=True),
         )
     )
+
+
+def _record_processing_failure(
+    db: Session,
+    *,
+    document_id: str,
+    user_id: str,
+    operation: str,
+    error: Exception,
+    repair_required: bool = False,
+) -> None:
+    document = db.query(models.Document).filter(models.Document.id == document_id).first()
+    if not document:
+        return
+    document.processing_status = "FAILED_REPAIR_REQUIRED" if repair_required else "FAILED"
+    failure = {
+        "document_id": document_id,
+        "operation": operation,
+        "processing_status": document.processing_status,
+        "error_type": type(error).__name__,
+        "retry_supported": not repair_required,
+        "retry_endpoint": f"/api/documents/{document_id}/reindex" if not repair_required else None,
+    }
+    try:
+        db.add(models.DocumentProcessingReport(
+            id=str(uuid.uuid4()),
+            document_id=document_id,
+            operation=f"{operation}_failed",
+            config_version=DEFAULT_PROCESSING_CONFIG.config_version,
+            config_hash=DEFAULT_PROCESSING_CONFIG.config_hash,
+            report_json=json.dumps(failure, ensure_ascii=False, sort_keys=True),
+        ))
+    except Exception:
+        # A report-table failure must not prevent preservation of the durable
+        # source, document status, and audit record.
+        pass
+    _audit(db, user_id, f"DOCUMENT_{operation.upper()}_FAILED", document_id, failure)
+    db.commit()
 
 
 def _keyword_client() -> Any | None:
@@ -413,15 +481,15 @@ async def upload_document(
     user_id: str = Depends(security.get_current_user_id),
     db: Session = Depends(get_db),
 ):
-    content = await file.read()
     document_id = str(uuid.uuid4())
     stored = None
     previous_vectors = _empty_vector_snapshot()
     vector_work_started = False
+    document_record_committed = False
     try:
+        content, original_filename = await _read_validated_pdf_upload(file)
         extract_pdf_pages(content)
         stored = source_storage.save(document_id, content, "application/pdf")
-        original_filename = _safe_original_filename(file.filename)
         document = models.Document(
             id=document_id,
             file_path=original_filename,
@@ -431,7 +499,7 @@ async def upload_document(
             source_mime_type=stored.mime_type,
             source_byte_size=stored.byte_size,
             source_status="ACTIVE",
-            processing_status="PROCESSING",
+            processing_status="PENDING",
             visibility=visibility_from_permission(permission_type),
             source_url=source_url,
             source_license=source_license,
@@ -446,6 +514,10 @@ async def upload_document(
             )
         )
         db.flush()
+        db.commit()
+        document_record_committed = True
+        document.processing_status = "PROCESSING"
+        db.commit()
         vector_work_started = True
         report = process_document_source(
             db=db,
@@ -474,19 +546,42 @@ async def upload_document(
         db.rollback()
         if vector_work_started:
             _restore_document_vectors(document_id, previous_vectors)
-        if stored:
+        if stored and not document_record_committed:
             source_storage.remove(document_id, stored.relative_path)
         raise
     except Exception as exc:
         db.rollback()
+        repair_required = False
         if vector_work_started:
             try:
                 _restore_document_vectors(document_id, previous_vectors)
             except Exception as cleanup_exc:
-                raise HTTPException(
-                    status_code=500,
-                    detail=f"Upload failed and vector compensation also failed: {type(cleanup_exc).__name__}",
-                ) from cleanup_exc
+                repair_required = True
+                exc = cleanup_exc
+        if document_record_committed:
+            try:
+                _record_processing_failure(
+                    db,
+                    document_id=document_id,
+                    user_id=user_id,
+                    operation="upload",
+                    error=exc,
+                    repair_required=repair_required,
+                )
+            except Exception:
+                db.rollback()
+            status = 500 if repair_required or not isinstance(exc, ValueError) else 400
+            message = (
+                "PDF processing failed and cross-store repair is required."
+                if repair_required
+                else "PDF processing failed; the durable source was preserved and can be retried."
+            )
+            raise HTTPException(status_code=status, detail={
+                "message": message,
+                "document_id": document_id,
+                "processing_status": "FAILED_REPAIR_REQUIRED" if repair_required else "FAILED",
+                "retry_url": None if repair_required else f"/api/documents/{document_id}/reindex",
+            }) from exc
         if stored:
             source_storage.remove(document_id, stored.relative_path)
         status = 400 if isinstance(exc, ValueError) else 500

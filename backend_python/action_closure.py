@@ -14,6 +14,13 @@ CLOSED_COMPLETED = "CLOSED_COMPLETED"
 CLOSED_CANCELLED = "CLOSED_CANCELLED"
 SUPERSEDED = "SUPERSEDED"
 
+_CLOSURE_EVENT_STATES = {
+    "completion": CLOSED_COMPLETED,
+    "cancellation": CLOSED_CANCELLED,
+    "rejection": CLOSED_CANCELLED,
+    "supersession": SUPERSEDED,
+}
+
 
 @dataclass(frozen=True)
 class MessageEvidence:
@@ -75,6 +82,20 @@ def classify_event(item: MessageEvidence) -> str:
         if re.search(pattern, text):
             return label
     return "informative"
+
+
+def resolve_action_status(event_types: Iterable[str]) -> str:
+    """Resolve the final action state from chronologically ordered events.
+
+    Non-closing events deliberately leave the current state unchanged.  A later
+    explicit closure event replaces an earlier closure state, matching the
+    ordered reconstruction performed by :func:`reconstruct_actions`.
+    """
+
+    status = OPEN
+    for event_type in event_types:
+        status = _CLOSURE_EVENT_STATES.get(event_type, status)
+    return status
 
 
 def _direct_group(item: MessageEvidence) -> str | None:
@@ -155,12 +176,7 @@ def reconstruct_actions(items: Iterable[MessageEvidence]) -> dict:
         candidate.event_types.append(event)
         candidate.link_signals.append(link_signal)
         by_evidence[item.evidence_id] = candidate
-        if event == "completion":
-            candidate.status = CLOSED_COMPLETED
-        elif event in {"cancellation", "rejection"}:
-            candidate.status = CLOSED_CANCELLED
-        elif event == "supersession":
-            candidate.status = SUPERSEDED
+        candidate.status = resolve_action_status(candidate.event_types)
 
     result = [candidate.to_dict() for candidate in sorted(candidates, key=lambda item: item.action_id)]
     return {

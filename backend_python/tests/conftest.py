@@ -27,6 +27,9 @@ atexit.register(shutil.rmtree, TEST_SOURCE_DIR, True)
 os.environ["DATABASE_URL"] = "sqlite+pysqlite:///:memory:"
 os.environ["JWT_SECRET_KEY"] = "r1b-isolated-test-secret"
 os.environ["OPENAI_API_KEY"] = "r1b-placeholder-no-provider-calls"
+os.environ["AI_PROVIDER"] = "deterministic-mock"
+os.environ["AI_EMBEDDING_MODEL"] = "deterministic-test-v1"
+os.environ.pop("AI_EMBEDDING_DIMENSIONS", None)
 os.environ["CHROMA_PERSIST_DIR"] = str(TEST_CHROMA_DIR)
 os.environ["SOURCE_STORAGE_DIR"] = str(TEST_SOURCE_DIR)
 

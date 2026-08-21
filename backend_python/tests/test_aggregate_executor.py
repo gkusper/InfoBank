@@ -6,12 +6,14 @@ import pytest
 
 import models
 import relevance
+from document_processing import sha256_text
 from aggregate_executor import (
     AGGREGATE_RESULT,
     REFUSE_AGGREGATION_THRESHOLD,
     AggregateConfig,
     AggregateContribution,
     execute_aggregate,
+    extract_unambiguous_numeric_value,
 )
 from routers import chat
 
@@ -71,6 +73,22 @@ def test_permission_counterfactual_changes_only_policy_and_never_leaks() -> None
     assert "30" not in json.dumps(denied)
 
 
+def test_denied_and_metadata_contributions_are_publicly_indistinguishable_from_absence() -> None:
+    all_inputs = execute_aggregate(contributions(), decisions(), AggregateConfig(k_threshold=3))
+    permitted_only = execute_aggregate(
+        contributions()[:4],
+        {key: value for key, value in decisions().items() if key not in {"source-denied", "source-metadata"}},
+        AggregateConfig(k_threshold=3),
+    )
+    assert all_inputs == permitted_only
+
+
+def test_free_text_numeric_extraction_refuses_ambiguous_chunks() -> None:
+    assert extract_unambiguous_numeric_value("Private contributor metric is 17.5 units.") == 17.5
+    assert extract_unambiguous_numeric_value("Report 2026: metric 17.5 units.") is None
+    assert extract_unambiguous_numeric_value("No numeric contribution is present.") is None
+
+
 @pytest.mark.parametrize("k", [0, 1])
 def test_unsafe_threshold_is_rejected(k: int) -> None:
     with pytest.raises(ValueError, match="at least 2"):
@@ -86,7 +104,7 @@ def test_production_retrieval_never_places_aggregate_chunk_in_generator_or_publi
     db_session.add(models.DocumentChunk(
         id=chunk_id, document_id=document_id, chunk_index=0, page_number=1,
         char_start=0, char_end=57, text_content="Private contributor metric is 17.5 units.",
-        content_sha256="a" * 64, vector_id=chunk_id,
+        content_sha256=sha256_text("Private contributor metric is 17.5 units."), vector_id=chunk_id,
     ))
     db_session.flush()
 
@@ -118,6 +136,48 @@ def test_production_retrieval_never_places_aggregate_chunk_in_generator_or_publi
     assert "17.5" not in json.dumps(sources)
     assert "Private contributor" not in json.dumps(sources)
     assert sources[0]["citation"]["available"] is False
+
+
+def test_production_retrieval_excludes_ambiguous_aggregate_chunk(db_session, monkeypatch) -> None:
+    document_id = "aggregate-ambiguous-doc"
+    chunk_id = "aggregate-ambiguous-chunk"
+    content = "Report 2026: private contributor metric is 17.5 units."
+    db_session.add(models.Document(
+        id=document_id, file_path="private-ambiguous.pdf", source_status="ACTIVE", visibility="Aggregate"
+    ))
+    db_session.add(models.DocumentChunk(
+        id=chunk_id, document_id=document_id, chunk_index=0, page_number=1,
+        char_start=0, char_end=len(content), text_content=content,
+        content_sha256=sha256_text(content), vector_id=chunk_id,
+    ))
+    db_session.flush()
+
+    class Collection:
+        @staticmethod
+        def query(**_kwargs):
+            return {
+                "ids": [[chunk_id]],
+                "documents": [[content]],
+                "metadatas": [[{"document_id": document_id, "chunk_id": chunk_id}]],
+            }
+
+    monkeypatch.setattr(chat.ai_service, "collection", Collection())
+    governance = {
+        "source_roles": {document_id: relevance.SOURCE_ROLE_AGGREGATE_ONLY},
+        "use_decisions": {document_id: relevance.USE_AGGREGATE},
+    }
+    sources, blocks, contributions_found = chat.query_retrieved_sources(
+        db_session,
+        "What is the average metric?",
+        [0.0],
+        {"task_intent": "aggregate_statistics"},
+        governance,
+        [document_id],
+    )
+    assert len(sources) == 1
+    assert blocks == []
+    assert contributions_found == []
+    assert "17.5" not in json.dumps(sources)
 
 
 def test_aggregate_generator_safe_chunk_is_content_independent() -> None:

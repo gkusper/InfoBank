@@ -224,11 +224,61 @@ class FakeUpload:
     filename = "../unsafe-name.pdf"
     content_type = "application/pdf"
 
-    def __init__(self, content: bytes) -> None:
+    def __init__(self, content: bytes, *, filename: str | None = None, content_type: str | None = None) -> None:
         self.content = content
+        if filename is not None:
+            self.filename = filename
+        if content_type is not None:
+            self.content_type = content_type
 
-    async def read(self) -> bytes:
-        return self.content
+    async def read(self, size: int = -1) -> bytes:
+        return self.content if size < 0 else self.content[:size]
+
+
+@pytest.mark.parametrize(
+    ("filename", "content_type", "message"),
+    [
+        ("document.txt", "application/pdf", "Only .pdf"),
+        ("document.pdf", "text/plain", "MIME type"),
+    ],
+)
+def test_upload_rejects_invalid_extension_or_mime_before_persistence(
+    db_session, monkeypatch, tmp_path: Path, filename: str, content_type: str, message: str
+) -> None:
+    source = make_pdf()
+    storage = SourceStorage(tmp_path / "sources")
+    monkeypatch.setattr(documents, "source_storage", storage)
+    with pytest.raises(HTTPException) as exc:
+        asyncio.run(documents.upload_document(
+            file=FakeUpload(source, filename=filename, content_type=content_type),
+            permission_type=models.PermissionType.Owner,
+            source_url=None,
+            source_license=None,
+            user_id=USER_ID,
+            db=db_session,
+        ))
+    assert exc.value.status_code == 400
+    assert message in exc.value.detail
+    assert not storage.root.exists()
+
+
+def test_upload_rejects_configured_size_limit_before_persistence(db_session, monkeypatch, tmp_path: Path) -> None:
+    source = make_pdf()
+    storage = SourceStorage(tmp_path / "sources")
+    monkeypatch.setattr(documents, "source_storage", storage)
+    monkeypatch.setenv("MAX_UPLOAD_BYTES", str(len(source) - 1))
+    with pytest.raises(HTTPException) as exc:
+        asyncio.run(documents.upload_document(
+            file=FakeUpload(source),
+            permission_type=models.PermissionType.Owner,
+            source_url=None,
+            source_license=None,
+            user_id=USER_ID,
+            db=db_session,
+        ))
+    assert exc.value.status_code == 400
+    assert "exceeds" in exc.value.detail
+    assert not storage.root.exists()
 
 
 def test_upload_survives_keyword_provider_failure_and_creates_index(db_session, monkeypatch, tmp_path: Path) -> None:
@@ -410,7 +460,7 @@ def prepare_durable_index(db_session, monkeypatch, tmp_path: Path, *, collection
     return source, storage, stored, document, collection
 
 
-def test_upload_partial_vector_add_is_fully_compensated(db_session, monkeypatch, tmp_path: Path) -> None:
+def test_upload_partial_vector_add_is_compensated_and_failure_is_preserved(db_session, monkeypatch, tmp_path: Path) -> None:
     source = make_pdf("Synthetic partial upload failure source.")
     db_session.add(models.User(id=USER_ID, email="partial@example.invalid", username="partial", password_hash="not-used"))
     db_session.flush()
@@ -433,11 +483,14 @@ def test_upload_partial_vector_add_is_fully_compensated(db_session, monkeypatch,
         )
     assert exc.value.status_code == 500
     assert collection.records == {}
-    assert db_session.query(models.Document).count() == 0
-    assert not storage.root.exists() or not any(storage.root.iterdir())
+    document = db_session.query(models.Document).one()
+    assert document.processing_status == "FAILED"
+    assert storage.exists(document.source_storage_path)
+    assert exc.value.detail["document_id"] == document.id
+    assert exc.value.detail["retry_url"] == f"/api/documents/{document.id}/reindex"
 
 
-def test_upload_report_persistence_failure_removes_all_cross_store_state(db_session, monkeypatch, tmp_path: Path) -> None:
+def test_upload_report_persistence_failure_preserves_source_and_failed_status(db_session, monkeypatch, tmp_path: Path) -> None:
     source = make_pdf("Synthetic processing report failure source.")
     db_session.add(models.User(id=USER_ID, email="report@example.invalid", username="report", password_hash="not-used"))
     db_session.flush()
@@ -466,8 +519,9 @@ def test_upload_report_persistence_failure_removes_all_cross_store_state(db_sess
         )
     assert exc.value.status_code == 500
     assert collection.records == {}
-    assert db_session.query(models.Document).count() == 0
-    assert not storage.root.exists() or not any(storage.root.iterdir())
+    document = db_session.query(models.Document).one()
+    assert document.processing_status == "FAILED"
+    assert storage.exists(document.source_storage_path)
 
 
 def test_upload_validation_fails_before_source_persistence(db_session, monkeypatch, tmp_path: Path) -> None:
@@ -519,7 +573,7 @@ def test_upload_db_commit_failure_removes_source_database_and_vectors(db_session
     assert not storage.root.exists() or not any(storage.root.iterdir())
 
 
-def test_upload_embedding_failure_removes_source_database_and_vectors(db_session, monkeypatch, tmp_path: Path) -> None:
+def test_upload_embedding_failure_preserves_retryable_document(db_session, monkeypatch, tmp_path: Path) -> None:
     source = make_pdf("Synthetic upload embedding failure source.")
     db_session.add(models.User(id=USER_ID, email="embedding@example.invalid", username="embedding", password_hash="not-used"))
     db_session.flush()
@@ -545,8 +599,19 @@ def test_upload_embedding_failure_removes_source_database_and_vectors(db_session
         )
     assert exc.value.status_code == 500
     assert collection.records == {}
-    assert db_session.query(models.Document).count() == 0
-    assert not storage.root.exists() or not any(storage.root.iterdir())
+    document = db_session.query(models.Document).one()
+    assert document.processing_status == "FAILED"
+    assert storage.exists(document.source_storage_path)
+
+    monkeypatch.setattr(
+        documents,
+        "_embed_chunks",
+        lambda chunks, _model: {chunk.id: [float(index), 1.0] for index, chunk in enumerate(chunks)},
+    )
+    retried = documents.reindex_document(document.id, user_id=USER_ID, db=db_session)
+    assert retried["status"] == "success"
+    assert db_session.query(models.Document).one().processing_status == "COMPLETE"
+    assert collection.records
 
 
 def test_reindex_commit_failure_restores_previous_vectors_and_database(db_session, monkeypatch, tmp_path: Path) -> None:

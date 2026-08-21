@@ -61,7 +61,14 @@ def test_openai_client_fails_clearly_only_when_invoked(monkeypatch: pytest.Monke
 
 def test_environment_paths_are_deterministic() -> None:
     assert ai_service.ENV_PATH == Path(ai_service.__file__).resolve().parent / ".env"
-    assert ai_service.CHROMA_PERSIST_DIR == os.environ["CHROMA_PERSIST_DIR"]
+    assert ai_service.CHROMA_PERSIST_PATH == Path(os.environ["CHROMA_PERSIST_DIR"]).resolve()
+    assert ai_service.CHROMA_PERSIST_DIR == str(ai_service.CHROMA_PERSIST_PATH)
+
+
+def test_relative_runtime_path_is_anchored_to_backend_not_cwd() -> None:
+    assert ai_service.resolve_backend_runtime_path("./chroma_data", default_name="chroma_data") == (
+        BACKEND_DIR / "chroma_data"
+    ).resolve()
 
 
 def test_no_gemini_import_or_dependency_remains() -> None:

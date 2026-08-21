@@ -19,7 +19,189 @@ from typing import Any, Callable, Iterable, Sequence
 from openai import OpenAI
 
 
-PROVIDER_CONFIG_VERSION = "infocom-provider-v1"
+PROVIDER_CONFIG_VERSION = "infocom-provider-v2"
+KEYWORD_SELECTION_STRATEGY_VERSION = "infocom-keyword-selector-v2"
+OPENAI_EMBEDDING_DIMENSIONS = {
+    "text-embedding-3-small": 1536,
+    "text-embedding-3-large": 3072,
+    "text-embedding-ada-002": 1536,
+}
+
+
+def _keyword_tokens(value: str) -> tuple[str, ...]:
+    """Return stable lexical tokens used only against an allowed vocabulary."""
+
+    return tuple(re.findall(r"[^\W_]+", str(value).casefold(), flags=re.UNICODE))
+
+
+def deterministic_allowed_keyword_matches(
+    text: str,
+    available_keywords: Sequence[str] | None,
+    *,
+    limit: int = 5,
+) -> list[str]:
+    """Select explicit question/keyword overlaps without expanding governance.
+
+    The caller supplies the already permitted vocabulary. A keyword matches
+    only when all of its lexical tokens occur in the question; contiguous
+    phrase matches rank first, followed by more specific (multi-token) values
+    and a stable lexical tie-break. No synonym inference is attempted here --
+    that remains the provider's optional contribution.
+    """
+
+    if limit <= 0 or not available_keywords:
+        return []
+    question_tokens = _keyword_tokens(text)
+    if not question_tokens:
+        return []
+    question_token_set = set(question_tokens)
+    canonical_by_key: dict[str, str] = {}
+    for value in sorted((str(item).strip() for item in available_keywords), key=lambda item: (item.casefold(), item)):
+        if value:
+            canonical_by_key.setdefault(value.casefold(), value)
+
+    ranked: list[tuple[int, int, str, str]] = []
+    for key, canonical in canonical_by_key.items():
+        tokens = _keyword_tokens(canonical)
+        if not tokens or not set(tokens).issubset(question_token_set):
+            continue
+        phrase_match = any(
+            question_tokens[index:index + len(tokens)] == tokens
+            for index in range(len(question_tokens) - len(tokens) + 1)
+        )
+        ranked.append((0 if phrase_match else 1, -len(tokens), key, canonical))
+    return [item[3] for item in sorted(ranked)[:limit]]
+
+
+def reconcile_keyword_selection(
+    text: str,
+    *,
+    available_keywords: Sequence[str] | None,
+    provider_keywords: Sequence[str],
+    provider_trace: dict[str, Any],
+    limit: int = 5,
+) -> tuple[list[str], dict[str, Any]]:
+    """Merge deterministic allowed-vocabulary anchors with provider output."""
+
+    anchors = deterministic_allowed_keyword_matches(text, available_keywords, limit=limit)
+    allowed_lookup = {
+        str(item).strip().casefold(): str(item).strip()
+        for item in available_keywords or ()
+        if str(item).strip()
+    }
+    provider_values: list[str] = []
+    for value in provider_keywords:
+        normalized = str(value).strip()
+        if available_keywords is not None:
+            normalized = allowed_lookup.get(normalized.casefold(), "")
+        if normalized and normalized not in provider_values:
+            provider_values.append(normalized)
+
+    selected: list[str] = []
+    for value in [*anchors, *provider_values]:
+        if value not in selected:
+            selected.append(value)
+        if len(selected) >= limit:
+            break
+
+    trace = dict(provider_trace)
+    provider_outcome = str(trace.get("outcome") or "no_selection_unclassified")
+    if anchors and provider_values:
+        outcome = "selected_with_deterministic_anchor"
+    elif anchors:
+        outcome = "deterministic_recovery"
+    else:
+        outcome = provider_outcome
+    trace.update({
+        "selection_strategy_version": KEYWORD_SELECTION_STRATEGY_VERSION,
+        "provider_outcome": provider_outcome,
+        "provider_selected_keyword_count": len(provider_values),
+        "deterministic_match_count": len(anchors),
+        "selected_keyword_count": len(selected),
+        "outcome": outcome,
+    })
+    return selected, trace
+
+
+def keyword_provider_error_fallback(
+    text: str,
+    *,
+    available_keywords: Sequence[str] | None,
+    limit: int,
+    provider: str,
+    adapter: str,
+    prompt_version: str,
+) -> tuple[list[str], dict[str, Any]]:
+    """Recover deterministically after a routing-keyword provider failure."""
+
+    available_count = None if available_keywords is None else len({
+        str(item).strip().casefold() for item in available_keywords if str(item).strip()
+    })
+    base_trace = {
+        "provider": provider,
+        "adapter": adapter,
+        "prompt_version": prompt_version,
+        "available_keyword_count": available_count,
+        "parsed_item_count": 0,
+        "selected_keyword_count": 0,
+        "rejected_item_count": 0,
+        "outcome": "provider_error",
+    }
+    return reconcile_keyword_selection(
+        text,
+        available_keywords=available_keywords,
+        provider_keywords=(),
+        provider_trace=base_trace,
+        limit=limit,
+    )
+
+
+def canonical_provider_name(name: str) -> str:
+    normalized = name.strip().lower()
+    if normalized == "openai":
+        return "openai"
+    if normalized in {"deterministic", "deterministic-mock", "mock"}:
+        return "deterministic-mock"
+    if normalized in {"local", "local-compatible"}:
+        return "local-compatible"
+    raise RuntimeError(
+        f"Unsupported AI_PROVIDER={name!r}. Expected one of: openai, deterministic-mock, local-compatible."
+    )
+
+
+def _embedding_dimension_override() -> int | None:
+    raw_value = os.getenv("AI_EMBEDDING_DIMENSIONS", "").strip()
+    if not raw_value:
+        return None
+    try:
+        value = int(raw_value)
+    except ValueError as exc:
+        raise RuntimeError("AI_EMBEDDING_DIMENSIONS must be a positive integer") from exc
+    if value <= 0:
+        raise RuntimeError("AI_EMBEDDING_DIMENSIONS must be a positive integer")
+    return value
+
+
+def embedding_dimensions(provider_name: str, model: str) -> int:
+    """Return the configured vector size without making a provider request."""
+
+    provider = canonical_provider_name(provider_name)
+    if provider in {"deterministic-mock", "local-compatible"}:
+        return 24
+    override = _embedding_dimension_override()
+    if override is not None:
+        if not model.startswith("text-embedding-3-"):
+            raise RuntimeError(
+                "AI_EMBEDDING_DIMENSIONS is supported only for OpenAI text-embedding-3 models"
+            )
+        return override
+    try:
+        return OPENAI_EMBEDDING_DIMENSIONS[model]
+    except KeyError as exc:
+        raise RuntimeError(
+            f"Unknown OpenAI embedding dimensions for model {model!r}; "
+            "use a supported model or set AI_EMBEDDING_DIMENSIONS for a text-embedding-3 model"
+        ) from exc
 
 
 @dataclass(frozen=True)
@@ -73,6 +255,42 @@ class AIProvider(ABC):
     ) -> list[str]:
         raise NotImplementedError
 
+    def extract_keywords_with_trace(
+        self,
+        text: str,
+        *,
+        model: str,
+        prompt: str,
+        prompt_version: str,
+        available_keywords: Sequence[str] | None = None,
+        limit: int = 5,
+    ) -> tuple[list[str], dict[str, Any]]:
+        """Return keywords plus a content-free selection outcome trace.
+
+        The default keeps third-party/provider wrappers compatible while
+        allowing adapters with access to the raw response to report a more
+        precise outcome.  Traces contain counts and classifications only;
+        source text, provider output, and keyword values are deliberately
+        excluded.
+        """
+
+        values = self.extract_keywords(
+            text,
+            model=model,
+            prompt=prompt,
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            limit=limit,
+        )
+        return values, self._keyword_selection_trace(
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            selected_count=len(values),
+            parsed_item_count=len(values),
+            rejected_item_count=0,
+            outcome="selected" if values else "no_selection_unclassified",
+        )
+
     @abstractmethod
     def embed(self, texts: Sequence[str], *, model: str) -> list[list[float]]:
         raise NotImplementedError
@@ -120,6 +338,30 @@ class AIProvider(ABC):
     def _usage_tokens(text: str) -> list[str]:
         return re.findall(r"\S+", text or "")
 
+    def _keyword_selection_trace(
+        self,
+        *,
+        prompt_version: str,
+        available_keywords: Sequence[str] | None,
+        selected_count: int,
+        parsed_item_count: int,
+        rejected_item_count: int,
+        outcome: str,
+    ) -> dict[str, Any]:
+        available_count = None
+        if available_keywords is not None:
+            available_count = len({str(item).strip().casefold() for item in available_keywords if str(item).strip()})
+        return {
+            "provider": self.provider_name,
+            "adapter": self.adapter_name,
+            "prompt_version": prompt_version,
+            "available_keyword_count": available_count,
+            "parsed_item_count": int(parsed_item_count),
+            "selected_keyword_count": int(selected_count),
+            "rejected_item_count": int(rejected_item_count),
+            "outcome": outcome,
+        }
+
 
 class OpenAIProvider(AIProvider):
     provider_name = "openai"
@@ -152,6 +394,26 @@ class OpenAIProvider(AIProvider):
         available_keywords: Sequence[str] | None = None,
         limit: int = 5,
     ) -> list[str]:
+        values, _ = self.extract_keywords_with_trace(
+            text,
+            model=model,
+            prompt=prompt,
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            limit=limit,
+        )
+        return values
+
+    def extract_keywords_with_trace(
+        self,
+        text: str,
+        *,
+        model: str,
+        prompt: str,
+        prompt_version: str,
+        available_keywords: Sequence[str] | None = None,
+        limit: int = 5,
+    ) -> tuple[list[str], dict[str, Any]]:
         if available_keywords is None:
             instruction = prompt
         else:
@@ -166,22 +428,55 @@ class OpenAIProvider(AIProvider):
             temperature=0.0,
         )
         raw = str(response.choices[0].message.content or "").strip()
-        if raw.upper() == "NONE":
-            return []
-        allowed_lookup = {item.lower(): item for item in available_keywords or ()}
+        allowed_lookup = {item.casefold(): item for item in available_keywords or ()}
         values: list[str] = []
-        for item in raw.split(","):
-            normalized = item.strip()
-            if not normalized:
-                continue
-            if allowed_lookup:
-                normalized = allowed_lookup.get(normalized.lower(), "")
+        parsed_items = [] if raw.upper() == "NONE" else [item.strip() for item in raw.split(",") if item.strip()]
+        rejected_item_count = 0
+        for normalized in parsed_items:
+            if available_keywords is not None:
+                matched = allowed_lookup.get(normalized.casefold(), "")
+                if not matched:
+                    rejected_item_count += 1
+                normalized = matched
             if normalized and normalized not in values:
                 values.append(normalized)
-        return values[:limit]
+        values = values[:limit]
+        if raw.upper() == "NONE":
+            outcome = "provider_none"
+        elif values:
+            outcome = "selected"
+        elif not parsed_items:
+            outcome = "empty_response"
+        elif available_keywords is not None:
+            outcome = "parser_rejected"
+        else:
+            outcome = "no_selection_unclassified"
+        provider_trace = self._keyword_selection_trace(
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            selected_count=len(values),
+            parsed_item_count=len(parsed_items),
+            rejected_item_count=rejected_item_count,
+            outcome=outcome,
+        )
+        return reconcile_keyword_selection(
+            text,
+            available_keywords=available_keywords,
+            provider_keywords=values,
+            provider_trace=provider_trace,
+            limit=limit,
+        )
 
     def embed(self, texts: Sequence[str], *, model: str) -> list[list[float]]:
-        response = self._get_client().embeddings.create(input=list(texts), model=model)
+        request: dict[str, Any] = {"input": list(texts), "model": model}
+        dimensions = _embedding_dimension_override()
+        if dimensions is not None:
+            if not model.startswith("text-embedding-3-"):
+                raise RuntimeError(
+                    "AI_EMBEDDING_DIMENSIONS is supported only for OpenAI text-embedding-3 models"
+                )
+            request["dimensions"] = dimensions
+        response = self._get_client().embeddings.create(**request)
         return [list(item.embedding) for item in response.data]
 
     def generate(self, messages: Sequence[dict[str, str]], *, model: str, temperature: float = 0.0) -> str:
@@ -276,6 +571,43 @@ class DeterministicMockProvider(AIProvider):
             counts[token] = counts.get(token, 0) + 1
         return sorted(counts, key=lambda token: (-counts[token], token))[:limit]
 
+    def extract_keywords_with_trace(
+        self,
+        text: str,
+        *,
+        model: str,
+        prompt: str,
+        prompt_version: str,
+        available_keywords: Sequence[str] | None = None,
+        limit: int = 5,
+    ) -> tuple[list[str], dict[str, Any]]:
+        values = self.extract_keywords(
+            text,
+            model=model,
+            prompt=prompt,
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            limit=limit,
+        )
+        if values:
+            outcome = "selected"
+        elif available_keywords is not None and not available_keywords:
+            outcome = "no_available_keywords"
+        elif available_keywords is not None:
+            outcome = "no_overlap"
+        elif not self._tokens(text):
+            outcome = "empty_input"
+        else:
+            outcome = "no_selection_unclassified"
+        return values, self._keyword_selection_trace(
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            selected_count=len(values),
+            parsed_item_count=len(values),
+            rejected_item_count=0,
+            outcome=outcome,
+        )
+
     def embed(self, texts: Sequence[str], *, model: str) -> list[list[float]]:
         vectors: list[list[float]] = []
         for text in texts:
@@ -330,13 +662,11 @@ class LocalCompatibleProvider(DeterministicMockProvider):
 
 
 def create_provider(name: str, *, openai_client_factory: Callable[[], Any] | None = None) -> AIProvider:
-    normalized = name.strip().lower()
+    normalized = canonical_provider_name(name)
     if normalized == "openai":
         return OpenAIProvider(client_factory=openai_client_factory)
-    if normalized in {"deterministic", "deterministic-mock", "mock"}:
+    if normalized == "deterministic-mock":
         return DeterministicMockProvider()
-    if normalized in {"local", "local-compatible"}:
+    if normalized == "local-compatible":
         return LocalCompatibleProvider()
-    raise RuntimeError(
-        f"Unsupported AI_PROVIDER={name!r}. Expected one of: openai, deterministic-mock, local-compatible."
-    )
+    raise AssertionError(f"Unhandled canonical provider: {normalized}")

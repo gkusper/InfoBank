@@ -10,6 +10,7 @@ from __future__ import annotations
 import enum
 import hashlib
 import json
+import os
 import re
 from dataclasses import asdict, dataclass
 from typing import Iterable, Mapping
@@ -21,6 +22,7 @@ class RoutingMode(str, enum.Enum):
 
 
 ROUTING_CONFIG_VERSION = "infocom-a2-routing-v1"
+RUNTIME_ROUTING_MODE_ENV = "INFOBANK_ROUTING_MODE"
 
 
 def normalize_keyword(value: str) -> str:
@@ -34,9 +36,21 @@ def routing_config_hash() -> str:
         "matching": "normalized_exact_keyword",
         "modes": [mode.value for mode in RoutingMode],
         "policy_order": "governance_before_routing",
+        "runtime_feature_flag": RUNTIME_ROUTING_MODE_ENV,
     }
     encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode("utf-8")
     return hashlib.sha256(encoded).hexdigest()
+
+
+def runtime_routing_mode() -> RoutingMode:
+    """Resolve the server-controlled production routing feature flag."""
+
+    raw = os.getenv(RUNTIME_ROUTING_MODE_ENV, RoutingMode.KEYWORD_ROUTING.value).strip().upper()
+    try:
+        return RoutingMode(raw)
+    except ValueError as exc:
+        allowed = ", ".join(mode.value for mode in RoutingMode)
+        raise RuntimeError(f"{RUNTIME_ROUTING_MODE_ENV} must be one of: {allowed}") from exc
 
 
 @dataclass(frozen=True)

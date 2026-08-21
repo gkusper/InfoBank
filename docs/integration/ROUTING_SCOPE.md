@@ -11,7 +11,7 @@ The former `GET /api/ontology/*` implementation counted keyword co-occurrence ov
 
 ## Implemented routing contract
 
-`backend_python/routing.py` defines exactly two evaluation modes:
+`backend_python/routing.py` defines exactly two evaluation and server-runtime modes:
 
 - `ROUTING_OFF`: return the complete governance-permitted input set.
 - `KEYWORD_ROUTING`: return documents with a normalized exact selected-keyword match; if no keyword is selected or no permitted match exists, fall back to the complete governance-permitted input set.
@@ -22,10 +22,12 @@ Both modes are post-policy operations. They accept `permitted_document_ids`, nev
 2. resolves Full/Aggregate/Metadata/Deny decisions;
 3. stops safely when there is no usable source;
 4. builds the model-visible keyword vocabulary only from usable document identifiers;
-5. applies `KEYWORD_ROUTING` within that usable set; and
+5. applies the server-configured `INFOBANK_ROUTING_MODE` within that usable set; and
 6. resolves policy again for the selected candidates before retrieval and generation.
 
-There is deliberately no client-controlled routing-mode parameter on `POST /api/ask`; the two-mode switch belongs to the local evaluator and cannot be used to bypass policy. The trace records mode, selected and matched keywords, candidates, excluded governed documents, fallback state and reason, governed input size, candidate size, routing configuration version, and SHA-256 configuration hash.
+There is deliberately no client-controlled routing-mode parameter on `POST /api/ask`. `INFOBANK_ROUTING_MODE` is a server-side feature flag accepting only `ROUTING_OFF` or `KEYWORD_ROUTING`; governance remains mandatory in both modes. `ROUTING_OFF` skips keyword-provider selection and returns the complete governed set. The privileged audit trace records mode, selected and matched keywords, candidates, excluded governed documents, fallback state and reason, governed input size, candidate size, routing configuration version, and SHA-256 configuration hash. The public response exposes only the safe routing fields: selected/matched keywords, counts, fallback state/reason, and configuration identity; governed document identifiers remain audit-only.
+
+The keyword provider also emits a content-free selection trace. The versioned `infocom-keyword-selector-v2` strategy first anchors explicit lexical matches against the already governance-permitted vocabulary, then merges any exact allowed-list values returned by the configured provider. An explicit provider `NONE`, empty/parser-rejected response, or provider exception therefore cannot erase a deterministic question/tag match. If neither the deterministic anchor nor the provider selects a permitted keyword, routing still falls back to the complete governance-permitted corpus. The trace distinguishes the final outcome from the provider outcome and records provider-selected, deterministic-match, and final counts only. It never stores or returns the raw provider response, question text, source text, rejected keyword values, or provider exception text. The reviewer UI shows the configured mode separately from the effective path (`KEYWORD_NARROWING`, `PERMITTED_CORPUS_FALLBACK`, or the full permitted corpus), together with the candidate-set effect and fallback reason. A visible fallback is an auditable safety path, not a routing failure by itself.
 
 ## Semantic Co-occurrence Graph contract
 

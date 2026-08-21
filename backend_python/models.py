@@ -40,8 +40,8 @@ class User(Base):
     username = Column(String(100), nullable=False)
     password_hash = Column(String(255), nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
-    full_name = Column(String, nullable=True)
-    avatar_url = Column(String, nullable=True)
+    full_name = Column(String(255), nullable=True)
+    avatar_url = Column(String(1024), nullable=True)
 
 class Document(Base):
     __tablename__ = "documents"
@@ -196,8 +196,8 @@ class PolicyRule(Base):
 class ConnectorAccount(Base):
     """OAuth connector account state for external evidence sources.
 
-    Used by the Gmail connector. Tokens are stored as JSON for the prototype;
-    production should encrypt this column or move it to a secrets vault.
+    Used by the Gmail connector. ``token_json`` contains a versioned encrypted
+    token envelope; legacy plaintext rows are refused until reconnect.
     """
 
     __tablename__ = "connector_accounts"

@@ -4,6 +4,8 @@ const AUTH_USER_KEY = "infobank_user_id";
 
 let CURRENT_USER_ID = "";
 let ACCESS_TOKEN = "";
+const DOCUMENT_CAPABILITIES = new Map();
+let AUTHORIZED_SOURCE_OBJECT_URL = null;
 
 function escapeHtml(value) {
     return String(value ?? "")
@@ -21,7 +23,10 @@ function authHeaders(extra = {}) {
 async function readApiResponse(response) {
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-        throw new Error(data.detail || data.message || `HTTP ${response.status}`);
+        const safeError = data.error || {};
+        const message = safeError.message || data.detail || data.message || `HTTP ${response.status}`;
+        const suffix = safeError.error_id ? ` (error ID: ${safeError.error_id})` : '';
+        throw new Error(message + suffix);
     }
     return data;
 }
@@ -29,15 +34,76 @@ async function readApiResponse(response) {
 function saveSession(userId, token) {
     CURRENT_USER_ID = userId;
     ACCESS_TOKEN = token;
-    localStorage.setItem(AUTH_USER_KEY, userId);
-    localStorage.setItem(AUTH_TOKEN_KEY, token);
+    sessionStorage.setItem(AUTH_USER_KEY, userId);
+    sessionStorage.setItem(AUTH_TOKEN_KEY, token);
 }
 
 function clearSession() {
     CURRENT_USER_ID = "";
     ACCESS_TOKEN = "";
-    localStorage.removeItem(AUTH_USER_KEY);
-    localStorage.removeItem(AUTH_TOKEN_KEY);
+    sessionStorage.removeItem(AUTH_USER_KEY);
+    sessionStorage.removeItem(AUTH_TOKEN_KEY);
+    resetSessionScopedUI();
+}
+
+function resetChatView() {
+    const chat = document.getElementById('view-chat');
+    if (!chat) return;
+    chat.innerHTML = `
+        <div class="flex justify-start w-full">
+            <div class="bg-gray-100 border border-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-2xl text-gray-700 shadow-sm text-sm">
+                Hello! I am your InfoBank Assistant. I only answer based on your uploaded documents. How can I help?
+            </div>
+        </div>`;
+}
+
+function resetSessionScopedUI() {
+    DOCUMENT_CAPABILITIES.clear();
+    lastPolicyTargetUserId = null;
+    document.body.classList.remove('reviewer-evidence-mode');
+    for (const id of [
+        'log-email', 'log-pass', 'reg-name', 'reg-email', 'reg-pass',
+        'prof-full-name', 'prof-email', 'prof-avatar-url',
+        'policy-doc-id', 'policy-target-username', 'policy-valid-from', 'policy-valid-until',
+        'transferDocId', 'transferUsernameInput',
+    ]) {
+        const element = document.getElementById(id);
+        if (element) element.value = '';
+    }
+    const purpose = document.getElementById('policy-purpose');
+    if (purpose) purpose.value = 'grounded_question_answering';
+    const policyMode = document.getElementById('policy-access-mode');
+    if (policyMode) policyMode.value = 'Full';
+    const grantType = document.getElementById('policy-grant-type');
+    if (grantType) grantType.value = 'Reader';
+    const uploadPermission = document.getElementById('upload-permission');
+    if (uploadPermission) uploadPermission.value = 'Owner';
+    const docsBody = document.getElementById('docs-tbody');
+    if (docsBody) docsBody.innerHTML = '';
+    const policyResult = document.getElementById('policy-review-output');
+    if (policyResult) policyResult.textContent = 'Select a document from the Documents screen or enter its UUID.';
+    const actionResult = document.getElementById('action-review-output');
+    if (actionResult) actionResult.textContent = 'No evidence loaded.';
+    const transferResults = document.getElementById('transferResults');
+    if (transferResults) {
+        transferResults.innerHTML = '';
+        transferResults.classList.add('hidden');
+    }
+    const profileModal = document.getElementById('profile-modal');
+    if (profileModal) profileModal.classList.add('hidden');
+    const transferModal = document.getElementById('transferModal');
+    if (transferModal) transferModal.classList.add('hidden');
+    closeAuthorizedSource();
+    const username = document.getElementById('sidebar-display-username');
+    if (username) username.innerText = 'Username';
+    const fullname = document.getElementById('sidebar-display-fullname');
+    if (fullname) {
+        fullname.innerText = 'Full Name';
+        fullname.classList.add('hidden');
+    }
+    if (document.getElementById('upload-file')) resetUploadUX();
+    resetChatView();
+    syncPolicyEditorForDocument();
 }
 
 function showAppShell() {
@@ -66,8 +132,8 @@ async function restoreSession() {
     const legacyLogoutBtn = document.querySelector('button[onclick="location.reload()"]');
     if (legacyLogoutBtn) legacyLogoutBtn.onclick = logout;
 
-    const token = localStorage.getItem(AUTH_TOKEN_KEY);
-    const userId = localStorage.getItem(AUTH_USER_KEY);
+    const token = sessionStorage.getItem(AUTH_TOKEN_KEY);
+    const userId = sessionStorage.getItem(AUTH_USER_KEY);
     if (!token || !userId) {
         clearSession();
         showLoginScreen();
@@ -77,7 +143,11 @@ async function restoreSession() {
     CURRENT_USER_ID = userId;
     ACCESS_TOKEN = token;
     const ok = await loadProfile();
-    if (ok) showAppShell();
+    if (ok) {
+        await loadDocs();
+        switchView('chat');
+        showAppShell();
+    }
     else {
         clearSession();
         showLoginScreen();
@@ -87,15 +157,6 @@ async function restoreSession() {
 function logout() {
     clearSession();
     showLoginScreen();
-    const chat = document.getElementById('view-chat');
-    if (chat) {
-        chat.innerHTML = `
-            <div class="flex justify-start w-full">
-                <div class="bg-gray-100 border border-gray-200 p-4 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-2xl text-gray-700 shadow-sm text-sm">
-                    Hello! I am your InfoBank Assistant. I only answer based on your uploaded documents. How can I help?
-                </div>
-            </div>`;
-    }
 }
 
 function roleBadge(role) {
@@ -153,6 +214,40 @@ function renderSourceProfile(profile) {
         </details>`;
 }
 
+function humanizeTraceValue(value) {
+    return String(value || 'not recorded').replaceAll('_', ' ').toLowerCase();
+}
+
+function routingPresentation(res) {
+    const profile = res.query_profile || {};
+    const trace = profile.routing_trace || res.governance?.routing_trace || {};
+    const selector = profile.keyword_selection_trace || {};
+    const mode = trace.mode || 'NOT_RUN';
+    const fallbackUsed = trace.fallback_used === true;
+    let effectivePath = 'NOT_RUN';
+    if (fallbackUsed) effectivePath = 'PERMITTED_CORPUS_FALLBACK';
+    else if (mode === 'ROUTING_OFF') effectivePath = 'FULL_PERMITTED_CORPUS';
+    else if (mode === 'KEYWORD_ROUTING') effectivePath = 'KEYWORD_NARROWING';
+
+    const selectedKeywords = Array.isArray(trace.selected_keywords)
+        ? trace.selected_keywords
+        : (Array.isArray(res.extracted_keywords) ? res.extracted_keywords : []);
+    const governedCount = Number(trace.governed_input_count);
+    const candidateCount = Number(trace.candidate_set_size);
+    const hasCandidateCounts = Number.isFinite(governedCount) && Number.isFinite(candidateCount);
+    const candidateEffect = hasCandidateCounts
+        ? `${candidateCount}/${governedCount} retained${candidateCount === governedCount ? ' (no reduction)' : ''}`
+        : 'not recorded';
+    return {
+        mode,
+        effectivePath,
+        selectedKeywords: selectedKeywords.length ? selectedKeywords.join(', ') : 'none selected',
+        candidateEffect,
+        fallbackReason: fallbackUsed ? humanizeTraceValue(trace.fallback_reason) : 'not applicable',
+        selectorOutcome: humanizeTraceValue(selector.outcome),
+    };
+}
+
 function renderGovernanceTrace(res) {
     const profile = res.query_profile || {};
     const gov = res.governance || {};
@@ -162,8 +257,10 @@ function renderGovernanceTrace(res) {
     const expectedGenres = (profile.expected_genres || []).join(', ') || 'N/A';
     const taskIntent = profile.task_intent || 'general_document_question';
     const retrievalStrategy = profile.retrieval_strategy || 'N/A';
-    const deniedCount = (gov.denied_doc_ids || []).length;
-    const metadataCount = (gov.metadata_only_doc_ids || []).length;
+    const routing = routingPresentation(res);
+    const metadataCount = Number.isFinite(Number(gov.metadata_only_source_count))
+        ? Number(gov.metadata_only_source_count)
+        : (gov.metadata_only_doc_ids || []).length;
     const levelSummary = renderLevelSummary(res.relevance_level_summary);
     return `
         <div class="mt-4 bg-slate-50 border border-slate-200 rounded-xl p-3 text-[11px] text-slate-600">
@@ -174,12 +271,17 @@ function renderGovernanceTrace(res) {
             <div class="grid gap-1">
                 <div><b>Task intent:</b> ${escapeHtml(taskIntent)}</div>
                 <div><b>Retrieval strategy:</b> ${escapeHtml(retrievalStrategy)}</div>
+                <div><b>Routing configured:</b> ${escapeHtml(routing.mode)}</div>
+                <div><b>Effective routing path:</b> ${escapeHtml(routing.effectivePath)}</div>
+                <div><b>Candidate-set effect:</b> ${escapeHtml(routing.candidateEffect)}</div>
+                <div><b>Fallback reason:</b> ${escapeHtml(routing.fallbackReason)}</div>
+                <div><b>Keyword selector outcome:</b> ${escapeHtml(routing.selectorOutcome)}</div>
                 <div><b>Lexical signals:</b> ${escapeHtml(lexicalTerms)}</div>
                 <div><b>Semantic tags:</b> ${escapeHtml(semanticTags)}</div>
                 <div><b>Expected genres:</b> ${escapeHtml(expectedGenres)}</div>
                 <div><b>Source roles:</b> ${roleSummary || '<span class="text-gray-400">N/A</span>'}</div>
                 <div><b>Metadata-only sources:</b> ${metadataCount}</div>
-                <div><b>Denied by governance:</b> ${deniedCount}</div>
+                <div><b>Governance:</b> enforced; restricted-source details withheld</div>
                 <details class="mt-2">
                     <summary class="cursor-pointer font-bold text-slate-500">Nine-level relevance summary</summary>
                     <div class="mt-2 space-y-1">${levelSummary}</div>
@@ -210,7 +312,7 @@ function renderSourceBlocks(sources, expanded = false) {
                 <span class="px-2 py-0.5 rounded-full bg-white border text-[10px] text-gray-500 uppercase" data-reviewer-field="permission-badge">${escapeHtml(src.use_decision || src.citation?.effective_use_decision || 'unknown')}</span>
             </div>
             <div class="text-[10px] text-slate-500 mb-1" data-reviewer-field="page-message-citation">Document ${escapeHtml(src.citation?.document_id || src.document_id || 'N/A')} · page/message ${escapeHtml(src.citation?.page_number || 'N/A')} · chunk ${escapeHtml(src.citation?.chunk_id || 'N/A')}</div>
-            ${src.citation?.source_view_url ? `<button onclick="openAuthorizedSource('${escapeHtml(src.citation.source_view_url)}')" class="mb-2 text-blue-600 font-bold" aria-label="Open cited source page">Open cited source page</button>` : ''}
+            ${src.citation?.source_view_url && src.use_decision !== 'aggregate' ? `<button onclick="openAuthorizedSource('${escapeHtml(src.citation.source_view_url)}')" class="mb-2 text-blue-600 font-bold" aria-label="Open cited source page">Open cited source page</button>` : ''}
             <div class="italic leading-relaxed max-h-24 overflow-y-auto pr-1 text-[11px] whitespace-pre-wrap">${escapeHtml(src.text)}</div>
             ${renderSourceProfile(src.usable_relevance)}
         </div>`).join('');
@@ -220,13 +322,13 @@ function renderSourceBlocks(sources, expanded = false) {
 function renderAssistantExchange(question, res, { expandedSources = false, replace = false, includeQuestion = true } = {}) {
     const box = document.getElementById('view-chat');
     const formattedText = escapeHtml(res.answer).replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-    const routingMode = res.query_profile?.routing_trace?.mode || res.governance?.routing_trace?.mode || res.query_profile?.retrieval_strategy || 'N/A';
+    const routing = routingPresentation(res);
     const questionHtml = includeQuestion ? `<div class="flex justify-end w-full mb-2"><div class="bg-blue-600 text-white p-3 px-5 rounded-2xl rounded-tr-none max-w-[80%] md:max-w-3xl shadow-sm text-sm" data-reviewer-field="complete-question">${escapeHtml(question)}</div></div>` : '';
     const exchange = `
         ${questionHtml}
         <div class="flex justify-start w-full mb-2"><div class="bg-white border border-gray-200 p-5 rounded-2xl rounded-tl-none max-w-[80%] md:max-w-3xl text-gray-800 shadow-sm text-sm leading-relaxed">
             ${renderAnswerReviewHeader(res)}
-            <div class="flex items-center space-x-2 mb-3 pb-3 border-b border-gray-100 text-[10px] text-gray-500 uppercase tracking-widest font-bold"><i class="fas fa-filter text-blue-500"></i><span>Routing: ${escapeHtml(routingMode)} · keywords: ${escapeHtml(res.extracted_keywords?.join(', ') || 'N/A')}</span></div>
+            <div class="flex items-start gap-2 mb-3 pb-3 border-b border-gray-100 text-[10px] text-gray-500 uppercase tracking-widest font-bold" data-reviewer-field="routing-summary"><i class="fas fa-filter text-blue-500 mt-0.5"></i><span>Routing: ${escapeHtml(routing.mode)} → ${escapeHtml(routing.effectivePath)} · selected keywords: ${escapeHtml(routing.selectedKeywords)} · candidate set: ${escapeHtml(routing.candidateEffect)} · fallback: ${escapeHtml(routing.fallbackReason)} · selector: ${escapeHtml(routing.selectorOutcome)}</span></div>
             <p style="white-space: pre-wrap;">${formattedText}</p>${renderGovernanceTrace(res)}${renderSourceBlocks(res.sources, expandedSources)}
         </div></div>`;
     if (replace) box.innerHTML = exchange;
@@ -255,9 +357,14 @@ async function doLogin() {
         const r = await fetch(`${API}/login`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(d) });
         const res = await readApiResponse(r);
         saveSession(res.user_id, res.access_token);
+        const profileLoaded = await loadProfile();
+        if (!profileLoaded) throw new Error('The authenticated profile could not be loaded.');
+        await loadDocs();
+        switchView('chat');
         showAppShell();
-        await loadProfile();
     } catch (e) {
+        if (ACCESS_TOKEN) clearSession();
+        showLoginScreen();
         alert(e.message || "Login failed");
     }
 }
@@ -305,112 +412,6 @@ async function saveProfile() {
     }
 }
 
-function isActionListQuestion(q) {
-    const text = q.toLowerCase();
-    return (text.includes('current action list') || text.includes('action list') || text.includes('open task') || text.includes('todo'))
-        && !text.includes('browser history alone');
-}
-
-function evidenceRoleSummary(units) {
-    const out = {};
-    units.forEach(unit => {
-        const role = unit.role || 'contextual';
-        out[role] = (out[role] || 0) + 1;
-    });
-    return out;
-}
-
-function evidenceLevelSummary(units) {
-    const base = {
-        lexical: 0, semantic: 0, ontological: 0, pragmatic: 0, genre: 0,
-        perlocutionary: 0, temporal_status: 0, governance: 0, evidential: 0,
-    };
-    if (!units.length) return base;
-    units.forEach(unit => {
-        const primary = unit.role === 'primary';
-        const contrastive = unit.role === 'contrastive';
-        base.lexical += primary ? 0.8 : 0.3;
-        base.semantic += primary || contrastive ? 1 : 0.5;
-        base.ontological += 1;
-        base.pragmatic += 1;
-        base.genre += 1;
-        base.perlocutionary += primary ? 1 : 0.5;
-        base.temporal_status += (unit.classifier?.temporal_status || []).includes('unspecified') ? 0.2 : 1;
-        base.governance += unit.policy?.use_decision === 'deny' ? 0 : 1;
-        base.evidential += primary ? 1 : (contrastive ? 0.85 : 0.45);
-    });
-    Object.keys(base).forEach(k => base[k] = Number((base[k] / units.length).toFixed(3)));
-    return base;
-}
-
-function evidenceSources(units) {
-    return units.map(unit => ({
-        document_id: unit.id,
-        file_name: `${unit.source_type || 'Evidence'} · ${unit.title || 'Untitled'}`,
-        role: unit.role || 'contextual',
-        use_decision: unit.policy?.use_decision || 'full',
-        text: unit.content_summary || '[evidence content unavailable]',
-        usable_relevance: {
-            levels: evidenceLevelSummary([unit]),
-            role: unit.role || 'contextual',
-            base_role: unit.citds_source_role || unit.role || 'contextual',
-            use_decision: unit.policy?.use_decision || 'full',
-            genre: unit.classifier?.genre || unit.signals?.genre || ['evidence_unit'],
-            speech_acts: unit.classifier?.speech_acts || unit.signals?.primary || ['informative'],
-            temporal_status: unit.classifier?.temporal_status || unit.signals?.temporal_status || ['unspecified'],
-            evidence_warnings: unit.classifier?.warnings || [],
-        },
-    }));
-}
-
-function formatActionListFromEvidence(data) {
-    const open = data.open_items || [];
-    if (!open.length) {
-        let suffix = '';
-        if ((data.contextual_only || []).length) suffix += ' Contextual/browser-history evidence exists, but it cannot create an action item by itself.';
-        if ((data.closed_items || []).length) suffix += ' Some candidate items are already closed or cancelled.';
-        return 'I found no open action items supported by primary evidence.' + suffix;
-    }
-    const items = open.map((item, idx) => {
-        let text = `(${idx + 1}) ${item.action || 'Unspecified action'}`;
-        if (item.object && !text.includes(item.object)) text += ` (${item.object})`;
-        if (item.due) text += ` by ${item.due}`;
-        return text;
-    });
-    return `Your current action list contains ${open.length} open item(s): ${items.join('; ')}.`;
-}
-
-async function actionListChatResponse(q) {
-    const r = await fetch(`${API}/evidence/action-list`, { headers: authHeaders() });
-    const data = await readApiResponse(r);
-    const units = data.classified_units || [];
-    return {
-        status: 'success',
-        answer: formatActionListFromEvidence(data),
-        extracted_keywords: ['action', 'email', 'calendar'],
-        query_profile: {
-            lexical_terms: q.toLowerCase().split(/\W+/).filter(Boolean).slice(0, 12),
-            semantic_tags: ['action', 'email', 'calendar'],
-            task_intent: 'current_action_list',
-            retrieval_strategy: 'evidence_reconstruction',
-            expected_genres: ['email_or_message', 'calendar_or_schedule', 'activity_trace'],
-        },
-        governance: {
-            source_type: 'evidence_units',
-            usable_doc_ids: [],
-            denied_doc_ids: [],
-            metadata_only_doc_ids: [],
-        },
-        source_role_summary: evidenceRoleSummary(units),
-        relevance_level_summary: evidenceLevelSummary(units),
-        evidence_check: {
-            decision: (data.open_items || []).length ? 'answer_allowed' : 'controlled_failure_or_no_open_items',
-            counts: data.counts || {},
-        },
-        sources: evidenceSources(units),
-    };
-}
-
 async function askQuestion() {
     const input = document.getElementById('chat-input');
     const box = document.getElementById('view-chat');
@@ -428,13 +429,8 @@ async function askQuestion() {
     const fd = new FormData();
     fd.append("question", q);
     try {
-        let res;
-        if (isActionListQuestion(q)) {
-            res = await actionListChatResponse(q);
-        } else {
-            const r = await fetch(`${API}/ask`, { method: 'POST', headers: authHeaders(), body: fd });
-            res = await readApiResponse(r);
-        }
+        const r = await fetch(`${API}/ask`, { method: 'POST', headers: authHeaders(), body: fd });
+        const res = await readApiResponse(r);
         removeTyping();
         if (res.status === "success") {
             renderAssistantExchange(q, res, {includeQuestion: false});
@@ -487,6 +483,12 @@ async function loadDocs() {
     try {
         const r = await fetch(`${API}/documents/me`, { headers: authHeaders() });
         const data = await readApiResponse(r);
+        DOCUMENT_CAPABILITIES.clear();
+        data.documents.forEach(doc => DOCUMENT_CAPABILITIES.set(doc.document_id, {
+            isOwner: doc.is_owner === true,
+            permission: doc.permission,
+            visibility: doc.visibility,
+        }));
         const tbody = document.getElementById('docs-tbody');
         tbody.innerHTML = "";
         data.documents.forEach(doc => {
@@ -495,22 +497,35 @@ async function loadDocs() {
             const iconTitle = isOwner ? 'Permanent Delete' : 'Unsubscribe';
             const transferBtn = isOwner ? `<button onclick="openTransferModal('${doc.document_id}')" class="text-blue-500 hover:text-blue-700 transition ml-2" title="Transfer ownership" aria-label="Transfer ownership"><i class="fas fa-exchange-alt"></i></button>` : '';
             const lifecycleButtons = isOwner ? `<button onclick="reindexDoc('${doc.document_id}')" class="text-indigo-500 ml-2" title="Re-index document" aria-label="Re-index document"><i class="fas fa-sync"></i></button><button onclick="archiveDoc('${doc.document_id}')" class="text-amber-600 ml-2" title="Archive document" aria-label="Archive document"><i class="fas fa-archive"></i></button><button onclick="restoreDoc('${doc.document_id}')" class="text-green-600 ml-2" title="Restore document" aria-label="Restore document"><i class="fas fa-trash-restore"></i></button>` : '';
+            const keywordEditor = isOwner
+                ? `<div class="flex items-center space-x-2"><input type="text" id="kw-${doc.document_id}" value="${escapeHtml((doc.keywords || []).join(', '))}" class="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-xs outline-none focus:ring-2 focus:ring-blue-400"><button onclick="saveKW('${doc.document_id}')" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-1.5 transition" title="Save reviewed keywords" aria-label="Save reviewed keywords"><i class="fas fa-save"></i></button></div>`
+                : `<input type="text" id="kw-${doc.document_id}" value="${escapeHtml((doc.keywords || []).join(', '))}" readonly aria-readonly="true" class="w-full border border-gray-200 bg-gray-100 text-gray-600 rounded-md px-3 py-1.5 text-xs cursor-not-allowed"><div class="mt-1 text-[10px] text-amber-700" data-owner-only="true">Owner review only</div>`;
+            const sourceAction = !isOwner && doc.permission === 'Aggregate'
+                ? `<span class="text-amber-700" title="Individual source withheld by Aggregate policy" aria-label="Individual source withheld by Aggregate policy"><i class="fas fa-eye-slash"></i></span>`
+                : `<button onclick="openAuthorizedSource('/api/documents/${doc.document_id}/source?page=1')" class="text-blue-600" title="${!isOwner && doc.permission === 'Metadata' ? 'Open permitted metadata' : 'Open page 1'}" aria-label="${!isOwner && doc.permission === 'Metadata' ? 'Open permitted metadata' : 'Open page 1'}"><i class="fas fa-external-link-alt"></i></button>`;
+            const policyTitle = isOwner ? 'Manage permissions' : 'Resolve effective access';
             const selectId = `perm-${doc.document_id}`;
             const provenance = (doc.provenance || []).map(item => `${item.field}:${item.type}`).slice(0, 4).join(' · ');
             tbody.innerHTML += `
                 <tr class="hover:bg-gray-50 transition">
                     <td class="px-6 py-4 text-gray-800"><div class="font-medium"><i class="far fa-file-pdf text-red-500 mr-2"></i>${escapeHtml(doc.file_name)}</div><div class="mt-1 text-[10px] font-mono text-gray-500" data-reviewer-field="document-uuid-hash">UUID ${escapeHtml(doc.document_id)}<br>SHA ${escapeHtml(doc.source_sha256 || 'N/A')}</div><div class="mt-1 text-[10px]">${escapeHtml(doc.processing_status)} · ${escapeHtml(doc.source_status)} · ${escapeHtml(doc.page_count ?? 0)} page · ${escapeHtml(doc.chunk_count ?? 0)} chunk</div></td>
-                    <td class="px-6 py-4"><div class="flex items-center space-x-2"><input type="text" id="kw-${doc.document_id}" value="${escapeHtml(doc.keywords.join(', '))}" class="flex-1 border border-gray-300 rounded-md px-3 py-1.5 text-xs outline-none focus:ring-2 focus:ring-blue-400"><button onclick="saveKW('${doc.document_id}')" class="text-white bg-blue-500 hover:bg-blue-600 rounded-md p-1.5 transition" title="Save reviewed keywords" aria-label="Save reviewed keywords"><i class="fas fa-save"></i></button></div><div class="text-[10px] text-gray-400 mt-1" data-reviewer-field="provenance">${escapeHtml(provenance || 'No provenance')}</div></td>
+                    <td class="px-6 py-4">${keywordEditor}<div class="text-[10px] text-gray-400 mt-1" data-reviewer-field="provenance">${escapeHtml(provenance || 'No provenance')}</div></td>
                     <td class="px-6 py-4"><select id="${selectId}" data-current="${escapeHtml(doc.permission)}" onchange="savePerm('${doc.document_id}', this.value, this)" ${!isOwner?'disabled':''} class="text-xs border border-gray-300 rounded-md p-2 outline-none ${!isOwner?'opacity-50 cursor-not-allowed bg-gray-100':'bg-white focus:ring-2 focus:ring-blue-400'}">${rightsOptions(doc.permission, isOwner)}</select></td>
-                    <td class="px-6 py-4 text-center whitespace-nowrap"><button onclick="openAuthorizedSource('/api/documents/${doc.document_id}/source?page=1')" class="text-blue-600" title="Open page 1" aria-label="Open page 1"><i class="fas fa-external-link-alt"></i></button><button onclick="selectPolicyDocument('${doc.document_id}')" class="text-purple-600 ml-2" title="Review permissions" aria-label="Review permissions"><i class="fas fa-user-shield"></i></button>${lifecycleButtons}<button onclick="deleteDoc('${doc.document_id}', '${isOwner}')" class="text-gray-400 hover:text-red-600 transition ml-2" title="${iconTitle}" aria-label="${iconTitle}"><i class="fas ${iconClass}"></i></button>${transferBtn}</td>
+                    <td class="px-6 py-4 text-center whitespace-nowrap">${sourceAction}<button onclick="selectPolicyDocument('${doc.document_id}')" class="text-purple-600 ml-2" title="${policyTitle}" aria-label="${policyTitle}"><i class="fas fa-user-shield"></i></button>${lifecycleButtons}<button onclick="deleteDoc('${doc.document_id}', '${isOwner}')" class="text-gray-400 hover:text-red-600 transition ml-2" title="${iconTitle}" aria-label="${iconTitle}"><i class="fas ${iconClass}"></i></button>${transferBtn}</td>
                 </tr>`;
         });
+        syncPolicyEditorForDocument();
+        return true;
     } catch (e) {
         alert("Document list failed: " + e.message);
+        DOCUMENT_CAPABILITIES.clear();
+        syncPolicyEditorForDocument();
+        return false;
     }
 }
 
 async function saveKW(id) {
+    if (!DOCUMENT_CAPABILITIES.get(id)?.isOwner) return alert('Only the Owner can review document keywords.');
     const fd = new FormData();
     fd.append("doc_id", id);
     fd.append("keywords", document.getElementById('kw-'+id).value);
@@ -524,6 +539,7 @@ async function saveKW(id) {
 }
 
 async function savePerm(id, p, selectEl = null) {
+    if (!DOCUMENT_CAPABILITIES.get(id)?.isOwner) return alert('Only the Owner can change document visibility.');
     const previous = selectEl?.dataset.current || null;
     if (selectEl) selectEl.disabled = true;
     const fd = new FormData();
@@ -571,27 +587,101 @@ function reindexDoc(id) { return documentLifecycle(id, 'reindex'); }
 function archiveDoc(id) { return documentLifecycle(id, 'archive'); }
 function restoreDoc(id) { return documentLifecycle(id, 'restore'); }
 
+function closeAuthorizedSource() {
+    const modal = document.getElementById('source-viewer-modal');
+    const frame = document.getElementById('source-viewer-frame');
+    if (frame) {
+        frame.removeAttribute('src');
+        frame.classList.add('hidden');
+    }
+    if (AUTHORIZED_SOURCE_OBJECT_URL) {
+        URL.revokeObjectURL(AUTHORIZED_SOURCE_OBJECT_URL);
+        AUTHORIZED_SOURCE_OBJECT_URL = null;
+    }
+    if (modal) modal.classList.add('hidden');
+}
+
 async function openAuthorizedSource(path) {
+    const modal = document.getElementById('source-viewer-modal');
+    const loading = document.getElementById('source-viewer-loading');
+    const textView = document.getElementById('source-viewer-text');
+    const frame = document.getElementById('source-viewer-frame');
+    if (!modal || !loading || !textView || !frame) return alert('The authorized source viewer is unavailable.');
+    closeAuthorizedSource();
+    modal.classList.remove('hidden');
+    loading.classList.remove('hidden');
+    textView.classList.add('hidden');
+    textView.textContent = '';
     try {
         const url = path.startsWith('/api/') ? `${API.replace('/api', '')}${path}` : `${API}${path}`;
         const r = await fetch(url, {headers: authHeaders()});
-        if (!r.ok) throw new Error((await r.json()).detail || `HTTP ${r.status}`);
+        if (!r.ok) {
+            const data = await r.json().catch(() => ({}));
+            throw new Error(data.error?.message || data.detail || `HTTP ${r.status}`);
+        }
         const type = r.headers.get('content-type') || '';
         if (type.includes('application/json')) {
             const data = await r.json();
-            const win = window.open('', '_blank');
-            win.document.write(`<pre style="white-space:pre-wrap;font-family:system-ui;padding:2rem">${escapeHtml(data.text || JSON.stringify(data, null, 2))}</pre>`);
+            textView.textContent = data.text || JSON.stringify(data, null, 2);
+            textView.classList.remove('hidden');
         } else {
-            window.open(URL.createObjectURL(await r.blob()), '_blank');
+            AUTHORIZED_SOURCE_OBJECT_URL = URL.createObjectURL(await r.blob());
+            frame.src = AUTHORIZED_SOURCE_OBJECT_URL;
+            frame.classList.remove('hidden');
         }
-    } catch (e) { alert(`Source open failed: ${e.message}`); }
+    } catch (e) {
+        textView.textContent = `Source open failed: ${e.message}`;
+        textView.classList.remove('hidden');
+    } finally {
+        loading.classList.add('hidden');
+    }
 }
 
 let lastPolicyTargetUserId = null;
 
 function selectPolicyDocument(id) {
     document.getElementById('policy-doc-id').value = id;
+    lastPolicyTargetUserId = null;
+    syncPolicyEditorForDocument();
     switchView('policy');
+}
+
+function handlePolicyDocumentChange() {
+    lastPolicyTargetUserId = null;
+    syncPolicyEditorForDocument();
+}
+
+function selectedPolicyCapability() {
+    const docId = document.getElementById('policy-doc-id')?.value.trim();
+    return docId ? DOCUMENT_CAPABILITIES.get(docId) : null;
+}
+
+function syncPolicyEditorForDocument() {
+    const docId = document.getElementById('policy-doc-id')?.value.trim() || '';
+    const capability = selectedPolicyCapability();
+    const isOwner = capability?.isOwner === true;
+    for (const id of ['policy-owner-permission-editor', 'policy-owner-rule-editor']) {
+        const panel = document.getElementById(id);
+        if (panel) panel.classList.toggle('hidden', !isOwner);
+    }
+    const context = document.getElementById('policy-role-context');
+    if (!context) return;
+    if (!docId) {
+        context.textContent = 'Select a document from the Documents screen. Owner-only editors remain hidden until ownership is verified from the current session.';
+    } else if (isOwner) {
+        context.textContent = 'Owner context verified for this document. Persistent grants, scoped rules, and effective-access resolution are available.';
+    } else if (capability) {
+        context.textContent = `${capability.permission || 'Reader'} context. You may resolve your effective access; persistent grants and scoped policy edits are Owner-only.`;
+    } else {
+        context.textContent = 'Ownership is not verified for this document in the current session. Effective access can be resolved, but Owner-only editors remain hidden.';
+    }
+}
+
+function requireOwnerPolicyContext() {
+    if (selectedPolicyCapability()?.isOwner) return true;
+    policyOutput({error: 'Only the verified document Owner can change persistent permissions or scoped policy rules.'});
+    syncPolicyEditorForDocument();
+    return false;
 }
 
 function policyOutput(data) {
@@ -599,6 +689,7 @@ function policyOutput(data) {
 }
 
 async function grantReviewerPermission() {
+    if (!requireOwnerPolicyContext()) return;
     const docId = document.getElementById('policy-doc-id').value.trim();
     const fd = new FormData();
     fd.append('target_username', document.getElementById('policy-target-username').value.trim());
@@ -612,6 +703,7 @@ async function grantReviewerPermission() {
 }
 
 async function revokeReviewerPermission() {
+    if (!requireOwnerPolicyContext()) return;
     const docId = document.getElementById('policy-doc-id').value.trim();
     if (!lastPolicyTargetUserId) return policyOutput({error:'Grant or change a target first so its opaque user ID is known.'});
     try {
@@ -631,6 +723,7 @@ async function resolveReviewerPolicy(showEmpty = true) {
 }
 
 async function createReviewerPolicyRule() {
+    if (!requireOwnerPolicyContext()) return;
     const fd = new FormData();
     fd.append('target_type', 'Document');
     fd.append('target_id', document.getElementById('policy-doc-id').value.trim());
@@ -653,9 +746,11 @@ async function loadReviewerActions() {
         const r = await fetch(`${API}/evidence/action-list`, {headers:authHeaders()});
         const data = await readApiResponse(r);
         renderActionEvidencePanel({
-            closure_states: ['OPEN','CLOSED_COMPLETED','CLOSED_CANCELLED','SUPERSEDED'],
+            engine_version: data.engine_version,
+            closure_states: data.closure_states,
             browser_only_rule: 'contextual evidence cannot create an action by itself',
             counts: data.counts,
+            actions: data.actions,
             open_items: data.open_items,
             closed_items: data.closed_items,
             contextual_only: data.contextual_only,
@@ -712,6 +807,12 @@ async function loadReviewerDemoSeed() {
     renderAvatar('sidebar-avatar-container', '', 'reviewer-demo');
     renderAssistantExchange(seed.assistant.question, seed.assistant.response, {expandedSources: true, replace: true});
     renderReviewerDemoDocuments(seed.documents);
+    DOCUMENT_CAPABILITIES.clear();
+    seed.documents.forEach(doc => DOCUMENT_CAPABILITIES.set(doc.document_id, {
+        isOwner: true,
+        permission: doc.permission,
+        visibility: doc.permission,
+    }));
     document.getElementById('policy-doc-id').value = seed.policy.document_id;
     document.getElementById('policy-target-username').value = seed.policy.target_username;
     document.getElementById('policy-grant-type').value = seed.policy.persistent_permission;
@@ -719,6 +820,7 @@ async function loadReviewerDemoSeed() {
     document.getElementById('policy-access-mode').value = seed.policy.selected_rule;
     document.getElementById('policy-valid-from').value = seed.policy.valid_from;
     document.getElementById('policy-valid-until').value = seed.policy.valid_until;
+    syncPolicyEditorForDocument();
     policyOutput(seed.policy.effective_resolution);
     renderActionEvidencePanel(seed.actions);
     window.__INFOBANK_REVIEWER_DEMO__ = {version: seed.demo_seed_version, privacy_safe: seed.privacy_safe, source_trace_sha256: seed.source_trace_sha256};

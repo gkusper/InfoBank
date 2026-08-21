@@ -10,6 +10,7 @@ from __future__ import annotations
 import hashlib
 import json
 import math
+import re
 import statistics
 from dataclasses import asdict, dataclass
 from typing import Any, Iterable, Mapping
@@ -22,6 +23,7 @@ AGGREGATE_RESULT = "AGGREGATE_RESULT"
 REFUSE_AGGREGATION_THRESHOLD = "REFUSE_AGGREGATION_THRESHOLD"
 REASON_THRESHOLD_MET = "aggregate_threshold_satisfied"
 REASON_THRESHOLD_NOT_MET = "aggregation_threshold_not_met"
+_NUMERIC_TOKEN_RE = re.compile(r"(?<![A-Za-z0-9])(-?\d+(?:\.\d+)?)(?![A-Za-z0-9])")
 
 
 @dataclass(frozen=True)
@@ -55,6 +57,22 @@ class AggregateContribution:
             raise ValueError("aggregate contribution value must be finite")
 
 
+def extract_unambiguous_numeric_value(text: str) -> float | None:
+    """Return a scalar only when a source contains exactly one numeric token.
+
+    Free-text aggregate ingestion has no field schema that could safely decide
+    whether the first of several numbers is the requested metric.  Ambiguous
+    chunks are therefore excluded instead of silently aggregating an arbitrary
+    date, model number, quantity, or value.
+    """
+
+    matches = _NUMERIC_TOKEN_RE.findall(text or "")
+    if len(matches) != 1:
+        return None
+    value = float(matches[0])
+    return value if math.isfinite(value) else None
+
+
 def _public_refusal(config: AggregateConfig) -> dict[str, Any]:
     return {
         "output_class": REFUSE_AGGREGATION_THRESHOLD,
@@ -79,11 +97,9 @@ def execute_aggregate(
     """Execute one safe aggregate after policy filtering and contributor dedup."""
 
     eligible: dict[str, AggregateContribution] = {}
-    excluded_count = 0
     for item in sorted(contributions, key=lambda value: (value.contributor_id, value.source_id)):
         decision = policy_decisions.get(item.source_id, relevance.USE_DENY)
         if decision not in {relevance.USE_FULL, relevance.USE_AGGREGATE}:
-            excluded_count += 1
             continue
         eligible.setdefault(item.contributor_id, item)
 
@@ -123,6 +139,5 @@ def execute_aggregate(
             "threshold_satisfied": True,
             "contributor_count": len(values),
             "deduplicated_count": len(values),
-            "excluded_by_policy": excluded_count,
         },
     }

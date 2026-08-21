@@ -37,7 +37,11 @@ def update_profile(profile_data: schemas.ProfileUpdate, user_id: str = Depends(s
     return {"status": "success", "message": "Profile updated."}
 
 @router.get("/users/search")
-def search_users(q: str, db: Session = Depends(get_db)):
+def search_users(
+    q: str,
+    _user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
     if not q or len(q) < 2:
         return {"status": "success", "users": []}
     users = db.query(models.User).filter(models.User.username.ilike(f"%{q}%")).limit(5).all()

@@ -102,12 +102,9 @@ def _build_governed_graph(user_id: str, db: Session) -> dict:
         document_keywords[document_id].append(keyword)
     graph = build_semantic_cooccurrence_graph(document_keywords)
     graph["governance"] = {
+        "policy_enforced": True,
         "policy_order": "governance_before_graph_export",
         "included_document_count": len(visible_ids),
-        "aggregate_excluded_count": sum(
-            1 for value in governance["use_decisions"].values() if value == relevance.USE_AGGREGATE
-        ),
-        "denied_document_count": len(governance["denied_doc_ids"]),
     }
     return graph
 

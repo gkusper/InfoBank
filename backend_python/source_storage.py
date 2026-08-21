@@ -11,7 +11,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 
-DEFAULT_SOURCE_STORAGE_DIR = Path(__file__).resolve().parent / "runtime" / "source_storage"
+BACKEND_DIR = Path(__file__).resolve().parent
+DEFAULT_SOURCE_STORAGE_DIR = BACKEND_DIR / "runtime" / "source_storage"
 
 
 @dataclass(frozen=True)
@@ -25,7 +26,10 @@ class StoredSource:
 class SourceStorage:
     def __init__(self, root: str | Path | None = None) -> None:
         configured = root or os.getenv("SOURCE_STORAGE_DIR") or DEFAULT_SOURCE_STORAGE_DIR
-        self.root = Path(configured).expanduser().resolve()
+        configured_path = Path(configured).expanduser()
+        if not configured_path.is_absolute():
+            configured_path = BACKEND_DIR / configured_path
+        self.root = configured_path.resolve()
 
     @staticmethod
     def validate_document_id(document_id: str) -> str:

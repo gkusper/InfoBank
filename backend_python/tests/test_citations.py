@@ -9,7 +9,7 @@ from fastapi import HTTPException
 
 import models
 import relevance
-from document_processing import ProcessingConfig, chunk_pages, extract_pdf_pages, sha256_bytes
+from document_processing import ProcessingConfig, chunk_pages, extract_pdf_pages, sha256_bytes, sha256_text
 from routers import chat, documents
 from source_storage import SourceStorage
 
@@ -187,3 +187,73 @@ def test_citation_rejects_chunk_from_a_different_document() -> None:
         "available": False,
         "reason": "traceability_unavailable",
     }
+
+
+@pytest.mark.parametrize("with_sql_chunk", [False, True])
+def test_retrieval_rejects_orphan_or_content_mismatched_vector(
+    db_session, monkeypatch, with_sql_chunk: bool
+) -> None:
+    document_id = "retrieval-integrity-doc"
+    chunk_id = "retrieval-integrity-chunk"
+    canonical_text = "Canonical permitted warranty text."
+    vector_text = "STALE SECRET VECTOR TEXT"
+    document = models.Document(
+        id=document_id,
+        file_path="integrity.pdf",
+        source_status="ACTIVE",
+        visibility="Private",
+        source_sha256="1" * 64,
+    )
+    db_session.add(document)
+    if with_sql_chunk:
+        db_session.add(models.DocumentChunk(
+            id=chunk_id,
+            document_id=document_id,
+            chunk_index=0,
+            page_number=1,
+            char_start=0,
+            char_end=len(canonical_text),
+            text_content=canonical_text,
+            content_sha256=sha256_text(canonical_text),
+            source_sha256=document.source_sha256,
+            chunk_config_hash="2" * 64,
+            vector_id=chunk_id,
+        ))
+    db_session.flush()
+
+    class Collection:
+        @staticmethod
+        def query(**_kwargs):
+            return {
+                "ids": [[chunk_id]],
+                "documents": [[vector_text]],
+                "metadatas": [[{
+                    "document_id": document_id,
+                    "chunk_id": chunk_id,
+                    "content_hash": sha256_text(vector_text),
+                    "source_sha256": document.source_sha256,
+                    "config_hash": "2" * 64,
+                }]],
+            }
+
+    monkeypatch.setattr(chat.ai_service, "collection", Collection())
+    governance = {
+        "source_roles": {document_id: relevance.SOURCE_ROLE_PRIMARY},
+        "use_decisions": {document_id: relevance.USE_FULL},
+    }
+    sources, blocks, contributions = chat.query_retrieved_sources(
+        db_session,
+        "What is the warranty?",
+        [0.0],
+        {"task_intent": "general_document_question"},
+        governance,
+        [document_id],
+    )
+    assert sources == []
+    assert blocks == []
+    assert contributions == []
+    assert governance["integrity_reason_code"] == "stale_index_denied"
+    assert governance["stale_index_rejections"][0]["reason"] == (
+        "content_hash_mismatch" if with_sql_chunk else "missing_sql_chunk"
+    )
+    assert vector_text not in json.dumps({"sources": sources, "blocks": blocks})

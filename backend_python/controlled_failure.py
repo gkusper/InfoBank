@@ -276,6 +276,7 @@ def select_rag_output_mode(
     context_blocks_available: bool,
     aggregate_request: bool = False,
     conflict_policy: str = "query_sensitive",
+    support_check: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
     state = evidence_state(sources, query_profile, context_blocks_available)
     policy = safe_policy_state(governance)
@@ -326,6 +327,40 @@ def select_rag_output_mode(
             "The request cannot be answered from the sources available for this purpose.",
             ["Use a permitted source for this purpose or ask about an object in the available scope."],
             {**trace, "gate": "policy_and_safety_filtering"},
+        )
+        return blocked_output(cf)
+
+    support_decision = (support_check or {}).get("decision")
+    if support_decision == "clarification_required":
+        cf = make_controlled_failure(
+            STATUS_ASK_CLARIFICATION,
+            REASON_EPISTEMIC,
+            state,
+            policy,
+            "I found permitted evidence for the object, but the requested relationship is ambiguous. Please clarify the exact claim you want checked.",
+            ["State whether you are asking about coverage or exclusion, a cause, a requirement, a duration, or another specific relationship."],
+            {
+                **trace,
+                "gate": "claim_relation_clarification",
+                "support_reason": (support_check or {}).get("reason"),
+            },
+        )
+        return blocked_output(cf)
+
+    if support_decision == "insufficient_evidence":
+        cf = make_controlled_failure(
+            STATUS_ABSTAIN,
+            REASON_EVIDENTIAL,
+            state,
+            policy,
+            "The answer cannot be found in the document.",
+            ["Provide a permitted source that explicitly states the requested relationship or ask a narrower question."],
+            {
+                **trace,
+                "gate": "evidence_sufficiency_checking",
+                "support_reason": (support_check or {}).get("reason"),
+                "missing_claim_relations": list((support_check or {}).get("missing_claim_relations") or []),
+            },
         )
         return blocked_output(cf)
 
@@ -460,5 +495,35 @@ def from_not_found_answer(question: str, sources: Iterable[Dict[str, Any]], quer
             "question_fingerprint": len(question or ""),
             "gate": "generation_result_validation",
             "task_intent": query_profile.get("task_intent"),
+        },
+    )
+
+
+def from_unsupported_generated_answer(
+    question: str,
+    sources: Iterable[Dict[str, Any]],
+    query_profile: Dict[str, Any],
+    governance: Dict[str, Any],
+    answer_support: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Convert a generated unsupported relation/fact into an audited abstention."""
+
+    state = evidence_state(sources, query_profile, True)
+    policy = safe_policy_state(governance)
+    return make_controlled_failure(
+        STATUS_ABSTAIN,
+        REASON_EVIDENTIAL,
+        state,
+        policy,
+        "The answer cannot be found in the document.",
+        ["Provide a source that explicitly supports the requested relationship or ask a narrower question."],
+        {
+            "question_fingerprint": len(question or ""),
+            "gate": "generation_grounding_validation",
+            "task_intent": query_profile.get("task_intent"),
+            "support_reason": answer_support.get("reason"),
+            "missing_claim_relations": list(answer_support.get("missing_claim_relations") or []),
+            "unsupported_number_count": len(answer_support.get("unsupported_numbers") or []),
+            "unmatched_object_identifier_count": len(answer_support.get("unmatched_object_identifiers") or []),
         },
     )

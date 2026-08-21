@@ -11,14 +11,20 @@ virtual environment. Replace angle-bracket parameters with task-owned names.
 docker compose up -d db
 py -3.11 -m venv backend_python\.venv_r1a
 backend_python\.venv_r1a\Scripts\python.exe -m pip install -r backend_python\requirements-dev-lock.txt
-docker exec -i infobank-mariadb mariadb -uroot "-p$env:INFOBANK_SMOKE_ADMIN_PASSWORD" < .\backend_python\migrations\citds_11_mysql.sql
-docker exec -i infobank-mariadb mariadb -uroot "-p$env:INFOBANK_SMOKE_ADMIN_PASSWORD" < .\backend_python\migrations\infocom_a_gate_phase1_mysql.sql
+backend_python\.venv_r1a\Scripts\python.exe .\scripts\check_database_schema.py
+backend_python\.venv_r1a\Scripts\python.exe .\scripts\apply_database_migrations.py --expected-database infobank_db --yes
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_local_quality_gate.ps1 -SkipDocker
 powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_local_quality_gate.ps1
 ```
 
 Apply migrations only to the intended database after backup; the smoke script
 uses separate isolated targets and avoids shell redirection for imports.
+
+The normal developer HTTP matrix is:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\scripts\run_normal_runtime_smoke.ps1
+```
 
 ## A, C and D development runners
 

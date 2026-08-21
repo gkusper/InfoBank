@@ -9,6 +9,7 @@ from backend_python.action_closure import (
     classify_event,
     normalized_action_key,
     reconstruct_actions,
+    resolve_action_status,
 )
 
 
@@ -48,6 +49,13 @@ def test_completion_cancellation_and_supersession_have_explicit_states() -> None
         ])
         assert len(result["actions"]) == 1
         assert result["actions"][0]["status"] == expected
+
+
+def test_shared_status_resolver_applies_only_ordered_explicit_closures() -> None:
+    assert resolve_action_status(["request", "acceptance", "status_update"]) == OPEN
+    assert resolve_action_status(["request", "completion"]) == CLOSED_COMPLETED
+    assert resolve_action_status(["request", "completion", "cancellation"]) == CLOSED_CANCELLED
+    assert resolve_action_status(["request", "cancellation", "supersession"]) == SUPERSEDED
 
 
 def test_acceptance_postponement_reminder_and_status_do_not_close_action() -> None:

@@ -8,7 +8,15 @@ import pytest
 
 import ai_service
 import relevance
-from ai_provider import DeterministicMockProvider, LocalCompatibleProvider, OpenAIProvider, create_provider
+from ai_provider import (
+    KEYWORD_SELECTION_STRATEGY_VERSION,
+    DeterministicMockProvider,
+    LocalCompatibleProvider,
+    OpenAIProvider,
+    create_provider,
+    deterministic_allowed_keyword_matches,
+    keyword_provider_error_fallback,
+)
 
 
 BACKEND_DIR = Path(__file__).resolve().parents[1]
@@ -154,3 +162,161 @@ def test_openai_usage_and_retry_metadata_are_provider_reported() -> None:
     assert result.retries == 1
     assert result.cost is None
     assert result.usage_source == "provider_reported"
+
+
+@pytest.mark.parametrize(
+    ("raw_response", "expected_values", "expected_outcome", "expected_rejected"),
+    [
+        ("NONE", [], "provider_none", 0),
+        ("", [], "empty_response", 0),
+        ("television and router", [], "parser_rejected", 1),
+        ("Television, router", ["television", "router"], "selected", 0),
+    ],
+)
+def test_openai_keyword_selection_trace_is_precise_and_content_free(
+    raw_response: str,
+    expected_values: list[str],
+    expected_outcome: str,
+    expected_rejected: int,
+) -> None:
+    class Completions:
+        def create(self, **kwargs):
+            del kwargs
+            message = type("Message", (), {"content": raw_response})()
+            choice = type("Choice", (), {"message": message})()
+            return type("Response", (), {"choices": [choice]})()
+
+    completions = Completions()
+    client = type("Client", (), {"chat": type("Chat", (), {"completions": completions})()})()
+    values, trace = OpenAIProvider(client_factory=lambda: client).extract_keywords_with_trace(
+        "private question text",
+        model="fixed-model",
+        prompt="fixed prompt",
+        prompt_version="routing-keyword-test-v1",
+        available_keywords=["television", "router"],
+        limit=3,
+    )
+    assert values == expected_values
+    assert trace["outcome"] == expected_outcome
+    assert trace["selected_keyword_count"] == len(expected_values)
+    assert trace["rejected_item_count"] == expected_rejected
+    assert trace["available_keyword_count"] == 2
+    serialized = json.dumps(trace, sort_keys=True)
+    if raw_response:
+        assert raw_response not in serialized
+    assert "private question text" not in serialized
+    assert "television" not in serialized
+    assert "router" not in serialized
+
+
+def test_deterministic_keyword_selection_trace_reports_no_overlap() -> None:
+    values, trace = DeterministicMockProvider().extract_keywords_with_trace(
+        "unrelated question",
+        model="fixed-model",
+        prompt="fixed prompt",
+        prompt_version="routing-keyword-test-v1",
+        available_keywords=["television", "router"],
+        limit=3,
+    )
+    assert values == []
+    assert trace["outcome"] == "no_overlap"
+    assert trace["selected_keyword_count"] == 0
+    assert trace["available_keyword_count"] == 2
+
+
+def test_openai_none_cannot_override_an_explicit_allowed_keyword_match() -> None:
+    class Completions:
+        def create(self, **kwargs):
+            del kwargs
+            message = type("Message", (), {"content": "NONE"})()
+            choice = type("Choice", (), {"message": message})()
+            return type("Response", (), {"choices": [choice]})()
+
+    client = type("Client", (), {"chat": type("Chat", (), {"completions": Completions()})()})()
+    values, trace = OpenAIProvider(client_factory=lambda: client).extract_keywords_with_trace(
+        "How long is the demonstration warranty for TV-AURORA-41?",
+        model="fixed-model",
+        prompt="fixed prompt",
+        prompt_version="routing-keyword-v1",
+        available_keywords=["router", "warranty", "service"],
+        limit=3,
+    )
+    assert values == ["warranty"]
+    assert trace["outcome"] == "deterministic_recovery"
+    assert trace["provider_outcome"] == "provider_none"
+    assert trace["provider_selected_keyword_count"] == 0
+    assert trace["deterministic_match_count"] == 1
+    assert trace["selection_strategy_version"] == KEYWORD_SELECTION_STRATEGY_VERSION
+
+
+def test_deterministic_keyword_anchor_uses_token_boundaries_and_stable_ranking() -> None:
+    assert deterministic_allowed_keyword_matches(
+        "Compare warranty support for the Wi-Fi router.",
+        ["router", "support", "warranty", "wi-fi", "warrant"],
+        limit=4,
+    ) == ["wi-fi", "router", "support", "warranty"]
+    assert deterministic_allowed_keyword_matches(
+        "This claim is unwarranted.",
+        ["warranty"],
+        limit=3,
+    ) == []
+    assert deterministic_allowed_keyword_matches(
+        "Mennyi a jótállás időtartama?",
+        ["jótállás", "router"],
+        limit=3,
+    ) == ["jótállás"]
+
+
+def test_openai_selector_enforces_an_explicit_empty_allowed_vocabulary() -> None:
+    class Completions:
+        def create(self, **kwargs):
+            del kwargs
+            message = type("Message", (), {"content": "router"})()
+            choice = type("Choice", (), {"message": message})()
+            return type("Response", (), {"choices": [choice]})()
+
+    client = type("Client", (), {"chat": type("Chat", (), {"completions": Completions()})()})()
+    values, trace = OpenAIProvider(client_factory=lambda: client).extract_keywords_with_trace(
+        "router",
+        model="fixed-model",
+        prompt="fixed prompt",
+        prompt_version="routing-keyword-v1",
+        available_keywords=[],
+        limit=3,
+    )
+    assert values == []
+    assert trace["outcome"] == "parser_rejected"
+    assert trace["rejected_item_count"] == 1
+
+
+def test_provider_error_recovers_exact_keyword_without_leaking_content() -> None:
+    values, trace = keyword_provider_error_fallback(
+        "Private question about warranty",
+        available_keywords=["warranty", "router"],
+        limit=3,
+        provider="openai",
+        adapter="openai-python",
+        prompt_version="routing-keyword-v1",
+    )
+    assert values == ["warranty"]
+    assert trace["outcome"] == "deterministic_recovery"
+    assert trace["provider_outcome"] == "provider_error"
+    assert trace["deterministic_match_count"] == 1
+    serialized = json.dumps(trace, sort_keys=True)
+    assert "Private question" not in serialized
+    assert "warranty" not in serialized
+
+
+def test_provider_error_without_exact_match_preserves_permitted_corpus_fallback() -> None:
+    values, trace = keyword_provider_error_fallback(
+        "Unrelated question",
+        available_keywords=["warranty", "router"],
+        limit=3,
+        provider="openai",
+        adapter="openai-python",
+        prompt_version="routing-keyword-v1",
+    )
+    assert values == []
+    assert trace["outcome"] == "provider_error"
+    assert trace["provider_outcome"] == "provider_error"
+    assert trace["deterministic_match_count"] == 0

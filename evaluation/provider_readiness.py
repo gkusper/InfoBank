@@ -15,7 +15,7 @@ from .backend import ensure_backend_path
 
 
 ensure_backend_path()
-from ai_provider import AIProvider, ProviderGenerationResult  # noqa: E402
+from ai_provider import AIProvider, KEYWORD_SELECTION_STRATEGY_VERSION, ProviderGenerationResult  # noqa: E402
 
 
 READINESS_STATUS = "PENDING_EXPLICIT_PROVIDER_RUN_APPROVAL"
@@ -24,7 +24,7 @@ EMBEDDING_MODEL = "text-embedding-3-small"
 GENERATION_TEMPERATURE = 0.0
 GENERATION_PROMPT_VERSION = "actual-pipeline-answer-v1"
 ROUTING_PROMPT_VERSION = "routing-keyword-v1"
-READINESS_CONFIG_VERSION = "real-provider-readiness-v1"
+READINESS_CONFIG_VERSION = "real-provider-readiness-v2"
 E1_ESTIMATE_SCHEMA_VERSION = "infocom-e1-estimate-v1"
 E1_MODES = (
     "B0_VECTOR_ONLY",
@@ -59,6 +59,7 @@ class ReadinessConfig:
     temperature: float = GENERATION_TEMPERATURE
     generation_prompt_version: str = GENERATION_PROMPT_VERSION
     routing_prompt_version: str = ROUTING_PROMPT_VERSION
+    keyword_selection_strategy_version: str = KEYWORD_SELECTION_STRATEGY_VERSION
     config_version: str = READINESS_CONFIG_VERSION
 
     @property

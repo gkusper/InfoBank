@@ -178,7 +178,12 @@ def resolve_document_access(db: Session, user_id: str, doc_id: str, purpose: str
 def resolve_evidence_unit_access(db: Session, user_id: str, evidence_unit_id: str, purpose: str = "action_reconstruction") -> Dict[str, Any]:
     """Resolve one owned EvidenceUnit into a CITDS use decision."""
 
-    unit = db.query(models.EvidenceUnit).filter(models.EvidenceUnit.id == evidence_unit_id).first()
+    # Policy resolution must not materialize private evidence content before the
+    # access decision is known.  Fetch only the ownership fields needed here;
+    # callers may load content after this function returns a permitted mode.
+    unit = db.query(models.EvidenceUnit.id, models.EvidenceUnit.user_id).filter(
+        models.EvidenceUnit.id == evidence_unit_id
+    ).first()
     if not unit:
         return {
             "target_id": evidence_unit_id,

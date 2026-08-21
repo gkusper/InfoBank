@@ -26,6 +26,9 @@ def load_controlled_failure_config() -> dict[str, Any]:
     thresholds = config.get("thresholds", {})
     if int(thresholds.get("aggregate_k", 0)) < 2:
         raise RuntimeError("Controlled-failure aggregate_k must be at least 2")
+    minimum_support = float(thresholds.get("minimum_support_score", -1))
+    if not 0.0 <= minimum_support <= 1.0:
+        raise RuntimeError("Controlled-failure minimum_support_score must be within [0, 1]")
     if not config.get("precedence") or not config.get("config_version"):
         raise RuntimeError("Controlled-failure precedence and config_version are required")
     canonical = json.dumps(config, sort_keys=True, separators=(",", ":"))

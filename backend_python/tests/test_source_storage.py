@@ -11,6 +11,12 @@ import source_storage as source_storage_module
 DOCUMENT_ID = "00000000-0000-0000-0000-000000000020"
 
 
+def test_relative_source_root_is_anchored_to_backend_not_cwd() -> None:
+    assert SourceStorage("./runtime/relative-test").root == (
+        source_storage_module.BACKEND_DIR / "runtime" / "relative-test"
+    ).resolve()
+
+
 def test_source_storage_atomic_roundtrip_integrity_and_no_overwrite(tmp_path: Path) -> None:
     storage = SourceStorage(tmp_path / "sources")
     content = b"%PDF-1.7\nsynthetic-source"

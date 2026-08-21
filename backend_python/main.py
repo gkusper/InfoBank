@@ -1,26 +1,90 @@
-from fastapi import FastAPI, Depends
+import logging
+import os
+import uuid
+
+from fastapi import FastAPI, Depends, Request
+from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 import models
 from database import engine, get_db
+from database_errors import install_database_exception_handlers
+from database_schema import (
+    PUBLIC_MIGRATION_MESSAGE,
+    PUBLIC_UNAVAILABLE_MESSAGE,
+    SCHEMA_COMPATIBLE,
+    SCHEMA_UNAVAILABLE,
+    check_database_schema,
+    safe_public_schema_report,
+)
 
 # IMPORTÁLÁS A ROUTERS MAPPÁBÓL:
 from routers import auth, profile, analytics, documents, chat, admin, evidence, policy, citds_eval, classifier, connectors
+import security
 
 load_dotenv()
 
-models.Base.metadata.create_all(bind=engine)
-
 app = FastAPI(title="InfoBank API", version="3.4.0")
+app.state.database_schema = {
+    "status": "NOT_CHECKED",
+    "compatible": False,
+    "migration_tracking": {"state": "NOT_CHECKED"},
+}
+install_database_exception_handlers(app)
+
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv(
+        "CORS_ALLOWED_ORIGINS",
+        "http://127.0.0.1:8765,http://localhost:8765",
+    ).split(",")
+    if origin.strip()
+]
+if "*" in allowed_origins:
+    raise RuntimeError("CORS_ALLOWED_ORIGINS cannot contain '*' when credentials are enabled.")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.on_event("startup")
+def verify_database_schema_on_startup() -> None:
+    report = check_database_schema(engine)
+    app.state.database_schema = report
+    if report["status"] != SCHEMA_COMPATIBLE:
+        logging.getLogger("infobank.startup").error(
+            "InfoBank database schema is not ready: %s",
+            report,
+        )
+
+
+@app.middleware("http")
+async def require_compatible_database(request: Request, call_next):
+    safe_paths = {"/docs", "/openapi.json", "/redoc", "/api/health/schema"}
+    if request.url.path in safe_paths or not request.url.path.startswith("/api/"):
+        return await call_next(request)
+    report = app.state.database_schema
+    if report.get("status") == SCHEMA_COMPATIBLE:
+        return await call_next(request)
+    error_id = str(uuid.uuid4())
+    unavailable = report.get("status") == SCHEMA_UNAVAILABLE
+    return JSONResponse(
+        status_code=503,
+        content={
+            "status": "error",
+            "error": {
+                "code": "DATABASE_UNAVAILABLE" if unavailable else "DATABASE_MIGRATION_REQUIRED",
+                "message": PUBLIC_UNAVAILABLE_MESSAGE if unavailable else PUBLIC_MIGRATION_MESSAGE,
+                "error_id": error_id,
+            },
+        },
+    )
 
 # ROUTEREK BEKÖTÉSE
 app.include_router(auth.router)
@@ -35,6 +99,15 @@ app.include_router(citds_eval.router)
 app.include_router(classifier.router)
 app.include_router(connectors.router)
 
+
+@app.get("/api/health/schema", tags=["Diagnostics"])
+def database_schema_health():
+    return safe_public_schema_report(app.state.database_schema)
+
 @app.get("/api/test-db")
-def test_db_connection(db: Session = Depends(get_db)):
-    return {"status": "success", "users_in_db": db.query(models.User).count()}
+def test_db_connection(
+    _user_id: str = Depends(security.get_current_user_id),
+    db: Session = Depends(get_db),
+):
+    db.query(models.User.id).limit(1).all()
+    return {"status": "success"}

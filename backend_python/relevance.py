@@ -34,9 +34,21 @@ RELEVANCE_LEVELS = [
 ]
 
 _TASK_PATTERNS = {
+    "document_inventory": [
+        r"\bwhat\s+are\s+my\s+(?:documents?|files?)\b",
+        r"\b(?:what|which)\s+(?:documents?|files?)\s+(?:do\s+i\s+have|are\s+(?:uploaded|available)|have\s+i\s+uploaded)\b",
+        r"\b(?:show|list)\s+(?:me\s+)?(?:my\s+)?(?:uploaded\s+)?(?:documents?|files?)\b",
+        r"\bwhat\s+(?:did|have)\s+i\s+upload(?:ed)?\b",
+        r"\b(?:mik|mi)\s+vannak\s+felt[öo]ltve\b",
+        r"\b(?:milyen|melyik)\s+dokumentumaim\s+vannak\b",
+        r"\b(?:milyen|melyik|mik)\s+(?:dokumentumok|f[aá]jlok|adatok)\s+(?:vannak\s+)?felt[öo]ltve\b",
+        r"\b(?:mik|melyek)\s+a\s+(?:felt[öo]lt[öo]tt|saj[aá]t)\s+(?:dokumentumaim|f[aá]jljaim)\b",
+        r"\b(?:list[aá]zd|sorold)\s+(?:fel\s+)?(?:a\s+)?(?:felt[öo]lt[öo]tt\s+)?(?:dokumentumaimat|f[aá]jljaimat)\b",
+        r"\bmit\s+t[öo]lt[öo]ttem\s+fel\b",
+    ],
     "current_action_list": [
         r"\b(todo|to-do|task|action item|action list|current action)\b",
-        r"\b(teend[őo]|feladat|aktu[aá]lis teend[őo]|tennival[oó])\b",
+        r"\b(teend[őo]\w*|feladat\w*|aktu[aá]lis teend[őo]\w*|tennival[oó]\w*)\b",
     ],
     "deadline_or_status": [
         r"\b(deadline|due|status|open|closed|current|active)\b",
@@ -90,6 +102,59 @@ _OBJECT_PATTERNS = {
     "course_or_topic": r"\b(Data Science|database systems|PhD|Ko[sš]ice|InfoBank|RAG)\b",
 }
 
+_CONFLICT_SIGNAL_RE = re.compile(
+    r"\b(contradict(?:s|ed|ion|ory)?|conflict(?:s|ed|ing)?|unverified|must not override|supersed(?:e|ed|es))\b",
+    flags=re.IGNORECASE,
+)
+
+# These words describe the existence or administration of a dispute, but not
+# the disputed subject.  Excluding them prevents an unrelated conflict notice
+# from constraining every question about the same document or object.
+_GENERIC_CONFLICT_SCOPE_TERMS = {
+    "applies", "approved", "authority", "authoritative", "bulletin", "claim",
+    "conflict", "conflicts", "conflicted", "conflicting", "contradict",
+    "contradicts", "contradicted", "contradiction", "date", "disagree",
+    "document", "effective", "final", "fixture", "latest", "notice", "record",
+    "required", "resolve", "service", "source", "states", "superseded", "term",
+    "unverified", "version", "warranty",
+}
+
+# Claim relations are deliberately small, auditable semantic anchors.  They do
+# not replace retrieval similarity; they prevent a matching noun from being
+# treated as support for a different predicate (for example, turning a
+# warranty exclusion into a claim about what caused damage).
+_CLAIM_RELATION_PATTERNS = {
+    "causation": [
+        r"\bcaus(?:e|es|ed|ing)\b", r"\bresult(?:s|ed|ing)?\s+in\b",
+        r"\blead(?:s|ing)?\s+to\b", r"\bokoz(?:za|ott|hat)?\b",
+    ],
+    "exclusion": [
+        r"\bexclud(?:e|es|ed|ing|sion)\b", r"\bnot\s+covered\b",
+        r"\boutside\s+(?:the\s+)?(?:warranty|coverage)\b",
+        r"\bkiz[aá]r(?:t|va|ás)\b", r"\bnem\s+(?:fedezett|garanci[aá]lis)\b",
+    ],
+    "coverage": [
+        r"\bcover(?:s|ed|age|ing)?\b", r"\bwarranty\s+applies\b",
+        r"\bfedez(?:i|ett|et)?\b", r"\bgarancia\s+(?:vonatkozik|kiterjed)\b",
+    ],
+    "duration": [
+        r"\bhow\s+long\b", r"\bduration\b", r"\bwarranty\s+term\b",
+        r"\b\d+\s*[- ]?\s*(?:day|days|week|weeks|month|months|year|years)\b",
+        r"\b(?:day|days|week|weeks|month|months|year|years)\b",
+        r"\bmennyi\s+ideig\b", r"\bid[őo]tartam\b",
+        r"\b\d+\s*(?:nap|h[eé]t|h[oó]nap|[ée]v)\b",
+    ],
+    "requirement": [
+        r"\brequir(?:e|es|ed|ement|ements)\b", r"\bmust\b",
+        r"\bneed(?:s|ed)?\s+to\b", r"\bprovide\b",
+        r"\bsz[üu]ks[ée]ges\b", r"\bkell\b", r"\bmeg\s+kell\b",
+    ],
+    "price": [
+        r"\bprice\b", r"\bcost(?:s|ed)?\b", r"\bhow\s+much\b",
+        r"\b[aá]r(?:a|at)?\b", r"\bmennyibe\s+ker[üu]l\b",
+    ],
+}
+
 
 def _normalize_word(value: str) -> str:
     return re.sub(r"[^\w\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]+", "", value).lower()
@@ -101,6 +166,12 @@ def _pattern_hits(text: str, pattern_map: Dict[str, List[str]]) -> List[str]:
         if any(re.search(pattern, text, flags=re.IGNORECASE) for pattern in patterns):
             hits.append(label)
     return hits
+
+
+def claim_relation_signals(text: str) -> List[str]:
+    """Return stable relation labels used by evidence and conflict gates."""
+
+    return _pattern_hits(text or "", _CLAIM_RELATION_PATTERNS)
 
 
 def extract_lexical_terms(question: str, max_terms: int = 12) -> List[str]:
@@ -136,6 +207,78 @@ def extract_entities(text: str) -> Dict[str, List[str]]:
     return entities
 
 
+def query_scoped_conflict(chunk_text: str, query_profile: Dict[str, Any], question: str = "") -> Dict[str, Any]:
+    """Decide whether a source conflict is about the subject of this query.
+
+    Conflict markers remain conservative evidence signals, but they only defeat
+    a claim when the marker-bearing sentence overlaps the query's non-generic
+    topic.  An explicit conflict/authority question may also be matched by the
+    same object identifier.  The returned trace contains counts and query terms
+    only; it never exposes source sentences.
+    """
+
+    conflict_sentences = [
+        sentence for sentence in re.split(r"(?<=[.!?])\s+|[\r\n]+", chunk_text or "")
+        if _CONFLICT_SIGNAL_RE.search(sentence)
+    ]
+    if not conflict_sentences:
+        return {
+            "raw_signal": False,
+            "query_relevant": False,
+            "matched_query_terms": [],
+            "matched_claim_relations": [],
+            "marker_sentence_count": 0,
+        }
+
+    query_identifiers = {
+        _normalize_word(value)
+        for value in (query_profile.get("entities", {}).get("identifier") or [])
+        if _normalize_word(value)
+    }
+    query_terms = {
+        _normalize_word(value)
+        for value in [
+            *(query_profile.get("lexical_terms") or []),
+            *(query_profile.get("semantic_tags") or []),
+        ]
+        if _normalize_word(value)
+    }
+    scoped_query_terms = query_terms - query_identifiers - _GENERIC_CONFLICT_SCOPE_TERMS
+    marker_terms: Set[str] = set()
+    marker_identifiers: Set[str] = set()
+    for sentence in conflict_sentences:
+        marker_terms.update(_normalize_word(value) for value in re.findall(r"[\w\-áéíóöőúüűÁÉÍÓÖŐÚÜŰ]+", sentence))
+        marker_identifiers.update(
+            _normalize_word(value)
+            for value in extract_entities(sentence).get("identifier", [])
+        )
+    marker_terms.discard("")
+    marker_identifiers.discard("")
+
+    matched_topics = sorted(scoped_query_terms.intersection(marker_terms))
+    query_relations = set(claim_relation_signals(question))
+    marker_relations = set(claim_relation_signals(" ".join(conflict_sentences)))
+    matched_relations = sorted(query_relations.intersection(marker_relations))
+    explicit_conflict_question = bool(re.search(
+        r"\b(conflict|conflicting|contradict|contradiction|disagree|final authority|authoritative source|which source)\b",
+        question or "",
+        flags=re.IGNORECASE,
+    ))
+    identifier_match = bool(query_identifiers.intersection(marker_identifiers))
+    query_relevant = bool(
+        matched_topics
+        or matched_relations
+        or (explicit_conflict_question and identifier_match)
+    )
+    return {
+        "raw_signal": True,
+        "query_relevant": query_relevant,
+        "matched_query_terms": matched_topics[:8],
+        "matched_claim_relations": matched_relations,
+        "marker_sentence_count": len(conflict_sentences),
+    }
+
+
 def infer_task_intent(question: str) -> str:
     q = question.lower()
     for intent, patterns in _TASK_PATTERNS.items():
@@ -147,6 +290,7 @@ def infer_task_intent(question: str) -> str:
 def infer_expected_genres(question: str, task_intent: str) -> List[str]:
     text_genres = _pattern_hits(question, _GENRE_PATTERNS)
     task_genre_defaults = {
+        "document_inventory": ["metadata"],
         "current_action_list": ["email_or_message", "calendar_or_schedule", "activity_trace"],
         "deadline_or_status": ["calendar_or_schedule", "email_or_message"],
         "governance_question": ["policy"],
@@ -170,6 +314,8 @@ def build_query_profile(question: str, selected_keywords: Iterable[str]) -> Dict
 
 
 def infer_purpose(task_intent: str) -> str:
+    if task_intent == "document_inventory":
+        return "document_inventory"
     if task_intent == "current_action_list":
         return "action_reconstruction"
     if task_intent == "comparison":
@@ -182,6 +328,8 @@ def infer_purpose(task_intent: str) -> str:
 
 
 def infer_required_evidence_strength(task_intent: str) -> str:
+    if task_intent == "document_inventory":
+        return "authorized_metadata_sufficient"
     if task_intent in {"current_action_list", "deadline_or_status", "governance_question"}:
         return "primary_required_for_direct_claim"
     if task_intent == "comparison":
@@ -241,11 +389,8 @@ def classify_chunk_profile(question: str, chunk_text: str, file_name: str, query
 
     ontological_links = infer_ontological_links(query_entities, chunk_entities, text)
     pragmatic_match = infer_pragmatic_match(query_profile.get("task_intent"), genres, speech_acts, temporal_signals)
-    conflict_signal = bool(re.search(
-        r"\b(contradict(?:s|ed|ion|ory)?|conflict(?:s|ed|ing)?|unverified|must not override|supersed(?:e|ed|es))\b",
-        text,
-        flags=re.IGNORECASE,
-    ))
+    conflict_scope = query_scoped_conflict(chunk_text, query_profile, question)
+    conflict_signal = conflict_scope["query_relevant"]
     refined_role = refine_source_role(
         base_role=base_role,
         use_decision=use_decision,
@@ -256,6 +401,10 @@ def classify_chunk_profile(question: str, chunk_text: str, file_name: str, query
         task_intent=query_profile.get("task_intent", "general_document_question"),
         conflict_signal=conflict_signal,
     )
+    if conflict_scope["raw_signal"] and not conflict_signal and refined_role == SOURCE_ROLE_PRIMARY:
+        # A conflict notice about another claim may be retained as context, but
+        # it cannot become primary proof or defeat an unrelated supported claim.
+        refined_role = SOURCE_ROLE_CONTEXTUAL
 
     scores = {
         "lexical": min(1.0, len(lexical_hits) / max(1, len(lexical_terms))),
@@ -283,7 +432,14 @@ def classify_chunk_profile(question: str, chunk_text: str, file_name: str, query
         "temporal_status": temporal_signals,
         "pragmatic_match": pragmatic_match,
         "conflict_signal": conflict_signal,
-        "evidence_warnings": evidence_warnings(refined_role, use_decision, temporal_signals, speech_acts),
+        "conflict_scope": conflict_scope,
+        "evidence_warnings": evidence_warnings(
+            refined_role,
+            use_decision,
+            temporal_signals,
+            speech_acts,
+            incidental_conflict=conflict_scope["raw_signal"] and not conflict_signal,
+        ),
     }
 
 
@@ -352,7 +508,13 @@ def evidential_score(role: str) -> float:
     }.get(role, 0.25)
 
 
-def evidence_warnings(role: str, use_decision: str, temporal_signals: List[str], speech_acts: List[str]) -> List[str]:
+def evidence_warnings(
+    role: str,
+    use_decision: str,
+    temporal_signals: List[str],
+    speech_acts: List[str],
+    incidental_conflict: bool = False,
+) -> List[str]:
     warnings: List[str] = []
     if role == SOURCE_ROLE_AGGREGATE_ONLY:
         warnings.append("aggregate_only_do_not_quote_individual_content")
@@ -362,6 +524,8 @@ def evidence_warnings(role: str, use_decision: str, temporal_signals: List[str],
         warnings.append("analogical_support_not_direct_proof")
     if role == SOURCE_ROLE_CONTRASTIVE:
         warnings.append("may_close_cancel_or_contradict_an_item")
+    if incidental_conflict:
+        warnings.append("conflict_marker_outside_query_scope_context_only")
     if use_decision == USE_DENY:
         warnings.append("governance_denied_do_not_use")
     if "closed" in temporal_signals or "completion" in speech_acts or "cancellation" in speech_acts:

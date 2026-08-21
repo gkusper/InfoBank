@@ -16,9 +16,11 @@ from typing import Any, Dict, Iterable, List, Optional
 from sqlalchemy.orm import Session
 
 import citds_classifier
+import action_closure
 import models
 import policy_engine
 import relevance
+from controlled_failure_config import load_controlled_failure_config
 
 
 ACTION_ROLE_PRIMARY = "primary"
@@ -125,7 +127,7 @@ def create_evidence_unit(db: Session, user_id: str, payload: Dict[str, Any]) -> 
         source_timestamp=parse_timestamp(payload.get("source_timestamp")),
         thread_id=payload.get("thread_id"),
         relation_key=payload.get("relation_key"),
-        metadata_json=json.dumps(payload.get("metadata", {}), ensure_ascii=False),
+        metadata_json=json.dumps(payload.get("metadata") or {}, ensure_ascii=False),
     )
     db.add(unit)
     db.commit()
@@ -142,7 +144,8 @@ def import_evidence_units(db: Session, user_id: str, units: Iterable[Dict[str, A
 
 def _metadata(unit: models.EvidenceUnit) -> Dict[str, Any]:
     try:
-        return json.loads(unit.metadata_json or "{}")
+        parsed = json.loads(unit.metadata_json or "{}")
+        return parsed if isinstance(parsed, dict) else {}
     except Exception:
         return {}
 
@@ -261,6 +264,52 @@ def classify_evidence_unit(unit: models.EvidenceUnit, policy_resolution: Dict[st
     }
     use_decision = policy_resolution.get("use_decision", relevance.USE_FULL)
 
+    # Defence in depth: callers must never be able to turn a hard governance
+    # decision into a content-bearing classification.  Aggregate evidence is
+    # likewise unavailable to an individual action-list reconstruction; it may
+    # be consumed only by a dedicated aggregate executor.
+    if use_decision in {relevance.USE_DENY, relevance.USE_AGGREGATE}:
+        denied = use_decision == relevance.USE_DENY
+        role = ACTION_ROLE_EXCLUDED if denied else ACTION_ROLE_CONTEXTUAL
+        source_role = (
+            relevance.SOURCE_ROLE_GOVERNANCE_EXCLUDED
+            if denied
+            else relevance.SOURCE_ROLE_AGGREGATE_ONLY
+        )
+        label = "governance-excluded" if denied else "aggregate-only"
+        return {
+            "id": unit.id,
+            "source_type": source_type,
+            "title": f"[{label}: evidence identity and content withheld]",
+            "content_summary": f"[{label}: evidence identity and content withheld]",
+            "timestamp": None,
+            "thread_id": None,
+            "relation_key": unit.id,
+            "role": role,
+            "citds_source_role": source_role,
+            "status": "governance_excluded" if denied else "aggregate_only",
+            "due": None,
+            "action": None,
+            "object": None,
+            "policy": {
+                "use_decision": use_decision,
+                "source_role": source_role,
+                "reason": policy_resolution.get("reason"),
+                "policy_rule_id": policy_resolution.get("policy_rule_id"),
+            },
+            "classifier": {
+                "source_role": source_role,
+                "warnings": [f"{label.replace('-', '_')}_content_withheld"],
+            },
+            "signals": {
+                "primary": [],
+                "contextual": [],
+                "closure": [],
+                "genre": [],
+                "temporal_status": [],
+            },
+        }
+
     classifier_text = text if use_decision != relevance.USE_METADATA else unit.title
     classifier_result = citds_classifier.classify_source(
         text=classifier_text,
@@ -330,6 +379,21 @@ def classify_evidence_unit(unit: models.EvidenceUnit, policy_resolution: Dict[st
     action = "[metadata-only: evidence content withheld]" if use_decision == relevance.USE_METADATA else extract_action_text(signal_text)
     object_label = None if use_decision == relevance.USE_METADATA else extract_object_label(signal_text)
     content_summary = "[metadata-only: evidence content withheld]" if use_decision == relevance.USE_METADATA else summarize_text(unit.content)
+    event_type = "metadata_only"
+    if use_decision != relevance.USE_METADATA:
+        metadata = _metadata(unit)
+        event_type = action_closure.classify_event(action_closure.MessageEvidence(
+            evidence_id=unit.id,
+            source_type=source_type,
+            timestamp=unit.source_timestamp.isoformat() if unit.source_timestamp else "",
+            sender=str(metadata.get("sender") or "unknown"),
+            recipients=tuple(str(value) for value in (metadata.get("recipients") or [])),
+            subject=unit.title,
+            body=unit.content,
+            thread_id=unit.thread_id,
+            reply_to=metadata.get("reply_to"),
+            relation_key=unit.relation_key,
+        ))
 
     return {
         "id": unit.id,
@@ -342,6 +406,7 @@ def classify_evidence_unit(unit: models.EvidenceUnit, policy_resolution: Dict[st
         "role": action_role,
         "citds_source_role": classifier_result.get("source_role"),
         "status": status,
+        "event_type": event_type,
         "due": due,
         "action": action,
         "object": object_label,
@@ -455,13 +520,63 @@ def _valid_later_contrastive(primary: List[Dict[str, Any]], contrastive: List[Di
     return valid
 
 
+def _runtime_action_id(relation_key: str, primary: List[Dict[str, Any]]) -> str:
+    request_ids = "|".join(sorted(item["id"] for item in primary))
+    return hashlib.sha256(f"{relation_key}|{request_ids}".encode("utf-8")).hexdigest()[:20]
+
+
+def _action_item(
+    group: Dict[str, Any],
+    primary: List[Dict[str, Any]],
+    contextual: List[Dict[str, Any]],
+    contrastive: List[Dict[str, Any]],
+    excluded: List[Dict[str, Any]],
+    metadata: List[Dict[str, Any]],
+) -> Dict[str, Any]:
+    strongest = sorted(primary, key=lambda item: item.get("timestamp") or "")[-1]
+    ordered_evidence = sorted(
+        primary + contextual + contrastive,
+        key=lambda item: (item.get("timestamp") or "", item["id"]),
+    )
+    event_types = [item.get("event_type") or "informative" for item in ordered_evidence]
+    closure_event_types = [item.get("event_type") or "informative" for item in contrastive]
+    status = action_closure.resolve_action_status(closure_event_types)
+    evidence = {
+        "primary": primary,
+        "contextual": contextual,
+        "contrastive": contrastive,
+        "excluded": excluded,
+        "metadata_only": metadata,
+    }
+    return {
+        "action_id": _runtime_action_id(group["relation_key"], primary),
+        "actor": "user",
+        "action": strongest.get("action") or "Unspecified action",
+        "object": strongest.get("object"),
+        "due": strongest.get("due"),
+        "status": status,
+        "E": [item["id"] for item in ordered_evidence],
+        "linked_evidence_ids": [item["id"] for item in ordered_evidence],
+        "event_types": event_types,
+        "closure_event_types": closure_event_types,
+        "R": {
+            "primary": len(primary),
+            "contextual": len(contextual),
+            "contrastive": len(contrastive),
+            "excluded": len(excluded),
+            "metadata_only": len(metadata),
+        },
+        "evidence": evidence,
+    }
+
+
 def reconstruct_action_list(db: Session, user_id: str, as_of: datetime.datetime | None = None) -> Dict[str, Any]:
     query = db.query(models.EvidenceUnit).filter(models.EvidenceUnit.user_id == user_id)
     if as_of is not None:
         query = query.filter((models.EvidenceUnit.source_timestamp == None) | (models.EvidenceUnit.source_timestamp <= as_of))
-    raw_units = query.all()
-    units = dedupe_evidence_units(raw_units)
-    unit_ids = [unit.id for unit in units]
+    # Resolve policy from identifiers first.  Denied and aggregate-only rows
+    # must not be loaded into the individual action reconstruction at all.
+    unit_ids = sorted(row[0] for row in query.with_entities(models.EvidenceUnit.id).all())
     policy_context = policy_engine.resolve_evidence_unit_access_bulk(
         db=db,
         user_id=user_id,
@@ -477,6 +592,13 @@ def reconstruct_action_list(db: Session, user_id: str, as_of: datetime.datetime 
         "metadata_only_unit_ids": [],
         "denied_unit_ids": [],
     }
+    individually_usable_ids = [
+        unit_id
+        for unit_id in unit_ids
+        if policy_context["use_decisions"].get(unit_id) in {relevance.USE_FULL, relevance.USE_METADATA}
+    ]
+    raw_units = query.filter(models.EvidenceUnit.id.in_(individually_usable_ids)).all() if individually_usable_ids else []
+    units = dedupe_evidence_units(raw_units)
     classified = [
         classify_evidence_unit(
             unit,
@@ -527,30 +649,12 @@ def reconstruct_action_list(db: Session, user_id: str, as_of: datetime.datetime 
         contextual = contextual + invalid_contrastive
         excluded = group["excluded_evidence"]
         metadata = group["metadata_only_evidence"]
-        if primary and not contrastive:
-            strongest = sorted(primary, key=lambda x: x.get("timestamp") or "")[-1]
-            open_items.append({
-                "actor": "user",
-                "action": strongest.get("action") or "Unspecified action",
-                "object": strongest.get("object"),
-                "due": strongest.get("due"),
-                "status": "open",
-                "E": [e["id"] for e in primary + contextual],
-                "R": {"primary": len(primary), "contextual": len(contextual), "contrastive": 0, "excluded": len(excluded), "metadata_only": len(metadata)},
-                "evidence": {"primary": primary, "contextual": contextual, "contrastive": [], "excluded": excluded, "metadata_only": metadata},
-            })
-        elif primary and contrastive:
-            strongest = sorted(primary, key=lambda x: x.get("timestamp") or "")[-1]
-            closed_items.append({
-                "actor": "user",
-                "action": strongest.get("action") or "Unspecified action",
-                "object": strongest.get("object"),
-                "due": strongest.get("due"),
-                "status": "closed_or_cancelled",
-                "E": [e["id"] for e in primary + contextual + contrastive],
-                "R": {"primary": len(primary), "contextual": len(contextual), "contrastive": len(contrastive), "excluded": len(excluded), "metadata_only": len(metadata)},
-                "evidence": {"primary": primary, "contextual": contextual, "contrastive": contrastive, "excluded": excluded, "metadata_only": metadata},
-            })
+        if primary:
+            action_item = _action_item(group, primary, contextual, contrastive, excluded, metadata)
+            if action_item["status"] == action_closure.OPEN:
+                open_items.append(action_item)
+            else:
+                closed_items.append(action_item)
         elif contextual:
             contextual_only.append({
                 "relation_key": group["relation_key"],
@@ -575,9 +679,30 @@ def reconstruct_action_list(db: Session, user_id: str, as_of: datetime.datetime 
 
     return {
         "status": "success",
-        "policy": policy_context,
+        "engine_version": action_closure.ACTION_ENGINE_VERSION,
+        "closure_states": [
+            action_closure.OPEN,
+            action_closure.CLOSED_COMPLETED,
+            action_closure.CLOSED_CANCELLED,
+            action_closure.SUPERSEDED,
+        ],
+        "policy": {
+            "policy_enforced": True,
+            "usable_unit_ids": sorted(unit.id for unit in units),
+            "content_unit_ids": sorted(
+                unit.id
+                for unit in units
+                if policy_context["use_decisions"].get(unit.id) == relevance.USE_FULL
+            ),
+            "metadata_only_unit_ids": sorted(
+                unit.id
+                for unit in units
+                if policy_context["use_decisions"].get(unit.id) == relevance.USE_METADATA
+            ),
+        },
         "open_items": open_items,
         "closed_items": closed_items,
+        "actions": sorted(open_items + closed_items, key=lambda item: item["action_id"]),
         "contextual_only": contextual_only,
         "metadata_only": metadata_only,
         "excluded_only": excluded_only,
@@ -642,52 +767,153 @@ _SUPPORT_STOP_WORDS = {
     "a", "an", "and", "are", "as", "at", "be", "by", "can", "does", "for", "from",
     "how", "i", "in", "is", "it", "of", "on", "or", "the", "this", "to", "what",
     "when", "where", "which", "who", "why", "with", "you", "your",
+    "az", "egy", "és", "hogy", "hogyan", "hol", "is", "mely", "melyik", "mi", "milyen",
+    "mit", "van", "vagy", "volt",
 }
 _OBJECT_IDENTIFIER = re.compile(
     r"\b(?=[A-Z0-9-]{4,}\b)(?=[A-Z0-9-]*[A-Z])(?=[A-Z0-9-]*\d)[A-Z0-9]+(?:-[A-Z0-9]+)+\b"
 )
+_AMBIGUOUS_RELATION_PATTERNS = [
+    # "What damage is described for cracked panels" does not state whether
+    # the caller means an exclusion, a symptom, or a causal relationship.
+    r"\bwhat\s+[a-z0-9_-]+\s+(?:is|are)\s+described\s+(?:for|on)\b",
+    r"\bmilyen\s+[\w-]+\s+(?:van|lett)\s+le[ií]rva\s+(?:ehhez|erre|enn[eé]l)\b",
+]
 
 
-def question_source_support(question: str, sources: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
-    """Return a deterministic, policy-preserving pre-generation support signal."""
+def _support_threshold() -> float:
+    value = load_controlled_failure_config().get("thresholds", {}).get("minimum_support_score", 0.5)
+    return float(value)
 
+
+def _full_source_rows(sources: Iterable[Dict[str, Any]]) -> List[tuple[Dict[str, Any], str]]:
     source_rows = list(sources)
-    searchable = " ".join(
-        " ".join(
+    return [
+        (
+            row,
+            " ".join(
             str(value or "")
             for value in (
                 row.get("file_name"),
                 row.get("text"),
                 " ".join(row.get("usable_relevance", {}).get("genre", [])),
             )
+            ),
         )
         for row in source_rows
         if row.get("use_decision") == relevance.USE_FULL
-    )
+    ]
+
+
+def _identifier_scoped_source_text(
+    sources: Iterable[Dict[str, Any]], identifiers: Iterable[str]
+) -> tuple[List[Dict[str, Any]], str, List[str]]:
+    rows = _full_source_rows(sources)
+    requested = list(identifiers)
+    if not requested:
+        return [row for row, _ in rows], " ".join(text for _, text in rows), []
+    matched = [
+        identifier
+        for identifier in requested
+        if any(identifier.casefold() in text.casefold() for _, text in rows)
+    ]
+    scoped = [
+        (row, text)
+        for row, text in rows
+        if any(identifier.casefold() in text.casefold() for identifier in requested)
+    ]
+    return [row for row, _ in scoped], " ".join(text for _, text in scoped), matched
+
+
+def _support_tokens(text: str) -> set[str]:
+    return {
+        token
+        for token in re.findall(r"[^\W_][\w-]{2,}", (text or "").casefold(), flags=re.UNICODE)
+        if token not in _SUPPORT_STOP_WORDS
+    }
+
+
+def _ambiguous_claim_relation(question: str, question_relations: Iterable[str]) -> bool:
+    if list(question_relations):
+        return False
+    return any(re.search(pattern, question or "", flags=re.IGNORECASE) for pattern in _AMBIGUOUS_RELATION_PATTERNS)
+
+
+def question_source_support(question: str, sources: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
+    """Return a deterministic, policy-preserving pre-generation support signal."""
+
     requested_ids = sorted(set(_OBJECT_IDENTIFIER.findall(question or "")))
-    matched_ids = [identifier for identifier in requested_ids if identifier.lower() in searchable.lower()]
+    source_rows, searchable, matched_ids = _identifier_scoped_source_text(sources, requested_ids)
     object_match = not requested_ids or len(matched_ids) == len(requested_ids)
-
-    def tokens(text: str) -> set[str]:
-        return {
-            token
-            for token in re.findall(r"[a-z0-9][a-z0-9_-]{2,}", (text or "").lower())
-            if token not in _SUPPORT_STOP_WORDS
-        }
-
-    question_tokens = tokens(question) - {identifier.lower() for identifier in requested_ids}
-    source_tokens = tokens(searchable)
+    question_tokens = _support_tokens(question) - {identifier.lower() for identifier in requested_ids}
+    source_tokens = _support_tokens(searchable)
     matched_tokens = sorted(question_tokens & source_tokens)
     coverage = len(matched_tokens) / len(question_tokens) if question_tokens else (1.0 if object_match else 0.0)
-    sufficient = bool(source_rows) and object_match and coverage >= 0.34
-    reason = "supported" if sufficient else ("wrong_object_identifier" if not object_match else "insufficient_lexical_support")
+    threshold = _support_threshold()
+    question_relations = relevance.claim_relation_signals(question)
+    source_relations = relevance.claim_relation_signals(searchable)
+    missing_relations = sorted(set(question_relations) - set(source_relations))
+    ambiguous_relation = _ambiguous_claim_relation(question, question_relations)
+
+    if not object_match:
+        decision = "wrong_object"
+        reason = "wrong_object_identifier"
+    elif ambiguous_relation:
+        decision = "clarification_required"
+        reason = "ambiguous_claim_relation"
+    elif missing_relations:
+        decision = "insufficient_evidence"
+        reason = "unsupported_claim_relation"
+    elif not searchable.strip() or coverage < threshold:
+        decision = "insufficient_evidence"
+        reason = "insufficient_lexical_support"
+    else:
+        decision = "supported"
+        reason = "supported"
+    sufficient = decision == "supported"
     return {
         "sufficient": sufficient,
+        "decision": decision,
         "reason": reason,
         "requested_object_identifiers": requested_ids,
         "matched_object_identifiers": matched_ids,
         "question_term_count": len(question_tokens),
         "matched_question_terms": matched_tokens,
         "support_coverage": round(coverage, 6),
-        "threshold": 0.34,
+        "threshold": threshold,
+        "question_claim_relations": question_relations,
+        "source_claim_relations": source_relations,
+        "missing_claim_relations": missing_relations,
+        "identifier_scoped_source_count": len(source_rows),
+    }
+
+
+def answer_source_support(answer: str, sources: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
+    """Validate generated claim relations against permitted full-source text.
+
+    This is intentionally deterministic and conservative.  It does not claim
+    full natural-language entailment; it blocks relation and numeric facts that
+    the source text never states, which closes the observed exclusion-to-cause
+    failure without weakening authorization.
+    """
+
+    answer_ids = sorted(set(_OBJECT_IDENTIFIER.findall(answer or "")))
+    source_rows, searchable, matched_ids = _identifier_scoped_source_text(sources, answer_ids)
+    answer_relations = relevance.claim_relation_signals(answer)
+    source_relations = relevance.claim_relation_signals(searchable)
+    missing_relations = sorted(set(answer_relations) - set(source_relations))
+    unmatched_ids = [identifier for identifier in answer_ids if identifier not in matched_ids]
+    answer_numbers = sorted(set(re.findall(r"\b\d+(?:[.,]\d+)?\b", answer or "")))
+    source_numbers = set(re.findall(r"\b\d+(?:[.,]\d+)?\b", searchable))
+    unsupported_numbers = [value for value in answer_numbers if value not in source_numbers]
+    supported = bool(searchable.strip()) and not missing_relations and not unmatched_ids and not unsupported_numbers
+    return {
+        "sufficient": supported,
+        "reason": "supported" if supported else "unsupported_generated_claim",
+        "answer_claim_relations": answer_relations,
+        "source_claim_relations": source_relations,
+        "missing_claim_relations": missing_relations,
+        "unmatched_object_identifiers": unmatched_ids,
+        "unsupported_numbers": unsupported_numbers,
+        "identifier_scoped_source_count": len(source_rows),
     }

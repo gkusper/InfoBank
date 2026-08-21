@@ -44,7 +44,10 @@ async function loadConnectorStatus() {
 
 async function connectGmail() {
     try {
-        const r = await fetch(`${API}/connectors/gmail/auth-url`, { headers: authHeaders() });
+        const r = await fetch(`${API}/connectors/gmail/auth-url`, {
+            headers: authHeaders(),
+            credentials: 'include',
+        });
         const data = await readApiResponse(r);
         connectorOutput(data);
         if (data.authorization_url) {

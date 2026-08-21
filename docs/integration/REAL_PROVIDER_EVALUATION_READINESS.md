@@ -14,8 +14,9 @@ requested OpenAI run to a mock.
 - temperature: `0.0`;
 - generation prompt: `actual-pipeline-answer-v1`;
 - routing prompt: `routing-keyword-v1`;
-- readiness config: `real-provider-readiness-v1`;
-- config hash: `56d8ed701f154e84c615944e34c4d5ff843c28b2c72e404311e3762e79404908`.
+- keyword selection strategy: `infocom-keyword-selector-v2`;
+- readiness config: `real-provider-readiness-v2`;
+- config hash: `793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3`.
 
 `scripts/run_real_provider_evaluation.py` exposes `--provider openai`,
 `--allow-network-provider`, `--max-cases`, `--estimate-only` (with the legacy

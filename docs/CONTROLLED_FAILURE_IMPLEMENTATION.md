@@ -63,7 +63,7 @@ The backend returns a `controlled_failure` object whenever the system must avoid
 
 - Policy resolution runs over the internal document scope before routing. Denied identifiers stay in privileged audit data and are removed from the public failure payload.
 - Revoke, explicit Deny, archive, purpose mismatch, expiry/future validity, and stale-index rejection return internal `REFUSE_PERMISSION`; a wrong object inside an otherwise permitted scope returns `REFUSE_NO_MATCH`.
-- Both public failure shapes are non-enumerating, contain no denied filename/UUID/hash/page count or citation, and expose only counts plus an identifier-free routing trace.
+- Both public failure shapes are non-enumerating, contain no denied filename/UUID/hash/page count, denied-source count, or citation, and expose only permitted operational summaries plus an identifier-free routing trace. Exact denied-source details remain in the privileged audit record.
 - Metadata-only sources return `metadata_only_answer` and never expose raw content.
 - Aggregate-only sources can answer aggregate/statistical questions but not specific content claims.
 - Contextual/activity sources cannot create obligations by themselves.

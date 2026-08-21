@@ -65,12 +65,30 @@ try {
     $stdoutLog = Join-Path $artifactDir "api-smoke.stdout.log"
     $stderrLog = Join-Path $artifactDir "api-smoke.stderr.log"
     $backendDir = Join-Path $repoRoot "backend_python"
-    $port = 8765
+    # Keep the smoke API away from the documented local frontend port (8765)
+    # so a developer can leave the static UI running during this isolated gate.
+    $port = 18765
 
     $env:DATABASE_URL = "mysql+pymysql://infobank:infobank_dev_password@127.0.0.1:3307/infobank_db?charset=utf8mb4"
     $env:JWT_SECRET_KEY = "r1b-temporary-api-smoke-secret"
+    $env:AI_PROVIDER = "deterministic-mock"
     $env:CHROMA_PERSIST_DIR = Join-Path ([System.IO.Path]::GetTempPath()) "infobank-r1b-api-smoke-chroma"
-    $env:OPENAI_API_KEY = "r1b-placeholder-no-provider-calls"
+    $env:SOURCE_STORAGE_DIR = Join-Path ([System.IO.Path]::GetTempPath()) "infobank-r1b-api-smoke-source"
+    $env:OPENAI_API_KEY = ""
+    $env:INFOBANK_MIGRATION_SMOKE_ADMIN_DATABASE_URL = "mysql+pymysql://root:infobank_root_password@127.0.0.1:3307/mysql?charset=utf8mb4"
+
+    & $pythonPath (Join-Path $PSScriptRoot "check_database_schema.py")
+    if ($LASTEXITCODE -ne 0) {
+        throw "Docker database schema is incompatible; the gate will not mutate it automatically"
+    }
+    & $pythonPath (Join-Path $PSScriptRoot "run_database_migration_smoke.py") --output (Join-Path $artifactDir "legacy-migration-smoke.json")
+    if ($LASTEXITCODE -ne 0) {
+        throw "Isolated legacy database migration smoke failed"
+    }
+    & $pythonPath (Join-Path $PSScriptRoot "run_clean_database_migration_smoke.py") --output (Join-Path $artifactDir "clean-migration-smoke.json")
+    if ($LASTEXITCODE -ne 0) {
+        throw "Isolated clean database migration smoke failed"
+    }
 
     $apiProcess = Start-Process `
         -FilePath $pythonPath `
@@ -95,15 +113,47 @@ try {
         Start-Sleep -Seconds 2
     }
 
-    $databaseResult = Invoke-RestMethod "http://127.0.0.1:$port/api/test-db" -TimeoutSec 10
+    $smokeEmail = "r1b-api-smoke@example.invalid"
+    $smokePassword = "R1b-local-api-smoke-password-2026!"
+    $registrationBody = @{
+        email = $smokeEmail
+        username = "r1b-api-smoke"
+        password = $smokePassword
+    } | ConvertTo-Json
+    try {
+        Invoke-RestMethod `
+            -Method Post `
+            -Uri "http://127.0.0.1:$port/api/register" `
+            -ContentType "application/json" `
+            -Body $registrationBody `
+            -TimeoutSec 10 | Out-Null
+    } catch {
+        # A persistent local smoke database may already contain this
+        # task-owned account. Authentication below remains the authority.
+    }
+    $loginBody = @{
+        email = $smokeEmail
+        password = $smokePassword
+    } | ConvertTo-Json
+    $loginResult = Invoke-RestMethod `
+        -Method Post `
+        -Uri "http://127.0.0.1:$port/api/login" `
+        -ContentType "application/json" `
+        -Body $loginBody `
+        -TimeoutSec 10
+    if (-not $loginResult.access_token) { throw "Smoke authentication did not return an access token" }
+    $authHeaders = @{ Authorization = "Bearer $($loginResult.access_token)" }
+    $databaseResult = Invoke-RestMethod "http://127.0.0.1:$port/api/test-db" -Headers $authHeaders -TimeoutSec 10
+    $schemaResult = Invoke-RestMethod "http://127.0.0.1:$port/api/health/schema" -TimeoutSec 10
     $openApiStatus = (Invoke-WebRequest -UseBasicParsing "http://127.0.0.1:$port/openapi.json" -TimeoutSec 10).StatusCode
     if ($docsStatus -ne 200) { throw "/docs did not return HTTP 200" }
     if ($openApiStatus -ne 200) { throw "/openapi.json did not return HTTP 200" }
     if ($databaseResult.status -ne "success") { throw "/api/test-db did not report success" }
+    if (-not $schemaResult.schema.compatible) { throw "/api/health/schema did not report compatibility" }
 
     Write-Output (
-        "R1B_DOCKER_SMOKE=PASS mariadb=healthy test_db_status={0} users_in_db={1} docs_http={2} openapi_http={3} volume_deleted=false" -f `
-        $databaseResult.status, $databaseResult.users_in_db, $docsStatus, $openApiStatus
+        "R1B_DOCKER_SMOKE=PASS mariadb=healthy authenticated_test_db_status={0} docs_http={1} openapi_http={2} schema_compatible=true legacy_migration=pass clean_migration=pass volume_deleted=false" -f `
+        $databaseResult.status, $docsStatus, $openApiStatus
     )
     exit 0
 } catch {

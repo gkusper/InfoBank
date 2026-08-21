@@ -23,10 +23,12 @@ function authHeaders(extra = {}) {
 async function readApiResponse(response) {
     const data = await response.json().catch(() => ({}));
     if (!response.ok) {
-        const safeError = data.error || {};
-        const message = safeError.message || data.detail || data.message || `HTTP ${response.status}`;
-        const suffix = safeError.error_id ? ` (error ID: ${safeError.error_id})` : '';
-        throw new Error(message + suffix);
+        const normalized = InfoBankAuthValidation.normalizeApiError(data, response.status);
+        const suffix = normalized.errorId ? ` (error ID: ${normalized.errorId})` : '';
+        const error = new Error(normalized.message + suffix);
+        error.fieldErrors = normalized.fieldErrors;
+        error.status = response.status;
+        throw error;
     }
     return data;
 }
@@ -335,20 +337,116 @@ function renderAssistantExchange(question, res, { expandedSources = false, repla
     else box.innerHTML += exchange;
 }
 
-async function doRegister() {
+const REGISTRATION_FIELDS = {
+    username: {inputId: 'reg-name', errorId: 'reg-name-error'},
+    email: {inputId: 'reg-email', errorId: 'reg-email-error'},
+    password: {inputId: 'reg-pass', errorId: 'reg-pass-error'},
+};
+
+function showAuthFeedback(message, type = 'error') {
+    const feedback = document.getElementById('auth-feedback');
+    if (!feedback) return;
+    feedback.textContent = String(message || '');
+    feedback.className = `mb-4 rounded-lg border px-4 py-3 text-sm ${
+        type === 'success'
+            ? 'border-green-200 bg-green-50 text-green-800'
+            : 'border-red-200 bg-red-50 text-red-800'
+    }`;
+    feedback.setAttribute('role', type === 'success' ? 'status' : 'alert');
+    feedback.setAttribute('aria-live', type === 'success' ? 'polite' : 'assertive');
+}
+
+function clearAuthFeedback() {
+    const feedback = document.getElementById('auth-feedback');
+    if (!feedback) return;
+    feedback.textContent = '';
+    feedback.className = 'hidden mb-4 rounded-lg border px-4 py-3 text-sm';
+    feedback.setAttribute('role', 'status');
+    feedback.setAttribute('aria-live', 'polite');
+}
+
+function clearRegistrationFieldError(field) {
+    const config = REGISTRATION_FIELDS[field];
+    if (!config) return;
+    const input = document.getElementById(config.inputId);
+    const error = document.getElementById(config.errorId);
+    if (input) {
+        input.setAttribute('aria-invalid', 'false');
+        input.classList.remove('border-red-500', 'focus:ring-red-500');
+        input.classList.add('focus:ring-blue-500');
+    }
+    if (error) {
+        error.textContent = '';
+        error.classList.add('hidden');
+    }
+}
+
+function clearRegistrationErrors({clearFeedback = true} = {}) {
+    Object.keys(REGISTRATION_FIELDS).forEach(clearRegistrationFieldError);
+    if (clearFeedback) clearAuthFeedback();
+}
+
+function renderRegistrationErrors(fieldErrors, summary = 'Please correct the highlighted fields.') {
+    let firstInvalidInput = null;
+    Object.entries(fieldErrors || {}).forEach(([field, messages]) => {
+        const config = REGISTRATION_FIELDS[field];
+        if (!config || !Array.isArray(messages) || messages.length === 0) return;
+        const input = document.getElementById(config.inputId);
+        const error = document.getElementById(config.errorId);
+        if (input) {
+            input.setAttribute('aria-invalid', 'true');
+            input.classList.remove('focus:ring-blue-500');
+            input.classList.add('border-red-500', 'focus:ring-red-500');
+            if (!firstInvalidInput) firstInvalidInput = input;
+        }
+        if (error) {
+            error.textContent = messages.join(' ');
+            error.classList.remove('hidden');
+        }
+    });
+    showAuthFeedback(summary, 'error');
+    firstInvalidInput?.focus();
+}
+
+function prepareRegistrationValidation() {
+    document.getElementById('form-register')?.addEventListener('submit', event => {
+        event.preventDefault();
+        void doRegister();
+    });
+    Object.entries(REGISTRATION_FIELDS).forEach(([field, config]) => {
+        document.getElementById(config.inputId)?.addEventListener('input', () => {
+            clearRegistrationFieldError(field);
+            if (!document.querySelector('#form-register [aria-invalid="true"]')) clearAuthFeedback();
+        });
+    });
+}
+
+async function doRegister(event) {
+    event?.preventDefault();
     const d = {
-        username: document.getElementById('reg-name').value,
-        email: document.getElementById('reg-email').value,
+        username: document.getElementById('reg-name').value.trim(),
+        email: document.getElementById('reg-email').value.trim(),
         password: document.getElementById('reg-pass').value
     };
+    clearRegistrationErrors();
+    const clientErrors = InfoBankAuthValidation.validateRegistration(d);
+    if (Object.keys(clientErrors).length) {
+        renderRegistrationErrors(clientErrors);
+        return false;
+    }
     try {
         const r = await fetch(`${API}/register`, { method: 'POST', headers: {'Content-Type':'application/json'}, body: JSON.stringify(d) });
         await readApiResponse(r);
-        alert("Registration successful! You can now log in.");
         toggleAuth();
+        showAuthFeedback('Registration successful! You can now log in.', 'success');
     } catch (e) {
-        alert(e.message || "Registration failed.");
+        if (e.fieldErrors && Object.keys(e.fieldErrors).length) {
+            renderRegistrationErrors(e.fieldErrors);
+        } else {
+            showAuthFeedback(e.message || 'Registration failed.', 'error');
+        }
     }
+    return false;
 }
 
 async function doLogin() {
@@ -870,4 +968,7 @@ async function loadMap() {
     }
 }
 
-window.addEventListener('DOMContentLoaded', restoreSession);
+window.addEventListener('DOMContentLoaded', () => {
+    prepareRegistrationValidation();
+    restoreSession();
+});

@@ -1,6 +1,7 @@
 function toggleAuth() { 
     document.getElementById('form-login').classList.toggle('hidden'); 
     document.getElementById('form-register').classList.toggle('hidden'); 
+    if (typeof clearRegistrationErrors === 'function') clearRegistrationErrors();
 }
 
 function renderAvatar(containerId, url, username) {

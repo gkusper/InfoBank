@@ -1,0 +1,54 @@
+{
+  "records": [
+    {
+      "case_ids": [
+        "HELD3_P5_01A",
+        "HELD3_P5_01B"
+      ],
+      "hidden_source_values_absent": true,
+      "internal_traces_differ": false,
+      "normalized_public_response_identical": false,
+      "pair_id": "H3PAIR_P5_01",
+      "public_reason_class_identical": true,
+      "source_existence_leakage": true
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_02A",
+        "HELD3_P5_02B"
+      ],
+      "hidden_source_values_absent": true,
+      "internal_traces_differ": false,
+      "normalized_public_response_identical": false,
+      "pair_id": "H3PAIR_P5_02",
+      "public_reason_class_identical": true,
+      "source_existence_leakage": true
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_03A",
+        "HELD3_P5_03B"
+      ],
+      "hidden_source_values_absent": true,
+      "internal_traces_differ": false,
+      "normalized_public_response_identical": false,
+      "pair_id": "H3PAIR_P5_03",
+      "public_reason_class_identical": true,
+      "source_existence_leakage": true
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_04A",
+        "HELD3_P5_04B"
+      ],
+      "hidden_source_values_absent": true,
+      "internal_traces_differ": false,
+      "normalized_public_response_identical": false,
+      "pair_id": "H3PAIR_P5_04",
+      "public_reason_class_identical": true,
+      "source_existence_leakage": true
+    }
+  ],
+  "schema_version": "wolala-source-existence-leakage-verification-v1",
+  "source_existence_leakage_rate": 1.0
+}

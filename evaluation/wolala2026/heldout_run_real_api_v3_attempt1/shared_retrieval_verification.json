@@ -1,0 +1,1222 @@
+{
+  "all_cases_share_retrieval": true,
+  "records": [
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_01a-brief"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_01a-brief"
+      ],
+      "case_id": "HELD3_P1_01A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "93379b724cf59f3a0ec42287cb049489412dc220781ceb83ce7e5d81b4c6e1cc"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_01b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_01b-context"
+      ],
+      "case_id": "HELD3_P1_01B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "61887675199d4ec364af75f86963dcf5a141dbabb82794c32fe285a648476aad"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_02a-brief"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_02a-brief"
+      ],
+      "case_id": "HELD3_P1_02A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "fdff64cb6a21b9d3312d0653f4cf37ba8f75c262494de573a3a6c1dfe54453d9"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_02b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_02b-context"
+      ],
+      "case_id": "HELD3_P1_02B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "4b914e377e85901681c1e66471f8db500848abc1daec9e20cc1d9f4948d335ae"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_03a-brief"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_03a-brief"
+      ],
+      "case_id": "HELD3_P1_03A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "9fc254a135ee245eae795eb246134466cc7ca80659916cbe827f309a701a22dc"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_03b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_03b-context"
+      ],
+      "case_id": "HELD3_P1_03B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "eda2dc5d5f27c5977f96d6917101941e25d36ce376a54ada14242c8b99c1e2f3"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_04a-brief"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_04a-brief"
+      ],
+      "case_id": "HELD3_P1_04A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "993d3e6dce3040ee15aaef58adbb85ef27b0eb6818ab3df58d39ab0cdaab3a07"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p1_04b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p1_04b-context"
+      ],
+      "case_id": "HELD3_P1_04B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "8d1cd236b3bb12475f64a43403531db3686d47291ae2c209e787fe3a5552b688"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_01a-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_01a-aggregate"
+      ],
+      "case_id": "HELD3_P2_01A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "4229f8d044ce080d35281e5e933c0647899ecadd8146520cff7f2dbab582f5ff"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_01b-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_01b-aggregate"
+      ],
+      "case_id": "HELD3_P2_01B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "66198d8864b0cfda42a21777b84aed39934e08d91d2d979afe37165802ac5054"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_02a-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_02a-aggregate"
+      ],
+      "case_id": "HELD3_P2_02A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "a397a72a79fe8996a7baf6cbb8fd133723117ea1292a4744e20ee0bfaa0d96a8"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_02b-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_02b-aggregate"
+      ],
+      "case_id": "HELD3_P2_02B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "82c5dfdab4e93e3372a267a08087de3dd8af6958b0ba94e50da0ba36bae0c0bf"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_03a-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_03a-aggregate"
+      ],
+      "case_id": "HELD3_P2_03A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "188e329310f478236c66ccb68f8995e1cf989e283ffd4f6df46a67908ffb8f44"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_03b-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_03b-aggregate"
+      ],
+      "case_id": "HELD3_P2_03B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "f933d2d2e550ddf14cc560f8363c0535123f44f0ca497222bcea77946f84368f"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_04a-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_04a-aggregate"
+      ],
+      "case_id": "HELD3_P2_04A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "fa3719fb584679a075cb2d56cfc5f395f67f0da85c8bbd3ba6ee88d95f588aa0"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p2_04b-aggregate"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p2_04b-aggregate"
+      ],
+      "case_id": "HELD3_P2_04B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "c46bc7943019d3f733496979f8a15a60ec0236ac2933e4f95f324f39822e2a14"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_01a-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_01a-metadata"
+      ],
+      "case_id": "HELD3_P3_01A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "62f3f8a4305742e3b23ab04be37596e11613b6bf007e17b6f232dbe59ee7212d"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_01b-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_01b-metadata"
+      ],
+      "case_id": "HELD3_P3_01B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "ba4649d5cee74269cc9c7991e18f5461716e0782a647911e82ca640ba81fef54"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_02a-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_02a-metadata"
+      ],
+      "case_id": "HELD3_P3_02A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "6c8d6d73acd02c224de319f6f26c373331e8e2ed48181f396f727a818133daec"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_02b-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_02b-metadata"
+      ],
+      "case_id": "HELD3_P3_02B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "d43ae7fa04eb8c34fa52f020775d7b1f84236f334d0f05e59bdbf020d3d6932a"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_03a-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_03a-metadata"
+      ],
+      "case_id": "HELD3_P3_03A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "185123b1f072022a728f0729187dd713d0e781dcf7d4fc205c3208fb0be4ad2b"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_03b-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_03b-metadata"
+      ],
+      "case_id": "HELD3_P3_03B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "5177db25688fa6b1612afc65cbf835ec05884e787e57bf451b49d033cf84a40e"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_04a-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_04a-metadata"
+      ],
+      "case_id": "HELD3_P3_04A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "cfce67784a102f17ed1c79850492777dc6ac90376ae3b75281bb95e743b59388"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p3_04b-metadata"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p3_04b-metadata"
+      ],
+      "case_id": "HELD3_P3_04B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "0e0bdc7eeb04c91d3c99231397f770408ac166dfaa1fda1c299b901b7d630278"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_01a-action"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_01a-action"
+      ],
+      "case_id": "HELD3_P4_01A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "64be11b4d845f9e7680e494fd5e0eafa85006b2f6d1bffd698213797109cd40c"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_01b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_01b-context"
+      ],
+      "case_id": "HELD3_P4_01B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "c0d7fa7b798c4f21177962c79119be6132bac393c4f04bdc2f119945d3d95c80"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_02a-action"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_02a-action"
+      ],
+      "case_id": "HELD3_P4_02A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "e8fa0c173111c806c055c010f34eb207c28ccf2327ce8748ab08952f415dd40c"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_02b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_02b-context"
+      ],
+      "case_id": "HELD3_P4_02B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "f2b47f3b3070b37ca5dfdf9a03c2d550e52c263656f9a1fed51c6db50b1395cc"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_03a-action"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_03a-action"
+      ],
+      "case_id": "HELD3_P4_03A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "2b8ab791fda7de61d2156f42d2f6677d12bdc75280cbe9369f9cea370ee8cb20"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_03b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_03b-context"
+      ],
+      "case_id": "HELD3_P4_03B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "fa7aaa3e38028fb4394cc60c2b5b7054c1c8bb05b38a00bb734ba1b9ce4e9673"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_04a-action"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_04a-action"
+      ],
+      "case_id": "HELD3_P4_04A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "da253d3dd8dbf27e3d2733165e8ab8e6c9a5d60d2ca5978081b76ee20476fcd6"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p4_04b-context"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p4_04b-context"
+      ],
+      "case_id": "HELD3_P4_04B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "ae2de4e53a40e6e7c7cff0b2e6005a8fe2326a24c530ad620fedaabc3fec8bc6"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD3_P5_01A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "6c262f5acb9402e9826bbf02279691b475326d67ff5f5062adbbb4828acad42c"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p5_01b-hidden"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p5_01b-hidden"
+      ],
+      "case_id": "HELD3_P5_01B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "61201bfa51aa07cfe5990f0c945a687de21573fc26a3bf53aeb236603fd306d8"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD3_P5_02A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "994f2fe5be211b80d99d9ad6b58f1f23251b1f5018a03640378894302fcde68b"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p5_02b-hidden"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p5_02b-hidden"
+      ],
+      "case_id": "HELD3_P5_02B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "c571e1934ad10789ec525a950579da19b6d22ef917f552b5240429ff4c832be3"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD3_P5_03A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "7d37b03ea6447fbe0cd8a2cd2e09653d9037be061139bc9596b512d28cf0bea4"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p5_03b-hidden"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p5_03b-hidden"
+      ],
+      "case_id": "HELD3_P5_03B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "78a0960ed2908f9b7a48f399531f9f46765cb3f2e769a8feac19c4d1b987c482"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD3_P5_04A",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "30f448c3065c4c024926752fac4abf9ab5ee02e309d037519eda24d3d741d2d3"
+      ],
+      "snapshot_reference_count_correct": true
+    },
+    {
+      "candidate_ids": [
+        "h3-cand-held3_p5_04b-hidden"
+      ],
+      "candidate_order": [
+        "h3-cand-held3_p5_04b-hidden"
+      ],
+      "case_id": "HELD3_P5_04B",
+      "expected_reference_count": 9,
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "record_count": 9,
+      "repetitions": [
+        1,
+        2,
+        3
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        0.991
+      ],
+      "same_snapshot_across_modes": true,
+      "same_snapshot_across_repetitions": true,
+      "snapshot_hashes": [
+        "3d05f6b4efd9363274dc32287c70b56b78f6cb875b6899aebeb9745835fd4f21"
+      ],
+      "snapshot_reference_count_correct": true
+    }
+  ],
+  "schema_version": "wolala-shared-retrieval-verification-v1"
+}

@@ -1,0 +1,29 @@
+{
+  "all_checks_passed": true,
+  "checks": {
+    "adapter_integrity_pass_count_360": true,
+    "all_cases_have_expected_record_count": true,
+    "all_cfaf_contexts_filtered": true,
+    "baselines_free_of_gold_or_external_cfaf_labels": true,
+    "call_accounting_all_counts_match": true,
+    "cfaf_context_exposure_zero": true,
+    "cfaf_uses_filtered_pipeline_context": true,
+    "completion_status_completed": true,
+    "embedding_calls_40_within_cap_60": true,
+    "generation_calls_360_within_cap_380": true,
+    "heldout_mode_execution_count_360": true,
+    "mode_execution_count_360": true,
+    "raw_freeze_manifest_created": true,
+    "result_record_count_360": true,
+    "retry_attempts_zero": true,
+    "runner_errors_empty": true,
+    "shared_retrieval_latency_reused": true,
+    "shared_retrieval_once_per_case": true,
+    "total_external_calls_400_within_cap_420": true
+  },
+  "dataset": "heldout_pilot_v3",
+  "result_hash": "86a803c00340a6de1d31e35c901f86e9c84f03d7d9b54b080d014d87afa71906",
+  "run_attempt": 1,
+  "run_id": "heldout_pilot_v3_real_api_attempt1",
+  "schema_version": "wolala-heldout-v3-postrun-validation-v1"
+}

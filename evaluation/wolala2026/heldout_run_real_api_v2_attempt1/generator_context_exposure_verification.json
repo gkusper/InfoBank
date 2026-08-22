@@ -1,0 +1,908 @@
+{
+  "all_cfaf_contexts_filtered": true,
+  "generator_exposure_rate": 0.0,
+  "protected_content_leakage_rate": 0.0,
+  "records": [
+    {
+      "case_id": "HELD2_P1_01A",
+      "context_hash": "6a452cc9b75344e001f40e0e1ba25a8d6d8cfcf4d981b92fd52e30d79470361a",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "context_hash": "c626cf21c0430fac5372196340fa77d24b12797e8995ac74458779e36f034120",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "context_hash": "aef6735be2116a7a1a763e964497f4e5f3342a8c4819b60615f5b69e666611f6",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "context_hash": "c7cdf1683560966e3bb0474df46335be001497239e1198f86d70620e2a73c220",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "context_hash": "0a0f86b3fd1362a93af9cad00a796f201f903176abcf0a352906cbafeb27aac0",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "context_hash": "10e2cef3d04a1f03432a9cb9de20bde2f6a91cbcfce459c00ea22da0a6aa3b34",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "context_hash": "51c129dac6528b188f3aa0180b3f8c77059cd7085fe9e69bb8e2e8f250f7846d",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "context_hash": "22ca252752cdbbb54d049336ad84c361491fa2e7d16497a97dc828a55bfaf913",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "context_hash": "1292ac1bcacaf96da5f75f9cb9f71872731c19bac853c20adce770b5bbabb977",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "context_hash": "37cce7d9f1ca6454583acddd5907e7442837d10b60d2215d69bac446f1083927",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "context_hash": "7d15213e3c5af371b911aa50799f45919d7644243948a24c17fb7e550e6334c0",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "context_hash": "f20793ba262cba124960a3ddfb6ec6af8afa0a3ff6131d08c997c72937f17b84",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "context_hash": "57adb5d024fd40139c732008982d0e01a3252f15a3304f8570c021158543c7a7",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "context_hash": "950282db0a92a8523516662f2a4eaa0eef2a96ef09119d7cafde624977afaf80",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "context_hash": "d94b6ffd4dd82e08307fdd4cc53523cb2ffb6f45200090d59b70938ab180331b",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "context_hash": "660417c32836650b6e28eb0a368b86df40785117c8d90f7614a35afebb105afa",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "context_hash": "c139b0db534cd133237674cfd33fbfa0a3807ea2378c7e3e6f59ed73dc5f2702",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "context_hash": "4b776b48acb11fba0849164c45e9c9a0313080217953d79a9e3860d5c0c6c83f",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "context_hash": "88214de691c31787332530d38386b2df03004760e4f12d97166e5e6fe3c97ed5",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "context_hash": "68062a67ba6850c892cd9a1890211fe9a795a6a2187fe9ea3423edf2d9981050",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03A",
+      "context_hash": "4cbc4696db4b4e0f70ce6099fc06973d406af68531d360bb0049748bf5e0f185",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03B",
+      "context_hash": "3a5dc5c503913f4e2fb023e40ce9337ea4340a7639f6d2506f00a5e8bd0600b6",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04A",
+      "context_hash": "fe27674860b48dbbd7a4a2f321259d7e7ab36a39c8f025c00dd9d63a2546a843",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04B",
+      "context_hash": "cc7b8a22e25cc7d6aaa210d6cd0cbaa8efe10c7d59a6095bde531b3d7840018c",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01A",
+      "context_hash": "2d91728c8fdd65ae69aa33bdf6c4aadc1cd875d748794f707f035ed3de26b263",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01B",
+      "context_hash": "f64969e52719945d49d856478f0024dc2d4c92f3c0a5a868b9736557277c69b7",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02A",
+      "context_hash": "e180e4b869b93810d8e9b342a5b4d11640c0d8e0042753f8cce43a62505a21dc",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02B",
+      "context_hash": "afa9619e24129dca1d7ac4240ec65eeae7da67435645587ee6a80a7f52bb61bc",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03A",
+      "context_hash": "4626a04c32438aa7221d2b6b89c971070660077ba60f187da8fa88efd2099b1c",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03B",
+      "context_hash": "b450d9faacac7800088bb80ace093a44c7283baeee3e206b1087839a7c235c31",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04A",
+      "context_hash": "a0a78608cb9eaecc8b3bdba4d91b4e98c72c86a39718267f04fa0fd38a1f5bde",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04B",
+      "context_hash": "d60e3c0f85aea861765015900e0973abd34c0fc4c382c6805da1a2f3f9556e1f",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01A",
+      "context_hash": "6a452cc9b75344e001f40e0e1ba25a8d6d8cfcf4d981b92fd52e30d79470361a",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "context_hash": "c626cf21c0430fac5372196340fa77d24b12797e8995ac74458779e36f034120",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "context_hash": "aef6735be2116a7a1a763e964497f4e5f3342a8c4819b60615f5b69e666611f6",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "context_hash": "c7cdf1683560966e3bb0474df46335be001497239e1198f86d70620e2a73c220",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "context_hash": "0a0f86b3fd1362a93af9cad00a796f201f903176abcf0a352906cbafeb27aac0",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "context_hash": "10e2cef3d04a1f03432a9cb9de20bde2f6a91cbcfce459c00ea22da0a6aa3b34",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "context_hash": "51c129dac6528b188f3aa0180b3f8c77059cd7085fe9e69bb8e2e8f250f7846d",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "context_hash": "22ca252752cdbbb54d049336ad84c361491fa2e7d16497a97dc828a55bfaf913",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "context_hash": "1292ac1bcacaf96da5f75f9cb9f71872731c19bac853c20adce770b5bbabb977",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "context_hash": "37cce7d9f1ca6454583acddd5907e7442837d10b60d2215d69bac446f1083927",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "context_hash": "7d15213e3c5af371b911aa50799f45919d7644243948a24c17fb7e550e6334c0",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "context_hash": "f20793ba262cba124960a3ddfb6ec6af8afa0a3ff6131d08c997c72937f17b84",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "context_hash": "57adb5d024fd40139c732008982d0e01a3252f15a3304f8570c021158543c7a7",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "context_hash": "950282db0a92a8523516662f2a4eaa0eef2a96ef09119d7cafde624977afaf80",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "context_hash": "d94b6ffd4dd82e08307fdd4cc53523cb2ffb6f45200090d59b70938ab180331b",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "context_hash": "660417c32836650b6e28eb0a368b86df40785117c8d90f7614a35afebb105afa",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "context_hash": "c139b0db534cd133237674cfd33fbfa0a3807ea2378c7e3e6f59ed73dc5f2702",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "context_hash": "4b776b48acb11fba0849164c45e9c9a0313080217953d79a9e3860d5c0c6c83f",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "context_hash": "88214de691c31787332530d38386b2df03004760e4f12d97166e5e6fe3c97ed5",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "context_hash": "68062a67ba6850c892cd9a1890211fe9a795a6a2187fe9ea3423edf2d9981050",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    }
+  ],
+  "schema_version": "wolala-generator-context-exposure-verification-v1"
+}

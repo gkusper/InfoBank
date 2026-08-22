@@ -1,0 +1,409 @@
+{
+  "actual": {
+    "case_score_rows": 180,
+    "embedding_calls": 60,
+    "end_time_utc": "2026-08-22T19:20:07Z",
+    "external_warmup_calls": 0,
+    "generation_calls": 180,
+    "provider_attempts": 240,
+    "raw_result_rows": 180,
+    "retry_attempts": 0,
+    "shared_retrieval_snapshot_rows": 60,
+    "start_time_utc": "2026-08-22T19:15:50Z",
+    "total_external_calls": 240
+  },
+  "artifact_checksums_sha256": {
+    "../HELDOUT_V2_ATTEMPT1_FAILED_RUN_REPORT_v1.md": "2762d379c6eb756c4dd8596054d0e3b0ef849c8bdd60a326929f3ba364c713b7",
+    "README.md": "b9475c0da6ade9a325f439115bf4eab2a0130f2ff9ed50c9a3c754874fe579cb",
+    "adapter_integrity_verification.json": "7cd3527844dcf0f5d9fa9abbd3ea10ef0c3b20a7eb7e8fc106491ee2f58b1ffb",
+    "case_scores.jsonl": "9103aae13a0e783b35f452c03d93beb800d1d434677639ba60a3116b2d6b2e8c",
+    "error_analysis.json": "d80fd3e61c45f602a22894a33f0b2f78e21541b81cf304e2223e52930d348749",
+    "errors.jsonl": "99cbb50711f057a185d006871eb38b8030475a48f05984b910f90807b447d6bc",
+    "execution_plan.json": "e0a12c9c2ea336fd3324930335c2ea4d444eb040c9536a44ff577e1fc16f17b9",
+    "generator_context_exposure_verification.json": "fd2b2302eca9f885c7a6f29e20f0e1fe06c87d2e0ddc8017b22e3e44d5268391",
+    "latency_diagnostics.json": "d4d841a0f82e9241878ef49629e0d1ee33ce69a0e174132a8d35c22873730f40",
+    "pair_scores.jsonl": "2dfac6d60b322c408f80ef20e163c587d2cbb082f73281ffdcea072b9bedd8d8",
+    "raw_results.jsonl": "782026ad732e391564adcdeb18a9b5094574dc38d960904daa492df9d613f492",
+    "run_manifest.json": "481a78a206fdd719539de3a0ae3de4d61b202a39fee98e0fec680fa80263c146",
+    "shared_retrieval_snapshots.jsonl": "4df7fc2451df1254573c3425de9f7a02a5713e172b7cd8753381a465484f6696",
+    "shared_retrieval_verification.json": "d2cdebf61dc74caab09eb2678774755cbaf98d9e8f7eb0774602214da29f9b63",
+    "source_existence_leakage_verification.json": "acfb01ddf0f5b0726d00fee351fd4a251d12760424cee891a8b8c7153509ad69",
+    "summary.csv": "a4a0ab46c850f7c5d0a8f6c2bb645f710000ee77e6566685169d620c82a7b952",
+    "summary.json": "ab47eaf01be875cf5ec1184b3b7f9f2907d2a09a0d6aa17289816ade80bb810f",
+    "summary_table.tex": "39d14662f6151a2414ce41f2dd5557c349f13510577ad9b9cf4bb98ca88993f2"
+  },
+  "artifact_paths": {
+    "checksums": "evaluation/wolala2026/heldout_run_real_api_v2_attempt1/checksums.sha256",
+    "raw_results": "evaluation/wolala2026/heldout_run_real_api_v2_attempt1/raw_results.jsonl",
+    "report": "evaluation/wolala2026/HELDOUT_V2_ATTEMPT1_FAILED_RUN_REPORT_v1.md",
+    "run_directory": "evaluation/wolala2026/heldout_run_real_api_v2_attempt1",
+    "run_manifest": "evaluation/wolala2026/heldout_run_real_api_v2_attempt1/run_manifest.json"
+  },
+  "attempt": {
+    "completion_status": "FAILED",
+    "confirmatory_analysis_valid": false,
+    "dataset": "heldout_pilot_v2",
+    "post_run_invalidation_class": "INVALIDATED_SCIENTIFIC_INTEGRITY_FAILURE",
+    "rerun_started": false,
+    "run_attempt": 1,
+    "run_id": "heldout_pilot_v2_real_api_attempt1",
+    "second_attempt_authorized": false,
+    "valid_for_manuscript": false
+  },
+  "branch": "wolala2026",
+  "command": "python -m evaluation.wolala2026.run_pilot --dataset heldout_pilot_v2 --modes standard_rag,prompt_only_control,cfaf_pipeline --repetitions 3 --execution-spec evaluation/wolala2026/HELDOUT_EXECUTION_SPEC_v3.json --output-dir evaluation/wolala2026/heldout_run_real_api_v2_attempt1 --max-mode-executions 360 --max-embedding-calls 60 --max-generation-calls 380 --max-total-external-calls 420 --allow-real-api --allow-heldout",
+  "coverage": {
+    "cases_with_one_repetition": 20,
+    "cases_with_three_repetitions": 0,
+    "cases_with_two_repetitions": 20,
+    "missing_case_repetition_count": 60,
+    "missing_case_repetitions": [
+      {
+        "case_id": "HELD2_P1_01A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_01B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_02A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_02B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_03A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_03B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_04A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P1_04B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_01A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_01B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_02A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_02B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_03A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_03B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_04A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P2_04B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_01A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_01B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_02A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_02B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_03A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P3_03A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_03B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P3_03B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_04A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P3_04A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P3_04B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P3_04B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_01A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_01A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_01B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_01B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_02A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_02A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_02B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_02B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_03A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_03A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_03B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_03B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_04A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_04A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P4_04B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P4_04B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_01A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_01A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_01B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_01B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_02A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_02A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_02B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_02B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_03A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_03A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_03B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_03B",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_04A",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_04A",
+        "missing_repetition": 3
+      },
+      {
+        "case_id": "HELD2_P5_04B",
+        "missing_repetition": 2
+      },
+      {
+        "case_id": "HELD2_P5_04B",
+        "missing_repetition": 3
+      }
+    ],
+    "records_by_family": {
+      "P1": 48,
+      "P2": 48,
+      "P3": 36,
+      "P4": 24,
+      "P5": 24
+    },
+    "records_by_mode": {
+      "cfaf_pipeline": 60,
+      "prompt_only_control": 60,
+      "standard_rag": 60
+    },
+    "records_by_repetition": {
+      "1": 120,
+      "2": 60
+    },
+    "unique_cases_with_any_output": 40
+  },
+  "failure": {
+    "errors": [
+      {
+        "case_count_completed": 40,
+        "category": "PROVIDER_ERROR",
+        "message": "Embedding call cap exceeded: requested 61, cap 60."
+      }
+    ],
+    "root_cause": "Real-API runner recomputed retrieval embeddings inside the repetition loop, consuming one embedding per case per repetition instead of the frozen one unique embedding per case.",
+    "why_not_infrastructure": "The cap exhaustion followed from experimental runner behavior and frozen-plan mismatch, not provider outage, network failure, retryable HTTP failure, or host termination."
+  },
+  "git": {
+    "authorization_commit": "66caca55756f8204c6b9b4596255d6d5a565eb63",
+    "authorization_tag": "wolala2026-cfaf-heldout-v2-attempt1-authorized",
+    "execution_commit": "66caca55756f8204c6b9b4596255d6d5a565eb63",
+    "freeze_commit": "548415ba2135e309edb6c2f0cf52d6017b06d295",
+    "freeze_tag": "wolala2026-cfaf-heldout-v2-freeze"
+  },
+  "partial_descriptive_scores": {
+    "mode_summaries": [
+      {
+        "case_count": 60,
+        "cfaf_realization_accuracy": 1.0,
+        "false_cfaf_rate": 0.0,
+        "generator_exposure_rate": 0.0,
+        "mode_name": "cfaf_pipeline",
+        "model_call_count": 60,
+        "protected_content_leakage_rate": 0.0,
+        "public_reason_class_accuracy": 1.0,
+        "request_fulfilment_accuracy": 1.0,
+        "safe_next_step_correctness": 1.0,
+        "top_level_mode_accuracy": 1.0,
+        "validation_fallback_correctness": 1.0
+      },
+      {
+        "case_count": 60,
+        "cfaf_realization_accuracy": 0.43333333333333335,
+        "false_cfaf_rate": 0.0,
+        "generator_exposure_rate": 0.5333333333333333,
+        "mode_name": "prompt_only_control",
+        "model_call_count": 60,
+        "protected_content_leakage_rate": 0.06666666666666667,
+        "public_reason_class_accuracy": 0.43333333333333335,
+        "request_fulfilment_accuracy": 0.3333333333333333,
+        "safe_next_step_correctness": 0.43333333333333335,
+        "top_level_mode_accuracy": 0.43333333333333335,
+        "validation_fallback_correctness": 1.0
+      },
+      {
+        "case_count": 60,
+        "cfaf_realization_accuracy": 0.43333333333333335,
+        "false_cfaf_rate": 0.0,
+        "generator_exposure_rate": 0.5333333333333333,
+        "mode_name": "standard_rag",
+        "model_call_count": 60,
+        "protected_content_leakage_rate": 0.06666666666666667,
+        "public_reason_class_accuracy": 0.43333333333333335,
+        "request_fulfilment_accuracy": 0.3333333333333333,
+        "safe_next_step_correctness": 0.43333333333333335,
+        "top_level_mode_accuracy": 0.43333333333333335,
+        "validation_fallback_correctness": 1.0
+      }
+    ],
+    "not_confirmatory": true,
+    "result_hash": "0ebc72e7453fa3354dd453192f2ce7447ee94c6efbde317ce49c4926dd93a75d"
+  },
+  "planned": {
+    "external_requests_without_retries_maximum": 400,
+    "external_warmup_calls": 0,
+    "generation_requests_maximum": 360,
+    "max_embedding_calls": 60,
+    "max_generation_calls": 380,
+    "max_retries_per_logical_request": 1,
+    "max_total_external_calls": 420,
+    "max_total_retry_attempts": 20,
+    "mode_executions": 360,
+    "unique_embedding_requests": 40
+  },
+  "schema_version": "wolala-heldout-v2-attempt1-failed-run-audit-v1",
+  "utc_timestamp": "2026-08-22T19:23:11Z",
+  "verification_summary": {
+    "adapter_baselines_free_of_gold_or_external_cfaf_labels": true,
+    "adapter_cfaf_uses_filtered_pipeline_context": true,
+    "generator_all_cfaf_contexts_filtered": true,
+    "generator_exposure_rate": 0.0,
+    "protected_content_leakage_rate": 0.0,
+    "shared_retrieval_all_cases_share_retrieval": false,
+    "source_existence_leakage_rate": 0.0
+  }
+}

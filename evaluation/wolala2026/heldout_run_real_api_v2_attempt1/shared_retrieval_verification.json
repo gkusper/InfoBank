@@ -1,0 +1,894 @@
+{
+  "all_cases_share_retrieval": false,
+  "records": [
+    {
+      "candidate_ids": [
+        "cand-held2_p1_01a-brief"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_01a-brief"
+      ],
+      "case_id": "HELD2_P1_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "1af2749b963cb3f32529afbdd655408973bc908da0761157770b375338f6a475",
+        "3dec79a2565d73fda66abae183b31b989249c7b961176be034e9a468b4863458"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_01b-context"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_01b-context"
+      ],
+      "case_id": "HELD2_P1_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "8b334c91311dd15546a9a982678e91b9cc6f540f4a8387ea4f2329862c3286c0",
+        "b9ec7f569a4d3f64474f341448c727c7a8e36b34863365b3070d2ab73109a521"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_02a-brief"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_02a-brief"
+      ],
+      "case_id": "HELD2_P1_02A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "0324887dc18abf61c06c567edff30ca551f37448bfecc242b72d7ab7f26e7203",
+        "57ecd19afd4318cd227a8c5d698aa3f1902fe4dbd0f3a643f15fc5a0632a0d63"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_02b-context"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_02b-context"
+      ],
+      "case_id": "HELD2_P1_02B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "c4c11dcefcee4c3b6045eebbed02fbcbd952a1fe164339f85a7c0875e967c127",
+        "d7dc458ac64db142c62062edf7b8e98d658935d22276056c3460510d90d2e2e7"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_03a-brief"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_03a-brief"
+      ],
+      "case_id": "HELD2_P1_03A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "1627f4059ca66d9fe1f78c3dc109dfce06ab506c8f7efb8aab1f2f8437660944",
+        "c6541b6a7a20806630b5950f5a54bb126e1bf6723952a36314ab2619e8e3d443"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_03b-context"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_03b-context"
+      ],
+      "case_id": "HELD2_P1_03B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "2580b4646b4e0f544ce84169f8179a423d647bae8c70967bef8cb1ab2ff240d1",
+        "9e003e0c176d954e9ac74ace1d03e8af00a2a2ab242d7d1dada72cedda629791"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_04a-brief"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_04a-brief"
+      ],
+      "case_id": "HELD2_P1_04A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "0b013ec9d41795ca4371dcbaead4e0f0c66c9105f5afe08f9b2ce9c0651b0ae8",
+        "7129d995942cc3a9b195336726271df2f7679dfcc7da38aaeac08680cc4ebd0a"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p1_04b-context"
+      ],
+      "candidate_order": [
+        "cand-held2_p1_04b-context"
+      ],
+      "case_id": "HELD2_P1_04B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "a895746cc476deb682aa08a9cf2f6ba0b46a8a21fde8c10d81934baf735c0cb1",
+        "d94d57826c6f7dca68376e6931fb00e37636b98dc528b0891303e9e8663f8b2f"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_01a-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_01a-aggregate"
+      ],
+      "case_id": "HELD2_P2_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "a7077aa5517d0b16ffb947e7406f8b554169252f4c18f0dde2afe25194860b94",
+        "e87db40727c16af2afab4ea30575c767b65435721388358493adcf6add8374ed"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_01b-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_01b-aggregate"
+      ],
+      "case_id": "HELD2_P2_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "8273bbb504eea33f36d2ddc69624b0a00dd05ece4a9912fc9b77715ba5d6715f",
+        "bea858e885f115cd22a8e95a17968f58127dbbe6a78b6ba1e3aa33f455f83cae"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_02a-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_02a-aggregate"
+      ],
+      "case_id": "HELD2_P2_02A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "a0bafd00bf995344273be3c6063378e72748ab39c14d9dc4a10dfb5d6b5a045e",
+        "ded3cd36c56266a872e1e914e67940ece6395ff6243f139360ac16e64387a86d"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_02b-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_02b-aggregate"
+      ],
+      "case_id": "HELD2_P2_02B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "1ad9df5ea71d5e3f14a5771439a5d4f420af19594e4c8ae1492b0c20ea36eb30",
+        "a98604afcdea8b07e88fd21a48e88ffc04b5140bdf7b3ab9c66b56e8d0a5a9ba"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_03a-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_03a-aggregate"
+      ],
+      "case_id": "HELD2_P2_03A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "1ba25d3828d7f1e717c6348d154f94d218720c6c5ae3b4019227da2dac60ce22",
+        "77d9ea30147159a34e3a025b69f5da61007f456b9a6f6e5ddc6a22339433bb46"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_03b-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_03b-aggregate"
+      ],
+      "case_id": "HELD2_P2_03B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "952f6d88b13837cbe89a695ebec96f5af7829d512c814f71724cdc8c6953233f",
+        "cbb0c39e2c5304aa0936149c89e05071f03b83998b99531d616c14419946e09d"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_04a-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_04a-aggregate"
+      ],
+      "case_id": "HELD2_P2_04A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "2d66c5fc3e55be457c91b89c15350fbb208c997cd31e1faab8ffba0ceeca5c8d",
+        "547e3d8eafa2e8059271cc48edaa417e177089f667cdbcf4a98ee949aa36695b"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p2_04b-aggregate"
+      ],
+      "candidate_order": [
+        "cand-held2_p2_04b-aggregate"
+      ],
+      "case_id": "HELD2_P2_04B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "8dfb6c3197641566fe1d3e3c4ff8f6a4c410e4b5f456c55add6633dc2437280d",
+        "952fa447d68f20657d27e86ba30c71e5cd21f0d171946ab663c0a32eb754fbb5"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_01a-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_01a-metadata"
+      ],
+      "case_id": "HELD2_P3_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "b59b777a9094762a0b5ef5813f15b4fbd9e9f7707ae65bf6ab6b5105c34a765d",
+        "cce278fe83dadfe86392e06e53a71174567667340d8cbe456fe724bf9a4a829a"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_01b-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_01b-metadata"
+      ],
+      "case_id": "HELD2_P3_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "589c200c5cc082838c3204810f0a89802e19ba6195a9af1bce420d92e84a3bb5",
+        "ddea45e618595909749bd79047386d2a18c89b2502766e952315208b48a7d2ce"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_02a-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_02a-metadata"
+      ],
+      "case_id": "HELD2_P3_02A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "9634a08dad1d9f765ed8a80e2dbf253c9d7b2c82feaf1a3307f3eb58bbadcc75",
+        "e4b60ab45cde88786e601de8268ff2743f65048c1d96ce8fa34285b1a3033b5b"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_02b-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_02b-metadata"
+      ],
+      "case_id": "HELD2_P3_02B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": false,
+      "snapshot_hashes": [
+        "9de3d8f5d98322228889476ad93031af6679989ce37a7f27d2d9a19384f2c689",
+        "c1f331ce0fd712951b7e5d0f2a43a77baaf2a4b90dc811202312d306ec2965ea"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_03a-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_03a-metadata"
+      ],
+      "case_id": "HELD2_P3_03A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "fb0dca7fe44277ba4c2b78dc5c26c5e37a21d89d9c543cf7bef4450ea0773b6c"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_03b-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_03b-metadata"
+      ],
+      "case_id": "HELD2_P3_03B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "613fe9b381fb94ad39710aec48c38f9ecf968b7f4ee8610beb14e7db55c2a330"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_04a-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_04a-metadata"
+      ],
+      "case_id": "HELD2_P3_04A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "5d9653e48ea4f456a3b9087ae9e6ce62031e66c20a68e695d2e4cd1c86b4f997"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p3_04b-metadata"
+      ],
+      "candidate_order": [
+        "cand-held2_p3_04b-metadata"
+      ],
+      "case_id": "HELD2_P3_04B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "ed73e33f8448855ce4b7b8bbf05174548e0385eccfd1e5d7a744f2835aa0ce1b"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_01a-email",
+        "cand-held2_p4_01a-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_01a-email",
+        "cand-held2_p4_01a-browser"
+      ],
+      "case_id": "HELD2_P4_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0,
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "da538fbe05eb4c875e546e9e51465bf522ac2725168a8cc5b2425838994d004e"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_01b-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_01b-browser"
+      ],
+      "case_id": "HELD2_P4_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "9bbf0234a36d60577efddaf4176064e714b6669b466749560c156ba95036314e"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_02a-email",
+        "cand-held2_p4_02a-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_02a-email",
+        "cand-held2_p4_02a-browser"
+      ],
+      "case_id": "HELD2_P4_02A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0,
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "2b61b902833d69cfb3153881b49623421d38fa5800957a08c2a40708dd6fcaa0"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_02b-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_02b-browser"
+      ],
+      "case_id": "HELD2_P4_02B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "856623f70a5654f20ce76543c1642b7cb3c2c12729f12a18cc0792b479996fc3"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_03a-email",
+        "cand-held2_p4_03a-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_03a-email",
+        "cand-held2_p4_03a-browser"
+      ],
+      "case_id": "HELD2_P4_03A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0,
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "4f7a8ebb58d78fa7d74af55d5e58165d3db7888f28cc09886b02a08745f5e1c5"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_03b-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_03b-browser"
+      ],
+      "case_id": "HELD2_P4_03B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "b915b36cd5acf5bea82650d3a05e4bb29a1ec37003a65956a8cb343d6df9e85a"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_04a-email",
+        "cand-held2_p4_04a-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_04a-email",
+        "cand-held2_p4_04a-browser"
+      ],
+      "case_id": "HELD2_P4_04A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0,
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "483e32a0444a330db6f5eeb32fb38eec2d418a34ed357fb6d4d45a1687ea5e86"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p4_04b-browser"
+      ],
+      "candidate_order": [
+        "cand-held2_p4_04b-browser"
+      ],
+      "case_id": "HELD2_P4_04B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "d1d97562ebce84bafabadfe1a7ee4e03f1228558e0d6eacc4721b69daedcb9a8"
+      ]
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD2_P5_01A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "acff39b9fb1496f02b2a8f533e80d6f8318cbcf819c05d65d2fd720cf77612d3"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p5_01b-internal"
+      ],
+      "candidate_order": [
+        "cand-held2_p5_01b-internal"
+      ],
+      "case_id": "HELD2_P5_01B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "ea6dc0b7f7574829737e07aec4d5b0b4ba92d2b0cefa691fd308a746ed848642"
+      ]
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD2_P5_02A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "8563a2c981246f5ad4f8450be12d73296728948ad70e2c1355bad8f966312fbf"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p5_02b-internal"
+      ],
+      "candidate_order": [
+        "cand-held2_p5_02b-internal"
+      ],
+      "case_id": "HELD2_P5_02B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "3288074d30e3521a1caf58f67e4da209287548de0e2144fd8ca59eb6d790f2c6"
+      ]
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD2_P5_03A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "7c4d8c34dfccae9ddda8610776f93fac69bc123e080fb53c5ca75fb28abb2359"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p5_03b-internal"
+      ],
+      "candidate_order": [
+        "cand-held2_p5_03b-internal"
+      ],
+      "case_id": "HELD2_P5_03B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "e9364737472c8eaa2c004c6b5848b13c7bc58191e0bb93af187114cf87018250"
+      ]
+    },
+    {
+      "candidate_ids": [],
+      "candidate_order": [],
+      "case_id": "HELD2_P5_04A",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "fc4be680643e848d90cedbe994c21eaf96f4e7a1ec7e78d6e844df02d111cf58"
+      ]
+    },
+    {
+      "candidate_ids": [
+        "cand-held2_p5_04b-internal"
+      ],
+      "candidate_order": [
+        "cand-held2_p5_04b-internal"
+      ],
+      "case_id": "HELD2_P5_04B",
+      "modes": [
+        "cfaf_pipeline",
+        "prompt_only_control",
+        "standard_rag"
+      ],
+      "retrieval_computed_once": true,
+      "retrieval_scores": [
+        1.0
+      ],
+      "same_snapshot_across_modes": true,
+      "snapshot_hashes": [
+        "5a911a4b9df81c17f4be6cfb9e732762ab3d6f897c3e1eea53c966a7adeca12c"
+      ]
+    }
+  ],
+  "schema_version": "wolala-shared-retrieval-verification-v1"
+}

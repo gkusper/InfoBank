@@ -10,8 +10,8 @@ from typing import Any
 from .adapters import ALL_MODES, adapter_for_mode, run_adapters_for_case
 from .common import read_json, read_jsonl, sha256_file, stable_hash, write_checksums, write_json, write_jsonl
 from .execution_spec import build_heldout_plan_only, load_execution_spec, validate_execution_spec, validate_heldout_authorization
-from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASETS, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2
-from .retrieval import build_retrieval_snapshot
+from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASETS, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, RETIRED_HELDOUT_DATASETS
+from .retrieval import RETRIEVER_VERSION, build_retrieval_snapshot
 from .real_api import EmbeddingCallResult, OpenAIProvider, ProviderCallResult, RealApiProvider
 from .retry_policy import classify_retryable_condition
 from .run_manifest import build_manifest, now_utc, write_schema
@@ -39,9 +39,12 @@ def run_pilot(
     plan_only: bool = False,
     provider: RealApiProvider | None = None,
     execution_spec: str | Path | dict[str, Any] | None = None,
+    case_ids: list[str] | None = None,
 ) -> dict[str, Any]:
     dataset_dir = DATA_DIR / dataset
     cases = read_jsonl(dataset_dir / "cases.jsonl")
+    if case_ids is not None:
+        cases = _select_cases(cases, case_ids, dataset=dataset)
     dataset_manifest = read_json(dataset_dir / "manifest.json")
     spec = load_execution_spec(execution_spec) if execution_spec is not None else None
     if dataset == DEV_DATASET and allow_heldout:
@@ -66,6 +69,8 @@ def run_pilot(
             "execution_plan_path": str(out / "execution_plan.json"),
             "external_api_calls_in_plan_only": 0,
         }
+    if dataset in RETIRED_HELDOUT_DATASETS:
+        raise RuntimeError(f"{dataset} is retired: {RETIRED_HELDOUT_DATASETS[dataset]}. No future execution is permitted.")
     if dataset == HELDOUT_DATASET_V1:
         raise RuntimeError("heldout_pilot_v1 is retired after the pre-execution implementation guard failure and cannot be executed.")
     if dataset in HELDOUT_DATASETS and not allow_heldout:
@@ -195,6 +200,15 @@ def run_pilot(
         manifest["statistical_plan_checksum"] = spec.get("checksums", {}).get("statistical_plan")
         manifest["latency_definition_checksum"] = spec.get("checksums", {}).get("latency_definition")
         manifest["execution_spec_checksum"] = sha256_file(execution_spec) if isinstance(execution_spec, (str, Path)) else stable_hash(spec)
+    _initialize_shared_retrieval_accounting(
+        manifest,
+        planned_mode_executions=mode_executions,
+        planned_logical_embedding_requests=len(cases),
+        planned_logical_generation_requests=estimated_generation_calls,
+        planned_external_requests_without_retries=estimated_total,
+        max_total_retry_attempts=max_total_retry_attempts,
+        max_retries_per_logical_request=max_retries_per_logical_request,
+    )
     manifest["heldout_mode_execution_count"] = 0
     manifest["cold_or_warm_state"] = "cold-real-api-process" if allow_real_api else manifest["cold_or_warm_state"]
     manifest["cache_configuration"] = {"external_cache": "not-used", "retrieval_cache": "shared-once-per-case"}
@@ -203,33 +217,35 @@ def run_pilot(
     errors: list[dict[str, Any]] = []
     completion_status = "COMPLETED"
     try:
-        for repetition in range(1, repetitions + 1):
-            for case in cases:
-                if active_provider:
-                    snapshot, embedding = _real_retrieval_snapshot(case, active_provider)
-                    case_results = [
-                        adapter_for_mode(mode).run(
-                            case,
-                            snapshot,
-                            run_id=run_id,
-                            repetition=repetition,
-                            provider=active_provider,
-                            max_output_tokens=manifest["max_output_tokens"],
-                        )
-                        for mode in modes
-                    ]
-                    _attach_shared_embedding_latency(case_results, embedding)
-                else:
-                    snapshot, case_results = run_adapters_for_case(case, modes, run_id=run_id, repetition=repetition)
-                retrieval_snapshots.append(snapshot)
+        for case in cases:
+            if active_provider:
+                snapshot, embedding = _real_retrieval_snapshot(case, active_provider, dataset_checksum=dataset_manifest["dataset_checksum"])
+            else:
+                snapshot = _deterministic_retrieval_snapshot(case, dataset_checksum=dataset_manifest["dataset_checksum"])
+                embedding = None
+            retrieval_snapshots.append(snapshot)
+            for repetition in range(1, repetitions + 1):
+                case_results = [
+                    adapter_for_mode(mode).run(
+                        case,
+                        snapshot,
+                        run_id=run_id,
+                        repetition=repetition,
+                        provider=active_provider,
+                        max_output_tokens=manifest["max_output_tokens"],
+                    )
+                    for mode in modes
+                ]
+                _attach_shared_retrieval_latency(case_results, snapshot, embedding)
                 results.extend(case_results)
     except Exception as exc:
         completion_status = "FAILED"
         errors.append({"category": "PROVIDER_ERROR" if allow_real_api else "OTHER", "message": str(exc), "case_count_completed": len({r["case_id"] for r in results})})
     write_jsonl(out / "raw_results.jsonl", results)
     write_jsonl(out / "shared_retrieval_snapshots.jsonl", retrieval_snapshots)
+    write_jsonl(out / "retrieval_snapshots.jsonl", retrieval_snapshots)
     scores = write_score_outputs(cases, results, out)
-    verification_files = _write_phase3_verifications(cases, results, retrieval_snapshots, scores, out, run_id)
+    verification_files = _write_phase3_verifications(cases, results, retrieval_snapshots, scores, out, run_id, expected_modes=modes, expected_repetitions=repetitions)
     latency_payload = {
         "diagnostic_only": True,
         "not_publication_ready": True,
@@ -246,19 +262,25 @@ def run_pilot(
     manifest["actual_generation_calls"] = counters.generation_calls if allow_real_api else 0
     manifest["actual_total_external_calls"] = counters.total_external_calls if allow_real_api else 0
     manifest["retry_count"] = counters.retry_count
-    if spec:
-        manifest["actual_provider_attempts"] = counters.total_external_calls if allow_real_api else 0
-        manifest["actual_retry_attempts"] = counters.retry_count
-        manifest["retry_events"] = counters.retry_log
+    manifest["actual_provider_attempts"] = counters.total_external_calls if allow_real_api else 0
+    manifest["actual_retry_attempts"] = counters.retry_count
+    manifest["retry_events"] = counters.retry_log
     manifest["mode_execution_count"] = mode_executions
     manifest["heldout_mode_execution_count"] = 0 if dataset == DEV_DATASET else mode_executions
     manifest["completion_status"] = completion_status
     manifest["errors"] = errors
+    _finalize_shared_retrieval_accounting(manifest, counters=counters, results=results, retrieval_snapshots=retrieval_snapshots, allow_real_api=allow_real_api)
     if active_provider:
         manifest["provider"] = active_provider.provider_name
         manifest["embedding_model"] = active_provider.embedding_model
         manifest["generator_model"] = active_provider.generator_model
     write_json(out / "run_manifest.json", manifest)
+    verification_files.extend(
+        [
+            _write_call_accounting_verification(cases, results, retrieval_snapshots, manifest, out),
+            _write_latency_verification(cases, results, retrieval_snapshots, out),
+        ]
+    )
     _write_run_readme(out, manifest, verification_files)
     write_schema(PACKAGE_DIR / "run_manifest_schema.json")
     checksum_files = [
@@ -274,12 +296,18 @@ def run_pilot(
         out / "error_analysis.json",
         out / "errors.jsonl",
         out / "shared_retrieval_snapshots.jsonl",
+        out / "retrieval_snapshots.jsonl",
         out / "shared_retrieval_verification.json",
+        out / "call_accounting_verification.json",
+        out / "latency_verification.json",
         out / "adapter_integrity_verification.json",
         out / "generator_context_exposure_verification.json",
         out / "source_existence_leakage_verification.json",
         out / "README.md",
     ]
+    selected_path = out / "selected_cases.json"
+    if selected_path.exists():
+        checksum_files.append(selected_path)
     write_checksums(out / "checksums.sha256", checksum_files, root=out)
     return manifest
 
@@ -290,6 +318,75 @@ def parse_modes(value: str) -> list[str]:
     if unknown:
         raise ValueError(f"Unknown mode(s): {unknown}")
     return modes
+
+
+def parse_case_ids(value: str | None) -> list[str] | None:
+    if value is None:
+        return None
+    return [part.strip() for part in value.split(",") if part.strip()]
+
+
+def _select_cases(cases: list[dict[str, Any]], case_ids: list[str], *, dataset: str) -> list[dict[str, Any]]:
+    if dataset != DEV_DATASET:
+        raise RuntimeError("--case-ids is permitted only for development regression runs.")
+    by_id = {case["case_id"]: case for case in cases}
+    missing = [case_id for case_id in case_ids if case_id not in by_id]
+    if missing:
+        raise RuntimeError(f"Unknown development case IDs: {missing}")
+    selected = [by_id[case_id] for case_id in case_ids]
+    non_development = [case["case_id"] for case in selected if not case["case_id"].startswith("DEV_")]
+    if non_development:
+        raise RuntimeError(f"Refusing non-development case IDs in a development regression: {non_development}")
+    return selected
+
+
+def _initialize_shared_retrieval_accounting(
+    manifest: dict[str, Any],
+    *,
+    planned_mode_executions: int,
+    planned_logical_embedding_requests: int,
+    planned_logical_generation_requests: int,
+    planned_external_requests_without_retries: int,
+    max_total_retry_attempts: int,
+    max_retries_per_logical_request: int,
+) -> None:
+    manifest["planned_mode_executions"] = planned_mode_executions
+    manifest["planned_logical_embedding_requests"] = planned_logical_embedding_requests
+    manifest["planned_logical_generation_requests_maximum"] = planned_logical_generation_requests
+    manifest["planned_external_requests_without_retries_maximum"] = planned_external_requests_without_retries
+    manifest["successful_logical_embedding_requests"] = 0
+    manifest["actual_embedding_attempts"] = 0
+    manifest["embedding_retry_attempts"] = 0
+    manifest["retrieval_cache_hits"] = 0
+    manifest["retrieval_snapshot_count"] = 0
+    manifest["snapshot_reuse_count"] = 0
+    manifest["unique_retrieval_snapshot_hashes"] = 0
+    manifest["result_record_count"] = 0
+    manifest["actual_provider_attempts"] = 0
+    manifest["actual_retry_attempts"] = 0
+    manifest["retry_events"] = []
+    manifest["max_total_retry_attempts"] = int(max_total_retry_attempts)
+    manifest["max_retries_per_logical_request"] = int(max_retries_per_logical_request)
+    manifest["external_warmup_calls"] = int(manifest.get("external_warmup_calls", 0))
+
+
+def _finalize_shared_retrieval_accounting(
+    manifest: dict[str, Any],
+    *,
+    counters: "_CallCounters",
+    results: list[dict[str, Any]],
+    retrieval_snapshots: list[dict[str, Any]],
+    allow_real_api: bool,
+) -> None:
+    embedding_retry_attempts = sum(1 for event in counters.retry_log if event.get("logical_request_kind") == "embedding")
+    manifest["successful_logical_embedding_requests"] = len(retrieval_snapshots)
+    manifest["actual_embedding_attempts"] = counters.embedding_calls if allow_real_api else 0
+    manifest["embedding_retry_attempts"] = embedding_retry_attempts if allow_real_api else 0
+    manifest["retrieval_snapshot_count"] = len(retrieval_snapshots)
+    manifest["snapshot_reuse_count"] = len(results)
+    manifest["retrieval_cache_hits"] = max(0, len(results) - len(retrieval_snapshots))
+    manifest["unique_retrieval_snapshot_hashes"] = len({snapshot["snapshot_hash"] for snapshot in retrieval_snapshots})
+    manifest["result_record_count"] = len(results)
 
 
 class _CallCounters:
@@ -421,6 +518,9 @@ def _development_execution_plan(
     if non_development_ids:
         raise RuntimeError(f"Development plan contains non-development case IDs and cannot proceed: {non_development_ids}")
     planned_mode_executions = len(cases) * len(modes) * repetitions
+    planned_logical_embedding_requests = len(cases)
+    planned_generation_requests = planned_mode_executions if allow_real_api else 0
+    planned_external_requests = planned_logical_embedding_requests + planned_generation_requests if allow_real_api else 0
     plan = {
         "schema_version": "wolala-real-api-execution-plan-v1",
         "dataset": dataset,
@@ -430,42 +530,85 @@ def _development_execution_plan(
         "mode_count": len(modes),
         "repetitions": repetitions,
         "planned_mode_executions": planned_mode_executions,
+        "planned_unique_embedding_requests": planned_logical_embedding_requests,
+        "planned_logical_embedding_requests": planned_logical_embedding_requests,
+        "planned_generation_requests_maximum": planned_generation_requests,
+        "planned_external_requests_without_retries_maximum": planned_external_requests,
         "heldout_mode_executions": 0,
         "maximum_embedding_calls": max_embedding_calls,
         "maximum_generation_calls": max_generation_calls,
         "maximum_total_external_calls": max_total_external_calls,
         "retrieval_computed_once_per_case": True,
         "retrieval_reused_across_modes": True,
+        "retrieval_reused_across_repetitions": True,
+        "planned_retrieval_snapshot_count": planned_logical_embedding_requests,
+        "planned_snapshot_reuse_count": planned_mode_executions,
         "allow_real_api": allow_real_api,
         "not_a_heldout_result": True,
         "not_publication_ready": True,
     }
-    if planned_mode_executions != 30 or max_mode_executions != 30:
-        raise RuntimeError("Phase 3 development plan must contain exactly 30 planned mode executions with cap 30.")
     return plan
 
 
-def _real_retrieval_snapshot(case: dict[str, Any], provider: RealApiProvider) -> tuple[dict[str, Any], EmbeddingCallResult]:
+def _deterministic_retrieval_snapshot(case: dict[str, Any], *, dataset_checksum: str) -> dict[str, Any]:
+    snapshot = build_retrieval_snapshot(case)
+    snapshot["logical_retrieval_request_count"] = 1
+    snapshot["retrieval_cache_key"] = _retrieval_cache_key(case, dataset_checksum=dataset_checksum)
+    snapshot["shared_retrieval_ms"] = 0.0
+    snapshot["real_api_embedding"] = False
+    snapshot["snapshot_hash"] = _snapshot_hash(snapshot)
+    return snapshot
+
+
+def _real_retrieval_snapshot(case: dict[str, Any], provider: RealApiProvider, *, dataset_checksum: str) -> tuple[dict[str, Any], EmbeddingCallResult]:
     embedding = provider.embed_query(case["query"])
     snapshot = build_retrieval_snapshot(case)
+    snapshot["logical_retrieval_request_count"] = 1
+    snapshot["retrieval_cache_key"] = _retrieval_cache_key(case, dataset_checksum=dataset_checksum)
     snapshot["embedding_calls"] = 1
     snapshot["embedding_model"] = embedding.model
     snapshot["embedding_api_ms"] = embedding.latency_ms
+    snapshot["shared_retrieval_ms"] = embedding.latency_ms
     snapshot["real_api_embedding"] = True
     snapshot["embedding_response_id"] = embedding.response_id
-    snapshot["snapshot_hash"] = stable_hash({key: value for key, value in snapshot.items() if key != "snapshot_hash"})
+    snapshot["snapshot_hash"] = _snapshot_hash(snapshot)
     return snapshot, embedding
 
 
-def _attach_shared_embedding_latency(results: list[dict[str, Any]], embedding: EmbeddingCallResult) -> None:
+def _retrieval_cache_key(case: dict[str, Any], *, dataset_checksum: str) -> str:
+    return stable_hash(
+        {
+            "dataset_checksum": dataset_checksum,
+            "case_id": case["case_id"],
+            "query": case["query"],
+            "retriever_version": RETRIEVER_VERSION,
+            "top_k": 4,
+        }
+    )
+
+
+def _snapshot_hash(snapshot: dict[str, Any]) -> str:
+    excluded = {"snapshot_hash", "embedding_api_ms", "shared_retrieval_ms", "embedding_response_id"}
+    return stable_hash({key: value for key, value in snapshot.items() if key not in excluded})
+
+
+def _attach_shared_retrieval_latency(results: list[dict[str, Any]], snapshot: dict[str, Any], embedding: EmbeddingCallResult | None) -> None:
+    shared_retrieval_ms = float(snapshot.get("shared_retrieval_ms", 0.0))
     for result in results:
         timings = result["stage_timings"]
-        timings["embedding_api_ms"] = embedding.latency_ms
-        timings["external_api_ms"] = max(0.0, float(timings.get("generation_api_ms", 0.0)) + embedding.latency_ms)
-        timings["end_to_end_ms"] = max(0.0, float(timings.get("end_to_end_ms", 0.0)) + embedding.latency_ms)
+        mode_processing_ms = float(timings.get("mode_processing_ms", timings.get("end_to_end_ms", result.get("end_to_end_ms", 0.0))))
+        timings["shared_retrieval_ms"] = shared_retrieval_ms
+        timings["mode_processing_ms"] = max(0.0, mode_processing_ms)
+        if embedding is not None:
+            timings["embedding_api_ms"] = embedding.latency_ms
+            timings["external_api_ms"] = max(0.0, float(timings.get("generation_api_ms", 0.0)) + embedding.latency_ms)
+        timings["end_to_end_ms"] = max(0.0, shared_retrieval_ms + timings["mode_processing_ms"])
         result["end_to_end_ms"] = timings["end_to_end_ms"]
-        result["shared_retrieval_embedding_call_count"] = 1
-        result["embedding_model"] = embedding.model
+        result["shared_retrieval_ms"] = shared_retrieval_ms
+        result["retrieval_cache_key"] = snapshot.get("retrieval_cache_key")
+        result["shared_retrieval_embedding_call_count"] = 1 if embedding is not None else 0
+        if embedding is not None:
+            result["embedding_model"] = embedding.model
 
 
 def _write_phase3_verifications(
@@ -475,9 +618,12 @@ def _write_phase3_verifications(
     scores: dict[str, Any],
     output_dir: Path,
     run_id: str,
+    *,
+    expected_modes: list[str],
+    expected_repetitions: int,
 ) -> list[Path]:
     files = [
-        _write_shared_retrieval_verification(results, retrieval_snapshots, output_dir),
+        _write_shared_retrieval_verification(results, retrieval_snapshots, output_dir, expected_modes=expected_modes, expected_repetitions=expected_repetitions),
         _write_adapter_integrity_verification(results, output_dir),
         _write_generator_context_exposure_verification(cases, results, output_dir),
         _write_source_existence_leakage_verification(cases, results, output_dir),
@@ -486,36 +632,134 @@ def _write_phase3_verifications(
     return files
 
 
-def _write_shared_retrieval_verification(results: list[dict[str, Any]], snapshots: list[dict[str, Any]], output_dir: Path) -> Path:
+def _write_shared_retrieval_verification(
+    results: list[dict[str, Any]],
+    snapshots: list[dict[str, Any]],
+    output_dir: Path,
+    *,
+    expected_modes: list[str],
+    expected_repetitions: int,
+) -> Path:
     rows = []
     by_case: dict[str, list[dict[str, Any]]] = {}
     snapshot_by_case = {snapshot["case_id"]: snapshot for snapshot in snapshots}
+    snapshot_count_by_case = {case_id: sum(1 for snapshot in snapshots if snapshot["case_id"] == case_id) for case_id in snapshot_by_case}
     for result in results:
         by_case.setdefault(result["case_id"], []).append(result)
     for case_id, case_results in sorted(by_case.items()):
         hashes = sorted({result["retrieval_snapshot_hash"] for result in case_results})
         modes = sorted({result["mode_name"] for result in case_results})
+        repetitions = sorted({int(result.get("repetition", 1)) for result in case_results})
         snapshot = snapshot_by_case.get(case_id, {})
+        expected_reference_count = len(expected_modes) * expected_repetitions
         rows.append(
             {
                 "case_id": case_id,
                 "modes": modes,
+                "repetitions": repetitions,
+                "record_count": len(case_results),
+                "expected_reference_count": expected_reference_count,
                 "snapshot_hashes": hashes,
                 "candidate_ids": snapshot.get("candidate_ids", []),
                 "candidate_order": snapshot.get("candidate_order", []),
                 "retrieval_scores": snapshot.get("retrieval_scores", []),
-                "same_snapshot_across_modes": len(hashes) == 1 and len(modes) == 3,
-                "retrieval_computed_once": snapshot.get("embedding_calls") == 1,
+                "same_snapshot_across_modes": len(hashes) == 1 and modes == sorted(expected_modes),
+                "same_snapshot_across_repetitions": len(hashes) == 1 and repetitions == list(range(1, expected_repetitions + 1)),
+                "snapshot_reference_count_correct": len(case_results) == expected_reference_count,
+                "retrieval_computed_once": snapshot_count_by_case.get(case_id, 0) == 1 and snapshot.get("logical_retrieval_request_count") == 1,
             }
         )
     payload = {
         "schema_version": "wolala-shared-retrieval-verification-v1",
         "records": rows,
-        "all_cases_share_retrieval": bool(rows) and all(row["same_snapshot_across_modes"] and row["retrieval_computed_once"] for row in rows),
+        "all_cases_share_retrieval": bool(rows)
+        and all(
+            row["same_snapshot_across_modes"]
+            and row["same_snapshot_across_repetitions"]
+            and row["snapshot_reference_count_correct"]
+            and row["retrieval_computed_once"]
+            for row in rows
+        ),
     }
     path = output_dir / "shared_retrieval_verification.json"
     write_json(path, payload)
     return path
+
+
+def _write_call_accounting_verification(
+    cases: list[dict[str, Any]],
+    results: list[dict[str, Any]],
+    snapshots: list[dict[str, Any]],
+    manifest: dict[str, Any],
+    output_dir: Path,
+) -> Path:
+    expected_records = len(cases) * len(manifest["modes"]) * int(manifest["repetitions"])
+    expected_snapshots = len(cases)
+    payload = {
+        "schema_version": "wolala-call-accounting-verification-v1",
+        "planned_logical_embedding_requests": manifest["planned_logical_embedding_requests"],
+        "successful_logical_embedding_requests": manifest["successful_logical_embedding_requests"],
+        "actual_embedding_attempts": manifest["actual_embedding_attempts"],
+        "embedding_retry_attempts": manifest["embedding_retry_attempts"],
+        "retrieval_snapshot_count": manifest["retrieval_snapshot_count"],
+        "snapshot_reuse_count": manifest["snapshot_reuse_count"],
+        "retrieval_cache_hits": manifest["retrieval_cache_hits"],
+        "result_record_count": manifest["result_record_count"],
+        "expected_result_record_count": expected_records,
+        "unique_retrieval_snapshot_hashes": manifest["unique_retrieval_snapshot_hashes"],
+        "embedding_count_independent_of_repetitions": manifest["planned_logical_embedding_requests"] == expected_snapshots,
+        "all_cases_have_expected_record_count": all(
+            sum(1 for result in results if result["case_id"] == case["case_id"]) == len(manifest["modes"]) * int(manifest["repetitions"])
+            for case in cases
+        ),
+        "all_counts_match": (
+            manifest["planned_logical_embedding_requests"] == expected_snapshots
+            and manifest["successful_logical_embedding_requests"] == expected_snapshots
+            and manifest["retrieval_snapshot_count"] == expected_snapshots
+            and manifest["snapshot_reuse_count"] == expected_records
+            and manifest["result_record_count"] == expected_records
+            and len(snapshots) == expected_snapshots
+        ),
+        "no_heldout_case_executed": not any(_is_heldout_id(result["case_id"]) for result in results),
+    }
+    path = output_dir / "call_accounting_verification.json"
+    write_json(path, payload)
+    return path
+
+
+def _write_latency_verification(
+    cases: list[dict[str, Any]],
+    results: list[dict[str, Any]],
+    snapshots: list[dict[str, Any]],
+    output_dir: Path,
+) -> Path:
+    snapshot_count_by_case = {case["case_id"]: sum(1 for snapshot in snapshots if snapshot["case_id"] == case["case_id"]) for case in cases}
+    rows = []
+    for case in cases:
+        case_results = [result for result in results if result["case_id"] == case["case_id"]]
+        shared_values = sorted({float((result.get("stage_timings") or {}).get("shared_retrieval_ms", 0.0)) for result in case_results})
+        rows.append(
+            {
+                "case_id": case["case_id"],
+                "retrieval_snapshot_count": snapshot_count_by_case.get(case["case_id"], 0),
+                "shared_retrieval_ms_values": shared_values,
+                "shared_retrieval_measured_once": snapshot_count_by_case.get(case["case_id"], 0) == 1 and len(shared_values) == 1,
+                "record_count": len(case_results),
+            }
+        )
+    payload = {
+        "schema_version": "wolala-shared-retrieval-latency-verification-v1",
+        "records": rows,
+        "shared_retrieval_latency_reused": bool(rows) and all(row["shared_retrieval_measured_once"] for row in rows),
+        "no_second_retrieval_timing_event_per_case": bool(rows) and all(row["retrieval_snapshot_count"] == 1 for row in rows),
+    }
+    path = output_dir / "latency_verification.json"
+    write_json(path, payload)
+    return path
+
+
+def _is_heldout_id(case_id: str) -> bool:
+    return case_id.startswith("HELD_") or case_id.startswith("HELD2_") or case_id.startswith("HELD3_")
 
 
 def _write_adapter_integrity_verification(results: list[dict[str, Any]], output_dir: Path) -> Path:
@@ -761,6 +1005,7 @@ def main() -> None:
     parser.add_argument("--allow-heldout", action="store_true")
     parser.add_argument("--plan-only", action="store_true")
     parser.add_argument("--execution-spec")
+    parser.add_argument("--case-ids", help="Comma-separated DEV_* case IDs for development-only subset regressions.")
     args = parser.parse_args()
     manifest = run_pilot(
         dataset=args.dataset,
@@ -777,6 +1022,7 @@ def main() -> None:
         allow_heldout=args.allow_heldout,
         plan_only=args.plan_only,
         execution_spec=args.execution_spec,
+        case_ids=parse_case_ids(args.case_ids),
     )
     print(
         json.dumps(

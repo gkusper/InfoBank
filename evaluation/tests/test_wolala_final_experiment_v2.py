@@ -6,7 +6,7 @@ from pathlib import Path
 
 from evaluation.wolala2026.common import read_json, read_jsonl, sha256_file
 from evaluation.wolala2026.execution_spec import load_execution_spec, validate_execution_spec, validate_heldout_authorization
-from evaluation.wolala2026.pilot_data import DEV_DATASET, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, validate_dataset
+from evaluation.wolala2026.pilot_data import DEV_DATASET, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, RETIRED_HELDOUT_DATASETS, validate_dataset
 from evaluation.wolala2026.run_pilot import run_pilot
 
 
@@ -109,9 +109,10 @@ class WolalaFinalExperimentV2Tests(unittest.TestCase):
         with self.assertRaisesRegex(RuntimeError, "HELD2_"):
             validate_execution_spec(self.spec, cases=[{"case_id": f"BAD_{index:02d}"} for index in range(40)], modes=self.spec["modes"], repetitions=3, plan_only=True)
 
-    def test_heldout_v2_execution_fails_without_required_flags_or_spec(self) -> None:
+    def test_heldout_v2_is_retired_and_execution_fails_closed(self) -> None:
+        self.assertEqual(RETIRED_HELDOUT_DATASETS[HELDOUT_DATASET_V2], "RETIRED_AFTER_SCIENTIFIC_INTEGRITY_FAILURE")
         with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaisesRegex(RuntimeError, "allow-heldout"):
+            with self.assertRaisesRegex(RuntimeError, "heldout_pilot_v2 is retired"):
                 run_pilot(
                     dataset=HELDOUT_DATASET_V2,
                     modes=self.spec["modes"],
@@ -124,7 +125,7 @@ class WolalaFinalExperimentV2Tests(unittest.TestCase):
                     execution_spec=SPEC_V3_PATH,
                 )
         with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaisesRegex(RuntimeError, "execution requires --execution-spec"):
+            with self.assertRaisesRegex(RuntimeError, "heldout_pilot_v2 is retired"):
                 run_pilot(
                     dataset=HELDOUT_DATASET_V2,
                     modes=self.spec["modes"],
@@ -137,7 +138,7 @@ class WolalaFinalExperimentV2Tests(unittest.TestCase):
                     allow_heldout=True,
                 )
         with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaisesRegex(RuntimeError, "allow-real-api"):
+            with self.assertRaisesRegex(RuntimeError, "heldout_pilot_v2 is retired"):
                 run_pilot(
                     dataset=HELDOUT_DATASET_V2,
                     modes=self.spec["modes"],
@@ -155,7 +156,7 @@ class WolalaFinalExperimentV2Tests(unittest.TestCase):
         bad = dict(self.spec)
         bad["checksums"] = dict(self.spec["checksums"], heldout_dataset="bad")
         with tempfile.TemporaryDirectory() as tmp:
-            with self.assertRaisesRegex(RuntimeError, "dataset checksum"):
+            with self.assertRaisesRegex(RuntimeError, "heldout_pilot_v2 is retired"):
                 run_pilot(
                     dataset=HELDOUT_DATASET_V2,
                     modes=self.spec["modes"],
@@ -175,7 +176,7 @@ class WolalaFinalExperimentV2Tests(unittest.TestCase):
 
         with tempfile.TemporaryDirectory() as tmp:
             Path(tmp, "already-there.txt").write_text("not empty\n", encoding="utf-8")
-            with self.assertRaisesRegex(RuntimeError, "nonempty output directory"):
+            with self.assertRaisesRegex(RuntimeError, "heldout_pilot_v2 is retired"):
                 run_pilot(
                     dataset=HELDOUT_DATASET_V2,
                     modes=self.spec["modes"],

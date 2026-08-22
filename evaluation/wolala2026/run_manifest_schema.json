@@ -1,10 +1,16 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
   "properties": {
+    "actual_embedding_attempts": {
+      "type": "integer"
+    },
     "actual_provider_attempts": {
       "type": "integer"
     },
     "actual_retry_attempts": {
+      "type": "integer"
+    },
+    "embedding_retry_attempts": {
       "type": "integer"
     },
     "execution_spec_checksum": {
@@ -43,10 +49,22 @@
     "protocol_v2_checksum": {
       "type": "string"
     },
+    "result_record_count": {
+      "type": "integer"
+    },
+    "retrieval_cache_hits": {
+      "type": "integer"
+    },
+    "retrieval_snapshot_count": {
+      "type": "integer"
+    },
     "retry_events": {
       "type": "array"
     },
     "run_attempt": {
+      "type": "integer"
+    },
+    "snapshot_reuse_count": {
       "type": "integer"
     },
     "statistical_plan_checksum": {
@@ -54,6 +72,12 @@
         "string",
         "null"
       ]
+    },
+    "successful_logical_embedding_requests": {
+      "type": "integer"
+    },
+    "unique_retrieval_snapshot_hashes": {
+      "type": "integer"
     }
   },
   "required": [

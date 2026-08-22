@@ -1,0 +1,11 @@
+{
+  "schema_version": "wolala-development-shared-retrieval-real-api-selection-v1",
+  "dataset": "development_integration_v1",
+  "selection_basis": "Complete P2 matched pair and complete P5 matched pair from the development integration dataset.",
+  "case_ids": [
+    "DEV_P2_01A",
+    "DEV_P2_01B",
+    "DEV_P5_01A",
+    "DEV_P5_01B"
+  ]
+}

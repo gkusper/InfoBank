@@ -1,0 +1,43 @@
+{
+  "no_second_retrieval_timing_event_per_case": true,
+  "records": [
+    {
+      "case_id": "DEV_P2_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        2033.2439
+      ]
+    },
+    {
+      "case_id": "DEV_P2_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        198.0499
+      ]
+    },
+    {
+      "case_id": "DEV_P5_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        1434.6878
+      ]
+    },
+    {
+      "case_id": "DEV_P5_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        240.8456
+      ]
+    }
+  ],
+  "schema_version": "wolala-shared-retrieval-latency-verification-v1",
+  "shared_retrieval_latency_reused": true
+}

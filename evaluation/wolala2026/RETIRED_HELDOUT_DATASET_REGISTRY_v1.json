@@ -1,0 +1,30 @@
+{
+  "active_heldout_dataset": "heldout_pilot_v3",
+  "datasets": [
+    {
+      "dataset": "heldout_pilot_v1",
+      "execution_permitted": false,
+      "model_saw_dataset": false,
+      "retirement_artifact": "evaluation/wolala2026/HELDOUT_PILOT_V1_RETIREMENT_RECORD.md",
+      "status": "RETIRED_AFTER_PRE_EXECUTION_IMPLEMENTATION_GUARD_FAILURE"
+    },
+    {
+      "attempt1_run_id": "heldout_pilot_v2_real_api_attempt1",
+      "dataset": "heldout_pilot_v2",
+      "execution_permitted": false,
+      "failure_root_cause": "Real-API runner recomputed retrieval embeddings inside the repetition loop, consuming one embedding per case per repetition instead of the frozen one unique embedding per case.",
+      "model_saw_dataset": true,
+      "post_run_invalidation_class": "INVALIDATED_SCIENTIFIC_INTEGRITY_FAILURE",
+      "raw_results_checksum": "782026ad732e391564adcdeb18a9b5094574dc38d960904daa492df9d613f492",
+      "retirement_artifact": "evaluation/wolala2026/HELDOUT_PILOT_V2_RETIREMENT_RECORD.md",
+      "run_manifest_checksum": "481a78a206fdd719539de3a0ae3de4d61b202a39fee98e0fec680fa80263c146",
+      "shared_retrieval_snapshot_checksum": "4df7fc2451df1254573c3425de9f7a02a5713e172b7cd8753381a465484f6696",
+      "status": "RETIRED_AFTER_SCIENTIFIC_INTEGRITY_FAILURE",
+      "valid_for_manuscript": false
+    }
+  ],
+  "no_future_execution_allowed_for_v1_or_v2": true,
+  "registry_status": "FROZEN_FOR_AUDIT",
+  "retired_datasets_execution_blocked_in_code": true,
+  "schema_version": "wolala-retired-heldout-dataset-registry-v1"
+}

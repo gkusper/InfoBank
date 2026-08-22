@@ -1,0 +1,20 @@
+{
+  "all_required_overlap_sets_empty": true,
+  "case_id_overlap": [],
+  "checked_against": [
+    "data/development_integration_v1",
+    "data/heldout_pilot_v1",
+    "data/heldout_pilot_v2"
+  ],
+  "dataset_name": "heldout_pilot_v3",
+  "evidence_id_overlap": [],
+  "exact_query_overlap": [],
+  "exact_source_text_overlap": [],
+  "generator_visible_gold_hint_count": 0,
+  "normalized_text_hash_overlap": [],
+  "pair_id_overlap": [],
+  "protected_marker_overlap": [],
+  "schema_version": "wolala-heldout-v3-overlap-audit-v1",
+  "source_id_overlap": [],
+  "thread_id_overlap": []
+}

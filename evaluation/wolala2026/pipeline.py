@@ -489,7 +489,7 @@ def _supported(
         maximum_granularity=maximum_granularity,
         requested_granularity=requested_granularity,
         can_fulfil_request=True,
-        answer=case.get("gold_answer"),
+        answer=_runtime_supported_answer(case, supporting),
     )
 
 
@@ -518,6 +518,18 @@ def _unsupported(
         reason_code=reason_code,
         cfaf_realization=cfaf_realization,
     )
+
+
+def _runtime_supported_answer(case: dict[str, Any], supporting: list[EvidenceCandidate]) -> str | None:
+    if case.get("gold_answer"):
+        return case.get("gold_answer")
+    for candidate in supporting:
+        answer = candidate.metadata.get("runtime_answer")
+        if answer:
+            return str(answer)
+        if candidate.aggregate_view:
+            return candidate.aggregate_view
+    return None
 
 
 def _public_reason_text(assessment: ClaimAssessment, state: PipelineState) -> str:
@@ -645,12 +657,20 @@ def validate_state_exposure(state: PipelineState, case: dict[str, Any]) -> list[
                 violations.append("PROTECTED_MARKER_IN_GENERATOR_CONTEXT")
             if marker and marker in final_text:
                 violations.append("PROTECTED_MARKER_IN_RESPONSE")
-    for marker in case.get("protected_markers", []):
+    for marker in _case_protected_markers(case):
         if marker and marker in context_text:
             violations.append("PROTECTED_MARKER_IN_GENERATOR_CONTEXT")
         if marker and marker in final_text:
             violations.append("PROTECTED_MARKER_IN_RESPONSE")
     return sorted(set(violations))
+
+
+def _case_protected_markers(case: dict[str, Any]) -> list[str]:
+    values = list(case.get("protected_markers") or [])
+    values.extend(case.get("protected_markers_used_only_by_validator") or [])
+    for source in case.get("sources", []):
+        values.extend(source.get("protected_markers") or [])
+    return sorted({str(value) for value in values if value})
 
 
 def assert_pipeline_invariants(state: PipelineState) -> None:

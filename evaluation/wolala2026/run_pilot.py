@@ -10,7 +10,7 @@ from typing import Any
 from .adapters import ALL_MODES, adapter_for_mode, run_adapters_for_case
 from .common import read_json, read_jsonl, sha256_file, stable_hash, write_checksums, write_json, write_jsonl
 from .execution_spec import build_heldout_plan_only, load_execution_spec, validate_execution_spec, validate_heldout_authorization
-from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASETS, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, RETIRED_HELDOUT_DATASETS
+from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASETS, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, HELDOUT_DATASET_V3, RETIRED_HELDOUT_DATASETS
 from .retrieval import RETRIEVER_VERSION, build_retrieval_snapshot
 from .real_api import EmbeddingCallResult, OpenAIProvider, ProviderCallResult, RealApiProvider
 from .retry_policy import classify_retryable_condition
@@ -97,7 +97,7 @@ def run_pilot(
         out = Path(output_dir)
         if out.exists() and any(out.iterdir()):
             raise RuntimeError(f"Refusing to start held-out execution in a nonempty output directory: {out}")
-        authorization_path = PACKAGE_DIR / "preheldout_v2_attempt1" / "HELDOUT_RUN_AUTHORIZATION.json"
+        authorization_path = _authorization_path_for_spec(spec)
         if not authorization_path.exists():
             raise RuntimeError(f"Held-out execution requires authorization artifact: {authorization_path}")
         validate_heldout_authorization(read_json(authorization_path), spec)
@@ -197,6 +197,7 @@ def run_pilot(
         manifest["retry_events"] = []
         manifest["protocol_v2_checksum"] = protocol_checksum if "v2" in protocol_filename else None
         manifest["protocol_v3_checksum"] = protocol_checksum if "v3" in protocol_filename else None
+        manifest["protocol_v4_checksum"] = protocol_checksum if "v4" in protocol_filename else None
         manifest["statistical_plan_checksum"] = spec.get("checksums", {}).get("statistical_plan")
         manifest["latency_definition_checksum"] = spec.get("checksums", {}).get("latency_definition")
         manifest["execution_spec_checksum"] = sha256_file(execution_spec) if isinstance(execution_spec, (str, Path)) else stable_hash(spec)
@@ -244,14 +245,15 @@ def run_pilot(
     write_jsonl(out / "raw_results.jsonl", results)
     write_jsonl(out / "shared_retrieval_snapshots.jsonl", retrieval_snapshots)
     write_jsonl(out / "retrieval_snapshots.jsonl", retrieval_snapshots)
-    scores = write_score_outputs(cases, results, out)
-    verification_files = _write_phase3_verifications(cases, results, retrieval_snapshots, scores, out, run_id, expected_modes=modes, expected_repetitions=repetitions)
+    score_cases = _cases_for_scoring(dataset, cases)
+    scores = write_score_outputs(score_cases, results, out)
+    verification_files = _write_phase3_verifications(score_cases, results, retrieval_snapshots, scores, out, run_id, expected_modes=modes, expected_repetitions=repetitions)
     latency_payload = {
         "diagnostic_only": True,
         "not_publication_ready": True,
         "latency_summaries": scores["latency_summaries"],
         "external_latency_summaries": _external_latency_summaries(results),
-        "expected_mode_latency_summaries": _expected_mode_latency_summaries(cases, results),
+        "expected_mode_latency_summaries": _expected_mode_latency_summaries(score_cases, results),
         "generation_used_latency_summaries": _generation_used_latency_summaries(results),
         "mode_execution_count": mode_executions,
     }
@@ -338,6 +340,43 @@ def _select_cases(cases: list[dict[str, Any]], case_ids: list[str], *, dataset: 
     if non_development:
         raise RuntimeError(f"Refusing non-development case IDs in a development regression: {non_development}")
     return selected
+
+
+def _authorization_path_for_spec(spec: dict[str, Any]) -> Path:
+    value = spec.get("authorization_path") or "preheldout_v2_attempt1/HELDOUT_RUN_AUTHORIZATION.json"
+    path = Path(str(value))
+    if path.is_absolute():
+        return path
+    if path.parts and path.parts[0] == "evaluation":
+        return PACKAGE_DIR.parents[1] / path
+    return PACKAGE_DIR / path
+
+
+GOLD_ONLY_CASE_FIELDS = {
+    "expected_top_level_mode",
+    "expected_fulfilment_status",
+    "expected_cfaf_realization",
+    "expected_public_reason_class",
+    "expected_internal_reason_class",
+    "expected_next_step_codes",
+    "expected_permitted_output",
+    "expected_public_response_norm",
+    "canonical_answer_markers",
+    "gold_answer",
+}
+
+
+def _cases_for_scoring(dataset: str, runtime_cases: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    if dataset != HELDOUT_DATASET_V3:
+        return runtime_cases
+    gold = read_jsonl(DATA_DIR / dataset / "gold.jsonl")
+    gold_by_id = {record["case_id"]: record for record in gold}
+    if set(gold_by_id) != {case["case_id"] for case in runtime_cases}:
+        raise RuntimeError("heldout_pilot_v3 gold records do not match runtime case IDs.")
+    leaked_fields = sorted({field for case in runtime_cases for field in GOLD_ONLY_CASE_FIELDS if field in case})
+    if leaked_fields:
+        raise RuntimeError(f"heldout_pilot_v3 runtime cases contain scorer-only fields: {leaked_fields}")
+    return [{**case, **gold_by_id[case["case_id"]]} for case in runtime_cases]
 
 
 def _initialize_shared_retrieval_accounting(
@@ -991,7 +1030,7 @@ def _write_run_readme(output_dir: Path, manifest: dict[str, Any], verification_f
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run a capped WoLaLa 2026 development integration pilot.")
-    parser.add_argument("--dataset", choices=[DEV_DATASET, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2], required=True)
+    parser.add_argument("--dataset", choices=[DEV_DATASET, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, HELDOUT_DATASET_V3], required=True)
     parser.add_argument("--modes", default=",".join(ALL_MODES))
     parser.add_argument("--repetitions", type=int, default=1)
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))

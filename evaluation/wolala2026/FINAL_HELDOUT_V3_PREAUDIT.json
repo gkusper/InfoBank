@@ -1,0 +1,46 @@
+{
+  "all_booleans_true": true,
+  "audit_passed": true,
+  "audited_branch": "wolala2026",
+  "checks": {
+    "deterministic_generation_no_external_api_calls": true,
+    "generator_visible_gold_hint_count_is_zero": true,
+    "heldout_v3_case_count_is_40": true,
+    "heldout_v3_dataset_exists": true,
+    "heldout_v3_family_counts_are_balanced": true,
+    "heldout_v3_pair_count_is_20": true,
+    "heldout_v3_real_api_output_dir_absent_or_empty": true,
+    "local_shared_retrieval_tag_ancestor_of_head": true,
+    "overlap_audit_all_required_sets_empty": true,
+    "remote_branch_wolala2026_verified": true,
+    "remote_shared_retrieval_tag_exists": true,
+    "remote_shared_retrieval_tag_peeled_to_repair_commit": true,
+    "retired_v1_and_v2_are_execution_blocked": true,
+    "runtime_cases_and_gold_are_separate": true
+  },
+  "dataset": {
+    "case_count": 40,
+    "case_prefix": "HELD3_",
+    "dataset_checksum": "d73fc26e9f622db2bf396b4f1cb21ddc2f9b49c41e1e357c32294bff9976f197",
+    "dataset_name": "heldout_pilot_v3",
+    "fixed_seed": 20261017,
+    "pair_count": 20,
+    "pair_prefix": "H3PAIR_"
+  },
+  "external_api_calls_in_preaudit": 0,
+  "git_evidence": {
+    "fetch_head_write_required": false,
+    "local_tag_is_ancestor_of_head": true,
+    "local_tag_peeled": "4989de65eea6390623e284e6919bcb4c460b74ac",
+    "remote_branch": "refs/heads/wolala2026",
+    "remote_branch_sha": "4989de65eea6390623e284e6919bcb4c460b74ac",
+    "remote_tag": "refs/tags/wolala2026-shared-retrieval-fix-v1",
+    "remote_tag_object": "4e807d68bf3bc74d20e54ef96f7f4602027ad800",
+    "remote_tag_peeled": "4989de65eea6390623e284e6919bcb4c460b74ac",
+    "remote_verification_method": "git ls-remote with http.sslBackend=openssl"
+  },
+  "heldout_model_outputs_generated_for_v3": 0,
+  "schema_version": "wolala-final-heldout-v3-preaudit-v1",
+  "shared_retrieval_repair_tag": "wolala2026-shared-retrieval-fix-v1",
+  "starting_commit": "4989de65eea6390623e284e6919bcb4c460b74ac"
+}

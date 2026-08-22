@@ -5,7 +5,7 @@ from typing import Any
 
 from .adapters import ALL_MODES
 from .common import read_json
-from .pilot_data import HELDOUT_DATASET_V1, HELDOUT_DATASET_V2
+from .pilot_data import HELDOUT_DATASET_V1, HELDOUT_DATASET_V2, HELDOUT_DATASET_V3
 from .retry_policy import retry_policy_summary
 
 
@@ -13,7 +13,8 @@ PACKAGE_DIR = Path(__file__).resolve().parent
 DEFAULT_EXECUTION_SPEC_PATH = PACKAGE_DIR / "HELDOUT_EXECUTION_SPEC_v2.json"
 SPEC_SCHEMA_VERSION_V2 = "wolala-heldout-execution-spec-v2"
 SPEC_SCHEMA_VERSION_V3 = "wolala-heldout-execution-spec-v3"
-SPEC_SCHEMA_VERSIONS = {SPEC_SCHEMA_VERSION_V2, SPEC_SCHEMA_VERSION_V3}
+SPEC_SCHEMA_VERSION_V4 = "wolala-heldout-execution-spec-v4"
+SPEC_SCHEMA_VERSIONS = {SPEC_SCHEMA_VERSION_V2, SPEC_SCHEMA_VERSION_V3, SPEC_SCHEMA_VERSION_V4}
 
 
 def load_execution_spec(path: str | Path | dict[str, Any] | None = None) -> dict[str, Any]:
@@ -55,7 +56,7 @@ def validate_execution_spec(
     _validate_requested_cap("max_generation_calls", max_generation_calls, spec, errors)
     _validate_requested_cap("max_total_external_calls", max_total_external_calls, spec, errors)
     if cases is not None:
-        case_prefix = spec.get("case_id_prefix", "HELD_" if schema_version == SPEC_SCHEMA_VERSION_V2 else "HELD2_")
+        case_prefix = spec.get("case_id_prefix", _default_case_prefix(schema_version))
         case_ids = [case["case_id"] for case in cases]
         if len(case_ids) != int(spec["cases"]):
             errors.append(f"case count expected {spec['cases']}, found {len(case_ids)}")
@@ -119,7 +120,7 @@ def build_heldout_plan_only(spec: dict[str, Any], *, cases: list[dict[str, Any]]
         plan_only=True,
     )
     return {
-        "schema_version": "wolala-heldout-plan-only-v3" if spec.get("schema_version") == SPEC_SCHEMA_VERSION_V3 else "wolala-heldout-plan-only-v2",
+        "schema_version": _plan_schema_version(spec.get("schema_version")),
         "dataset": spec["dataset"],
         "protocol": spec["protocol"],
         "case_ids": [case["case_id"] for case in cases],
@@ -182,6 +183,14 @@ def validate_heldout_authorization(auth: dict[str, Any], spec: dict[str, Any]) -
 
 
 def _expected_core_values(spec: dict[str, Any]) -> dict[str, Any]:
+    if spec.get("schema_version") == SPEC_SCHEMA_VERSION_V4:
+        return {
+            **_shared_expected_core_values(),
+            "protocol": "WOLALA2026_PILOT_PROTOCOL_v4.md",
+            "dataset": HELDOUT_DATASET_V3,
+            "case_id_prefix": "HELD3_",
+            "run_attempt": 1,
+        }
     if spec.get("schema_version") == SPEC_SCHEMA_VERSION_V3:
         return {
             **_shared_expected_core_values(),
@@ -196,6 +205,22 @@ def _expected_core_values(spec: dict[str, Any]) -> dict[str, Any]:
         "dataset": HELDOUT_DATASET_V1,
         "run_attempt": 1,
     }
+
+
+def _default_case_prefix(schema_version: str | None) -> str:
+    if schema_version == SPEC_SCHEMA_VERSION_V4:
+        return "HELD3_"
+    if schema_version == SPEC_SCHEMA_VERSION_V3:
+        return "HELD2_"
+    return "HELD_"
+
+
+def _plan_schema_version(schema_version: str | None) -> str:
+    if schema_version == SPEC_SCHEMA_VERSION_V4:
+        return "wolala-heldout-plan-only-v4"
+    if schema_version == SPEC_SCHEMA_VERSION_V3:
+        return "wolala-heldout-plan-only-v3"
+    return "wolala-heldout-plan-only-v2"
 
 
 def _shared_expected_core_values() -> dict[str, Any]:

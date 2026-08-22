@@ -1,0 +1,63 @@
+{
+  "case_count": 40,
+  "case_hash": "145f126c0dc537637dfd27224931199bb152620161d935056731055db53a5181",
+  "dataset_name": "heldout_pilot_v2",
+  "family_counts": {
+    "P1": 8,
+    "P2": 8,
+    "P3": 8,
+    "P4": 8,
+    "P5": 8
+  },
+  "fixed_seed": 20261013,
+  "generation_timestamp": "2026-08-22T18:05:11Z",
+  "generator_version": "evaluation.wolala2026.pilot_data.heldout_v2_v1",
+  "gold_hash": "6d1cb442957018e31b8901f40ef15e2ed8933b72f11db2d6eb803565519d0bd4",
+  "overlap_checks": {
+    "checked_against": [
+      "development_integration_v1",
+      "heldout_pilot_v1"
+    ],
+    "comparisons": {
+      "development_integration_v1": {
+        "case_ids": [],
+        "evidence_unit_ids": [],
+        "pair_ids": [],
+        "protected_markers": [],
+        "query_texts": [],
+        "source_texts": []
+      },
+      "heldout_pilot_v1": {
+        "case_ids": [],
+        "evidence_unit_ids": [],
+        "pair_ids": [],
+        "protected_markers": [],
+        "query_texts": [],
+        "source_texts": []
+      }
+    },
+    "d1_d8_protected_marker_overlap": false,
+    "no_case_id_overlap": true,
+    "no_evidence_unit_id_overlap": true,
+    "no_pair_id_overlap": true,
+    "no_protected_marker_overlap": true,
+    "no_query_text_overlap": true,
+    "no_source_text_overlap": true
+  },
+  "pair_count": 20,
+  "personal_data_check": {
+    "contains_medical_or_health_data": false,
+    "contains_personal_information": false,
+    "privacy_safe": true,
+    "synthetic_only": true
+  },
+  "provenance_hash": "c44fecfb9d9a545a6d9f380e9677816693fe36f70c000a05fce1550f4a62becc",
+  "schema_version": "wolala-heldout-v2-generation-manifest-v1",
+  "source_templates": [
+    "P1 evidence-sufficiency paired templates",
+    "P2 aggregate request-relativity paired templates",
+    "P3 metadata request-relativity paired templates",
+    "P4 evidential-role paired templates",
+    "P5 protected source-existence paired templates"
+  ]
+}

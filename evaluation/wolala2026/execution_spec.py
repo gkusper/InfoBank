@@ -5,13 +5,15 @@ from typing import Any
 
 from .adapters import ALL_MODES
 from .common import read_json
-from .pilot_data import HELDOUT_DATASET
+from .pilot_data import HELDOUT_DATASET_V1, HELDOUT_DATASET_V2
 from .retry_policy import retry_policy_summary
 
 
 PACKAGE_DIR = Path(__file__).resolve().parent
 DEFAULT_EXECUTION_SPEC_PATH = PACKAGE_DIR / "HELDOUT_EXECUTION_SPEC_v2.json"
-SPEC_SCHEMA_VERSION = "wolala-heldout-execution-spec-v2"
+SPEC_SCHEMA_VERSION_V2 = "wolala-heldout-execution-spec-v2"
+SPEC_SCHEMA_VERSION_V3 = "wolala-heldout-execution-spec-v3"
+SPEC_SCHEMA_VERSIONS = {SPEC_SCHEMA_VERSION_V2, SPEC_SCHEMA_VERSION_V3}
 
 
 def load_execution_spec(path: str | Path | dict[str, Any] | None = None) -> dict[str, Any]:
@@ -35,12 +37,13 @@ def validate_execution_spec(
     plan_only: bool = False,
 ) -> dict[str, Any]:
     errors: list[str] = []
-    expected = _expected_core_values()
+    expected = _expected_core_values(spec)
     for key, value in expected.items():
         if spec.get(key) != value:
             errors.append(f"{key} expected {value!r}, found {spec.get(key)!r}")
-    if spec.get("schema_version") != SPEC_SCHEMA_VERSION:
-        errors.append(f"schema_version expected {SPEC_SCHEMA_VERSION!r}, found {spec.get('schema_version')!r}")
+    schema_version = spec.get("schema_version")
+    if schema_version not in SPEC_SCHEMA_VERSIONS:
+        errors.append(f"schema_version expected one of {sorted(SPEC_SCHEMA_VERSIONS)!r}, found {schema_version!r}")
     if spec.get("modes") != ALL_MODES:
         errors.append(f"modes expected {ALL_MODES!r}, found {spec.get('modes')!r}")
     if modes is not None and list(modes) != list(spec["modes"]):
@@ -52,11 +55,12 @@ def validate_execution_spec(
     _validate_requested_cap("max_generation_calls", max_generation_calls, spec, errors)
     _validate_requested_cap("max_total_external_calls", max_total_external_calls, spec, errors)
     if cases is not None:
+        case_prefix = spec.get("case_id_prefix", "HELD_" if schema_version == SPEC_SCHEMA_VERSION_V2 else "HELD2_")
         case_ids = [case["case_id"] for case in cases]
         if len(case_ids) != int(spec["cases"]):
             errors.append(f"case count expected {spec['cases']}, found {len(case_ids)}")
-        if not all(case_id.startswith("HELD_") for case_id in case_ids):
-            errors.append("held-out spec may validate only HELD_* case IDs")
+        if not all(case_id.startswith(case_prefix) for case_id in case_ids):
+            errors.append(f"held-out spec may validate only {case_prefix}* case IDs")
     planned_mode_executions = int(spec["cases"]) * len(spec["modes"]) * int(spec["repetitions"])
     planned_external_without_retries = int(spec["planned_unique_embedding_requests"]) + int(spec["planned_generation_requests_maximum"])
     if planned_mode_executions != int(spec["planned_mode_executions"]):
@@ -75,9 +79,9 @@ def validate_execution_spec(
     if summary["total_cap_retry_slack"] != int(spec["max_total_retry_attempts"]):
         errors.append("total retry budget must equal total cap slack")
     if int(spec["max_retries_per_logical_request"]) != 1:
-        errors.append("Protocol v2 freezes one retry maximum per logical request")
+        errors.append("Protocol freezes one retry maximum per logical request")
     if int(spec["external_warmup_calls"]) != 0:
-        errors.append("Protocol v2 permits no external warm-up calls")
+        errors.append("Protocol permits no external warm-up calls")
     if not plan_only:
         if spec.get("allow_real_api_required") is not True:
             errors.append("held-out execution spec must require --allow-real-api")
@@ -86,7 +90,7 @@ def validate_execution_spec(
     if "checksums" not in spec or not isinstance(spec["checksums"], dict):
         errors.append("execution spec must include frozen artifact checksums")
     if errors:
-        raise RuntimeError("Invalid WoLaLa Protocol v2 execution spec: " + "; ".join(errors))
+        raise RuntimeError("Invalid WoLaLa held-out execution spec: " + "; ".join(errors))
     return {
         "valid": True,
         "cases": int(spec["cases"]),
@@ -115,8 +119,8 @@ def build_heldout_plan_only(spec: dict[str, Any], *, cases: list[dict[str, Any]]
         plan_only=True,
     )
     return {
-        "schema_version": "wolala-heldout-plan-only-v2",
-        "dataset": HELDOUT_DATASET,
+        "schema_version": "wolala-heldout-plan-only-v3" if spec.get("schema_version") == SPEC_SCHEMA_VERSION_V3 else "wolala-heldout-plan-only-v2",
+        "dataset": spec["dataset"],
         "protocol": spec["protocol"],
         "case_ids": [case["case_id"] for case in cases],
         "cases": validation["cases"],
@@ -145,10 +149,57 @@ def build_heldout_plan_only(spec: dict[str, Any], *, cases: list[dict[str, Any]]
     }
 
 
-def _expected_core_values() -> dict[str, Any]:
+def validate_heldout_authorization(auth: dict[str, Any], spec: dict[str, Any]) -> dict[str, Any]:
+    errors: list[str] = []
+    if auth.get("authorization_status") != "AUTHORIZED_NOT_STARTED":
+        errors.append("authorization_status must be AUTHORIZED_NOT_STARTED")
+    for key in ["dataset", "run_attempt", "allow_real_api", "allow_heldout"]:
+        expected = spec["run_attempt"] if key == "run_attempt" else (True if key in {"allow_real_api", "allow_heldout"} else spec["dataset"])
+        if auth.get(key) != expected:
+            errors.append(f"{key} expected {expected!r}, found {auth.get(key)!r}")
+    auth_checksums = auth.get("checksums")
+    spec_checksums = spec.get("checksums")
+    if not isinstance(auth_checksums, dict) or not isinstance(spec_checksums, dict):
+        errors.append("authorization and spec must include checksums")
+    else:
+        for key, value in spec_checksums.items():
+            if auth_checksums.get(key) != value:
+                errors.append(f"authorization checksum {key!r} does not match execution spec")
+    for key in [
+        "max_mode_executions",
+        "max_embedding_calls",
+        "max_generation_calls",
+        "max_total_external_calls",
+        "max_total_retry_attempts",
+        "max_retries_per_logical_request",
+        "external_warmup_calls",
+    ]:
+        if int(auth.get(key, -1)) != int(spec[key]):
+            errors.append(f"authorization {key} expected {spec[key]!r}, found {auth.get(key)!r}")
+    if errors:
+        raise RuntimeError("Invalid WoLaLa held-out authorization: " + "; ".join(errors))
+    return {"valid": True, "dataset": auth["dataset"], "run_attempt": int(auth["run_attempt"])}
+
+
+def _expected_core_values(spec: dict[str, Any]) -> dict[str, Any]:
+    if spec.get("schema_version") == SPEC_SCHEMA_VERSION_V3:
+        return {
+            **_shared_expected_core_values(),
+            "protocol": "WOLALA2026_PILOT_PROTOCOL_v3.md",
+            "dataset": HELDOUT_DATASET_V2,
+            "case_id_prefix": "HELD2_",
+            "run_attempt": 1,
+        }
     return {
+        **_shared_expected_core_values(),
         "protocol": "WOLALA2026_PILOT_PROTOCOL_v2.md",
-        "dataset": HELDOUT_DATASET,
+        "dataset": HELDOUT_DATASET_V1,
+        "run_attempt": 1,
+    }
+
+
+def _shared_expected_core_values() -> dict[str, Any]:
+    return {
         "provider": "openai",
         "provider_implementation": "direct_https_openai_provider_wrapper",
         "embedding_model": "text-embedding-3-small",
@@ -171,7 +222,6 @@ def _expected_core_values() -> dict[str, Any]:
         "external_warmup_calls": 0,
         "allow_real_api_required": True,
         "allow_heldout_required": True,
-        "run_attempt": 1,
     }
 
 

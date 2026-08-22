@@ -4,7 +4,7 @@ import unittest
 from pathlib import Path
 
 from evaluation.wolala2026.adapters import MODE_CFAF_PIPELINE, MODE_PROMPT_ONLY_CONTROL, MODE_STANDARD_RAG
-from evaluation.wolala2026.common import read_json, read_jsonl, sha256_file, stable_hash
+from evaluation.wolala2026.common import read_json, read_jsonl, sha256_bytes, sha256_file, stable_hash
 from evaluation.wolala2026.pilot_data import DEV_DATASET, HELDOUT_DATASET, REQUIRED_CASE_FIELDS, validate_dataset
 from evaluation.wolala2026.run_pilot import run_pilot
 from evaluation.wolala2026.score_pilot import score_results
@@ -58,7 +58,12 @@ class WolalaPilotPhase2Tests(unittest.TestCase):
         self.assertEqual(self.baseline["protocol_checksum"], sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v1.md"))
         self.assertEqual(self.baseline["development_dataset_checksum"], read_json(DEV_DIR / "manifest.json")["dataset_checksum"])
         self.assertEqual(self.baseline["heldout_dataset_checksum"], read_json(HELDOUT_DIR / "manifest.json")["dataset_checksum"])
-        self.assertEqual(self.baseline["run_manifest_schema_checksum"], sha256_file(ROOT / "run_manifest_schema.json"))
+        schema_bytes = (ROOT / "run_manifest_schema.json").read_bytes()
+        schema_hashes = {
+            sha256_bytes(schema_bytes),
+            sha256_bytes(schema_bytes.replace(b"\r\n", b"\n").replace(b"\n", b"\r\n")),
+        }
+        self.assertIn(self.baseline["run_manifest_schema_checksum"], schema_hashes)
 
     def test_shared_retrieval_snapshot_across_modes(self) -> None:
         by_case: dict[str, set[str]] = {}

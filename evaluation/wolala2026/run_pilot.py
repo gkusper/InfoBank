@@ -9,8 +9,8 @@ from typing import Any
 
 from .adapters import ALL_MODES, adapter_for_mode, run_adapters_for_case
 from .common import read_json, read_jsonl, sha256_file, stable_hash, write_checksums, write_json, write_jsonl
-from .execution_spec import build_heldout_plan_only, load_execution_spec, validate_execution_spec
-from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASET
+from .execution_spec import build_heldout_plan_only, load_execution_spec, validate_execution_spec, validate_heldout_authorization
+from .pilot_data import DATA_DIR, DEV_DATASET, HELDOUT_DATASETS, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2
 from .retrieval import build_retrieval_snapshot
 from .real_api import EmbeddingCallResult, OpenAIProvider, ProviderCallResult, RealApiProvider
 from .retry_policy import classify_retryable_condition
@@ -44,9 +44,11 @@ def run_pilot(
     cases = read_jsonl(dataset_dir / "cases.jsonl")
     dataset_manifest = read_json(dataset_dir / "manifest.json")
     spec = load_execution_spec(execution_spec) if execution_spec is not None else None
-    if dataset == HELDOUT_DATASET and plan_only:
+    if dataset == DEV_DATASET and allow_heldout:
+        raise RuntimeError("Development execution refused: --allow-heldout is not valid for development data.")
+    if dataset in HELDOUT_DATASETS and plan_only:
         if spec is None:
-            raise RuntimeError("Held-out Protocol v2 plan-only validation requires --execution-spec.")
+            raise RuntimeError("Held-out plan-only validation requires --execution-spec.")
         out = Path(output_dir)
         out.mkdir(parents=True, exist_ok=True)
         plan = build_heldout_plan_only(spec, cases=cases, modes=modes, repetitions=repetitions)
@@ -64,11 +66,13 @@ def run_pilot(
             "execution_plan_path": str(out / "execution_plan.json"),
             "external_api_calls_in_plan_only": 0,
         }
-    if dataset == HELDOUT_DATASET and not allow_heldout:
-        raise RuntimeError("Held-out pilot execution refused: supply an explicit held-out approval flag for a future run.")
-    if dataset == HELDOUT_DATASET:
+    if dataset == HELDOUT_DATASET_V1:
+        raise RuntimeError("heldout_pilot_v1 is retired after the pre-execution implementation guard failure and cannot be executed.")
+    if dataset in HELDOUT_DATASETS and not allow_heldout:
+        raise RuntimeError("Held-out pilot execution refused: supply --allow-heldout for an explicitly authorized run.")
+    if dataset in HELDOUT_DATASETS:
         if spec is None:
-            raise RuntimeError("Held-out Protocol v2 execution requires --execution-spec.")
+            raise RuntimeError("Held-out execution requires --execution-spec.")
         validate_execution_spec(
             spec,
             cases=cases,
@@ -80,7 +84,18 @@ def run_pilot(
             max_total_external_calls=max_total_external_calls,
         )
         if not allow_real_api:
-            raise RuntimeError("Protocol v2 held-out execution requires --allow-real-api.")
+            raise RuntimeError("Held-out execution requires --allow-real-api.")
+        if spec["dataset"] != dataset:
+            raise RuntimeError(f"Execution spec dataset {spec['dataset']!r} does not match requested dataset {dataset!r}.")
+        if spec.get("checksums", {}).get("heldout_dataset") != dataset_manifest.get("dataset_checksum"):
+            raise RuntimeError("Held-out dataset checksum does not match execution spec.")
+        out = Path(output_dir)
+        if out.exists() and any(out.iterdir()):
+            raise RuntimeError(f"Refusing to start held-out execution in a nonempty output directory: {out}")
+        authorization_path = PACKAGE_DIR / "preheldout_v2_attempt1" / "HELDOUT_RUN_AUTHORIZATION.json"
+        if not authorization_path.exists():
+            raise RuntimeError(f"Held-out execution requires authorization artifact: {authorization_path}")
+        validate_heldout_authorization(read_json(authorization_path), spec)
         max_total_retry_attempts = int(spec["max_total_retry_attempts"])
         max_retries_per_logical_request = int(spec["max_retries_per_logical_request"])
     mode_executions = len(cases) * len(modes) * repetitions
@@ -100,17 +115,21 @@ def run_pilot(
 
     out = Path(output_dir)
     out.mkdir(parents=True, exist_ok=True)
-    plan = _execution_plan(
-        dataset=dataset,
-        cases=cases,
-        modes=modes,
-        repetitions=repetitions,
-        max_mode_executions=max_mode_executions,
-        max_embedding_calls=max_embedding_calls,
-        max_generation_calls=max_generation_calls,
-        max_total_external_calls=max_total_external_calls,
-        allow_real_api=allow_real_api,
-    )
+    if dataset == DEV_DATASET:
+        plan = _development_execution_plan(
+            dataset=dataset,
+            cases=cases,
+            modes=modes,
+            repetitions=repetitions,
+            max_mode_executions=max_mode_executions,
+            max_embedding_calls=max_embedding_calls,
+            max_generation_calls=max_generation_calls,
+            max_total_external_calls=max_total_external_calls,
+            allow_real_api=allow_real_api,
+            allow_heldout=allow_heldout,
+        )
+    else:
+        plan = build_heldout_plan_only(spec, cases=cases, modes=modes, repetitions=repetitions)
     write_json(out / "execution_plan.json", plan)
     if plan_only:
         return {
@@ -136,10 +155,10 @@ def run_pilot(
     protocol_filename = str(spec["protocol"]) if spec else "WOLALA2026_PILOT_PROTOCOL_v1.md"
     protocol_checksum = sha256_file(PACKAGE_DIR / protocol_filename)
     start_time = now_utc()
-    run_id = f"{dataset}_real_api_v1" if allow_real_api else f"{dataset}_deterministic_v1"
+    run_id = f"{dataset}_real_api_attempt{int(spec['run_attempt'])}" if allow_real_api and spec else (f"{dataset}_real_api_v1" if allow_real_api else f"{dataset}_deterministic_v1")
     manifest = build_manifest(
         run_id=run_id,
-        run_type="real_api_development_integration" if allow_real_api and dataset == DEV_DATASET else ("development_integration_pilot_v1" if dataset == DEV_DATASET else "heldout_pilot_v1"),
+        run_type="real_api_development_integration" if allow_real_api and dataset == DEV_DATASET else ("development_integration_pilot_v1" if dataset == DEV_DATASET else dataset),
         development_or_heldout="development" if dataset == DEV_DATASET else "heldout",
         dataset_name=dataset,
         dataset_checksum=dataset_manifest["dataset_checksum"],
@@ -171,7 +190,8 @@ def run_pilot(
         manifest["run_attempt"] = int(spec["run_attempt"])
         manifest["invalidation_class"] = None
         manifest["retry_events"] = []
-        manifest["protocol_v2_checksum"] = protocol_checksum
+        manifest["protocol_v2_checksum"] = protocol_checksum if "v2" in protocol_filename else None
+        manifest["protocol_v3_checksum"] = protocol_checksum if "v3" in protocol_filename else None
         manifest["statistical_plan_checksum"] = spec.get("checksums", {}).get("statistical_plan")
         manifest["latency_definition_checksum"] = spec.get("checksums", {}).get("latency_definition")
         manifest["execution_spec_checksum"] = sha256_file(execution_spec) if isinstance(execution_spec, (str, Path)) else stable_hash(spec)
@@ -379,7 +399,7 @@ class _BudgetedProvider:
             return result
 
 
-def _execution_plan(
+def _development_execution_plan(
     *,
     dataset: str,
     cases: list[dict[str, Any]],
@@ -390,11 +410,16 @@ def _execution_plan(
     max_generation_calls: int,
     max_total_external_calls: int,
     allow_real_api: bool,
+    allow_heldout: bool,
 ) -> dict[str, Any]:
+    if dataset != DEV_DATASET:
+        raise RuntimeError(f"Development execution plan may only be built for {DEV_DATASET}.")
+    if allow_heldout:
+        raise RuntimeError("Development execution plan refuses --allow-heldout.")
     case_ids = [case["case_id"] for case in cases]
-    heldout_ids = [case_id for case_id in case_ids if case_id.startswith("HELD_")]
-    if heldout_ids:
-        raise RuntimeError(f"Plan contains held-out case IDs and cannot proceed: {heldout_ids}")
+    non_development_ids = [case_id for case_id in case_ids if not case_id.startswith("DEV_")]
+    if non_development_ids:
+        raise RuntimeError(f"Development plan contains non-development case IDs and cannot proceed: {non_development_ids}")
     planned_mode_executions = len(cases) * len(modes) * repetitions
     plan = {
         "schema_version": "wolala-real-api-execution-plan-v1",
@@ -722,7 +747,7 @@ def _write_run_readme(output_dir: Path, manifest: dict[str, Any], verification_f
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Run a capped WoLaLa 2026 development integration pilot.")
-    parser.add_argument("--dataset", choices=[DEV_DATASET, HELDOUT_DATASET], required=True)
+    parser.add_argument("--dataset", choices=[DEV_DATASET, HELDOUT_DATASET_V1, HELDOUT_DATASET_V2], required=True)
     parser.add_argument("--modes", default=",".join(ALL_MODES))
     parser.add_argument("--repetitions", type=int, default=1)
     parser.add_argument("--output-dir", default=str(DEFAULT_OUTPUT_DIR))

@@ -1,0 +1,44 @@
+{
+  "audit_passed": true,
+  "audited_artifact_groups": [
+    "development_run",
+    "development_run_real_api_v1",
+    "run_manifests",
+    "raw_results",
+    "retrieval_snapshots",
+    "generator_contexts",
+    "case_scores",
+    "pair_scores",
+    "latency_records",
+    "error_records",
+    "heldout_run_real_api_v1"
+  ],
+  "branch": "wolala2026",
+  "current_head": "182f9d6c256526701ead65901fed0e90e2ff5e6a",
+  "freeze_commit": "182f9d6c256526701ead65901fed0e90e2ff5e6a",
+  "freeze_tag": "wolala2026-heldout-protocol-v2-freeze",
+  "heldout_case_id_note": "HELD_* identifiers exist in the frozen heldout_pilot_v1 dataset, Protocol v2 documents, and preheldout plan-only artifact by design. No HELD_* case ID was found in prior development model outputs, retrieval snapshots, generator contexts, scored model outputs, latency records, or error records.",
+  "heldout_embedding_calls_found": 0,
+  "heldout_generation_calls_found": 0,
+  "heldout_mode_execution_count_sources": {
+    "development_run": 0,
+    "development_run_real_api_v1": 0,
+    "preheldout_attempt1_plan_only": 0,
+    "readiness_baseline_manifest": 0
+  },
+  "heldout_output_artifacts_found": false,
+  "heldout_output_dir": "evaluation/wolala2026/heldout_run_real_api_v1",
+  "heldout_output_dir_exists": false,
+  "heldout_output_files": [],
+  "prior_heldout_embedding_calls": 0,
+  "prior_heldout_generation_calls": 0,
+  "prior_heldout_mode_execution_count": 0,
+  "schema_version": "wolala-pre-heldout-nonexecution-audit-v3",
+  "search_result": {
+    "development_artifact_held_case_id_match_files": [],
+    "development_artifact_held_case_id_matches": 0,
+    "heldout_output_directories": [],
+    "manifests_with_positive_heldout_mode_execution_count": []
+  },
+  "utc_timestamp": "2026-08-22T14:48:58Z"
+}

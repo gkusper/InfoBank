@@ -33,7 +33,8 @@ def test_package_and_query_candidate_meets_declared_minimums() -> None:
 def test_every_gold_query_has_required_fields_and_answer_or_refusal() -> None:
     required = {
         "query_id", "query_class", "expected_output_class", "gold_document_ids",
-        "gold_page_or_message_ranges", "reference_answer", "refusal_reason", "reason_code",
+        "gold_page_or_message_ranges", "required_sources", "reference_citations",
+        "reference_answer", "refusal_reason", "reason_code",
         "evidence_role", "split", "template_family", "object_family",
     }
     for query in build_gold_queries():
@@ -42,6 +43,16 @@ def test_every_gold_query_has_required_fields_and_answer_or_refusal() -> None:
         if query["expected_output_class"].startswith("REFUSE_"):
             assert query["reference_answer"] is None
             assert query["refusal_reason"]
+        if query["expected_output_class"] in {
+            "REFUSE_PERMISSION", "REFUSE_INSUFFICIENT_EVIDENCE", "REFUSE_NO_MATCH",
+            "REFUSE_AGGREGATION_THRESHOLD", "CLARIFICATION",
+        }:
+            assert query["required_sources"] == []
+        assert query["reference_citations"] == [
+            {"source_id": source_id, "page": page, "message_id": None, "record_id": None}
+            for source_id, page_numbers in query["gold_page_or_message_ranges"].items()
+            for page in page_numbers
+        ]
 
 
 def test_counterfactuals_hold_facts_constant_and_browser_never_creates_action() -> None:

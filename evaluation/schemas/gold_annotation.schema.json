@@ -25,6 +25,30 @@
     "reason_code": {"type": "string", "minLength": 1},
     "gold_document_ids": {"type": "array", "items": {"type": "string"}},
     "gold_page_or_message_ranges": {"type": "object"},
+    "required_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "reference_citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "page", "message_id", "record_id"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "page": {"type": ["integer", "null"], "minimum": 1},
+          "message_id": {"type": ["string", "null"], "minLength": 1},
+          "record_id": {"type": ["string", "null"], "minLength": 1}
+        },
+        "oneOf": [
+          {"properties": {"page": {"type": "integer"}, "message_id": {"type": "null"}, "record_id": {"type": "null"}}},
+          {"properties": {"page": {"type": "null"}, "message_id": {"type": "string"}, "record_id": {"type": "null"}}},
+          {"properties": {"page": {"type": "null"}, "message_id": {"type": "null"}, "record_id": {"type": "string"}}}
+        ]
+      }
+    },
     "reference_answer": {"type": ["string", "null"]},
     "factual_atoms": {"type": "array", "items": {"type": "string"}},
     "required_evidence_roles": {"type": "array", "items": {"type": "string"}},

@@ -153,6 +153,12 @@ _CLAIM_RELATION_PATTERNS = {
         r"\bprice\b", r"\bcost(?:s|ed)?\b", r"\bhow\s+much\b",
         r"\b[aá]r(?:a|at)?\b", r"\bmennyibe\s+ker[üu]l\b",
     ],
+    "purchase_date": [
+        r"\bpurchase\s+date\b", r"\bdate\s+of\s+purchase\b",
+        r"\bwhen\s+did\s+(?:i|you|we|they)\s+(?:buy|purchase)\b",
+        r"\bmikor\s+(?:vettem|vetted|vásároltam|vásároltad)\b",
+        r"\bvásárlás\s+dátuma\b",
+    ],
 }
 
 

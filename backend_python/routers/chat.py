@@ -8,6 +8,7 @@ import models
 import ai_service
 import relevance
 import evidence_service
+import owned_object_context
 import security
 import policy_engine
 import controlled_failure
@@ -20,7 +21,7 @@ from aggregate_executor import (
     execute_aggregate,
     extract_unambiguous_numeric_value,
 )
-from routing import RoutingMode, route_documents, runtime_routing_mode
+from routing import RoutingDecision, RoutingMode, route_documents, runtime_routing_mode
 from database import get_db
 
 router = APIRouter(prefix="/api", tags=["Chat"])
@@ -72,6 +73,62 @@ def get_governance_scope_doc_ids(db: Session) -> list[str]:
     """
 
     return sorted(row[0] for row in db.query(models.Document.id).all())
+
+
+def _full_permitted_document_contents(
+    db: Session,
+    governance: dict,
+) -> list[owned_object_context.PermittedDocumentContent]:
+    """Load only content the policy engine marked FULL for this request."""
+
+    full_doc_ids = sorted(
+        doc_id
+        for doc_id, use_decision in (governance.get("use_decisions") or {}).items()
+        if use_decision == relevance.USE_FULL
+    )
+    if not full_doc_ids:
+        return []
+    rows = db.query(
+        models.DocumentChunk.document_id,
+        models.DocumentChunk.text_content,
+    ).filter(
+        models.DocumentChunk.document_id.in_(full_doc_ids),
+    ).order_by(
+        models.DocumentChunk.document_id,
+        models.DocumentChunk.chunk_index,
+        models.DocumentChunk.id,
+    ).all()
+    text_by_document = {doc_id: [] for doc_id in full_doc_ids}
+    for doc_id, text_content in rows:
+        text_by_document.setdefault(doc_id, []).append(text_content or "")
+    return [
+        owned_object_context.PermittedDocumentContent(doc_id, "\n".join(text_by_document[doc_id]))
+        for doc_id in full_doc_ids
+        if text_by_document.get(doc_id)
+    ]
+
+
+def _routing_decision_in_governed_scope(
+    scoped_decision: RoutingDecision,
+    governed_document_ids: list[str],
+) -> RoutingDecision:
+    """Preserve full governed counts after a content-derived scope reduction."""
+
+    governed = tuple(sorted(set(governed_document_ids)))
+    candidate_set = set(scoped_decision.candidate_document_ids)
+    return RoutingDecision(
+        mode=scoped_decision.mode,
+        candidate_document_ids=scoped_decision.candidate_document_ids,
+        excluded_document_ids=tuple(doc_id for doc_id in governed if doc_id not in candidate_set),
+        selected_keywords=scoped_decision.selected_keywords,
+        matched_keywords=scoped_decision.matched_keywords,
+        fallback_used=scoped_decision.fallback_used,
+        fallback_reason=scoped_decision.fallback_reason,
+        governed_input_count=len(governed),
+        candidate_set_size=len(scoped_decision.candidate_document_ids),
+        config_version=scoped_decision.config_version,
+        config_hash=scoped_decision.config_hash,
+    )
 
 
 def _public_routing_trace(trace: dict | None) -> dict:
@@ -273,6 +330,7 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
     results = ai_service.collection.query(query_embeddings=[question_vector], n_results=n_results, where=where_clause)
     sources: list[dict] = []
     blocks: list[str] = []
+    block_rows: list[tuple[dict, str]] = []
     aggregate_contributions: list[AggregateContribution] = []
     if not results.get('documents') or not results['documents'][0]:
         return sources, blocks, aggregate_contributions
@@ -334,8 +392,8 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
                     AggregateContribution(source_id=doc_id, contributor_id=doc_id, value=numeric_value)
                 )
         else:
-            blocks.append(relevance.make_context_block(source_profile, file_name, safe_chunk_text))
-        sources.append({
+            block = relevance.make_context_block(source_profile, file_name, safe_chunk_text)
+        source = {
             "document_id": doc_id,
             "file_name": file_name,
             "role": role,
@@ -343,7 +401,19 @@ def query_retrieved_sources(db: Session, question: str, question_vector: list[fl
             "usable_relevance": source_profile,
             "text": relevance.public_source_text(role, chunk_text),
             "citation": citation,
-        })
+        }
+        sources.append(source)
+        if role != relevance.SOURCE_ROLE_AGGREGATE_ONLY:
+            block_rows.append((source, block))
+
+    selected_sources, source_selection_trace = evidence_service.select_minimal_evidence_sources(
+        question,
+        sources,
+    )
+    query_profile["source_selection_trace"] = source_selection_trace
+    selected_source_objects = {id(source) for source in selected_sources}
+    blocks = [block for source, block in block_rows if id(source) in selected_source_objects]
+    sources = selected_sources
     return sources, blocks, aggregate_contributions
 
 
@@ -788,6 +858,56 @@ async def ask_infobank(
             log_chat_event(db, user_id, question, msg, [], [], "rejected", query_profile, pre_routing_governance, evidence_check, cf, cf["status"], audit_id)
             return controlled_failure_payload(msg, query_profile, pre_routing_governance, evidence_check, cf, audit_id=audit_id)
 
+        owned_object_resolution = owned_object_context.resolve_owned_object_context(
+            question,
+            _full_permitted_document_contents(db, pre_routing_governance),
+        )
+        owned_object_trace = owned_object_resolution.public_trace()
+        query_profile["owned_object_resolution_trace"] = owned_object_trace
+        if owned_object_resolution.status == owned_object_context.STATUS_CLARIFICATION_REQUIRED:
+            if owned_object_resolution.reason == "multiple_purchase_evidenced_objects":
+                msg = (
+                    "I found more than one permitted product with purchase evidence. "
+                    "Please name the product or object you mean."
+                )
+            elif owned_object_resolution.reason.startswith("explicit_"):
+                msg = (
+                    "I could not uniquely match the requested product or object to the permitted documents. "
+                    "Please check its product code or name the object more precisely."
+                )
+            else:
+                msg = (
+                    "I could not determine a unique owned object from the permitted purchase evidence. "
+                    "Please name the product or provide a permitted receipt or purchase record."
+                )
+            cf = controlled_failure.make_controlled_failure(
+                controlled_failure.STATUS_ASK_CLARIFICATION,
+                controlled_failure.REASON_EPISTEMIC,
+                controlled_failure.evidence_state([], query_profile, False),
+                controlled_failure.safe_policy_state(pre_routing_governance),
+                msg,
+                ["Name the product, object type, or exact product code and try again."],
+                {"gate": "owned_object_resolution", **owned_object_trace},
+            )
+            evidence_check = {
+                "decision": "controlled_failure",
+                "controlled_failure": cf,
+                "output_mode": cf["status"],
+            }
+            log_chat_event(
+                db, user_id, question, msg, [], [], "owned_object_clarification",
+                query_profile, pre_routing_governance, evidence_check, cf, cf["status"], audit_id,
+            )
+            return controlled_failure_payload(
+                msg, query_profile, pre_routing_governance, evidence_check, cf, audit_id=audit_id,
+            )
+
+        routing_input_doc_ids = (
+            list(owned_object_resolution.candidate_document_ids)
+            if owned_object_resolution.status == owned_object_context.STATUS_RESOLVED
+            else list(permitted_doc_ids)
+        )
+
         configured_routing_mode = runtime_routing_mode()
         document_keywords: dict[str, list[str]] = {}
         if configured_routing_mode == RoutingMode.ROUTING_OFF:
@@ -813,9 +933,9 @@ async def ask_infobank(
             ).join(
                 models.Keyword, models.Keyword.id == models.DocumentKeyword.keyword_id,
             ).filter(
-                models.DocumentKeyword.document_id.in_(permitted_doc_ids),
+                models.DocumentKeyword.document_id.in_(routing_input_doc_ids),
             ).all()
-            document_keywords = {doc_id: [] for doc_id in permitted_doc_ids}
+            document_keywords = {doc_id: [] for doc_id in routing_input_doc_ids}
             for doc_id, word in keyword_rows:
                 document_keywords.setdefault(doc_id, []).append(word)
             permitted_keywords = sorted({word for _, word in keyword_rows}, key=lambda value: value.lower())
@@ -843,15 +963,26 @@ async def ask_infobank(
                 )
         query_profile = relevance.build_query_profile(question, question_keywords)
         query_profile["keyword_selection_trace"] = keyword_selection_trace
-        routing_decision = route_documents(
-            permitted_document_ids=permitted_doc_ids,
+        query_profile["owned_object_resolution_trace"] = owned_object_trace
+        scoped_routing_decision = route_documents(
+            permitted_document_ids=routing_input_doc_ids,
             document_keywords=document_keywords,
             selected_keywords=question_keywords,
             mode=configured_routing_mode,
         )
+        routing_decision = _routing_decision_in_governed_scope(
+            scoped_routing_decision,
+            permitted_doc_ids,
+        )
         candidate_doc_ids = list(routing_decision.candidate_document_ids)
         query_profile["routing_trace"] = routing_decision.to_trace()
-        if configured_routing_mode == RoutingMode.ROUTING_OFF:
+        if owned_object_resolution.status == owned_object_context.STATUS_RESOLVED and configured_routing_mode == RoutingMode.ROUTING_OFF:
+            query_profile["retrieval_strategy"] = "owned_object_context"
+        elif owned_object_resolution.status == owned_object_context.STATUS_RESOLVED and routing_decision.fallback_used:
+            query_profile["retrieval_strategy"] = "owned_object_context_fallback"
+        elif owned_object_resolution.status == owned_object_context.STATUS_RESOLVED:
+            query_profile["retrieval_strategy"] = "owned_object_keyword_routed"
+        elif configured_routing_mode == RoutingMode.ROUTING_OFF:
             query_profile["retrieval_strategy"] = "full_permitted_corpus"
         elif routing_decision.fallback_used:
             query_profile["retrieval_strategy"] = "permitted_corpus_fallback"
@@ -883,6 +1014,7 @@ async def ask_infobank(
         governance_context["pre_routing_usable_count"] = len(permitted_doc_ids)
         governance_context["pre_routing_denied_count"] = len(pre_routing_governance["denied_doc_ids"])
         governance_context["routing_trace"] = routing_decision.to_trace()
+        governance_context["owned_object_resolution_trace"] = owned_object_trace
         governance_context["fallback_used"] = routing_decision.fallback_used
         content_doc_ids = governance_context["content_doc_ids"]
         metadata_doc_ids = governance_context["metadata_only_doc_ids"]

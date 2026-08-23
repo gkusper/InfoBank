@@ -7,6 +7,7 @@ from pathlib import Path
 import pytest
 
 from evaluation.actual_pipeline_dataset import OUTPUT_CLASSES, build_development_dataset, document_id
+from evaluation.actual_pipeline_gold import load_gold_annotations
 from evaluation.actual_pipeline_inputs import CORPUS_SCHEMA_VERSION, QueryInput, write_jsonl
 from evaluation.actual_pipeline_runner import ActualPipelineConfig, run_actual_pipeline
 from evaluation.actual_pipeline_scorer import scan_record_safety, score_sealed_run
@@ -63,6 +64,10 @@ def _minimal_fixture(root: Path) -> tuple[Path, Path, Path]:
         "reason_code": "supported",
         "gold_document_ids": [doc_id],
         "gold_page_or_message_ranges": {doc_id: [1]},
+        "required_sources": [doc_id],
+        "reference_citations": [
+            {"source_id": doc_id, "page": 1, "message_id": None, "record_id": None}
+        ],
         "reference_answer": "connect test port 2",
         "factual_atoms": ["connect test port 2"],
         "required_evidence_roles": ["primary"],
@@ -103,6 +108,9 @@ def test_development_builder_separates_runtime_inputs_and_gold(tmp_path: Path) -
         "gold_page_or_message_ranges",
         "reference_answer",
     }.intersection(query)
+    gold = json.loads((tmp_path / "dataset/gold_annotations.jsonl").read_text().splitlines()[0])
+    assert gold["required_sources"] == gold["gold_document_ids"]
+    assert "reference_citations" in gold
 
 
 def test_runner_module_has_no_gold_loader_or_gold_field_access() -> None:
@@ -114,6 +122,8 @@ def test_runner_module_has_no_gold_loader_or_gold_field_access() -> None:
         "gold_document_ids",
         "gold_page",
         "reference_answer",
+        "required_sources",
+        "reference_citations",
     ):
         assert forbidden not in source
 
@@ -123,10 +133,37 @@ def test_runner_succeeds_without_gold_and_gold_corruption_cannot_change_raw(tmp_
     seal = _run_minimal(tmp_path, query_path, corpus_path, "run-a")
     deterministic_before = seal["deterministic_content_sha256"]
     gold = json.loads(gold_path.read_text().splitlines()[0])
-    gold["expected_output_class"] = "REFUSE_PERMISSION"
+    gold["required_sources"] = []
     write_jsonl(gold_path, [gold])
     seal_after = _run_minimal(tmp_path, query_path, corpus_path, "run-b")
     assert seal_after["deterministic_content_sha256"] == deterministic_before
+
+
+def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path: Path) -> None:
+    _, _, gold_path = _minimal_fixture(tmp_path)
+    current = json.loads(gold_path.read_text().splitlines()[0])
+    legacy = dict(current)
+    legacy.pop("required_sources")
+    legacy.pop("reference_citations")
+    legacy_path = tmp_path / "legacy-gold.jsonl"
+    write_jsonl(legacy_path, [legacy])
+    legacy_annotation = load_gold_annotations(legacy_path)[0]
+    assert legacy_annotation.required_sources is None
+    assert legacy_annotation.required_source_ids == tuple(legacy["gold_document_ids"])
+    assert legacy_annotation.reference_page_ranges == legacy["gold_page_or_message_ranges"]
+    assert "required_sources" not in legacy_annotation.to_dict()
+    assert "reference_citations" not in legacy_annotation.to_dict()
+
+    current_annotation = load_gold_annotations(gold_path)[0]
+    assert current_annotation.required_source_ids == tuple(current["required_sources"])
+    assert current_annotation.reference_page_ranges == current["gold_page_or_message_ranges"]
+
+    inconsistent = dict(current)
+    inconsistent["reference_citations"] = []
+    inconsistent_path = tmp_path / "inconsistent-gold.jsonl"
+    write_jsonl(inconsistent_path, [inconsistent])
+    with pytest.raises(ValueError, match="must match legacy"):
+        load_gold_annotations(inconsistent_path)
 
 
 def test_query_corruption_changes_raw_deterministic_content(tmp_path: Path) -> None:

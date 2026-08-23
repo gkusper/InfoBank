@@ -11,6 +11,7 @@ import hashlib
 import json
 import re
 import uuid
+from itertools import combinations
 from typing import Any, Dict, Iterable, List, Optional
 
 from sqlalchemy.orm import Session
@@ -764,11 +765,22 @@ def check_rag_evidence(sources: Iterable[Dict[str, Any]], query_profile: Dict[st
 
 
 _SUPPORT_STOP_WORDS = {
-    "a", "an", "and", "are", "as", "at", "be", "by", "can", "does", "for", "from",
+    "a", "an", "and", "are", "as", "at", "be", "by", "can", "did", "does", "for", "from",
     "how", "i", "in", "is", "it", "of", "on", "or", "the", "this", "to", "what",
-    "when", "where", "which", "who", "why", "with", "you", "your",
+    "when", "where", "which", "who", "why", "with", "you", "your", "much",
     "az", "egy", "és", "hogy", "hogyan", "hol", "is", "mely", "melyik", "mi", "milyen",
     "mit", "van", "vagy", "volt",
+}
+_SUPPORT_TOKEN_CANONICAL_FORMS = {
+    "bought": "purchase",
+    "buy": "purchase",
+    "purchased": "purchase",
+    "purchases": "purchase",
+    "purchasing": "purchase",
+    "paid": "payment",
+    "pay": "payment",
+    "payments": "payment",
+    "paying": "payment",
 }
 _OBJECT_IDENTIFIER = re.compile(
     r"\b(?=[A-Z0-9-]{4,}\b)(?=[A-Z0-9-]*[A-Z])(?=[A-Z0-9-]*\d)[A-Z0-9]+(?:-[A-Z0-9]+)+\b"
@@ -827,10 +839,17 @@ def _identifier_scoped_source_text(
 
 def _support_tokens(text: str) -> set[str]:
     return {
-        token
+        _SUPPORT_TOKEN_CANONICAL_FORMS.get(token, token)
         for token in re.findall(r"[^\W_][\w-]{2,}", (text or "").casefold(), flags=re.UNICODE)
         if token not in _SUPPORT_STOP_WORDS
     }
+
+
+def _factual_numbers(text: str) -> set[str]:
+    """Extract numeric facts while ignoring Markdown-style list ordinals."""
+
+    without_list_ordinals = re.sub(r"(?m)^\s*\d{1,2}[.)]\s+", "", text or "")
+    return set(re.findall(r"\b\d+(?:[.,]\d+)?\b", without_list_ordinals))
 
 
 def _ambiguous_claim_relation(question: str, question_relations: Iterable[str]) -> bool:
@@ -888,6 +907,111 @@ def question_source_support(question: str, sources: Iterable[Dict[str, Any]]) ->
     }
 
 
+SOURCE_SELECTION_VERSION = "infobank-minimal-evidence-set-v1"
+
+
+def select_minimal_evidence_sources(
+    question: str,
+    sources: Iterable[Dict[str, Any]],
+) -> tuple[List[Dict[str, Any]], Dict[str, Any]]:
+    """Select the smallest supported document set without using evaluation gold.
+
+    Selection is intentionally conservative. It operates only on ordinary
+    primary/full sources, preserves every question term and object identifier
+    matched by the complete retrieved set, and keeps the complete set whenever
+    support is insufficient or a security/evidence role requires special
+    handling. Shared object identifiers provide a deterministic tie-break for
+    same-object multi-document evidence.
+    """
+
+    source_list = list(sources)
+    grouped: Dict[str, List[Dict[str, Any]]] = {}
+    document_order: List[str] = []
+    for index, source in enumerate(source_list):
+        document_key = str(source.get("document_id") or f"__source_{index}")
+        if document_key not in grouped:
+            grouped[document_key] = []
+            document_order.append(document_key)
+        grouped[document_key].append(source)
+
+    def trace(*, applied: bool, reason: str, selected: List[Dict[str, Any]]) -> Dict[str, Any]:
+        return {
+            "version": SOURCE_SELECTION_VERSION,
+            "applied": applied,
+            "reason": reason,
+            "retrieved_document_count": len(grouped),
+            "selected_document_count": len({str(item.get("document_id") or "") for item in selected}),
+            "retrieved_chunk_count": len(source_list),
+            "selected_chunk_count": len(selected),
+        }
+
+    if len(grouped) < 2:
+        return source_list, trace(applied=False, reason="single_document_set", selected=source_list)
+    if any(source.get("security", {}).get("prompt_injection_detected") for source in source_list):
+        return source_list, trace(applied=False, reason="security_source_present", selected=source_list)
+    if any(
+        source.get("use_decision") != relevance.USE_FULL
+        or source.get("role") != relevance.SOURCE_ROLE_PRIMARY
+        for source in source_list
+    ):
+        return source_list, trace(applied=False, reason="special_evidence_role_present", selected=source_list)
+
+    full_support = question_source_support(question, source_list)
+    if not full_support["sufficient"]:
+        return source_list, trace(applied=False, reason="full_set_not_supported", selected=source_list)
+
+    target_terms = set(full_support["matched_question_terms"])
+    target_relations = set(full_support["question_claim_relations"])
+    target_identifiers = set(full_support["matched_object_identifiers"])
+    if not (target_terms or target_relations or target_identifiers):
+        return source_list, trace(
+            applied=False,
+            reason="no_discriminating_question_evidence",
+            selected=source_list,
+        )
+
+    identifiers_by_document = {
+        document_key: set(_OBJECT_IDENTIFIER.findall(" ".join(str(row.get("text") or "") for row in rows)))
+        for document_key, rows in grouped.items()
+    }
+    viable: List[tuple[int, int, tuple[int, ...], tuple[str, ...], List[Dict[str, Any]]]] = []
+    for subset_size in range(1, len(document_order)):
+        for indexes in combinations(range(len(document_order)), subset_size):
+            document_keys = tuple(document_order[index] for index in indexes)
+            subset_sources = [source for key in document_keys for source in grouped[key]]
+            subset_support = question_source_support(question, subset_sources)
+            if not subset_support["sufficient"]:
+                continue
+            if not target_terms.issubset(subset_support["matched_question_terms"]):
+                continue
+            if not target_identifiers.issubset(subset_support["matched_object_identifiers"]):
+                continue
+            identifier_counts: Dict[str, int] = {}
+            for key in document_keys:
+                for identifier in identifiers_by_document[key]:
+                    identifier_counts[identifier] = identifier_counts.get(identifier, 0) + 1
+            shared_identifier_count = sum(count >= 2 for count in identifier_counts.values())
+            viable.append((
+                subset_size,
+                -shared_identifier_count,
+                indexes,
+                document_keys,
+                subset_sources,
+            ))
+        if viable:
+            break
+
+    if not viable:
+        return source_list, trace(applied=False, reason="minimal_set_is_full_set", selected=source_list)
+
+    selected = min(viable, key=lambda item: (item[0], item[1], item[2]))[4]
+    selection_trace = trace(applied=True, reason="minimal_sufficient_evidence_set", selected=selected)
+    selection_trace["preserved_question_term_count"] = len(target_terms)
+    selection_trace["preserved_claim_relation_count"] = len(target_relations)
+    selection_trace["preserved_object_identifier_count"] = len(target_identifiers)
+    return selected, selection_trace
+
+
 def answer_source_support(answer: str, sources: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
     """Validate generated claim relations against permitted full-source text.
 
@@ -903,8 +1027,8 @@ def answer_source_support(answer: str, sources: Iterable[Dict[str, Any]]) -> Dic
     source_relations = relevance.claim_relation_signals(searchable)
     missing_relations = sorted(set(answer_relations) - set(source_relations))
     unmatched_ids = [identifier for identifier in answer_ids if identifier not in matched_ids]
-    answer_numbers = sorted(set(re.findall(r"\b\d+(?:[.,]\d+)?\b", answer or "")))
-    source_numbers = set(re.findall(r"\b\d+(?:[.,]\d+)?\b", searchable))
+    answer_numbers = sorted(_factual_numbers(answer or ""))
+    source_numbers = _factual_numbers(searchable)
     unsupported_numbers = [value for value in answer_numbers if value not in source_numbers]
     supported = bool(searchable.strip()) and not missing_relations and not unmatched_ids and not unsupported_numbers
     return {

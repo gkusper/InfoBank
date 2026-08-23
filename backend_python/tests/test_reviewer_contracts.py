@@ -5,7 +5,10 @@ from pathlib import Path
 
 import controlled_failure
 import evidence_service
+import models
 import relevance
+from document_processing import sha256_text
+from routers import chat
 from routers.chat import chat_success_payload, controlled_failure_payload
 
 
@@ -18,6 +21,17 @@ def _source(text: str, *, use_decision: str = "full") -> dict:
         "text": text,
         "use_decision": use_decision,
         "usable_relevance": {"genre": ["manual"]},
+    }
+
+
+def _s1_source(document_id: str, file_name: str, text: str, *, role: str = "primary") -> dict:
+    return {
+        "document_id": document_id,
+        "file_name": file_name,
+        "role": role,
+        "text": text,
+        "use_decision": relevance.USE_FULL,
+        "usable_relevance": {"genre": ["manual"], "levels": {}},
     }
 
 
@@ -110,6 +124,302 @@ def test_identifier_scope_still_allows_multi_document_support_for_same_object() 
     )
     assert support["sufficient"] is True
     assert support["identifier_scoped_source_count"] == 2
+
+
+def test_s1_receipt_questions_normalize_purchase_and_payment_language() -> None:
+    receipt = _source(
+        "PURCHASE DATE 14 November 2025. ITEM Lunara S3 three-seat sofa. "
+        "PRODUCT CODE LUN-S3-2401. UNIT PRICE 249,900 HUF. "
+        "PAYMENT STATUS PAID. TOTAL PAID 249,900 HUF."
+    )
+
+    purchase_date = evidence_service.question_source_support(
+        "When did I buy the Lunara S3 sofa?", [receipt]
+    )
+    amount_paid = evidence_service.question_source_support(
+        "How much did I pay for the Lunara S3 sofa?", [receipt]
+    )
+
+    assert purchase_date["decision"] == "supported"
+    assert purchase_date["matched_question_terms"] == ["lunara", "purchase", "sofa"]
+    assert purchase_date["question_claim_relations"] == ["purchase_date"]
+    assert amount_paid["decision"] == "supported"
+    assert amount_paid["matched_question_terms"] == ["lunara", "payment", "sofa"]
+    assert amount_paid["question_claim_relations"] == ["price"]
+
+
+def test_s1_missing_warranty_duration_remains_insufficient_evidence() -> None:
+    sources = [
+        _source("Lunara S3 sofa care guide. Blot coffee spills and use mild soap."),
+        _source("PURCHASE DATE 14 November 2025. Lunara S3 sofa TOTAL PAID 249,900 HUF."),
+    ]
+
+    support = evidence_service.question_source_support(
+        "How long is the warranty for the Lunara S3 sofa?", sources
+    )
+
+    assert support["decision"] == "insufficient_evidence"
+    assert support["reason"] == "unsupported_claim_relation"
+    assert support["missing_claim_relations"] == ["duration"]
+
+
+def test_s1_numbered_cleaning_steps_ignore_ordinals_but_validate_quantities() -> None:
+    source = _source(
+        "For coffee spills on the Lunara S3 sofa, blot immediately. "
+        "Mix 5 mL mild soap with 250 mL water, then dab and air dry."
+    )
+    grounded_answer = (
+        "1. Blot the coffee spill immediately.\n"
+        "2. Mix 5 mL mild soap with 250 mL water.\n"
+        "3. Dab the Lunara S3 sofa and let it air dry."
+    )
+    invented_quantity = (
+        "1. Blot the coffee spill immediately.\n"
+        "2. Mix 50 mL mild soap with 250 mL water."
+    )
+
+    grounded = evidence_service.answer_source_support(grounded_answer, [source])
+    unsupported = evidence_service.answer_source_support(invented_quantity, [source])
+
+    assert grounded["sufficient"] is True
+    assert grounded["unsupported_numbers"] == []
+    assert unsupported["sufficient"] is False
+    assert unsupported["unsupported_numbers"] == ["50"]
+
+
+def test_s1_minimal_evidence_selection_keeps_only_the_required_care_guide() -> None:
+    care_sources = [
+        _s1_source(
+            "care-guide",
+            "lunara-s3-care-guide.pdf",
+            "Lunara S3 sofa product code LUN-S3-2401. Blot a coffee spill immediately; do not rub it.",
+        ),
+        _s1_source(
+            "care-guide",
+            "lunara-s3-care-guide.pdf",
+            "Clean the affected area with mild soap and water, then dab and air dry.",
+        ),
+    ]
+    receipt = _s1_source(
+        "receipt",
+        "lunara-s3-receipt.pdf",
+        "PURCHASE DATE 14 November 2025. ITEM Lunara S3 sofa. PRODUCT CODE LUN-S3-2401.",
+    )
+    rug_distractor = _s1_source(
+        "rug-guide",
+        "generic-rug-care-guide.pdf",
+        "Generic rug spot guide for RUG-P9-009. This document is not a sofa care instruction.",
+    )
+
+    selected, trace = evidence_service.select_minimal_evidence_sources(
+        "How should I clean a coffee spill from the Lunara S3 sofa?",
+        [*care_sources, receipt, rug_distractor],
+    )
+
+    assert {source["document_id"] for source in selected} == {"care-guide"}
+    assert len(selected) == 2
+    assert trace["applied"] is True
+    assert trace["reason"] == "minimal_sufficient_evidence_set"
+    assert trace["retrieved_document_count"] == 3
+    assert trace["selected_document_count"] == 1
+
+
+def test_s1_minimal_evidence_selection_keeps_only_the_required_receipt() -> None:
+    care = _s1_source(
+        "care-guide",
+        "lunara-s3-care-guide.pdf",
+        "Lunara S3 sofa product code LUN-S3-2401. Blot spills and use mild soap.",
+    )
+    receipt = _s1_source(
+        "receipt",
+        "lunara-s3-receipt.pdf",
+        "PURCHASE DATE 14 November 2025. ITEM Lunara S3 sofa. PRODUCT CODE LUN-S3-2401. "
+        "UNIT PRICE 249,900 HUF. PAYMENT STATUS PAID. TOTAL PAID 249,900 HUF.",
+    )
+
+    purchase_sources, purchase_trace = evidence_service.select_minimal_evidence_sources(
+        "When did I buy the Lunara S3 sofa?",
+        [care, receipt],
+    )
+    payment_sources, payment_trace = evidence_service.select_minimal_evidence_sources(
+        "How much did I pay for the Lunara S3 sofa?",
+        [care, receipt],
+    )
+
+    assert [source["document_id"] for source in purchase_sources] == ["receipt"]
+    assert [source["document_id"] for source in payment_sources] == ["receipt"]
+    assert purchase_trace["selected_document_count"] == 1
+    assert payment_trace["selected_document_count"] == 1
+
+
+def test_s1_minimal_evidence_selection_preserves_same_object_multi_document_support() -> None:
+    care = _s1_source(
+        "care-guide",
+        "lunara-s3-care-guide.pdf",
+        "Lunara S3 sofa product code LUN-S3-2401. Its care guide says to blot spills and use mild soap.",
+    )
+    receipt = _s1_source(
+        "receipt",
+        "lunara-s3-receipt.pdf",
+        "PURCHASE DATE 14 November 2025. ITEM Lunara S3 sofa. PRODUCT CODE LUN-S3-2401.",
+    )
+    rug_distractor = _s1_source(
+        "rug-guide",
+        "generic-rug-care-guide.pdf",
+        "Generic rug care guide for RUG-P9-009. Blot a spot and air dry the rug.",
+    )
+
+    selected, trace = evidence_service.select_minimal_evidence_sources(
+        "Do the care guide and purchase receipt refer to the same sofa?",
+        [care, receipt, rug_distractor],
+    )
+
+    assert {source["document_id"] for source in selected} == {"care-guide", "receipt"}
+    assert trace["applied"] is True
+    assert trace["selected_document_count"] == 2
+    assert trace["preserved_object_identifier_count"] == 0
+
+
+def test_minimal_evidence_selection_keeps_full_set_for_refusal_and_safety_paths() -> None:
+    care = _s1_source(
+        "care-guide",
+        "lunara-s3-care-guide.pdf",
+        "Lunara S3 sofa product code LUN-S3-2401. Blot spills and use mild soap.",
+    )
+    receipt = _s1_source(
+        "receipt",
+        "lunara-s3-receipt.pdf",
+        "PURCHASE DATE 14 November 2025. ITEM Lunara S3 sofa. PRODUCT CODE LUN-S3-2401.",
+    )
+
+    unsupported_sources, unsupported_trace = evidence_service.select_minimal_evidence_sources(
+        "How long is the warranty for the Lunara S3 sofa?",
+        [care, receipt],
+    )
+    assert unsupported_sources == [care, receipt]
+    assert unsupported_trace["applied"] is False
+    assert unsupported_trace["reason"] == "full_set_not_supported"
+
+    injected = dict(receipt)
+    injected["security"] = {"prompt_injection_detected": True}
+    security_sources, security_trace = evidence_service.select_minimal_evidence_sources(
+        "When did I buy the Lunara S3 sofa?",
+        [care, injected],
+    )
+    assert security_sources == [care, injected]
+    assert security_trace["reason"] == "security_source_present"
+
+    contrastive = dict(receipt)
+    contrastive["role"] = relevance.SOURCE_ROLE_CONTRASTIVE
+    role_sources, role_trace = evidence_service.select_minimal_evidence_sources(
+        "When did I buy the Lunara S3 sofa?",
+        [care, contrastive],
+    )
+    assert role_sources == [care, contrastive]
+    assert role_trace["reason"] == "special_evidence_role_present"
+
+
+def test_production_retrieval_passes_only_the_minimal_s1_evidence_set_to_generation(
+    db_session, monkeypatch
+) -> None:
+    care_document_id = "00000000-0000-0000-0000-000000000071"
+    receipt_document_id = "00000000-0000-0000-0000-000000000072"
+    care_chunk_id = "00000000-0000-0000-0000-000000000073"
+    receipt_chunk_id = "00000000-0000-0000-0000-000000000074"
+    source_sha = "3" * 64
+    config_hash = "4" * 64
+    care_text = "Lunara S3 sofa product code LUN-S3-2401. Blot spills and use mild soap."
+    receipt_text = (
+        "PURCHASE DATE 14 November 2025. ITEM Lunara S3 sofa. "
+        "PRODUCT CODE LUN-S3-2401. UNIT PRICE 249,900 HUF."
+    )
+
+    for document_id, filename in (
+        (care_document_id, "lunara-s3-care-guide.pdf"),
+        (receipt_document_id, "lunara-s3-purchase-receipt.pdf"),
+    ):
+        db_session.add(models.Document(
+            id=document_id,
+            file_path=filename,
+            original_filename=filename,
+            source_status="ACTIVE",
+            visibility="Private",
+            source_sha256=source_sha,
+        ))
+    for chunk_id, document_id, text in (
+        (care_chunk_id, care_document_id, care_text),
+        (receipt_chunk_id, receipt_document_id, receipt_text),
+    ):
+        db_session.add(models.DocumentChunk(
+            id=chunk_id,
+            document_id=document_id,
+            chunk_index=0,
+            page_number=1,
+            char_start=0,
+            char_end=len(text),
+            text_content=text,
+            content_sha256=sha256_text(text),
+            source_sha256=source_sha,
+            chunk_config_hash=config_hash,
+            vector_id=chunk_id,
+        ))
+    db_session.flush()
+
+    class Collection:
+        @staticmethod
+        def query(**_kwargs):
+            return {
+                "ids": [[receipt_chunk_id, care_chunk_id]],
+                "documents": [[receipt_text, care_text]],
+                "metadatas": [[
+                    {
+                        "document_id": receipt_document_id,
+                        "chunk_id": receipt_chunk_id,
+                        "content_hash": sha256_text(receipt_text),
+                        "source_sha256": source_sha,
+                        "config_hash": config_hash,
+                    },
+                    {
+                        "document_id": care_document_id,
+                        "chunk_id": care_chunk_id,
+                        "content_hash": sha256_text(care_text),
+                        "source_sha256": source_sha,
+                        "config_hash": config_hash,
+                    },
+                ]],
+            }
+
+    monkeypatch.setattr(chat.ai_service, "collection", Collection())
+    question = "When did I buy this sofa?"
+    query_profile = relevance.build_query_profile(question, ["purchase", "receipt", "sofa"])
+    governance = {
+        "source_roles": {
+            care_document_id: relevance.SOURCE_ROLE_PRIMARY,
+            receipt_document_id: relevance.SOURCE_ROLE_PRIMARY,
+        },
+        "use_decisions": {
+            care_document_id: relevance.USE_FULL,
+            receipt_document_id: relevance.USE_FULL,
+        },
+    }
+
+    sources, blocks, contributions = chat.query_retrieved_sources(
+        db_session,
+        question,
+        [0.0],
+        query_profile,
+        governance,
+        [care_document_id, receipt_document_id],
+    )
+
+    assert [source["document_id"] for source in sources] == [receipt_document_id]
+    assert len(blocks) == 1
+    assert receipt_text in blocks[0]
+    assert care_text not in blocks[0]
+    assert contributions == []
+    assert query_profile["source_selection_trace"]["applied"] is True
+    assert query_profile["source_selection_trace"]["retrieved_document_count"] == 2
+    assert query_profile["source_selection_trace"]["selected_document_count"] == 1
 
 
 def test_claim_relation_decision_uses_clarification_without_bypassing_governance() -> None:

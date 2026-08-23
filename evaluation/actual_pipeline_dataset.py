@@ -170,6 +170,17 @@ def _case(
         action_status="NOT_APPLICABLE",
         dataset_version=DATASET_VERSION,
         metadata={"coverage_class": output_class},
+        required_sources=tuple(gold_docs),
+        reference_citations=tuple(
+            {
+                "source_id": source_id,
+                "page": page,
+                "message_id": None,
+                "record_id": None,
+            }
+            for source_id, page_numbers in pages.items()
+            for page in page_numbers
+        ),
     )
     return query_input, gold
 

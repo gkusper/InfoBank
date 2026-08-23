@@ -146,10 +146,27 @@ def build_gold_queries() -> list[dict[str, Any]]:
                 if package.split == "development"
                 else f"Assess {query_class.replace('_', ' ')} for the candidate device {package.object_id}."
             )
+            required_sources = (
+                list(gold)
+                if output not in {
+                    "CLARIFICATION",
+                    "REFUSE_PERMISSION",
+                    "REFUSE_INSUFFICIENT_EVIDENCE",
+                    "REFUSE_NO_MATCH",
+                    "REFUSE_AGGREGATION_THRESHOLD",
+                }
+                else []
+            )
+            reference_citations = [
+                {"source_id": source_id, "page": page, "message_id": None, "record_id": None}
+                for source_id, page_numbers in pages.items()
+                for page in page_numbers
+            ]
             cases.append({
                 "query_id": f"rv2-{package.package_id}-{index:02d}", "query_class": query_class,
                 "query": wording, "expected_output_class": output, "gold_document_ids": list(gold),
-                "gold_page_or_message_ranges": pages, "reference_answer": answer,
+                "gold_page_or_message_ranges": pages, "required_sources": required_sources,
+                "reference_citations": reference_citations, "reference_answer": answer,
                 "refusal_reason": reason if output.startswith("REFUSE_") or output == "CLARIFICATION" else None,
                 "reason_code": reason,
                 "evidence_role": role, "action_status": "NOT_APPLICABLE", "split": package.split,
@@ -270,7 +287,8 @@ def validate_candidate(candidate_dir: Path) -> dict[str, Any]:
         and all(sum(item["query_class"] == query_class for item in queries) == 6 for query_class in QUERY_CLASSES),
         "query_required_fields": all({
             "query_id", "query_class", "expected_output_class", "gold_document_ids",
-            "gold_page_or_message_ranges", "reference_answer", "refusal_reason", "reason_code",
+            "gold_page_or_message_ranges", "required_sources", "reference_citations",
+            "reference_answer", "refusal_reason", "reason_code",
             "evidence_role", "split", "template_family", "object_family",
         } <= set(item) and bool(item["reference_answer"] or item["refusal_reason"]) for item in queries),
         "fifty_permission_groups": len(permissions) >= 50,

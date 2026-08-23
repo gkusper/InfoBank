@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/infobank/scenario-pack-v1.schema.json",
+  "title": "InfoBank Roadmap v1.8 ScenarioPack",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["scenario_id", "user_id", "object_id", "account_id", "sources", "queries"],
+  "properties": {
+    "scenario_id": {"type": "string", "minLength": 1},
+    "user_id": {"type": "string", "minLength": 1},
+    "object_id": {"type": ["string", "null"], "minLength": 1},
+    "account_id": {"type": ["string", "null"], "minLength": 1},
+    "sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "source_type", "date", "valid_from", "valid_to", "relation_key", "permission"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "source_type": {"type": "string", "minLength": 1},
+          "date": {"type": ["string", "null"], "format": "date"},
+          "valid_from": {"type": ["string", "null"], "format": "date"},
+          "valid_to": {"type": ["string", "null"], "format": "date"},
+          "relation_key": {"type": "string", "minLength": 1},
+          "permission": {"enum": ["Owner", "Reader", "Aggregate", "Metadata", "Deny"]}
+        }
+      }
+    },
+    "queries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["query_id", "query", "required_sources", "supporting_sources", "expected_output", "reference_answer", "reference_citations", "negative_reason"],
+        "properties": {
+          "query_id": {"type": "string", "minLength": 1},
+          "query": {"type": "string", "minLength": 1},
+          "required_sources": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "supporting_sources": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+          "expected_output": {
+            "enum": [
+              "FULL_ANSWER",
+              "CONSTRAINED_ANSWER",
+              "AGGREGATE_RESULT",
+              "METADATA_ONLY",
+              "CLARIFICATION",
+              "REFUSE_PERMISSION",
+              "REFUSE_INSUFFICIENT_EVIDENCE",
+              "REFUSE_NO_MATCH",
+              "REFUSE_AGGREGATION_THRESHOLD",
+              "REFUSE_CONFLICT"
+            ]
+          },
+          "reference_answer": {"type": ["string", "null"], "minLength": 1},
+          "reference_citations": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["source_id", "page", "message_id", "record_id"],
+              "properties": {
+                "source_id": {"type": "string", "minLength": 1},
+                "page": {"type": ["integer", "null"], "minimum": 1},
+                "message_id": {"type": ["string", "null"], "minLength": 1},
+                "record_id": {"type": ["string", "null"], "minLength": 1}
+              },
+              "oneOf": [
+                {"properties": {"page": {"type": "integer"}, "message_id": {"type": "null"}, "record_id": {"type": "null"}}},
+                {"properties": {"page": {"type": "null"}, "message_id": {"type": "string"}, "record_id": {"type": "null"}}},
+                {"properties": {"page": {"type": "null"}, "message_id": {"type": "null"}, "record_id": {"type": "string"}}}
+              ]
+            }
+          },
+          "negative_reason": {"type": ["string", "null"], "minLength": 1}
+        }
+      }
+    }
+  },
+  "oneOf": [
+    {"properties": {"object_id": {"type": "string"}, "account_id": {"type": "null"}}},
+    {"properties": {"object_id": {"type": "null"}, "account_id": {"type": "string"}}}
+  ]
+}

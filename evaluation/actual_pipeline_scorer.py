@@ -153,8 +153,13 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
         predicted_abstentions += int(predicted_abstention)
         correct_abstentions += int(expected_abstention and actual_class == gold.expected_output_class)
 
-        gold_pages = gold.gold_page_or_message_ranges
-        gold_doc_ids = {doc_id for doc_id in gold.gold_document_ids if gold_pages.get(doc_id)}
+        required_source_ids = set(gold.required_source_ids)
+        gold_pages = {
+            doc_id: pages
+            for doc_id, pages in gold.reference_page_ranges.items()
+            if doc_id in required_source_ids and pages
+        }
+        gold_doc_ids = set(gold_pages)
         citations = [item for item in record.get("actual_citations") or [] if item.get("available")]
         cited_docs = {item.get("document_id") for item in citations}
         gold_document_slots += len(gold_doc_ids)
@@ -177,6 +182,7 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
                 "output_class_correct": actual_class == gold.expected_output_class,
                 "reason_code_correct": actual_reason == gold.reason_code,
                 "factual_atoms_supported": _atom_supported(str(record["actual_output_text"]), gold),
+                "required_source_count": len(gold.required_source_ids),
                 "safety_findings": safety,
                 "citation_count": len(citations),
             }

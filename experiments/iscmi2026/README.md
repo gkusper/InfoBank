@@ -36,3 +36,27 @@ Generated outputs:
 - `mailex_event_statistics.csv`
 - `mailex_thread_statistics.csv`
 - `mailex_pilot_candidates.csv`
+
+## Manual Pilot Preparation
+
+The manual pilot preparation step uses the fixed 50-row candidate pool from
+`mailex_pilot_candidates.csv`. It adds:
+
+- `mailex_annotation_guideline_v0.1.md`
+- `mailex_pilot_index.csv`
+- `mailex_pilot_annotation_template.csv`
+- `mailex_pilot_task_summary_template.csv`
+- `prepare_mailex_pilot.py`
+
+The CSV templates intentionally leave semantic ISCMI fields blank for later
+human annotation. To generate the full-text packet outside the repository:
+
+```powershell
+& "C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\python.exe" `
+  experiments\iscmi2026\prepare_mailex_pilot.py `
+  --dataset "C:\path\outside\repo\mailex_data.zip" `
+  --output "C:\path\outside\repo\mailex_pilot"
+```
+
+The packet includes original MailEx annotations for reviewer context only. It
+does not create ISCMI semantic ground-truth labels.

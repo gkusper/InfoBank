@@ -60,3 +60,18 @@ human annotation. To generate the full-text packet outside the repository:
 
 The packet includes original MailEx annotations for reviewer context only. It
 does not create ISCMI semantic ground-truth labels.
+
+### Message Alignment
+
+MailEx JSON `turn_N` order is treated as the intended conversational order. The
+original MailEx processing code uses earlier `sentences[:idx]` as conversation
+history, so `chronological_rank` is generated as `turn_N + 1`.
+
+The `raw_threads` positional order must not be assumed to match JSON order.
+`prepare_mailex_pilot.py` aligns each JSON sentence to the corresponding raw
+message by deterministic text evidence before displaying sender, recipient,
+subject, and body metadata.
+
+`chronological_rank` is not an independently reconstructed send-time chronology,
+and `sent_at` is not generated because timestamp coverage in MailEx is too
+sparse for reliable ordering.

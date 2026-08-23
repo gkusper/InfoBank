@@ -1,0 +1,12 @@
+event_type,event_instances,event_groups,threads_with_event,turns_with_event_group,label_sequences,nonempty_triggers,example_trigger,example_trigger_indices,iscmi_relevance_note
+Amend_Action_Data,3,3,3,3,3,3,will sign on my behalf,31 32 33 34 35,"Potential MODIFY or CANCEL candidate, very sparse."
+Amend_Data,193,153,129,153,193,193,For this report please include,0 1 2 4 5,Potential MODIFY candidate for data-centric tasks.
+Amend_Meeting_Data,55,53,42,53,55,55,The party is back,14 15 16 17,Potential MODIFY candidate for meeting state.
+Deliver_Action_Data,3195,1604,1081,1604,3195,3195,quarantined,10,Potential COMPLETE/CONFIRM evidence candidate depending on context.
+Deliver_Data,1820,1262,943,1262,1820,1820,"it was , Fairfield weather forecast",3 4 5 6 7 8,Contextual or completion evidence for data delivery.
+Deliver_Meeting_Data,487,409,337,409,487,487,are coming over for dinner,68 69 70 71 72,Possible confirmation/context for meeting state.
+Request_Action,1376,1048,774,1048,1376,1376,Let me know,33 34 35,"Strong CREATE/open-action candidate, but not final ISCMI ground truth."
+Request_Action_Data,233,212,188,212,233,233,where we are with delivering,12 13 14 15 16,Potential CREATE or MODIFY candidate involving action plus data request.
+Request_Data,721,602,491,602,721,721,What did you send,18 19 20 21,"Possible contextual data request, not necessarily an action item."
+Request_Meeting,259,246,214,246,259,259,would love for you to come,75 76 77 78 79 80,Possible CREATE candidate for meeting-related task.
+Request_Meeting_Data,50,48,46,48,50,50,let us know,50 51 52,Possible contextual meeting data request.

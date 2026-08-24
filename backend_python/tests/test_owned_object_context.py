@@ -69,6 +69,114 @@ def test_extracts_only_label_scoped_product_identifiers_and_strong_purchase_evid
     assert extract_declared_object_types(ARMCHAIR.text) == ("armchair",)
 
 
+def test_product_code_extraction_discards_model_alias_and_repeated_truncated_prefix() -> None:
+    extracted_pdf_text = """PRODUCT
+Velora V55 Smart TV
+Product code VEL-V55-2025
+Model / product code V55 / VEL-V55-2025
+Product code VEL-V5 a and personalised-content choices separately.
+The rear label shows product code VEL-V55-2025.
+"""
+
+    assert extract_product_codes(extracted_pdf_text) == ("VEL-V55-2025",)
+
+
+def test_service_document_that_only_requests_proof_of_purchase_is_not_purchase_evidence() -> None:
+    service_notice = """REGIONAL SERVICE NOTICE
+The service period starts on the original retail purchase date.
+Customers must retain the original proof of purchase.
+Verify purchase using a retail receipt or invoice before service is scheduled.
+"""
+
+    assert contains_purchase_evidence(service_notice) is False
+
+
+def test_owned_television_question_prefers_purchase_evidenced_type_cluster() -> None:
+    velora_manual = PermittedDocumentContent(
+        "velora-manual",
+        """PRODUCT
+Velora V55 Smart TV
+PRODUCT CODE VEL-V55-2025
+Model / product code V55 / VEL-V55-2025
+""",
+    )
+    velora_receipt = PermittedDocumentContent(
+        "velora-receipt",
+        """PURCHASE RECEIPT
+ITEM Velora V55 Smart TV
+PRODUCT CODE VEL-V55-2025
+PURCHASE DATE 12 March 2025
+PAYMENT STATUS PAID
+TOTAL PAID 319,900 HUF
+""",
+    )
+    aster_manual = PermittedDocumentContent(
+        "aster-manual",
+        """PRODUCT
+Aster M55 television
+PRODUCT CODE AST-M55-2024
+""",
+    )
+
+    result = resolve_owned_object_context(
+        "Which television do I own, when did I purchase it, and what was the price?",
+        [velora_manual, velora_receipt, aster_manual],
+    )
+
+    assert result.status == STATUS_RESOLVED
+    assert result.candidate_document_ids == ("velora-manual", "velora-receipt")
+    assert result.purchase_evidenced_object_count == 1
+
+
+def test_duration_phrases_do_not_override_declared_product_name_resolution() -> None:
+    velora_terms = PermittedDocumentContent(
+        "velora-terms",
+        """PRODUCT
+Velora V55 Smart TV
+PRODUCT CODE VEL-V55-2025
+The manufacturer warranty period is 24 months.
+""",
+    )
+    velora_service = PermittedDocumentContent(
+        "velora-service",
+        """PRODUCT
+Velora V55 Smart TV
+PRODUCT CODE VEL-V55-2025
+The regional service period is 18 months.
+""",
+    )
+    velora_receipt = PermittedDocumentContent(
+        "velora-receipt",
+        """PURCHASE RECEIPT
+ITEM Velora V55 Smart TV
+PRODUCT CODE VEL-V55-2025
+PURCHASE DATE 12 March 2025
+PAYMENT STATUS PAID
+TOTAL PAID 319,900 HUF
+""",
+    )
+    aster_receipt = PermittedDocumentContent(
+        "aster-receipt",
+        """PURCHASE RECEIPT
+ITEM Aster M55 television
+PRODUCT CODE AST-M55-2024
+PURCHASE DATE 2 January 2025
+PAYMENT STATUS PAID
+TOTAL PAID 199,900 HUF
+""",
+    )
+
+    result = resolve_owned_object_context(
+        "Does the 18-month regional service period replace the 24-month manufacturer warranty for my Velora V55?",
+        [velora_terms, velora_service, velora_receipt, aster_receipt],
+    )
+
+    assert result.status == STATUS_RESOLVED
+    assert result.reason == "explicit_product_description"
+    assert result.candidate_document_ids == ("velora-receipt", "velora-service", "velora-terms")
+    assert result.purchase_evidenced_object_count == 2
+
+
 @pytest.mark.parametrize(
     "question",
     [

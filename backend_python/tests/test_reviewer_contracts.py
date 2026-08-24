@@ -187,6 +187,132 @@ def test_s1_numbered_cleaning_steps_ignore_ordinals_but_validate_quantities() ->
     assert unsupported["unsupported_numbers"] == ["50"]
 
 
+def test_grounding_accepts_question_date_but_rejects_a_generated_date() -> None:
+    sources = [
+        _source("PURCHASE DATE 12 March 2025. ITEM Velora V55 Smart TV."),
+        _source(
+            "The manufacturer warranty period is 24 months from the original retail purchase date. "
+            "The covered product is the Velora V55 Smart TV."
+        ),
+    ]
+    question = "Is my Velora V55 still covered by the manufacturer warranty on 21 August 2026?"
+
+    grounded = evidence_service.answer_source_support(
+        "On 21 August 2026, the Velora V55 is still covered by the manufacturer warranty.",
+        sources,
+        question,
+    )
+    invented = evidence_service.answer_source_support(
+        "On 21 August 2026, the Velora V55 remains covered until 2030.",
+        sources,
+        question,
+    )
+
+    assert grounded["sufficient"] is True
+    assert grounded["accepted_question_number_count"] == 2
+    assert grounded["unsupported_numbers"] == []
+    assert invented["sufficient"] is False
+    assert invented["unsupported_numbers"] == ["2030"]
+
+
+def test_temporal_coverage_inference_validates_answer_polarity_and_preserves_exclusion_guard() -> None:
+    sources = [
+        _source("PURCHASE DATE 12 March 2025. ITEM Velora V55 Smart TV."),
+        _source(
+            "The manufacturer warranty period is 24 months from the original retail purchase date. "
+            "The covered product is the Velora V55 Smart TV."
+        ),
+    ]
+    future_question = "Is my Velora V55 covered by the manufacturer warranty on 21 August 2028?"
+    current_question = "Is my Velora V55 covered by the manufacturer warranty on 21 August 2026?"
+
+    supported_expiry = evidence_service.answer_source_support(
+        "On 21 August 2028, the Velora V55 is no longer covered and is outside the warranty.",
+        sources,
+        future_question,
+    )
+    wrong_expiry = evidence_service.answer_source_support(
+        "On 21 August 2026, the Velora V55 is no longer covered and is outside the warranty.",
+        sources,
+        current_question,
+    )
+    invented_exclusion = evidence_service.answer_source_support(
+        "On 21 August 2026, the Velora V55 is still covered, but liquid damage is excluded.",
+        sources,
+        current_question,
+    )
+
+    assert supported_expiry["sufficient"] is True
+    assert supported_expiry["temporal_coverage_inference_supported"] is True
+    assert wrong_expiry["sufficient"] is False
+    assert wrong_expiry["missing_claim_relations"] == ["exclusion"]
+    assert invented_exclusion["sufficient"] is False
+    assert invented_exclusion["missing_claim_relations"] == ["exclusion"]
+
+
+def test_temporal_coverage_correction_repairs_only_resolvable_polarity_failures() -> None:
+    sources = [
+        _source("PURCHASE DATE 12 March 2025. ITEM Velora V55 Smart TV."),
+        _source(
+            "The manufacturer warranty period is 24 months from the original retail purchase date. "
+            "The covered product is the Velora V55 Smart TV. "
+            "Purchase date 12 March 2025. Manufacturer warranty end 12 March 2027."
+        ),
+    ]
+    question = "Is my Velora V55 covered by the manufacturer warranty on 21 August 2026?"
+    failing_drafts = (
+        (
+            "The Velora V55 is not covered on 21 August 2026. "
+            "The warranty ends on 12 March 2027, so it is still covered on that date.",
+            "contradictory_generated_temporal_coverage",
+        ),
+        (
+            "No. The Velora V55 is not covered on 21 August 2026, although the warranty ends on 12 March 2027.",
+            "mismatched_generated_temporal_coverage",
+        ),
+    )
+
+    for draft, expected_reason in failing_drafts:
+        support = evidence_service.answer_source_support(draft, sources, question)
+        correction = evidence_service.correct_temporal_coverage_answer(
+            question,
+            draft,
+            sources,
+            support,
+        )
+
+        assert support["sufficient"] is False
+        assert correction is not None
+        assert correction["answer"].startswith("Yes.")
+        assert "ending on 12 March 2027" in correction["answer"]
+        assert correction["answer_source_support"]["sufficient"] is True
+        assert correction["trace"] == {
+            "version": evidence_service.TEMPORAL_COVERAGE_CORRECTION_VERSION,
+            "applied": True,
+            "reason": expected_reason,
+            "source_fact_count": 3,
+            "covered": True,
+        }
+
+
+def test_temporal_coverage_correction_does_not_rewrite_a_concrete_exclusion_claim() -> None:
+    sources = [
+        _source("PURCHASE DATE 12 March 2025. ITEM Velora V55 Smart TV."),
+        _source("The manufacturer warranty period is 24 months from the original retail purchase date."),
+    ]
+    question = "Is my Velora V55 covered by the manufacturer warranty on 21 August 2026?"
+    draft = "The television is still covered, but liquid damage is excluded."
+    support = evidence_service.answer_source_support(draft, sources, question)
+
+    assert support["sufficient"] is False
+    assert evidence_service.correct_temporal_coverage_answer(
+        question,
+        draft,
+        sources,
+        support,
+    ) is None
+
+
 def test_s1_minimal_evidence_selection_keeps_only_the_required_care_guide() -> None:
     care_sources = [
         _s1_source(
@@ -420,6 +546,248 @@ def test_production_retrieval_passes_only_the_minimal_s1_evidence_set_to_generat
     assert query_profile["source_selection_trace"]["applied"] is True
     assert query_profile["source_selection_trace"]["retrieved_document_count"] == 2
     assert query_profile["source_selection_trace"]["selected_document_count"] == 1
+
+
+def test_owned_object_retrieval_backfills_a_missing_routed_document_without_expanding_top_k(
+    db_session, monkeypatch
+) -> None:
+    warranty_document_id = "00000000-0000-0000-0000-000000000081"
+    service_document_id = "00000000-0000-0000-0000-000000000082"
+    source_sha = "5" * 64
+    config_hash = "6" * 64
+    warranty_chunks = [
+        (
+            f"00000000-0000-0000-0000-00000000008{index}",
+            text,
+        )
+        for index, text in enumerate(
+            (
+                "PRODUCT CODE VEL-V55-2025. The manufacturer warranty period is 24 months.",
+                "VEL-V55-2025 manufacturer warranty coverage begins on the retail purchase date.",
+                "VEL-V55-2025 warranty claims require the original purchase receipt.",
+                "VEL-V55-2025 manufacturer warranty administration is described in these terms.",
+            ),
+            start=3,
+        )
+    ]
+    service_chunk_id = "00000000-0000-0000-0000-000000000087"
+    service_text = (
+        "PRODUCT CODE VEL-V55-2025. The regional service period is 18 months. "
+        "Registration does not change the starting date of this regional programme."
+    )
+
+    for document_id, filename in (
+        (warranty_document_id, "velora-v55-manufacturer-warranty-terms.pdf"),
+        (service_document_id, "velora-v55-regional-service-notice.pdf"),
+    ):
+        db_session.add(models.Document(
+            id=document_id,
+            file_path=filename,
+            original_filename=filename,
+            source_status="ACTIVE",
+            visibility="Private",
+            source_sha256=source_sha,
+        ))
+    for chunk_index, (chunk_id, text) in enumerate(warranty_chunks):
+        db_session.add(models.DocumentChunk(
+            id=chunk_id,
+            document_id=warranty_document_id,
+            chunk_index=chunk_index,
+            page_number=chunk_index + 1,
+            char_start=0,
+            char_end=len(text),
+            text_content=text,
+            content_sha256=sha256_text(text),
+            source_sha256=source_sha,
+            chunk_config_hash=config_hash,
+            vector_id=chunk_id,
+        ))
+    db_session.add(models.DocumentChunk(
+        id=service_chunk_id,
+        document_id=service_document_id,
+        chunk_index=0,
+        page_number=1,
+        char_start=0,
+        char_end=len(service_text),
+        text_content=service_text,
+        content_sha256=sha256_text(service_text),
+        source_sha256=source_sha,
+        chunk_config_hash=config_hash,
+        vector_id=service_chunk_id,
+    ))
+    db_session.flush()
+
+    def vector_row(document_id: str, chunk_id: str, text: str) -> tuple[str, str, dict]:
+        return chunk_id, text, {
+            "document_id": document_id,
+            "chunk_id": chunk_id,
+            "content_hash": sha256_text(text),
+            "source_sha256": source_sha,
+            "config_hash": config_hash,
+        }
+
+    initial_rows = [
+        vector_row(warranty_document_id, chunk_id, text)
+        for chunk_id, text in warranty_chunks
+    ]
+    service_row = vector_row(service_document_id, service_chunk_id, service_text)
+    query_filters = []
+
+    class Collection:
+        @staticmethod
+        def query(**kwargs):
+            query_filters.append(kwargs["where"])
+            rows = [service_row] if kwargs["where"] == {"document_id": service_document_id} else initial_rows
+            return {
+                "ids": [[row[0] for row in rows]],
+                "documents": [[row[1] for row in rows]],
+                "metadatas": [[row[2] for row in rows]],
+            }
+
+    monkeypatch.setattr(chat.ai_service, "collection", Collection())
+    question = (
+        "Do the documents establish that the 18-month regional service period replaces the "
+        "24-month manufacturer warranty for VEL-V55-2025?"
+    )
+    query_profile = relevance.build_query_profile(question, ["manufacturer", "regional", "service"])
+    governance = {
+        "source_roles": {
+            warranty_document_id: relevance.SOURCE_ROLE_PRIMARY,
+            service_document_id: relevance.SOURCE_ROLE_PRIMARY,
+        },
+        "use_decisions": {
+            warranty_document_id: relevance.USE_FULL,
+            service_document_id: relevance.USE_FULL,
+        },
+    }
+
+    sources, blocks, contributions = chat.query_retrieved_sources(
+        db_session,
+        question,
+        [0.0],
+        query_profile,
+        governance,
+        [warranty_document_id, service_document_id],
+        n_results=4,
+        ensure_document_coverage=True,
+    )
+
+    assert query_filters == [
+        {"document_id": {"$in": [warranty_document_id, service_document_id]}},
+        {"document_id": service_document_id},
+    ]
+    assert len(sources) <= 4
+    assert {source["document_id"] for source in sources} == {
+        warranty_document_id,
+        service_document_id,
+    }
+    assert len(blocks) == len(sources)
+    assert contributions == []
+    assert query_profile["retrieval_document_coverage_trace"] == {
+        "version": chat.RETRIEVAL_DOCUMENT_COVERAGE_VERSION,
+        "enabled": True,
+        "result_limit": 4,
+        "routed_document_count": 2,
+        "initial_document_count": 1,
+        "backfilled_document_count": 1,
+        "final_document_count": 2,
+    }
+    assert query_profile["retrieval_anchor_rerank_trace"] == {
+        "version": chat.RETRIEVAL_ANCHOR_RERANK_VERSION,
+        "enabled": False,
+        "candidate_limit": chat.RETRIEVAL_ANCHOR_CANDIDATE_LIMIT,
+        "anchor_count": 0,
+        "navigation_candidate_count": 0,
+        "reranked_document_count": 0,
+    }
+
+
+def test_error_code_rerank_replaces_only_navigation_hit_inside_the_governed_document(
+    monkeypatch,
+) -> None:
+    manual_document_id = "00000000-0000-0000-0000-000000000091"
+    warranty_document_id = "00000000-0000-0000-0000-000000000092"
+    excluded_document_id = "00000000-0000-0000-0000-000000000093"
+    index_chunk_id = "00000000-0000-0000-0000-000000000094"
+    explanation_chunk_id = "00000000-0000-0000-0000-000000000095"
+    warranty_chunk_id = "00000000-0000-0000-0000-000000000096"
+    excluded_chunk_id = "00000000-0000-0000-0000-000000000097"
+
+    def vector_row(document_id: str, chunk_id: str, text: str) -> tuple[str, str, dict]:
+        return chunk_id, text, {"document_id": document_id, "chunk_id": chunk_id}
+
+    index_row = vector_row(
+        manual_document_id,
+        index_chunk_id,
+        "Error Code Index. E06 HDMI error 17.",
+    )
+    explanation_row = vector_row(
+        manual_document_id,
+        explanation_chunk_id,
+        (
+            "E06 recovery procedure. E06 means an HDMI handshake or connection failure. "
+            "Power-cycle both connected devices and reconnect. On the Velora V55, E06 relates "
+            "to HDMI connection negotiation; another manufacturer's code may mean something else."
+        ),
+    )
+    warranty_row = vector_row(
+        warranty_document_id,
+        warranty_chunk_id,
+        "VEL-V55-2025 has a 24-month manufacturer warranty.",
+    )
+    excluded_row = vector_row(
+        excluded_document_id,
+        excluded_chunk_id,
+        "Aster M55 error E06 means a temperature-sensor fault.",
+    )
+    query_filters: list[dict] = []
+
+    class Collection:
+        @staticmethod
+        def query(**kwargs):
+            query_filters.append(kwargs["where"])
+            rows = (
+                [index_row, explanation_row, excluded_row]
+                if kwargs["where"] == {"document_id": manual_document_id}
+                else [index_row, warranty_row]
+            )
+            return {
+                "ids": [[row[0] for row in rows]],
+                "documents": [[row[1] for row in rows]],
+                "metadatas": [[row[2] for row in rows]],
+            }
+
+    monkeypatch.setattr(chat.ai_service, "collection", Collection())
+    question = (
+        "For the Velora V55, product code VEL-V55-2025, does error E06 mean a "
+        "temperature-sensor fault as described in the Aster M55 manual, or something else?"
+    )
+
+    rows, trace = chat._query_vector_rows(
+        question,
+        [0.0],
+        [manual_document_id, warranty_document_id],
+        4,
+        ensure_document_coverage=True,
+    )
+
+    assert query_filters == [
+        {"document_id": {"$in": [manual_document_id, warranty_document_id]}},
+        {"document_id": manual_document_id},
+    ]
+    assert [row[0] for row in rows] == [explanation_chunk_id, warranty_chunk_id]
+    assert excluded_chunk_id not in {row[0] for row in rows}
+    assert len(rows) == 2
+    assert trace["coverage"]["initial_document_count"] == 2
+    assert trace["coverage"]["final_document_count"] == 2
+    assert trace["anchor_rerank"] == {
+        "version": chat.RETRIEVAL_ANCHOR_RERANK_VERSION,
+        "enabled": True,
+        "candidate_limit": chat.RETRIEVAL_ANCHOR_CANDIDATE_LIMIT,
+        "anchor_count": 1,
+        "navigation_candidate_count": 1,
+        "reranked_document_count": 1,
+    }
 
 
 def test_claim_relation_decision_uses_clarification_without_bypassing_governance() -> None:

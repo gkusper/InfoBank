@@ -323,21 +323,278 @@ def _record_stale_index_rejection(governance_context: dict, doc_id: str, chunk_i
     governance_context["integrity_reason_code"] = "stale_index_denied"
 
 
-def query_retrieved_sources(db: Session, question: str, question_vector: list[float], query_profile: dict, governance_context: dict, doc_ids: list[str], n_results: int = 4) -> tuple[list[dict], list[str], list[AggregateContribution]]:
+RETRIEVAL_DOCUMENT_COVERAGE_VERSION = "infobank-owned-object-document-coverage-v1"
+RETRIEVAL_ANCHOR_RERANK_VERSION = "infobank-explicit-anchor-rerank-v1"
+RETRIEVAL_ANCHOR_CANDIDATE_LIMIT = 4
+
+_ERROR_CODE_ANCHOR_RE = re.compile(
+    r"\b(?:error|fault|hiba)(?:\s+(?:code|k[oó]d))?\s*[:#-]?\s*([A-Z]{1,3}\d{2,5})\b"
+    r"|\b([A-Z]{1,3}\d{2,5})\s+(?:error|fault|hiba)\b",
+    flags=re.IGNORECASE,
+)
+_NAVIGATION_CHUNK_RE = re.compile(
+    r"\b(?:table\s+of\s+contents|contents|error(?:\s+code)?\s+index|index)\b",
+    flags=re.IGNORECASE,
+)
+_EXPLANATORY_ANCHOR_RE = re.compile(
+    r"\b(?:mean(?:s|ing)?|indicat(?:e|es|ed|ing)|relat(?:e|es|ed|ing)\s+to|"
+    r"failure|fault|procedure|recovery|first\s+action|power-cycle|reconnect|reset)\b",
+    flags=re.IGNORECASE,
+)
+
+
+def _vector_result_rows(results: dict) -> list[tuple[str, str, dict]]:
+    if not results.get("documents") or not results["documents"][0]:
+        return []
+    result_ids = results.get("ids", [[]])[0]
+    metadatas = results.get("metadatas", [[]])[0]
+    return list(zip(result_ids, results["documents"][0], metadatas))
+
+
+def _explicit_error_code_anchors(question: str) -> list[str]:
+    """Return exact error-code anchors without treating product models as codes."""
+
+    anchors: list[str] = []
+    for match in _ERROR_CODE_ANCHOR_RE.finditer(question or ""):
+        anchor = next((group for group in match.groups() if group), "").upper()
+        if anchor and anchor not in anchors:
+            anchors.append(anchor)
+    return anchors
+
+
+def _chunk_contains_anchor(chunk_text: str, anchors: list[str]) -> bool:
+    normalized = (chunk_text or "").upper()
+    return any(re.search(rf"\b{re.escape(anchor)}\b", normalized) for anchor in anchors)
+
+
+def _navigation_like_chunk(chunk_text: str) -> bool:
+    return bool(_NAVIGATION_CHUNK_RE.search(chunk_text or ""))
+
+
+def _anchor_chunk_rank(chunk_text: str, anchors: list[str], question_terms: list[str]) -> tuple[int, int, int, int, int]:
+    """Rank exact-anchor chunks, preferring explanation over navigation."""
+
+    normalized = (chunk_text or "").casefold()
+    anchor_hits = sum(
+        bool(re.search(rf"\b{re.escape(anchor.casefold())}\b", normalized))
+        for anchor in anchors
+    )
+    explanatory = int(bool(_EXPLANATORY_ANCHOR_RE.search(chunk_text or "")))
+    navigation_penalty = -int(_navigation_like_chunk(chunk_text))
+    lexical_overlap = sum(term.casefold() in normalized for term in question_terms)
+    substantive_length = min(len(re.findall(r"\w+", chunk_text or "")), 200)
+    return anchor_hits, explanatory, navigation_penalty, lexical_overlap, substantive_length
+
+
+def _rerank_navigation_anchor_rows(
+    question: str,
+    question_vector: list[float],
+    rows: list[tuple[str, str, dict]],
+    scoped_doc_ids: list[str],
+    *,
+    enabled: bool,
+) -> tuple[list[tuple[str, str, dict]], dict]:
+    """Replace an index-like hit with a stronger same-document anchor hit.
+
+    Candidate expansion is bounded, vector-based, and restricted to the
+    already governed/routed document. It never adds a result or changes the
+    document set represented by the existing rows.
+    """
+
+    anchors = _explicit_error_code_anchors(question) if enabled else []
+    trace = {
+        "version": RETRIEVAL_ANCHOR_RERANK_VERSION,
+        "enabled": bool(enabled and anchors),
+        "candidate_limit": RETRIEVAL_ANCHOR_CANDIDATE_LIMIT,
+        "anchor_count": len(anchors),
+        "navigation_candidate_count": 0,
+        "reranked_document_count": 0,
+    }
+    if not anchors:
+        return rows, trace
+
+    scoped_doc_id_set = set(scoped_doc_ids)
+    question_terms = relevance.extract_lexical_terms(question, max_terms=24)
+    reranked_rows = list(rows)
+    processed_document_ids: set[str] = set()
+
+    for row_index, row in enumerate(list(reranked_rows)):
+        metadata = row[2] or {}
+        document_id = metadata.get("document_id")
+        if (
+            document_id not in scoped_doc_id_set
+            or document_id in processed_document_ids
+            or not _chunk_contains_anchor(row[1], anchors)
+            or not _navigation_like_chunk(row[1])
+        ):
+            continue
+
+        processed_document_ids.add(document_id)
+        trace["navigation_candidate_count"] += 1
+        candidate_results = ai_service.collection.query(
+            query_embeddings=[question_vector],
+            n_results=RETRIEVAL_ANCHOR_CANDIDATE_LIMIT,
+            where={"document_id": document_id},
+        )
+        candidates = [
+            candidate
+            for candidate in _vector_result_rows(candidate_results)
+            if (candidate[2] or {}).get("document_id") == document_id
+            and _chunk_contains_anchor(candidate[1], anchors)
+        ]
+        if not candidates:
+            continue
+
+        best_candidate = max(
+            candidates,
+            key=lambda candidate: _anchor_chunk_rank(candidate[1], anchors, question_terms),
+        )
+        current_rank = _anchor_chunk_rank(row[1], anchors, question_terms)
+        best_rank = _anchor_chunk_rank(best_candidate[1], anchors, question_terms)
+        duplicate_elsewhere = any(
+            existing_index != row_index and existing[0] == best_candidate[0]
+            for existing_index, existing in enumerate(reranked_rows)
+        )
+        if best_rank > current_rank and not duplicate_elsewhere:
+            reranked_rows[row_index] = best_candidate
+            trace["reranked_document_count"] += 1
+
+    return reranked_rows, trace
+
+
+def _query_vector_rows(
+    question: str,
+    question_vector: list[float],
+    doc_ids: list[str],
+    n_results: int,
+    *,
+    ensure_document_coverage: bool,
+) -> tuple[list[tuple[str, str, dict]], dict]:
+    """Retrieve a bounded chunk set with optional routed-document coverage.
+
+    The ordinary global top-k remains authoritative. For a resolved owned-object
+    query, a routed document that is completely absent may replace the weakest
+    duplicate-document result with its own best chunk. An explicit error-code
+    query may also replace a navigation hit with a stronger hit from the same
+    routed document. Neither operation expands the governed document set or the
+    result limit.
+    """
+
+    scoped_doc_ids = list(dict.fromkeys(doc_ids))
+    where_clause = (
+        {"document_id": scoped_doc_ids[0]}
+        if len(scoped_doc_ids) == 1
+        else {"document_id": {"$in": scoped_doc_ids}}
+    )
+    initial_results = ai_service.collection.query(
+        query_embeddings=[question_vector],
+        n_results=n_results,
+        where=where_clause,
+    )
+    rows = _vector_result_rows(initial_results)
+    scoped_doc_id_set = set(scoped_doc_ids)
+
+    def row_document_id(row: tuple[str, str, dict]) -> str | None:
+        metadata = row[2] or {}
+        document_id = metadata.get("document_id")
+        return document_id if document_id in scoped_doc_id_set else None
+
+    initial_covered = {document_id for row in rows if (document_id := row_document_id(row))}
+    backfilled_document_count = 0
+    if ensure_document_coverage and len(scoped_doc_ids) > 1 and n_results > 1:
+        document_counts = {
+            document_id: sum(row_document_id(row) == document_id for row in rows)
+            for document_id in scoped_doc_ids
+        }
+        for missing_document_id in (
+            document_id for document_id in scoped_doc_ids if document_counts[document_id] == 0
+        ):
+            backfill_results = ai_service.collection.query(
+                query_embeddings=[question_vector],
+                n_results=1,
+                where={"document_id": missing_document_id},
+            )
+            backfill_rows = [
+                row for row in _vector_result_rows(backfill_results)
+                if row_document_id(row) == missing_document_id
+            ]
+            if not backfill_rows:
+                continue
+
+            replacement_index = next(
+                (
+                    index
+                    for index in range(len(rows) - 1, -1, -1)
+                    if (existing_document_id := row_document_id(rows[index]))
+                    and document_counts[existing_document_id] > 1
+                ),
+                None,
+            )
+            if replacement_index is None:
+                if len(rows) >= n_results:
+                    continue
+                rows.append(backfill_rows[0])
+            else:
+                replaced_document_id = row_document_id(rows[replacement_index])
+                rows[replacement_index] = backfill_rows[0]
+                if replaced_document_id:
+                    document_counts[replaced_document_id] -= 1
+            document_counts[missing_document_id] += 1
+            backfilled_document_count += 1
+
+    rows, anchor_rerank_trace = _rerank_navigation_anchor_rows(
+        question,
+        question_vector,
+        rows,
+        scoped_doc_ids,
+        enabled=ensure_document_coverage,
+    )
+
+    final_covered = {document_id for row in rows if (document_id := row_document_id(row))}
+    trace = {
+        "version": RETRIEVAL_DOCUMENT_COVERAGE_VERSION,
+        "enabled": ensure_document_coverage,
+        "result_limit": n_results,
+        "routed_document_count": len(scoped_doc_ids),
+        "initial_document_count": len(initial_covered),
+        "backfilled_document_count": backfilled_document_count,
+        "final_document_count": len(final_covered),
+    }
+    return rows, {"coverage": trace, "anchor_rerank": anchor_rerank_trace}
+
+
+def query_retrieved_sources(
+    db: Session,
+    question: str,
+    question_vector: list[float],
+    query_profile: dict,
+    governance_context: dict,
+    doc_ids: list[str],
+    n_results: int = 4,
+    *,
+    ensure_document_coverage: bool = False,
+) -> tuple[list[dict], list[str], list[AggregateContribution]]:
     if not doc_ids:
         return [], [], []
-    where_clause = {"document_id": doc_ids[0]} if len(doc_ids) == 1 else {"document_id": {"$in": doc_ids}}
-    results = ai_service.collection.query(query_embeddings=[question_vector], n_results=n_results, where=where_clause)
+    result_rows, retrieval_trace = _query_vector_rows(
+        question,
+        question_vector,
+        doc_ids,
+        n_results,
+        ensure_document_coverage=ensure_document_coverage,
+    )
+    if ensure_document_coverage:
+        query_profile["retrieval_document_coverage_trace"] = retrieval_trace["coverage"]
+        query_profile["retrieval_anchor_rerank_trace"] = retrieval_trace["anchor_rerank"]
     sources: list[dict] = []
     blocks: list[str] = []
     block_rows: list[tuple[dict, str]] = []
     aggregate_contributions: list[AggregateContribution] = []
-    if not results.get('documents') or not results['documents'][0]:
+    if not result_rows:
         return sources, blocks, aggregate_contributions
 
     seen = set()
-    result_ids = results.get("ids", [[]])[0]
-    for vector_id, chunk_text, meta in zip(result_ids, results['documents'][0], results['metadatas'][0]):
+    for vector_id, chunk_text, meta in result_rows:
         meta = meta or {}
         doc_id = meta.get("document_id")
         chunk_id = meta.get("chunk_id") or vector_id
@@ -1048,6 +1305,11 @@ async def ask_infobank(
                     governance_context=governance_context,
                     doc_ids=tier_doc_ids,
                     n_results=4,
+                    ensure_document_coverage=(
+                        owned_object_resolution.status == owned_object_context.STATUS_RESOLVED
+                        and tier_name == "primary_full"
+                        and len(tier_doc_ids) > 1
+                    ),
                 )
                 if tier_sources:
                     sources_list.extend(tier_sources)
@@ -1196,6 +1458,7 @@ async def ask_infobank(
             "Contrastive sources may close, cancel, or weaken a candidate claim. Respect the Evidence Check warnings. "
             "Every relationship asserted in the answer must be explicitly stated by the permitted source text. "
             "Do not turn an exclusion, coverage rule, requirement, or correlation into a causal claim. "
+            "For time-limited coverage on a stated date, derive the end date from the permitted purchase date and coverage period: if the stated date is on or before the end date, answer Yes and covered; otherwise answer No and not covered. Never state both conclusions or add exclusions or conditions absent from the selected source text. "
             "If the Output mode gate contains a controlled_failure object, obey its safeOutput and nextSteps while still answering only within the allowed restriction. "
             "If information is missing or unclear, answer strictly with: 'The answer cannot be found in the document.' No hallucinations."
         )
@@ -1228,8 +1491,25 @@ async def ask_infobank(
         final_status = "not_found" if "The answer cannot be found in the document." in answer else "success"
         grounding_failure_applied = False
         if final_status == "success":
-            answer_support = evidence_service.answer_source_support(answer, sources_list)
+            answer_support = evidence_service.answer_source_support(
+                answer,
+                sources_list,
+                question,
+            )
             evidence_check["answer_source_support"] = answer_support
+            if not answer_support["sufficient"]:
+                temporal_correction = evidence_service.correct_temporal_coverage_answer(
+                    question,
+                    answer,
+                    sources_list,
+                    answer_support,
+                )
+                if temporal_correction:
+                    evidence_check["answer_source_support_before_correction"] = answer_support
+                    evidence_check["temporal_coverage_correction"] = temporal_correction["trace"]
+                    answer = temporal_correction["answer"]
+                    answer_support = temporal_correction["answer_source_support"]
+                    evidence_check["answer_source_support"] = answer_support
             if not answer_support["sufficient"]:
                 final_cf = controlled_failure.from_unsupported_generated_answer(
                     question,

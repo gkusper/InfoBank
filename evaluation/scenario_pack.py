@@ -136,6 +136,7 @@ def roadmap_scenario_packs() -> list[dict[str, Any]]:
         "s2-tv-purchase-receipt",
         "s2-tv-warranty-terms",
         "s2-tv-product-sheet",
+        "s2-tv-regional-service-notice",
         "s2-wrong-device-manual",
     )
     s3_orders = tuple(f"s3-tesco-order-{number:02d}" for number in range(1, 9))
@@ -259,33 +260,107 @@ def roadmap_scenario_packs() -> list[dict[str, Any]]:
                 _source(s2_sources[1], "purchase_receipt_pdf", "TV-001"),
                 _source(s2_sources[2], "warranty_terms_pdf", "TV-001"),
                 _source(s2_sources[3], "product_specification_pdf", "TV-001"),
-                _source(s2_sources[4], "wrong_object_manual_pdf", "DISPLAY-OTHER-001"),
+                _source(s2_sources[4], "regional_service_notice_pdf", "TV-001"),
+                _source(s2_sources[5], "wrong_object_manual_pdf", "DISPLAY-OTHER-001"),
             ],
             "queries": [
-                _query("S2-Q1", "Mit jelent az E06 hibakód és mi az első javasolt lépés?", [s2_sources[0]], [s2_sources[4]], "FULL_ANSWER"),
-                _query("S2-Q2", "Mikor vettem a TV-t?", [s2_sources[1]], [], "FULL_ANSWER"),
                 _query(
-                    "S2-Q3",
-                    "Még garanciális a TV 2026. augusztus 21-én?",
+                    "S2-Q1",
+                    "Which television do I own, when did I purchase it, and what was the price?",
+                    [s2_sources[1]],
+                    [s2_sources[0]],
+                    "FULL_ANSWER",
+                    reference_answer=(
+                        "You own a Velora V55 Smart TV. It was purchased on 12 March 2025 "
+                        "for 319,900 HUF."
+                    ),
+                    reference_citations=(
+                        {"source_id": s2_sources[1], "page": 1, "message_id": None, "record_id": None},
+                    ),
+                ),
+                _query(
+                    "S2-Q2",
+                    "Is my Velora V55 still covered by the manufacturer warranty on 21 August 2026? "
+                    "Explain using the purchase record and the manufacturer warranty terms.",
                     [s2_sources[1], s2_sources[2]],
                     [],
                     "FULL_ANSWER",
-                    reference_answer="A vásárlás dátumát és a garancia időtartamát 2026-08-21 dátummal kell összevetni.",
+                    reference_answer=(
+                        "Yes. The television was purchased on 12 March 2025, and the 24-month "
+                        "manufacturer warranty ends on 12 March 2027. It is therefore covered "
+                        "on 21 August 2026."
+                    ),
+                    reference_citations=(
+                        {"source_id": s2_sources[1], "page": 1, "message_id": None, "record_id": None},
+                        {"source_id": s2_sources[2], "page": 2, "message_id": None, "record_id": None},
+                    ),
+                ),
+                _query(
+                    "S2-Q3",
+                    "My Velora V55 shows error E06 while I am using an HDMI source. "
+                    "What does E06 mean, and what should I do first?",
+                    [s2_sources[0]],
+                    [],
+                    "FULL_ANSWER",
+                    reference_answer=(
+                        "E06 indicates an HDMI handshake or connection failure. First turn off "
+                        "and unplug both the television and the HDMI source device for 60 seconds, "
+                        "then reconnect them."
+                    ),
+                    reference_citations=(
+                        {"source_id": s2_sources[0], "page": 17, "message_id": None, "record_id": None},
+                    ),
                 ),
                 _query(
                     "S2-Q4",
-                    "Mekkora volt a vásárláskori ár és milyen csatlakozók vannak a készüléken?",
-                    [s2_sources[1], s2_sources[0]],
+                    "How many HDMI and USB-A ports does the Velora V55 have, and what other "
+                    "wired connections are listed?",
                     [s2_sources[3]],
+                    [s2_sources[0]],
                     "FULL_ANSWER",
+                    reference_answer=(
+                        "The Velora V55 has 4 HDMI inputs, 2 USB-A ports, 1 Ethernet port, "
+                        "1 optical audio output and 1 antenna input."
+                    ),
+                    reference_citations=(
+                        {"source_id": s2_sources[3], "page": 3, "message_id": None, "record_id": None},
+                    ),
                 ),
                 _query(
                     "S2-Q5",
-                    "A gyártó biztosan ingyen javítja?",
-                    [s2_sources[2]],
-                    [s2_sources[0], s2_sources[1]],
-                    "CONSTRAINED_ANSWER",
-                    negative_reason="insufficient_evidence",
+                    "Do the documents establish that the 18-month regional service period replaces "
+                    "the 24-month manufacturer warranty for my Velora V55? Explain the two periods "
+                    "without assuming that one supersedes the other.",
+                    [s2_sources[2], s2_sources[4]],
+                    [s2_sources[1]],
+                    "FULL_ANSWER",
+                    reference_answer=(
+                        "The documents define a 24-month manufacturer warranty and a separate "
+                        "18-month regional service period, both calculated from the retail purchase "
+                        "date. They do not state that the regional period replaces or supersedes "
+                        "the manufacturer warranty."
+                    ),
+                    reference_citations=(
+                        {"source_id": s2_sources[2], "page": 2, "message_id": None, "record_id": None},
+                        {"source_id": s2_sources[4], "page": 1, "message_id": None, "record_id": None},
+                    ),
+                ),
+                _query(
+                    "S2-Q6",
+                    "For the Velora V55, product code VEL-V55-2025, does error E06 mean a "
+                    "temperature-sensor fault as described in the Aster M55 manual, or does it "
+                    "mean something else? Use only the matching product documents.",
+                    [s2_sources[0]],
+                    [s2_sources[5]],
+                    "FULL_ANSWER",
+                    reference_answer=(
+                        "For the Velora V55, E06 concerns HDMI connection negotiation, not a "
+                        "temperature-sensor fault. The Aster M55 definition does not apply to "
+                        "the Velora product."
+                    ),
+                    reference_citations=(
+                        {"source_id": s2_sources[0], "page": 17, "message_id": None, "record_id": None},
+                    ),
                 ),
             ],
         },

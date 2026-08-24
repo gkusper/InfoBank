@@ -10,11 +10,12 @@ from __future__ import annotations
 import hashlib
 import json
 import re
+from collections import Counter
 from dataclasses import dataclass
 from typing import Iterable
 
 
-RESOLUTION_VERSION = "infobank-owned-object-context-v1"
+RESOLUTION_VERSION = "infobank-owned-object-context-v2"
 STATUS_INACTIVE = "inactive"
 STATUS_RESOLVED = "resolved"
 STATUS_CLARIFICATION_REQUIRED = "clarification_required"
@@ -26,8 +27,13 @@ _PRODUCT_CODE_PATTERN = re.compile(
 _QUERY_IDENTIFIER_PATTERN = re.compile(
     r"(?i)\b(?=[a-z0-9-]{6,}\b)(?=[a-z0-9-]*\d)[a-z0-9]+(?:-[a-z0-9]+)+\b"
 )
+_NON_PRODUCT_QUERY_IDENTIFIER_PATTERNS = (
+    re.compile(r"(?i)^\d+(?:[.,]\d+)?-(?:day|days|week|weeks|month|months|year|years)$"),
+    re.compile(r"(?i)^\d+(?:[.,]\d+)?-(?:nap|het|h[eé]t|honap|h[oó]nap|ev|[ée]v)$"),
+    re.compile(r"^\d{4}-\d{1,2}-\d{1,2}$"),
+)
 _PURCHASE_RECORD_PATTERN = re.compile(
-    r"(?i)\b(?:purchase\s+receipt|sales\s+receipt|receipt|invoice|proof\s+of\s+purchase|purchase\s+record|sales\s+order)\b"
+    r"(?im)^\s*(?:purchase\s+receipt|sales\s+receipt|receipt|invoice|proof\s+of\s+purchase|purchase\s+record|sales\s+order)\b"
 )
 _TRANSACTION_SIGNAL_PATTERNS = (
     re.compile(r"(?i)\b(?:purchase|order|invoice|transaction)\s+date\b"),
@@ -36,6 +42,11 @@ _TRANSACTION_SIGNAL_PATTERNS = (
     re.compile(r"(?i)\b(?:customer|sold\s+to|bill\s+to)\b"),
     re.compile(r"(?i)\b(?:receipt|invoice|order|transaction)\s+(?:number|no\.?|id)\b"),
 )
+_OWNERSHIP_REFERENCE_PATTERN = re.compile(
+    r"(?i)\b(?:my|mine|own|owned|buy|bought|purchase|purchased|"
+    r"saj[aá]t|eny[eé]m|birtok|tulajdon|vettem|v[aá]s[aá]roltam)\b"
+)
+_DESCRIPTION_TOKEN_PATTERN = re.compile(r"[a-z0-9]+", flags=re.IGNORECASE)
 
 # These are generic product-type lexical aliases, not scenario labels. They are
 # used only when the user explicitly names an object type in the question and
@@ -70,7 +81,11 @@ def _config_hash() -> str:
     payload = {
         "version": RESOLUTION_VERSION,
         "product_identifier": "label_scoped_product_model_item_device_code",
-        "purchase_evidence": "record_marker_and_two_transaction_signals",
+        "product_identifier_canonicalization": "prefer_repeated_specific_code_over_model_or_truncated_alias",
+        "query_identifier_exclusions": "durations_and_iso_dates",
+        "purchase_evidence": "line_scoped_record_marker_and_two_transaction_signals",
+        "owned_type_resolution": "purchase_evidenced_intersection",
+        "declared_product_alias": "brand_model_pair",
         "content_scope": "policy_permitted_full_content_only",
         "object_aliases": _OBJECT_TYPE_ALIASES,
     }
@@ -116,12 +131,44 @@ class OwnedObjectResolution:
 
 
 def extract_product_codes(text: str) -> tuple[str, ...]:
-    codes: set[str] = set()
+    raw_codes: list[str] = []
     for match in _PRODUCT_CODE_PATTERN.finditer(text or ""):
         code = match.group(1).upper()
         if any(character.isdigit() for character in code):
-            codes.add(code)
-    return tuple(sorted(codes))
+            raw_codes.append(code)
+
+    counts = Counter(raw_codes)
+    codes = set(raw_codes)
+    canonical_codes: set[str] = set()
+    for code in codes:
+        redundant = False
+        for other in codes - {code}:
+            model_alias = (
+                "-" not in code
+                and other.count("-") >= 2
+                and code in other.split("-")
+            )
+            truncated_prefix = (
+                other.startswith(code)
+                and len(other) >= len(code) + 2
+                and counts[other] > counts[code]
+            )
+            if model_alias or truncated_prefix:
+                redundant = True
+                break
+        if not redundant:
+            canonical_codes.add(code)
+    return tuple(sorted(canonical_codes))
+
+
+def _query_product_identifiers(question: str) -> set[str]:
+    identifiers: set[str] = set()
+    for match in _QUERY_IDENTIFIER_PATTERN.finditer(question or ""):
+        identifier = match.group(0).upper()
+        if any(pattern.fullmatch(identifier) for pattern in _NON_PRODUCT_QUERY_IDENTIFIER_PATTERNS):
+            continue
+        identifiers.add(identifier)
+    return identifiers
 
 
 def _contains_phrase(text: str, phrase: str) -> bool:
@@ -165,6 +212,29 @@ def _declared_product_descriptions(text: str) -> tuple[str, ...]:
 def extract_declared_object_types(text: str) -> tuple[str, ...]:
     descriptions = "\n".join(_declared_product_descriptions(text))
     return extract_object_types(descriptions)
+
+
+def _declared_product_aliases(text: str) -> tuple[str, ...]:
+    """Return conservative content-derived brand/model aliases.
+
+    A two-token alias is emitted only when the second token contains a digit,
+    for example ``Velora V55`` or ``Lunara S3``. Generic narrative mentions do
+    not create aliases, because only declared PRODUCT/ITEM/DEVICE fields are
+    inspected.
+    """
+
+    aliases: set[str] = set()
+    for description in _declared_product_descriptions(text):
+        tokens = [token.casefold() for token in _DESCRIPTION_TOKEN_PATTERN.findall(description)]
+        for index in range(1, len(tokens)):
+            if any(character.isdigit() for character in tokens[index]):
+                aliases.add(f"{tokens[index - 1]} {tokens[index]}")
+                break
+    return tuple(sorted(aliases))
+
+
+def _normalized_phrase(text: str) -> str:
+    return " ".join(token.casefold() for token in _DESCRIPTION_TOKEN_PATTERN.findall(text or ""))
 
 
 def contains_purchase_evidence(text: str) -> bool:
@@ -222,21 +292,23 @@ def resolve_owned_object_context(
 
     documents_by_code: dict[str, set[str]] = {}
     types_by_code: dict[str, set[str]] = {}
+    aliases_by_code: dict[str, set[str]] = {}
     purchase_codes: set[str] = set()
     for record in records:
         codes = codes_by_document[record.document_id]
         object_types = set(extract_declared_object_types(record.text))
+        product_aliases = set(_declared_product_aliases(record.text))
         purchase_evidence = contains_purchase_evidence(record.text)
         for code in codes:
             documents_by_code.setdefault(code, set()).add(record.document_id)
             types_by_code.setdefault(code, set()).update(object_types)
+            aliases_by_code.setdefault(code, set()).update(product_aliases)
             if purchase_evidence:
                 purchase_codes.add(code)
 
     cluster_count = len(documents_by_code)
     purchase_count = len(purchase_codes)
-    question_upper = (question or "").upper()
-    requested_identifiers = {match.group(0).upper() for match in _QUERY_IDENTIFIER_PATTERN.finditer(question_upper)}
+    requested_identifiers = _query_product_identifiers(question)
     if requested_identifiers:
         matching_codes = requested_identifiers.intersection(documents_by_code)
         if len(matching_codes) == 1:
@@ -260,12 +332,54 @@ def resolve_owned_object_context(
             explicit_reference_match_count=len(matching_codes),
         )
 
+    normalized_question = _normalized_phrase(question)
+    matching_alias_codes = {
+        code
+        for code, aliases in aliases_by_code.items()
+        if any(_contains_phrase(normalized_question, alias) for alias in aliases)
+    }
+    if matching_alias_codes:
+        if len(matching_alias_codes) == 1:
+            code = next(iter(matching_alias_codes))
+            return _resolution(
+                status=STATUS_RESOLVED,
+                reason="explicit_product_description",
+                candidates=documents_by_code[code],
+                structured_document_count=structured_document_count,
+                object_cluster_count=cluster_count,
+                purchase_evidenced_object_count=purchase_count,
+                explicit_reference_match_count=1,
+            )
+        return _resolution(
+            status=STATUS_CLARIFICATION_REQUIRED,
+            reason="explicit_product_description_not_uniquely_resolved",
+            candidates=(),
+            structured_document_count=structured_document_count,
+            object_cluster_count=cluster_count,
+            purchase_evidenced_object_count=purchase_count,
+            explicit_reference_match_count=len(matching_alias_codes),
+        )
+
     question_types = set(extract_object_types(question))
     if question_types:
         matching_codes = {
             code for code, object_types in types_by_code.items()
             if object_types.intersection(question_types)
         }
+        if _OWNERSHIP_REFERENCE_PATTERN.search(question or ""):
+            purchase_matching_codes = matching_codes.intersection(purchase_codes)
+            if purchase_matching_codes:
+                matching_codes = purchase_matching_codes
+            else:
+                return _resolution(
+                    status=STATUS_CLARIFICATION_REQUIRED,
+                    reason="explicit_owned_object_type_not_purchase_evidenced",
+                    candidates=(),
+                    structured_document_count=structured_document_count,
+                    object_cluster_count=cluster_count,
+                    purchase_evidenced_object_count=purchase_count,
+                    explicit_reference_match_count=0,
+                )
         if len(matching_codes) == 1:
             code = next(iter(matching_codes))
             return _resolution(

@@ -6,6 +6,7 @@ role, status, conflict, permission, and support strength before an answer is
 accepted.
 """
 
+import calendar
 import datetime
 import hashlib
 import json
@@ -1012,7 +1013,117 @@ def select_minimal_evidence_sources(
     return selected, selection_trace
 
 
-def answer_source_support(answer: str, sources: Iterable[Dict[str, Any]]) -> Dict[str, Any]:
+_ENGLISH_MONTH_NUMBERS = {
+    month.casefold(): index
+    for index, month in enumerate(calendar.month_name)
+    if month
+}
+_TEXT_DATE_RE = re.compile(
+    r"\b(\d{1,2})\s+(" + "|".join(calendar.month_name[1:]) + r")\s+(\d{4})\b",
+    re.IGNORECASE,
+)
+_PURCHASE_DATE_RE = re.compile(
+    r"\bpurchase\s+date\b[^\d]{0,40}"
+    r"(\d{1,2}\s+(?:" + "|".join(calendar.month_name[1:]) + r")\s+\d{4})",
+    re.IGNORECASE,
+)
+_WARRANTY_MONTHS_PATTERNS = (
+    re.compile(r"\bwarranty\s+period\s+(?:is|of|lasts?)\s+(\d{1,3})\s*[- ]?\s*months?\b", re.IGNORECASE),
+    re.compile(r"\b(\d{1,3})\s*[- ]?\s*month\s+(?:manufacturer\s+)?warranty\b", re.IGNORECASE),
+)
+_POSITIVE_TEMPORAL_COVERAGE_RE = re.compile(
+    r"\b(?:still|currently)\s+covered\b|"
+    r"\bremains?\s+covered\b|"
+    r"\bis\s+covered\b|"
+    r"\bwithin\s+(?:the\s+)?(?:manufacturer\s+)?warranty\b|"
+    r"\bwarranty\s+(?:is\s+)?(?:valid|active|in\s+effect)\b|"
+    r"\b(?:has\s+)?not\s+expired\b",
+    re.IGNORECASE,
+)
+_NEGATIVE_TEMPORAL_COVERAGE_RE = re.compile(
+    r"\b(?:not|no\s+longer)\s+covered\b|"
+    r"\boutside\s+(?:the\s+)?(?:manufacturer\s+)?warranty\b|"
+    r"\bwarranty\s+(?:has\s+)?expired\b",
+    re.IGNORECASE,
+)
+_NON_TEMPORAL_EXCLUSION_RE = re.compile(r"\bexclud(?:e|es|ed|ing|sion|sions)\b", re.IGNORECASE)
+
+
+def _parse_english_text_date(value: str) -> Optional[datetime.date]:
+    match = _TEXT_DATE_RE.search(value or "")
+    if not match:
+        return None
+    day, month_name, year = match.groups()
+    try:
+        return datetime.date(int(year), _ENGLISH_MONTH_NUMBERS[month_name.casefold()], int(day))
+    except ValueError:
+        return None
+
+
+def _add_calendar_months(value: datetime.date, months: int) -> datetime.date:
+    month_index = value.month - 1 + months
+    year = value.year + month_index // 12
+    month = month_index % 12 + 1
+    day = min(value.day, calendar.monthrange(year, month)[1])
+    return datetime.date(year, month, day)
+
+
+def _temporal_coverage_resolution(question: str, searchable: str) -> Optional[Dict[str, Any]]:
+    if "coverage" not in relevance.claim_relation_signals(question):
+        return None
+
+    question_date = _parse_english_text_date(question)
+    purchase_match = _PURCHASE_DATE_RE.search(searchable or "")
+    purchase_date = _parse_english_text_date(purchase_match.group(1)) if purchase_match else None
+    warranty_months = next(
+        (
+            int(match.group(1))
+            for pattern in _WARRANTY_MONTHS_PATTERNS
+            if (match := pattern.search(searchable or ""))
+        ),
+        None,
+    )
+    if question_date is None or purchase_date is None or warranty_months is None:
+        return None
+
+    coverage_end_date = _add_calendar_months(purchase_date, warranty_months)
+    return {
+        "question_date": question_date,
+        "purchase_date": purchase_date,
+        "warranty_months": warranty_months,
+        "coverage_end_date": coverage_end_date,
+        "covered": question_date <= coverage_end_date,
+    }
+
+
+def _temporal_coverage_conclusion_supported(question: str, answer: str, searchable: str) -> bool:
+    """Validate a generated covered/not-covered conclusion from source dates.
+
+    This is deliberately narrow: it requires an explicit English question
+    date, a labelled purchase date, a manufacturer-warranty duration, and an
+    unambiguous answer polarity. Product exclusions are never treated as this
+    temporal inference.
+    """
+
+    if _NON_TEMPORAL_EXCLUSION_RE.search(answer or ""):
+        return False
+
+    resolution = _temporal_coverage_resolution(question, searchable)
+    if resolution is None:
+        return False
+
+    positive = bool(_POSITIVE_TEMPORAL_COVERAGE_RE.search(answer or ""))
+    negative = bool(_NEGATIVE_TEMPORAL_COVERAGE_RE.search(answer or ""))
+    if positive == negative:
+        return False
+    return positive if resolution["covered"] else negative
+
+
+def answer_source_support(
+    answer: str,
+    sources: Iterable[Dict[str, Any]],
+    question: str = "",
+) -> Dict[str, Any]:
     """Validate generated claim relations against permitted full-source text.
 
     This is intentionally deterministic and conservative.  It does not claim
@@ -1025,11 +1136,29 @@ def answer_source_support(answer: str, sources: Iterable[Dict[str, Any]]) -> Dic
     source_rows, searchable, matched_ids = _identifier_scoped_source_text(sources, answer_ids)
     answer_relations = relevance.claim_relation_signals(answer)
     source_relations = relevance.claim_relation_signals(searchable)
-    missing_relations = sorted(set(answer_relations) - set(source_relations))
+    missing_relation_set = set(answer_relations) - set(source_relations)
+    temporal_coverage_inference_supported = False
+    if "exclusion" in missing_relation_set:
+        temporal_coverage_inference_supported = _temporal_coverage_conclusion_supported(
+            question,
+            answer,
+            searchable,
+        )
+        if temporal_coverage_inference_supported:
+            missing_relation_set.remove("exclusion")
+    missing_relations = sorted(missing_relation_set)
     unmatched_ids = [identifier for identifier in answer_ids if identifier not in matched_ids]
     answer_numbers = sorted(_factual_numbers(answer or ""))
     source_numbers = _factual_numbers(searchable)
-    unsupported_numbers = [value for value in answer_numbers if value not in source_numbers]
+    question_numbers = _factual_numbers(question or "")
+    accepted_question_numbers = [
+        value for value in answer_numbers
+        if value not in source_numbers and value in question_numbers
+    ]
+    unsupported_numbers = [
+        value for value in answer_numbers
+        if value not in source_numbers and value not in question_numbers
+    ]
     supported = bool(searchable.strip()) and not missing_relations and not unmatched_ids and not unsupported_numbers
     return {
         "sufficient": supported,
@@ -1037,7 +1166,88 @@ def answer_source_support(answer: str, sources: Iterable[Dict[str, Any]]) -> Dic
         "answer_claim_relations": answer_relations,
         "source_claim_relations": source_relations,
         "missing_claim_relations": missing_relations,
+        "temporal_coverage_inference_supported": temporal_coverage_inference_supported,
         "unmatched_object_identifiers": unmatched_ids,
+        "accepted_question_number_count": len(accepted_question_numbers),
         "unsupported_numbers": unsupported_numbers,
         "identifier_scoped_source_count": len(source_rows),
+    }
+
+
+TEMPORAL_COVERAGE_CORRECTION_VERSION = "infobank-temporal-coverage-correction-v1"
+
+
+def _format_english_date(value: datetime.date) -> str:
+    return f"{value.day} {calendar.month_name[value.month]} {value.year}"
+
+
+def correct_temporal_coverage_answer(
+    question: str,
+    answer: str,
+    sources: Iterable[Dict[str, Any]],
+    answer_support: Dict[str, Any],
+) -> Optional[Dict[str, Any]]:
+    """Correct only a source-resolvable temporal coverage polarity failure.
+
+    The correction is deliberately unavailable for concrete exclusion claims,
+    unsupported numbers, unmatched object identifiers, incomplete date facts,
+    or any grounding failure beyond the observed coverage polarity relation.
+    """
+
+    if answer_support.get("missing_claim_relations") != ["exclusion"]:
+        return None
+    if answer_support.get("unsupported_numbers") or answer_support.get("unmatched_object_identifiers"):
+        return None
+    if _NON_TEMPORAL_EXCLUSION_RE.search(answer or ""):
+        return None
+
+    source_list = list(sources)
+    _, searchable, _ = _identifier_scoped_source_text(source_list, [])
+    resolution = _temporal_coverage_resolution(question, searchable)
+    if resolution is None:
+        return None
+
+    positive = bool(_POSITIVE_TEMPORAL_COVERAGE_RE.search(answer or ""))
+    negative = bool(_NEGATIVE_TEMPORAL_COVERAGE_RE.search(answer or ""))
+    expected_matches = positive if resolution["covered"] else negative
+    if positive != negative and expected_matches:
+        return None
+
+    question_date = _format_english_date(resolution["question_date"])
+    purchase_date = _format_english_date(resolution["purchase_date"])
+    coverage_end_date = _format_english_date(resolution["coverage_end_date"])
+    if resolution["covered"]:
+        conclusion = "Yes"
+        comparison = "on or before"
+        coverage_state = "covered"
+    else:
+        conclusion = "No"
+        comparison = "after"
+        coverage_state = "not covered"
+
+    corrected_answer = (
+        f"{conclusion}. The purchase date is {purchase_date}. "
+        f"The manufacturer warranty period is {resolution['warranty_months']} months from that date, "
+        f"ending on {coverage_end_date}. Because {question_date} is {comparison} the warranty end date, "
+        f"the product is {coverage_state} on that date."
+    )
+    corrected_support = answer_source_support(corrected_answer, source_list, question)
+    if not corrected_support["sufficient"]:
+        return None
+
+    reason = (
+        "contradictory_generated_temporal_coverage"
+        if positive and negative
+        else "mismatched_generated_temporal_coverage"
+    )
+    return {
+        "answer": corrected_answer,
+        "answer_source_support": corrected_support,
+        "trace": {
+            "version": TEMPORAL_COVERAGE_CORRECTION_VERSION,
+            "applied": True,
+            "reason": reason,
+            "source_fact_count": 3,
+            "covered": resolution["covered"],
+        },
     }

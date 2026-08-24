@@ -49,7 +49,7 @@ def test_catalog_is_structurally_valid_and_reports_unfinished_evidence_honestly(
     report = validate_scenario_catalog(roadmap_scenario_packs())
     assert report["status"] == "STRUCTURALLY_VALID_WITH_READINESS_GAPS"
     assert report["scenario_count"] == 6
-    assert report["query_count"] == 27
+    assert report["query_count"] == 28
     assert report["error_count"] == 0
     codes = {issue["code"] for pack in report["packs"] for issue in pack["issues"]}
     assert "QUERY_TARGET_GAP" in codes
@@ -59,7 +59,7 @@ def test_catalog_is_structurally_valid_and_reports_unfinished_evidence_honestly(
 def test_required_sources_match_the_key_multi_source_roadmap_cases() -> None:
     packs = _by_id()
     s2 = {query["query_id"]: query for query in packs["S2_TV_WARRANTY_01"]["queries"]}
-    assert s2["S2-Q3"]["required_sources"] == ["s2-tv-purchase-receipt", "s2-tv-warranty-terms"]
+    assert s2["S2-Q2"]["required_sources"] == ["s2-tv-purchase-receipt", "s2-tv-warranty-terms"]
 
     s4 = packs["S4_TESCO_BANK_01"]
     order_ids = [source["source_id"] for source in s4["sources"] if source["source_type"] == "order_confirmation_pdf"]
@@ -107,6 +107,45 @@ def test_s1_uses_english_queries_natural_source_ids_and_document_relation_keys()
     ]
 
 
+def test_s2_matches_the_six_live_english_queries_and_reviewed_gold() -> None:
+    s2 = _by_id()["S2_TV_WARRANTY_01"]
+    assert [source["source_id"] for source in s2["sources"]] == [
+        "s2-tv-manual",
+        "s2-tv-purchase-receipt",
+        "s2-tv-warranty-terms",
+        "s2-tv-product-sheet",
+        "s2-tv-regional-service-notice",
+        "s2-wrong-device-manual",
+    ]
+    assert [source["relation_key"] for source in s2["sources"]] == [
+        "TV-001",
+        "TV-001",
+        "TV-001",
+        "TV-001",
+        "TV-001",
+        "DISPLAY-OTHER-001",
+    ]
+    queries = {query["query_id"]: query for query in s2["queries"]}
+    assert list(queries) == [f"S2-Q{number}" for number in range(1, 7)]
+    assert all(query["expected_output"] == "FULL_ANSWER" for query in queries.values())
+    assert all(query["reference_answer"] for query in queries.values())
+    assert all(query["reference_citations"] for query in queries.values())
+    assert all(query["negative_reason"] is None for query in queries.values())
+    assert queries["S2-Q2"]["required_sources"] == [
+        "s2-tv-purchase-receipt",
+        "s2-tv-warranty-terms",
+    ]
+    assert queries["S2-Q5"]["required_sources"] == [
+        "s2-tv-warranty-terms",
+        "s2-tv-regional-service-notice",
+    ]
+    assert queries["S2-Q6"]["required_sources"] == ["s2-tv-manual"]
+    assert queries["S2-Q6"]["supporting_sources"] == ["s2-wrong-device-manual"]
+    assert [citation["source_id"] for citation in queries["S2-Q6"]["reference_citations"]] == [
+        "s2-tv-manual",
+    ]
+
+
 def test_no_evidence_questions_do_not_claim_required_sources() -> None:
     packs = _by_id()
     assert next(query for query in packs["S1_SOFA_01"]["queries"] if query["query_id"] == "S1-Q4")["required_sources"] == []
@@ -137,7 +176,7 @@ def test_bundle_writer_is_deterministic_and_keeps_gold_outside_query_runtime_con
     second = write_scenario_pack_bundle(tmp_path)
     assert first == second
     assert first["scenario_count"] == 6
-    assert first["query_count"] == 27
+    assert first["query_count"] == 28
     index = json.loads((tmp_path / "scenario_pack_index.json").read_text(encoding="utf-8"))
     assert index == {key: first[key] for key in ("schema_id", "scenario_count", "source_count", "query_count", "scenarios")}
     assert (tmp_path / "validation_reports" / "scenario_pack_validation.json").is_file()
@@ -149,8 +188,11 @@ def test_bundle_writer_is_deterministic_and_keeps_gold_outside_query_runtime_con
 
 
 def test_incomplete_pack_cannot_be_projected_as_evaluation_input() -> None:
+    pack = copy.deepcopy(roadmap_scenario_packs()[1])
+    pack["queries"][0]["reference_answer"] = None
+    pack["queries"][0]["reference_citations"] = []
     with pytest.raises(ValueError, match="evidence is incomplete"):
-        project_scenario_pack(roadmap_scenario_packs()[1])
+        project_scenario_pack(pack)
 
 
 def test_projection_separates_runtime_query_and_scorer_gold() -> None:

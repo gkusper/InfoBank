@@ -1,0 +1,16 @@
+{
+  "chunking": "complete chronological corrected email thread plus one compact oracle record per human-derived task",
+  "condition": "ORACLE_TASK_STATE_RAG",
+  "config_file": "oracle_task_state_rag.json",
+  "context_character_budget": 60000,
+  "embedding_model": "text-embedding-3-small",
+  "generator_model": "gpt-4o-mini",
+  "max_output_tokens": 800,
+  "retrieval_top_k": 6,
+  "seed": null,
+  "similarity_metric": "cosine similarity",
+  "task_representation_mode": "human-derived oracle task histories and final snapshots with source references",
+  "temperature": 0.0,
+  "thread_scope": "current benchmark conversation; chronological emails plus all oracle task records for that thread",
+  "top_p": null
+}

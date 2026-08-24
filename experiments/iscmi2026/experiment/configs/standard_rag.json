@@ -1,0 +1,16 @@
+{
+  "chunking": "one corrected original email message per retrieval unit",
+  "condition": "STANDARD_RAG",
+  "config_file": "standard_rag.json",
+  "context_character_budget": 60000,
+  "embedding_model": "text-embedding-3-small",
+  "generator_model": "gpt-4o-mini",
+  "max_output_tokens": 800,
+  "retrieval_top_k": 6,
+  "seed": null,
+  "similarity_metric": "cosine similarity",
+  "task_representation_mode": "none; original email evidence only",
+  "temperature": 0.0,
+  "thread_scope": "current benchmark conversation; semantic top-k messages only",
+  "top_p": null
+}

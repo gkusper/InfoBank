@@ -143,7 +143,9 @@ def validate_evidence(benchmark: dict[str, Any]) -> None:
                 fail(f"Unresolved evidence IDs in {collection_name}: {sorted(missing)}")
 
 
-def validate_result_file(path: Path, benchmark: dict[str, Any]) -> None:
+def validate_result_file(
+    path: Path, benchmark: dict[str, Any], configs: dict[str, dict[str, Any]]
+) -> None:
     rows = read_jsonl(path)
     if not rows:
         fail(f"Result file is empty: {path}")
@@ -164,6 +166,13 @@ def validate_result_file(path: Path, benchmark: dict[str, Any]) -> None:
     all_message_ids = {row["message_id"] for row in benchmark["evidence"]}
     for row in rows:
         ensure_no_forbidden_fields(row, f"result.{row['question_id']}.{row['condition']}")
+        expected_model = configs[row["condition"]]["generator_model"]
+        if row.get("configured_generator_model") != expected_model:
+            fail(f"Configured generator mismatch for {row['question_id']}.{row['condition']}")
+        if row.get("actual_generator_model") != expected_model:
+            fail(f"Observed generator mismatch for {row['question_id']}.{row['condition']}")
+        if row.get("error") and (row.get("error") or {}).get("type") != "parser_error":
+            fail(f"API error remains for {row['question_id']}.{row['condition']}")
         answer_type = (row.get("parsed_output") or {}).get("answer_type")
         if answer_type not in ANSWER_TYPES:
             fail(f"Unrecognized parsed answer type: {answer_type}")
@@ -220,7 +229,7 @@ def validate(args: argparse.Namespace) -> int:
     if parse_error or sample["answer_type"] != "TASK_SET":
         fail("Noise-tolerant deterministic response parser failed")
     if args.results:
-        validate_result_file(Path(args.results).resolve(), benchmark)
+        validate_result_file(Path(args.results).resolve(), benchmark, configs)
     print("Leakage validation: PASS")
     print("Questions: 271; corrected email documents: 195; oracle task documents: 236")
     print("Gold-target mutation leaves every condition prompt unchanged")

@@ -6,6 +6,7 @@ from compare_output_limits import strip_parser_metadata
 from compare_generators import classify_pattern, nearest_rank_percentile
 from evaluate_results import score_result
 from experiment_core import ANSWER_TYPES, load_benchmark, parse_model_output
+from run_experiment import retry_delay_seconds, sanitize_error_message
 
 
 ATTRIBUTE_TYPES = {
@@ -156,6 +157,18 @@ class ExperimentEvaluationTests(unittest.TestCase):
     def test_generator_pattern_classification(self) -> None:
         self.assertEqual("C", classify_pattern(0.55, 0.42, [0.08, 0.07, 0.06]))
         self.assertEqual("D", classify_pattern(0.55, 0.04, [0.2, 0.2, 0.0]))
+
+    def test_retry_delay_parses_seconds_without_under_backing_off(self) -> None:
+        RateLimitError = type("RateLimitError", (Exception,), {})
+        error = RateLimitError("Please try again in 2.31s")
+        self.assertEqual(4.0, retry_delay_seconds(error, 2))
+
+    def test_api_error_message_redacts_nonpublic_identifiers(self) -> None:
+        message = "organization org-private123 project proj_secret key sk-secretvalue"
+        sanitized = sanitize_error_message(message)
+        self.assertNotIn("private123", sanitized)
+        self.assertNotIn("proj_secret", sanitized)
+        self.assertNotIn("sk-secretvalue", sanitized)
 
 
 if __name__ == "__main__":

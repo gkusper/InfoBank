@@ -6,6 +6,7 @@ import importlib.metadata
 import json
 import os
 import platform
+import re
 import subprocess
 import sys
 import time
@@ -38,6 +39,13 @@ from experiment_core import (
 
 
 DRY_RUN_FAMILIES = ("OPEN_TASKS", "TASK_HISTORY", "NO_TASK_CONTROL", "DEADLINE")
+MAX_API_RETRIES = 12
+TRANSIENT_API_ERROR_TYPES = {
+    "APIConnectionError",
+    "APITimeoutError",
+    "InternalServerError",
+    "RateLimitError",
+}
 
 
 def utc_timestamp() -> str:
@@ -83,6 +91,44 @@ def empty_usage() -> dict[str, Any]:
         "total_tokens": 0,
         "retries": 0,
     }
+
+
+def sanitize_error_message(value: str) -> str:
+    sanitized = re.sub(r"\borg-[A-Za-z0-9_-]+\b", "org-[redacted]", value)
+    sanitized = re.sub(r"\bproj_[A-Za-z0-9_-]+\b", "proj_[redacted]", sanitized)
+    return re.sub(r"\bsk-[A-Za-z0-9_-]+\b", "sk-[redacted]", sanitized)
+
+
+def is_retryable_api_error(exc: Exception) -> bool:
+    if type(exc).__name__ in TRANSIENT_API_ERROR_TYPES:
+        return True
+    status_code = getattr(exc, "status_code", None)
+    return isinstance(status_code, int) and status_code >= 500
+
+
+def retry_delay_seconds(exc: Exception, retry_number: int) -> float:
+    delay: float | None = None
+    response = getattr(exc, "response", None)
+    headers = getattr(response, "headers", {}) or {}
+    try:
+        if headers.get("retry-after-ms") is not None:
+            delay = float(headers["retry-after-ms"]) / 1000.0
+        elif headers.get("retry-after") is not None:
+            delay = float(headers["retry-after"])
+    except (TypeError, ValueError):
+        delay = None
+    if delay is None:
+        match = re.search(
+            r"try again in\s+([0-9]+(?:\.[0-9]+)?)\s*(ms|s)",
+            str(exc),
+            flags=re.IGNORECASE,
+        )
+        if match:
+            delay = float(match.group(1)) / (1000.0 if match.group(2).lower() == "ms" else 1.0)
+    fallback = min(30.0, float(2 * retry_number))
+    if type(exc).__name__ == "RateLimitError":
+        return max(delay or 0.0, fallback)
+    return max(delay or 0.0, min(30.0, float(2 ** min(retry_number, 5))))
 
 
 def add_usage(target: dict[str, Any], source: dict[str, Any]) -> None:
@@ -148,11 +194,11 @@ def generate_real(
             usage = usage_from_response(response, generation_calls=1)
             usage["retries"] = retries
             return raw, usage, str(response.model), retries, finish_reason
-        except Exception:
-            if retries >= 2:
+        except Exception as exc:
+            if not is_retryable_api_error(exc) or retries >= MAX_API_RETRIES:
                 raise
             retries += 1
-            time.sleep(2**retries)
+            time.sleep(retry_delay_seconds(exc, retries))
 
 
 def existing_pairs(path: Path) -> set[tuple[str, str]]:
@@ -168,9 +214,9 @@ def existing_pairs(path: Path) -> set[tuple[str, str]]:
 def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> dict[str, Any]:
     started = time.perf_counter()
     error: dict[str, str] | None = None
-    actual_model = "deterministic-mock"
+    actual_model = "unavailable" if real_api else "deterministic-mock"
     generation_usage = empty_usage()
-    finish_reason: str | None = "mock"
+    finish_reason: str | None = None if real_api else "mock"
     output_status = "unparsable"
     parser_recovery_applied = False
     try:
@@ -196,7 +242,7 @@ def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> 
     except Exception as exc:
         raw_output = ""
         parsed_output, _ = parse_model_output("{}")
-        error = {"type": type(exc).__name__, "message": str(exc)}
+        error = {"type": type(exc).__name__, "message": sanitize_error_message(str(exc))}
         output_status = "unparsable"
     question = job["question"]
     contexts = job["contexts"]
@@ -430,6 +476,21 @@ def run(args: argparse.Namespace) -> int:
     manifest["observed_generator_models"] = sorted(
         {row["actual_generator_model"] for row in rows}
     )
+    api_errors = [
+        row
+        for row in rows
+        if row.get("error") and (row.get("error") or {}).get("type") != "parser_error"
+    ]
+    expected_models = {config["generator_model"] for config in configs.values()}
+    observed_models = set(manifest["observed_generator_models"])
+    if api_errors or observed_models != expected_models:
+        manifest["status"] = "failed_api_validation"
+        manifest["api_error_records"] = len(api_errors)
+        write_json(manifest_path, manifest)
+        raise RuntimeError(
+            f"Run rejected: api_errors={len(api_errors)}, "
+            f"expected_models={sorted(expected_models)}, observed_models={sorted(observed_models)}"
+        )
     write_json(manifest_path, manifest)
     print(f"Completed {len(rows)} pairs in {mode}; results: {inference_path}")
     return 0

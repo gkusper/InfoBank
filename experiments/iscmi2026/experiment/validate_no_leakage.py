@@ -188,6 +188,12 @@ def validate(args: argparse.Namespace) -> int:
     configured_limits = {config["max_output_tokens"] for config in configs.values()}
     if configured_limits != {2000}:
         fail(f"Expected uniform max_output_tokens=2000, found {sorted(configured_limits)}")
+    configured_generators = {config["generator_model"] for config in configs.values()}
+    if configured_generators != {"gpt-4.1-2025-04-14"}:
+        fail(
+            "Expected pinned generator gpt-4.1-2025-04-14, found "
+            f"{sorted(configured_generators)}"
+        )
     packet_dir = resolve_packet_dir(args.packet_dir)
     if len(benchmark["questions"]) != 271:
         fail("Exactly 271 benchmark questions were not loaded")

@@ -3,6 +3,7 @@ from __future__ import annotations
 import unittest
 
 from compare_output_limits import strip_parser_metadata
+from compare_generators import classify_pattern, nearest_rank_percentile
 from evaluate_results import score_result
 from experiment_core import ANSWER_TYPES, load_benchmark, parse_model_output
 
@@ -148,6 +149,13 @@ class ExperimentEvaluationTests(unittest.TestCase):
             {"answer_type": "TASK_SET", "tasks": [{"task_id": "T1"}]},
             strip_parser_metadata(value),
         )
+
+    def test_generator_comparison_percentile_uses_nearest_rank(self) -> None:
+        self.assertEqual(5.0, nearest_rank_percentile([1, 2, 3, 4, 5], 0.95))
+
+    def test_generator_pattern_classification(self) -> None:
+        self.assertEqual("C", classify_pattern(0.55, 0.42, [0.08, 0.07, 0.06]))
+        self.assertEqual("D", classify_pattern(0.55, 0.04, [0.2, 0.2, 0.0]))
 
 
 if __name__ == "__main__":

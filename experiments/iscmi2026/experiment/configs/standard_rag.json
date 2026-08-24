@@ -4,7 +4,7 @@
   "config_file": "standard_rag.json",
   "context_character_budget": 60000,
   "embedding_model": "text-embedding-3-small",
-  "generator_model": "gpt-4o-mini",
+  "generator_model": "gpt-4.1-2025-04-14",
   "max_output_tokens": 2000,
   "retrieval_top_k": 6,
   "seed": null,

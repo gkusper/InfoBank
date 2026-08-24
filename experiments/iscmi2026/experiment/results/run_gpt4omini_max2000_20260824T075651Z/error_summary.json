@@ -1,0 +1,30 @@
+{
+  "by_condition": {
+    "ORACLE_TASK_STATE_RAG": {},
+    "STANDARD_RAG": {},
+    "THREAD_AWARE_RAG": {}
+  },
+  "controlled_failures": {
+    "ORACLE_TASK_STATE_RAG": 31,
+    "STANDARD_RAG": 57,
+    "THREAD_AWARE_RAG": 58
+  },
+  "output_status_by_condition": {
+    "ORACLE_TASK_STATE_RAG": {
+      "complete": 270,
+      "truncated_by_output_limit": 1
+    },
+    "STANDARD_RAG": {
+      "complete": 271
+    },
+    "THREAD_AWARE_RAG": {
+      "complete": 271
+    }
+  },
+  "output_status_counts": {
+    "complete": 812,
+    "truncated_by_output_limit": 1
+  },
+  "parser_recoveries": 1,
+  "total_errors": 0
+}

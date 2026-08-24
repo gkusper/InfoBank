@@ -498,7 +498,8 @@ def write_report(
     lines = [
         "# ISCMI 2026 Oracle Task-State RAG Experiment",
         "",
-        f"Run mode: `{aggregate['run_mode']}`. Benchmark questions: {aggregate['questions']}.",
+        f"Run mode: `{aggregate['run_mode']}`. Questions: {aggregate['questions']}. "
+        f"Conditions: {len(CONDITIONS)}. Evaluations: {aggregate['condition_question_pairs']}.",
         "",
         "The three conditions use the same generator and output schema. STANDARD_RAG uses semantic email-message retrieval; THREAD_AWARE_RAG expands to the complete chronological email thread; ORACLE_TASK_STATE_RAG additionally receives the human-derived task representation.",
         "",
@@ -553,6 +554,24 @@ def write_report(
     lines.extend(
         [
             "",
+            "## Evidence, Failure Control, And Usage",
+            "",
+            "| Condition | Controlled failure | Evidence precision | Evidence recall | Evidence F1 | Input tokens | Output tokens | Total tokens | Tokens/question | Latency (s) |",
+            "|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|",
+        ]
+    )
+    for condition in CONDITIONS:
+        row = aggregate["by_condition"][condition]["overall"]
+        lines.append(
+            f"| {condition} | {row['controlled_failure_accuracy']:.4f} | "
+            f"{row['evidence_precision']:.4f} | {row['evidence_recall']:.4f} | "
+            f"{row['evidence_f1']:.4f} | {row['input_tokens']} | {row['output_tokens']} | "
+            f"{row['total_tokens']} | {row['average_tokens_per_question']:.2f} | "
+            f"{row['mean_latency_seconds']:.3f} |"
+        )
+    lines.extend(
+        [
+            "",
             "## Paired Comparisons",
             "",
             "Primary-family p-values use paired McNemar and Wilcoxon signed-rank tests with Holm correction. Negative differences favor the right-hand condition.",
@@ -574,9 +593,17 @@ def write_report(
     lines.extend(
         [
             "",
+            "## Output Completeness",
+            "",
+            f"Recorded output statuses: `{json.dumps(aggregate.get('output_status_counts', {}), sort_keys=True)}`. "
+            f"Deterministic parser recoveries: {aggregate['parser_recoveries']}.",
+            "",
             "## Limitations",
             "",
-            f"The fixed 800-token output ceiling truncated 64 JSON responses. The deterministic parser retained only complete emitted JSON values and discarded incomplete suffixes; no value was inferred. Remaining evaluation errors: {sum(row['errors'] for row in (aggregate['by_condition'][condition]['overall'] for condition in CONDITIONS))}.",
+            f"The fixed {run_manifest.get('max_output_tokens')}-token output ceiling produced "
+            f"{aggregate.get('output_status_counts', {}).get('truncated_by_output_limit', 0)} explicitly truncated responses. "
+            "When malformed output occurs, the deterministic parser retains only complete emitted JSON values and discards incomplete suffixes; no value is inferred. "
+            f"Remaining evaluation errors: {sum(row['errors'] for row in (aggregate['by_condition'][condition]['overall'] for condition in CONDITIONS))}.",
             "",
             "Raw email content remains external. Task alignment without an oracle task ID relies on source-message overlap. Secondary families have limited sample sizes and are exploratory.",
             "",
@@ -609,11 +636,12 @@ def evaluate(args: argparse.Namespace) -> int:
         if parser_error is None:
             previous_error = row.get("error")
             row["parsed_output"] = reparsed
-            if previous_error and previous_error.get("type") == "parser_error":
+            if reparsed.get("_parser_recovery"):
                 row["parser_recovery"] = {
                     "strategy": reparsed.get("_parser_recovery", "deterministic_reparse"),
-                    "original_error": previous_error.get("message"),
+                    "original_error": previous_error.get("message") if previous_error else None,
                 }
+            if previous_error and previous_error.get("type") == "parser_error":
                 row["error"] = None
         inference.append(row)
     pairs = [(row["question_id"], row["condition"]) for row in inference]
@@ -679,6 +707,21 @@ def evaluate(args: argparse.Namespace) -> int:
         "questions": len(condition_ids[CONDITIONS[0]]),
         "condition_question_pairs": len(scored),
         "parser_recoveries": sum(1 for row in scored if row.get("parser_recovery")),
+        "output_status_counts": dict(
+            sorted(Counter(row.get("output_status") or "legacy_unspecified" for row in scored).items())
+        ),
+        "output_status_by_condition": {
+            condition: dict(
+                sorted(
+                    Counter(
+                        row.get("output_status") or "legacy_unspecified"
+                        for row in scored
+                        if row["condition"] == condition
+                    ).items()
+                )
+            )
+            for condition in CONDITIONS
+        },
         "primary_families": sorted(PRIMARY_FAMILIES),
         "secondary_exploratory_families": sorted(SECONDARY_FAMILIES),
         "by_condition": by_condition,
@@ -691,6 +734,8 @@ def evaluate(args: argparse.Namespace) -> int:
     errors = {
         "total_errors": sum(1 for row in scored if row.get("error")),
         "parser_recoveries": sum(1 for row in scored if row.get("parser_recovery")),
+        "output_status_counts": aggregate["output_status_counts"],
+        "output_status_by_condition": aggregate["output_status_by_condition"],
         "by_condition": {
             condition: Counter(
                 (row.get("error") or {}).get("type", "none")

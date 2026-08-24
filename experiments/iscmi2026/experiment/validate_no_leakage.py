@@ -170,6 +170,13 @@ def validate_result_file(path: Path, benchmark: dict[str, Any]) -> None:
         unresolved = set(row.get("retrieved_message_ids", [])) - all_message_ids
         if unresolved:
             fail(f"Unresolved retrieved message IDs: {sorted(unresolved)}")
+        if "output_status" in row and row["output_status"] not in {
+            "complete",
+            "truncated_by_output_limit",
+            "invalid_json",
+            "unparsable",
+        }:
+            fail(f"Unrecognized output status: {row['output_status']}")
     if rows[0].get("run_mode") == "real_api":
         if len(by_condition[CONDITIONS[0]]) != 271 or len(rows) != 813:
             fail("A real API result must contain exactly 271 questions x 3 conditions")
@@ -178,6 +185,9 @@ def validate_result_file(path: Path, benchmark: dict[str, Any]) -> None:
 def validate(args: argparse.Namespace) -> int:
     benchmark = load_benchmark()
     configs = load_configs()
+    configured_limits = {config["max_output_tokens"] for config in configs.values()}
+    if configured_limits != {2000}:
+        fail(f"Expected uniform max_output_tokens=2000, found {sorted(configured_limits)}")
     packet_dir = resolve_packet_dir(args.packet_dir)
     if len(benchmark["questions"]) != 271:
         fail("Exactly 271 benchmark questions were not loaded")

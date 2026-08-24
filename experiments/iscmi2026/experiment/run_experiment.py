@@ -124,7 +124,7 @@ def generate_real(
     system_prompt: str,
     user_prompt: str,
     config: dict[str, Any],
-) -> tuple[str, dict[str, Any], str, int]:
+) -> tuple[str, dict[str, Any], str, int, str | None]:
     retries = 0
     while True:
         try:
@@ -144,9 +144,10 @@ def generate_real(
                 kwargs["seed"] = config["seed"]
             response = client.chat.completions.create(**kwargs)
             raw = response.choices[0].message.content or ""
+            finish_reason = getattr(response.choices[0], "finish_reason", None)
             usage = usage_from_response(response, generation_calls=1)
             usage["retries"] = retries
-            return raw, usage, str(response.model), retries
+            return raw, usage, str(response.model), retries, finish_reason
         except Exception:
             if retries >= 2:
                 raise
@@ -169,9 +170,12 @@ def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> 
     error: dict[str, str] | None = None
     actual_model = "deterministic-mock"
     generation_usage = empty_usage()
+    finish_reason: str | None = "mock"
+    output_status = "unparsable"
+    parser_recovery_applied = False
     try:
         if real_api:
-            raw_output, generation_usage, actual_model, _retries = generate_real(
+            raw_output, generation_usage, actual_model, _retries, finish_reason = generate_real(
                 client,
                 system_prompt=job["system_prompt"],
                 user_prompt=job["user_prompt"],
@@ -180,12 +184,20 @@ def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> 
         else:
             raw_output = mock_model_output(job["question"]["question"], job["contexts"])
         parsed_output, parser_error = parse_model_output(raw_output)
+        parser_recovery_applied = bool(parsed_output.get("_parser_recovery"))
         if parser_error:
             error = {"type": "parser_error", "message": parser_error}
+        if finish_reason == "length":
+            output_status = "truncated_by_output_limit"
+        elif parser_error or parser_recovery_applied:
+            output_status = "invalid_json"
+        elif finish_reason in {"stop", "mock"}:
+            output_status = "complete"
     except Exception as exc:
         raw_output = ""
         parsed_output, _ = parse_model_output("{}")
         error = {"type": type(exc).__name__, "message": str(exc)}
+        output_status = "unparsable"
     question = job["question"]
     contexts = job["contexts"]
     config = job["config"]
@@ -216,6 +228,9 @@ def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> 
         "retries": generation_usage["retries"],
         "configured_generator_model": config["generator_model"],
         "actual_generator_model": actual_model,
+        "finish_reason": finish_reason,
+        "output_status": output_status,
+        "parser_recovery_applied": parser_recovery_applied,
         "error": error,
     }
 

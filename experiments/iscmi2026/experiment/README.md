@@ -7,7 +7,7 @@ automatic task-state extraction.
 
 ## Conditions
 
-All conditions use `gpt-4o-mini`, temperature `0.0`, the same 800-token output
+All conditions use `gpt-4o-mini`, temperature `0.0`, the same 2000-token output
 limit, system prompt, question text, and JSON response schema. Email semantic
 retrieval uses `text-embedding-3-small`, cosine similarity, and fixed top-k 6.
 The benchmark conversation boundary is a non-semantic scope supplied equally to
@@ -61,7 +61,9 @@ result.
 
 ## Stage B: Frozen Full Run
 
-Set `OPENAI_API_KEY` in the process environment, choose an empty output directory,
+The current frozen rerun configuration raises only `max_output_tokens` from 800
+to 2000. The original 800-token run remains preserved in its result directory
+and manifest. Set `OPENAI_API_KEY` in the process environment, choose an empty output directory,
 and invoke `--real-api`. The script then runs all 271 questions in all three
 conditions, producing 813 generation records. It does not read `.env` files or
 store the key. Use `--resume` only with the same frozen code/configuration and
@@ -75,6 +77,15 @@ python experiments/iscmi2026/experiment/validate_no_leakage.py `
   --results experiments/iscmi2026/experiment/results/inference_results.jsonl
 python experiments/iscmi2026/experiment/evaluate_results.py `
   --inference-results experiments/iscmi2026/experiment/results/inference_results.jsonl
+```
+
+For the controlled 2000-token rerun, use a new empty subdirectory and compare it
+against the preserved 800-token run after evaluation:
+
+```powershell
+python experiments/iscmi2026/experiment/compare_output_limits.py `
+  --old-results-dir experiments/iscmi2026/experiment/results `
+  --new-results-dir experiments/iscmi2026/experiment/results/run_gpt4omini_max2000_<timestamp>
 ```
 
 The run manifest records Git/config hashes, models, generation settings,

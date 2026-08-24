@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import unittest
 
+from compare_output_limits import strip_parser_metadata
 from evaluate_results import score_result
 from experiment_core import ANSWER_TYPES, load_benchmark, parse_model_output
 
@@ -136,6 +137,17 @@ class ExperimentEvaluationTests(unittest.TestCase):
         }
         scored = score_result(inference, question, self.task_evidence, self.message_ids)
         self.assertFalse(scored["controlled_failure_correct"])
+
+    def test_output_limit_comparison_ignores_parser_metadata_only(self) -> None:
+        value = {
+            "answer_type": "TASK_SET",
+            "_parser_recovery": "strategy",
+            "tasks": [{"task_id": "T1", "_parser_recovery": "nested"}],
+        }
+        self.assertEqual(
+            {"answer_type": "TASK_SET", "tasks": [{"task_id": "T1"}]},
+            strip_parser_metadata(value),
+        )
 
 
 if __name__ == "__main__":

@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 from dataclasses import asdict, dataclass, field
-from pathlib import Path
+from pathlib import Path, PurePosixPath, PureWindowsPath
 from typing import Any, Iterable
 
 
@@ -51,15 +51,37 @@ class CorpusDocument:
     pages: tuple[str, ...]
     keywords: tuple[str, ...]
     archived: bool = False
+    source_pdf_path: str | None = None
+    source_pdf_sha256: str | None = None
 
     def __post_init__(self) -> None:
         if not self.document_id or not self.package_ref or not self.object_id or not self.pages:
             raise ValueError("CorpusDocument identity and pages are required")
+        if self.source_pdf_path is not None:
+            source_path = str(self.source_pdf_path).strip()
+            posix_path = PurePosixPath(source_path)
+            windows_path = PureWindowsPath(source_path)
+            if (
+                not source_path
+                or "\\" in source_path
+                or posix_path.is_absolute()
+                or windows_path.is_absolute()
+                or ".." in posix_path.parts
+            ):
+                raise ValueError("source_pdf_path must be a safe relative POSIX path")
+        if self.source_pdf_sha256 is not None:
+            digest = str(self.source_pdf_sha256)
+            if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
+                raise ValueError("source_pdf_sha256 must be lowercase hex SHA-256")
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)
         value["pages"] = list(self.pages)
         value["keywords"] = list(self.keywords)
+        if value.get("source_pdf_path") is None:
+            value.pop("source_pdf_path")
+        if value.get("source_pdf_sha256") is None:
+            value.pop("source_pdf_sha256")
         return value
 
 

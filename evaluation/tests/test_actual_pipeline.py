@@ -7,10 +7,18 @@ from pathlib import Path
 import pytest
 
 from evaluation.actual_pipeline_dataset import OUTPUT_CLASSES, build_development_dataset, document_id
-from evaluation.actual_pipeline_gold import load_gold_annotations
-from evaluation.actual_pipeline_inputs import CORPUS_SCHEMA_VERSION, QueryInput, write_jsonl
-from evaluation.actual_pipeline_runner import ActualPipelineConfig, run_actual_pipeline
-from evaluation.actual_pipeline_scorer import scan_record_safety, score_sealed_run
+from evaluation.actual_pipeline_gold import GoldAnnotation, load_gold_annotations
+from evaluation.actual_pipeline_inputs import CORPUS_SCHEMA_VERSION, CorpusDocument, QueryInput, write_jsonl
+from evaluation.actual_pipeline_runner import (
+    ActualPipelineConfig,
+    PipelineRuntime,
+    _document_routing_keywords,
+    _informative_routing_keyword,
+    _select_answer_citations,
+    _support_score,
+    run_actual_pipeline,
+)
+from evaluation.actual_pipeline_scorer import _score_mode, scan_record_safety, score_sealed_run
 
 
 def _minimal_fixture(root: Path) -> tuple[Path, Path, Path]:
@@ -81,6 +89,22 @@ def _minimal_fixture(root: Path) -> tuple[Path, Path, Path]:
     return dataset / "query_inputs.jsonl", dataset / "corpus_fixture.json", dataset / "gold_annotations.jsonl"
 
 
+def _write_test_pdf(path: Path, text: str) -> str:
+    import fitz
+
+    pdf = fitz.open()
+    page = pdf.new_page(width=595, height=842)
+    page.insert_textbox(fitz.Rect(72, 72, 523, 770), text, fontsize=11, fontname="helv")
+    path.parent.mkdir(parents=True, exist_ok=True)
+    try:
+        path.write_bytes(pdf.tobytes(garbage=4, deflate=True, no_new_id=True))
+    except TypeError:
+        path.write_bytes(pdf.tobytes(garbage=4, deflate=True))
+    finally:
+        pdf.close()
+    return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
 def _run_minimal(root: Path, query_path: Path, corpus_path: Path, label: str) -> dict:
     return run_actual_pipeline(
         query_input_path=query_path,
@@ -93,6 +117,280 @@ def _run_minimal(root: Path, query_path: Path, corpus_path: Path, label: str) ->
         modes=["B3_FULL_ROLE_AWARE"],
         config=ActualPipelineConfig(),
     )
+
+
+def test_support_score_handles_short_exact_factual_lookups() -> None:
+    date_source = "Purchase record for DEVICE-A. Purchase date 3 May 2026."
+    amount_source = "Invoice for DEVICE-B. Amount paid 42,500 HUF."
+    identifier_source = "Inspection sheet. Reference identifier ZX-99-A7 is printed on the label."
+    assert _support_score("When did I buy device A?", date_source) >= 0.45
+    assert _support_score("How much did I pay?", amount_source) >= 0.45
+    assert _support_score("What reference identifier is listed?", identifier_source) >= 0.45
+    assert _support_score("How long is the manufacturer's warranty?", "Routine care notes only.") < 0.45
+
+
+def test_low_information_keywords_are_not_used_for_routing() -> None:
+    assert not _informative_routing_keyword("of")
+    assert not _informative_routing_keyword("an")
+    assert not _informative_routing_keyword("55")
+    assert _informative_routing_keyword("purchase")
+    assert _informative_routing_keyword("warranty")
+
+
+def test_document_type_terms_are_available_for_routing() -> None:
+    document = CorpusDocument(
+        document_id="receipt-doc",
+        package_ref="pkg-routing",
+        object_id="DEVICE-A",
+        document_type="purchase_receipt_pdf",
+        original_filename="opaque-name.pdf",
+        pages=("Receipt body.",),
+        keywords=(),
+    )
+
+    assert {"purchase", "receipt", "purchase_receipt_pdf"} <= set(_document_routing_keywords(document))
+
+
+def test_citation_selection_prefers_supporting_page_in_multi_page_document() -> None:
+    selected = _select_answer_citations(
+        [
+            {
+                "available": True,
+                "document_id": "doc-a",
+                "page_number": 1,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.9,
+                "_text": "Device overview and generic administration notes.",
+            },
+            {
+                "available": True,
+                "document_id": "doc-a",
+                "page_number": 2,
+                "chunk_index": 1,
+                "evidence_role": "primary",
+                "_selection_score": 0.4,
+                "_text": "Reference identifier ZX-99-A7 is the approved service code.",
+            },
+        ],
+        question="What reference identifier is listed?",
+        answer="The reference identifier is ZX-99-A7.",
+    )
+    assert [item["page_number"] for item in selected] == [2]
+    assert all(not any(key.startswith("_") for key in item) for item in selected)
+
+
+def test_citation_selection_keeps_multiple_supporting_documents() -> None:
+    selected = _select_answer_citations(
+        [
+            {
+                "available": True,
+                "document_id": "receipt",
+                "page_number": 1,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.5,
+                "_text": "Purchase date 4 April 2026. Amount paid 19,900 HUF.",
+            },
+            {
+                "available": True,
+                "document_id": "terms",
+                "page_number": 2,
+                "chunk_index": 1,
+                "evidence_role": "primary",
+                "_selection_score": 0.5,
+                "_text": "Warranty period is 24 months from the purchase date.",
+            },
+        ],
+        question="What purchase date and warranty period are stated?",
+        answer="Purchase date is 4 April 2026 and the warranty period is 24 months.",
+    )
+    assert {item["document_id"] for item in selected} == {"receipt", "terms"}
+
+
+def test_retrieval_overfetches_before_page_aware_truncation() -> None:
+    class FakeProvider:
+        def embed(self, texts: list[str], *, model: str) -> list[list[float]]:
+            return [[0.0]]
+
+    class FakeCollection:
+        def count(self) -> int:
+            return 4
+
+        def query(self, **kwargs):
+            assert kwargs["n_results"] == 4
+            return {
+                "ids": [["generic", "purchase-date", "care", "setup"]],
+                "documents": [[
+                    "Generic device overview and setup summary.",
+                    "Purchase date 3 May 2026. Amount paid 42,500 HUF.",
+                    "Routine care instructions.",
+                    "Setup checklist.",
+                ]],
+                "metadatas": [[
+                    {"document_id": "manual", "page_number": 1},
+                    {"document_id": "receipt", "page_number": 1},
+                    {"document_id": "manual", "page_number": 2},
+                    {"document_id": "manual", "page_number": 3},
+                ]],
+                "distances": [[0.01, 0.99, 0.4, 0.5]],
+            }
+
+    runtime = object.__new__(PipelineRuntime)
+    runtime.provider = FakeProvider()
+    runtime.collection = FakeCollection()
+    runtime.config = ActualPipelineConfig()
+
+    rows = PipelineRuntime._retrieve(
+        runtime,
+        "When did I buy it?",
+        ["manual", "receipt"],
+        top_k=1,
+    )
+
+    assert [(item["document_id"], item["page_number"]) for item in rows] == [("receipt", 1)]
+
+
+def test_retrieval_diversifies_top_rows_across_documents() -> None:
+    class FakeProvider:
+        def embed(self, texts: list[str], *, model: str) -> list[list[float]]:
+            return [[0.0]]
+
+    class FakeCollection:
+        def count(self) -> int:
+            return 4
+
+        def query(self, **kwargs):
+            assert kwargs["n_results"] == 4
+            return {
+                "ids": [["terms-a", "terms-b", "receipt-a", "manual-a"]],
+                "documents": [[
+                    "Warranty period is 24 months from the purchase date.",
+                    "Warranty period begins on the retail purchase date.",
+                    "Purchase date 3 May 2026. Amount paid 42,500 HUF.",
+                    "Generic setup checklist.",
+                ]],
+                "metadatas": [[
+                    {"document_id": "terms", "page_number": 2},
+                    {"document_id": "terms", "page_number": 3},
+                    {"document_id": "receipt", "page_number": 1},
+                    {"document_id": "manual", "page_number": 1},
+                ]],
+                "distances": [[0.01, 0.02, 0.99, 0.5]],
+            }
+
+    runtime = object.__new__(PipelineRuntime)
+    runtime.provider = FakeProvider()
+    runtime.collection = FakeCollection()
+    runtime.config = ActualPipelineConfig()
+
+    rows = PipelineRuntime._retrieve(
+        runtime,
+        "What warranty period and purchase date are stated?",
+        ["terms", "receipt", "manual"],
+        top_k=2,
+    )
+
+    assert [item["document_id"] for item in rows] == ["terms", "receipt"]
+
+
+def _object_scope_fixture(root: Path, *, target_warranty: bool) -> tuple[Path, Path]:
+    dataset = root / ("object-scope-with-target" if target_warranty else "object-scope-distractor")
+    dataset.mkdir()
+    package_ref = "pkg-object-a"
+    docs = [
+        {
+            "document_id": document_id(package_ref, "target-manual"),
+            "package_ref": package_ref,
+            "object_id": "DEVICE-A",
+            "document_type": "manual",
+            "original_filename": "device-a-manual.pdf",
+            "pages": ["Manual for DEVICE-A. Setup instruction: connect the blue cable."],
+            "keywords": ["device-a", "manual", "setup"],
+            "archived": False,
+        },
+        {
+            "document_id": document_id(package_ref, "target-receipt"),
+            "package_ref": package_ref,
+            "object_id": "DEVICE-A",
+            "document_type": "receipt",
+            "original_filename": "device-a-receipt.pdf",
+            "pages": ["Purchase receipt for DEVICE-A. Purchase date 3 May 2026."],
+            "keywords": ["device-a", "purchase", "receipt", "date"],
+            "archived": False,
+        },
+        {
+            "document_id": document_id(package_ref, "distractor-warranty"),
+            "package_ref": package_ref,
+            "object_id": "DEVICE-B",
+            "document_type": "warranty",
+            "original_filename": "device-b-warranty.pdf",
+            "pages": ["Warranty terms for DEVICE-B. Manufacturer warranty duration is 36 months."],
+            "keywords": ["device-b", "warranty", "duration", "months"],
+            "archived": False,
+        },
+    ]
+    if target_warranty:
+        docs.append(
+            {
+                "document_id": document_id(package_ref, "target-warranty"),
+                "package_ref": package_ref,
+                "object_id": "DEVICE-A",
+                "document_type": "warranty",
+                "original_filename": "device-a-warranty.pdf",
+                "pages": ["Warranty terms for DEVICE-A. Manufacturer warranty duration is 24 months."],
+                "keywords": ["device-a", "warranty", "duration", "months"],
+                "archived": False,
+            }
+        )
+    query = QueryInput(
+        case_id="object-scope-case",
+        evaluation_identity="scenario-user",
+        query_text="How long is the manufacturer's warranty?",
+        declared_purpose="grounded_question_answering",
+        corpus_package_ref=package_ref,
+        policy_fixture_ref="full",
+        runtime_parameters={"top_k": 4},
+    )
+    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict()])
+    corpus = {
+        "schema_version": CORPUS_SCHEMA_VERSION,
+        "metadata": {
+            "dataset_version": "actual-pipeline-development-v1",
+            "builder_version": "test",
+            "synthetic": True,
+        },
+        "documents": docs,
+        "policy_fixtures": [
+            {
+                "fixture_id": "full",
+                "access_by_document": {item["document_id"]: "Full" for item in docs},
+                "purpose": "grounded_question_answering",
+                "conflict_policy": "query_sensitive",
+                "aggregate_k": 3,
+                "prohibited_markers": [],
+            }
+        ],
+    }
+    (dataset / "corpus_fixture.json").write_text(json.dumps(corpus), encoding="utf-8")
+    return dataset / "query_inputs.jsonl", dataset / "corpus_fixture.json"
+
+
+def test_object_scoped_query_rejects_different_object_distractor(tmp_path: Path) -> None:
+    query_path, corpus_path = _object_scope_fixture(tmp_path, target_warranty=False)
+    _run_minimal(tmp_path, query_path, corpus_path, "object-distractor")
+    record = json.loads((tmp_path / "object-distractor/raw/raw_records.jsonl").read_text().splitlines()[0])
+    assert record["actual_output_class"] == "REFUSE_INSUFFICIENT_EVIDENCE"
+    assert record["actual_citations"] == []
+    assert record["routing_trace"]["object_scope_applied"] is True
+
+
+def test_object_scoped_query_allows_same_object_evidence(tmp_path: Path) -> None:
+    query_path, corpus_path = _object_scope_fixture(tmp_path, target_warranty=True)
+    _run_minimal(tmp_path, query_path, corpus_path, "object-target")
+    record = json.loads((tmp_path / "object-target/raw/raw_records.jsonl").read_text().splitlines()[0])
+    assert record["actual_output_class"] == "FULL_ANSWER"
+    assert "24 months" in record["actual_output_text"]
 
 
 def test_development_builder_separates_runtime_inputs_and_gold(tmp_path: Path) -> None:
@@ -139,6 +437,52 @@ def test_runner_succeeds_without_gold_and_gold_corruption_cannot_change_raw(tmp_
     assert seal_after["deterministic_content_sha256"] == deterministic_before
 
 
+def test_runner_uses_query_identity_and_corpus_dataset_version(tmp_path: Path) -> None:
+    query_path, corpus_path, gold_path = _minimal_fixture(tmp_path)
+    query = json.loads(query_path.read_text().splitlines()[0])
+    query["evaluation_identity"] = "scenario-user"
+    write_jsonl(query_path, [query])
+    corpus = json.loads(corpus_path.read_text(encoding="utf-8"))
+    corpus["metadata"]["dataset_version"] = "scenario-pack-development-v1"
+    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
+    gold = json.loads(gold_path.read_text().splitlines()[0])
+    gold["dataset_version"] = "scenario-pack-development-v1"
+    write_jsonl(gold_path, [gold])
+
+    _run_minimal(tmp_path, query_path, corpus_path, "scenario-version")
+    raw_path = tmp_path / "scenario-version/raw/raw_records.jsonl"
+    record = json.loads(raw_path.read_text(encoding="utf-8").splitlines()[0])
+    assert record["dataset_version"] == "scenario-pack-development-v1"
+    assert record["actual_output_class"] == "FULL_ANSWER"
+    score = score_sealed_run(
+        raw_run_path=raw_path,
+        seal_path=tmp_path / "scenario-version/raw/run_seal.json",
+        gold_annotation_path=gold_path,
+        output_dir=tmp_path / "scenario-version/scores",
+    )
+    assert score["dataset_version"] == "scenario-pack-development-v1"
+
+
+def test_runner_uploads_external_source_pdf_bytes(tmp_path: Path) -> None:
+    query_path, corpus_path, _ = _minimal_fixture(tmp_path)
+    external_pdf = tmp_path / "dataset" / "source_documents" / "external-manual.pdf"
+    digest = _write_test_pdf(
+        external_pdf,
+        "Synthetic TV-TEST-1 setup instruction: connect external HDMI 3.",
+    )
+    corpus = json.loads(corpus_path.read_text(encoding="utf-8"))
+    corpus["documents"][0]["pages"] = ["Decoy fixture text: connect internal port 9."]
+    corpus["documents"][0]["source_pdf_path"] = "source_documents/external-manual.pdf"
+    corpus["documents"][0]["source_pdf_sha256"] = digest
+    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
+
+    _run_minimal(tmp_path, query_path, corpus_path, "external-pdf")
+    raw_path = tmp_path / "external-pdf/raw/raw_records.jsonl"
+    record = json.loads(raw_path.read_text(encoding="utf-8").splitlines()[0])
+    assert "connect external HDMI 3" in record["generator_visible_text"]
+    assert "connect internal port 9" not in record["generator_visible_text"]
+
+
 def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path: Path) -> None:
     _, _, gold_path = _minimal_fixture(tmp_path)
     current = json.loads(gold_path.read_text().splitlines()[0])
@@ -164,6 +508,107 @@ def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path
     write_jsonl(inconsistent_path, [inconsistent])
     with pytest.raises(ValueError, match="must match legacy"):
         load_gold_annotations(inconsistent_path)
+
+
+def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
+    annotations = [
+        GoldAnnotation(
+            case_id="answer-ok",
+            expected_output_class="FULL_ANSWER",
+            reason_code="supported",
+            gold_document_ids=("doc-a",),
+            gold_page_or_message_ranges={"doc-a": [1]},
+            reference_answer="supported fact",
+            factual_atoms=("supported fact",),
+            required_evidence_roles=(),
+            action_status="NOT_APPLICABLE",
+            required_sources=("doc-a",),
+            reference_citations=({"source_id": "doc-a", "page": 1, "message_id": None, "record_id": None},),
+        ),
+        GoldAnnotation(
+            case_id="answer-missed",
+            expected_output_class="FULL_ANSWER",
+            reason_code="supported",
+            gold_document_ids=("doc-b",),
+            gold_page_or_message_ranges={"doc-b": [1]},
+            reference_answer="another fact",
+            factual_atoms=("another fact",),
+            required_evidence_roles=(),
+            action_status="NOT_APPLICABLE",
+            required_sources=("doc-b",),
+            reference_citations=({"source_id": "doc-b", "page": 1, "message_id": None, "record_id": None},),
+        ),
+        GoldAnnotation(
+            case_id="refusal-ok",
+            expected_output_class="REFUSE_INSUFFICIENT_EVIDENCE",
+            reason_code="evidential",
+            gold_document_ids=(),
+            gold_page_or_message_ranges={},
+            reference_answer=None,
+            factual_atoms=(),
+            required_evidence_roles=(),
+            action_status="NOT_APPLICABLE",
+            required_sources=(),
+            reference_citations=(),
+        ),
+        GoldAnnotation(
+            case_id="false-answer",
+            expected_output_class="REFUSE_INSUFFICIENT_EVIDENCE",
+            reason_code="evidential",
+            gold_document_ids=(),
+            gold_page_or_message_ranges={},
+            reference_answer=None,
+            factual_atoms=(),
+            required_evidence_roles=(),
+            action_status="NOT_APPLICABLE",
+            required_sources=(),
+            reference_citations=(),
+        ),
+    ]
+    records = [
+        {
+            "case_id": "answer-ok",
+            "mode": "B3_FULL_ROLE_AWARE",
+            "actual_output_class": "FULL_ANSWER",
+            "actual_reason_code": "supported",
+            "actual_output_text": "supported fact",
+            "actual_citations": [{"available": True, "document_id": "doc-a", "page_number": 1}],
+            "safety_constraints": {},
+        },
+        {
+            "case_id": "answer-missed",
+            "mode": "B3_FULL_ROLE_AWARE",
+            "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+            "actual_reason_code": "evidential",
+            "actual_output_text": "The answer cannot be found in the document.",
+            "actual_citations": [],
+            "safety_constraints": {},
+        },
+        {
+            "case_id": "refusal-ok",
+            "mode": "B3_FULL_ROLE_AWARE",
+            "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+            "actual_reason_code": "evidential",
+            "actual_output_text": "The answer cannot be found in the document.",
+            "actual_citations": [],
+            "safety_constraints": {},
+        },
+        {
+            "case_id": "false-answer",
+            "mode": "B3_FULL_ROLE_AWARE",
+            "actual_output_class": "FULL_ANSWER",
+            "actual_reason_code": "supported",
+            "actual_output_text": "unsupported answer",
+            "actual_citations": [],
+            "safety_constraints": {},
+        },
+    ]
+    summary, _ = _score_mode(records, annotations)
+    assert summary["permitted_answer_accuracy"] == 0.5
+    assert summary["expected_non_answer_count"] == 2
+    assert summary["false_answer_count"] == 1
+    assert summary["false_answer_rate_on_expected_abstentions"] == 0.5
+    assert summary["false_or_unsupported_answer_rate"] == 0.5
 
 
 def test_query_corruption_changes_raw_deterministic_content(tmp_path: Path) -> None:

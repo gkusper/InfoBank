@@ -14,6 +14,7 @@ import subprocess
 import sys
 import time
 import uuid
+from collections import Counter
 from dataclasses import asdict, dataclass
 from pathlib import Path
 from typing import Any, Iterable
@@ -37,6 +38,40 @@ GENERATION_PROMPT_VERSION = "actual-pipeline-answer-v1"
 ROUTING_PROMPT_VERSION = "routing-keyword-v1"
 GENERATION_TEMPERATURE = 0.0
 MODES = tuple(item.value for item in EvaluationMode)
+ANSWER_OUTPUT_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
+CITATION_MIN_QUESTION_SUPPORT = 0.30
+ROUTING_STOPWORDS = {
+    "a", "an", "and", "are", "as", "at", "be", "by", "do", "does", "for", "from",
+    "how", "i", "in", "is", "it", "me", "my", "of", "on", "or", "the", "this",
+    "to", "use", "using", "was", "what", "when", "where", "which", "with", "you",
+}
+SUPPORT_STOPWORDS = ROUTING_STOPWORDS | {
+    "across", "available", "did", "give", "governed", "listed", "long", "many",
+    "much", "permitted", "should", "source", "specified", "stated", "still",
+    "that", "them",
+}
+FACTUAL_SUPPORT_ALIASES = (
+    (
+        (r"\bwhen\b", r"\bdate\b", r"\bbuy\b", r"\bbought\b", r"\bpurchase(?:d)?\b"),
+        ("purchase", "purchased", "receipt", "transaction", "date", "dated"),
+    ),
+    (
+        (r"\bhow\s+much\b", r"\bpay\b", r"\bpaid\b", r"\bprice\b", r"\bcost\b", r"\bamount\b"),
+        ("price", "cost", "paid", "payment", "amount", "total", "subtotal"),
+    ),
+    (
+        (r"\bserial\b", r"\breference\b", r"\bidentifier\b", r"\bid\b", r"\bcode\b", r"\bmodel\b"),
+        ("serial", "reference", "identifier", "id", "code", "model", "number"),
+    ),
+    (
+        (r"\bhow\s+long\b", r"\bduration\b", r"\bperiod\b", r"\bterm\b", r"\bmonth", r"\byear"),
+        ("duration", "period", "term", "month", "months", "year", "years", "day", "days"),
+    ),
+    (
+        (r"\bwarranty\b", r"\bcovered\b", r"\bcoverage\b"),
+        ("warranty", "covered", "coverage", "terms", "period"),
+    ),
+)
 
 
 @dataclass(frozen=True)
@@ -110,42 +145,72 @@ def _pdf_bytes(document: CorpusDocument) -> bytes:
     return payload
 
 
+def _corpus_pdf_bytes(document: CorpusDocument, corpus_base_dir: Path) -> bytes:
+    if document.source_pdf_path is None:
+        return _pdf_bytes(document)
+    base = corpus_base_dir.resolve()
+    path = (base / document.source_pdf_path).resolve()
+    try:
+        path.relative_to(base)
+    except ValueError as exc:
+        raise ValueError("Corpus source PDF path escaped the fixture directory") from exc
+    payload = path.read_bytes()
+    digest = _sha256_bytes(payload)
+    if document.source_pdf_sha256 is not None and digest != document.source_pdf_sha256:
+        raise ValueError(f"Corpus source PDF hash mismatch for {document.document_id}")
+    return payload
+
+
 def _elapsed_ms(start_ns: int) -> float:
     return round((time.perf_counter_ns() - start_ns) / 1_000_000, 6)
 
 
+def _contains_support_term(text: str, term: str) -> bool:
+    escaped = re.escape(term.lower())
+    if " " in term:
+        return term.lower() in text.lower()
+    return bool(re.search(rf"(?<![a-z0-9]){escaped}(?![a-z0-9])", text.lower()))
+
+
+def _support_groups(question: str) -> list[set[str]]:
+    lowered = question.lower()
+    alias_groups: list[set[str]] = []
+    alias_terms: set[str] = set()
+    for triggers, aliases in FACTUAL_SUPPORT_ALIASES:
+        if any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
+            group = {alias.lower() for alias in aliases}
+            alias_groups.append(group)
+            alias_terms.update(group)
+
+    groups: list[set[str]] = []
+    seen: set[tuple[str, ...]] = set()
+    for group in alias_groups:
+        key = tuple(sorted(group))
+        if key not in seen:
+            groups.append(group)
+            seen.add(key)
+    for token in re.findall(r"[a-z0-9][a-z0-9_-]{2,}", lowered):
+        if token in SUPPORT_STOPWORDS or token in alias_terms:
+            continue
+        key = (token,)
+        if key not in seen:
+            groups.append({token})
+            seen.add(key)
+    return groups
+
+
 def _support_score(question: str, text: str) -> float:
-    tokens = {
-        token
-        for token in re.findall(r"[a-z0-9][a-z0-9_-]{2,}", question.lower())
-        if token
-        not in {
-            "what",
-            "which",
-            "where",
-            "when",
-            "does",
-            "stated",
-            "specified",
-            "available",
-            "across",
-            "permitted",
-            "governed",
-            "source",
-            "this",
-            "that",
-            "give",
-        }
-        and not re.fullmatch(r"(?:tv|router|printer|device)-[a-z0-9-]+", token)
-    }
-    if not tokens:
+    groups = _support_groups(question)
+    if not groups:
         return 0.0
-    lowered = text.lower()
     aliases = {"authority": "authoritative", "authoritative": "authority"}
-    return round(
-        sum(token in lowered or aliases.get(token, "\0") in lowered for token in tokens) / len(tokens),
-        6,
-    )
+    matched = 0
+    for group in groups:
+        expanded = set(group)
+        expanded.update(aliases.get(term, "\0") for term in group)
+        if any(term != "\0" and _contains_support_term(text, term) for term in expanded):
+            matched += 1
+    return round(matched / len(groups), 6)
 
 
 def _page_aware_score(question: str, text: str, vector_distance: float) -> float:
@@ -157,6 +222,104 @@ def _page_aware_score(question: str, text: str, vector_distance: float) -> float
 
 def _known_object_reference(question: str) -> list[str]:
     return re.findall(r"\b(?:TV|ROUTER|PRINTER|DEVICE)-[A-Z0-9-]+\b", question.upper())
+
+
+def _primary_object_by_package(documents: Iterable[CorpusDocument]) -> dict[str, str]:
+    counts: dict[str, Counter[str]] = {}
+    for document in documents:
+        if not document.package_ref or not document.object_id:
+            continue
+        counts.setdefault(document.package_ref, Counter())[document.object_id.upper()] += 1
+    primary: dict[str, str] = {}
+    for package_ref, counter in counts.items():
+        ranked = counter.most_common()
+        if len(ranked) == 1 or (ranked[0][1] > ranked[1][1] and ranked[0][1] > 1):
+            primary[package_ref] = ranked[0][0]
+    return primary
+
+
+def _informative_routing_keyword(value: str) -> bool:
+    keyword = re.sub(r"[^a-z0-9_-]", "", str(value).strip().lower())
+    if not keyword or keyword in ROUTING_STOPWORDS:
+        return False
+    if len(keyword) < 3 and not keyword.isdigit():
+        return False
+    if keyword.isdigit() and len(keyword) < 3:
+        return False
+    return True
+
+
+def _package_terms(package_ref: str) -> set[str]:
+    return {
+        part.lower()
+        for part in re.split(r"[-_]+", package_ref)
+        if part and not part.isdigit()
+    }
+
+
+def _document_routing_keywords(document: CorpusDocument) -> tuple[str, ...]:
+    terms = set(document.keywords)
+    terms.update(
+        part
+        for part in re.split(r"[^a-z0-9]+", document.document_type.lower())
+        if part
+    )
+    if document.document_type:
+        terms.add(document.document_type.lower())
+    return tuple(sorted(terms))
+
+
+def _citation_rank(question: str, answer: str, citation: dict[str, Any]) -> tuple[float, float, float, int]:
+    text = str(citation.get("_text") or "")
+    question_support = _support_score(question, text)
+    answer_support = _support_score(answer, text) if answer else 0.0
+    retrieval_score = float(citation.get("_selection_score") or 0.0)
+    combined = round(0.75 * question_support + 0.10 * answer_support + 0.15 * retrieval_score, 9)
+    return (
+        combined,
+        question_support,
+        answer_support,
+        -int(citation.get("chunk_index") or 0),
+    )
+
+
+def _select_answer_citations(
+    citations: Iterable[dict[str, Any]],
+    *,
+    question: str,
+    answer: str,
+    max_citations: int = 4,
+) -> list[dict[str, Any]]:
+    best_by_document: dict[str, dict[str, Any]] = {}
+    for citation in citations:
+        if not citation.get("available"):
+            continue
+        if citation.get("evidence_role") not in {
+            "primary",
+            "contrastive",
+        }:
+            continue
+        if _support_score(question, str(citation.get("_text") or "")) < CITATION_MIN_QUESTION_SUPPORT:
+            continue
+        doc_id = str(citation.get("document_id") or "")
+        if not doc_id:
+            continue
+        current = best_by_document.get(doc_id)
+        if current is None or _citation_rank(question, answer, citation) > _citation_rank(question, answer, current):
+            best_by_document[doc_id] = citation
+    ranked = sorted(
+        best_by_document.values(),
+        key=lambda item: _citation_rank(question, answer, item),
+        reverse=True,
+    )[:max_citations]
+    return [
+        {
+            key: value
+            for key, value in item.items()
+            if not key.startswith("_")
+        }
+        for item in ranked
+    ]
 
 
 class PipelineRuntime:
@@ -171,6 +334,9 @@ class PipelineRuntime:
         chroma_dir: Path,
         source_storage_dir: Path,
         config: ActualPipelineConfig,
+        corpus_base_dir: Path,
+        dataset_version: str,
+        fixture_identities: dict[str, tuple[str, ...]],
         provider_name: str = "deterministic-mock",
         allow_network_provider: bool = False,
         cache_dir: Path | None = None,
@@ -208,8 +374,12 @@ class PipelineRuntime:
         self.routing = routing
         self.documents = documents
         self.document_by_id = {item.document_id: item for item in documents}
+        self.primary_object_by_package = _primary_object_by_package(documents)
         self.fixtures = fixtures
         self.config = config
+        self.corpus_base_dir = corpus_base_dir
+        self.dataset_version = dataset_version
+        self.fixture_identities = fixture_identities
         provider = ai_provider.create_provider(provider_name)
         if provider.external_network_required and not allow_network_provider:
             raise RuntimeError(
@@ -256,7 +426,7 @@ class PipelineRuntime:
     def _seed(self) -> None:
         models = self.models
         with self.Session() as db:
-            fixture_users = sorted({f"eval-{name}" for name in self.fixtures})
+            fixture_users = sorted({identity for identities in self.fixture_identities.values() for identity in identities})
             owner_id = self._user_id("source-owner")
             for identity in ["source-owner", *fixture_users]:
                 db.add(
@@ -271,7 +441,7 @@ class PipelineRuntime:
             all_chunk_texts: list[str] = []
             all_chunk_metadata: list[dict[str, Any]] = []
             for fixture_doc in self.documents:
-                payload = _pdf_bytes(fixture_doc)
+                payload = _corpus_pdf_bytes(fixture_doc, self.corpus_base_dir)
                 stored = self.source_storage.save(fixture_doc.document_id, payload)
                 extracted = self.document_processing.extract_pdf_pages(payload)
                 chunks = self.document_processing.chunk_pages(fixture_doc.document_id, extracted.pages)
@@ -338,23 +508,24 @@ class PipelineRuntime:
                         )
                     )
             for fixture_id, fixture in self.fixtures.items():
-                user_id = self._user_id(f"eval-{fixture_id}")
-                for doc_id, access in fixture.access_by_document.items():
-                    permission = {
-                        "Full": models.PermissionType.Reader,
-                        "Aggregate": models.PermissionType.Aggregate,
-                        "Metadata": models.PermissionType.Metadata,
-                    }.get(access)
-                    if permission is None:
-                        continue
-                    db.add(
-                        models.UserDocumentPermission(
-                            id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"fixture:{fixture_id}:{doc_id}")),
-                            user_id=user_id,
-                            document_id=doc_id,
-                            permission_type=permission,
+                for identity in self.fixture_identities.get(fixture_id, (f"eval-{fixture_id}",)):
+                    user_id = self._user_id(identity)
+                    for doc_id, access in fixture.access_by_document.items():
+                        permission = {
+                            "Full": models.PermissionType.Reader,
+                            "Aggregate": models.PermissionType.Aggregate,
+                            "Metadata": models.PermissionType.Metadata,
+                        }.get(access)
+                        if permission is None:
+                            continue
+                        db.add(
+                            models.UserDocumentPermission(
+                                id=str(uuid.uuid5(uuid.NAMESPACE_URL, f"fixture:{fixture_id}:{identity}:{doc_id}")),
+                                user_id=user_id,
+                                document_id=doc_id,
+                                permission_type=permission,
+                            )
                         )
-                    )
             db.commit()
             embeddings = self.provider.embed(all_chunk_texts, model=self.config.embedding_model)
             self.collection.add(
@@ -370,26 +541,44 @@ class PipelineRuntime:
         permitted_ids: list[str],
         *,
         enabled: bool,
+        target_object_id: str | None = None,
     ) -> tuple[list[str], list[str], dict[str, Any]]:
         referenced_objects = set(_known_object_reference(question))
-        object_scoped = [
-            item.document_id
-            for item in self.documents
-            if item.document_id in permitted_ids and item.object_id.upper() in referenced_objects
-        ]
+        target = (target_object_id or "").upper()
+        if referenced_objects:
+            object_scoped = [
+                item.document_id
+                for item in self.documents
+                if item.document_id in permitted_ids and item.object_id.upper() in referenced_objects
+            ]
+        elif target:
+            object_scoped = [
+                item.document_id
+                for item in self.documents
+                if item.document_id in permitted_ids and item.object_id.upper() == target
+            ]
+        else:
+            object_scoped = []
         routing_input = object_scoped or permitted_ids
-        document_keywords = {item.document_id: item.keywords for item in self.documents if item.document_id in routing_input}
-        scoped_families = {
-            item.package_ref.split("-")[1]
+        document_keywords = {
+            item.document_id: _document_routing_keywords(item)
+            for item in self.documents
+            if item.document_id in routing_input
+        }
+        scoped_terms = {
+            term
             for item in self.documents
             if item.document_id in object_scoped
+            for term in _package_terms(item.package_ref)
         }
         available = sorted(
             {
                 value
                 for values in document_keywords.values()
                 for value in values
-                if value.upper() not in referenced_objects and value.lower() not in scoped_families
+                if _informative_routing_keyword(value)
+                and value.upper() not in referenced_objects
+                and value.lower() not in scoped_terms
             }
         )
         selected = self.provider.extract_keywords(
@@ -402,7 +591,11 @@ class PipelineRuntime:
         )
         mode = self.routing.RoutingMode.KEYWORD_ROUTING if enabled else self.routing.RoutingMode.ROUTING_OFF
         decision = self.routing.route_documents(routing_input, document_keywords, selected, mode)
-        return list(decision.candidate_document_ids), selected, decision.to_trace()
+        trace = decision.to_trace()
+        trace["object_scope_target"] = target or None
+        trace["object_scope_applied"] = bool(object_scoped)
+        trace["routing_available_keyword_count"] = len(available)
+        return list(decision.candidate_document_ids), selected, trace
 
     def _retrieve(self, question: str, candidate_ids: list[str], top_k: int) -> list[dict[str, Any]]:
         if not candidate_ids:
@@ -412,9 +605,10 @@ class PipelineRuntime:
         chunk_count = sum(
             self.collection.count() for _ in [0]
         )
+        fetch_k = min(max(top_k * 4, len(candidate_ids) * 3, top_k), chunk_count)
         results = self.collection.query(
             query_embeddings=[question_vector],
-            n_results=min(max(top_k, 1), chunk_count),
+            n_results=max(fetch_k, 1),
             where=where,
             include=["documents", "metadatas", "distances"],
         )
@@ -435,7 +629,27 @@ class PipelineRuntime:
                     "page_aware_score": _page_aware_score(question, text, float(distance)),
                 }
             )
-        return sorted(rows, key=lambda item: (-item["page_aware_score"], item["vector_distance"], item["chunk_id"]))
+        ranked = sorted(rows, key=lambda item: (-item["page_aware_score"], item["vector_distance"], item["chunk_id"]))
+        selected: list[dict[str, Any]] = []
+        selected_keys: set[str] = set()
+        selected_documents: set[str] = set()
+        for item in ranked:
+            if item["document_id"] in selected_documents:
+                continue
+            selected.append(item)
+            selected_keys.add(str(item["chunk_id"]))
+            selected_documents.add(str(item["document_id"]))
+            if len(selected) >= top_k:
+                return selected
+        for item in ranked:
+            key = str(item["chunk_id"])
+            if key in selected_keys:
+                continue
+            selected.append(item)
+            selected_keys.add(key)
+            if len(selected) >= top_k:
+                break
+        return selected
 
     def run_case(self, query: QueryInput, mode: str) -> tuple[dict[str, Any], dict[str, float]]:
         timings: dict[str, float] = {}
@@ -472,6 +686,7 @@ class PipelineRuntime:
                 active_ids = sorted(item.document_id for item in self.documents if not item.archived)
                 known_objects = {item.object_id.upper() for item in self.documents}
                 referenced_objects = _known_object_reference(query.query_text)
+                target_object_id = self.primary_object_by_package.get(query.corpus_package_ref)
                 exact_object_missing = bool(referenced_objects and not set(referenced_objects).intersection(known_objects))
 
                 stage = time.perf_counter_ns()
@@ -531,6 +746,7 @@ class PipelineRuntime:
                         query.query_text,
                         permitted_ids,
                         enabled=routing_enabled,
+                        target_object_id=target_object_id,
                     )
                 timings["routing"] = _elapsed_ms(stage)
 
@@ -599,6 +815,7 @@ class PipelineRuntime:
                         if citation.get("available"):
                             citation["evidence_role"] = role
                             citation["_selection_score"] = item["page_aware_score"]
+                            citation["_text"] = item["text"]
                             citations.append(citation)
                         public_text = relevance.public_source_text(role, item["text"])
                         sources.append(
@@ -631,19 +848,6 @@ class PipelineRuntime:
                             generator_blocks.append(block)
 
                     visible_text = "\n\n---\n\n".join(generator_blocks)
-                    if citations:
-                        if any(item.get("evidence_role") == relevance.SOURCE_ROLE_CONTRASTIVE for item in citations):
-                            selected_citations = []
-                            for role in (relevance.SOURCE_ROLE_PRIMARY, relevance.SOURCE_ROLE_CONTRASTIVE):
-                                role_items = [item for item in citations if item.get("evidence_role") == role]
-                                if role_items:
-                                    selected_citations.append(max(role_items, key=lambda item: float(item["_selection_score"])))
-                        else:
-                            selected_citations = [max(citations, key=lambda item: float(item["_selection_score"]))]
-                        citations = [
-                            {key: value for key, value in item.items() if key != "_selection_score"}
-                            for item in selected_citations
-                        ]
                     support_score = _support_score(query.query_text, visible_text)
                     context_available = bool(generator_blocks) and support_score >= self.config.minimum_support_score
                     aggregate_request = any(term in query.query_text.lower() for term in ("average", "aggregate", "mean", "count"))
@@ -742,6 +946,12 @@ class PipelineRuntime:
                     "REFUSE_AGGREGATION_THRESHOLD",
                 }:
                     citations = []
+                elif output_class in ANSWER_OUTPUT_CLASSES:
+                    citations = _select_answer_citations(
+                        citations,
+                        question=query.query_text,
+                        answer=answer,
+                    )
                 if generation_skipped:
                     generator_blocks = []
 
@@ -769,7 +979,7 @@ class PipelineRuntime:
                 record = {
                     "schema_version": RAW_SCHEMA_VERSION,
                     "runner_version": RUNNER_VERSION,
-                    "dataset_version": "actual-pipeline-development-v1",
+                    "dataset_version": self.dataset_version,
                     "case_id": query.case_id,
                     "mode": mode,
                     "query_input_fingerprint": _sha256_bytes(_canonical(query.to_dict()).encode("utf-8")),
@@ -818,7 +1028,7 @@ class PipelineRuntime:
             record = {
                 "schema_version": RAW_SCHEMA_VERSION,
                 "runner_version": RUNNER_VERSION,
-                "dataset_version": "actual-pipeline-development-v1",
+                "dataset_version": self.dataset_version,
                 "case_id": query.case_id,
                 "mode": mode,
                 "query_input_fingerprint": _sha256_bytes(_canonical(query.to_dict()).encode("utf-8")),
@@ -882,6 +1092,15 @@ def run_actual_pipeline(
             raise ValueError("max_cases must be positive")
         queries = queries[:max_cases]
     documents, fixtures, corpus_metadata = load_corpus_fixture(corpus_path)
+    fixture_identity_sets: dict[str, set[str]] = {fixture_id: {f"eval-{fixture_id}"} for fixture_id in fixtures}
+    for query in queries:
+        fixture_identity_sets.setdefault(query.policy_fixture_ref, {f"eval-{query.policy_fixture_ref}"}).add(
+            query.evaluation_identity
+        )
+    fixture_identities = {
+        fixture_id: tuple(sorted(identities))
+        for fixture_id, identities in fixture_identity_sets.items()
+    }
     resolved_modes = [EvaluationMode(mode).value for mode in modes]
     runtime = PipelineRuntime(
         documents=documents,
@@ -890,6 +1109,9 @@ def run_actual_pipeline(
         chroma_dir=Path(chroma_dir),
         source_storage_dir=Path(source_storage_dir),
         config=config,
+        corpus_base_dir=corpus_path.parent,
+        dataset_version=str(corpus_metadata["dataset_version"]),
+        fixture_identities=fixture_identities,
         provider_name=provider_name,
         allow_network_provider=allow_network_provider,
         cache_dir=Path(cache_dir) if cache_dir is not None else None,

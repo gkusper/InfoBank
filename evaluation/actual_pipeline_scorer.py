@@ -125,7 +125,7 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
     reason_confusion: Counter[tuple[str, str]] = Counter()
     citation_expected = citation_supported = citation_correct_page = 0
     cited_count = gold_document_slots = covered_gold_documents = 0
-    answer_correct = unsupported_answers = permitted_answer_count = 0
+    answer_correct = unsupported_answers = permitted_answer_count = expected_non_answer_count = 0
     expected_abstentions = predicted_abstentions = correct_abstentions = 0
     errors: Counter[str] = Counter()
 
@@ -145,8 +145,10 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
             permitted_answer_count += 1
             if actual_class == gold.expected_output_class and _atom_supported(str(record["actual_output_text"]), gold):
                 answer_correct += 1
-        elif predicted_answer:
-            unsupported_answers += 1
+        else:
+            expected_non_answer_count += 1
+            if predicted_answer:
+                unsupported_answers += 1
         expected_abstention = gold.expected_output_class in ABSTENTION_CLASSES
         predicted_abstention = actual_class in ABSTENTION_CLASSES
         expected_abstentions += int(expected_abstention)
@@ -189,12 +191,20 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
         )
 
     count = len(records)
+    false_answer_rate = (
+        round(unsupported_answers / expected_non_answer_count, 6)
+        if expected_non_answer_count
+        else None
+    )
     summary = {
         "case_count": count,
         "output_class_accuracy": round(sum(item["output_class_correct"] for item in details) / count, 6),
         "reason_code_accuracy": round(sum(item["reason_code_correct"] for item in details) / count, 6),
         "permitted_answer_accuracy": round(answer_correct / permitted_answer_count, 6) if permitted_answer_count else None,
-        "false_or_unsupported_answer_rate": round(unsupported_answers / max(1, count - permitted_answer_count), 6),
+        "false_or_unsupported_answer_rate": false_answer_rate,
+        "false_answer_rate_on_expected_abstentions": false_answer_rate,
+        "false_answer_count": unsupported_answers,
+        "expected_non_answer_count": expected_non_answer_count,
         "abstention_precision": round(correct_abstentions / predicted_abstentions, 6) if predicted_abstentions else None,
         "abstention_recall": round(correct_abstentions / expected_abstentions, 6) if expected_abstentions else None,
         "citation_document_coverage": round(covered_gold_documents / gold_document_slots, 6) if gold_document_slots else None,
@@ -264,6 +274,9 @@ def score_sealed_run(
         "reason_code_accuracy",
         "permitted_answer_accuracy",
         "false_or_unsupported_answer_rate",
+        "false_answer_rate_on_expected_abstentions",
+        "false_answer_count",
+        "expected_non_answer_count",
         "abstention_precision",
         "abstention_recall",
         "citation_document_coverage",

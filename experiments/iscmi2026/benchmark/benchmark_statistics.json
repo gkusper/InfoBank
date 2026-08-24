@@ -1,0 +1,126 @@
+{
+  "annotation_rows_total": 376,
+  "annotation_status_distribution": {
+    "ANNOTATED": 352,
+    "NO_TASK": 19,
+    "SKIP_UNCERTAIN": 5
+  },
+  "confidence_distribution_usable": {
+    "3": 60,
+    "4": 154,
+    "5": 138
+  },
+  "excluded_annotations": {
+    "annotation_status:NO_TASK": 19,
+    "annotation_status:SKIP_UNCERTAIN": 5
+  },
+  "excluded_annotations_total": 24,
+  "messages": 195,
+  "negative_control_questions": 40,
+  "qc": {
+    "distribution": {},
+    "field_present": false,
+    "primary_filter": null
+  },
+  "questions_by_family": {
+    "ACTOR_RESPONSIBILITY": 45,
+    "BLOCKED_BY": 4,
+    "CLOSED_TASKS": 50,
+    "DEADLINE": 6,
+    "NO_TASK_CONTROL": 19,
+    "OPEN_TASKS": 50,
+    "REQUESTER": 36,
+    "TASK_HISTORY": 42,
+    "WAITING_FOR": 19
+  },
+  "questions_total": 271,
+  "rare_transition_policy": {
+    "CANCEL": "secondary_descriptive_only",
+    "REJECT": "secondary_descriptive_only"
+  },
+  "schema_version": "1.0",
+  "task_snapshot_coverage": {
+    "actor": {
+      "populated": 210,
+      "ratio": 0.889831,
+      "total": 236
+    },
+    "blocked_by": {
+      "populated": 4,
+      "ratio": 0.016949,
+      "total": 236
+    },
+    "closure_reason": {
+      "populated": 67,
+      "ratio": 0.283898,
+      "total": 236
+    },
+    "deadline": {
+      "populated": 17,
+      "ratio": 0.072034,
+      "total": 236
+    },
+    "requester": {
+      "populated": 112,
+      "ratio": 0.474576,
+      "total": 236
+    },
+    "waiting_for": {
+      "populated": 23,
+      "ratio": 0.097458,
+      "total": 236
+    }
+  },
+  "tasks_by_closure_reason": {
+    "COMPLETE": 66,
+    "REJECT": 1
+  },
+  "tasks_by_final_state": {
+    "CLOSED": 67,
+    "OPEN": 167,
+    "UNCERTAIN": 2
+  },
+  "threads": 50,
+  "transition_distribution": {
+    "COMPLETE": 67,
+    "CONFIRM": 27,
+    "CREATE": 215,
+    "MODIFY": 26,
+    "NONE": 16,
+    "REJECT": 1
+  },
+  "unique_tasks": 236,
+  "usable_annotated_rows": 352,
+  "usable_row_coverage": {
+    "actor": {
+      "populated": 316,
+      "ratio": 0.897727,
+      "total": 352
+    },
+    "blocked_by": {
+      "populated": 6,
+      "ratio": 0.017045,
+      "total": 352
+    },
+    "closure_reason": {
+      "populated": 72,
+      "ratio": 0.204545,
+      "total": 352
+    },
+    "deadline": {
+      "populated": 20,
+      "ratio": 0.056818,
+      "total": 352
+    },
+    "requester": {
+      "populated": 197,
+      "ratio": 0.559659,
+      "total": 352
+    },
+    "waiting_for": {
+      "populated": 33,
+      "ratio": 0.09375,
+      "total": 352
+    }
+  }
+}

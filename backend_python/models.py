@@ -1,8 +1,11 @@
-from sqlalchemy import Column, String, Integer, Text, Enum, ForeignKey, TIMESTAMP, DateTime, func
+from sqlalchemy import BigInteger, Boolean, Column, DateTime, Enum, Float, ForeignKey, Integer, String, Text, TIMESTAMP, func
 from sqlalchemy.orm import relationship
 from database import Base
 import enum
 import datetime
+
+def _utcnow_naive():
+    return datetime.datetime.now(datetime.UTC).replace(tzinfo=None)
 
 class PermissionType(str, enum.Enum):
     Owner = 'Owner'
@@ -24,6 +27,12 @@ class PolicyAccessMode(str, enum.Enum):
     Metadata = 'Metadata'
     Deny = 'Deny'
 
+class ProvenanceType(str, enum.Enum):
+    Extracted = 'EXTRACTED'
+    User = 'USER'
+    Rule = 'RULE'
+    AI = 'AI'
+
 class User(Base):
     __tablename__ = "users"
     id = Column(String(36), primary_key=True)
@@ -31,18 +40,37 @@ class User(Base):
     username = Column(String(100), nullable=False)
     password_hash = Column(String(255), nullable=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
-    full_name = Column(String, nullable=True)
-    avatar_url = Column(String, nullable=True)
+    full_name = Column(String(255), nullable=True)
+    avatar_url = Column(String(1024), nullable=True)
 
 class Document(Base):
     __tablename__ = "documents"
     id = Column(String(255), primary_key=True)
     file_path = Column(String(512), nullable=False)
+    original_filename = Column(String(512), nullable=True)
+    source_storage_path = Column(String(512), nullable=True)
+    source_sha256 = Column(String(64), nullable=True, index=True)
+    source_mime_type = Column(String(100), nullable=True)
+    source_byte_size = Column(BigInteger, nullable=True)
+    page_count = Column(Integer, nullable=True)
+    source_status = Column(String(30), nullable=False, default="ACTIVE", index=True)
+    processing_status = Column(String(30), nullable=False, default="PENDING")
+    processing_config_version = Column(String(100), nullable=True)
+    processing_config_hash = Column(String(64), nullable=True)
+    source_url = Column(String(2048), nullable=True)
+    source_license = Column(String(255), nullable=True)
+    pdf_title = Column(String(512), nullable=True)
+    pdf_author = Column(String(512), nullable=True)
+    pdf_creation_date = Column(String(100), nullable=True)
     upload_date = Column(TIMESTAMP, server_default=func.now())
+    updated_at = Column(DateTime, default=_utcnow_naive, onupdate=_utcnow_naive)
+    archived_at = Column(DateTime, nullable=True)
     visibility = Column(String(50), default="Private") 
     
     permissions = relationship("UserDocumentPermission", back_populates="document")
     chunks = relationship("DocumentChunk", back_populates="document")
+    metadata_provenance = relationship("DocumentMetadataProvenance", back_populates="document", cascade="all, delete-orphan")
+    processing_reports = relationship("DocumentProcessingReport", back_populates="document", cascade="all, delete-orphan")
 
 class Keyword(Base):
     __tablename__ = "keywords"
@@ -53,16 +81,67 @@ class DocumentKeyword(Base):
     __tablename__ = "document_keywords"
     document_id = Column(String(255), ForeignKey("documents.id", ondelete="CASCADE"), primary_key=True)
     keyword_id = Column(Integer, ForeignKey("keywords.id", ondelete="CASCADE"), primary_key=True)
+    provenance_type = Column(
+        Enum(ProvenanceType, values_callable=lambda members: [member.value for member in members]),
+        nullable=False,
+        default=ProvenanceType.Rule,
+    )
+    provenance_json = Column(Text, nullable=True)
+    extraction_method = Column(String(100), nullable=True)
+    model_version = Column(String(255), nullable=True)
+    prompt_version = Column(String(100), nullable=True)
+    user_edited = Column(Boolean, nullable=False, default=False)
+    created_at = Column(DateTime, default=_utcnow_naive)
+    updated_at = Column(DateTime, default=_utcnow_naive, onupdate=_utcnow_naive)
 
 class DocumentChunk(Base):
     __tablename__ = "document_chunks"
     id = Column(String(36), primary_key=True)
     document_id = Column(String(255), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
     chunk_index = Column(Integer, nullable=False)
+    page_number = Column(Integer, nullable=True)
+    block_index = Column(Integer, nullable=True)
+    char_start = Column(Integer, nullable=True)
+    char_end = Column(Integer, nullable=True)
     text_content = Column(Text, nullable=False)
+    content_sha256 = Column(String(64), nullable=True)
+    source_sha256 = Column(String(64), nullable=True)
+    chunk_config_version = Column(String(100), nullable=True)
+    chunk_config_hash = Column(String(64), nullable=True)
     vector_id = Column(String(255), nullable=False)
     
     document = relationship("Document", back_populates="chunks")
+
+class DocumentMetadataProvenance(Base):
+    __tablename__ = "document_metadata_provenance"
+    id = Column(String(36), primary_key=True)
+    document_id = Column(String(255), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False, index=True)
+    field_name = Column(String(100), nullable=False, index=True)
+    field_value = Column(Text, nullable=True)
+    provenance_type = Column(
+        Enum(ProvenanceType, values_callable=lambda members: [member.value for member in members]),
+        nullable=False,
+    )
+    method = Column(String(100), nullable=False)
+    model_version = Column(String(255), nullable=True)
+    prompt_version = Column(String(100), nullable=True)
+    confidence = Column(Float, nullable=True)
+    created_at = Column(DateTime, default=_utcnow_naive)
+    updated_at = Column(DateTime, default=_utcnow_naive, onupdate=_utcnow_naive)
+
+    document = relationship("Document", back_populates="metadata_provenance")
+
+class DocumentProcessingReport(Base):
+    __tablename__ = "document_processing_reports"
+    id = Column(String(36), primary_key=True)
+    document_id = Column(String(255), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False, index=True)
+    operation = Column(String(30), nullable=False)
+    config_version = Column(String(100), nullable=False)
+    config_hash = Column(String(64), nullable=False)
+    report_json = Column(Text, nullable=False)
+    created_at = Column(DateTime, default=_utcnow_naive)
+
+    document = relationship("Document", back_populates="processing_reports")
 
 class UserDocumentPermission(Base):
     __tablename__ = "user_document_permission"
@@ -117,8 +196,8 @@ class PolicyRule(Base):
 class ConnectorAccount(Base):
     """OAuth connector account state for external evidence sources.
 
-    Used by the Gmail connector. Tokens are stored as JSON for the prototype;
-    production should encrypt this column or move it to a secrets vault.
+    Used by the Gmail connector. ``token_json`` contains a versioned encrypted
+    token envelope; legacy plaintext rows are refused until reconnect.
     """
 
     __tablename__ = "connector_accounts"

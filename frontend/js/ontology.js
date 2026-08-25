@@ -3,12 +3,12 @@ async function loadOntology() {
     container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center"><i class="fas fa-circle-notch fa-spin text-3xl text-blue-500"></i></div>';
     
     try {
-        const r = await fetch(`${API}/ontology/me`, { headers: authHeaders() });
+        const r = await fetch(`${API}/semantic-cooccurrence-graph/me`, { headers: authHeaders() });
         const data = await r.json();
         container.innerHTML = ""; 
 
         if (!data.nodes || data.nodes.length === 0) {
-            container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-gray-500">Upload documents to build your Ontology.</div>';
+            container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-gray-500">Upload governed documents to build the Semantic Co-occurrence Graph.</div>';
             return;
         }
 
@@ -54,7 +54,7 @@ async function loadOntology() {
             .attr("class", "shadow-lg");
 
         node.append("text")
-            .text(d => d.id)
+            .text(d => d.keyword)
             .attr("x", d => 20 + (d.val * 4))
             .attr("y", 5)
             .style("font-size", "14px")
@@ -85,7 +85,7 @@ async function loadOntology() {
             d.fx = null; d.fy = null;
         }
     } catch (error) {
-        console.error("Ontology load failed", error);
-        container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-red-500">Failed to load Ontology.</div>';
+        console.error("Semantic Co-occurrence Graph load failed", error);
+        container.innerHTML = '<div class="absolute inset-0 flex items-center justify-center text-red-500">Failed to load the Semantic Co-occurrence Graph.</div>';
     }
 }

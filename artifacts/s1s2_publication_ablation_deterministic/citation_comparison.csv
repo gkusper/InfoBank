@@ -1,0 +1,5 @@
+config,mode,citation_document_coverage,citation_support_precision,page_level_citation_correctness,citation_coverage,unsupported_citation_count,wrong_page_citation_count
+B0,B0_VECTOR_ONLY,0.785714,0.846154,0.846154,0.785714,2,0
+B1,B1_VECTOR_ROUTING,0.785714,1.0,1.0,0.785714,0,0
+B2,B2_PERMISSION_FILTERED,0.785714,0.846154,0.846154,0.785714,2,0
+B3,B3_FULL_ROLE_AWARE,0.785714,1.0,1.0,0.785714,0,0

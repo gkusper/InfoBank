@@ -1,0 +1,30 @@
+{
+  "commit_sha": "70a8852fc5cb7b4dea5abb856b4893fbd4ff5b0c",
+  "config_hash": "473419d9e87afad07a0ea33d52894635d31d7506f62b8fa0a82d2dde04b582ad",
+  "config_version": "actual-pipeline-development-config-v1",
+  "corpus_sha256": "81841f5d39d83070324fee2d7e68d2f53a083b5240045d03dfafb15300c41c75",
+  "dataset_version": "scenario-pack-development-v1",
+  "deterministic_content_sha256": "38b75111f588fcc82208bc491d22f6795c84abf52491e244876599afceac8608",
+  "embedding_model": "text-embedding-3-small",
+  "generation_prompt_version": "actual-pipeline-answer-v1",
+  "generation_temperature": 0.0,
+  "local_pricing_config_supplied": false,
+  "model": "gpt-4o-mini",
+  "modes": [
+    "B2_PERMISSION_FILTERED"
+  ],
+  "network_provider_explicitly_allowed": true,
+  "output_cache_enabled": false,
+  "provider": "openai",
+  "query_input_sha256": "b573bd0be9a1a4ec313239c0618bb96f375ff08f6390b88308b04f08d3a850de",
+  "raw_run_sha256": "093fd5fe9db90a79bc21eca8cf5dd4c19ea865256e90af8e1941fc37ff5a7c25",
+  "record_count": 12,
+  "routing_prompt_version": "routing-keyword-v1",
+  "run_id": "s1s2-openai-r3-b2-20260825",
+  "runner_version": "infobank-actual-pipeline-runner-v1",
+  "schema_version": "infobank-raw-run-seal-v1",
+  "scoring_started": false,
+  "timestamp": "2026-08-24T23:30:35Z",
+  "timing_sidecar_sha256": "29ba7fca8d382b661ebc5032776ad9ac9a900937e91dc56c835192a5e3a0ab09",
+  "wall_clock_separated_from_deterministic_hash": true
+}

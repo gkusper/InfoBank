@@ -1,0 +1,12 @@
+{
+  "dataset_version": "scenario-pack-development-v1",
+  "gold_blind_runtime": true,
+  "projection_version": "infobank-scenario-projection-v1",
+  "query_count": 6,
+  "runtime_query_path": "runtime/query_inputs.jsonl",
+  "runtime_query_sha256": "cafc3f26df698cfcde46355a9f14a528e366134c056831b930cdb95e1b30a566",
+  "scenario_id": "S1_SOFA_01",
+  "scorer_gold_path": "scorer/gold_annotations.jsonl",
+  "scorer_gold_sha256": "cace372365d217094bc160bd99dace13a1824ee8b6e5a22f420c4d047ea996f6",
+  "status": "READY_FOR_CORPUS_BINDING"
+}

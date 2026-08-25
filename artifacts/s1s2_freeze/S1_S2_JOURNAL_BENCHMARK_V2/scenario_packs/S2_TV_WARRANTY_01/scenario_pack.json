@@ -1,0 +1,206 @@
+{
+  "account_id": null,
+  "object_id": "TV-001",
+  "queries": [
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "Which television do I own, when did I purchase it, and what was the price?",
+      "query_id": "S2-Q1",
+      "reference_answer": "You own a Velora V55 Smart TV. It was purchased on 12 March 2025 for 319,900 HUF.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "s2-tv-purchase-receipt"
+        }
+      ],
+      "required_sources": [
+        "s2-tv-purchase-receipt"
+      ],
+      "supporting_sources": [
+        "s2-tv-manual"
+      ]
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "Is my Velora V55 still covered by the manufacturer warranty on 21 August 2026? Explain using the purchase record and the manufacturer warranty terms.",
+      "query_id": "S2-Q2",
+      "reference_answer": "Yes. The television was purchased on 12 March 2025, and the 24-month manufacturer warranty ends on 12 March 2027. It is therefore covered on 21 August 2026.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "s2-tv-purchase-receipt"
+        },
+        {
+          "message_id": null,
+          "page": 2,
+          "record_id": null,
+          "source_id": "s2-tv-warranty-terms"
+        }
+      ],
+      "required_sources": [
+        "s2-tv-purchase-receipt",
+        "s2-tv-warranty-terms"
+      ],
+      "supporting_sources": []
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "My Velora V55 shows error E06 while I am using an HDMI source. What does E06 mean, and what should I do first?",
+      "query_id": "S2-Q3",
+      "reference_answer": "E06 indicates an HDMI handshake or connection failure. First turn off and unplug both the television and the HDMI source device for 60 seconds, then reconnect them.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 17,
+          "record_id": null,
+          "source_id": "s2-tv-manual"
+        }
+      ],
+      "required_sources": [
+        "s2-tv-manual"
+      ],
+      "supporting_sources": []
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "How many HDMI and USB-A ports does the Velora V55 have, and what other wired connections are listed?",
+      "query_id": "S2-Q4",
+      "reference_answer": "The Velora V55 has 4 HDMI inputs, 2 USB-A ports, 1 Ethernet port, 1 optical audio output and 1 antenna input.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 3,
+          "record_id": null,
+          "source_id": "s2-tv-product-sheet"
+        }
+      ],
+      "required_sources": [
+        "s2-tv-product-sheet"
+      ],
+      "supporting_sources": [
+        "s2-tv-manual"
+      ]
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "Do the documents establish that the 18-month regional service period replaces the 24-month manufacturer warranty for my Velora V55? Explain the two periods without assuming that one supersedes the other.",
+      "query_id": "S2-Q5",
+      "reference_answer": "The documents define a 24-month manufacturer warranty and a separate 18-month regional service period, both calculated from the retail purchase date. They do not state that the regional period replaces or supersedes the manufacturer warranty.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 2,
+          "record_id": null,
+          "source_id": "s2-tv-warranty-terms"
+        },
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "s2-tv-regional-service-notice"
+        }
+      ],
+      "required_sources": [
+        "s2-tv-warranty-terms",
+        "s2-tv-regional-service-notice"
+      ],
+      "supporting_sources": [
+        "s2-tv-purchase-receipt"
+      ]
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "For the Velora V55, product code VEL-V55-2025, does error E06 mean a temperature-sensor fault as described in the Aster M55 manual, or does it mean something else? Use only the matching product documents.",
+      "query_id": "S2-Q6",
+      "reference_answer": "For the Velora V55, E06 concerns HDMI connection negotiation, not a temperature-sensor fault. The Aster M55 definition does not apply to the Velora product.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 17,
+          "record_id": null,
+          "source_id": "s2-tv-manual"
+        },
+        {
+          "message_id": null,
+          "page": 20,
+          "record_id": null,
+          "source_id": "s2-tv-manual"
+        }
+      ],
+      "required_sources": [
+        "s2-tv-manual"
+      ],
+      "supporting_sources": [
+        "s2-wrong-device-manual"
+      ]
+    }
+  ],
+  "scenario_id": "S2_TV_WARRANTY_01",
+  "sources": [
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "source_id": "s2-tv-manual",
+      "source_type": "user_manual_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "source_id": "s2-tv-purchase-receipt",
+      "source_type": "purchase_receipt_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "source_id": "s2-tv-warranty-terms",
+      "source_type": "warranty_terms_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "source_id": "s2-tv-product-sheet",
+      "source_type": "product_specification_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "source_id": "s2-tv-regional-service-notice",
+      "source_type": "regional_service_notice_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "DISPLAY-OTHER-001",
+      "source_id": "s2-wrong-device-manual",
+      "source_type": "wrong_object_manual_pdf",
+      "valid_from": null,
+      "valid_to": null
+    }
+  ],
+  "user_id": "synthetic-user-tv"
+}

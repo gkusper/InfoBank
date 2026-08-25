@@ -16,7 +16,26 @@ CREATE TABLE IF NOT EXISTS users (
 CREATE TABLE IF NOT EXISTS documents (
     id VARCHAR(255) PRIMARY KEY,
     file_path VARCHAR(512) NOT NULL,
+    original_filename VARCHAR(512) NULL,
+    source_storage_path VARCHAR(512) NULL,
+    source_sha256 VARCHAR(64) NULL,
+    source_mime_type VARCHAR(100) NULL,
+    source_byte_size BIGINT NULL,
+    page_count INT NULL,
+    source_status VARCHAR(30) NOT NULL DEFAULT 'ACTIVE',
+    processing_status VARCHAR(30) NOT NULL DEFAULT 'PENDING',
+    processing_config_version VARCHAR(100) NULL,
+    processing_config_hash VARCHAR(64) NULL,
+    source_url VARCHAR(2048) NULL,
+    source_license VARCHAR(255) NULL,
+    pdf_title VARCHAR(512) NULL,
+    pdf_author VARCHAR(512) NULL,
+    pdf_creation_date VARCHAR(100) NULL,
     upload_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NULL,
+    archived_at DATETIME NULL,
+    INDEX ix_documents_source_sha256 (source_sha256),
+    INDEX ix_documents_source_status (source_status),
     visibility VARCHAR(50) DEFAULT 'Private'
 ) ENGINE=InnoDB;
 
@@ -28,6 +47,14 @@ CREATE TABLE IF NOT EXISTS keywords (
 CREATE TABLE IF NOT EXISTS document_keywords (
     document_id VARCHAR(255) NOT NULL,
     keyword_id INT NOT NULL,
+    provenance_type ENUM('EXTRACTED', 'USER', 'RULE', 'AI') NOT NULL DEFAULT 'RULE',
+    provenance_json TEXT NULL,
+    extraction_method VARCHAR(100) NULL,
+    model_version VARCHAR(255) NULL,
+    prompt_version VARCHAR(100) NULL,
+    user_edited BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at DATETIME NULL,
+    updated_at DATETIME NULL,
     PRIMARY KEY (document_id, keyword_id),
     FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE,
     FOREIGN KEY (keyword_id) REFERENCES keywords(id) ON DELETE CASCADE
@@ -37,8 +64,45 @@ CREATE TABLE IF NOT EXISTS document_chunks (
     id VARCHAR(36) PRIMARY KEY,
     document_id VARCHAR(255) NOT NULL,
     chunk_index INT NOT NULL,
+    page_number INT NULL,
+    block_index INT NULL,
+    char_start INT NULL,
+    char_end INT NULL,
     text_content TEXT NOT NULL,
+    content_sha256 VARCHAR(64) NULL,
+    source_sha256 VARCHAR(64) NULL,
+    chunk_config_version VARCHAR(100) NULL,
+    chunk_config_hash VARCHAR(64) NULL,
     vector_id VARCHAR(255) NOT NULL,
+    FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS document_metadata_provenance (
+    id VARCHAR(36) PRIMARY KEY,
+    document_id VARCHAR(255) NOT NULL,
+    field_name VARCHAR(100) NOT NULL,
+    field_value TEXT NULL,
+    provenance_type ENUM('EXTRACTED', 'USER', 'RULE', 'AI') NOT NULL,
+    method VARCHAR(100) NOT NULL,
+    model_version VARCHAR(255) NULL,
+    prompt_version VARCHAR(100) NULL,
+    confidence DOUBLE NULL,
+    created_at DATETIME NULL,
+    updated_at DATETIME NULL,
+    INDEX ix_document_metadata_provenance_document_id (document_id),
+    INDEX ix_document_metadata_provenance_field_name (field_name),
+    FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS document_processing_reports (
+    id VARCHAR(36) PRIMARY KEY,
+    document_id VARCHAR(255) NOT NULL,
+    operation VARCHAR(30) NOT NULL,
+    config_version VARCHAR(100) NOT NULL,
+    config_hash VARCHAR(64) NOT NULL,
+    report_json TEXT NOT NULL,
+    created_at DATETIME NULL,
+    INDEX ix_document_processing_reports_document_id (document_id),
     FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;
 

@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/infobank/gold-annotation-v1.schema.json",
+  "title": "InfoBank GoldAnnotation",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "expected_output_class",
+    "reason_code",
+    "gold_document_ids",
+    "gold_page_or_message_ranges",
+    "reference_answer",
+    "factual_atoms",
+    "required_evidence_roles",
+    "action_status",
+    "manual_validation_state",
+    "dataset_version",
+    "schema_version",
+    "metadata"
+  ],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "expected_output_class": {"type": "string", "minLength": 1},
+    "reason_code": {"type": "string", "minLength": 1},
+    "gold_document_ids": {"type": "array", "items": {"type": "string"}},
+    "gold_page_or_message_ranges": {"type": "object"},
+    "required_sources": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 1}
+    },
+    "reference_citations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "page", "message_id", "record_id"],
+        "properties": {
+          "source_id": {"type": "string", "minLength": 1},
+          "page": {"type": ["integer", "null"], "minimum": 1},
+          "message_id": {"type": ["string", "null"], "minLength": 1},
+          "record_id": {"type": ["string", "null"], "minLength": 1}
+        },
+        "oneOf": [
+          {"properties": {"page": {"type": "integer"}, "message_id": {"type": "null"}, "record_id": {"type": "null"}}},
+          {"properties": {"page": {"type": "null"}, "message_id": {"type": "string"}, "record_id": {"type": "null"}}},
+          {"properties": {"page": {"type": "null"}, "message_id": {"type": "null"}, "record_id": {"type": "string"}}}
+        ]
+      }
+    },
+    "reference_answer": {"type": ["string", "null"]},
+    "factual_atoms": {"type": "array", "items": {"type": "string"}},
+    "required_evidence_roles": {"type": "array", "items": {"type": "string"}},
+    "action_status": {"type": "string"},
+    "manual_validation_state": {"enum": ["PENDING_HUMAN_REVIEW", "HUMAN_VALIDATED"]},
+    "dataset_version": {"type": "string"},
+    "schema_version": {"const": "infobank-gold-annotation-v1"},
+    "metadata": {"type": "object"}
+  }
+}

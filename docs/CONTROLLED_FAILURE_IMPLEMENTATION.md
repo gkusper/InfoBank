@@ -8,7 +8,7 @@ The backend returns a `controlled_failure` object whenever the system must avoid
 
 ```json
 {
-  "status": "abstain",
+  "status": "REFUSE_INSUFFICIENT_EVIDENCE",
   "reason": "evidential",
   "evidenceState": {},
   "policyState": {},
@@ -22,14 +22,17 @@ The backend returns a `controlled_failure` object whenever the system must avoid
 
 | Status | Runtime behavior |
 | --- | --- |
-| `full_answer` | Permitted, sufficiently supported answer mode. |
-| `abstain` | No source, no support, missing context, or unsupported post-generation answer. |
-| `refuse` | Governance-denied, unsafe, or prompt-injection request. |
-| `restricted_answer` | Contextual-only, conflict/defeat, browser-history-only, or qualified answer mode. |
-| `aggregate_answer` | Aggregate/statistical answer over aggregate-only sources with raw content withheld. |
-| `metadata_only_answer` | Metadata can be acknowledged, but source content is withheld. |
-| `ask_clarification` | Underspecified or temporally unclear question. |
-| `escalate_to_human` | State-changing or operationally unsafe action boundary. |
+| `FULL_ANSWER` | Permitted, sufficiently supported answer mode. |
+| `REFUSE_INSUFFICIENT_EVIDENCE` | Permitted candidate exists but lacks supporting evidence. |
+| `REFUSE_NO_MATCH` | A permitted search scope exists but no relevant object/source match exists. |
+| `REFUSE_PERMISSION` | Revoke/missing permission, Deny, archive, purpose/validity rejection, unsafe request, or prompt-injection request. |
+| `CONSTRAINED_ANSWER` | Contextual-only, bounded conflict/defeat, browser-history-only, or qualified answer mode. |
+| `AGGREGATE_RESULT` | K-thresholded aggregate result with individual content withheld. |
+| `REFUSE_AGGREGATION_THRESHOLD` | Aggregate threshold not met; source count and existence withheld. |
+| `METADATA_ONLY` | Metadata can be acknowledged, but source content is withheld. |
+| `CLARIFICATION` | Underspecified or temporally unclear question. |
+| `REFUSE_CONFLICT` | Authority-sensitive conflict blocks a safe answer. |
+| `ESCALATE_TO_HUMAN` | State-changing or operationally unsafe action boundary. |
 
 ## Implemented reason classes
 
@@ -58,6 +61,9 @@ The backend returns a `controlled_failure` object whenever the system must avoid
 
 ## Runtime behavior
 
+- Policy resolution runs over the internal document scope before routing. Denied identifiers stay in privileged audit data and are removed from the public failure payload.
+- Revoke, explicit Deny, archive, purpose mismatch, expiry/future validity, and stale-index rejection return internal `REFUSE_PERMISSION`; a wrong object inside an otherwise permitted scope returns `REFUSE_NO_MATCH`.
+- Both public failure shapes are non-enumerating, contain no denied filename/UUID/hash/page count, denied-source count, or citation, and expose only permitted operational summaries plus an identifier-free routing trace. Exact denied-source details remain in the privileged audit record.
 - Metadata-only sources return `metadata_only_answer` and never expose raw content.
 - Aggregate-only sources can answer aggregate/statistical questions but not specific content claims.
 - Contextual/activity sources cannot create obligations by themselves.

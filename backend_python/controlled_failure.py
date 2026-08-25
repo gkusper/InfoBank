@@ -5,16 +5,22 @@ import re
 from typing import Any, Dict, Iterable, List
 
 import relevance
+from controlled_failure_config import load_controlled_failure_config
 
 
-STATUS_FULL_ANSWER = "full_answer"
-STATUS_ABSTAIN = "abstain"
-STATUS_REFUSE = "refuse"
-STATUS_RESTRICTED_ANSWER = "restricted_answer"
-STATUS_AGGREGATE_ANSWER = "aggregate_answer"
-STATUS_METADATA_ONLY_ANSWER = "metadata_only_answer"
-STATUS_ASK_CLARIFICATION = "ask_clarification"
-STATUS_ESCALATE = "escalate_to_human"
+_CONFIG = load_controlled_failure_config()
+
+STATUS_FULL_ANSWER = "FULL_ANSWER"
+STATUS_ABSTAIN = "REFUSE_INSUFFICIENT_EVIDENCE"
+STATUS_REFUSE = "REFUSE_PERMISSION"
+STATUS_RESTRICTED_ANSWER = "CONSTRAINED_ANSWER"
+STATUS_AGGREGATE_ANSWER = "AGGREGATE_RESULT"
+STATUS_METADATA_ONLY_ANSWER = "METADATA_ONLY"
+STATUS_ASK_CLARIFICATION = "CLARIFICATION"
+STATUS_ESCALATE = "ESCALATE_TO_HUMAN"
+STATUS_REFUSE_NO_MATCH = "REFUSE_NO_MATCH"
+STATUS_REFUSE_AGGREGATION_THRESHOLD = "REFUSE_AGGREGATION_THRESHOLD"
+STATUS_REFUSE_CONFLICT = "REFUSE_CONFLICT"
 
 REASON_EPISTEMIC = "epistemic"
 REASON_EVIDENTIAL = "evidential"
@@ -24,7 +30,8 @@ REASON_CONFLICT_DEFEAT = "conflict_defeat"
 REASON_TEMPORAL_STATUS = "temporal_status"
 REASON_OPERATIONAL_SECURITY = "operational_security"
 
-CONTROLLED_FAILURE_VERSION = "controlled-failure-v2"
+CONTROLLED_FAILURE_VERSION = _CONFIG["config_version"]
+CONTROLLED_FAILURE_CONFIG_HASH = _CONFIG["config_hash"]
 
 PROMPT_INJECTION_PATTERNS = [
     r"ignore\s+(all\s+)?(previous|prior|above|system|developer)\s+instructions",
@@ -217,6 +224,7 @@ def make_controlled_failure(
 ) -> Dict[str, Any]:
     return {
         "version": CONTROLLED_FAILURE_VERSION,
+        "config_hash": CONTROLLED_FAILURE_CONFIG_HASH,
         "status": status,
         "reason": reason,
         "evidenceState": evidence_state_value,
@@ -250,7 +258,7 @@ def blocked_output(cf: Dict[str, Any]) -> Dict[str, Any]:
 
 def _question_mentions_current_status(question: str, query_profile: Dict[str, Any]) -> bool:
     q = (question or "").lower()
-    if any(term in q for term in CURRENT_STATUS_TERMS):
+    if any(re.search(rf"\b{re.escape(term)}\b", q) for term in CURRENT_STATUS_TERMS):
         return True
     return query_profile.get("task_intent") in {"current_action_list", "deadline_or_status"}
 
@@ -267,6 +275,8 @@ def select_rag_output_mode(
     governance: Dict[str, Any],
     context_blocks_available: bool,
     aggregate_request: bool = False,
+    conflict_policy: str = "query_sensitive",
+    support_check: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
     state = evidence_state(sources, query_profile, context_blocks_available)
     policy = safe_policy_state(governance)
@@ -310,13 +320,47 @@ def select_rag_output_mode(
     if not policy["content_source_count"]:
         reason = REASON_GOVERNANCE if policy["denied_source_count"] else REASON_EPISTEMIC
         cf = make_controlled_failure(
-            STATUS_REFUSE if reason == REASON_GOVERNANCE else STATUS_ABSTAIN,
+            STATUS_REFUSE if reason == REASON_GOVERNANCE else STATUS_REFUSE_NO_MATCH,
             reason,
             state,
             policy,
-            "There is no permitted source that can be used for this question in the InfoBank.",
-            ["Upload, connect, or grant a permitted source for this purpose."],
+            "The request cannot be answered from the sources available for this purpose.",
+            ["Use a permitted source for this purpose or ask about an object in the available scope."],
             {**trace, "gate": "policy_and_safety_filtering"},
+        )
+        return blocked_output(cf)
+
+    support_decision = (support_check or {}).get("decision")
+    if support_decision == "clarification_required":
+        cf = make_controlled_failure(
+            STATUS_ASK_CLARIFICATION,
+            REASON_EPISTEMIC,
+            state,
+            policy,
+            "I found permitted evidence for the object, but the requested relationship is ambiguous. Please clarify the exact claim you want checked.",
+            ["State whether you are asking about coverage or exclusion, a cause, a requirement, a duration, or another specific relationship."],
+            {
+                **trace,
+                "gate": "claim_relation_clarification",
+                "support_reason": (support_check or {}).get("reason"),
+            },
+        )
+        return blocked_output(cf)
+
+    if support_decision == "insufficient_evidence":
+        cf = make_controlled_failure(
+            STATUS_ABSTAIN,
+            REASON_EVIDENTIAL,
+            state,
+            policy,
+            "The answer cannot be found in the document.",
+            ["Provide a permitted source that explicitly states the requested relationship or ask a narrower question."],
+            {
+                **trace,
+                "gate": "evidence_sufficiency_checking",
+                "support_reason": (support_check or {}).get("reason"),
+                "missing_claim_relations": list((support_check or {}).get("missing_claim_relations") or []),
+            },
         )
         return blocked_output(cf)
 
@@ -407,6 +451,22 @@ def select_rag_output_mode(
         return blocked_output(cf)
 
     if has_primary and has_contrastive:
+        authority_sensitive = bool(re.search(
+            r"\b(final authority|authoritative source|resolve (?:the )?conflict|which source (?:is|has)|binding authority)\b",
+            question or "",
+            flags=re.IGNORECASE,
+        ))
+        if conflict_policy == "authority_required" or (conflict_policy == "query_sensitive" and authority_sensitive):
+            cf = make_controlled_failure(
+                STATUS_REFUSE_CONFLICT,
+                REASON_CONFLICT_DEFEAT,
+                state,
+                policy,
+                "The available permitted sources conflict, and the evidence does not establish which source has final authority.",
+                ["Resolve the source authority or provide an authoritative record before relying on the disputed claim."],
+                {**trace, "gate": "conflict_defeat_check", "conflict_policy": conflict_policy},
+            )
+            return blocked_output(cf)
         return _restricted_output(
             STATUS_RESTRICTED_ANSWER,
             REASON_CONFLICT_DEFEAT,
@@ -435,5 +495,35 @@ def from_not_found_answer(question: str, sources: Iterable[Dict[str, Any]], quer
             "question_fingerprint": len(question or ""),
             "gate": "generation_result_validation",
             "task_intent": query_profile.get("task_intent"),
+        },
+    )
+
+
+def from_unsupported_generated_answer(
+    question: str,
+    sources: Iterable[Dict[str, Any]],
+    query_profile: Dict[str, Any],
+    governance: Dict[str, Any],
+    answer_support: Dict[str, Any],
+) -> Dict[str, Any]:
+    """Convert a generated unsupported relation/fact into an audited abstention."""
+
+    state = evidence_state(sources, query_profile, True)
+    policy = safe_policy_state(governance)
+    return make_controlled_failure(
+        STATUS_ABSTAIN,
+        REASON_EVIDENTIAL,
+        state,
+        policy,
+        "The answer cannot be found in the document.",
+        ["Provide a source that explicitly supports the requested relationship or ask a narrower question."],
+        {
+            "question_fingerprint": len(question or ""),
+            "gate": "generation_grounding_validation",
+            "task_intent": query_profile.get("task_intent"),
+            "support_reason": answer_support.get("reason"),
+            "missing_claim_relations": list(answer_support.get("missing_claim_relations") or []),
+            "unsupported_number_count": len(answer_support.get("unsupported_numbers") or []),
+            "unmatched_object_identifier_count": len(answer_support.get("unmatched_object_identifiers") or []),
         },
     )

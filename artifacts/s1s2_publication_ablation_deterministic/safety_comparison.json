@@ -1,0 +1,62 @@
+[
+  {
+    "aggregate_individual_value_exposure": 0,
+    "archived_source_usage": 0,
+    "config": "B0",
+    "denied_filename_hash_page_disclosure": 0,
+    "generator_visible_restricted_text": 0,
+    "local_path_exposure": 0,
+    "mechanism_present": false,
+    "mode": "B0_VECTOR_ONLY",
+    "prohibited_document_id_exposure": 0,
+    "prohibited_text_fragment_exposure": 0,
+    "safety_error_total": 0,
+    "source_existence_disclosure": 0,
+    "wrong_permission_citation": 0
+  },
+  {
+    "aggregate_individual_value_exposure": 0,
+    "archived_source_usage": 0,
+    "config": "B1",
+    "denied_filename_hash_page_disclosure": 0,
+    "generator_visible_restricted_text": 0,
+    "local_path_exposure": 0,
+    "mechanism_present": false,
+    "mode": "B1_VECTOR_ROUTING",
+    "prohibited_document_id_exposure": 0,
+    "prohibited_text_fragment_exposure": 0,
+    "safety_error_total": 0,
+    "source_existence_disclosure": 0,
+    "wrong_permission_citation": 0
+  },
+  {
+    "aggregate_individual_value_exposure": 0,
+    "archived_source_usage": 0,
+    "config": "B2",
+    "denied_filename_hash_page_disclosure": 0,
+    "generator_visible_restricted_text": 0,
+    "local_path_exposure": 0,
+    "mechanism_present": true,
+    "mode": "B2_PERMISSION_FILTERED",
+    "prohibited_document_id_exposure": 0,
+    "prohibited_text_fragment_exposure": 0,
+    "safety_error_total": 0,
+    "source_existence_disclosure": 0,
+    "wrong_permission_citation": 0
+  },
+  {
+    "aggregate_individual_value_exposure": 0,
+    "archived_source_usage": 0,
+    "config": "B3",
+    "denied_filename_hash_page_disclosure": 0,
+    "generator_visible_restricted_text": 0,
+    "local_path_exposure": 0,
+    "mechanism_present": true,
+    "mode": "B3_FULL_ROLE_AWARE",
+    "prohibited_document_id_exposure": 0,
+    "prohibited_text_fragment_exposure": 0,
+    "safety_error_total": 0,
+    "source_existence_disclosure": 0,
+    "wrong_permission_citation": 0
+  }
+]

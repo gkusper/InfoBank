@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/infobank/raw-run-seal-v1.schema.json",
+  "title": "InfoBank RawRunSeal",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "schema_version",
+    "run_id",
+    "timestamp",
+    "raw_run_sha256",
+    "deterministic_content_sha256",
+    "config_hash",
+    "query_input_sha256",
+    "corpus_sha256",
+    "commit_sha",
+    "provider",
+    "model"
+  ],
+  "properties": {
+    "schema_version": {"const": "infobank-raw-run-seal-v1"},
+    "run_id": {"type": "string"},
+    "timestamp": {"type": "string"},
+    "raw_run_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "deterministic_content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "config_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "query_input_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "corpus_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "commit_sha": {"type": "string"},
+    "provider": {"type": "string"},
+    "model": {"type": "string"}
+  }
+}

@@ -10,25 +10,40 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
     
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/reviewer_evidence.css">
 </head>
 <body class="bg-gray-50 h-screen flex overflow-hidden">
 
     <div id="login-screen" class="absolute inset-0 bg-gray-100 z-50 flex items-center justify-center">
         <div class="bg-white p-8 rounded-2xl shadow-xl w-96 border border-gray-200">
             <div class="flex justify-center mb-6"><div class="w-12 h-12 bg-blue-600 rounded-xl flex items-center justify-center text-white text-2xl font-bold shadow-lg">IB</div></div>
+            <div id="auth-feedback" class="hidden mb-4 rounded-lg border px-4 py-3 text-sm" role="status" aria-live="polite"></div>
             <div id="form-login" class="space-y-4">
                 <input type="email" id="log-email" placeholder="Email" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
                 <input type="password" id="log-pass" placeholder="Password" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
                 <button onclick="doLogin()" class="w-full bg-blue-600 text-white py-3 rounded-lg font-bold hover:bg-blue-700 transition">Login</button>
                 <p class="text-center text-sm text-gray-500">New? <a href="#" onclick="toggleAuth()" class="text-blue-600 font-bold">Register</a></p>
             </div>
-            <div id="form-register" class="space-y-4 hidden">
-                <input type="text" id="reg-name" placeholder="Username" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
-                <input type="email" id="reg-email" placeholder="Email" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
-                <input type="password" id="reg-pass" placeholder="Password" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
-                <button onclick="doRegister()" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition">Sign Up</button>
+            <form id="form-register" class="space-y-4 hidden" novalidate>
+                <div>
+                    <label for="reg-name" class="sr-only">Username</label>
+                    <input type="text" id="reg-name" name="username" placeholder="Username" required minlength="3" maxlength="100" pattern="[A-Za-z0-9_.-]+" autocomplete="username" aria-describedby="reg-name-error" aria-invalid="false" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
+                    <p id="reg-name-error" class="hidden mt-1 text-sm text-red-700" aria-live="polite"></p>
+                </div>
+                <div>
+                    <label for="reg-email" class="sr-only">Email</label>
+                    <input type="email" id="reg-email" name="email" placeholder="Email" required maxlength="255" autocomplete="email" aria-describedby="reg-email-error" aria-invalid="false" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
+                    <p id="reg-email-error" class="hidden mt-1 text-sm text-red-700" aria-live="polite"></p>
+                </div>
+                <div>
+                    <label for="reg-pass" class="sr-only">Password</label>
+                    <input type="password" id="reg-pass" name="password" placeholder="Password" required minlength="12" maxlength="128" autocomplete="new-password" aria-describedby="reg-pass-hint reg-pass-error" aria-invalid="false" class="w-full border rounded-lg p-3 outline-none focus:ring-2 focus:ring-blue-500">
+                    <p id="reg-pass-hint" class="mt-1 text-xs text-gray-500">Use 12–128 characters.</p>
+                    <p id="reg-pass-error" class="hidden mt-1 text-sm text-red-700" aria-live="polite"></p>
+                </div>
+                <button type="submit" class="w-full bg-green-600 text-white py-3 rounded-lg font-bold hover:bg-green-700 transition">Sign Up</button>
                 <p class="text-center text-sm text-gray-500">Back to <a href="#" onclick="toggleAuth()" class="text-blue-600 font-bold">Login</a></p>
-            </div>
+            </form>
         </div>
     </div>
 
@@ -45,10 +60,16 @@
                         <i class="fas fa-project-diagram w-5 text-center"></i><span>Knowledge Map</span>
                     </button>
                     <button onclick="switchView('ontology')" id="btn-ontology" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
-                        <i class="fas fa-network-wired w-5 text-center"></i><span>Smart Ontology</span>
+                        <i class="fas fa-network-wired w-5 text-center"></i><span>Semantic Co-occurrence Graph</span>
                     </button>
                     <button onclick="switchView('manager')" id="btn-manager" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
-                        <i class="fas fa-tasks w-5 text-center"></i><span>Management</span>
+                        <i class="fas fa-database w-5 text-center"></i><span>Documents</span>
+                    </button>
+                    <button onclick="switchView('policy')" id="btn-policy" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
+                        <i class="fas fa-user-shield w-5 text-center"></i><span>Permissions</span>
+                    </button>
+                    <button onclick="switchView('actions')" id="btn-actions" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
+                        <i class="fas fa-clipboard-check w-5 text-center"></i><span>Actions & Evidence</span>
                     </button>
                     <button onclick="switchView('connectors')" id="btn-connectors" class="nav-btn w-full flex items-center space-x-3 px-4 py-3 text-gray-600 hover:bg-gray-100 rounded-xl font-medium transition">
                         <i class="fas fa-plug w-5 text-center"></i><span>Connectors</span>
@@ -92,8 +113,8 @@
                     <table class="min-w-full divide-y divide-gray-200 text-sm">
                         <thead class="bg-gray-50 font-bold text-gray-500 uppercase">
                             <tr>
-                                <th class="px-6 py-3 text-left tracking-wider">Document</th>
-                                <th class="px-6 py-3 text-left tracking-wider w-1/2">Keywords</th>
+                                <th class="px-6 py-3 text-left tracking-wider">Document / audit identity</th>
+                                <th class="px-6 py-3 text-left tracking-wider">Keywords / provenance</th>
                                 <th class="px-6 py-3 text-left tracking-wider">Visibility</th>
                                 <th class="px-6 py-3 text-center tracking-wider">Actions</th>
                             </tr>
@@ -113,6 +134,71 @@
                         <option value="Metadata">Metadata Only</option>
                     </select>
                     <button onclick="uploadDocument()" id="btn-upload" class="bg-blue-600 text-white px-6 py-2 rounded-lg font-bold hover:bg-blue-700 transition ml-2">Upload & Ingest</button>
+                </div>
+            </div>
+
+            <div id="view-policy" class="view-section hidden flex-1 p-6 overflow-y-auto bg-gray-50" data-reviewer-screen="policy">
+                <div class="max-w-5xl mx-auto space-y-6">
+                    <div class="bg-white rounded-2xl border shadow-sm p-6">
+                        <h2 class="text-lg font-bold text-gray-800">Effective document access</h2>
+                        <p class="text-sm text-gray-500 mt-1">Resolve the active Full, Aggregate, Metadata, or Deny decision for the selected purpose. This read-only check is available to every permitted user.</p>
+                        <div class="grid md:grid-cols-3 gap-3 mt-4">
+                            <input id="policy-doc-id" data-reviewer-field="document-uuid" placeholder="Document UUID" oninput="handlePolicyDocumentChange()" class="border rounded-lg p-2 text-sm md:col-span-2">
+                            <input id="policy-purpose" value="grounded_question_answering" data-reviewer-field="purpose" class="border rounded-lg p-2 text-sm">
+                        </div>
+                        <div id="policy-role-context" class="mt-3 rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-xs text-slate-600" data-reviewer-field="owner-reader-context">Select a document from the Documents screen. Owner-only editors remain hidden until ownership is verified from the current session.</div>
+                        <button onclick="resolveReviewerPolicy()" class="mt-3 bg-slate-700 text-white px-4 py-2 rounded-lg text-sm font-bold">Resolve effective access</button>
+                    </div>
+                    <div id="policy-owner-permission-editor" class="hidden bg-white rounded-2xl border shadow-sm p-6" data-owner-only="true">
+                        <h2 class="text-lg font-bold text-gray-800">Owner: persistent document permissions</h2>
+                        <p class="text-sm text-gray-500 mt-1">Grant or replace Reader, Aggregate, or Metadata access. Ownership transfer remains an explicit document action.</p>
+                        <div class="grid md:grid-cols-2 gap-3 mt-4">
+                            <input id="policy-target-username" data-reviewer-field="target-user" placeholder="Target username" class="border rounded-lg p-2 text-sm">
+                            <select id="policy-grant-type" data-reviewer-field="owner-reader-aggregate" class="border rounded-lg p-2 text-sm">
+                                <option value="Reader">Reader / Full</option><option value="Aggregate">Aggregate</option><option value="Metadata">Metadata</option>
+                            </select>
+                        </div>
+                        <div class="flex flex-wrap gap-2 mt-3">
+                            <button onclick="grantReviewerPermission()" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Grant / change</button>
+                            <button onclick="revokeReviewerPermission()" class="bg-red-50 border border-red-200 text-red-700 px-4 py-2 rounded-lg text-sm font-bold">Revoke last target</button>
+                        </div>
+                    </div>
+                    <div id="policy-owner-rule-editor" class="hidden bg-white rounded-2xl border shadow-sm p-6" data-owner-only="true">
+                        <h2 class="text-lg font-bold text-gray-800">Owner: purpose and expiry rule</h2>
+                        <div class="grid md:grid-cols-3 gap-3 mt-4">
+                            <select id="policy-access-mode" data-reviewer-field="effective-full-aggregate-metadata-deny" class="border rounded-lg p-2 text-sm">
+                                <option>Full</option><option>Aggregate</option><option>Metadata</option><option>Deny</option>
+                            </select>
+                            <label class="text-xs font-semibold text-gray-600">Valid from<input id="policy-valid-from" type="datetime-local" data-reviewer-field="valid-from" class="mt-1 w-full border rounded-lg p-2 text-sm" aria-label="Policy valid from"></label>
+                            <label class="text-xs font-semibold text-gray-600">Valid until<input id="policy-valid-until" type="datetime-local" data-reviewer-field="expiry" class="mt-1 w-full border rounded-lg p-2 text-sm" aria-label="Policy valid until"></label>
+                        </div>
+                        <button onclick="createReviewerPolicyRule()" class="mt-3 bg-indigo-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Create scoped rule</button>
+                    </div>
+                    <pre id="policy-review-output" data-reviewer-field="policy-resolution" class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-auto min-h-[180px] whitespace-pre-wrap">Select a document from the Documents screen or enter its UUID.</pre>
+                </div>
+            </div>
+
+            <div id="view-actions" class="view-section hidden flex-1 p-6 overflow-y-auto bg-gray-50" data-reviewer-screen="actions-evidence">
+                <div class="max-w-6xl mx-auto space-y-6">
+                    <div class="grid md:grid-cols-4 gap-3" data-reviewer-field="action-closure-states">
+                        <div class="bg-green-50 border border-green-200 rounded-xl p-4"><b>OPEN</b><p class="text-xs mt-1">Current primary evidence supports an obligation.</p></div>
+                        <div class="bg-slate-50 border rounded-xl p-4"><b>CLOSED_COMPLETED</b><p class="text-xs mt-1">Completion evidence closes the action.</p></div>
+                        <div class="bg-slate-50 border rounded-xl p-4"><b>CLOSED_CANCELLED</b><p class="text-xs mt-1">Cancellation evidence defeats the action.</p></div>
+                        <div class="bg-amber-50 border border-amber-200 rounded-xl p-4"><b>SUPERSEDED</b><p class="text-xs mt-1">A later authoritative record replaces it.</p></div>
+                    </div>
+                    <div class="bg-white rounded-2xl border shadow-sm p-6">
+                        <div class="flex items-center justify-between gap-3">
+                            <div><h2 class="text-lg font-bold">Evidence-role reviewer</h2><p class="text-sm text-gray-500">Primary, contextual, and contrastive evidence remain visibly distinct. Browser-only evidence cannot create an action.</p></div>
+                            <button onclick="loadReviewerActions()" class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm font-bold">Load action evidence</button>
+                        </div>
+                        <div class="mt-3 flex flex-wrap gap-2 text-xs" data-reviewer-field="evidence-roles">
+                            <span class="px-2 py-1 rounded-full bg-green-100 text-green-800">primary</span>
+                            <span class="px-2 py-1 rounded-full bg-blue-100 text-blue-800">contextual · browser-only</span>
+                            <span class="px-2 py-1 rounded-full bg-red-100 text-red-800">contrastive</span>
+                            <span class="px-2 py-1 rounded-full bg-gray-100 text-gray-700">correction / audit trail</span>
+                        </div>
+                    </div>
+                    <div id="action-review-output" data-reviewer-field="action-audit-trail" class="bg-slate-900 text-slate-100 text-xs rounded-xl p-4 overflow-auto min-h-[260px]">No evidence loaded.</div>
                 </div>
             </div>
 
@@ -225,7 +311,25 @@
         </div>
     </div>
 
-    <script src="js/api.js"></script>
+    <div id="source-viewer-modal" class="hidden fixed inset-0 z-[60] modal-backdrop flex items-center justify-center p-4" role="dialog" aria-modal="true" aria-labelledby="source-viewer-title">
+        <div class="bg-white rounded-2xl shadow-2xl w-full max-w-5xl h-[85vh] border border-gray-100 overflow-hidden flex flex-col">
+            <div class="bg-gray-50 px-5 py-4 border-b flex justify-between items-center gap-3">
+                <div>
+                    <h2 id="source-viewer-title" class="text-lg font-bold text-gray-800 flex items-center gap-2"><i class="fas fa-file-alt text-blue-500"></i>Authorized source view</h2>
+                    <p class="text-xs text-gray-500 mt-1">Only content permitted by the effective document policy is rendered here.</p>
+                </div>
+                <button onclick="closeAuthorizedSource()" class="text-gray-500 hover:text-red-600 p-2" aria-label="Close authorized source"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            <div class="relative flex-1 min-h-0 bg-white">
+                <div id="source-viewer-loading" class="absolute inset-0 flex items-center justify-center text-sm text-gray-500"><i class="fas fa-spinner fa-spin mr-2"></i>Loading authorized source…</div>
+                <pre id="source-viewer-text" class="hidden absolute inset-0 overflow-auto whitespace-pre-wrap p-6 text-sm font-sans text-gray-800"></pre>
+                <iframe id="source-viewer-frame" class="hidden absolute inset-0 w-full h-full border-0" title="Authorized source document"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/auth-validation.js?v=20260821-2"></script>
+    <script src="js/api.js?v=20260821-2"></script>
     <script src="js/ui.js"></script>
     <script src="js/ontology.js"></script>
     <script src="js/connectors.js"></script>

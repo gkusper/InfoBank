@@ -1,0 +1,38 @@
+{
+  "config_version": "controlled-failure-v3",
+  "output_classes": [
+    "FULL_ANSWER",
+    "CONSTRAINED_ANSWER",
+    "AGGREGATE_RESULT",
+    "METADATA_ONLY",
+    "CLARIFICATION",
+    "REFUSE_PERMISSION",
+    "REFUSE_INSUFFICIENT_EVIDENCE",
+    "REFUSE_NO_MATCH",
+    "REFUSE_AGGREGATION_THRESHOLD",
+    "REFUSE_CONFLICT",
+    "ESCALATE_TO_HUMAN"
+  ],
+  "precedence": [
+    "hard_authorization_and_archive",
+    "request_and_source_safety",
+    "aggregate_threshold",
+    "metadata_only",
+    "evidence_availability",
+    "temporal_status",
+    "conflict",
+    "full_answer"
+  ],
+  "thresholds": {
+    "minimum_primary_sources": 1,
+    "minimum_source_diversity": 1,
+    "aggregate_k": 3,
+    "minimum_support_score": 0.5
+  },
+  "conflict_policy": {
+    "bounded_summary": "CONSTRAINED_ANSWER",
+    "authority_required": "REFUSE_CONFLICT"
+  },
+  "supporting_chunk_policy": "at_least_one_accessible_traceable_chunk_per_indispensable_gold_document",
+  "safe_wording_version": "infocom-safe-wording-v1"
+}

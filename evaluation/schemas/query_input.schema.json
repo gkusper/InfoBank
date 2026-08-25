@@ -1,0 +1,27 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/infobank/query-input-v1.schema.json",
+  "title": "InfoBank QueryInput",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "case_id",
+    "evaluation_identity",
+    "query_text",
+    "declared_purpose",
+    "corpus_package_ref",
+    "policy_fixture_ref",
+    "runtime_parameters",
+    "schema_version"
+  ],
+  "properties": {
+    "case_id": {"type": "string", "minLength": 1},
+    "evaluation_identity": {"type": "string", "minLength": 1},
+    "query_text": {"type": "string", "minLength": 1},
+    "declared_purpose": {"type": "string", "minLength": 1},
+    "corpus_package_ref": {"type": "string", "minLength": 1},
+    "policy_fixture_ref": {"type": "string", "minLength": 1},
+    "runtime_parameters": {"type": "object"},
+    "schema_version": {"const": "infobank-query-input-v1"}
+  }
+}

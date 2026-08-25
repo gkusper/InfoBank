@@ -1,0 +1,50 @@
+{
+  "B0_VECTOR_ONLY": {
+    "controlled_failure": "absent before evidence gate; baseline generation may map exact provider no-answer to REFUSE_INSUFFICIENT_EVIDENCE",
+    "controlled_failure_mode": "baseline_provider_no_answer_only",
+    "evidence_role_mode": "baseline_primary",
+    "evidence_roles": "absent; all usable sources treated primary",
+    "governance_enabled": false,
+    "other_governed_stages": "no policy trace beyond baseline full-use decisions",
+    "permission_filtering": "absent; active_ids are permitted",
+    "retrieval": "vector retrieval over active documents",
+    "routing": "disabled; RoutingMode.ROUTING_OFF but object-scope infrastructure may constrain known object references",
+    "routing_enabled": false
+  },
+  "B1_VECTOR_ROUTING": {
+    "controlled_failure": "same baseline behavior as B0",
+    "controlled_failure_mode": "baseline_provider_no_answer_only",
+    "evidence_role_mode": "baseline_primary",
+    "evidence_roles": "absent; all usable sources treated primary",
+    "governance_enabled": false,
+    "other_governed_stages": "routing trace only",
+    "permission_filtering": "absent; active_ids are permitted before routing",
+    "retrieval": "vector retrieval over routed candidate documents",
+    "routing": "enabled keyword routing plus object scope",
+    "routing_enabled": true
+  },
+  "B2_PERMISSION_FILTERED": {
+    "controlled_failure": "simple B2 gates for metadata-only, no permitted source, aggregate, insufficient evidence",
+    "controlled_failure_mode": "b2_simple_evidence_permission_gates",
+    "evidence_role_mode": "permission_use_decision_only",
+    "evidence_roles": "limited to permission use decisions: aggregate/metadata/full; no B3 chunk profile roles",
+    "governance_enabled": true,
+    "other_governed_stages": "policy trace and aggregate executor if applicable",
+    "permission_filtering": "enabled policy_engine resolve before and after retrieval/candidate selection",
+    "retrieval": "vector retrieval after permission-filtered candidates",
+    "routing": "disabled; RoutingMode.ROUTING_OFF but object-scope infrastructure may constrain known object references",
+    "routing_enabled": false
+  },
+  "B3_FULL_ROLE_AWARE": {
+    "controlled_failure": "enabled pre-generation and RAG controlled-failure gates plus aggregate governance",
+    "controlled_failure_mode": "b3_pre_generation_and_rag_controlled_failure",
+    "evidence_role_mode": "role_aware_chunk_profile",
+    "evidence_roles": "enabled query profile, source role classification, public source text, context blocks",
+    "governance_enabled": true,
+    "other_governed_stages": "conflict policy, role-aware citation selection, safety constraints",
+    "permission_filtering": "enabled policy_engine resolve before and after routing",
+    "retrieval": "vector retrieval after governed routed candidates",
+    "routing": "enabled keyword routing plus object scope",
+    "routing_enabled": true
+  }
+}

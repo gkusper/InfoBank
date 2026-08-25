@@ -1,0 +1,12 @@
+{
+  "dataset_version": "scenario-pack-development-v1",
+  "gold_blind_runtime": true,
+  "projection_version": "infobank-scenario-projection-v1",
+  "query_count": 6,
+  "runtime_query_path": "runtime/query_inputs.jsonl",
+  "runtime_query_sha256": "8a50cd3f6c5e441b0044c455dec64e51351083e274049343b2280d0d609a7766",
+  "scenario_id": "S2_TV_WARRANTY_01",
+  "scorer_gold_path": "scorer/gold_annotations.jsonl",
+  "scorer_gold_sha256": "0a8c2f7dd6ab0fde6d684e0afacbe4af24aa8e055845bbc164d559d9aeebae33",
+  "status": "READY_FOR_CORPUS_BINDING"
+}

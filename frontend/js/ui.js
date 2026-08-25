@@ -1,6 +1,7 @@
 function toggleAuth() { 
     document.getElementById('form-login').classList.toggle('hidden'); 
     document.getElementById('form-register').classList.toggle('hidden'); 
+    if (typeof clearRegistrationErrors === 'function') clearRegistrationErrors();
 }
 
 function renderAvatar(containerId, url, username) {
@@ -17,7 +18,10 @@ function renderAvatar(containerId, url, username) {
 }
 
 function renderMonogram(container, username) {
-    container.innerHTML = `<span class="text-xl font-bold text-white uppercase">${username.substring(0, 2)}</span>`;
+    const monogram = document.createElement('span');
+    monogram.className = 'text-xl font-bold text-white uppercase';
+    monogram.textContent = String(username || '').substring(0, 2);
+    container.replaceChildren(monogram);
 }
 
 function openProfileModal() {
@@ -43,25 +47,34 @@ function switchView(v) {
     document.querySelectorAll('.view-section').forEach(s => s.classList.add('hidden'));
     document.getElementById('view-'+v).classList.remove('hidden');
     document.getElementById('chat-bar').style.display = (v === 'chat' ? 'block' : 'none');
-    document.getElementById('view-title').innerText = v === 'ontology' ? 'Smart Ontology' : v.charAt(0).toUpperCase() + v.slice(1);
+    const reviewerTitles = {manager: 'Document / Data Store', chat: 'Question / Answer / Sources', policy: 'Permissions / Policy', actions: 'Actions / Evidence'};
+    document.getElementById('view-title').innerText = v === 'ontology' ? 'Semantic Co-occurrence Graph' : (reviewerTitles[v] || v.charAt(0).toUpperCase() + v.slice(1));
     
     document.querySelectorAll('.nav-btn').forEach(b => b.classList.replace('bg-blue-50', 'text-gray-600'));
     document.getElementById('btn-'+v).classList.replace('text-gray-600', 'bg-blue-50');
     document.getElementById('btn-'+v).classList.add('text-blue-700');
     
+    const reviewerEvidenceMode = document.body.classList.contains('reviewer-evidence-mode');
     if(v==='map') loadMap(); 
-    if(v==='manager') loadDocs();
+    if(v==='manager' && !reviewerEvidenceMode) loadDocs();
     if(v==='ontology') loadOntology();
+    if(v==='policy' && !reviewerEvidenceMode) {
+        syncPolicyEditorForDocument();
+        resolveReviewerPolicy(false);
+    }
+    if(v==='actions' && !reviewerEvidenceMode) loadReviewerActions();
 }
 
 function updateFileLabel() {
     const fileInput = document.getElementById('upload-file');
     const btn = document.getElementById('btn-select-pdf');
     if (fileInput.files.length > 0) {
-        btn.innerHTML = `<i class="far fa-file-pdf text-red-500 mr-2"></i>${fileInput.files[0].name}`;
+        const icon = document.createElement('i');
+        icon.className = 'far fa-file-pdf text-red-500 mr-2';
+        btn.replaceChildren(icon, document.createTextNode(fileInput.files[0].name));
         btn.classList.replace('text-blue-600', 'text-gray-800');
     } else {
-        btn.innerHTML = "Select PDF";
+        btn.textContent = "Select PDF";
         btn.classList.replace('text-gray-800', 'text-blue-600');
     }
 }
@@ -109,8 +122,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
             transferSearchTimeout = setTimeout(async () => {
                 try {
-                    const response = await fetch(`${API}/users/search?q=${query}`);
-                    const data = await response.json();
+                    const response = await fetch(`${API}/users/search?q=${encodeURIComponent(query)}`, {
+                        headers: authHeaders(),
+                    });
+                    const data = await readApiResponse(response);
 
                     resultsDiv.innerHTML = '';
                     if (data.users.length === 0) {
@@ -118,7 +133,9 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else {
                         data.users.forEach(user => {
                             const div = document.createElement('div'); div.className = 'autocomplete-item';
-                            div.innerHTML = `<strong>${user.username}</strong>`; 
+                            const label = document.createElement('strong');
+                            label.textContent = String(user.username || '');
+                            div.appendChild(label);
                             div.onclick = () => {
                                 document.getElementById('transferUsernameInput').value = user.username;
                                 resultsDiv.classList.add('hidden');

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/infobank/reviewer-v2-candidate.schema.json",
+  "title": "InfoBank reviewer-v2 non-frozen candidate manifest",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "dataset_version",
+    "builder_version",
+    "status",
+    "final",
+    "frozen",
+    "package_count",
+    "category_count",
+    "document_count",
+    "gold_query_count",
+    "permission_counterfactual_group_count",
+    "browser_only_case_count",
+    "mail_candidate_thread_count",
+    "split_report",
+    "near_duplicate_report",
+    "licence_report"
+  ],
+  "properties": {
+    "dataset_version": {"const": "reviewer-v2-pre-freeze-candidate-v1"},
+    "builder_version": {"const": "infocom-pre-freeze-builder-v1"},
+    "status": {"enum": ["READY_FOR_HUMAN_QA", "READY_FOR_FREEZE", "NOT_READY"]},
+    "final": {"const": false},
+    "frozen": {"const": false},
+    "package_count": {"type": "integer", "minimum": 6},
+    "category_count": {"type": "integer", "minimum": 3},
+    "documents_per_package": {"const": 5},
+    "document_count": {"type": "integer", "minimum": 30},
+    "gold_query_count": {"type": "integer", "minimum": 90},
+    "permission_counterfactual_group_count": {"type": "integer", "minimum": 50},
+    "browser_only_case_count": {"type": "integer", "minimum": 50},
+    "mail_candidate_thread_count": {"type": "integer", "minimum": 100},
+    "human_annotation_complete": {"const": false},
+    "adjudication_complete": {"const": false},
+    "manual_citation_audit_complete": {"const": false},
+    "manual_no_health_signoff_complete": {"const": false}
+  }
+}

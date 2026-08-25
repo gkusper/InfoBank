@@ -1,4 +1,4 @@
-"""Development-only D-GATE calibration, B0-B3, citation, safety, and action evaluation."""
+"""Development-only D-GATE calibration, C0-C3, citation, safety, and action evaluation."""
 
 from __future__ import annotations
 
@@ -149,9 +149,9 @@ def run_calibration(output_dir: Path) -> dict[str, Any]:
 
 
 def _baseline_output(case: CandidateCase, mode: EvaluationMode) -> tuple[str, str]:
-    if mode in {EvaluationMode.B0_VECTOR_ONLY, EvaluationMode.B1_VECTOR_ROUTING}:
+    if mode in {EvaluationMode.C0_VECTOR_ONLY, EvaluationMode.C1_VECTOR_ROUTING}:
         return "FULL_ANSWER", "baseline_generation"
-    if mode == EvaluationMode.B2_PERMISSION_FILTERED:
+    if mode == EvaluationMode.C2_PERMISSION_FILTERED:
         if case.query_class in {"purpose_expiry", "stale_index"}:
             return "REFUSE_PERMISSION", case.reason_code
         if case.query_class == "no_answer":
@@ -166,9 +166,9 @@ def _baseline_output(case: CandidateCase, mode: EvaluationMode) -> tuple[str, st
 
 def _record_for_case(case: CandidateCase, mode: EvaluationMode, run_id: str, commit: str, config_hash: str) -> dict[str, Any]:
     output, reason = _baseline_output(case, mode)
-    routed = mode in {EvaluationMode.B1_VECTOR_ROUTING, EvaluationMode.B3_FULL_ROLE_AWARE}
-    governed = mode in {EvaluationMode.B2_PERMISSION_FILTERED, EvaluationMode.B3_FULL_ROLE_AWARE}
-    role_aware = mode == EvaluationMode.B3_FULL_ROLE_AWARE
+    routed = mode in {EvaluationMode.C1_VECTOR_ROUTING, EvaluationMode.C3_FULL_ROLE_AWARE}
+    governed = mode in {EvaluationMode.C2_PERMISSION_FILTERED, EvaluationMode.C3_FULL_ROLE_AWARE}
+    role_aware = mode == EvaluationMode.C3_FULL_ROLE_AWARE
     controlled = role_aware
     candidate_ids = [f"{case.object_family}-candidate-{index}" for index in range(1, 5 if routed else 9)]
     if case.gold_document_ids:
@@ -321,7 +321,7 @@ def _mode_summary(mode: EvaluationMode, cases: tuple[CandidateCase, ...], record
     }
 
 
-def run_b0_b3(output_dir: Path) -> dict[str, Any]:
+def run_c0_c3(output_dir: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     cases = build_candidate_cases()
     commit = _git("rev-parse", "HEAD")
@@ -351,7 +351,7 @@ def run_b0_b3(output_dir: Path) -> dict[str, Any]:
         "model": "infobank-deterministic-v1",
         "evaluation_database": "isolated-in-memory-development",
         "evaluation_vector_path": "isolated-artifacts-d-gate",
-        "production_api_reachable_modes": [EvaluationMode.B3_FULL_ROLE_AWARE.value],
+        "production_api_reachable_modes": [EvaluationMode.C3_FULL_ROLE_AWARE.value],
         "record_count": len(records),
         "development_only": True,
         "final_e1": False,
@@ -380,7 +380,7 @@ def _write_result_tables(output_dir: Path, summaries: list[dict[str, Any]]) -> N
         for item in summaries
     ]
     markdown = [
-        "# D-GATE B0-B3 development table", "",
+        "# D-GATE C0-C3 development table", "",
         "| Mode | Output conformance | Permitted accuracy | False answer | Citation precision | P50 ms | P95 ms |",
         "|---|---:|---:|---:|---:|---:|---:|",
         *["| " + " | ".join(map(str, row)) + " |" for row in rows], "",
@@ -393,7 +393,7 @@ def _write_result_tables(output_dir: Path, summaries: list[dict[str, Any]]) -> N
 
 
 def _write_manual_citation_audit(output_dir: Path, cases: tuple[CandidateCase, ...], records: list[dict[str, Any]]) -> None:
-    selected = [record for record in records if record["mode"] == EvaluationMode.B3_FULL_ROLE_AWARE.value][:40]
+    selected = [record for record in records if record["mode"] == EvaluationMode.C3_FULL_ROLE_AWARE.value][:40]
     case_map = {case.case_id: case for case in cases}
     fields = [
         "audit_row", "case_id", "mode", "expected_output_class", "system_output_class",
@@ -497,9 +497,9 @@ def run_action_evaluation(output_dir: Path) -> dict[str, Any]:
 def run_d_gate(output_dir: Path) -> dict[str, Any]:
     output_dir.mkdir(parents=True, exist_ok=True)
     calibration = run_calibration(output_dir / "calibration")
-    b0_b3 = run_b0_b3(output_dir / "b0_b3")
+    c0_c3 = run_c0_c3(output_dir / "c0_c3")
     action = run_action_evaluation(output_dir / "action")
-    b3 = next(item for item in b0_b3["summaries"] if item["mode"] == EvaluationMode.B3_FULL_ROLE_AWARE.value)
+    c3 = next(item for item in c0_c3["summaries"] if item["mode"] == EvaluationMode.C3_FULL_ROLE_AWARE.value)
     summary = {
         "schema_version": D_GATE_VERSION,
         "development_only": True,
@@ -507,22 +507,22 @@ def run_d_gate(output_dir: Path) -> dict[str, Any]:
         "final_e1": False,
         "manual_citation_audit": "PENDING_HUMAN_AUDIT",
         "calibration": calibration["selected"],
-        "b0_b3_summaries": b0_b3["summaries"],
-        "b3_safety": b3["safety"],
-        "b3_utility": {
-            "permitted_answer_accuracy": b3["permitted_answer_accuracy"],
-            "false_unsupported_answer_rate": b3["false_unsupported_answer_rate"],
+        "c0_c3_summaries": c0_c3["summaries"],
+        "c3_safety": c3["safety"],
+        "c3_utility": {
+            "permitted_answer_accuracy": c3["permitted_answer_accuracy"],
+            "false_unsupported_answer_rate": c3["false_unsupported_answer_rate"],
         },
         "action": action,
         "failure_taxonomy": list(FAILURE_TAXONOMY),
-        "status": "PASS" if not any(b3["safety"].values()) and b3["permitted_answer_accuracy"] >= 0.8 and action["action_f1"] >= 0.85 else "FAIL",
+        "status": "PASS" if not any(c3["safety"].values()) and c3["permitted_answer_accuracy"] >= 0.8 and action["action_f1"] >= 0.85 else "FAIL",
     }
     reports = {
         "safety_report.json": {
             "development_only": True,
-            "production_mode": EvaluationMode.B3_FULL_ROLE_AWARE.value,
-            "per_mode": {item["mode"]: item["safety"] for item in b0_b3["summaries"]},
-            "production_safety_target_met": not any(b3["safety"].values()),
+            "production_mode": EvaluationMode.C3_FULL_ROLE_AWARE.value,
+            "per_mode": {item["mode"]: item["safety"] for item in c0_c3["summaries"]},
+            "production_safety_target_met": not any(c3["safety"].values()),
         },
         "utility_report.json": {
             "per_mode": {
@@ -531,12 +531,12 @@ def run_d_gate(output_dir: Path) -> dict[str, Any]:
                         "permitted_answer_accuracy", "false_unsupported_answer_rate", "generation_skip_rate",
                         "constrained_answer_correctness", "clarification_correctness",
                     )
-                } for item in b0_b3["summaries"]
+                } for item in c0_c3["summaries"]
             },
             "engineering_target": 0.80,
             "stretch_target": 0.85,
         },
-        "citation_report.json": {item["mode"]: item["citation"] for item in b0_b3["summaries"]},
+        "citation_report.json": {item["mode"]: item["citation"] for item in c0_c3["summaries"]},
         "controlled_failure_report.json": {
             "calibration": calibration,
             "per_mode": {
@@ -545,20 +545,20 @@ def run_d_gate(output_dir: Path) -> dict[str, Any]:
                         "exact_output_class_conformance", "reason_code_accuracy", "abstention_precision",
                         "abstention_recall", "abstention_f1", "false_unsupported_answer_rate",
                     )
-                } for item in b0_b3["summaries"]
+                } for item in c0_c3["summaries"]
             },
         },
         "action_report.json": action,
         "latency_usage_report.json": {
             item["mode"]: {
                 key: item[key] for key in ("latency_p50_ms", "latency_p95_ms", "total_tokens", "cost", "retry_count")
-            } for item in b0_b3["summaries"]
+            } for item in c0_c3["summaries"]
         },
         "error_analysis.json": {
             "taxonomy": list(FAILURE_TAXONOMY),
             "per_mode_output_class_errors": {
                 item["mode"]: round((1.0 - item["exact_output_class_conformance"]) * item["case_count"])
-                for item in b0_b3["summaries"]
+                for item in c0_c3["summaries"]
             },
             "scorer_parse_errors": 0,
         },

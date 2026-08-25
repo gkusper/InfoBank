@@ -1,0 +1,81 @@
+{
+  "EXTRA_RECORD_COUNT": 0,
+  "MISSING_RECORD_COUNT": 0,
+  "NUMERICAL_DIFFERENCE_COUNT": 0,
+  "SEMANTIC_DIFFERENCE_COUNT": 0,
+  "changed_numerical_field_count": 0,
+  "changed_semantic_field_count": 0,
+  "compared_record_count": 144,
+  "data_artifacts": {
+    "compared_file_count": 208,
+    "extra_field_count": 0,
+    "missing_field_count": 0,
+    "numerical_difference_count": 0,
+    "semantic_difference_count": 0
+  },
+  "deterministic": {
+    "cases_per_configuration": 12,
+    "compared_record_count": 48,
+    "configurations": 4,
+    "substantive_results_unchanged": true
+  },
+  "difference_samples": [],
+  "extra_record_count": 0,
+  "full_mode_name_mapping": {
+    "B0_VECTOR_ONLY": "C0_VECTOR_ONLY",
+    "B1_VECTOR_ROUTING": "C1_VECTOR_ROUTING",
+    "B2_PERMISSION_FILTERED": "C2_PERMISSION_FILTERED",
+    "B3_FULL_ROLE_AWARE": "C3_FULL_ROLE_AWARE"
+  },
+  "ignored_change_classes": [
+    "configuration identifier",
+    "mode identifier",
+    "filename/path",
+    "artifact hash",
+    "run id labels derived from configuration names"
+  ],
+  "ignored_fields": [
+    "artifact_hash",
+    "artifact_sha256",
+    "audit_id",
+    "case_scores_sha256",
+    "code_state_hash",
+    "config_label",
+    "deterministic_content_sha256",
+    "mode",
+    "raw_run_sha256",
+    "run_id",
+    "run_seal_sha256",
+    "score_summary_sha256",
+    "sealed_raw_run_sha256",
+    "sha256",
+    "timing_sidecar_sha256",
+    "tracked_diff_sha256_after",
+    "tracked_diff_sha256_before"
+  ],
+  "mapping": {
+    "B0": "C0",
+    "B1": "C1",
+    "B2": "C2",
+    "B3": "C3"
+  },
+  "missing_record_count": 0,
+  "openai_provider_calls_performed": 0,
+  "provider_calls_performed": 0,
+  "real_provider": {
+    "answers_unchanged": true,
+    "cases_per_configuration_per_repetition": 12,
+    "citations_unchanged": true,
+    "configurations": 4,
+    "error_classifications_unchanged": true,
+    "latency_values_unchanged": true,
+    "numerical_scores_unchanged": true,
+    "repetitions": 3,
+    "safety_counters_unchanged": true,
+    "token_counts_unchanged": true,
+    "total_measured_records": 144
+  },
+  "status": "PASS",
+  "total_compared_records_including_deterministic": 192,
+  "validated_without_provider_network": true
+}

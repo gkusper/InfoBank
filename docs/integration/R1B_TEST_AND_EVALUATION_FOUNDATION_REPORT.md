@@ -119,9 +119,9 @@ The R1B core provides infrastructure only:
 - SHA-256 helpers for files and stable objects;
 - exact commit and branch capture;
 - versioned output-directory creation and frozen-output overwrite protection;
-- generic labels `B0_VECTOR_ONLY`, `B1_VECTOR_ROUTING`, `B2_PERMISSION_FILTERED`, and `B3_FULL_ROLE_AWARE`.
+- generic labels `C0_VECTOR_ONLY`, `C1_VECTOR_ROUTING`, `C2_PERMISSION_FILTERED`, and `C3_FULL_ROLE_AWARE`.
 
-No B0-B3 retrieval/generation pipeline, reviewer dataset, scorer, or result is implemented or claimed in R1B.
+No C0-C3 retrieval/generation pipeline, reviewer dataset, scorer, or result is implemented or claimed in R1B.
 
 ## Quality gate
 
@@ -218,7 +218,7 @@ git diff --stat
 - `user_document_permission` has SQL `UNIQUE(user_id, document_id)` without an equivalent SQLAlchemy `UniqueConstraint`.
 - Persistent `Metadata` permission and query-time `Metadata` decision remain distinct concepts requiring later semantic hardening.
 - Gmail connector token storage requires production encryption or a secrets vault.
-- B0-B3 pipelines, datasets, scorers, stress runs, provider migration, and frontend redesign remain future milestones.
+- C0-C3 pipelines, datasets, scorers, stress runs, provider migration, and frontend redesign remain future milestones.
 
 GitHub CI and branch protection remain deferred by agreement with Gábor. No `.github/workflows` file was added.
 

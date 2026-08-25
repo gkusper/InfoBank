@@ -10,7 +10,7 @@ candidate output and preserves deterministic splits. Its licence remains
 `LICENCE_PENDING_HUMAN_CONFIRMATION`; raw or derived text is not tracked.
 
 Development and candidate holdout remain separate. Runtime consumes only
-`QueryInput`; scoring consumes `GoldAnnotation` after a raw run is sealed. B0-B3
+`QueryInput`; scoring consumes `GoldAnnotation` after a raw run is sealed. C0-C3
 compare no retrieval, routing-off, keyword routing and full role-aware behavior.
 Scale stress is a separate deterministic workload. Scoring covers output class,
 reason, retrieval/candidate behavior, false exclusion, citations, evidence roles

@@ -6,26 +6,26 @@ Runtime/provider failures: 0 across all 144 measured records.
 Safety/leakage findings: 0 across all available frozen counters.
 
 ## By Configuration
-### B0 - B0_VECTOR_ONLY
+### C0 - C0_VECTOR_ONLY
 - citation document miss: 6
 - false answer: 3
 - unsupported citation: 12
 - wrong page: 3
 - Known frozen citation-completeness limitations observed: S1-Q6 (3/3 reps)
 
-### B1 - B1_VECTOR_ROUTING
+### C1 - C1_VECTOR_ROUTING
 - citation document miss: 9
 - false answer: 3
 - unsupported citation: 3
 - Known frozen citation-completeness limitations observed: S1-Q6 (3/3 reps), S2-Q2 (3/3 reps)
 
-### B2 - B2_PERMISSION_FILTERED
+### C2 - C2_PERMISSION_FILTERED
 - citation document miss: 6
 - unsupported citation: 12
 - wrong page: 3
 - Known frozen citation-completeness limitations observed: S1-Q6 (3/3 reps)
 
-### B3 - B3_FULL_ROLE_AWARE
+### C3 - C3_FULL_ROLE_AWARE
 - citation document miss: 9
 - unsupported citation: 3
 - Known frozen citation-completeness limitations observed: S1-Q6 (3/3 reps), S2-Q2 (3/3 reps)

@@ -115,7 +115,7 @@ def _run_minimal(root: Path, query_path: Path, corpus_path: Path, label: str) ->
         chroma_dir=root / label / "chroma",
         source_storage_dir=root / label / "sources",
         run_id=label,
-        modes=["B3_FULL_ROLE_AWARE"],
+        modes=["C3_FULL_ROLE_AWARE"],
         config=ActualPipelineConfig(),
     )
 
@@ -702,7 +702,7 @@ def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
     records = [
         {
             "case_id": "answer-ok",
-            "mode": "B3_FULL_ROLE_AWARE",
+            "mode": "C3_FULL_ROLE_AWARE",
             "actual_output_class": "FULL_ANSWER",
             "actual_reason_code": "supported",
             "actual_output_text": "supported fact",
@@ -711,7 +711,7 @@ def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
         },
         {
             "case_id": "answer-missed",
-            "mode": "B3_FULL_ROLE_AWARE",
+            "mode": "C3_FULL_ROLE_AWARE",
             "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
             "actual_reason_code": "evidential",
             "actual_output_text": "The answer cannot be found in the document.",
@@ -720,7 +720,7 @@ def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
         },
         {
             "case_id": "refusal-ok",
-            "mode": "B3_FULL_ROLE_AWARE",
+            "mode": "C3_FULL_ROLE_AWARE",
             "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
             "actual_reason_code": "evidential",
             "actual_output_text": "The answer cannot be found in the document.",
@@ -729,7 +729,7 @@ def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
         },
         {
             "case_id": "false-answer",
-            "mode": "B3_FULL_ROLE_AWARE",
+            "mode": "C3_FULL_ROLE_AWARE",
             "actual_output_class": "FULL_ANSWER",
             "actual_reason_code": "supported",
             "actual_output_text": "unsupported answer",
@@ -775,7 +775,7 @@ def test_scorer_treats_gold_pages_as_acceptable_page_sets() -> None:
     records = [
         {
             "case_id": case_id,
-            "mode": "B3_FULL_ROLE_AWARE",
+            "mode": "C3_FULL_ROLE_AWARE",
             "actual_output_class": "FULL_ANSWER",
             "actual_reason_code": "supported",
             "actual_output_text": "supported fact",
@@ -821,7 +821,7 @@ def test_scorer_compares_canonical_reason_codes() -> None:
     records = [
         {
             "case_id": case_id,
-            "mode": "B3_FULL_ROLE_AWARE",
+            "mode": "C3_FULL_ROLE_AWARE",
             "actual_output_class": output_class,
             "actual_reason_code": actual_reason,
             "actual_output_text": "No grounded answer is available.",
@@ -906,7 +906,7 @@ def test_safety_scanner_detects_each_actual_trace_surface() -> None:
     assert findings and all(value == 1 for value in findings.values())
 
 
-def test_production_routes_do_not_expose_b0_or_b1_switch() -> None:
+def test_production_routes_do_not_expose_c0_or_c1_switch() -> None:
     route_text = "\n".join(path.read_text(encoding="utf-8") for path in (Path(__file__).parents[2] / "backend_python/routers").glob("*.py"))
-    assert "B0_VECTOR_ONLY" not in route_text
-    assert "B1_VECTOR_ROUTING" not in route_text
+    assert "C0_VECTOR_ONLY" not in route_text
+    assert "C1_VECTOR_ROUTING" not in route_text

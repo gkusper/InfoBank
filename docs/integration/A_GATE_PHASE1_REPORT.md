@@ -136,7 +136,7 @@ backend_python\.venv_r1a\Scripts\python.exe scripts\generate_a_gate_owned_object
 - Durable storage is a configurable local filesystem backend; object-store deployment is future work.
 - OCR, semantic chunk boundary optimization, and full PDF block mapping are not included.
 - Citation API is implemented, but the current frontend does not yet render all citation fields.
-- No full routing ablation, hard-negative retrieval study, final W1/W2 scripted demonstration, final reviewer dataset v2, provider adapter, or B0–B3 evaluation is included.
+- No full routing ablation, hard-negative retrieval study, final W1/W2 scripted demonstration, final reviewer dataset v2, provider adapter, or C0–C3 evaluation is included.
 
 No research dataset, fixture, frozen result, publication artifact, personal data, real provider call, health-related scenario, or reviewer-response prose was added or modified.
 

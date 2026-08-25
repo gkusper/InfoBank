@@ -83,7 +83,7 @@ def build_human_qa_package(
     gold_by_id = {item.case_id: item for item in gold}
     citation_rows: list[dict[str, Any]] = []
     for run_index, raw_path in enumerate(actual_raw_run_paths, start=1):
-        records = [item for item in _load_jsonl(raw_path) if item.get("mode") == "B3_FULL_ROLE_AWARE"]
+        records = [item for item in _load_jsonl(raw_path) if item.get("mode") == "C3_FULL_ROLE_AWARE"]
         for record in records:
             annotation = gold_by_id[record["case_id"]]
             citations = record.get("actual_citations") or []

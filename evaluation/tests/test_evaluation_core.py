@@ -40,7 +40,7 @@ def record(**overrides) -> RunRecord:
     values = {
         "run_id": "run-1",
         "case_id": "case-1",
-        "mode": EvaluationMode.B0_VECTOR_ONLY,
+        "mode": EvaluationMode.C0_VECTOR_ONLY,
         "retrieved_ids": ["chunk-2", "chunk-1"],
         "generator_visible_context_hash": "sha256:" + "b" * 64,
         "output_class": "answer",
@@ -101,10 +101,10 @@ def test_required_fields_and_generic_modes_are_enforced() -> None:
     with pytest.raises(ValueError, match="Unsupported evaluation mode"):
         record(mode="paper-specific-mode")
     assert {mode.value for mode in EvaluationMode} == {
-        "B0_VECTOR_ONLY",
-        "B1_VECTOR_ROUTING",
-        "B2_PERMISSION_FILTERED",
-        "B3_FULL_ROLE_AWARE",
+        "C0_VECTOR_ONLY",
+        "C1_VECTOR_ROUTING",
+        "C2_PERMISSION_FILTERED",
+        "C3_FULL_ROLE_AWARE",
     }
 
 

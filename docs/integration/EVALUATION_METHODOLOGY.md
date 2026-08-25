@@ -39,11 +39,11 @@ The deterministic local provider exercises the provider interface without networ
 - A2 routing preserved Recall@3 and reduced candidate size on its synthetic development corpus with zero routing false exclusions.
 - The C scale microbenchmark repeats the same retrieval questions at 50/250/1000 documents and measures lexical/IDF routing/retrieval behavior.
 - Permission, aggregate, provider and controlled-failure invariants have deterministic tests.
-- B0/B1 production unreachability is a required hard invariant.
+- C0/C1 production unreachability is a required hard invariant.
 
 ## Deprecated performance claims
 
-The pre-hardening D-GATE B0–B3 records are deterministic contract simulations. Gold output classes, reason codes, source IDs or pages were used to construct some predictions, retrieval records or citations; some safety, timing and usage values were assigned or simulated. Their perfect B3, controlled-failure and action scores validate contracts only and are deprecated as empirical performance claims.
+The pre-hardening D-GATE C0–C3 records are deterministic contract simulations. Gold output classes, reason codes, source IDs or pages were used to construct some predictions, retrieval records or citations; some safety, timing and usage values were assigned or simulated. Their perfect C3, controlled-failure and action scores validate contracts only and are deprecated as empirical performance claims.
 
 The C scale runner did not generate answer text. Its former `answer_correctness` is `gold_document_retrieval_completeness`; unsupported-answer rate is `NOT_EVALUATED`. Page retrieval correctness is not human citation faithfulness.
 

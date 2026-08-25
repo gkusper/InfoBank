@@ -16,10 +16,10 @@ observed PDF page counts are verified before an estimate is produced.
 
 The base modes are the repository's actual evaluation modes:
 
-1. `B0_VECTOR_ONLY`;
-2. `B1_VECTOR_ROUTING`;
-3. `B2_PERMISSION_FILTERED`;
-4. `B3_FULL_ROLE_AWARE`.
+1. `C0_VECTOR_ONLY`;
+2. `C1_VECTOR_ROUTING`;
+3. `C2_PERMISSION_FILTERED`;
+4. `C3_FULL_ROLE_AWARE`.
 
 The optional scale subset is separate. It reads the local 1000-document C-GATE
 manifest, verifies its corpus hash by reconstructing the local deterministic
@@ -87,7 +87,7 @@ mode, repeat, retry, or scale-subset cherry-picking is permitted.
    hashes; then create separately authorized immutable freeze records.
 5. Approve a local pricing config, maximum cost, run count, optional scale
    inclusion and network-provider execution.
-6. Execute base modes in fixed B0, B1, B2, B3 order for each approved repeat.
+6. Execute base modes in fixed C0, C1, C2, C3 order for each approved repeat.
    Seal each complete raw repeat before any scoring.
 7. If separately approved, execute and seal the representative scale subset;
    never merge it into the base denominator.
@@ -100,7 +100,7 @@ Run from the repository root after regenerating/validating the ignored
 pre-freeze candidate:
 
 ```powershell
-$modes = 'B0_VECTOR_ONLY','B1_VECTOR_ROUTING','B2_PERMISSION_FILTERED','B3_FULL_ROLE_AWARE'
+$modes = 'C0_VECTOR_ONLY','C1_VECTOR_ROUTING','C2_PERMISSION_FILTERED','C3_FULL_ROLE_AWARE'
 backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 1 --modes $modes --include-scale-subset --output .\artifacts\pre_freeze\e1_estimate_only\e1-r1.json
 backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 2 --modes $modes --output .\artifacts\pre_freeze\e1_estimate_only\e1-r2.json
 backend_python\.venv_r1a\Scripts\python.exe .\scripts\run_real_provider_evaluation.py --estimate-only --repeats 3 --modes $modes --output .\artifacts\pre_freeze\e1_estimate_only\e1-r3.json

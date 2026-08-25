@@ -70,7 +70,7 @@ def test_human_qa_package_has_exact_pending_rows_and_no_fabricated_decisions(tmp
         path = tmp_path / f"raw-{run_index}.jsonl"
         records = [
             {
-                "mode": "B3_FULL_ROLE_AWARE",
+                "mode": "C3_FULL_ROLE_AWARE",
                 "case_id": item["case_id"],
                 "actual_output_text": "Pending human audit fixture.",
                 "actual_citations": [],

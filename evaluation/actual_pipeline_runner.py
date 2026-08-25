@@ -1,4 +1,4 @@
-"""Gold-blind actual InfoBank B0-B3 execution harness.
+"""Gold-blind actual InfoBank C0-C3 execution harness.
 
 This module intentionally imports only query/corpus input schemas.  Scoring and
 annotation loading live in a separate post-run module.
@@ -907,7 +907,7 @@ class PipelineRuntime:
                 exact_object_missing = bool(referenced_objects and not set(referenced_objects).intersection(known_objects))
 
                 stage = time.perf_counter_ns()
-                if mode == EvaluationMode.B3_FULL_ROLE_AWARE.value:
+                if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value:
                     pre_gate = cf.select_pre_generation_output_mode(
                         query.query_text,
                         relevance.build_query_profile(query.query_text, []),
@@ -922,7 +922,7 @@ class PipelineRuntime:
 
                 stage = time.perf_counter_ns()
                 if not generation_skipped:
-                    if mode in {EvaluationMode.B0_VECTOR_ONLY.value, EvaluationMode.B1_VECTOR_ROUTING.value}:
+                    if mode in {EvaluationMode.C0_VECTOR_ONLY.value, EvaluationMode.C1_VECTOR_ROUTING.value}:
                         permitted_ids = active_ids
                     else:
                         governance = self.policy_engine.resolve_document_access_bulk(
@@ -933,8 +933,8 @@ class PipelineRuntime:
                         )
                         permitted_ids = list(governance["usable_doc_ids"])
                     if exact_object_missing and mode in {
-                        EvaluationMode.B2_PERMISSION_FILTERED.value,
-                        EvaluationMode.B3_FULL_ROLE_AWARE.value,
+                        EvaluationMode.C2_PERMISSION_FILTERED.value,
+                        EvaluationMode.C3_FULL_ROLE_AWARE.value,
                     }:
                         permitted_ids = []
                         governance = {
@@ -956,8 +956,8 @@ class PipelineRuntime:
                 stage = time.perf_counter_ns()
                 if not generation_skipped:
                     routing_enabled = mode in {
-                        EvaluationMode.B1_VECTOR_ROUTING.value,
-                        EvaluationMode.B3_FULL_ROLE_AWARE.value,
+                        EvaluationMode.C1_VECTOR_ROUTING.value,
+                        EvaluationMode.C3_FULL_ROLE_AWARE.value,
                     }
                     candidate_ids, selected_keywords, routing_trace = self._routing(
                         query.query_text,
@@ -975,7 +975,7 @@ class PipelineRuntime:
 
                 stage = time.perf_counter_ns()
                 if not generation_skipped:
-                    if mode in {EvaluationMode.B2_PERMISSION_FILTERED.value, EvaluationMode.B3_FULL_ROLE_AWARE.value}:
+                    if mode in {EvaluationMode.C2_PERMISSION_FILTERED.value, EvaluationMode.C3_FULL_ROLE_AWARE.value}:
                         governance = self.policy_engine.resolve_document_access_bulk(
                             db,
                             self._user_id(query.evaluation_identity),
@@ -995,7 +995,7 @@ class PipelineRuntime:
                             "has_metadata_only": False,
                         }
 
-                    if mode == EvaluationMode.B3_FULL_ROLE_AWARE.value:
+                    if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value:
                         profile = relevance.build_query_profile(query.query_text, selected_keywords)
                     else:
                         profile = {"task_intent": "baseline", "required_evidence_strength": "baseline"}
@@ -1009,7 +1009,7 @@ class PipelineRuntime:
                         chunk_row = db.query(models.DocumentChunk).filter(models.DocumentChunk.id == item["chunk_id"]).first()
                         if not doc_row or not chunk_row or doc_row.source_status != "ACTIVE":
                             continue
-                        if mode == EvaluationMode.B3_FULL_ROLE_AWARE.value:
+                        if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value:
                             source_profile = relevance.classify_chunk_profile(
                                 query.query_text,
                                 item["text"],
@@ -1060,7 +1060,7 @@ class PipelineRuntime:
                         elif use_decision == relevance.USE_FULL:
                             block = (
                                 relevance.make_context_block(source_profile, doc_row.original_filename, item["text"])
-                                if mode == EvaluationMode.B3_FULL_ROLE_AWARE.value
+                                if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value
                                 else item["text"]
                             )
                             generator_blocks.append(block)
@@ -1070,7 +1070,7 @@ class PipelineRuntime:
                     context_available = bool(generator_blocks) and support_score >= self.config.minimum_support_score
                     aggregate_request = any(term in query.query_text.lower() for term in ("average", "aggregate", "mean", "count"))
 
-                    if mode == EvaluationMode.B3_FULL_ROLE_AWARE.value:
+                    if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value:
                         if aggregate_request and governance.get("has_aggregate_evidence") and not governance.get("has_primary_evidence"):
                             aggregate_result = self.aggregate_executor.execute_aggregate(
                                 aggregate_contributions,
@@ -1103,7 +1103,7 @@ class PipelineRuntime:
                                     generation_skipped = True
                             else:
                                 reason_code = "supported"
-                    elif mode == EvaluationMode.B2_PERMISSION_FILTERED.value:
+                    elif mode == EvaluationMode.C2_PERMISSION_FILTERED.value:
                         if governance.get("metadata_only_doc_ids") and not governance.get("content_doc_ids"):
                             output_class, reason_code = "METADATA_ONLY", "governance"
                             answer, generation_skipped = "Only metadata-level source information is available; content is withheld by policy.", True
@@ -1192,7 +1192,7 @@ class PipelineRuntime:
                     doc_id
                     for doc_id in active_ids
                     if fixture.access_by_document.get(doc_id) in {None, "Deny"}
-                ) if mode in {EvaluationMode.B2_PERMISSION_FILTERED.value, EvaluationMode.B3_FULL_ROLE_AWARE.value} else []
+                ) if mode in {EvaluationMode.C2_PERMISSION_FILTERED.value, EvaluationMode.C3_FULL_ROLE_AWARE.value} else []
                 prohibited_markers = list(fixture.prohibited_markers)
                 raw_reason_code = reason_code
                 reason_code = canonical_reason_code(output_class, raw_reason_code)

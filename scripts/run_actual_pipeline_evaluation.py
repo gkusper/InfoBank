@@ -1,4 +1,4 @@
-"""Build, run twice, seal, and post-score the actual development B0-B3 evaluation."""
+"""Build, run twice, seal, and post-score the actual development C0-C3 evaluation."""
 
 from __future__ import annotations
 
@@ -119,9 +119,9 @@ def execute(output: Path, database_url: str, admin_database_url: str | None = No
             database_url=database_url,
             dataset_dir=dataset_dir,
             config=config,
-            modes=["B3_FULL_ROLE_AWARE"],
+            modes=["C3_FULL_ROLE_AWARE"],
         )
-        metrics = result["score"]["modes"]["B3_FULL_ROLE_AWARE"]
+        metrics = result["score"]["modes"]["C3_FULL_ROLE_AWARE"]
         calibration_rows.append(
             {
                 "label": f"config-{index:02d}",
@@ -161,7 +161,7 @@ def execute(output: Path, database_url: str, admin_database_url: str | None = No
                 database_url=database_url,
                 dataset_dir=dataset_dir,
                 config=selected_config,
-                modes=["B0_VECTOR_ONLY", "B1_VECTOR_ROUTING", "B2_PERMISSION_FILTERED", "B3_FULL_ROLE_AWARE"],
+                modes=["C0_VECTOR_ONLY", "C1_VECTOR_ROUTING", "C2_PERMISSION_FILTERED", "C3_FULL_ROLE_AWARE"],
             )
         )
     deterministic_match = (
@@ -212,7 +212,7 @@ def main() -> None:
         "document_count": result["dataset"]["document_count"],
         "selected_config_hash": result["calibration"]["selected_config_hash"],
         "reproducibility": result["reproducibility"]["status"],
-        "b3": result["selected_summary"]["modes"]["B3_FULL_ROLE_AWARE"],
+        "c3": result["selected_summary"]["modes"]["C3_FULL_ROLE_AWARE"],
     }
     print(json.dumps(public, sort_keys=True, indent=2))
 

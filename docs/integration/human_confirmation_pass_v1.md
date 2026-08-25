@@ -10,7 +10,7 @@ Human-QA status: HUMAN_QA_STATUS: APPROVED
 
 Benchmark status at confirmation: BENCHMARK_STATUS: NOT_YET_FROZEN
 
-Reference run: `../s1s2_b3_20260824_reverted_baseline_01`
+Reference run: `../s1s2_c3_20260824_reverted_baseline_01`
 
 This artifact records the author's completed confirmation decisions for all 12 S1/S2 benchmark cases. It distinguishes fully confirmed cases from cases where the answer content is accepted but the runtime citation set is incomplete. It does not change gold, scorer semantics, or implementation behavior.
 

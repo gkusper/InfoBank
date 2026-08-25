@@ -5,7 +5,7 @@ Status: `DRAFT_NOT_RELEASED`
 Implemented reviewer-critical functionality includes durable UUID PDF storage,
 page-aware deterministic chunks/citations, provenance, re-index/archive/restore,
 governed permissions and aggregate behavior, controlled failures, offline
-provider abstraction, B0-B3 development evaluation, MailEx preparation,
+provider abstraction, C0-C3 development evaluation, MailEx preparation,
 W1/W2/W3 API workflows, four reviewer screens and operations/QA tooling.
 
 Existing MariaDB installations require review and application of

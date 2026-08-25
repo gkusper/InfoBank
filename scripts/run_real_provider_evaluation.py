@@ -139,7 +139,7 @@ def main() -> None:
         chroma_dir=chroma_dir,
         source_storage_dir=source_dir,
         run_id=f"actual-provider-{args.provider}",
-        modes=["B3_FULL_ROLE_AWARE"],
+        modes=["C3_FULL_ROLE_AWARE"],
         config=config,
         provider_name=args.provider,
         allow_network_provider=args.allow_network_provider,

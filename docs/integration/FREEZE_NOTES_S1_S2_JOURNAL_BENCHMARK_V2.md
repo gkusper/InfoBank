@@ -37,7 +37,7 @@ Frozen items:
 
 Not implied by this freeze:
 
-- Every B3 case passes.
+- Every C3 case passes.
 - The three documented citation limitations disappear.
 - The current implementation is bug-free.
 - HEAD alone identifies the evaluated implementation.
@@ -82,7 +82,7 @@ Page-level citation correctness: 1.0
 
 Safety error total: 0
 
-## Frozen Reference B3 Result
+## Frozen Reference C3 Result
 
 DETERMINISTIC DEVELOPMENT/REPRODUCIBILITY RESULT — NOT FINAL REAL-LLM JOURNAL PERFORMANCE
 

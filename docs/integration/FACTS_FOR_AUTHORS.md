@@ -34,9 +34,9 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 
 - `backend_python/aggregate_executor.py` requires a configurable distinct-contributor threshold (default 3), deduplicates contributors, excludes Metadata/Deny, and exposes no individual values or identifiers in output, generator context, trace, or citations.
 - Controlled failure uses `controlled-failure-v3`; the development scorer is `infocom-controlled-failure-scorer-v1` and the citation scorer is `infocom-citation-scorer-v1`.
-- The current pre-hardening D-GATE B0-B3 records were deterministic contract simulations. Gold output classes, reason codes, source IDs, or pages were used by the simulator to construct some predictions and citations. Those numbers must not be used as final system-performance estimates.
-- Controlled-failure specification, separate QueryInput/GoldAnnotation schemas, raw-run seals, post-run scorer, and gold-blind actual B0-B3 development execution are implemented. The corrected 20-case synthetic B3 run produced 1.0 output/reason/permitted-answer and citation-development metrics with zero scanned safety findings; this is development-only deterministic evidence, not a human-validated or final result. Final E1 has not started.
-- Historical zero B3 safety counters are contract-simulation results. Actual-pipeline safety must be recalculated by scanning produced candidates, retrieval traces, generator context, answers, citations, and public wording.
+- The current pre-hardening D-GATE C0-C3 records were deterministic contract simulations. Gold output classes, reason codes, source IDs, or pages were used by the simulator to construct some predictions and citations. Those numbers must not be used as final system-performance estimates.
+- Controlled-failure specification, separate QueryInput/GoldAnnotation schemas, raw-run seals, post-run scorer, and gold-blind actual C0-C3 development execution are implemented. The corrected 20-case synthetic C3 run produced 1.0 output/reason/permitted-answer and citation-development metrics with zero scanned safety findings; this is development-only deterministic evidence, not a human-validated or final result. Final E1 has not started.
+- Historical zero C3 safety counters are contract-simulation results. Actual-pipeline safety must be recalculated by scanning produced candidates, retrieval traces, generator context, answers, citations, and public wording.
 - The action/closure development set contained 120 generated threads and 60 browser-only counterfactuals. Open/status/closure/linking accuracy and action F1 were 1.0; browser-only false actions were 0. Human MailEx evaluation remains pending.
 - Local MailEx reconciliation accounts for all 1500 full-data JSON records: 1496 normalized-stem one-to-one relations, four content aliases, two alternate raw duplicates, six explicitly unmatched raw files, zero unmatched JSON, and zero unexplained records. Licence remains `LICENCE_PENDING_HUMAN_CONFIRMATION`.
 
@@ -56,7 +56,7 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 ## Known limitations
 
 - The C scale runner is a synthetic lexical/IDF retrieval microbenchmark. Recall@3 and candidate reduction remain valid retrieval observations; it produced no answer text, so answer correctness and unsupported-answer claims are not valid.
-- A gold-blind actual-pipeline B0-B3 synthetic development evaluation has run twice reproducibly. No candidate-holdout evaluation, approved network-provider run, final E1, or human citation audit has run.
+- A gold-blind actual-pipeline C0-C3 synthetic development evaluation has run twice reproducibly. No candidate-holdout evaluation, approved network-provider run, final E1, or human citation audit has run.
 - The candidate holdout is not frozen and is forbidden for threshold tuning.
 - The local-compatible provider is a deterministic interface smoke, not a production inference-quality result.
 - Chroma/MariaDB/source storage do not share one atomic transaction.

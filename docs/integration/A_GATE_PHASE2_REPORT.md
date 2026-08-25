@@ -60,4 +60,4 @@ Machine gate records are written only to ignored `artifacts/local_quality_gate/`
 - The graph is a visualization-only keyword co-occurrence graph, not an ontology.
 - The local lexical evaluator is deterministic and provider-free; it does not validate the live embedding model.
 - Sub-millisecond latency measurements are machine-specific and are retained only in the generated run bundle.
-- Final reviewer evaluation, production scale tests, and Review D B0–B3 ablations remain outside A-GATE Phase A2.
+- Final reviewer evaluation, production scale tests, and Review D C0–C3 ablations remain outside A-GATE Phase A2.

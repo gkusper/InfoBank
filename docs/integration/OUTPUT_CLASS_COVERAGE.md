@@ -19,4 +19,4 @@ Dataset: `actual-pipeline-development-v1`. The builder creates 15 deterministic 
 
 `ESCALATE_TO_HUMAN` is marked `FUTURE`: mutation requests are outside the paper's evaluation scope and are not represented by an artificial positive evaluation case.
 
-Automated coverage tests verify two positives per retained class, neighboring contrast pairs, scorer support, separation of runtime inputs from annotations, and absence of B0/B1 switches from production routes. All labels remain pending human QA.
+Automated coverage tests verify two positives per retained class, neighboring contrast pairs, scorer support, separation of runtime inputs from annotations, and absence of C0/C1 switches from production routes. All labels remain pending human QA.

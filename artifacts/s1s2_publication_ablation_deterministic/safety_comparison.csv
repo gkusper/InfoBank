@@ -1,5 +1,5 @@
 config,mode,mechanism_present,aggregate_individual_value_exposure,archived_source_usage,denied_filename_hash_page_disclosure,generator_visible_restricted_text,local_path_exposure,prohibited_document_id_exposure,prohibited_text_fragment_exposure,source_existence_disclosure,wrong_permission_citation,safety_error_total
-B0,B0_VECTOR_ONLY,False,0,0,0,0,0,0,0,0,0,0
-B1,B1_VECTOR_ROUTING,False,0,0,0,0,0,0,0,0,0,0
-B2,B2_PERMISSION_FILTERED,True,0,0,0,0,0,0,0,0,0,0
-B3,B3_FULL_ROLE_AWARE,True,0,0,0,0,0,0,0,0,0,0
+C0,C0_VECTOR_ONLY,False,0,0,0,0,0,0,0,0,0,0
+C1,C1_VECTOR_ROUTING,False,0,0,0,0,0,0,0,0,0,0
+C2,C2_PERMISSION_FILTERED,True,0,0,0,0,0,0,0,0,0,0
+C3,C3_FULL_ROLE_AWARE,True,0,0,0,0,0,0,0,0,0,0

@@ -15,7 +15,7 @@ The automatic scorer checks case identity before scoring. It does not judge pros
 
 ## Pending manual audit
 
-`scripts/build_human_qa_package.py` preselects exactly 40 B3 responses from the two sealed actual-pipeline development runs. The ignored CSV contains fixed answer/claim/citation/source-reference fields and blank or pending human fields:
+`scripts/build_human_qa_package.py` preselects exactly 40 C3 responses from the two sealed actual-pipeline development runs. The ignored CSV contains fixed answer/claim/citation/source-reference fields and blank or pending human fields:
 
 - `support_label`;
 - `coverage_label`;

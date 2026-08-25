@@ -1,4 +1,4 @@
-# Reproduce Frozen OpenAI B0-B3 Evaluation
+# Reproduce Frozen OpenAI C0-C3 Evaluation
 
 Generated at: 2026-08-24T23:33:45.552962Z
 
@@ -9,9 +9,9 @@ Prerequisite: MariaDB must be reachable on 127.0.0.1:3307 using the repository d
 3. Run the locked measured execution script without changing model, prompts, scorer, gold, or benchmark:
 
 ```powershell
-& 'backend_python\.venv_r1a\Scripts\python.exe' artifacts\s1s2_publication_ablation_openai\openai_b0_b3_runner.py
+& 'backend_python\.venv_r1a\Scripts\python.exe' artifacts\s1s2_publication_ablation_openai\openai_c0_c3_runner.py
 ```
 
-The run order is R1 B0-B1-B2-B3, R2 B0-B1-B2-B3, R3 B0-B1-B2-B3. Each run group uses an isolated infobank_eval_* MariaDB database, Chroma directory, source-storage directory, raw output directory, and score output directory.
+The run order is R1 C0-C1-C2-C3, R2 C0-C1-C2-C3, R3 C0-C1-C2-C3. Each run group uses an isolated infobank_eval_* MariaDB database, Chroma directory, source-storage directory, raw output directory, and score output directory.
 
 Confidence intervals: CONFIDENCE_INTERVALS_NOT_GENERATED_BY_FROZEN_EVALUATOR.

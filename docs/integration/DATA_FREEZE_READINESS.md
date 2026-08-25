@@ -4,13 +4,13 @@ Status: `READY_FOR_HUMAN_QA`
 
 This report covers a reproducible pre-freeze candidate only. No dataset, scorer, configuration, code, or evaluation result is frozen, and final E1 has not run.
 
-Methodology correction: the pre-hardening D-GATE B0–B3 outputs are deterministic contract simulations, not actual empirical pipeline results. A separate gold-blind actual-pipeline development run and raw-run sealing now pass; `READY_FOR_HUMAN_QA` still applies only to candidate construction and does not authorize freeze or final E1.
+Methodology correction: the pre-hardening D-GATE C0–C3 outputs are deterministic contract simulations, not actual empirical pipeline results. A separate gold-blind actual-pipeline development run and raw-run sealing now pass; `READY_FOR_HUMAN_QA` still applies only to candidate construction and does not authorize freeze or final E1.
 
 ## Exact versions
 
 - Dataset candidate: `reviewer-v2-pre-freeze-candidate-v1`.
 - Candidate builder/code: `infocom-pre-freeze-builder-v1`.
-- Development B0-B3 runner: `infocom-d-gate-v1`.
+- Development C0-C3 runner: `infocom-d-gate-v1`.
 - Controlled-failure scorer: `infocom-controlled-failure-scorer-v1`.
 - Citation scorer: `infocom-citation-scorer-v1`.
 - Controlled-failure configuration: `controlled-failure-v3`.
@@ -53,7 +53,7 @@ The tracked candidate builder uses generated synthetic source PDFs and mail. A s
 - Manual no-health sign-off is pending.
 - The local MailEx ZIP contains no locally evidenced licence/readme file; human licence and redistribution confirmation is pending.
 - The approved network-provider run and final freeze/version decision have not occurred.
-- Complete local E1 estimates now exist for one, two and three B0-B3 repeats,
+- Complete local E1 estimates now exist for one, two and three C0-C3 repeats,
   plus a separately reported optional scale subset. Cost remains `null` and
   runtime `UNKNOWN` because no local pricing or latency assumption was approved.
 

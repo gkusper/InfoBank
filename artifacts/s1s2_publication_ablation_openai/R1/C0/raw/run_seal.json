@@ -1,0 +1,30 @@
+{
+  "commit_sha": "70a8852fc5cb7b4dea5abb856b4893fbd4ff5b0c",
+  "config_hash": "473419d9e87afad07a0ea33d52894635d31d7506f62b8fa0a82d2dde04b582ad",
+  "config_version": "actual-pipeline-development-config-v1",
+  "corpus_sha256": "81841f5d39d83070324fee2d7e68d2f53a083b5240045d03dfafb15300c41c75",
+  "dataset_version": "scenario-pack-development-v1",
+  "deterministic_content_sha256": "5d56d059f3e956978cce2dc86f1790fa8f74bf5382a503b89798c9ad4d66556c",
+  "embedding_model": "text-embedding-3-small",
+  "generation_prompt_version": "actual-pipeline-answer-v1",
+  "generation_temperature": 0.0,
+  "local_pricing_config_supplied": false,
+  "model": "gpt-4o-mini",
+  "modes": [
+    "C0_VECTOR_ONLY"
+  ],
+  "network_provider_explicitly_allowed": true,
+  "output_cache_enabled": false,
+  "provider": "openai",
+  "query_input_sha256": "b573bd0be9a1a4ec313239c0618bb96f375ff08f6390b88308b04f08d3a850de",
+  "raw_run_sha256": "552f34cae0061b3b4b66b445e6eb127d5288f6493795d412dedd75e4a9efb1e8",
+  "record_count": 12,
+  "routing_prompt_version": "routing-keyword-v1",
+  "run_id": "s1s2-openai-r1-c0-20260825",
+  "runner_version": "infobank-actual-pipeline-runner-v1",
+  "schema_version": "infobank-raw-run-seal-v1",
+  "scoring_started": false,
+  "timestamp": "2026-08-24T23:13:11Z",
+  "timing_sidecar_sha256": "a8a9defb90c6f4a88cf31a11156c1ba41b13acb3e889565b4f333858520ba2f5",
+  "wall_clock_separated_from_deterministic_hash": true
+}

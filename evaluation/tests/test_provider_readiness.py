@@ -133,7 +133,7 @@ def test_full_e1_estimate_supports_local_pricing_latency_scale_and_csv(tmp_path:
         gold_queries_path=candidate / "gold_queries.json",
         source_manifest_path=candidate / "source_manifest.json",
         repeats=1,
-        modes=["B2_PERMISSION_FILTERED", "B3_FULL_ROLE_AWARE"],
+        modes=["C2_PERMISSION_FILTERED", "C3_FULL_ROLE_AWARE"],
         include_scale_subset=True,
         scale_manifest_path=scale_path,
         pricing_config=pricing_path,

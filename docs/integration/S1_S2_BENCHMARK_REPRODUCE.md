@@ -57,9 +57,9 @@ backend_python\.venv_r1a\Scripts\python.exe scripts\bind_external_scenario_packa
 
 The rebound runtime must remain gold-blind: `query_inputs.jsonl` must not contain `required_sources`, `reference_answer`, `reference_citations`, `gold_document_ids`, `gold_page_or_message_ranges`, `reason_code`, or `manual_validation_state`.
 
-For exact reproduction of the frozen reference B3 hash, use the sealed bound inputs included in `artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/actual_pipeline_inputs/`. Fresh binding is still required as a package-integrity/loadability check, but it may use a different document-ID namespace from the historical sealed reference.
+For exact reproduction of the frozen reference C3 hash, use the sealed bound inputs included in `artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/actual_pipeline_inputs/`. Fresh binding is still required as a package-integrity/loadability check, but it may use a different document-ID namespace from the historical sealed reference.
 
-## Run B3 Deterministic Smoke
+## Run C3 Deterministic Smoke
 
 Use the deterministic provider path only. The frozen reference result is a deterministic development/reproducibility result, not final real-LLM journal performance.
 
@@ -67,7 +67,7 @@ Run `evaluation.actual_pipeline_runner.run_actual_pipeline` with:
 
 - `query_input_path`: frozen `actual_pipeline_inputs/query_inputs.jsonl`
 - `corpus_fixture_path`: frozen `actual_pipeline_inputs/corpus_fixture.json`
-- `modes`: `B3_FULL_ROLE_AWARE`
+- `modes`: `C3_FULL_ROLE_AWARE`
 - isolated MariaDB evaluation database
 - fresh Chroma directory
 - fresh source storage directory
@@ -79,7 +79,7 @@ Then score the sealed run:
 backend_python\.venv_r1a\Scripts\python.exe -c "from pathlib import Path; from evaluation.actual_pipeline_scorer import score_sealed_run; score_sealed_run(raw_run_path=Path('<run>')/'raw'/'raw_records.jsonl', seal_path=Path('<run>')/'raw'/'run_seal.json', gold_annotation_path=Path('artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/actual_pipeline_inputs')/'gold_annotations.jsonl', output_dir=Path('<run>')/'scores')"
 ```
 
-## Expected B3 Reference
+## Expected C3 Reference
 
 Expected deterministic content hash:
 

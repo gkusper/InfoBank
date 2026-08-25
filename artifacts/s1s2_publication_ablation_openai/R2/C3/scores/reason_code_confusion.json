@@ -1,0 +1,14 @@
+{
+  "C3_FULL_ROLE_AWARE": [
+    {
+      "actual": "insufficient_evidence",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 11,
+      "expected": "supported"
+    }
+  ]
+}

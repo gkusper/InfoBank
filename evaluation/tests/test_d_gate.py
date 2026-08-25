@@ -10,7 +10,7 @@ from evaluation.d_gate import (
     FAILURE_TAXONOMY,
     build_action_development_set,
     run_action_evaluation,
-    run_b0_b3,
+    run_c0_c3,
     run_calibration,
     run_d_gate,
     score_predictions,
@@ -58,11 +58,11 @@ def test_calibration_records_every_config_and_never_uses_holdout_or_frozen_set(t
     assert set(summary["error_taxonomy"]) == set(FAILURE_TAXONOMY)
 
 
-def test_b0_b3_runner_has_complete_records_isolated_baselines_and_safe_b3(tmp_path) -> None:
-    result = run_b0_b3(tmp_path / "run")
+def test_c0_c3_runner_has_complete_records_isolated_baselines_and_safe_c3(tmp_path) -> None:
+    result = run_c0_c3(tmp_path / "run")
     cases = build_candidate_cases()
     assert result["manifest"]["record_count"] == len(cases) * 4
-    assert result["manifest"]["production_api_reachable_modes"] == [EvaluationMode.B3_FULL_ROLE_AWARE.value]
+    assert result["manifest"]["production_api_reachable_modes"] == [EvaluationMode.C3_FULL_ROLE_AWARE.value]
     required = {
         "run_id", "case_id", "dataset_version", "scorer_version", "config_version", "config_hash",
         "commit_sha", "provider", "model", "retrieved_ids", "candidate_ids",
@@ -71,13 +71,13 @@ def test_b0_b3_runner_has_complete_records_isolated_baselines_and_safe_b3(tmp_pa
         "prompt_size_chars", "context_size_chars", "generation_skipped", "audit_id", "metrics", "error",
     }
     assert all(required <= set(record) for record in result["records"])
-    b3 = next(summary for summary in result["summaries"] if summary["mode"] == EvaluationMode.B3_FULL_ROLE_AWARE.value)
-    assert set(b3["safety"].values()) == {0}
-    assert b3["permitted_answer_accuracy"] >= 0.8
-    assert b3["citation"]["citation_support_precision"] == 1.0
-    assert b3["citation"]["citation_coverage"] == 1.0
-    b0 = next(summary for summary in result["summaries"] if summary["mode"] == EvaluationMode.B0_VECTOR_ONLY.value)
-    assert b0["false_unsupported_answer_rate"] > b3["false_unsupported_answer_rate"]
+    c3 = next(summary for summary in result["summaries"] if summary["mode"] == EvaluationMode.C3_FULL_ROLE_AWARE.value)
+    assert set(c3["safety"].values()) == {0}
+    assert c3["permitted_answer_accuracy"] >= 0.8
+    assert c3["citation"]["citation_support_precision"] == 1.0
+    assert c3["citation"]["citation_coverage"] == 1.0
+    c0 = next(summary for summary in result["summaries"] if summary["mode"] == EvaluationMode.C0_VECTOR_ONLY.value)
+    assert c0["false_unsupported_answer_rate"] > c3["false_unsupported_answer_rate"]
     rows = list(csv.DictReader((tmp_path / "run" / "manual_citation_audit_40.csv").open(encoding="utf-8")))
     assert len(rows) == 40
     assert {row["review_status"] for row in rows} == {"PENDING_HUMAN_AUDIT"}

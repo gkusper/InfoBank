@@ -1,0 +1,32 @@
+{
+  "actual_pipeline_config": {
+    "config_hash": "473419d9e87afad07a0ea33d52894635d31d7506f62b8fa0a82d2dde04b582ad",
+    "config_version": "actual-pipeline-development-config-v1",
+    "conflict_policy": "query_sensitive",
+    "embedding_model": "text-embedding-3-small",
+    "generation_model": "gpt-4o-mini",
+    "minimum_primary_sources": 1,
+    "minimum_source_diversity": 1,
+    "minimum_support_score": 0.45,
+    "routing_mode": "KEYWORD_ROUTING",
+    "top_k": 6
+  },
+  "branch": "feature/scenario-workflows",
+  "chroma_dir": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-24\\files-pasted-by-the-user-you\\work\\InfoBank\\artifacts\\s1s2_publication_ablation_openai\\R2\\C3\\runtime\\chroma",
+  "config_label": "C3",
+  "created_at": "2026-08-24T23:17:30.176246Z",
+  "database_target": "infobank_eval_s1s2_openai_r2_c3_20260825",
+  "embedding_model": "text-embedding-3-small",
+  "generation_model": "gpt-4o-mini",
+  "head": "70a8852fc5cb7b4dea5abb856b4893fbd4ff5b0c",
+  "mode": "C3_FULL_ROLE_AWARE",
+  "preregistration_sha256": "254dd996d8bdd7322061cfbffc8cb6cad4998e449ae4081b62570b13420a5c7c",
+  "provider": "openai",
+  "provider_cache_enabled": false,
+  "raw_output_dir": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-24\\files-pasted-by-the-user-you\\work\\InfoBank\\artifacts\\s1s2_publication_ablation_openai\\R2\\C3\\raw",
+  "repetition": 2,
+  "run_id": "s1s2-openai-r2-c3-20260825",
+  "schema_version": "infobank-s1s2-openai-run-config-v1",
+  "score_output_dir": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-24\\files-pasted-by-the-user-you\\work\\InfoBank\\artifacts\\s1s2_publication_ablation_openai\\R2\\C3\\scores",
+  "source_storage_dir": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-24\\files-pasted-by-the-user-you\\work\\InfoBank\\artifacts\\s1s2_publication_ablation_openai\\R2\\C3\\runtime\\source_storage"
+}

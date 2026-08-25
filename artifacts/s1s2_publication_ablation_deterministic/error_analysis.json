@@ -5,9 +5,9 @@
       "categories": [
         "unsupported_citation"
       ],
-      "config": "B0",
+      "config": "C0",
       "missing_citation_documents": [],
-      "mode": "B0_VECTOR_ONLY",
+      "mode": "C0_VECTOR_ONLY",
       "safety_total": 0,
       "unsupported_citations": [
         "lunara-s3-purchase-receipt.pdf"
@@ -20,9 +20,9 @@
         "output_class_mismatch",
         "reason_code_mismatch"
       ],
-      "config": "B0",
+      "config": "C0",
       "missing_citation_documents": [],
-      "mode": "B0_VECTOR_ONLY",
+      "mode": "C0_VECTOR_ONLY",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -32,11 +32,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B0",
+      "config": "C0",
       "missing_citation_documents": [
         "lunara-s3-care-guide.pdf"
       ],
-      "mode": "B0_VECTOR_ONLY",
+      "mode": "C0_VECTOR_ONLY",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -46,9 +46,9 @@
       "categories": [
         "unsupported_citation"
       ],
-      "config": "B0",
+      "config": "C0",
       "missing_citation_documents": [],
-      "mode": "B0_VECTOR_ONLY",
+      "mode": "C0_VECTOR_ONLY",
       "safety_total": 0,
       "unsupported_citations": [
         "velora-v55-regional-service-notice.pdf"
@@ -60,11 +60,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B0",
+      "config": "C0",
       "missing_citation_documents": [
         "velora-v55-manufacturer-warranty-terms.pdf"
       ],
-      "mode": "B0_VECTOR_ONLY",
+      "mode": "C0_VECTOR_ONLY",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -74,11 +74,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B0",
+      "config": "C0",
       "missing_citation_documents": [
         "velora-v55-regional-service-notice.pdf"
       ],
-      "mode": "B0_VECTOR_ONLY",
+      "mode": "C0_VECTOR_ONLY",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -89,9 +89,9 @@
         "output_class_mismatch",
         "reason_code_mismatch"
       ],
-      "config": "B1",
+      "config": "C1",
       "missing_citation_documents": [],
-      "mode": "B1_VECTOR_ROUTING",
+      "mode": "C1_VECTOR_ROUTING",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -101,11 +101,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B1",
+      "config": "C1",
       "missing_citation_documents": [
         "lunara-s3-care-guide.pdf"
       ],
-      "mode": "B1_VECTOR_ROUTING",
+      "mode": "C1_VECTOR_ROUTING",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -115,11 +115,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B1",
+      "config": "C1",
       "missing_citation_documents": [
         "velora-v55-manufacturer-warranty-terms.pdf"
       ],
-      "mode": "B1_VECTOR_ROUTING",
+      "mode": "C1_VECTOR_ROUTING",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -129,11 +129,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B1",
+      "config": "C1",
       "missing_citation_documents": [
         "velora-v55-regional-service-notice.pdf"
       ],
-      "mode": "B1_VECTOR_ROUTING",
+      "mode": "C1_VECTOR_ROUTING",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -143,9 +143,9 @@
       "categories": [
         "unsupported_citation"
       ],
-      "config": "B2",
+      "config": "C2",
       "missing_citation_documents": [],
-      "mode": "B2_PERMISSION_FILTERED",
+      "mode": "C2_PERMISSION_FILTERED",
       "safety_total": 0,
       "unsupported_citations": [
         "lunara-s3-purchase-receipt.pdf"
@@ -157,11 +157,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B2",
+      "config": "C2",
       "missing_citation_documents": [
         "lunara-s3-care-guide.pdf"
       ],
-      "mode": "B2_PERMISSION_FILTERED",
+      "mode": "C2_PERMISSION_FILTERED",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -171,9 +171,9 @@
       "categories": [
         "unsupported_citation"
       ],
-      "config": "B2",
+      "config": "C2",
       "missing_citation_documents": [],
-      "mode": "B2_PERMISSION_FILTERED",
+      "mode": "C2_PERMISSION_FILTERED",
       "safety_total": 0,
       "unsupported_citations": [
         "velora-v55-regional-service-notice.pdf"
@@ -185,11 +185,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B2",
+      "config": "C2",
       "missing_citation_documents": [
         "velora-v55-manufacturer-warranty-terms.pdf"
       ],
-      "mode": "B2_PERMISSION_FILTERED",
+      "mode": "C2_PERMISSION_FILTERED",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -199,11 +199,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B2",
+      "config": "C2",
       "missing_citation_documents": [
         "velora-v55-regional-service-notice.pdf"
       ],
-      "mode": "B2_PERMISSION_FILTERED",
+      "mode": "C2_PERMISSION_FILTERED",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -213,11 +213,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B3",
+      "config": "C3",
       "missing_citation_documents": [
         "lunara-s3-care-guide.pdf"
       ],
-      "mode": "B3_FULL_ROLE_AWARE",
+      "mode": "C3_FULL_ROLE_AWARE",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -227,11 +227,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B3",
+      "config": "C3",
       "missing_citation_documents": [
         "velora-v55-manufacturer-warranty-terms.pdf"
       ],
-      "mode": "B3_FULL_ROLE_AWARE",
+      "mode": "C3_FULL_ROLE_AWARE",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -241,11 +241,11 @@
       "categories": [
         "citation_document_miss"
       ],
-      "config": "B3",
+      "config": "C3",
       "missing_citation_documents": [
         "velora-v55-regional-service-notice.pdf"
       ],
-      "mode": "B3_FULL_ROLE_AWARE",
+      "mode": "C3_FULL_ROLE_AWARE",
       "safety_total": 0,
       "unsupported_citations": [],
       "wrong_page_documents": []
@@ -254,52 +254,52 @@
   "summary": [
     {
       "category": "citation_document_miss",
-      "config": "B0",
+      "config": "C0",
       "count": 3
     },
     {
       "category": "output_class_mismatch",
-      "config": "B0",
+      "config": "C0",
       "count": 1
     },
     {
       "category": "reason_code_mismatch",
-      "config": "B0",
+      "config": "C0",
       "count": 1
     },
     {
       "category": "unsupported_citation",
-      "config": "B0",
+      "config": "C0",
       "count": 2
     },
     {
       "category": "citation_document_miss",
-      "config": "B1",
+      "config": "C1",
       "count": 3
     },
     {
       "category": "output_class_mismatch",
-      "config": "B1",
+      "config": "C1",
       "count": 1
     },
     {
       "category": "reason_code_mismatch",
-      "config": "B1",
+      "config": "C1",
       "count": 1
     },
     {
       "category": "citation_document_miss",
-      "config": "B2",
+      "config": "C2",
       "count": 3
     },
     {
       "category": "unsupported_citation",
-      "config": "B2",
+      "config": "C2",
       "count": 2
     },
     {
       "category": "citation_document_miss",
-      "config": "B3",
+      "config": "C3",
       "count": 3
     }
   ]

@@ -3,8 +3,8 @@
     "citation_coverage": 0.785714,
     "citation_document_coverage": 0.785714,
     "citation_support_precision": 0.846154,
-    "config": "B0",
-    "mode": "B0_VECTOR_ONLY",
+    "config": "C0",
+    "mode": "C0_VECTOR_ONLY",
     "page_level_citation_correctness": 0.846154,
     "unsupported_citation_count": 2,
     "wrong_page_citation_count": 0
@@ -13,8 +13,8 @@
     "citation_coverage": 0.785714,
     "citation_document_coverage": 0.785714,
     "citation_support_precision": 1.0,
-    "config": "B1",
-    "mode": "B1_VECTOR_ROUTING",
+    "config": "C1",
+    "mode": "C1_VECTOR_ROUTING",
     "page_level_citation_correctness": 1.0,
     "unsupported_citation_count": 0,
     "wrong_page_citation_count": 0
@@ -23,8 +23,8 @@
     "citation_coverage": 0.785714,
     "citation_document_coverage": 0.785714,
     "citation_support_precision": 0.846154,
-    "config": "B2",
-    "mode": "B2_PERMISSION_FILTERED",
+    "config": "C2",
+    "mode": "C2_PERMISSION_FILTERED",
     "page_level_citation_correctness": 0.846154,
     "unsupported_citation_count": 2,
     "wrong_page_citation_count": 0
@@ -33,8 +33,8 @@
     "citation_coverage": 0.785714,
     "citation_document_coverage": 0.785714,
     "citation_support_precision": 1.0,
-    "config": "B3",
-    "mode": "B3_FULL_ROLE_AWARE",
+    "config": "C3",
+    "mode": "C3_FULL_ROLE_AWARE",
     "page_level_citation_correctness": 1.0,
     "unsupported_citation_count": 0,
     "wrong_page_citation_count": 0

@@ -6,7 +6,7 @@ Scorer and run-record infrastructure: `PASS`
 
 Deterministic contract simulation: `PASS`
 
-Actual gold-blind B0–B3 development evaluation: `PASS`
+Actual gold-blind C0–C3 development evaluation: `PASS`
 
 Final frozen E1: `NOT_STARTED`
 
@@ -23,7 +23,7 @@ The corrected actual-pipeline results are reported separately in `ACTUAL_PIPELIN
 - Citation scorer: `infocom-citation-scorer-v1`.
 - Candidate: `reviewer-v2-candidate-v1`, non-final/non-frozen.
 - Provider/model: `deterministic-mock` / `infobank-deterministic-v1`.
-- B0/B1 database/vector paths are isolated evaluation identifiers. Production exposes only the B3 governed behavior; no B0/B1 switch exists in the production API.
+- C0/C1 database/vector paths are isolated evaluation identifiers. Production exposes only the C3 governed behavior; no C0/C1 switch exists in the production API.
 
 ## Deprecated contract-simulation calibration
 
@@ -31,16 +31,16 @@ Six configurations (support thresholds 0.4/0.5/0.6 crossed with minimum primary 
 
 Selected config: minimum support 0.5, minimum primary sources 1, hash `3eb526bebe2f9cc879e51273df65689cc1c7313b0cc6b6fe2be143575ff136f7`. Development calibration scores: exact output conformance 1.0, reason accuracy 1.0, abstention precision/recall/F1 1.0/1.0/1.0, false-answer rate 0.0. These perfect values reflect deterministic generated templates and are not a final generalization claim.
 
-## Deprecated B0–B3 deterministic contract simulation (54 cases per mode)
+## Deprecated C0–C3 deterministic contract simulation (54 cases per mode)
 
 The following table is retained for provenance only. The simulator used gold output classes, reason codes, document IDs, or page ranges to construct parts of predictions, retrieval traces, or citations. Safety counters and latency/token values were also partly assigned or simulated. These numbers must not be used as system-performance estimates.
 
 | Mode | Output conformance | Reason accuracy | Abstention F1 | Permitted accuracy | False answer | Skip rate | Citation precision | Citation coverage | P50/P95 ms | Tokens |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| B0_VECTOR_ONLY | 0.333333 | 0.000000 | 0.000000 | 1.000000 | 0.666667 | 0.000000 | 0.333333 | 1.000000 | 0.402 / 0.402 | 4860 |
-| B1_VECTOR_ROUTING | 0.333333 | 0.000000 | 0.000000 | 1.000000 | 0.666667 | 0.000000 | 0.333333 | 1.000000 | 0.436 / 0.436 | 4860 |
-| B2_PERMISSION_FILTERED | 0.777778 | 0.444444 | 0.909091 | 1.000000 | 0.111111 | 0.555556 | 0.750000 | 1.000000 | 0.247 / 0.457 | 2400 |
-| B3_FULL_ROLE_AWARE | 1.000000 | 1.000000 | 1.000000 | 1.000000 | 0.000000 | 0.666667 | 1.000000 | 1.000000 | 0.359 / 0.569 | 1908 |
+| C0_VECTOR_ONLY | 0.333333 | 0.000000 | 0.000000 | 1.000000 | 0.666667 | 0.000000 | 0.333333 | 1.000000 | 0.402 / 0.402 | 4860 |
+| C1_VECTOR_ROUTING | 0.333333 | 0.000000 | 0.000000 | 1.000000 | 0.666667 | 0.000000 | 0.333333 | 1.000000 | 0.436 / 0.436 | 4860 |
+| C2_PERMISSION_FILTERED | 0.777778 | 0.444444 | 0.909091 | 1.000000 | 0.111111 | 0.555556 | 0.750000 | 1.000000 | 0.247 / 0.457 | 2400 |
+| C3_FULL_ROLE_AWARE | 1.000000 | 1.000000 | 1.000000 | 1.000000 | 0.000000 | 0.666667 | 1.000000 | 1.000000 | 0.359 / 0.569 | 1908 |
 
 Latencies in this table are simulated deterministic instrumentation values, not measured actual-pipeline or provider latency. Cost is 0 and retries are 0 by construction.
 
@@ -48,18 +48,18 @@ Latencies in this table are simulated deterministic instrumentation values, not 
 
 | Mode | Support precision | Coverage | Wrong page | Unsupported claim | Invalid association | Inaccessible citation |
 |---|---:|---:|---:|---:|---:|---:|
-| B0 | 0.333333 | 1.000000 | 0.555556 | 0.666667 | 0 | 0.333333 |
-| B1 | 0.333333 | 1.000000 | 0.555556 | 0.666667 | 0 | 0.333333 |
-| B2 | 0.750000 | 1.000000 | 0.000000 | 0.111111 | 0 | 0.000000 |
-| B3 | 1.000000 | 1.000000 | 0.000000 | 0.000000 | 0 | 0.000000 |
+| C0 | 0.333333 | 1.000000 | 0.555556 | 0.666667 | 0 | 0.333333 |
+| C1 | 0.333333 | 1.000000 | 0.555556 | 0.666667 | 0 | 0.333333 |
+| C2 | 0.750000 | 1.000000 | 0.000000 | 0.111111 | 0 | 0.000000 |
+| C3 | 1.000000 | 1.000000 | 0.000000 | 0.000000 | 0 | 0.000000 |
 
 ## Deprecated simulated safety and utility
 
-B3 counters were zero in the contract simulation, but some counters were assigned by construction rather than calculated by scanning actual produced traces. They validate expected schema/invariant behavior only.
+C3 counters were zero in the contract simulation, but some counters were assigned by construction rather than calculated by scanning actual produced traces. They validate expected schema/invariant behavior only.
 
-B0/B1 intentionally disable governance in an isolated synthetic evaluation and therefore record 18 generator/source-existence/wrong-permission exposures, 6 Aggregate leaks, and 6 archived-source uses per mode. These baseline violations are the measured ablation effect; they are not reachable from production and are not represented as safe. No real protected or personal data is present.
+C0/C1 intentionally disable governance in an isolated synthetic evaluation and therefore record 18 generator/source-existence/wrong-permission exposures, 6 Aggregate leaks, and 6 archived-source uses per mode. These baseline violations are the measured ablation effect; they are not reachable from production and are not represented as safe. No real protected or personal data is present.
 
-The former B3 permitted-answer accuracy, false-answer rate, and generation-skip values are deprecated as performance claims. An actual gold-blind pipeline run must produce raw answers and traces before post-run scoring. Failure taxonomy remains: retrieval, routing, role classification, evidence threshold, output class, generation skip, generation content, citation, and scorer/parsing.
+The former C3 permitted-answer accuracy, false-answer rate, and generation-skip values are deprecated as performance claims. An actual gold-blind pipeline run must produce raw answers and traces before post-run scoring. Failure taxonomy remains: retrieval, routing, role classification, evidence threshold, output class, generation skip, generation content, citation, and scorer/parsing.
 
 ## Action/closure development
 
@@ -71,7 +71,7 @@ The generated set contains 120 threads / 240 email messages and 60 browser-only 
 
 Ignored output under `artifacts/d_gate/` includes raw JSONL, summary CSV/JSON/Markdown/LaTeX, calibration records, safety/utility/citation fields, action records, and the pending 40-row manual audit sheet. Tracked code/config/docs reproduce them.
 
-Limitations: the historical B0–B3 runner is a gold-informed deterministic contract simulator and remains deprecated as performance evidence. A separate actual-pipeline development evaluator now exists, but its synthetic deterministic results are not final or frozen. Manual citation review, local MailEx licence approval and human action annotation, approved real-provider evaluation, and final frozen E1 remain pending.
+Limitations: the historical C0–C3 runner is a gold-informed deterministic contract simulator and remains deprecated as performance evidence. A separate actual-pipeline development evaluator now exists, but its synthetic deterministic results are not final or frozen. Manual citation review, local MailEx licence approval and human action annotation, approved real-provider evaluation, and final frozen E1 remain pending.
 
 ## Validation
 
@@ -85,7 +85,7 @@ Limitations: the historical B0–B3 runner is a gold-informed deterministic cont
 - 50/250/1000 C scale stress rerun: PASS, zero false exclusions, no final-E1 claim.
 - No-health scan of generated D artifacts: 0 hits.
 - Local-path scan of generated D artifacts: 0 hits.
-- Production-module scan for `B0_VECTOR_ONLY`/`B1_VECTOR_ROUTING`: 0 hits.
+- Production-module scan for `C0_VECTOR_ONLY`/`C1_VECTOR_ROUTING`: 0 hits.
 - Generated D output and quality-gate output are ignored; frozen D1–D8/CogInfoCom/MailEx/WoLaLa artifacts were not modified.
 
 The D-GATE commit contains 14 source/config/test/documentation files:

@@ -1,0 +1,107 @@
+{
+  "benchmark_package_checksums_sha256": "21d51c9cbd119fd1838af89e0c4c4e696fed92a886b2bab676f293f4836553e2",
+  "benchmark_package_manifest_sha256": "c2e1b61f5e3fede3678d0fed6a6e093f5634e27eecc1b0b8052604ad02abd6a9",
+  "benchmark_package_sha256": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1",
+  "benchmark_package_stage": "artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2",
+  "benchmark_package_zip": "artifacts/s1s2_freeze/S1_S2_journal_benchmark_v2.zip",
+  "benchmark_status": "FROZEN",
+  "branch": "feature/scenario-workflows",
+  "deterministic_b3_content_sha256": "24afef714fe8bfc4715b41720cff8d44d7fd20b83b6a9786b308ecedb9023c5a",
+  "deterministic_b3_raw_run_sha256": "918d817aa86b0e3f1595f48ef9e868368342388f5df113ee4862f779cfe8caad",
+  "deterministic_b3_reference_path": "../s1s2_b3_20260824_reverted_baseline_01",
+  "freeze_date": "2026-08-25",
+  "freeze_patch_path": "artifacts/s1s2_freeze_working_tree.patch",
+  "freeze_patch_sha256": "dc290b7d83dad8f730000011e4506069c22ab08e220a3029416e2ef941bf96eb",
+  "further_s1s2_tuning_allowed": "NO",
+  "git_status_short": [
+    " M evaluation/actual_pipeline_gold.py",
+    " M evaluation/actual_pipeline_runner.py",
+    " M evaluation/actual_pipeline_scorer.py",
+    " M evaluation/scenario_pack.py",
+    " M evaluation/schemas/gold_annotation.schema.json",
+    " M evaluation/tests/test_actual_pipeline.py",
+    " M evaluation/tests/test_scenario_pack.py",
+    "?? artifacts/",
+    "?? docs/integration/FREEZE_NOTES_S1_S2_JOURNAL_BENCHMARK_V2.md",
+    "?? docs/integration/S1_S2_BENCHMARK_REPRODUCE.md",
+    "?? docs/integration/S1_S2_FREEZE_CODE_STATE.json",
+    "?? docs/integration/human_confirmation_pass_v1.md",
+    "?? docs/integration/human_qa_review_notes.md",
+    "?? evaluation/reason_codes.py",
+    "?? s1s2_b3_20260824_gfix_after_01/",
+    "?? s1s2_b3_20260824_gfix_baseline_01/",
+    "?? s1s2_b3_20260824_gfix_retrieval_trace_01/",
+    "?? s1s2_b3_20260824_gfix_trace_01/",
+    "?? s1s2_b3_20260824_gfix_trace_02/",
+    "?? s1s2_b3_20260824_reverted_baseline_01/",
+    "?? scripts/validate_s1s2_human_qa.py"
+  ],
+  "head_alone_identifies_evaluated_state": false,
+  "head_sha": "70a8852fc5cb7b4dea5abb856b4893fbd4ff5b0c",
+  "human_confirmation_status": "APPROVED_WITH_DOCUMENTED_LIMITATIONS",
+  "human_qa_status": "APPROVED",
+  "notes": [
+    "HEAD alone does not identify the evaluated implementation because approved changes remain uncommitted.",
+    "The tracked diff patch and relevant untracked artifact hashes are part of the frozen code/config provenance.",
+    "The package SHA-256 is recorded externally because a zip cannot contain its own final digest without changing that digest."
+  ],
+  "ontology": "NOT NEEDED FOR CURRENT PAPER",
+  "package_identity": "S1_S2_JOURNAL_BENCHMARK_V2",
+  "relevant_untracked_artifacts": [
+    {
+      "path": "docs/integration/human_confirmation_pass_v1.md",
+      "sha256": "80f93e835c9c6add998be7e03cf23dcf7f35c54f0fdcdf554583398d51958d1f",
+      "size_bytes": 3317
+    },
+    {
+      "path": "docs/integration/human_qa_review_notes.md",
+      "sha256": "0406be9a01870b6c3791a930e8b093cab805a139a954987981e7a22e899f8613",
+      "size_bytes": 5679
+    },
+    {
+      "path": "docs/integration/FREEZE_NOTES_S1_S2_JOURNAL_BENCHMARK_V2.md",
+      "sha256": "84a215adf575623a48c075922934901fdca163f5c6f55a29a850ee0901383b3b",
+      "size_bytes": 3289
+    },
+    {
+      "path": "docs/integration/S1_S2_BENCHMARK_REPRODUCE.md",
+      "sha256": "1e718c184f1f45d15330d7f8fa208ec8af6e97517e22d53f05c208ebd5e08c67",
+      "size_bytes": 4698
+    },
+    {
+      "path": "evaluation/reason_codes.py",
+      "sha256": "642d46ef3af279afdf05cdd03749bdad438011d48dc51ea266abae9b8c543d9c",
+      "size_bytes": 2098
+    },
+    {
+      "path": "scripts/validate_s1s2_human_qa.py",
+      "sha256": "42b34d3539fbef814bae046e759f8fa4809f98f5f10476f0c9310cb5a6207c49",
+      "size_bytes": 5632
+    },
+    {
+      "path": "artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/PACKAGE_MANIFEST.json",
+      "sha256": "c2e1b61f5e3fede3678d0fed6a6e093f5634e27eecc1b0b8052604ad02abd6a9",
+      "size_bytes": 11059
+    },
+    {
+      "path": "artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/SHA256SUMS.txt",
+      "sha256": "21d51c9cbd119fd1838af89e0c4c4e696fed92a886b2bab676f293f4836553e2",
+      "size_bytes": 5475
+    },
+    {
+      "path": "artifacts/s1s2_freeze/S1_S2_journal_benchmark_v2.zip.sha256",
+      "sha256": "92fdf5e6bb68d100e6e4aa8ba2a8785f14baca22cc6b603a97c415df37ab1d5f",
+      "size_bytes": 98
+    }
+  ],
+  "relevant_untracked_artifacts_combined_sha256": "a30bbd02f30a7da2873264b36424c5175807a2151d027d71894d078af6f46fb9",
+  "repository": "https://github.com/gkusper/InfoBank",
+  "schema_version": "infobank-s1s2-freeze-code-state-v1",
+  "tracked_working_tree_diff_sha256": "dc290b7d83dad8f730000011e4506069c22ab08e220a3029416e2ef941bf96eb",
+  "validation_artifacts_not_part_of_code_state": [
+    "artifacts/local_quality_gate/",
+    "artifacts/s1s2_freeze_rebound/",
+    "artifacts/s1s2_freeze_validation_score/"
+  ],
+  "working_tree_intentionally_dirty": true
+}

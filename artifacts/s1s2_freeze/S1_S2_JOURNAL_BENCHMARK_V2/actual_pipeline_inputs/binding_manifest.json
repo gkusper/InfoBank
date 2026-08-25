@@ -1,0 +1,269 @@
+{
+  "builder_version": "external-scenario-corpus-v1",
+  "contains_local_absolute_paths": false,
+  "corpus_fixture_path": "corpus_fixture.json",
+  "corpus_fixture_sha256": "81841f5d39d83070324fee2d7e68d2f53a083b5240045d03dfafb15300c41c75",
+  "dataset_version": "scenario-pack-development-v1",
+  "document_count": 10,
+  "gold_annotation_path": "gold_annotations.jsonl",
+  "gold_annotation_sha256": "e0c54e328d939bb392ef072d457a852d8957621b1fd7f6fb5fc99da042bda46a",
+  "gold_count": 12,
+  "gold_manual_validation_state": "HUMAN_VALIDATED",
+  "original_package_root_removed": true,
+  "package_identity": "S1_S2_JOURNAL_BENCHMARK_V2",
+  "package_root": "<extracted-package-root>",
+  "package_sha256": "80b7acb4770213434e5cf61b09a4bc9cde5d6f486a8f54d33d50c4a66493f0e2",
+  "query_count": 12,
+  "query_input_path": "query_inputs.jsonl",
+  "query_input_sha256": "b573bd0be9a1a4ec313239c0618bb96f375ff08f6390b88308b04f08d3a850de",
+  "scenario_ids": [
+    "S1_SOFA_01",
+    "S2_TV_WARRANTY_01"
+  ],
+  "source_bindings": [
+    {
+      "document_id": "77809285-cd77-5486-8c4e-0cd9dfc5cdd0",
+      "original_filename": "lunara-s3-care-guide.pdf",
+      "page_count": 1,
+      "permission": "Owner",
+      "relation_key": "LUN-S3-2401",
+      "scenario_id": "S1_SOFA_01",
+      "source_id": "lunara-s3-care-guide",
+      "source_pdf_path": "source_documents/S1_SOFA_01/lunara-s3-care-guide.pdf",
+      "source_pdf_sha256": "b243dceefd0f2c348d084c02719967a4afb27443f76e1fe8dcee8e753dfcf83c",
+      "source_type": "cleaning_manual_pdf"
+    },
+    {
+      "document_id": "9c193693-5005-5272-815f-f251ce8fc8ae",
+      "original_filename": "lunara-s3-purchase-receipt.pdf",
+      "page_count": 1,
+      "permission": "Owner",
+      "relation_key": "LUN-S3-2401",
+      "scenario_id": "S1_SOFA_01",
+      "source_id": "lunara-s3-purchase-receipt",
+      "source_pdf_path": "source_documents/S1_SOFA_01/lunara-s3-purchase-receipt.pdf",
+      "source_pdf_sha256": "7ef04886379d61f9ec809a20a0e221e39d37098928a357cf41aad4a8237cc6ba",
+      "source_type": "purchase_receipt_pdf"
+    },
+    {
+      "document_id": "628e198a-979f-514d-99ff-bb73568f385e",
+      "original_filename": "vellum-l2-armchair-care-notes.pdf",
+      "page_count": 1,
+      "permission": "Owner",
+      "relation_key": "ARM-L2-880",
+      "scenario_id": "S1_SOFA_01",
+      "source_id": "vellum-l2-armchair-care-notes",
+      "source_pdf_path": "source_documents/S1_SOFA_01/vellum-l2-armchair-care-notes.pdf",
+      "source_pdf_sha256": "80fc0e19b9f53d10eb7bc2a20e679278fdc2ab890fb5531d2dd8c569b3975a69",
+      "source_type": "leather_care_notes_pdf"
+    },
+    {
+      "document_id": "a560bb27-d0a5-538b-8597-097bcc045a56",
+      "original_filename": "polarweave-p9-rug-care-guide.pdf",
+      "page_count": 1,
+      "permission": "Owner",
+      "relation_key": "RUG-P9-009",
+      "scenario_id": "S1_SOFA_01",
+      "source_id": "polarweave-p9-rug-care-guide",
+      "source_pdf_path": "source_documents/S1_SOFA_01/polarweave-p9-rug-care-guide.pdf",
+      "source_pdf_sha256": "e717ef6786857bc9daf0b9f72303681d70bdf7bab3ab32ecae2219345ed9d83e",
+      "source_type": "rug_care_guide_pdf"
+    },
+    {
+      "document_id": "f1025ca4-e18c-59ae-b025-3cb12ee33522",
+      "original_filename": "velora-v55-user-manual.pdf",
+      "page_count": 20,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "source_id": "s2-tv-manual",
+      "source_pdf_path": "source_documents/S2_TV_WARRANTY_01/velora-v55-user-manual.pdf",
+      "source_pdf_sha256": "ad908ded0edd3d012530180a26763ce6cdc17c1afd1935e61bb078f1728ccd61",
+      "source_type": "user_manual_pdf"
+    },
+    {
+      "document_id": "15aff4e8-ba87-5102-bea3-7531558c2e5c",
+      "original_filename": "velora-v55-purchase-receipt.pdf",
+      "page_count": 1,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "source_id": "s2-tv-purchase-receipt",
+      "source_pdf_path": "source_documents/S2_TV_WARRANTY_01/velora-v55-purchase-receipt.pdf",
+      "source_pdf_sha256": "fade1c737f0ed018ce3120ab35da13d58e4e1b095df9ff2be0a71044a323d3f5",
+      "source_type": "purchase_receipt_pdf"
+    },
+    {
+      "document_id": "402e9da2-1654-5751-b970-4f3e35488c52",
+      "original_filename": "velora-v55-manufacturer-warranty-terms.pdf",
+      "page_count": 8,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "source_id": "s2-tv-warranty-terms",
+      "source_pdf_path": "source_documents/S2_TV_WARRANTY_01/velora-v55-manufacturer-warranty-terms.pdf",
+      "source_pdf_sha256": "ec9408d845ce75dd71c1c025a99743b6ac89e092f94313af527e3bd267a4806b",
+      "source_type": "warranty_terms_pdf"
+    },
+    {
+      "document_id": "746bfb0c-38e0-5f7e-958b-34dd1a481974",
+      "original_filename": "velora-v55-product-specification.pdf",
+      "page_count": 5,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "source_id": "s2-tv-product-sheet",
+      "source_pdf_path": "source_documents/S2_TV_WARRANTY_01/velora-v55-product-specification.pdf",
+      "source_pdf_sha256": "0ebe0bc3d30def6e1f825e662269be7e0020021abaf80ab74508bbf01ed60c04",
+      "source_type": "product_specification_pdf"
+    },
+    {
+      "document_id": "79523654-1146-564a-9dba-a62d61db335e",
+      "original_filename": "velora-v55-regional-service-notice.pdf",
+      "page_count": 3,
+      "permission": "Owner",
+      "relation_key": "TV-001",
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "source_id": "s2-tv-regional-service-notice",
+      "source_pdf_path": "source_documents/S2_TV_WARRANTY_01/velora-v55-regional-service-notice.pdf",
+      "source_pdf_sha256": "b50c1c2d02fb3031448916e54930b27e9fec92d7f678f9d726dc8e595b062993",
+      "source_type": "regional_service_notice_pdf"
+    },
+    {
+      "document_id": "214d4a6b-097e-5f65-86f5-633ec0c88e33",
+      "original_filename": "aster-m55-user-manual.pdf",
+      "page_count": 14,
+      "permission": "Owner",
+      "relation_key": "DISPLAY-OTHER-001",
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "source_id": "s2-wrong-device-manual",
+      "source_pdf_path": "source_documents/S2_TV_WARRANTY_01/aster-m55-user-manual.pdf",
+      "source_pdf_sha256": "742eeb87c248006b041d716cd1775c7f682de605226aa9d9353427949958ef60",
+      "source_type": "wrong_object_manual_pdf"
+    }
+  ],
+  "source_package_sha256_for_bound_document_ids": "80b7acb4770213434e5cf61b09a4bc9cde5d6f486a8f54d33d50c4a66493f0e2",
+  "status": "READY_FOR_ACTUAL_PIPELINE",
+  "verification": {
+    "checksum_entry_count": 34,
+    "page_checks": [
+      {
+        "case_id": "S1-Q1",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "lunara-s3-care-guide",
+        "valid": true
+      },
+      {
+        "case_id": "S1-Q2",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "lunara-s3-purchase-receipt",
+        "valid": true
+      },
+      {
+        "case_id": "S1-Q3",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "lunara-s3-care-guide",
+        "valid": true
+      },
+      {
+        "case_id": "S1-Q5",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "lunara-s3-purchase-receipt",
+        "valid": true
+      },
+      {
+        "case_id": "S1-Q6",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "lunara-s3-care-guide",
+        "valid": true
+      },
+      {
+        "case_id": "S1-Q6",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "lunara-s3-purchase-receipt",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q1",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "s2-tv-purchase-receipt",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q2",
+        "page": 1,
+        "page_count": 1,
+        "source_id": "s2-tv-purchase-receipt",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q2",
+        "page": 2,
+        "page_count": 8,
+        "source_id": "s2-tv-warranty-terms",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q3",
+        "page": 17,
+        "page_count": 20,
+        "source_id": "s2-tv-manual",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q4",
+        "page": 3,
+        "page_count": 5,
+        "source_id": "s2-tv-product-sheet",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q5",
+        "page": 2,
+        "page_count": 8,
+        "source_id": "s2-tv-warranty-terms",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q5",
+        "page": 1,
+        "page_count": 3,
+        "source_id": "s2-tv-regional-service-notice",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q6",
+        "page": 17,
+        "page_count": 20,
+        "source_id": "s2-tv-manual",
+        "valid": true
+      },
+      {
+        "case_id": "S2-Q6",
+        "page": 20,
+        "page_count": 20,
+        "source_id": "s2-tv-manual",
+        "valid": true
+      }
+    ],
+    "pdf_source_count": 10,
+    "question_counts": {
+      "S1_SOFA_01": 6,
+      "S2_TV_WARRANTY_01": 6
+    },
+    "runtime_gold_separated": true,
+    "scenario_ids": [
+      "S1_SOFA_01",
+      "S2_TV_WARRANTY_01"
+    ],
+    "status": "PASS",
+    "total_questions": 12
+  }
+}

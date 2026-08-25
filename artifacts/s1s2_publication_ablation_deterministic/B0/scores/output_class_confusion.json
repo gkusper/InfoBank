@@ -1,0 +1,14 @@
+{
+  "B0_VECTOR_ONLY": [
+    {
+      "actual": "FULL_ANSWER",
+      "count": 11,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 1,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    }
+  ]
+}

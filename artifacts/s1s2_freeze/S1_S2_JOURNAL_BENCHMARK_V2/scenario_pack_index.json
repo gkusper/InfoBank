@@ -1,0 +1,26 @@
+{
+  "package_identity": "S1_S2_JOURNAL_BENCHMARK_V2",
+  "query_count": 12,
+  "scenario_count": 2,
+  "scenarios": [
+    {
+      "manifest_path": "scenario_packs/S1_SOFA_01/scenario_pack.json",
+      "query_count": 6,
+      "scenario_id": "S1_SOFA_01",
+      "sha256": "7f13f4edbd39ca86ec4f0f9bac5436ae94473a3e78c6936758d1537ade37f871",
+      "source_count": 4,
+      "source_pdf_count": 4
+    },
+    {
+      "manifest_path": "scenario_packs/S2_TV_WARRANTY_01/scenario_pack.json",
+      "query_count": 6,
+      "scenario_id": "S2_TV_WARRANTY_01",
+      "sha256": "73ae3838628bc5fe13941e616881cc0165e1033268710b1a8dc46f5417c66f65",
+      "source_count": 6,
+      "source_pdf_count": 6
+    }
+  ],
+  "schema_id": "infobank-scenario-pack-v1",
+  "source_count": 10,
+  "source_pdf_count": 10
+}

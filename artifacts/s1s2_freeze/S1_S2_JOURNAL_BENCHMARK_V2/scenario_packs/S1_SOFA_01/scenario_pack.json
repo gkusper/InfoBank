@@ -1,0 +1,167 @@
+{
+  "account_id": null,
+  "object_id": "LUN-S3-2401",
+  "queries": [
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "I spilled coffee on my sofa. How should I clean it?",
+      "query_id": "S1-Q1",
+      "reference_answer": "Blot the spill immediately with a clean white absorbent cloth without rubbing. Use 5 mL of neutral liquid soap mixed with 250 mL of lukewarm water, test it on a hidden area, dab from the edge toward the centre, remove the soap residue with a clean damp cloth, and allow the sofa to air dry.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "lunara-s3-care-guide"
+        }
+      ],
+      "required_sources": [
+        "lunara-s3-care-guide"
+      ],
+      "supporting_sources": [
+        "vellum-l2-armchair-care-notes",
+        "polarweave-p9-rug-care-guide"
+      ]
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "When did I buy this sofa?",
+      "query_id": "S1-Q2",
+      "reference_answer": "The sofa was purchased on 14 November 2025.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "lunara-s3-purchase-receipt"
+        }
+      ],
+      "required_sources": [
+        "lunara-s3-purchase-receipt"
+      ],
+      "supporting_sources": []
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "Can I use chlorine bleach?",
+      "query_id": "S1-Q3",
+      "reference_answer": "No. The LUNARA S3 care guide explicitly prohibits chlorine bleach on the sofa fabric.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "lunara-s3-care-guide"
+        }
+      ],
+      "required_sources": [
+        "lunara-s3-care-guide"
+      ],
+      "supporting_sources": [
+        "vellum-l2-armchair-care-notes",
+        "polarweave-p9-rug-care-guide"
+      ]
+    },
+    {
+      "expected_output": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "negative_reason": "insufficient_evidence",
+      "query": "How long is the manufacturer's warranty?",
+      "query_id": "S1-Q4",
+      "reference_answer": "The available sofa care guide and purchase receipt do not state a manufacturer warranty duration, so the question cannot be answered from the available evidence.",
+      "reference_citations": [],
+      "required_sources": [],
+      "supporting_sources": [
+        "lunara-s3-care-guide",
+        "lunara-s3-purchase-receipt"
+      ]
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "How much did I pay for the sofa?",
+      "query_id": "S1-Q5",
+      "reference_answer": "The total paid for the sofa was 249,900 HUF.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "lunara-s3-purchase-receipt"
+        }
+      ],
+      "required_sources": [
+        "lunara-s3-purchase-receipt"
+      ],
+      "supporting_sources": []
+    },
+    {
+      "expected_output": "FULL_ANSWER",
+      "negative_reason": null,
+      "query": "Do the care guide and purchase receipt refer to the same sofa?",
+      "query_id": "S1-Q6",
+      "reference_answer": "Yes. Both documents identify the LUNARA S3 three-seat fabric sofa with product code LUN-S3-2401.",
+      "reference_citations": [
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "lunara-s3-care-guide"
+        },
+        {
+          "message_id": null,
+          "page": 1,
+          "record_id": null,
+          "source_id": "lunara-s3-purchase-receipt"
+        }
+      ],
+      "required_sources": [
+        "lunara-s3-care-guide",
+        "lunara-s3-purchase-receipt"
+      ],
+      "supporting_sources": []
+    }
+  ],
+  "scenario_id": "S1_SOFA_01",
+  "sources": [
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "LUN-S3-2401",
+      "source_id": "lunara-s3-care-guide",
+      "source_type": "cleaning_manual_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": "2025-11-14",
+      "permission": "Owner",
+      "relation_key": "LUN-S3-2401",
+      "source_id": "lunara-s3-purchase-receipt",
+      "source_type": "purchase_receipt_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "ARM-L2-880",
+      "source_id": "vellum-l2-armchair-care-notes",
+      "source_type": "leather_care_notes_pdf",
+      "valid_from": null,
+      "valid_to": null
+    },
+    {
+      "date": null,
+      "permission": "Owner",
+      "relation_key": "RUG-P9-009",
+      "source_id": "polarweave-p9-rug-care-guide",
+      "source_type": "rug_care_guide_pdf",
+      "valid_from": null,
+      "valid_to": null
+    }
+  ],
+  "user_id": "synthetic-user-s1"
+}

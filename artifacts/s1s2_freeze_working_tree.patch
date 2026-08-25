@@ -1,0 +1,884 @@
+diff --git a/evaluation/actual_pipeline_gold.py b/evaluation/actual_pipeline_gold.py
+index ab6a81b..597ead1 100644
+--- a/evaluation/actual_pipeline_gold.py
++++ b/evaluation/actual_pipeline_gold.py
+@@ -12,6 +12,9 @@ from typing import Any
+ 
+ 
+ GOLD_SCHEMA_VERSION = "infobank-gold-annotation-v1"
++PENDING_HUMAN_REVIEW = "PENDING_HUMAN_REVIEW"
++HUMAN_VALIDATED = "HUMAN_VALIDATED"
++HUMAN_VALIDATION_STATES = {PENDING_HUMAN_REVIEW, HUMAN_VALIDATED}
+ 
+ 
+ @dataclass(frozen=True)
+@@ -25,7 +28,7 @@ class GoldAnnotation:
+     factual_atoms: tuple[str, ...]
+     required_evidence_roles: tuple[str, ...]
+     action_status: str
+-    manual_validation_state: str = "PENDING_HUMAN_REVIEW"
++    manual_validation_state: str = PENDING_HUMAN_REVIEW
+     dataset_version: str = "actual-pipeline-development-v1"
+     schema_version: str = GOLD_SCHEMA_VERSION
+     metadata: dict[str, Any] = field(default_factory=dict)
+@@ -35,6 +38,8 @@ class GoldAnnotation:
+     reference_citations: tuple[dict[str, Any], ...] | None = None
+ 
+     def __post_init__(self) -> None:
++        if self.manual_validation_state not in HUMAN_VALIDATION_STATES:
++            raise ValueError("manual_validation_state is not recognized")
+         if (self.required_sources is None) != (self.reference_citations is None):
+             raise ValueError("required_sources and reference_citations must be present together")
+         if self.required_sources is not None:
+@@ -95,6 +100,12 @@ class GoldAnnotation:
+                 ranges.setdefault(str(citation["source_id"]), []).append(int(page))
+         return {key: sorted(set(value)) for key, value in ranges.items()}
+ 
++    @property
++    def acceptable_page_ranges(self) -> dict[str, list[int]]:
++        """Return document IDs mapped to human-approved acceptable page sets."""
++
++        return self.reference_page_ranges
++
+     def to_dict(self) -> dict[str, Any]:
+         value = asdict(self)
+         value["gold_document_ids"] = list(self.gold_document_ids)
+diff --git a/evaluation/actual_pipeline_runner.py b/evaluation/actual_pipeline_runner.py
+index 5c6c5a7..e99e7d9 100644
+--- a/evaluation/actual_pipeline_runner.py
++++ b/evaluation/actual_pipeline_runner.py
+@@ -27,6 +27,7 @@ from .actual_pipeline_inputs import (
+     load_query_inputs,
+ )
+ from .backend import BACKEND_DIR, REPO_ROOT, ensure_backend_path
++from .reason_codes import canonical_reason_code
+ from .schemas import EvaluationMode, utc_timestamp
+ 
+ 
+@@ -50,26 +51,56 @@ SUPPORT_STOPWORDS = ROUTING_STOPWORDS | {
+     "much", "permitted", "should", "source", "specified", "stated", "still",
+     "that", "them",
+ }
++DATE_MONTH_TOKENS = {
++    "january", "february", "march", "april", "may", "june",
++    "july", "august", "september", "october", "november", "december",
++}
++CURRENCY_TOKENS = {
++    "aud", "cad", "chf", "eur", "gbp", "huf", "jpy", "usd",
++}
++MEASUREMENT_UNIT_TOKENS = {
++    "day", "days", "hour", "hours", "month", "months", "week", "weeks", "year", "years",
++}
+ FACTUAL_SUPPORT_ALIASES = (
+     (
++        "purchase_date",
+         (r"\bwhen\b", r"\bdate\b", r"\bbuy\b", r"\bbought\b", r"\bpurchase(?:d)?\b"),
+         ("purchase", "purchased", "receipt", "transaction", "date", "dated"),
+     ),
+     (
++        "price_amount",
+         (r"\bhow\s+much\b", r"\bpay\b", r"\bpaid\b", r"\bprice\b", r"\bcost\b", r"\bamount\b"),
+         ("price", "cost", "paid", "payment", "amount", "total", "subtotal"),
+     ),
+     (
++        "identifier",
+         (r"\bserial\b", r"\breference\b", r"\bidentifier\b", r"\bid\b", r"\bcode\b", r"\bmodel\b"),
+         ("serial", "reference", "identifier", "id", "code", "model", "number"),
+     ),
+     (
++        "duration",
+         (r"\bhow\s+long\b", r"\bduration\b", r"\bperiod\b", r"\bterm\b", r"\bmonth", r"\byear"),
+         ("duration", "period", "term", "month", "months", "year", "years", "day", "days"),
+     ),
+     (
++        "warranty",
+         (r"\bwarranty\b", r"\bcovered\b", r"\bcoverage\b"),
+-        ("warranty", "covered", "coverage", "terms", "period"),
++        ("warranty", "covered", "coverage", "terms"),
++    ),
++    (
++        "service_period",
++        (r"\bservice\b", r"\bregional\b", r"\bprogramme\b", r"\bprogram\b"),
++        ("service", "regional", "programme", "program", "notice", "period"),
++    ),
++    (
++        "ports_connections",
++        (r"\bports?\b", r"\bconnections?\b", r"\bhdmi\b", r"\busb(?:-a)?\b", r"\bwired\b"),
++        ("port", "ports", "connection", "connections", "interface", "interfaces", "hdmi", "usb", "usb-a", "input", "inputs", "ethernet", "optical"),
++    ),
++    (
++        "error_recovery",
++        (r"\berror\b", r"\bfault\b", r"\btroubleshoot", r"\brecover", r"\bdo\s+first\b"),
++        ("error", "fault", "recovery", "procedure", "troubleshoot", "troubleshooting", "diagnosis"),
+     ),
+ )
+ 
+@@ -172,15 +203,36 @@ def _contains_support_term(text: str, term: str) -> bool:
+     return bool(re.search(rf"(?<![a-z0-9]){escaped}(?![a-z0-9])", text.lower()))
+ 
+ 
++def _active_factual_alias_groups(question: str) -> list[tuple[str, set[str]]]:
++    lowered = question.lower()
++    groups: list[tuple[str, set[str]]] = []
++    seen: set[str] = set()
++    for name, triggers, aliases in FACTUAL_SUPPORT_ALIASES:
++        if name in seen:
++            continue
++        if any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
++            groups.append((name, {alias.lower() for alias in aliases}))
++            seen.add(name)
++    return groups
++
++
++def _matched_factual_group_names(question: str, text: str, *, substantive_only: bool = False) -> set[str]:
++    groups = _active_factual_alias_groups(question)
++    if substantive_only and any(name != "identifier" for name, _ in groups):
++        groups = [(name, aliases) for name, aliases in groups if name != "identifier"]
++    return {
++        name
++        for name, aliases in groups
++        if any(_contains_support_term(text, alias) for alias in aliases)
++    }
++
++
+ def _support_groups(question: str) -> list[set[str]]:
+     lowered = question.lower()
+-    alias_groups: list[set[str]] = []
++    alias_groups = [aliases for _, aliases in _active_factual_alias_groups(question)]
+     alias_terms: set[str] = set()
+-    for triggers, aliases in FACTUAL_SUPPORT_ALIASES:
+-        if any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
+-            group = {alias.lower() for alias in aliases}
+-            alias_groups.append(group)
+-            alias_terms.update(group)
++    for group in alias_groups:
++        alias_terms.update(group)
+ 
+     groups: list[set[str]] = []
+     seen: set[tuple[str, ...]] = set()
+@@ -213,11 +265,92 @@ def _support_score(question: str, text: str) -> float:
+     return round(matched / len(groups), 6)
+ 
+ 
+-def _page_aware_score(question: str, text: str, vector_distance: float) -> float:
++def _important_exact_tokens(text: str) -> set[str]:
++    tokens = set()
++    for token in re.findall(r"[a-z0-9][a-z0-9_-]{1,}", text.lower()):
++        if token in SUPPORT_STOPWORDS:
++            continue
++        if len(token) >= 4 or any(char.isdigit() for char in token) or "-" in token:
++            tokens.add(token)
++    return tokens
++
++
++def _important_value_tokens(text: str) -> set[str]:
++    lowered = text.lower()
++    tokens = set()
++    for token in re.findall(r"[a-z0-9][a-z0-9_-]*", lowered):
++        if token in SUPPORT_STOPWORDS:
++            continue
++        if any(char.isdigit() for char in token) or "-" in token:
++            tokens.add(token)
++    for month in DATE_MONTH_TOKENS:
++        if re.search(rf"\b(?:\d{{1,2}}\s+{month}|{month}\s+\d{{1,4}})\b", lowered):
++            tokens.add(month)
++    for currency in CURRENCY_TOKENS:
++        if re.search(rf"\b(?:\d[\d,.\s]*\s+{currency}|{currency}\s+\d)\b", lowered):
++            tokens.add(currency)
++    for unit in MEASUREMENT_UNIT_TOKENS:
++        if re.search(rf"\b(?:\d[\d,.\s]*\s+{unit}|{unit}\s+\d)\b", lowered):
++            tokens.add(unit)
++    return tokens
++
++
++def _exact_overlap_score(left: str, right: str) -> float:
++    left_tokens = _important_exact_tokens(left)
++    if not left_tokens:
++        return 0.0
++    right_tokens = _important_exact_tokens(right)
++    return round(len(left_tokens & right_tokens) / len(left_tokens), 6)
++
++
++def _document_type_relevance(question: str, document_type: str) -> float:
++    lowered = question.lower()
++    doc_type = str(document_type or "").lower().replace("-", "_")
++    score = 0.0
++    hints = (
++        (
++            (r"\bpurchase\b", r"\bbuy\b", r"\bbought\b", r"\bpaid\b", r"\bprice\b", r"\bamount\b", r"\breceipt\b", r"\binvoice\b"),
++            ("receipt", "invoice", "transaction", "order"),
++            (),
++        ),
++        (
++            (r"\bwarranty\b", r"\bcovered\b", r"\bcoverage\b"),
++            ("warranty", "terms"),
++            (),
++        ),
++        (
++            (r"\bports?\b", r"\bconnections?\b", r"\bhdmi\b", r"\busb(?:-a)?\b", r"\bwired\b", r"\btechnical\b", r"\bspecification\b"),
++            ("specification", "spec"),
++            ("manual",),
++        ),
++        (
++            (r"\berror\b", r"\bfault\b", r"\btroubleshoot", r"\brecover", r"\bdo\s+first\b"),
++            ("manual", "guide", "service"),
++            (),
++        ),
++        (
++            (r"\bregional\b", r"\bservice\b", r"\bprogramme\b", r"\bprogram\b"),
++            ("service", "notice"),
++            ("warranty", "terms"),
++        ),
++    )
++    for triggers, primary_terms, secondary_terms in hints:
++        if not any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
++            continue
++        if any(term in doc_type for term in primary_terms):
++            score = max(score, 1.0)
++        elif any(term in doc_type for term in secondary_terms):
++            score = max(score, 0.6)
++    return score
++
++
++def _page_aware_score(question: str, text: str, vector_distance: float, document_type: str = "") -> float:
+     lexical = _support_score(question, text)
++    exact = _exact_overlap_score(question, text)
+     semantic = max(0.0, 1.0 - float(vector_distance))
++    doc_type = _document_type_relevance(question, document_type)
+     authority_bonus = 0.15 if "conflict" in question.lower() and "authoritative" in text.lower() else 0.0
+-    return round(0.7 * lexical + 0.3 * semantic + authority_bonus, 9)
++    return round(0.55 * lexical + 0.2 * exact + 0.15 * semantic + 0.1 * doc_type + authority_bonus, 9)
+ 
+ 
+ def _known_object_reference(question: str) -> list[str]:
+@@ -269,16 +402,71 @@ def _document_routing_keywords(document: CorpusDocument) -> tuple[str, ...]:
+     return tuple(sorted(terms))
+ 
+ 
+-def _citation_rank(question: str, answer: str, citation: dict[str, Any]) -> tuple[float, float, float, int]:
++def _citation_materiality(question: str, answer: str, citation: dict[str, Any]) -> dict[str, Any]:
+     text = str(citation.get("_text") or "")
+     question_support = _support_score(question, text)
+     answer_support = _support_score(answer, text) if answer else 0.0
++    question_exact = _exact_overlap_score(question, text)
++    answer_exact = _exact_overlap_score(answer, text) if answer else 0.0
++    document_type_score = _document_type_relevance(question, str(citation.get("_document_type") or ""))
++    active_groups = _active_factual_alias_groups(question)
++    active_substantive_groups = [
++        name
++        for name, _ in active_groups
++        if name != "identifier" or not any(other_name != "identifier" for other_name, _ in active_groups)
++    ]
++    matched_substantive_groups = _matched_factual_group_names(question, text, substantive_only=True)
++    answer_value_tokens = _important_value_tokens(answer) if answer else set()
++    matched_answer_value_tokens = answer_value_tokens & _important_value_tokens(text)
++    return {
++        "question_support": question_support,
++        "answer_support": answer_support,
++        "question_exact": question_exact,
++        "answer_exact": answer_exact,
++        "document_type_score": document_type_score,
++        "active_substantive_groups": set(active_substantive_groups),
++        "active_substantive_group_count": len(active_substantive_groups),
++        "matched_substantive_groups": matched_substantive_groups,
++        "matched_substantive_group_count": len(matched_substantive_groups),
++        "matched_answer_value_tokens": matched_answer_value_tokens,
++        "matched_answer_value_token_count": len(matched_answer_value_tokens),
++    }
++
++
++def _citation_supports_material_fact(question: str, answer: str, citation: dict[str, Any]) -> bool:
++    materiality = _citation_materiality(question, answer, citation)
++    if (
++        materiality["active_substantive_group_count"]
++        and materiality["matched_substantive_group_count"] == 0
++    ):
++        return False
++    return (
++        materiality["question_support"] >= CITATION_MIN_QUESTION_SUPPORT
++        or materiality["answer_support"] >= 0.35
++        or materiality["question_exact"] >= 0.25
++        or materiality["answer_exact"] >= 0.25
++        or materiality["document_type_score"] >= 1.0
++    )
++
++
++def _citation_rank(question: str, answer: str, citation: dict[str, Any]) -> tuple[float, float, float, float, float, int]:
++    materiality = _citation_materiality(question, answer, citation)
+     retrieval_score = float(citation.get("_selection_score") or 0.0)
+-    combined = round(0.75 * question_support + 0.10 * answer_support + 0.15 * retrieval_score, 9)
++    combined = round(
++        0.40 * materiality["question_support"]
++        + 0.25 * materiality["answer_support"]
++        + 0.15 * materiality["question_exact"]
++        + 0.10 * materiality["answer_exact"]
++        + 0.05 * materiality["document_type_score"]
++        + 0.05 * retrieval_score,
++        9,
++    )
+     return (
+         combined,
+-        question_support,
+-        answer_support,
++        materiality["matched_substantive_group_count"],
++        materiality["question_exact"],
++        materiality["answer_exact"],
++        materiality["document_type_score"],
+         -int(citation.get("chunk_index") or 0),
+     )
+ 
+@@ -299,7 +487,7 @@ def _select_answer_citations(
+             "contrastive",
+         }:
+             continue
+-        if _support_score(question, str(citation.get("_text") or "")) < CITATION_MIN_QUESTION_SUPPORT:
++        if not _citation_supports_material_fact(question, answer, citation):
+             continue
+         doc_id = str(citation.get("document_id") or "")
+         if not doc_id:
+@@ -311,7 +499,33 @@ def _select_answer_citations(
+         best_by_document.values(),
+         key=lambda item: _citation_rank(question, answer, item),
+         reverse=True,
+-    )[:max_citations]
++    )
++    active_groups = set()
++    for item in ranked:
++        active_groups.update(_citation_materiality(question, answer, item)["active_substantive_groups"])
++    if active_groups:
++        selected: list[dict[str, Any]] = []
++        covered_groups: set[str] = set()
++        covered_answer_value_tokens: set[str] = set()
++        for item in ranked:
++            materiality = _citation_materiality(question, answer, item)
++            matched_groups = set(materiality["matched_substantive_groups"])
++            matched_answer_value_tokens = set(materiality["matched_answer_value_tokens"])
++            role = item.get("evidence_role")
++            if (
++                not selected
++                or matched_groups - covered_groups
++                or matched_answer_value_tokens - covered_answer_value_tokens
++                or role == "contrastive"
++            ):
++                selected.append(item)
++                covered_groups.update(matched_groups)
++                covered_answer_value_tokens.update(matched_answer_value_tokens)
++            if len(selected) >= max_citations:
++                break
++        ranked = selected
++    else:
++        ranked = ranked[:max_citations]
+     return [
+         {
+             key: value
+@@ -605,7 +819,7 @@ class PipelineRuntime:
+         chunk_count = sum(
+             self.collection.count() for _ in [0]
+         )
+-        fetch_k = min(max(top_k * 4, len(candidate_ids) * 3, top_k), chunk_count)
++        fetch_k = min(max(top_k * 8, len(candidate_ids) * 8, top_k), chunk_count)
+         results = self.collection.query(
+             query_embeddings=[question_vector],
+             n_results=max(fetch_k, 1),
+@@ -619,14 +833,17 @@ class PipelineRuntime:
+             results.get("metadatas", [[]])[0],
+             results.get("distances", [[]])[0],
+         ):
++            fixture_document = self.document_by_id.get(str(metadata["document_id"]))
++            document_type = fixture_document.document_type if fixture_document is not None else ""
+             rows.append(
+                 {
+                     "chunk_id": vector_id,
+                     "document_id": metadata["document_id"],
++                    "document_type": document_type,
+                     "page_number": int(metadata["page_number"]),
+                     "text": text,
+                     "vector_distance": round(float(distance), 9),
+-                    "page_aware_score": _page_aware_score(question, text, float(distance)),
++                    "page_aware_score": _page_aware_score(question, text, float(distance), document_type),
+                 }
+             )
+         ranked = sorted(rows, key=lambda item: (-item["page_aware_score"], item["vector_distance"], item["chunk_id"]))
+@@ -816,6 +1033,7 @@ class PipelineRuntime:
+                             citation["evidence_role"] = role
+                             citation["_selection_score"] = item["page_aware_score"]
+                             citation["_text"] = item["text"]
++                            citation["_document_type"] = item.get("document_type", "")
+                             citations.append(citation)
+                         public_text = relevance.public_source_text(role, item["text"])
+                         sources.append(
+@@ -976,6 +1194,8 @@ class PipelineRuntime:
+                     if fixture.access_by_document.get(doc_id) in {None, "Deny"}
+                 ) if mode in {EvaluationMode.B2_PERMISSION_FILTERED.value, EvaluationMode.B3_FULL_ROLE_AWARE.value} else []
+                 prohibited_markers = list(fixture.prohibited_markers)
++                raw_reason_code = reason_code
++                reason_code = canonical_reason_code(output_class, raw_reason_code)
+                 record = {
+                     "schema_version": RAW_SCHEMA_VERSION,
+                     "runner_version": RUNNER_VERSION,
+@@ -987,7 +1207,7 @@ class PipelineRuntime:
+                     "selected_keywords": selected_keywords,
+                     "routing_trace": routing_trace,
+                     "retrieved_chunks": [
+-                        {key: item[key] for key in ("chunk_id", "document_id", "page_number", "vector_distance", "page_aware_score")}
++                        {key: item[key] for key in ("chunk_id", "document_id", "document_type", "page_number", "vector_distance", "page_aware_score")}
+                         for item in retrieved
+                     ],
+                     "retrieved_document_ids": sorted({item["document_id"] for item in retrieved}),
+@@ -997,6 +1217,7 @@ class PipelineRuntime:
+                     "actual_output_text": answer,
+                     "actual_output_class": output_class,
+                     "actual_reason_code": reason_code,
++                    "actual_reason_category": raw_reason_code,
+                     "actual_citations": citations,
+                     "support_score": support_score,
+                     "provider_usage": provider_usage,
+@@ -1043,6 +1264,7 @@ class PipelineRuntime:
+                 "actual_output_text": "",
+                 "actual_output_class": "ERROR",
+                 "actual_reason_code": "runtime_error",
++                "actual_reason_category": "runtime_error",
+                 "actual_citations": [],
+                 "support_score": 0.0,
+                 "provider_usage": provider_usage,
+diff --git a/evaluation/actual_pipeline_scorer.py b/evaluation/actual_pipeline_scorer.py
+index f0ff63a..965c893 100644
+--- a/evaluation/actual_pipeline_scorer.py
++++ b/evaluation/actual_pipeline_scorer.py
+@@ -11,7 +11,8 @@ from collections import Counter, defaultdict
+ from pathlib import Path
+ from typing import Any, Iterable
+ 
+-from .actual_pipeline_gold import GoldAnnotation, load_gold_annotations
++from .actual_pipeline_gold import HUMAN_VALIDATED, GoldAnnotation, load_gold_annotations
++from .reason_codes import canonical_reason_code
+ from .schemas import EvaluationMode, utc_timestamp
+ 
+ 
+@@ -131,9 +132,11 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
+ 
+     for record, gold in zip(records, annotations):
+         actual_class = str(record["actual_output_class"])
+-        actual_reason = str(record["actual_reason_code"])
++        raw_actual_reason = str(record.get("actual_reason_category") or record["actual_reason_code"])
++        actual_reason = canonical_reason_code(actual_class, str(record["actual_reason_code"]))
++        expected_reason = canonical_reason_code(gold.expected_output_class, gold.reason_code)
+         output_confusion[(gold.expected_output_class, actual_class)] += 1
+-        reason_confusion[(gold.reason_code, actual_reason)] += 1
++        reason_confusion[(expected_reason, actual_reason)] += 1
+         safety = scan_record_safety(record)
+         safety_totals.update(safety)
+         if record.get("error"):
+@@ -158,7 +161,7 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
+         required_source_ids = set(gold.required_source_ids)
+         gold_pages = {
+             doc_id: pages
+-            for doc_id, pages in gold.reference_page_ranges.items()
++            for doc_id, pages in gold.acceptable_page_ranges.items()
+             if doc_id in required_source_ids and pages
+         }
+         gold_doc_ids = set(gold_pages)
+@@ -173,16 +176,18 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
+                 citation_supported += 1
+                 if citation.get("page_number") in gold_pages.get(doc_id, []):
+                     citation_correct_page += 1
+-        citation_expected += sum(len(pages) for pages in gold_pages.values())
++        citation_expected += len(gold_pages)
+         details.append(
+             {
+                 "case_id": gold.case_id,
+                 "expected_output_class": gold.expected_output_class,
+                 "actual_output_class": actual_class,
+-                "expected_reason_code": gold.reason_code,
++                "expected_reason_code": expected_reason,
+                 "actual_reason_code": actual_reason,
++                "raw_expected_reason_code": gold.reason_code,
++                "raw_actual_reason_code": raw_actual_reason,
+                 "output_class_correct": actual_class == gold.expected_output_class,
+-                "reason_code_correct": actual_reason == gold.reason_code,
++                "reason_code_correct": actual_reason == expected_reason,
+                 "factual_atoms_supported": _atom_supported(str(record["actual_output_text"]), gold),
+                 "required_source_count": len(gold.required_source_ids),
+                 "safety_findings": safety,
+@@ -227,6 +232,12 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
+     return summary, details
+ 
+ 
++def _human_validation_state(annotations: list[GoldAnnotation]) -> str:
++    if annotations and all(item.manual_validation_state == HUMAN_VALIDATED for item in annotations):
++        return "APPROVED"
++    return "PENDING_HUMAN_REVIEW"
++
++
+ def score_sealed_run(
+     *,
+     raw_run_path: str | Path,
+@@ -263,7 +274,7 @@ def score_sealed_run(
+         "run_id": seal["run_id"],
+         "dataset_version": seal["dataset_version"],
+         "modes": by_mode,
+-        "human_validation_state": "PENDING_HUMAN_REVIEW",
++        "human_validation_state": _human_validation_state(annotations),
+         "candidate_holdout_accessed": False,
+     }
+     (destination / "summary.json").write_text(json.dumps(result, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+diff --git a/evaluation/scenario_pack.py b/evaluation/scenario_pack.py
+index 638c6c3..d2a0a92 100644
+--- a/evaluation/scenario_pack.py
++++ b/evaluation/scenario_pack.py
+@@ -360,6 +360,7 @@ def roadmap_scenario_packs() -> list[dict[str, Any]]:
+                     ),
+                     reference_citations=(
+                         {"source_id": s2_sources[0], "page": 17, "message_id": None, "record_id": None},
++                        {"source_id": s2_sources[0], "page": 20, "message_id": None, "record_id": None},
+                     ),
+                 ),
+             ],
+diff --git a/evaluation/schemas/gold_annotation.schema.json b/evaluation/schemas/gold_annotation.schema.json
+index 340e203..a812152 100644
+--- a/evaluation/schemas/gold_annotation.schema.json
++++ b/evaluation/schemas/gold_annotation.schema.json
+@@ -53,7 +53,7 @@
+     "factual_atoms": {"type": "array", "items": {"type": "string"}},
+     "required_evidence_roles": {"type": "array", "items": {"type": "string"}},
+     "action_status": {"type": "string"},
+-    "manual_validation_state": {"const": "PENDING_HUMAN_REVIEW"},
++    "manual_validation_state": {"enum": ["PENDING_HUMAN_REVIEW", "HUMAN_VALIDATED"]},
+     "dataset_version": {"type": "string"},
+     "schema_version": {"const": "infobank-gold-annotation-v1"},
+     "metadata": {"type": "object"}
+diff --git a/evaluation/tests/test_actual_pipeline.py b/evaluation/tests/test_actual_pipeline.py
+index 802467a..f17390c 100644
+--- a/evaluation/tests/test_actual_pipeline.py
++++ b/evaluation/tests/test_actual_pipeline.py
+@@ -7,7 +7,7 @@ from pathlib import Path
+ import pytest
+ 
+ from evaluation.actual_pipeline_dataset import OUTPUT_CLASSES, build_development_dataset, document_id
+-from evaluation.actual_pipeline_gold import GoldAnnotation, load_gold_annotations
++from evaluation.actual_pipeline_gold import HUMAN_VALIDATED, GoldAnnotation, load_gold_annotations
+ from evaluation.actual_pipeline_inputs import CORPUS_SCHEMA_VERSION, CorpusDocument, QueryInput, write_jsonl
+ from evaluation.actual_pipeline_runner import (
+     ActualPipelineConfig,
+@@ -18,7 +18,8 @@ from evaluation.actual_pipeline_runner import (
+     _support_score,
+     run_actual_pipeline,
+ )
+-from evaluation.actual_pipeline_scorer import _score_mode, scan_record_safety, score_sealed_run
++from evaluation.actual_pipeline_scorer import _human_validation_state, _score_mode, scan_record_safety, score_sealed_run
++from evaluation.reason_codes import canonical_reason_code
+ 
+ 
+ def _minimal_fixture(root: Path) -> tuple[Path, Path, Path]:
+@@ -151,6 +152,15 @@ def test_document_type_terms_are_available_for_routing() -> None:
+     assert {"purchase", "receipt", "purchase_receipt_pdf"} <= set(_document_routing_keywords(document))
+ 
+ 
++def test_canonical_reason_codes_cover_refusal_taxonomy() -> None:
++    assert canonical_reason_code("REFUSE_INSUFFICIENT_EVIDENCE", "evidential") == "insufficient_evidence"
++    assert canonical_reason_code("REFUSE_PERMISSION", "governance") == "permission_refusal"
++    assert canonical_reason_code("REFUSE_NO_MATCH", "epistemic") == "no_match"
++    assert canonical_reason_code("REFUSE_CONFLICT", "conflict_defeat") == "conflict"
++    assert canonical_reason_code("REFUSE_AGGREGATION_THRESHOLD", "aggregation_threshold_not_met") == "aggregation_threshold_not_met"
++    assert canonical_reason_code("CLARIFICATION", "underspecified_question") == "clarification"
++
++
+ def test_citation_selection_prefers_supporting_page_in_multi_page_document() -> None:
+     selected = _select_answer_citations(
+         [
+@@ -180,6 +190,109 @@ def test_citation_selection_prefers_supporting_page_in_multi_page_document() ->
+     assert all(not any(key.startswith("_") for key in item) for item in selected)
+ 
+ 
++def test_citation_selection_prunes_semantically_related_non_material_sources() -> None:
++    selected = _select_answer_citations(
++        [
++            {
++                "available": True,
++                "document_id": "receipt",
++                "page_number": 1,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.4,
++                "_document_type": "purchase_receipt_pdf",
++                "_text": "Purchase receipt. Purchase date 3 May 2026. Amount paid 42,500 HUF.",
++            },
++            {
++                "available": True,
++                "document_id": "care",
++                "page_number": 1,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.9,
++                "_document_type": "care_manual_pdf",
++                "_text": "Device care manual. Wipe the exterior with a dry cloth.",
++            },
++            {
++                "available": True,
++                "document_id": "overview",
++                "page_number": 1,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.8,
++                "_document_type": "user_manual_pdf",
++                "_text": "Device overview. Keep all records with the product packaging.",
++            },
++        ],
++        question="How much did I pay for the device?",
++        answer="The amount paid was 42,500 HUF.",
++    )
++
++    assert [(item["document_id"], item["page_number"]) for item in selected] == [("receipt", 1)]
++
++
++def test_citation_selection_uses_document_type_for_purchase_fact() -> None:
++    selected = _select_answer_citations(
++        [
++            {
++                "available": True,
++                "document_id": "manual",
++                "page_number": 2,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.9,
++                "_document_type": "user_manual_pdf",
++                "_text": "Manual for DEVICE-A. Keep the purchase paperwork with this guide.",
++            },
++            {
++                "available": True,
++                "document_id": "receipt",
++                "page_number": 1,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.4,
++                "_document_type": "purchase_receipt_pdf",
++                "_text": "Receipt for DEVICE-A. Purchase date 3 May 2026.",
++            },
++        ],
++        question="When did I buy DEVICE-A?",
++        answer="DEVICE-A was purchased on 3 May 2026.",
++    )
++
++    assert [(item["document_id"], item["page_number"]) for item in selected] == [("receipt", 1)]
++
++
++def test_citation_selection_prefers_specification_for_technical_property() -> None:
++    selected = _select_answer_citations(
++        [
++            {
++                "available": True,
++                "document_id": "manual",
++                "page_number": 10,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.9,
++                "_document_type": "user_manual_pdf",
++                "_text": "Manual connection section. Use certified cables for HDMI and USB accessories.",
++            },
++            {
++                "available": True,
++                "document_id": "spec",
++                "page_number": 3,
++                "chunk_index": 0,
++                "evidence_role": "primary",
++                "_selection_score": 0.5,
++                "_document_type": "product_specification_pdf",
++                "_text": "Product specification. HDMI 4 inputs. USB-A 2 ports. Ethernet and optical audio are listed wired connections.",
++            },
++        ],
++        question="How many HDMI and USB-A ports are listed?",
++        answer="The specification lists 4 HDMI inputs and 2 USB-A ports.",
++    )
++
++    assert [(item["document_id"], item["page_number"]) for item in selected] == [("spec", 3)]
++
++
+ def test_citation_selection_keeps_multiple_supporting_documents() -> None:
+     selected = _select_answer_citations(
+         [
+@@ -190,6 +303,7 @@ def test_citation_selection_keeps_multiple_supporting_documents() -> None:
+                 "chunk_index": 0,
+                 "evidence_role": "primary",
+                 "_selection_score": 0.5,
++                "_document_type": "purchase_receipt_pdf",
+                 "_text": "Purchase date 4 April 2026. Amount paid 19,900 HUF.",
+             },
+             {
+@@ -199,6 +313,7 @@ def test_citation_selection_keeps_multiple_supporting_documents() -> None:
+                 "chunk_index": 1,
+                 "evidence_role": "primary",
+                 "_selection_score": 0.5,
++                "_document_type": "warranty_terms_pdf",
+                 "_text": "Warranty period is 24 months from the purchase date.",
+             },
+         ],
+@@ -240,6 +355,10 @@ def test_retrieval_overfetches_before_page_aware_truncation() -> None:
+     runtime.provider = FakeProvider()
+     runtime.collection = FakeCollection()
+     runtime.config = ActualPipelineConfig()
++    runtime.document_by_id = {
++        "manual": CorpusDocument("manual", "pkg", "DEVICE-A", "user_manual_pdf", "manual.pdf", ("x",), ()),
++        "receipt": CorpusDocument("receipt", "pkg", "DEVICE-A", "purchase_receipt_pdf", "receipt.pdf", ("x",), ()),
++    }
+ 
+     rows = PipelineRuntime._retrieve(
+         runtime,
+@@ -283,6 +402,11 @@ def test_retrieval_diversifies_top_rows_across_documents() -> None:
+     runtime.provider = FakeProvider()
+     runtime.collection = FakeCollection()
+     runtime.config = ActualPipelineConfig()
++    runtime.document_by_id = {
++        "terms": CorpusDocument("terms", "pkg", "DEVICE-A", "warranty_terms_pdf", "terms.pdf", ("x",), ()),
++        "receipt": CorpusDocument("receipt", "pkg", "DEVICE-A", "purchase_receipt_pdf", "receipt.pdf", ("x",), ()),
++        "manual": CorpusDocument("manual", "pkg", "DEVICE-A", "user_manual_pdf", "manual.pdf", ("x",), ()),
++    }
+ 
+     rows = PipelineRuntime._retrieve(
+         runtime,
+@@ -501,6 +625,16 @@ def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path
+     current_annotation = load_gold_annotations(gold_path)[0]
+     assert current_annotation.required_source_ids == tuple(current["required_sources"])
+     assert current_annotation.reference_page_ranges == current["gold_page_or_message_ranges"]
++    assert current_annotation.acceptable_page_ranges == current["gold_page_or_message_ranges"]
++
++    validated = dict(current)
++    validated["manual_validation_state"] = HUMAN_VALIDATED
++    validated_path = tmp_path / "validated-gold.jsonl"
++    write_jsonl(validated_path, [validated])
++    validated_annotation = load_gold_annotations(validated_path)[0]
++    assert validated_annotation.manual_validation_state == HUMAN_VALIDATED
++    assert _human_validation_state([validated_annotation]) == "APPROVED"
++    assert _human_validation_state([current_annotation, validated_annotation]) == "PENDING_HUMAN_REVIEW"
+ 
+     inconsistent = dict(current)
+     inconsistent["reference_citations"] = []
+@@ -611,6 +745,105 @@ def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
+     assert summary["false_or_unsupported_answer_rate"] == 0.5
+ 
+ 
++def test_scorer_treats_gold_pages_as_acceptable_page_sets() -> None:
++    cases = [
++        ("one-page", "doc-a", [3], "doc-a", 3),
++        ("two-pages-first", "doc-b", [3, 4], "doc-b", 3),
++        ("two-pages-second", "doc-c", [3, 4], "doc-c", 4),
++        ("outside-set", "doc-d", [10, 12, 13], "doc-d", 11),
++        ("wrong-document", "doc-e", [3], "other-doc", 3),
++    ]
++    annotations = [
++        GoldAnnotation(
++            case_id=case_id,
++            expected_output_class="FULL_ANSWER",
++            reason_code="supported",
++            gold_document_ids=(source_id,),
++            gold_page_or_message_ranges={source_id: pages},
++            reference_answer="supported fact",
++            factual_atoms=("supported fact",),
++            required_evidence_roles=(),
++            action_status="NOT_APPLICABLE",
++            required_sources=(source_id,),
++            reference_citations=tuple(
++                {"source_id": source_id, "page": page, "message_id": None, "record_id": None}
++                for page in pages
++            ),
++        )
++        for case_id, source_id, pages, _, _ in cases
++    ]
++    records = [
++        {
++            "case_id": case_id,
++            "mode": "B3_FULL_ROLE_AWARE",
++            "actual_output_class": "FULL_ANSWER",
++            "actual_reason_code": "supported",
++            "actual_output_text": "supported fact",
++            "actual_citations": [{"available": True, "document_id": actual_doc_id, "page_number": actual_page}],
++            "safety_constraints": {},
++        }
++        for case_id, _, _, actual_doc_id, actual_page in cases
++    ]
++
++    summary, _ = _score_mode(records, annotations)
++
++    assert summary["citation_document_coverage"] == 0.8
++    assert summary["citation_support_precision"] == 0.8
++    assert summary["page_level_citation_correctness"] == 0.6
++    assert summary["citation_coverage"] == 0.6
++
++
++def test_scorer_compares_canonical_reason_codes() -> None:
++    cases = [
++        ("insufficient", "REFUSE_INSUFFICIENT_EVIDENCE", "insufficient_evidence", "evidential"),
++        ("permission", "REFUSE_PERMISSION", "permission_refusal", "governance"),
++        ("no-match", "REFUSE_NO_MATCH", "no_match", "epistemic"),
++        ("conflict", "REFUSE_CONFLICT", "conflict", "conflict_defeat"),
++        ("aggregate", "REFUSE_AGGREGATION_THRESHOLD", "aggregation_threshold_not_met", "aggregation_threshold_not_met"),
++        ("clarify", "CLARIFICATION", "clarification", "underspecified_question"),
++    ]
++    annotations = [
++        GoldAnnotation(
++            case_id=case_id,
++            expected_output_class=output_class,
++            reason_code=expected_reason,
++            gold_document_ids=(),
++            gold_page_or_message_ranges={},
++            reference_answer=None,
++            factual_atoms=(),
++            required_evidence_roles=(),
++            action_status="NOT_APPLICABLE",
++            required_sources=(),
++            reference_citations=(),
++        )
++        for case_id, output_class, expected_reason, _ in cases
++    ]
++    records = [
++        {
++            "case_id": case_id,
++            "mode": "B3_FULL_ROLE_AWARE",
++            "actual_output_class": output_class,
++            "actual_reason_code": actual_reason,
++            "actual_output_text": "No grounded answer is available.",
++            "actual_citations": [],
++            "safety_constraints": {},
++        }
++        for case_id, output_class, _, actual_reason in cases
++    ]
++
++    summary, details = _score_mode(records, annotations)
++
++    assert summary["reason_code_accuracy"] == 1.0
++    assert {item["actual_reason_code"] for item in details} == {
++        "aggregation_threshold_not_met",
++        "clarification",
++        "conflict",
++        "insufficient_evidence",
++        "no_match",
++        "permission_refusal",
++    }
++
++
+ def test_query_corruption_changes_raw_deterministic_content(tmp_path: Path) -> None:
+     query_path, corpus_path, _ = _minimal_fixture(tmp_path)
+     first = _run_minimal(tmp_path, query_path, corpus_path, "run-a")
+diff --git a/evaluation/tests/test_scenario_pack.py b/evaluation/tests/test_scenario_pack.py
+index b027862..9b0ae16 100644
+--- a/evaluation/tests/test_scenario_pack.py
++++ b/evaluation/tests/test_scenario_pack.py
+@@ -143,7 +143,19 @@ def test_s2_matches_the_six_live_english_queries_and_reviewed_gold() -> None:
+     assert queries["S2-Q6"]["supporting_sources"] == ["s2-wrong-device-manual"]
+     assert [citation["source_id"] for citation in queries["S2-Q6"]["reference_citations"]] == [
+         "s2-tv-manual",
++        "s2-tv-manual",
+     ]
++    assert [citation["page"] for citation in queries["S2-Q6"]["reference_citations"]] == [17, 20]
++
++
++def test_human_qa_notes_record_all_s1_s2_cases_as_author_validated() -> None:
++    notes = (Path(__file__).parents[2] / "docs" / "integration" / "human_qa_review_notes.md").read_text(encoding="utf-8")
++    case_ids = [f"S1-Q{number}" for number in range(1, 7)] + [f"S2-Q{number}" for number in range(1, 7)]
++    assert "Overall status: HUMAN_QA_STATUS: APPROVED" in notes
++    assert "Benchmark status: BENCHMARK_STATUS: NOT_YET_FROZEN" in notes
++    assert notes.count("Status: HUMAN_VALIDATED") == 12
++    for case_id in case_ids:
++        assert f"## {case_id}" in notes
+ 
+ 
+ def test_no_evidence_questions_do_not_claim_required_sources() -> None:

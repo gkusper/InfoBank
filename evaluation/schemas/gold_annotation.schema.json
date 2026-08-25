@@ -53,7 +53,7 @@
     "factual_atoms": {"type": "array", "items": {"type": "string"}},
     "required_evidence_roles": {"type": "array", "items": {"type": "string"}},
     "action_status": {"type": "string"},
-    "manual_validation_state": {"const": "PENDING_HUMAN_REVIEW"},
+    "manual_validation_state": {"enum": ["PENDING_HUMAN_REVIEW", "HUMAN_VALIDATED"]},
     "dataset_version": {"type": "string"},
     "schema_version": {"const": "infobank-gold-annotation-v1"},
     "metadata": {"type": "object"}

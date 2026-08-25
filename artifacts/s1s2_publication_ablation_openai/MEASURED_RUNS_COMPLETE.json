@@ -1,0 +1,10 @@
+{
+  "completed_records": 144,
+  "completed_run_groups": 12,
+  "planned_records": 144,
+  "planned_run_groups": 12,
+  "preregistration_sha256": "254dd996d8bdd7322061cfbffc8cb6cad4998e449ae4081b62570b13420a5c7c",
+  "schema_version": "infobank-s1s2-openai-completion-v1",
+  "status": "COMPLETE",
+  "timestamp": "2026-08-24T23:31:19.713562Z"
+}

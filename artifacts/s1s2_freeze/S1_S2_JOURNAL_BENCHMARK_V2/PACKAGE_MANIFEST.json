@@ -1,0 +1,276 @@
+{
+  "actual_pipeline_inputs": "actual_pipeline_inputs/",
+  "benchmark_status": "FROZEN",
+  "excluded_scenarios": [
+    "S3_TESCO_ORDERS_01",
+    "S4_TESCO_BANK_01",
+    "S5_TV_INSURANCE_01",
+    "S6_EV_SOLAR_01"
+  ],
+  "file_count_excluding_manifest_and_sums": 41,
+  "files": [
+    {
+      "path": "actual_pipeline_inputs/binding_manifest.json",
+      "sha256": "c080dd3ade3f88110eb07c376ff8ab13534b852e8ad2ada320a11c5e68eaa57d",
+      "size_bytes": 9564
+    },
+    {
+      "path": "actual_pipeline_inputs/corpus_fixture.json",
+      "sha256": "81841f5d39d83070324fee2d7e68d2f53a083b5240045d03dfafb15300c41c75",
+      "size_bytes": 67504
+    },
+    {
+      "path": "actual_pipeline_inputs/gold_annotations.jsonl",
+      "sha256": "e0c54e328d939bb392ef072d457a852d8957621b1fd7f6fb5fc99da042bda46a",
+      "size_bytes": 16174
+    },
+    {
+      "path": "actual_pipeline_inputs/query_inputs.jsonl",
+      "sha256": "b573bd0be9a1a4ec313239c0618bb96f375ff08f6390b88308b04f08d3a850de",
+      "size_bytes": 4652
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S1_SOFA_01/lunara-s3-care-guide.pdf",
+      "sha256": "b243dceefd0f2c348d084c02719967a4afb27443f76e1fe8dcee8e753dfcf83c",
+      "size_bytes": 4135
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S1_SOFA_01/lunara-s3-purchase-receipt.pdf",
+      "sha256": "7ef04886379d61f9ec809a20a0e221e39d37098928a357cf41aad4a8237cc6ba",
+      "size_bytes": 3549
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S1_SOFA_01/polarweave-p9-rug-care-guide.pdf",
+      "sha256": "e717ef6786857bc9daf0b9f72303681d70bdf7bab3ab32ecae2219345ed9d83e",
+      "size_bytes": 3677
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S1_SOFA_01/vellum-l2-armchair-care-notes.pdf",
+      "sha256": "80fc0e19b9f53d10eb7bc2a20e679278fdc2ab890fb5531d2dd8c569b3975a69",
+      "size_bytes": 3647
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S2_TV_WARRANTY_01/aster-m55-user-manual.pdf",
+      "sha256": "742eeb87c248006b041d716cd1775c7f682de605226aa9d9353427949958ef60",
+      "size_bytes": 24321
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S2_TV_WARRANTY_01/velora-v55-manufacturer-warranty-terms.pdf",
+      "sha256": "ec9408d845ce75dd71c1c025a99743b6ac89e092f94313af527e3bd267a4806b",
+      "size_bytes": 15071
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S2_TV_WARRANTY_01/velora-v55-product-specification.pdf",
+      "sha256": "0ebe0bc3d30def6e1f825e662269be7e0020021abaf80ab74508bbf01ed60c04",
+      "size_bytes": 10669
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S2_TV_WARRANTY_01/velora-v55-purchase-receipt.pdf",
+      "sha256": "fade1c737f0ed018ce3120ab35da13d58e4e1b095df9ff2be0a71044a323d3f5",
+      "size_bytes": 3117
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S2_TV_WARRANTY_01/velora-v55-regional-service-notice.pdf",
+      "sha256": "b50c1c2d02fb3031448916e54930b27e9fec92d7f678f9d726dc8e595b062993",
+      "size_bytes": 7013
+    },
+    {
+      "path": "actual_pipeline_inputs/source_documents/S2_TV_WARRANTY_01/velora-v55-user-manual.pdf",
+      "sha256": "ad908ded0edd3d012530180a26763ce6cdc17c1afd1935e61bb078f1728ccd61",
+      "size_bytes": 37903
+    },
+    {
+      "path": "docs/integration/FREEZE_NOTES_S1_S2_JOURNAL_BENCHMARK_V2.md",
+      "sha256": "84a215adf575623a48c075922934901fdca163f5c6f55a29a850ee0901383b3b",
+      "size_bytes": 3289
+    },
+    {
+      "path": "docs/integration/human_confirmation_pass_v1.md",
+      "sha256": "80f93e835c9c6add998be7e03cf23dcf7f35c54f0fdcdf554583398d51958d1f",
+      "size_bytes": 3317
+    },
+    {
+      "path": "docs/integration/human_qa_review_notes.md",
+      "sha256": "0406be9a01870b6c3791a930e8b093cab805a139a954987981e7a22e899f8613",
+      "size_bytes": 5679
+    },
+    {
+      "path": "projections/S1_SOFA_01/projection_manifest.json",
+      "sha256": "d597940cb64f600d9c82baae2b3143c9c677c96c13d441b8ee5393c645c0095f",
+      "size_bytes": 531
+    },
+    {
+      "path": "projections/S1_SOFA_01/runtime/query_inputs.jsonl",
+      "sha256": "cafc3f26df698cfcde46355a9f14a528e366134c056831b930cdb95e1b30a566",
+      "size_bytes": 1976
+    },
+    {
+      "path": "projections/S1_SOFA_01/scorer/gold_annotations.jsonl",
+      "sha256": "cace372365d217094bc160bd99dace13a1824ee8b6e5a22f420c4d047ea996f6",
+      "size_bytes": 5151
+    },
+    {
+      "path": "projections/S2_TV_WARRANTY_01/projection_manifest.json",
+      "sha256": "cf766e387f6ca1ab75fdfa9b53e3e7fb44be67004a05884687b38fee83869fda",
+      "size_bytes": 538
+    },
+    {
+      "path": "projections/S2_TV_WARRANTY_01/runtime/query_inputs.jsonl",
+      "sha256": "8a50cd3f6c5e441b0044c455dec64e51351083e274049343b2280d0d609a7766",
+      "size_bytes": 2664
+    },
+    {
+      "path": "projections/S2_TV_WARRANTY_01/scorer/gold_annotations.jsonl",
+      "sha256": "0a8c2f7dd6ab0fde6d684e0afacbe4af24aa8e055845bbc164d559d9aeebae33",
+      "size_bytes": 5551
+    },
+    {
+      "path": "README.md",
+      "sha256": "178206419d040263c1d7e08b88cbba579820cbfdbd5c1ed1ffd5016b95a27a7a",
+      "size_bytes": 604
+    },
+    {
+      "path": "reference_results/B3_FULL_ROLE_AWARE/case_scores.jsonl",
+      "sha256": "3f0d46e88fc15f6d4fd59e700432c0ddfcd11f2d74a6021abb8858129d187184",
+      "size_bytes": 8747
+    },
+    {
+      "path": "reference_results/B3_FULL_ROLE_AWARE/run_seal.json",
+      "sha256": "2299f0db85e20d91ce8f7baa488d0843b840e24ed8bf2341eda27bd5329fb4cf",
+      "size_bytes": 1516
+    },
+    {
+      "path": "reference_results/B3_FULL_ROLE_AWARE/summary.json",
+      "sha256": "4beeae7da076c59d106f1ed2284eddf58970e989d7c9c53d34ac2018d068f37c",
+      "size_bytes": 2310
+    },
+    {
+      "path": "scenario_pack_index.json",
+      "sha256": "6f3eb9c140955fc39e6ec414b6f24b4bbe0cb11e992da9d2dc9edaee0d275bbc",
+      "size_bytes": 812
+    },
+    {
+      "path": "scenario_packs/S1_SOFA_01/scenario_pack.json",
+      "sha256": "7f13f4edbd39ca86ec4f0f9bac5436ae94473a3e78c6936758d1537ade37f871",
+      "size_bytes": 5065
+    },
+    {
+      "path": "scenario_packs/S1_SOFA_01/source_documents/lunara-s3-care-guide.pdf",
+      "sha256": "b243dceefd0f2c348d084c02719967a4afb27443f76e1fe8dcee8e753dfcf83c",
+      "size_bytes": 4135
+    },
+    {
+      "path": "scenario_packs/S1_SOFA_01/source_documents/lunara-s3-purchase-receipt.pdf",
+      "sha256": "7ef04886379d61f9ec809a20a0e221e39d37098928a357cf41aad4a8237cc6ba",
+      "size_bytes": 3549
+    },
+    {
+      "path": "scenario_packs/S1_SOFA_01/source_documents/polarweave-p9-rug-care-guide.pdf",
+      "sha256": "e717ef6786857bc9daf0b9f72303681d70bdf7bab3ab32ecae2219345ed9d83e",
+      "size_bytes": 3677
+    },
+    {
+      "path": "scenario_packs/S1_SOFA_01/source_documents/vellum-l2-armchair-care-notes.pdf",
+      "sha256": "80fc0e19b9f53d10eb7bc2a20e679278fdc2ab890fb5531d2dd8c569b3975a69",
+      "size_bytes": 3647
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/scenario_pack.json",
+      "sha256": "73ae3838628bc5fe13941e616881cc0165e1033268710b1a8dc46f5417c66f65",
+      "size_bytes": 6825
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/source_documents/aster-m55-user-manual.pdf",
+      "sha256": "742eeb87c248006b041d716cd1775c7f682de605226aa9d9353427949958ef60",
+      "size_bytes": 24321
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/source_documents/velora-v55-manufacturer-warranty-terms.pdf",
+      "sha256": "ec9408d845ce75dd71c1c025a99743b6ac89e092f94313af527e3bd267a4806b",
+      "size_bytes": 15071
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/source_documents/velora-v55-product-specification.pdf",
+      "sha256": "0ebe0bc3d30def6e1f825e662269be7e0020021abaf80ab74508bbf01ed60c04",
+      "size_bytes": 10669
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/source_documents/velora-v55-purchase-receipt.pdf",
+      "sha256": "fade1c737f0ed018ce3120ab35da13d58e4e1b095df9ff2be0a71044a323d3f5",
+      "size_bytes": 3117
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/source_documents/velora-v55-regional-service-notice.pdf",
+      "sha256": "b50c1c2d02fb3031448916e54930b27e9fec92d7f678f9d726dc8e595b062993",
+      "size_bytes": 7013
+    },
+    {
+      "path": "scenario_packs/S2_TV_WARRANTY_01/source_documents/velora-v55-user-manual.pdf",
+      "sha256": "ad908ded0edd3d012530180a26763ce6cdc17c1afd1935e61bb078f1728ccd61",
+      "size_bytes": 37903
+    },
+    {
+      "path": "source_filename_map.json",
+      "sha256": "d5dd34a933392c62fd1fa4412770e538e83ba2e205f3aa91d61c6ce31d6bf561",
+      "size_bytes": 1465
+    }
+  ],
+  "freeze_date": "2026-08-25",
+  "freeze_notes": "docs/integration/FREEZE_NOTES_S1_S2_JOURNAL_BENCHMARK_V2.md",
+  "further_s1s2_tuning_allowed": "NO",
+  "gold_count": 12,
+  "gold_manual_validation_state": "HUMAN_VALIDATED",
+  "human_confirmation_record": "docs/integration/human_confirmation_pass_v1.md",
+  "human_confirmation_status": "APPROVED_WITH_DOCUMENTED_LIMITATIONS",
+  "human_qa_record": "docs/integration/human_qa_review_notes.md",
+  "human_qa_status": "APPROVED",
+  "known_limitations": {
+    "affected_cases": [
+      "S1-Q6",
+      "S2-Q2",
+      "S2-Q5"
+    ],
+    "classification": "MULTI_DOCUMENT_CITATION_COMPLETENESS",
+    "status": "DOCUMENTED_LIMITATION",
+    "unsupported_extra_citations": 0,
+    "wrong_page_citations": 0
+  },
+  "ontology": "NOT NEEDED FOR CURRENT PAPER",
+  "package_identity": "S1_S2_JOURNAL_BENCHMARK_V2",
+  "package_name": "S1_S2_journal_benchmark_v2.zip",
+  "package_sha256_recorded_externally": "S1_S2_journal_benchmark_v2.zip.sha256",
+  "package_version": "v2",
+  "projection_status": {
+    "S1_SOFA_01": "READY_FOR_CORPUS_BINDING",
+    "S2_TV_WARRANTY_01": "READY_FOR_CORPUS_BINDING"
+  },
+  "purpose": "human-validated controlled proof-of-concept evaluation set",
+  "query_count": 12,
+  "reference_b3": {
+    "deterministic_content_sha256": "24afef714fe8bfc4715b41720cff8d44d7fd20b83b6a9786b308ecedb9023c5a",
+    "label": "DETERMINISTIC DEVELOPMENT/REPRODUCIBILITY RESULT — NOT FINAL REAL-LLM JOURNAL PERFORMANCE",
+    "metrics": {
+      "citation_coverage": 0.785714,
+      "citation_document_coverage": 0.785714,
+      "citation_support_precision": 1.0,
+      "controlled_failure_correctness": 1.0,
+      "false_answer_rate_count": "0.0 / 0",
+      "output_class_accuracy": 1.0,
+      "page_level_citation_correctness": 1.0,
+      "permitted_answer_accuracy": 1.0,
+      "reason_code_accuracy": 1.0,
+      "safety_error_total": 0
+    }
+  },
+  "runtime_gold_separated": true,
+  "scenario_ids": [
+    "S1_SOFA_01",
+    "S2_TV_WARRANTY_01"
+  ],
+  "scenario_question_counts": {
+    "S1_SOFA_01": 6,
+    "S2_TV_WARRANTY_01": 6
+  },
+  "source_filename_map": "source_filename_map.json",
+  "source_pdf_count": 10
+}

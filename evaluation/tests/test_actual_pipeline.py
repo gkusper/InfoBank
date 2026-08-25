@@ -7,7 +7,7 @@ from pathlib import Path
 import pytest
 
 from evaluation.actual_pipeline_dataset import OUTPUT_CLASSES, build_development_dataset, document_id
-from evaluation.actual_pipeline_gold import GoldAnnotation, load_gold_annotations
+from evaluation.actual_pipeline_gold import HUMAN_VALIDATED, GoldAnnotation, load_gold_annotations
 from evaluation.actual_pipeline_inputs import CORPUS_SCHEMA_VERSION, CorpusDocument, QueryInput, write_jsonl
 from evaluation.actual_pipeline_runner import (
     ActualPipelineConfig,
@@ -18,7 +18,8 @@ from evaluation.actual_pipeline_runner import (
     _support_score,
     run_actual_pipeline,
 )
-from evaluation.actual_pipeline_scorer import _score_mode, scan_record_safety, score_sealed_run
+from evaluation.actual_pipeline_scorer import _human_validation_state, _score_mode, scan_record_safety, score_sealed_run
+from evaluation.reason_codes import canonical_reason_code
 
 
 def _minimal_fixture(root: Path) -> tuple[Path, Path, Path]:
@@ -151,6 +152,15 @@ def test_document_type_terms_are_available_for_routing() -> None:
     assert {"purchase", "receipt", "purchase_receipt_pdf"} <= set(_document_routing_keywords(document))
 
 
+def test_canonical_reason_codes_cover_refusal_taxonomy() -> None:
+    assert canonical_reason_code("REFUSE_INSUFFICIENT_EVIDENCE", "evidential") == "insufficient_evidence"
+    assert canonical_reason_code("REFUSE_PERMISSION", "governance") == "permission_refusal"
+    assert canonical_reason_code("REFUSE_NO_MATCH", "epistemic") == "no_match"
+    assert canonical_reason_code("REFUSE_CONFLICT", "conflict_defeat") == "conflict"
+    assert canonical_reason_code("REFUSE_AGGREGATION_THRESHOLD", "aggregation_threshold_not_met") == "aggregation_threshold_not_met"
+    assert canonical_reason_code("CLARIFICATION", "underspecified_question") == "clarification"
+
+
 def test_citation_selection_prefers_supporting_page_in_multi_page_document() -> None:
     selected = _select_answer_citations(
         [
@@ -180,6 +190,109 @@ def test_citation_selection_prefers_supporting_page_in_multi_page_document() -> 
     assert all(not any(key.startswith("_") for key in item) for item in selected)
 
 
+def test_citation_selection_prunes_semantically_related_non_material_sources() -> None:
+    selected = _select_answer_citations(
+        [
+            {
+                "available": True,
+                "document_id": "receipt",
+                "page_number": 1,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.4,
+                "_document_type": "purchase_receipt_pdf",
+                "_text": "Purchase receipt. Purchase date 3 May 2026. Amount paid 42,500 HUF.",
+            },
+            {
+                "available": True,
+                "document_id": "care",
+                "page_number": 1,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.9,
+                "_document_type": "care_manual_pdf",
+                "_text": "Device care manual. Wipe the exterior with a dry cloth.",
+            },
+            {
+                "available": True,
+                "document_id": "overview",
+                "page_number": 1,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.8,
+                "_document_type": "user_manual_pdf",
+                "_text": "Device overview. Keep all records with the product packaging.",
+            },
+        ],
+        question="How much did I pay for the device?",
+        answer="The amount paid was 42,500 HUF.",
+    )
+
+    assert [(item["document_id"], item["page_number"]) for item in selected] == [("receipt", 1)]
+
+
+def test_citation_selection_uses_document_type_for_purchase_fact() -> None:
+    selected = _select_answer_citations(
+        [
+            {
+                "available": True,
+                "document_id": "manual",
+                "page_number": 2,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.9,
+                "_document_type": "user_manual_pdf",
+                "_text": "Manual for DEVICE-A. Keep the purchase paperwork with this guide.",
+            },
+            {
+                "available": True,
+                "document_id": "receipt",
+                "page_number": 1,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.4,
+                "_document_type": "purchase_receipt_pdf",
+                "_text": "Receipt for DEVICE-A. Purchase date 3 May 2026.",
+            },
+        ],
+        question="When did I buy DEVICE-A?",
+        answer="DEVICE-A was purchased on 3 May 2026.",
+    )
+
+    assert [(item["document_id"], item["page_number"]) for item in selected] == [("receipt", 1)]
+
+
+def test_citation_selection_prefers_specification_for_technical_property() -> None:
+    selected = _select_answer_citations(
+        [
+            {
+                "available": True,
+                "document_id": "manual",
+                "page_number": 10,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.9,
+                "_document_type": "user_manual_pdf",
+                "_text": "Manual connection section. Use certified cables for HDMI and USB accessories.",
+            },
+            {
+                "available": True,
+                "document_id": "spec",
+                "page_number": 3,
+                "chunk_index": 0,
+                "evidence_role": "primary",
+                "_selection_score": 0.5,
+                "_document_type": "product_specification_pdf",
+                "_text": "Product specification. HDMI 4 inputs. USB-A 2 ports. Ethernet and optical audio are listed wired connections.",
+            },
+        ],
+        question="How many HDMI and USB-A ports are listed?",
+        answer="The specification lists 4 HDMI inputs and 2 USB-A ports.",
+    )
+
+    assert [(item["document_id"], item["page_number"]) for item in selected] == [("spec", 3)]
+
+
 def test_citation_selection_keeps_multiple_supporting_documents() -> None:
     selected = _select_answer_citations(
         [
@@ -190,6 +303,7 @@ def test_citation_selection_keeps_multiple_supporting_documents() -> None:
                 "chunk_index": 0,
                 "evidence_role": "primary",
                 "_selection_score": 0.5,
+                "_document_type": "purchase_receipt_pdf",
                 "_text": "Purchase date 4 April 2026. Amount paid 19,900 HUF.",
             },
             {
@@ -199,6 +313,7 @@ def test_citation_selection_keeps_multiple_supporting_documents() -> None:
                 "chunk_index": 1,
                 "evidence_role": "primary",
                 "_selection_score": 0.5,
+                "_document_type": "warranty_terms_pdf",
                 "_text": "Warranty period is 24 months from the purchase date.",
             },
         ],
@@ -240,6 +355,10 @@ def test_retrieval_overfetches_before_page_aware_truncation() -> None:
     runtime.provider = FakeProvider()
     runtime.collection = FakeCollection()
     runtime.config = ActualPipelineConfig()
+    runtime.document_by_id = {
+        "manual": CorpusDocument("manual", "pkg", "DEVICE-A", "user_manual_pdf", "manual.pdf", ("x",), ()),
+        "receipt": CorpusDocument("receipt", "pkg", "DEVICE-A", "purchase_receipt_pdf", "receipt.pdf", ("x",), ()),
+    }
 
     rows = PipelineRuntime._retrieve(
         runtime,
@@ -283,6 +402,11 @@ def test_retrieval_diversifies_top_rows_across_documents() -> None:
     runtime.provider = FakeProvider()
     runtime.collection = FakeCollection()
     runtime.config = ActualPipelineConfig()
+    runtime.document_by_id = {
+        "terms": CorpusDocument("terms", "pkg", "DEVICE-A", "warranty_terms_pdf", "terms.pdf", ("x",), ()),
+        "receipt": CorpusDocument("receipt", "pkg", "DEVICE-A", "purchase_receipt_pdf", "receipt.pdf", ("x",), ()),
+        "manual": CorpusDocument("manual", "pkg", "DEVICE-A", "user_manual_pdf", "manual.pdf", ("x",), ()),
+    }
 
     rows = PipelineRuntime._retrieve(
         runtime,
@@ -501,6 +625,16 @@ def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path
     current_annotation = load_gold_annotations(gold_path)[0]
     assert current_annotation.required_source_ids == tuple(current["required_sources"])
     assert current_annotation.reference_page_ranges == current["gold_page_or_message_ranges"]
+    assert current_annotation.acceptable_page_ranges == current["gold_page_or_message_ranges"]
+
+    validated = dict(current)
+    validated["manual_validation_state"] = HUMAN_VALIDATED
+    validated_path = tmp_path / "validated-gold.jsonl"
+    write_jsonl(validated_path, [validated])
+    validated_annotation = load_gold_annotations(validated_path)[0]
+    assert validated_annotation.manual_validation_state == HUMAN_VALIDATED
+    assert _human_validation_state([validated_annotation]) == "APPROVED"
+    assert _human_validation_state([current_annotation, validated_annotation]) == "PENDING_HUMAN_REVIEW"
 
     inconsistent = dict(current)
     inconsistent["reference_citations"] = []
@@ -609,6 +743,105 @@ def test_false_answer_rate_is_over_expected_non_answer_cases() -> None:
     assert summary["false_answer_count"] == 1
     assert summary["false_answer_rate_on_expected_abstentions"] == 0.5
     assert summary["false_or_unsupported_answer_rate"] == 0.5
+
+
+def test_scorer_treats_gold_pages_as_acceptable_page_sets() -> None:
+    cases = [
+        ("one-page", "doc-a", [3], "doc-a", 3),
+        ("two-pages-first", "doc-b", [3, 4], "doc-b", 3),
+        ("two-pages-second", "doc-c", [3, 4], "doc-c", 4),
+        ("outside-set", "doc-d", [10, 12, 13], "doc-d", 11),
+        ("wrong-document", "doc-e", [3], "other-doc", 3),
+    ]
+    annotations = [
+        GoldAnnotation(
+            case_id=case_id,
+            expected_output_class="FULL_ANSWER",
+            reason_code="supported",
+            gold_document_ids=(source_id,),
+            gold_page_or_message_ranges={source_id: pages},
+            reference_answer="supported fact",
+            factual_atoms=("supported fact",),
+            required_evidence_roles=(),
+            action_status="NOT_APPLICABLE",
+            required_sources=(source_id,),
+            reference_citations=tuple(
+                {"source_id": source_id, "page": page, "message_id": None, "record_id": None}
+                for page in pages
+            ),
+        )
+        for case_id, source_id, pages, _, _ in cases
+    ]
+    records = [
+        {
+            "case_id": case_id,
+            "mode": "B3_FULL_ROLE_AWARE",
+            "actual_output_class": "FULL_ANSWER",
+            "actual_reason_code": "supported",
+            "actual_output_text": "supported fact",
+            "actual_citations": [{"available": True, "document_id": actual_doc_id, "page_number": actual_page}],
+            "safety_constraints": {},
+        }
+        for case_id, _, _, actual_doc_id, actual_page in cases
+    ]
+
+    summary, _ = _score_mode(records, annotations)
+
+    assert summary["citation_document_coverage"] == 0.8
+    assert summary["citation_support_precision"] == 0.8
+    assert summary["page_level_citation_correctness"] == 0.6
+    assert summary["citation_coverage"] == 0.6
+
+
+def test_scorer_compares_canonical_reason_codes() -> None:
+    cases = [
+        ("insufficient", "REFUSE_INSUFFICIENT_EVIDENCE", "insufficient_evidence", "evidential"),
+        ("permission", "REFUSE_PERMISSION", "permission_refusal", "governance"),
+        ("no-match", "REFUSE_NO_MATCH", "no_match", "epistemic"),
+        ("conflict", "REFUSE_CONFLICT", "conflict", "conflict_defeat"),
+        ("aggregate", "REFUSE_AGGREGATION_THRESHOLD", "aggregation_threshold_not_met", "aggregation_threshold_not_met"),
+        ("clarify", "CLARIFICATION", "clarification", "underspecified_question"),
+    ]
+    annotations = [
+        GoldAnnotation(
+            case_id=case_id,
+            expected_output_class=output_class,
+            reason_code=expected_reason,
+            gold_document_ids=(),
+            gold_page_or_message_ranges={},
+            reference_answer=None,
+            factual_atoms=(),
+            required_evidence_roles=(),
+            action_status="NOT_APPLICABLE",
+            required_sources=(),
+            reference_citations=(),
+        )
+        for case_id, output_class, expected_reason, _ in cases
+    ]
+    records = [
+        {
+            "case_id": case_id,
+            "mode": "B3_FULL_ROLE_AWARE",
+            "actual_output_class": output_class,
+            "actual_reason_code": actual_reason,
+            "actual_output_text": "No grounded answer is available.",
+            "actual_citations": [],
+            "safety_constraints": {},
+        }
+        for case_id, output_class, _, actual_reason in cases
+    ]
+
+    summary, details = _score_mode(records, annotations)
+
+    assert summary["reason_code_accuracy"] == 1.0
+    assert {item["actual_reason_code"] for item in details} == {
+        "aggregation_threshold_not_met",
+        "clarification",
+        "conflict",
+        "insufficient_evidence",
+        "no_match",
+        "permission_refusal",
+    }
 
 
 def test_query_corruption_changes_raw_deterministic_content(tmp_path: Path) -> None:

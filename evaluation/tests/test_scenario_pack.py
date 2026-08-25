@@ -143,7 +143,19 @@ def test_s2_matches_the_six_live_english_queries_and_reviewed_gold() -> None:
     assert queries["S2-Q6"]["supporting_sources"] == ["s2-wrong-device-manual"]
     assert [citation["source_id"] for citation in queries["S2-Q6"]["reference_citations"]] == [
         "s2-tv-manual",
+        "s2-tv-manual",
     ]
+    assert [citation["page"] for citation in queries["S2-Q6"]["reference_citations"]] == [17, 20]
+
+
+def test_human_qa_notes_record_all_s1_s2_cases_as_author_validated() -> None:
+    notes = (Path(__file__).parents[2] / "docs" / "integration" / "human_qa_review_notes.md").read_text(encoding="utf-8")
+    case_ids = [f"S1-Q{number}" for number in range(1, 7)] + [f"S2-Q{number}" for number in range(1, 7)]
+    assert "Overall status: HUMAN_QA_STATUS: APPROVED" in notes
+    assert "Benchmark status: BENCHMARK_STATUS: NOT_YET_FROZEN" in notes
+    assert notes.count("Status: HUMAN_VALIDATED") == 12
+    for case_id in case_ids:
+        assert f"## {case_id}" in notes
 
 
 def test_no_evidence_questions_do_not_claim_required_sources() -> None:

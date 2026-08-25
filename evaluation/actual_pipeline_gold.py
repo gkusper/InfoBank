@@ -12,6 +12,9 @@ from typing import Any
 
 
 GOLD_SCHEMA_VERSION = "infobank-gold-annotation-v1"
+PENDING_HUMAN_REVIEW = "PENDING_HUMAN_REVIEW"
+HUMAN_VALIDATED = "HUMAN_VALIDATED"
+HUMAN_VALIDATION_STATES = {PENDING_HUMAN_REVIEW, HUMAN_VALIDATED}
 
 
 @dataclass(frozen=True)
@@ -25,7 +28,7 @@ class GoldAnnotation:
     factual_atoms: tuple[str, ...]
     required_evidence_roles: tuple[str, ...]
     action_status: str
-    manual_validation_state: str = "PENDING_HUMAN_REVIEW"
+    manual_validation_state: str = PENDING_HUMAN_REVIEW
     dataset_version: str = "actual-pipeline-development-v1"
     schema_version: str = GOLD_SCHEMA_VERSION
     metadata: dict[str, Any] = field(default_factory=dict)
@@ -35,6 +38,8 @@ class GoldAnnotation:
     reference_citations: tuple[dict[str, Any], ...] | None = None
 
     def __post_init__(self) -> None:
+        if self.manual_validation_state not in HUMAN_VALIDATION_STATES:
+            raise ValueError("manual_validation_state is not recognized")
         if (self.required_sources is None) != (self.reference_citations is None):
             raise ValueError("required_sources and reference_citations must be present together")
         if self.required_sources is not None:
@@ -94,6 +99,12 @@ class GoldAnnotation:
             if page is not None:
                 ranges.setdefault(str(citation["source_id"]), []).append(int(page))
         return {key: sorted(set(value)) for key, value in ranges.items()}
+
+    @property
+    def acceptable_page_ranges(self) -> dict[str, list[int]]:
+        """Return document IDs mapped to human-approved acceptable page sets."""
+
+        return self.reference_page_ranges
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)

@@ -360,6 +360,7 @@ def roadmap_scenario_packs() -> list[dict[str, Any]]:
                     ),
                     reference_citations=(
                         {"source_id": s2_sources[0], "page": 17, "message_id": None, "record_id": None},
+                        {"source_id": s2_sources[0], "page": 20, "message_id": None, "record_id": None},
                     ),
                 ),
             ],

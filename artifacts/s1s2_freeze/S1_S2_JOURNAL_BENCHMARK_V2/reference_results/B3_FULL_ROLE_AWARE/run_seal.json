@@ -1,0 +1,30 @@
+{
+  "commit_sha": "70a8852fc5cb7b4dea5abb856b4893fbd4ff5b0c",
+  "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+  "config_version": "actual-pipeline-development-config-v1",
+  "corpus_sha256": "81841f5d39d83070324fee2d7e68d2f53a083b5240045d03dfafb15300c41c75",
+  "dataset_version": "scenario-pack-development-v1",
+  "deterministic_content_sha256": "24afef714fe8bfc4715b41720cff8d44d7fd20b83b6a9786b308ecedb9023c5a",
+  "embedding_model": "infobank-deterministic-embedding-v1",
+  "generation_prompt_version": "actual-pipeline-answer-v1",
+  "generation_temperature": 0.0,
+  "local_pricing_config_supplied": false,
+  "model": "infobank-deterministic-extractive-v1",
+  "modes": [
+    "B3_FULL_ROLE_AWARE"
+  ],
+  "network_provider_explicitly_allowed": false,
+  "output_cache_enabled": false,
+  "provider": "deterministic-mock",
+  "query_input_sha256": "b573bd0be9a1a4ec313239c0618bb96f375ff08f6390b88308b04f08d3a850de",
+  "raw_run_sha256": "918d817aa86b0e3f1595f48ef9e868368342388f5df113ee4862f779cfe8caad",
+  "record_count": 12,
+  "routing_prompt_version": "routing-keyword-v1",
+  "run_id": "s1s2-b3-20260824_reverted_baseline_01",
+  "runner_version": "infobank-actual-pipeline-runner-v1",
+  "schema_version": "infobank-raw-run-seal-v1",
+  "scoring_started": false,
+  "timestamp": "2026-08-24T21:08:46Z",
+  "timing_sidecar_sha256": "e9c8b91142e613bab75180e3240f93b34a1c440fa948f3fc334f0a52b990a494",
+  "wall_clock_separated_from_deterministic_hash": true
+}

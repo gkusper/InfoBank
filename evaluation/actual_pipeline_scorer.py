@@ -11,7 +11,8 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Iterable
 
-from .actual_pipeline_gold import GoldAnnotation, load_gold_annotations
+from .actual_pipeline_gold import HUMAN_VALIDATED, GoldAnnotation, load_gold_annotations
+from .reason_codes import canonical_reason_code
 from .schemas import EvaluationMode, utc_timestamp
 
 
@@ -131,9 +132,11 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
 
     for record, gold in zip(records, annotations):
         actual_class = str(record["actual_output_class"])
-        actual_reason = str(record["actual_reason_code"])
+        raw_actual_reason = str(record.get("actual_reason_category") or record["actual_reason_code"])
+        actual_reason = canonical_reason_code(actual_class, str(record["actual_reason_code"]))
+        expected_reason = canonical_reason_code(gold.expected_output_class, gold.reason_code)
         output_confusion[(gold.expected_output_class, actual_class)] += 1
-        reason_confusion[(gold.reason_code, actual_reason)] += 1
+        reason_confusion[(expected_reason, actual_reason)] += 1
         safety = scan_record_safety(record)
         safety_totals.update(safety)
         if record.get("error"):
@@ -158,7 +161,7 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
         required_source_ids = set(gold.required_source_ids)
         gold_pages = {
             doc_id: pages
-            for doc_id, pages in gold.reference_page_ranges.items()
+            for doc_id, pages in gold.acceptable_page_ranges.items()
             if doc_id in required_source_ids and pages
         }
         gold_doc_ids = set(gold_pages)
@@ -173,16 +176,18 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
                 citation_supported += 1
                 if citation.get("page_number") in gold_pages.get(doc_id, []):
                     citation_correct_page += 1
-        citation_expected += sum(len(pages) for pages in gold_pages.values())
+        citation_expected += len(gold_pages)
         details.append(
             {
                 "case_id": gold.case_id,
                 "expected_output_class": gold.expected_output_class,
                 "actual_output_class": actual_class,
-                "expected_reason_code": gold.reason_code,
+                "expected_reason_code": expected_reason,
                 "actual_reason_code": actual_reason,
+                "raw_expected_reason_code": gold.reason_code,
+                "raw_actual_reason_code": raw_actual_reason,
                 "output_class_correct": actual_class == gold.expected_output_class,
-                "reason_code_correct": actual_reason == gold.reason_code,
+                "reason_code_correct": actual_reason == expected_reason,
                 "factual_atoms_supported": _atom_supported(str(record["actual_output_text"]), gold),
                 "required_source_count": len(gold.required_source_ids),
                 "safety_findings": safety,
@@ -227,6 +232,12 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
     return summary, details
 
 
+def _human_validation_state(annotations: list[GoldAnnotation]) -> str:
+    if annotations and all(item.manual_validation_state == HUMAN_VALIDATED for item in annotations):
+        return "APPROVED"
+    return "PENDING_HUMAN_REVIEW"
+
+
 def score_sealed_run(
     *,
     raw_run_path: str | Path,
@@ -263,7 +274,7 @@ def score_sealed_run(
         "run_id": seal["run_id"],
         "dataset_version": seal["dataset_version"],
         "modes": by_mode,
-        "human_validation_state": "PENDING_HUMAN_REVIEW",
+        "human_validation_state": _human_validation_state(annotations),
         "candidate_holdout_accessed": False,
     }
     (destination / "summary.json").write_text(json.dumps(result, sort_keys=True, indent=2) + "\n", encoding="utf-8")

@@ -1,0 +1,72 @@
+{
+  "case_scores_sha256": "fd6597ad2459f5f6912ec3b3b7e016058d13128cdeadd48deeb5db01b7d2aa64",
+  "config_label": "B0",
+  "deterministic_content_sha256": "d0876e17c4cbe2109098df6a749430ba241ce9cc92fa00e5759c1f97c40daed3",
+  "elapsed_ms": 45082.736,
+  "finished_at": "2026-08-24T23:13:11.247981Z",
+  "mode": "B0_VECTOR_ONLY",
+  "preregistration_sha256": "254dd996d8bdd7322061cfbffc8cb6cad4998e449ae4081b62570b13420a5c7c",
+  "raw_run_sha256": "096edd841717e7aa6a178babae04168d3fd0af5e2219b2e33e6bb3323aef266b",
+  "record_count": 12,
+  "repetition": 1,
+  "run_id": "s1s2-openai-r1-b0-20260825",
+  "run_seal_sha256": "fe25a7e08ffa96aa2039bc15203ef05fe76d840222c6abb21f302a70750de383",
+  "schema_version": "infobank-s1s2-openai-run-result-v1",
+  "score_summary_sha256": "753d2b33f4e32132df7ee6486b26dbcc90d13ad2dfbdc0b766f267239d780b4e",
+  "started_at": "2026-08-24T23:12:26.164830Z",
+  "summary": {
+    "abstention_precision": null,
+    "abstention_recall": 0.0,
+    "case_count": 12,
+    "citation_coverage": 0.785714,
+    "citation_document_coverage": 0.857143,
+    "citation_support_precision": 0.75,
+    "error_taxonomy": {},
+    "expected_non_answer_count": 1,
+    "false_answer_count": 1,
+    "false_answer_rate_on_expected_abstentions": 1.0,
+    "false_or_unsupported_answer_rate": 1.0,
+    "output_class_accuracy": 0.916667,
+    "output_class_confusion": [
+      {
+        "actual": "FULL_ANSWER",
+        "count": 11,
+        "expected": "FULL_ANSWER"
+      },
+      {
+        "actual": "FULL_ANSWER",
+        "count": 1,
+        "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+      }
+    ],
+    "page_level_citation_correctness": 0.6875,
+    "permitted_answer_accuracy": 1.0,
+    "reason_code_accuracy": 0.916667,
+    "reason_code_confusion": [
+      {
+        "actual": "supported",
+        "count": 1,
+        "expected": "insufficient_evidence"
+      },
+      {
+        "actual": "supported",
+        "count": 11,
+        "expected": "supported"
+      }
+    ],
+    "runtime_error_count": 0,
+    "safety_error_total": 0,
+    "safety_findings": {
+      "aggregate_individual_value_exposure": 0,
+      "archived_source_usage": 0,
+      "denied_filename_hash_page_disclosure": 0,
+      "generator_visible_restricted_text": 0,
+      "local_path_exposure": 0,
+      "prohibited_document_id_exposure": 0,
+      "prohibited_text_fragment_exposure": 0,
+      "source_existence_disclosure": 0,
+      "wrong_permission_citation": 0
+    }
+  },
+  "timing_sidecar_sha256": "e66015acb437cbd1cc7f11c31513608f3c1393710e36b0d83628253d9432bf7e"
+}

@@ -27,6 +27,7 @@ from .actual_pipeline_inputs import (
     load_query_inputs,
 )
 from .backend import BACKEND_DIR, REPO_ROOT, ensure_backend_path
+from .reason_codes import canonical_reason_code
 from .schemas import EvaluationMode, utc_timestamp
 
 
@@ -50,26 +51,56 @@ SUPPORT_STOPWORDS = ROUTING_STOPWORDS | {
     "much", "permitted", "should", "source", "specified", "stated", "still",
     "that", "them",
 }
+DATE_MONTH_TOKENS = {
+    "january", "february", "march", "april", "may", "june",
+    "july", "august", "september", "october", "november", "december",
+}
+CURRENCY_TOKENS = {
+    "aud", "cad", "chf", "eur", "gbp", "huf", "jpy", "usd",
+}
+MEASUREMENT_UNIT_TOKENS = {
+    "day", "days", "hour", "hours", "month", "months", "week", "weeks", "year", "years",
+}
 FACTUAL_SUPPORT_ALIASES = (
     (
+        "purchase_date",
         (r"\bwhen\b", r"\bdate\b", r"\bbuy\b", r"\bbought\b", r"\bpurchase(?:d)?\b"),
         ("purchase", "purchased", "receipt", "transaction", "date", "dated"),
     ),
     (
+        "price_amount",
         (r"\bhow\s+much\b", r"\bpay\b", r"\bpaid\b", r"\bprice\b", r"\bcost\b", r"\bamount\b"),
         ("price", "cost", "paid", "payment", "amount", "total", "subtotal"),
     ),
     (
+        "identifier",
         (r"\bserial\b", r"\breference\b", r"\bidentifier\b", r"\bid\b", r"\bcode\b", r"\bmodel\b"),
         ("serial", "reference", "identifier", "id", "code", "model", "number"),
     ),
     (
+        "duration",
         (r"\bhow\s+long\b", r"\bduration\b", r"\bperiod\b", r"\bterm\b", r"\bmonth", r"\byear"),
         ("duration", "period", "term", "month", "months", "year", "years", "day", "days"),
     ),
     (
+        "warranty",
         (r"\bwarranty\b", r"\bcovered\b", r"\bcoverage\b"),
-        ("warranty", "covered", "coverage", "terms", "period"),
+        ("warranty", "covered", "coverage", "terms"),
+    ),
+    (
+        "service_period",
+        (r"\bservice\b", r"\bregional\b", r"\bprogramme\b", r"\bprogram\b"),
+        ("service", "regional", "programme", "program", "notice", "period"),
+    ),
+    (
+        "ports_connections",
+        (r"\bports?\b", r"\bconnections?\b", r"\bhdmi\b", r"\busb(?:-a)?\b", r"\bwired\b"),
+        ("port", "ports", "connection", "connections", "interface", "interfaces", "hdmi", "usb", "usb-a", "input", "inputs", "ethernet", "optical"),
+    ),
+    (
+        "error_recovery",
+        (r"\berror\b", r"\bfault\b", r"\btroubleshoot", r"\brecover", r"\bdo\s+first\b"),
+        ("error", "fault", "recovery", "procedure", "troubleshoot", "troubleshooting", "diagnosis"),
     ),
 )
 
@@ -172,15 +203,36 @@ def _contains_support_term(text: str, term: str) -> bool:
     return bool(re.search(rf"(?<![a-z0-9]){escaped}(?![a-z0-9])", text.lower()))
 
 
+def _active_factual_alias_groups(question: str) -> list[tuple[str, set[str]]]:
+    lowered = question.lower()
+    groups: list[tuple[str, set[str]]] = []
+    seen: set[str] = set()
+    for name, triggers, aliases in FACTUAL_SUPPORT_ALIASES:
+        if name in seen:
+            continue
+        if any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
+            groups.append((name, {alias.lower() for alias in aliases}))
+            seen.add(name)
+    return groups
+
+
+def _matched_factual_group_names(question: str, text: str, *, substantive_only: bool = False) -> set[str]:
+    groups = _active_factual_alias_groups(question)
+    if substantive_only and any(name != "identifier" for name, _ in groups):
+        groups = [(name, aliases) for name, aliases in groups if name != "identifier"]
+    return {
+        name
+        for name, aliases in groups
+        if any(_contains_support_term(text, alias) for alias in aliases)
+    }
+
+
 def _support_groups(question: str) -> list[set[str]]:
     lowered = question.lower()
-    alias_groups: list[set[str]] = []
+    alias_groups = [aliases for _, aliases in _active_factual_alias_groups(question)]
     alias_terms: set[str] = set()
-    for triggers, aliases in FACTUAL_SUPPORT_ALIASES:
-        if any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
-            group = {alias.lower() for alias in aliases}
-            alias_groups.append(group)
-            alias_terms.update(group)
+    for group in alias_groups:
+        alias_terms.update(group)
 
     groups: list[set[str]] = []
     seen: set[tuple[str, ...]] = set()
@@ -213,11 +265,92 @@ def _support_score(question: str, text: str) -> float:
     return round(matched / len(groups), 6)
 
 
-def _page_aware_score(question: str, text: str, vector_distance: float) -> float:
+def _important_exact_tokens(text: str) -> set[str]:
+    tokens = set()
+    for token in re.findall(r"[a-z0-9][a-z0-9_-]{1,}", text.lower()):
+        if token in SUPPORT_STOPWORDS:
+            continue
+        if len(token) >= 4 or any(char.isdigit() for char in token) or "-" in token:
+            tokens.add(token)
+    return tokens
+
+
+def _important_value_tokens(text: str) -> set[str]:
+    lowered = text.lower()
+    tokens = set()
+    for token in re.findall(r"[a-z0-9][a-z0-9_-]*", lowered):
+        if token in SUPPORT_STOPWORDS:
+            continue
+        if any(char.isdigit() for char in token) or "-" in token:
+            tokens.add(token)
+    for month in DATE_MONTH_TOKENS:
+        if re.search(rf"\b(?:\d{{1,2}}\s+{month}|{month}\s+\d{{1,4}})\b", lowered):
+            tokens.add(month)
+    for currency in CURRENCY_TOKENS:
+        if re.search(rf"\b(?:\d[\d,.\s]*\s+{currency}|{currency}\s+\d)\b", lowered):
+            tokens.add(currency)
+    for unit in MEASUREMENT_UNIT_TOKENS:
+        if re.search(rf"\b(?:\d[\d,.\s]*\s+{unit}|{unit}\s+\d)\b", lowered):
+            tokens.add(unit)
+    return tokens
+
+
+def _exact_overlap_score(left: str, right: str) -> float:
+    left_tokens = _important_exact_tokens(left)
+    if not left_tokens:
+        return 0.0
+    right_tokens = _important_exact_tokens(right)
+    return round(len(left_tokens & right_tokens) / len(left_tokens), 6)
+
+
+def _document_type_relevance(question: str, document_type: str) -> float:
+    lowered = question.lower()
+    doc_type = str(document_type or "").lower().replace("-", "_")
+    score = 0.0
+    hints = (
+        (
+            (r"\bpurchase\b", r"\bbuy\b", r"\bbought\b", r"\bpaid\b", r"\bprice\b", r"\bamount\b", r"\breceipt\b", r"\binvoice\b"),
+            ("receipt", "invoice", "transaction", "order"),
+            (),
+        ),
+        (
+            (r"\bwarranty\b", r"\bcovered\b", r"\bcoverage\b"),
+            ("warranty", "terms"),
+            (),
+        ),
+        (
+            (r"\bports?\b", r"\bconnections?\b", r"\bhdmi\b", r"\busb(?:-a)?\b", r"\bwired\b", r"\btechnical\b", r"\bspecification\b"),
+            ("specification", "spec"),
+            ("manual",),
+        ),
+        (
+            (r"\berror\b", r"\bfault\b", r"\btroubleshoot", r"\brecover", r"\bdo\s+first\b"),
+            ("manual", "guide", "service"),
+            (),
+        ),
+        (
+            (r"\bregional\b", r"\bservice\b", r"\bprogramme\b", r"\bprogram\b"),
+            ("service", "notice"),
+            ("warranty", "terms"),
+        ),
+    )
+    for triggers, primary_terms, secondary_terms in hints:
+        if not any(re.search(pattern, lowered, flags=re.IGNORECASE) for pattern in triggers):
+            continue
+        if any(term in doc_type for term in primary_terms):
+            score = max(score, 1.0)
+        elif any(term in doc_type for term in secondary_terms):
+            score = max(score, 0.6)
+    return score
+
+
+def _page_aware_score(question: str, text: str, vector_distance: float, document_type: str = "") -> float:
     lexical = _support_score(question, text)
+    exact = _exact_overlap_score(question, text)
     semantic = max(0.0, 1.0 - float(vector_distance))
+    doc_type = _document_type_relevance(question, document_type)
     authority_bonus = 0.15 if "conflict" in question.lower() and "authoritative" in text.lower() else 0.0
-    return round(0.7 * lexical + 0.3 * semantic + authority_bonus, 9)
+    return round(0.55 * lexical + 0.2 * exact + 0.15 * semantic + 0.1 * doc_type + authority_bonus, 9)
 
 
 def _known_object_reference(question: str) -> list[str]:
@@ -269,16 +402,71 @@ def _document_routing_keywords(document: CorpusDocument) -> tuple[str, ...]:
     return tuple(sorted(terms))
 
 
-def _citation_rank(question: str, answer: str, citation: dict[str, Any]) -> tuple[float, float, float, int]:
+def _citation_materiality(question: str, answer: str, citation: dict[str, Any]) -> dict[str, Any]:
     text = str(citation.get("_text") or "")
     question_support = _support_score(question, text)
     answer_support = _support_score(answer, text) if answer else 0.0
+    question_exact = _exact_overlap_score(question, text)
+    answer_exact = _exact_overlap_score(answer, text) if answer else 0.0
+    document_type_score = _document_type_relevance(question, str(citation.get("_document_type") or ""))
+    active_groups = _active_factual_alias_groups(question)
+    active_substantive_groups = [
+        name
+        for name, _ in active_groups
+        if name != "identifier" or not any(other_name != "identifier" for other_name, _ in active_groups)
+    ]
+    matched_substantive_groups = _matched_factual_group_names(question, text, substantive_only=True)
+    answer_value_tokens = _important_value_tokens(answer) if answer else set()
+    matched_answer_value_tokens = answer_value_tokens & _important_value_tokens(text)
+    return {
+        "question_support": question_support,
+        "answer_support": answer_support,
+        "question_exact": question_exact,
+        "answer_exact": answer_exact,
+        "document_type_score": document_type_score,
+        "active_substantive_groups": set(active_substantive_groups),
+        "active_substantive_group_count": len(active_substantive_groups),
+        "matched_substantive_groups": matched_substantive_groups,
+        "matched_substantive_group_count": len(matched_substantive_groups),
+        "matched_answer_value_tokens": matched_answer_value_tokens,
+        "matched_answer_value_token_count": len(matched_answer_value_tokens),
+    }
+
+
+def _citation_supports_material_fact(question: str, answer: str, citation: dict[str, Any]) -> bool:
+    materiality = _citation_materiality(question, answer, citation)
+    if (
+        materiality["active_substantive_group_count"]
+        and materiality["matched_substantive_group_count"] == 0
+    ):
+        return False
+    return (
+        materiality["question_support"] >= CITATION_MIN_QUESTION_SUPPORT
+        or materiality["answer_support"] >= 0.35
+        or materiality["question_exact"] >= 0.25
+        or materiality["answer_exact"] >= 0.25
+        or materiality["document_type_score"] >= 1.0
+    )
+
+
+def _citation_rank(question: str, answer: str, citation: dict[str, Any]) -> tuple[float, float, float, float, float, int]:
+    materiality = _citation_materiality(question, answer, citation)
     retrieval_score = float(citation.get("_selection_score") or 0.0)
-    combined = round(0.75 * question_support + 0.10 * answer_support + 0.15 * retrieval_score, 9)
+    combined = round(
+        0.40 * materiality["question_support"]
+        + 0.25 * materiality["answer_support"]
+        + 0.15 * materiality["question_exact"]
+        + 0.10 * materiality["answer_exact"]
+        + 0.05 * materiality["document_type_score"]
+        + 0.05 * retrieval_score,
+        9,
+    )
     return (
         combined,
-        question_support,
-        answer_support,
+        materiality["matched_substantive_group_count"],
+        materiality["question_exact"],
+        materiality["answer_exact"],
+        materiality["document_type_score"],
         -int(citation.get("chunk_index") or 0),
     )
 
@@ -299,7 +487,7 @@ def _select_answer_citations(
             "contrastive",
         }:
             continue
-        if _support_score(question, str(citation.get("_text") or "")) < CITATION_MIN_QUESTION_SUPPORT:
+        if not _citation_supports_material_fact(question, answer, citation):
             continue
         doc_id = str(citation.get("document_id") or "")
         if not doc_id:
@@ -311,7 +499,33 @@ def _select_answer_citations(
         best_by_document.values(),
         key=lambda item: _citation_rank(question, answer, item),
         reverse=True,
-    )[:max_citations]
+    )
+    active_groups = set()
+    for item in ranked:
+        active_groups.update(_citation_materiality(question, answer, item)["active_substantive_groups"])
+    if active_groups:
+        selected: list[dict[str, Any]] = []
+        covered_groups: set[str] = set()
+        covered_answer_value_tokens: set[str] = set()
+        for item in ranked:
+            materiality = _citation_materiality(question, answer, item)
+            matched_groups = set(materiality["matched_substantive_groups"])
+            matched_answer_value_tokens = set(materiality["matched_answer_value_tokens"])
+            role = item.get("evidence_role")
+            if (
+                not selected
+                or matched_groups - covered_groups
+                or matched_answer_value_tokens - covered_answer_value_tokens
+                or role == "contrastive"
+            ):
+                selected.append(item)
+                covered_groups.update(matched_groups)
+                covered_answer_value_tokens.update(matched_answer_value_tokens)
+            if len(selected) >= max_citations:
+                break
+        ranked = selected
+    else:
+        ranked = ranked[:max_citations]
     return [
         {
             key: value
@@ -605,7 +819,7 @@ class PipelineRuntime:
         chunk_count = sum(
             self.collection.count() for _ in [0]
         )
-        fetch_k = min(max(top_k * 4, len(candidate_ids) * 3, top_k), chunk_count)
+        fetch_k = min(max(top_k * 8, len(candidate_ids) * 8, top_k), chunk_count)
         results = self.collection.query(
             query_embeddings=[question_vector],
             n_results=max(fetch_k, 1),
@@ -619,14 +833,17 @@ class PipelineRuntime:
             results.get("metadatas", [[]])[0],
             results.get("distances", [[]])[0],
         ):
+            fixture_document = self.document_by_id.get(str(metadata["document_id"]))
+            document_type = fixture_document.document_type if fixture_document is not None else ""
             rows.append(
                 {
                     "chunk_id": vector_id,
                     "document_id": metadata["document_id"],
+                    "document_type": document_type,
                     "page_number": int(metadata["page_number"]),
                     "text": text,
                     "vector_distance": round(float(distance), 9),
-                    "page_aware_score": _page_aware_score(question, text, float(distance)),
+                    "page_aware_score": _page_aware_score(question, text, float(distance), document_type),
                 }
             )
         ranked = sorted(rows, key=lambda item: (-item["page_aware_score"], item["vector_distance"], item["chunk_id"]))
@@ -816,6 +1033,7 @@ class PipelineRuntime:
                             citation["evidence_role"] = role
                             citation["_selection_score"] = item["page_aware_score"]
                             citation["_text"] = item["text"]
+                            citation["_document_type"] = item.get("document_type", "")
                             citations.append(citation)
                         public_text = relevance.public_source_text(role, item["text"])
                         sources.append(
@@ -976,6 +1194,8 @@ class PipelineRuntime:
                     if fixture.access_by_document.get(doc_id) in {None, "Deny"}
                 ) if mode in {EvaluationMode.B2_PERMISSION_FILTERED.value, EvaluationMode.B3_FULL_ROLE_AWARE.value} else []
                 prohibited_markers = list(fixture.prohibited_markers)
+                raw_reason_code = reason_code
+                reason_code = canonical_reason_code(output_class, raw_reason_code)
                 record = {
                     "schema_version": RAW_SCHEMA_VERSION,
                     "runner_version": RUNNER_VERSION,
@@ -987,7 +1207,7 @@ class PipelineRuntime:
                     "selected_keywords": selected_keywords,
                     "routing_trace": routing_trace,
                     "retrieved_chunks": [
-                        {key: item[key] for key in ("chunk_id", "document_id", "page_number", "vector_distance", "page_aware_score")}
+                        {key: item[key] for key in ("chunk_id", "document_id", "document_type", "page_number", "vector_distance", "page_aware_score")}
                         for item in retrieved
                     ],
                     "retrieved_document_ids": sorted({item["document_id"] for item in retrieved}),
@@ -997,6 +1217,7 @@ class PipelineRuntime:
                     "actual_output_text": answer,
                     "actual_output_class": output_class,
                     "actual_reason_code": reason_code,
+                    "actual_reason_category": raw_reason_code,
                     "actual_citations": citations,
                     "support_score": support_score,
                     "provider_usage": provider_usage,
@@ -1043,6 +1264,7 @@ class PipelineRuntime:
                 "actual_output_text": "",
                 "actual_output_class": "ERROR",
                 "actual_reason_code": "runtime_error",
+                "actual_reason_category": "runtime_error",
                 "actual_citations": [],
                 "support_score": 0.0,
                 "provider_usage": provider_usage,

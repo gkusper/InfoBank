@@ -1,0 +1,291 @@
+{
+  "actual_pipeline_config": {
+    "config_hash": "473419d9e87afad07a0ea33d52894635d31d7506f62b8fa0a82d2dde04b582ad",
+    "config_version": "actual-pipeline-development-config-v1",
+    "conflict_policy": "query_sensitive",
+    "embedding_model": "text-embedding-3-small",
+    "generation_model": "gpt-4o-mini",
+    "minimum_primary_sources": 1,
+    "minimum_source_diversity": 1,
+    "minimum_support_score": 0.45,
+    "routing_mode": "KEYWORD_ROUTING",
+    "top_k": 6
+  },
+  "benchmark_package_checksums_sha256": "21d51c9cbd119fd1838af89e0c4c4e696fed92a886b2bab676f293f4836553e2",
+  "benchmark_package_manifest_sha256": "c2e1b61f5e3fede3678d0fed6a6e093f5634e27eecc1b0b8052604ad02abd6a9",
+  "benchmark_package_path": "artifacts/s1s2_freeze/S1_S2_journal_benchmark_v2.zip",
+  "benchmark_package_sha256": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1",
+  "benchmark_status": "FROZEN",
+  "branch": "feature/scenario-workflows",
+  "canonical_case_order": [
+    "S1-Q1",
+    "S1-Q2",
+    "S1-Q3",
+    "S1-Q4",
+    "S1-Q5",
+    "S1-Q6",
+    "S2-Q1",
+    "S2-Q2",
+    "S2-Q3",
+    "S2-Q4",
+    "S2-Q5",
+    "S2-Q6"
+  ],
+  "case_count": 12,
+  "configuration_count": 4,
+  "configuration_semantics": {
+    "B0_VECTOR_ONLY": {
+      "controlled_failure_gate": false,
+      "implementation_note": "Frozen _routing still performs provider keyword extraction, then route_documents uses ROUTING_OFF.",
+      "permission_filtering": false,
+      "role_aware_evidence": false,
+      "routing_decision_enabled": false
+    },
+    "B1_VECTOR_ROUTING": {
+      "controlled_failure_gate": false,
+      "permission_filtering": false,
+      "role_aware_evidence": false,
+      "routing_decision_enabled": true
+    },
+    "B2_PERMISSION_FILTERED": {
+      "controlled_failure_gate": "permission/metadata/aggregate/insufficient-evidence output gating implemented for B2",
+      "implementation_note": "Frozen _routing still performs provider keyword extraction, then route_documents uses ROUTING_OFF.",
+      "permission_filtering": true,
+      "role_aware_evidence": false,
+      "routing_decision_enabled": false
+    },
+    "B3_FULL_ROLE_AWARE": {
+      "controlled_failure_gate": true,
+      "permission_filtering": true,
+      "role_aware_evidence": true,
+      "routing_decision_enabled": true
+    }
+  },
+  "corpus_sha256": "81841f5d39d83070324fee2d7e68d2f53a083b5240045d03dfafb15300c41c75",
+  "effective_embedding_parameters": {
+    "AI_EMBEDDING_DIMENSIONS_env_present": false,
+    "api_endpoint_mode": "embeddings.create",
+    "dimensions": "NOT_OVERRIDDEN; provider default observed as 1536 in preflight",
+    "model": "text-embedding-3-small"
+  },
+  "effective_generation_parameters": {
+    "api_endpoint_mode": "chat.completions.create",
+    "base_url": "NOT_SUPPORTED_OR_NOT_EXPOSED",
+    "max_output_tokens": "NOT_SUPPORTED_OR_NOT_EXPOSED",
+    "model": "gpt-4o-mini",
+    "provider_specific_deterministic_or_stochastic_setting": "temperature=0.0 only; no seed exposed",
+    "reasoning_effort": "NOT_SUPPORTED_OR_NOT_EXPOSED",
+    "response_format": "NOT_SUPPORTED_OR_NOT_EXPOSED",
+    "seed": "NOT_SUPPORTED_OR_NOT_EXPOSED",
+    "temperature": 0.0,
+    "timeout": "NOT_SUPPORTED_OR_NOT_EXPOSED",
+    "top_p": "NOT_SUPPORTED_OR_NOT_EXPOSED"
+  },
+  "embedding_model_identifier": "text-embedding-3-small",
+  "expected_benchmark_package_sha256": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1",
+  "expected_frozen_code_state_hash": "dc290b7d83dad8f730000011e4506069c22ab08e220a3029416e2ef941bf96eb",
+  "frozen_code_state_hash": "dc290b7d83dad8f730000011e4506069c22ab08e220a3029416e2ef941bf96eb",
+  "further_s1s2_tuning_allowed": "NO",
+  "gold_blind_execution": {
+    "gold_annotation_path_used_only_for_post_run_scoring": "artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/actual_pipeline_inputs/gold_annotations.jsonl",
+    "runtime_reads_gold": false,
+    "scoring_after_seal_only": true
+  },
+  "gold_sha256": "e0c54e328d939bb392ef072d457a852d8957621b1fd7f6fb5fc99da042bda46a",
+  "head": "70a8852fc5cb7b4dea5abb856b4893fbd4ff5b0c",
+  "human_confirmation_status": "APPROVED_WITH_DOCUMENTED_LIMITATIONS",
+  "human_qa_status": "APPROVED",
+  "immutability_after_first_measured_call": {
+    "citation_behavior": "IMMUTABLE",
+    "controlled_failure_settings": "IMMUTABLE",
+    "evidence_roles": "IMMUTABLE",
+    "generation_parameters": "IMMUTABLE",
+    "gold": "IMMUTABLE",
+    "model": "IMMUTABLE",
+    "permissions": "IMMUTABLE",
+    "prompts": "IMMUTABLE",
+    "routing_settings": "IMMUTABLE",
+    "run_count": "IMMUTABLE",
+    "run_order": "IMMUTABLE",
+    "scorer": "IMMUTABLE",
+    "top_k": "IMMUTABLE"
+  },
+  "keyword_model_identifier": "gpt-4o-mini",
+  "known_benchmark_limitations": {
+    "S1-Q6": "Missing second required care-guide citation.",
+    "S2-Q2": "Missing second required warranty-terms citation.",
+    "S2-Q5": "Missing second required regional-service-notice citation."
+  },
+  "model_source": "evaluation.provider_readiness.GENERATION_MODEL and EMBEDDING_MODEL constants used by scripts/run_real_provider_evaluation.py",
+  "no_result_dependent_reruns_allowed": true,
+  "ontology": "NOT NEEDED FOR CURRENT PAPER",
+  "openai_model_identifier": "gpt-4o-mini",
+  "openai_preflight": {
+    "adapter_name": "openai-python",
+    "credential_present": true,
+    "embedding_model_access": "PASS",
+    "embedding_preflight_observed_dimension": 1536,
+    "generation_model_access": "PASS",
+    "generation_preflight_usage": {
+      "cost_recorded": false,
+      "input_tokens": 24,
+      "output_tokens": 1,
+      "retries": 0,
+      "total_tokens": 25,
+      "usage_source": "provider_reported"
+    },
+    "measured_record": false,
+    "provider_adapter_status": "PASS",
+    "status": "PASS"
+  },
+  "phase": "PHASE_A_PREREGISTRATION_AND_PREFLIGHT_COMPLETE",
+  "phase_a_validation": {
+    "external_scenario_package_verification": {
+      "pdf_source_count": 10,
+      "runtime_gold_separated": true,
+      "status": "PASS",
+      "total_questions": 12
+    },
+    "human_confirmation_validator": {
+      "confirmed": 9,
+      "human_confirmation_status": "APPROVED_WITH_DOCUMENTED_LIMITATIONS",
+      "limited": 3,
+      "row_count": 12,
+      "status": "PASS"
+    },
+    "human_qa_validator": {
+      "case_count": 12,
+      "human_qa_status": "APPROVED",
+      "runtime_gold_separated": true,
+      "status": "PASS"
+    },
+    "isolated_chroma_source_storage_readiness": {
+      "chroma_path": "artifacts/s1s2_publication_ablation_openai/phase_a_readiness/chroma_ready",
+      "status": "PASS"
+    },
+    "mariadb_readiness": {
+      "database_prefix_ok": true,
+      "host": "127.0.0.1",
+      "port": 3307,
+      "schema_table_count": 12,
+      "status": "PASS"
+    },
+    "package_checksum_verification": {
+      "entry_count": 42,
+      "status": "PASS"
+    },
+    "relevant_frozen_tests": {
+      "basetemp": "C:/Users/EKKE/Documents/Codex/tmp_infobank_pytest/bt",
+      "result": "67 passed, 7 warnings",
+      "status": "PASS"
+    },
+    "scenario_pack_validation": {
+      "S1_SOFA_01": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "S2_TV_WARRANTY_01": {
+        "errors": 0,
+        "warnings": 0
+      },
+      "status": "PASS"
+    }
+  },
+  "preregistration_locked_before_measured_calls": true,
+  "preregistration_timestamp": "2026-08-24T23:10:48.099212Z",
+  "prompt_versions": {
+    "generation_prompt_version": "actual-pipeline-answer-v1",
+    "keyword_selection_strategy_version": "infocom-keyword-selector-v2",
+    "routing_prompt_version": "routing-keyword-v1"
+  },
+  "provider": "openai",
+  "query_sha256": "b573bd0be9a1a4ec313239c0618bb96f375ff08f6390b88308b04f08d3a850de",
+  "raw_schema_version": "infobank-actual-raw-record-v1",
+  "readiness_config": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "config_version": "real-provider-readiness-v2"
+  },
+  "repetition_count": 3,
+  "repository": "https://github.com/gkusper/InfoBank",
+  "retry_policy": {
+    "embedding": {
+      "adapter_retry": "NONE_EXPLICITLY_IMPLEMENTED",
+      "max_attempts": 1,
+      "operation": "embeddings.create"
+    },
+    "failed_record_after_exhausted_technical_retry_remains_failed": true,
+    "generation_generate_with_usage": {
+      "backoff": "NONE_EXPLICITLY_IMPLEMENTED",
+      "caught_exception_scope": "Exception as implemented by frozen OpenAIProvider.generate_with_usage",
+      "failed_record_metadata": "run_case records sanitized exception string when failure reaches case boundary; individual attempt details not exposed",
+      "max_attempts": 3,
+      "max_retries_after_initial_attempt": 2,
+      "successful_record_metadata": "provider_usage.retries count only; individual attempt details not exposed"
+    },
+    "no_result_dependent_reruns": true,
+    "routing_keyword_extraction": {
+      "adapter_retry": "NONE_EXPLICITLY_IMPLEMENTED",
+      "max_attempts": 1,
+      "operation": "chat.completions.create via extract_keywords_with_trace"
+    }
+  },
+  "run_order": [
+    {
+      "configs": [
+        "B0_VECTOR_ONLY",
+        "B1_VECTOR_ROUTING",
+        "B2_PERMISSION_FILTERED",
+        "B3_FULL_ROLE_AWARE"
+      ],
+      "repetition": 1
+    },
+    {
+      "configs": [
+        "B0_VECTOR_ONLY",
+        "B1_VECTOR_ROUTING",
+        "B2_PERMISSION_FILTERED",
+        "B3_FULL_ROLE_AWARE"
+      ],
+      "repetition": 2
+    },
+    {
+      "configs": [
+        "B0_VECTOR_ONLY",
+        "B1_VECTOR_ROUTING",
+        "B2_PERMISSION_FILTERED",
+        "B3_FULL_ROLE_AWARE"
+      ],
+      "repetition": 3
+    }
+  ],
+  "runner_source_sha256": "53e196983a9aafcb7bf3e689430a7e64218ef3298db6d0e55fdf64464c4ad3d3",
+  "runner_version": "infobank-actual-pipeline-runner-v1",
+  "runtime_isolation_plan": {
+    "chroma_dir_pattern": "artifacts/s1s2_publication_ablation_openai/R{rep}/B{index}/runtime/chroma",
+    "database_name_pattern": "infobank_eval_s1s2_openai_r{rep}_b{index}_20260825",
+    "provider_cache_enabled": false,
+    "raw_output_dir_pattern": "artifacts/s1s2_publication_ablation_openai/R{rep}/B{index}/raw",
+    "run_groups": [
+      "R1-B0",
+      "R1-B1",
+      "R1-B2",
+      "R1-B3",
+      "R2-B0",
+      "R2-B1",
+      "R2-B2",
+      "R2-B3",
+      "R3-B0",
+      "R3-B1",
+      "R3-B2",
+      "R3-B3"
+    ],
+    "score_output_dir_pattern": "artifacts/s1s2_publication_ablation_openai/R{rep}/B{index}/scores",
+    "source_storage_dir_pattern": "artifacts/s1s2_publication_ablation_openai/R{rep}/B{index}/runtime/source_storage"
+  },
+  "s1s2_tuning_prohibited": true,
+  "schema_version": "infobank-s1s2-openai-real-provider-preregistration-v1",
+  "scorer_identity": "infobank-actual-pipeline-scorer-v1",
+  "scorer_source_sha256": "bd3e3c8e2e3cb0746f89b2afdbd3d2016cc2d4d6a0b41ffc6871bf22487185e1",
+  "seal_schema_version": "infobank-raw-run-seal-v1",
+  "total_planned_records": 144
+}

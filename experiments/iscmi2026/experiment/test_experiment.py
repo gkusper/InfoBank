@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import json
+import tempfile
 import unittest
+from pathlib import Path
 
 from compare_output_limits import strip_parser_metadata
 from compare_generators import classify_pattern, nearest_rank_percentile
 from evaluate_results import score_result
-from experiment_core import ANSWER_TYPES, load_benchmark, parse_model_output
+from experiment_core import ANSWER_TYPES, CONDITIONS, load_benchmark, load_configs, parse_model_output
 from run_experiment import retry_delay_seconds, sanitize_error_message
 
 
@@ -169,6 +172,48 @@ class ExperimentEvaluationTests(unittest.TestCase):
         self.assertNotIn("private123", sanitized)
         self.assertNotIn("proj_secret", sanitized)
         self.assertNotIn("sk-secretvalue", sanitized)
+
+    def test_load_benchmark_accepts_dynamic_question_count(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "questions.jsonl").write_text(
+                json.dumps({"question_id": "ISCMI-A10-Q0001"}) + "\n",
+                encoding="utf-8",
+            )
+            for name in ("task_histories.jsonl", "task_snapshots.jsonl", "message_evidence_index.jsonl"):
+                (root / name).write_text("", encoding="utf-8")
+            (root / "benchmark_manifest.json").write_text("{}", encoding="utf-8")
+
+            loaded = load_benchmark(root, expected_question_count=None)
+
+            self.assertEqual(str(root.resolve()), loaded["benchmark_dir"])
+            self.assertEqual(1, len(loaded["questions"]))
+            with self.assertRaises(ValueError):
+                load_benchmark(root)
+
+    def test_load_configs_applies_generator_override(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for condition in CONDITIONS:
+                file_name = f"{condition.lower()}.json"
+                config = {
+                    "condition": condition,
+                    "config_file": file_name,
+                    "generator_model": "gpt-4.1-2025-04-14",
+                    "embedding_model": "text-embedding-3-small",
+                    "temperature": 0.0,
+                    "max_output_tokens": 2000,
+                    "top_p": None,
+                    "seed": None,
+                }
+                (root / file_name).write_text(json.dumps(config), encoding="utf-8")
+
+            configs = load_configs(root, generator_model="gpt-4o-mini-2024-07-18")
+
+            self.assertEqual(
+                {"gpt-4o-mini-2024-07-18"},
+                {config["generator_model"] for config in configs.values()},
+            )
 
 
 if __name__ == "__main__":

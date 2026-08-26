@@ -1,0 +1,365 @@
+{
+  "annotators": {
+    "Annotation1": [
+      "A1",
+      "A2",
+      "A3"
+    ],
+    "Annotation2": [
+      "SzJ_A13"
+    ],
+    "Annotation3": [
+      "CSF_A14"
+    ],
+    "Finalized_Annotation": [
+      "KG_A15"
+    ]
+  },
+  "decomposition_or_structure_disagreements": [
+    {
+      "chronological_rank": 4,
+      "message_id": "campbell-l_inbox1277::turn_3",
+      "passes": {
+        "Annotation1": {
+          "task_mentions": 2,
+          "transition_state": "1x CREATE/OPEN; 1x NONE/UNCERTAIN"
+        },
+        "Annotation2": {
+          "task_mentions": 2,
+          "transition_state": "1x CREATE/OPEN; 1x NONE/UNCERTAIN"
+        },
+        "Annotation3": {
+          "task_mentions": 2,
+          "transition_state": "1x CREATE/OPEN; 1x CREATE/UNCERTAIN"
+        }
+      },
+      "pilot_id": "P001"
+    },
+    {
+      "chronological_rank": 4,
+      "message_id": "crandell-s_inbox99::turn_3",
+      "passes": {
+        "Annotation1": {
+          "task_mentions": 2,
+          "transition_state": "2x CONFIRM/OPEN"
+        },
+        "Annotation2": {
+          "task_mentions": 2,
+          "transition_state": "2x CONFIRM/OPEN"
+        },
+        "Annotation3": {
+          "task_mentions": 1,
+          "transition_state": "1x CONFIRM/OPEN"
+        }
+      },
+      "pilot_id": "P003"
+    }
+  ],
+  "finalized_selection": {
+    "rationale": "The workbook contains an explicit Finalized_Annotation worksheet with the same P001-P010 schema and message coverage as the annotation passes. Its annotator provenance is KG_A15, indicating a corrected/final adjudication layer rather than a fourth independent vote.",
+    "sheet": "Finalized_Annotation"
+  },
+  "old_vs_clean": {
+    "changed_pilot_family_gold_structures": [
+      {
+        "pilot_id": "P001",
+        "question_family": "ACTOR_RESPONSIBILITY"
+      },
+      {
+        "pilot_id": "P001",
+        "question_family": "BLOCKED_BY"
+      },
+      {
+        "pilot_id": "P001",
+        "question_family": "DEADLINE"
+      },
+      {
+        "pilot_id": "P001",
+        "question_family": "OPEN_TASKS"
+      },
+      {
+        "pilot_id": "P001",
+        "question_family": "WAITING_FOR"
+      },
+      {
+        "pilot_id": "P004",
+        "question_family": "ACTOR_RESPONSIBILITY"
+      },
+      {
+        "pilot_id": "P004",
+        "question_family": "OPEN_TASKS"
+      },
+      {
+        "pilot_id": "P004",
+        "question_family": "REQUESTER"
+      },
+      {
+        "pilot_id": "P005",
+        "question_family": "WAITING_FOR"
+      }
+    ],
+    "clean_task_count": 44,
+    "comparable_pilot_family_gold_structures": 55,
+    "final_state_distribution_clean": {
+      "CLOSED": 12,
+      "OPEN": 31,
+      "UNCERTAIN": 1
+    },
+    "final_state_distribution_old": {
+      "CLOSED": 12,
+      "OPEN": 31,
+      "UNCERTAIN": 1
+    },
+    "old_task_count": 44,
+    "question_count_by_family_clean": {
+      "ACTOR_RESPONSIBILITY": 9,
+      "BLOCKED_BY": 2,
+      "CLOSED_TASKS": 10,
+      "DEADLINE": 1,
+      "NO_TASK_CONTROL": 5,
+      "OPEN_TASKS": 10,
+      "REQUESTER": 6,
+      "TASK_HISTORY": 10,
+      "WAITING_FOR": 4
+    },
+    "question_count_by_family_old": {
+      "ACTOR_RESPONSIBILITY": 8,
+      "BLOCKED_BY": 2,
+      "CLOSED_TASKS": 10,
+      "DEADLINE": 1,
+      "NO_TASK_CONTROL": 5,
+      "OPEN_TASKS": 10,
+      "REQUESTER": 6,
+      "TASK_HISTORY": 10,
+      "WAITING_FOR": 4
+    },
+    "question_count_clean": 57,
+    "question_count_old_p001_p010": 56,
+    "task_count_by_pilot_clean": {
+      "P001": 5,
+      "P002": 3,
+      "P003": 2,
+      "P004": 9,
+      "P005": 6,
+      "P006": 1,
+      "P007": 4,
+      "P008": 6,
+      "P009": 6,
+      "P010": 2
+    },
+    "task_count_by_pilot_old": {
+      "P001": 5,
+      "P002": 3,
+      "P003": 2,
+      "P004": 9,
+      "P005": 6,
+      "P006": 1,
+      "P007": 4,
+      "P008": 6,
+      "P009": 6,
+      "P010": 2
+    },
+    "task_count_delta_clean_minus_old": 0
+  },
+  "pairwise_agreement": [
+    {
+      "continuity_edge_agreement": {
+        "f1": 1.0,
+        "jaccard": 1.0,
+        "left_count": 41,
+        "overlap": 41,
+        "precision_left_to_right": 1.0,
+        "recall_left_to_right": 1.0,
+        "right_count": 41
+      },
+      "left": "Annotation1",
+      "message_count": 47,
+      "right": "Annotation2",
+      "task_presence_agreement": 1.0,
+      "transition_state_structure_agreement": 1.0
+    },
+    {
+      "continuity_edge_agreement": {
+        "f1": 0.96202532,
+        "jaccard": 0.92682927,
+        "left_count": 41,
+        "overlap": 38,
+        "precision_left_to_right": 0.92682927,
+        "recall_left_to_right": 1.0,
+        "right_count": 38
+      },
+      "left": "Annotation1",
+      "message_count": 47,
+      "right": "Annotation3",
+      "task_presence_agreement": 1.0,
+      "transition_state_structure_agreement": 0.95744681
+    },
+    {
+      "continuity_edge_agreement": {
+        "f1": 0.96202532,
+        "jaccard": 0.92682927,
+        "left_count": 41,
+        "overlap": 38,
+        "precision_left_to_right": 0.92682927,
+        "recall_left_to_right": 1.0,
+        "right_count": 38
+      },
+      "left": "Annotation2",
+      "message_count": 47,
+      "right": "Annotation3",
+      "task_presence_agreement": 1.0,
+      "transition_state_structure_agreement": 0.95744681
+    }
+  ],
+  "sheets": {
+    "Annotation1": {
+      "annotated_task_event_rows": 77,
+      "annotation_status_distribution": {
+        "ANNOTATED": 77,
+        "NO_TASK": 5,
+        "SKIP_UNCERTAIN": 2
+      },
+      "confidence_distribution": {
+        "3": 21,
+        "4": 38,
+        "5": 18
+      },
+      "final_state_distribution": {
+        "CLOSED": 12,
+        "OPEN": 31,
+        "UNCERTAIN": 1
+      },
+      "final_tasks": 44,
+      "messages_with_any_row": 47,
+      "messages_with_task_presence": 41,
+      "rows": 84,
+      "transition_distribution": {
+        "COMPLETE": 12,
+        "CONFIRM": 11,
+        "CREATE": 37,
+        "MODIFY": 7,
+        "NONE": 9,
+        "REJECT": 1
+      }
+    },
+    "Annotation2": {
+      "annotated_task_event_rows": 77,
+      "annotation_status_distribution": {
+        "ANNOTATED": 77,
+        "NO_TASK": 5,
+        "SKIP_UNCERTAIN": 2
+      },
+      "confidence_distribution": {
+        "3": 12,
+        "4": 46,
+        "5": 19
+      },
+      "final_state_distribution": {
+        "CLOSED": 12,
+        "OPEN": 31,
+        "UNCERTAIN": 1
+      },
+      "final_tasks": 44,
+      "messages_with_any_row": 47,
+      "messages_with_task_presence": 41,
+      "rows": 84,
+      "transition_distribution": {
+        "COMPLETE": 12,
+        "CONFIRM": 11,
+        "CREATE": 37,
+        "MODIFY": 7,
+        "NONE": 9,
+        "REJECT": 1
+      }
+    },
+    "Annotation3": {
+      "annotated_task_event_rows": 76,
+      "annotation_status_distribution": {
+        "ANNOTATED": 76,
+        "NO_TASK": 5,
+        "SKIP_UNCERTAIN": 2
+      },
+      "confidence_distribution": {
+        "3": 20,
+        "4": 38,
+        "5": 18
+      },
+      "final_state_distribution": {
+        "CLOSED": 13,
+        "OPEN": 31,
+        "UNCERTAIN": 1
+      },
+      "final_tasks": 45,
+      "messages_with_any_row": 47,
+      "messages_with_task_presence": 41,
+      "rows": 83,
+      "transition_distribution": {
+        "COMPLETE": 12,
+        "CONFIRM": 10,
+        "CREATE": 38,
+        "MODIFY": 7,
+        "NONE": 8,
+        "REJECT": 1
+      }
+    },
+    "Finalized_Annotation": {
+      "annotated_task_event_rows": 77,
+      "annotation_status_distribution": {
+        "ANNOTATED": 77,
+        "NO_TASK": 5,
+        "SKIP_UNCERTAIN": 2
+      },
+      "confidence_distribution": {
+        "3": 12,
+        "4": 46,
+        "5": 19
+      },
+      "final_state_distribution": {
+        "CLOSED": 12,
+        "OPEN": 31,
+        "UNCERTAIN": 1
+      },
+      "final_tasks": 44,
+      "messages_with_any_row": 47,
+      "messages_with_task_presence": 41,
+      "rows": 84,
+      "transition_distribution": {
+        "COMPLETE": 12,
+        "CONFIRM": 11,
+        "CREATE": 37,
+        "MODIFY": 7,
+        "NONE": 9,
+        "REJECT": 1
+      }
+    }
+  },
+  "validation": {
+    "duplicate_semantic_rows": [],
+    "issues": [],
+    "mechanical_corrections": [],
+    "message_count": 47,
+    "pilots": [
+      "P001",
+      "P002",
+      "P003",
+      "P004",
+      "P005",
+      "P006",
+      "P007",
+      "P008",
+      "P009",
+      "P010"
+    ],
+    "status": "PASS"
+  },
+  "workbook": {
+    "filename": "MailEx_annotation_001-010_v2.2.xlsx",
+    "sha256": "ba37a5620c49b0424a76ab8f359e6d1365bf68f23f3e292495acbeac599927be",
+    "sheet_names": [
+      "Annotation1",
+      "Annotation2",
+      "Annotation3",
+      "Finalized_Annotation"
+    ]
+  }
+}

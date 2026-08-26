@@ -133,18 +133,26 @@ def resolve_packet_dir(value: str | Path | None = None) -> Path:
     return candidate
 
 
-def load_benchmark() -> dict[str, Any]:
-    questions = read_jsonl(BENCHMARK_DIR / "questions.jsonl")
-    histories = read_jsonl(BENCHMARK_DIR / "task_histories.jsonl")
-    snapshots = read_jsonl(BENCHMARK_DIR / "task_snapshots.jsonl")
-    evidence = read_jsonl(BENCHMARK_DIR / "message_evidence_index.jsonl")
-    manifest = read_json(BENCHMARK_DIR / "benchmark_manifest.json")
+def load_benchmark(
+    benchmark_dir: str | Path | None = None,
+    *,
+    expected_question_count: int | None = 271,
+) -> dict[str, Any]:
+    source_dir = Path(benchmark_dir).resolve() if benchmark_dir else BENCHMARK_DIR
+    questions = read_jsonl(source_dir / "questions.jsonl")
+    histories = read_jsonl(source_dir / "task_histories.jsonl")
+    snapshots = read_jsonl(source_dir / "task_snapshots.jsonl")
+    evidence = read_jsonl(source_dir / "message_evidence_index.jsonl")
+    manifest = read_json(source_dir / "benchmark_manifest.json")
     question_ids = [row["question_id"] for row in questions]
-    if len(questions) != 271:
-        raise ValueError(f"Expected 271 benchmark questions, found {len(questions)}")
+    if expected_question_count is not None and len(questions) != expected_question_count:
+        raise ValueError(
+            f"Expected {expected_question_count} benchmark questions, found {len(questions)}"
+        )
     if len(set(question_ids)) != len(question_ids):
         raise ValueError("Benchmark question IDs are not unique")
     return {
+        "benchmark_dir": str(source_dir),
         "questions": questions,
         "histories": histories,
         "snapshots": snapshots,
@@ -153,11 +161,19 @@ def load_benchmark() -> dict[str, Any]:
     }
 
 
-def load_configs(config_dir: Path | None = None) -> dict[str, dict[str, Any]]:
+def load_configs(
+    config_dir: str | Path | None = None,
+    *,
+    generator_model: str | None = None,
+) -> dict[str, dict[str, Any]]:
     config_dir = config_dir or EXPERIMENT_DIR / "configs"
+    config_dir = Path(config_dir).resolve()
     configs: dict[str, dict[str, Any]] = {}
     for path in sorted(config_dir.glob("*.json")):
         config = read_json(path)
+        if generator_model is not None:
+            config = dict(config)
+            config["generator_model"] = generator_model
         condition = config.get("condition")
         if condition in configs:
             raise ValueError(f"Duplicate condition config: {condition}")
@@ -227,8 +243,10 @@ def parse_corrected_packet(packet_dir: Path, evidence_rows: list[dict[str, Any]]
         missing = sorted(set(expected) - found)
         extra = sorted(found - set(expected))
         raise ValueError(f"Corrected packet mismatch; missing={missing}, extra={extra}")
-    if len(documents) != 195:
-        raise ValueError(f"Expected 195 corrected messages, found {len(documents)}")
+    if len(documents) != len(expected):
+        raise ValueError(
+            f"Expected {len(expected)} corrected messages, found {len(documents)}"
+        )
     return sorted(documents, key=lambda row: (row["pilot_id"], row["chronological_rank"]))
 
 

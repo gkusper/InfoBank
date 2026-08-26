@@ -88,10 +88,16 @@ def validate_corpora(benchmark: dict[str, Any], packet_dir: Path) -> tuple[list[
     }
     if not oracle or any(not required_oracle_keys <= set(document) for document in oracle):
         fail("Oracle corpus does not contain the required task representation")
-    if len(emails) != 195:
-        fail(f"Expected 195 corrected email documents, found {len(emails)}")
-    if len(oracle) != 236:
-        fail(f"Expected 236 oracle task documents, found {len(oracle)}")
+    if len(emails) != len(benchmark["evidence"]):
+        fail(
+            f"Expected {len(benchmark['evidence'])} corrected email documents, "
+            f"found {len(emails)}"
+        )
+    if len(oracle) != len(benchmark["snapshots"]):
+        fail(
+            f"Expected {len(benchmark['snapshots'])} oracle task documents, "
+            f"found {len(oracle)}"
+        )
     return emails, oracle
 
 
@@ -187,25 +193,32 @@ def validate_result_file(
         }:
             fail(f"Unrecognized output status: {row['output_status']}")
     if rows[0].get("run_mode") == "real_api":
-        if len(by_condition[CONDITIONS[0]]) != 271 or len(rows) != 813:
-            fail("A real API result must contain exactly 271 questions x 3 conditions")
+        expected_questions = len(benchmark["questions"])
+        expected_rows = expected_questions * len(CONDITIONS)
+        if len(by_condition[CONDITIONS[0]]) != expected_questions or len(rows) != expected_rows:
+            fail(
+                "A real API result must contain exactly "
+                f"{expected_questions} questions x {len(CONDITIONS)} conditions"
+            )
 
 
 def validate(args: argparse.Namespace) -> int:
-    benchmark = load_benchmark()
-    configs = load_configs()
+    benchmark = load_benchmark(
+        args.benchmark_dir,
+        expected_question_count=None if args.benchmark_dir else 271,
+    )
+    configs = load_configs(args.config_dir, generator_model=args.generator_model)
     configured_limits = {config["max_output_tokens"] for config in configs.values()}
     if configured_limits != {2000}:
         fail(f"Expected uniform max_output_tokens=2000, found {sorted(configured_limits)}")
     configured_generators = {config["generator_model"] for config in configs.values()}
-    if configured_generators != {"gpt-4.1-2025-04-14"}:
+    expected_generator = args.generator_model or "gpt-4.1-2025-04-14"
+    if configured_generators != {expected_generator}:
         fail(
-            "Expected pinned generator gpt-4.1-2025-04-14, found "
+            f"Expected pinned generator {expected_generator}, found "
             f"{sorted(configured_generators)}"
         )
     packet_dir = resolve_packet_dir(args.packet_dir)
-    if len(benchmark["questions"]) != 271:
-        fail("Exactly 271 benchmark questions were not loaded")
     question_ids = [row["question_id"] for row in benchmark["questions"]]
     if len(question_ids) != len(set(question_ids)):
         fail("Question IDs are not unique")
@@ -231,7 +244,11 @@ def validate(args: argparse.Namespace) -> int:
     if args.results:
         validate_result_file(Path(args.results).resolve(), benchmark, configs)
     print("Leakage validation: PASS")
-    print("Questions: 271; corrected email documents: 195; oracle task documents: 236")
+    print(
+        f"Questions: {len(benchmark['questions'])}; "
+        f"corrected email documents: {len(benchmark['evidence'])}; "
+        f"oracle task documents: {len(benchmark['snapshots'])}"
+    )
     print("Gold-target mutation leaves every condition prompt unchanged")
     return 0
 
@@ -242,6 +259,18 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--packet-dir", help="Corrected external MailEx packet directory.")
     parser.add_argument("--results", help="Optional gold-free inference JSONL to validate.")
+    parser.add_argument(
+        "--benchmark-dir",
+        help="Benchmark directory to validate; defaults to the frozen 271-question benchmark.",
+    )
+    parser.add_argument(
+        "--config-dir",
+        help="Condition config directory; defaults to experiments/iscmi2026/experiment/configs.",
+    )
+    parser.add_argument(
+        "--generator-model",
+        help="Pinned generator snapshot expected across all condition configs.",
+    )
     return parser
 
 

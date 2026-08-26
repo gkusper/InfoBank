@@ -27,7 +27,10 @@ ALLOWED_TRANSITIONS = {
 }
 ALLOWED_STATES = {"OPEN", "CLOSED", "UNCERTAIN"}
 MIN_PRIMARY_CONFIDENCE = 3
-EXPECTED_PILOTS = [f"P{index:03d}" for index in range(1, 51)]
+DEFAULT_EXPECTED_PILOTS = [f"P{index:03d}" for index in range(1, 51)]
+EXPECTED_PILOTS = DEFAULT_EXPECTED_PILOTS
+DEFAULT_ANNOTATION_WORKBOOK_NAME = "MailEx_annotation_v1.6.xlsx"
+DEFAULT_QUESTION_ID_PREFIX = "ISCMI-Q"
 PILOT_FILE_RE = re.compile(r"^P\d{3}\.md$")
 TASK_ID_RE = re.compile(r"^T(\d+)$")
 CELL_REF_RE = re.compile(r"^([A-Z]+)(\d+)$")
@@ -60,6 +63,9 @@ REQUIRED_COLUMNS = [
     "notes",
     "annotation_status",
 ]
+HEADER_ALIASES = {
+    "Annotator": "annotator_id",
+}
 OUTPUT_FILES = [
     "message_evidence_index.jsonl",
     "task_histories.jsonl",
@@ -92,7 +98,7 @@ def parse_args() -> argparse.Namespace:
         "--annotations",
         type=Path,
         required=True,
-        help="Path to MailEx_annotation_v1.6.xlsx.",
+        help="Path to the annotation workbook.",
     )
     parser.add_argument(
         "--pilot-packet",
@@ -107,6 +113,31 @@ def parse_args() -> argparse.Namespace:
         help="Directory for generated benchmark fixtures.",
     )
     parser.add_argument(
+        "--worksheet",
+        default="Annotations",
+        help="Annotation worksheet to read. Defaults to the frozen main benchmark sheet.",
+    )
+    parser.add_argument(
+        "--pilot-ids",
+        default=",".join(DEFAULT_EXPECTED_PILOTS),
+        help="Comma-separated pilot IDs to include, in benchmark order.",
+    )
+    parser.add_argument(
+        "--allow-extra-packet-files",
+        action="store_true",
+        help="Allow the pilot packet to contain files outside --pilot-ids.",
+    )
+    parser.add_argument(
+        "--question-id-prefix",
+        default=DEFAULT_QUESTION_ID_PREFIX,
+        help="Question ID prefix before the four-digit counter.",
+    )
+    parser.add_argument(
+        "--annotation-workbook-name",
+        default=DEFAULT_ANNOTATION_WORKBOOK_NAME,
+        help="Stable workbook name to record in generated metadata.",
+    )
+    parser.add_argument(
         "--generation-timestamp",
         help=(
             "ISO-8601 UTC timestamp for the manifest. When omitted, current UTC is used; "
@@ -114,6 +145,18 @@ def parse_args() -> argparse.Namespace:
         ),
     )
     return parser.parse_args()
+
+
+def parse_pilot_ids(value: str) -> list[str]:
+    pilots = [item.strip() for item in value.split(",") if item.strip()]
+    if not pilots:
+        raise ValueError("--pilot-ids must include at least one pilot")
+    if len(pilots) != len(set(pilots)):
+        raise ValueError("--pilot-ids contains duplicate values")
+    invalid = [pilot_id for pilot_id in pilots if not re.fullmatch(r"P\d{3}", pilot_id)]
+    if invalid:
+        raise ValueError(f"Invalid pilot IDs: {invalid}")
+    return pilots
 
 
 def sha256_bytes(value: bytes) -> str:
@@ -189,7 +232,9 @@ def parse_numeric(value: str) -> int | float | str:
     return number
 
 
-def read_xlsx_annotations(path: Path) -> tuple[list[str], list[dict[str, Any]], str]:
+def read_xlsx_annotations(
+    path: Path, worksheet_name: str = "Annotations"
+) -> tuple[list[str], list[dict[str, Any]], str]:
     if not path.exists():
         raise FileNotFoundError(f"Annotation workbook not found: {path}")
     if not zipfile.is_zipfile(path):
@@ -210,11 +255,11 @@ def read_xlsx_annotations(path: Path) -> tuple[list[str], list[dict[str, Any]], 
         }
         annotation_sheet = None
         for sheet in workbook_root.findall(f"{main}sheets/{main}sheet"):
-            if sheet.attrib.get("name") == "Annotations":
+            if sheet.attrib.get("name") == worksheet_name:
                 annotation_sheet = sheet
                 break
         if annotation_sheet is None:
-            raise ValueError("Workbook does not contain an 'Annotations' worksheet")
+            raise ValueError(f"Workbook does not contain a {worksheet_name!r} worksheet")
 
         relationship_id = annotation_sheet.attrib[rel_id_name]
         target = relationships[relationship_id].replace("\\", "/")
@@ -273,7 +318,10 @@ def read_xlsx_annotations(path: Path) -> tuple[list[str], list[dict[str, Any]], 
     header_row_number, header_values = parsed_rows[0]
     if header_row_number != 1:
         raise ValueError("Expected the annotation header in workbook row 1")
-    headers = [str(value).strip() for value in header_values]
+    headers = [
+        HEADER_ALIASES.get(str(value).strip(), str(value).strip())
+        for value in header_values
+    ]
     missing_columns = [column for column in REQUIRED_COLUMNS if column not in headers]
     if missing_columns:
         raise ValueError(f"Annotation workbook is missing columns: {missing_columns}")
@@ -307,7 +355,7 @@ def read_xlsx_annotations(path: Path) -> tuple[list[str], list[dict[str, Any]], 
                     )
                 record[field] = int(number)
         records.append(record)
-    return headers, records, "Annotations"
+    return headers, records, worksheet_name
 
 
 def read_markdown_field(block: str, label: str, *, code: bool = False) -> str:
@@ -321,6 +369,9 @@ def read_markdown_field(block: str, label: str, *, code: bool = False) -> str:
 
 def read_pilot_packet(
     packet_path: Path,
+    expected_pilots: list[str] | None = None,
+    *,
+    require_exact_files: bool = True,
 ) -> tuple[
     list[dict[str, Any]],
     dict[str, str],
@@ -328,14 +379,24 @@ def read_pilot_packet(
     dict[str, str],
     list[str],
 ]:
+    expected_pilots = expected_pilots or EXPECTED_PILOTS
     threads_dir = packet_path / "threads" if (packet_path / "threads").is_dir() else packet_path
     if not threads_dir.is_dir():
         raise FileNotFoundError(f"Pilot packet directory not found: {packet_path}")
-    files = sorted(
+    candidate_files = sorted(
         path for path in threads_dir.iterdir() if path.is_file() and PILOT_FILE_RE.match(path.name)
     )
-    if [path.stem for path in files] != EXPECTED_PILOTS:
-        raise ValueError("Pilot packet must contain exactly P001.md through P050.md")
+    files = (
+        candidate_files
+        if require_exact_files
+        else [path for path in candidate_files if path.stem in set(expected_pilots)]
+    )
+    if [path.stem for path in files] != expected_pilots:
+        raise ValueError(
+            "Pilot packet must contain exactly "
+            f"{', '.join(expected_pilots)}"
+            + ("" if require_exact_files else " among its available pilot files")
+        )
 
     message_index: list[dict[str, Any]] = []
     thread_by_pilot: dict[str, str] = {}
@@ -392,11 +453,11 @@ def read_pilot_packet(
                     body_snippets.append(normalized[:120])
 
     message_index.sort(key=lambda item: (item["pilot_id"], item["chronological_rank"]))
-    if len(message_index) != 195:
-        raise ValueError(f"Expected 195 pilot messages, found {len(message_index)}")
+    if not message_index:
+        raise ValueError("Pilot packet did not yield any messages")
     if len({item["message_id"] for item in message_index}) != len(message_index):
         raise ValueError("Pilot packet contains duplicate message IDs")
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         ranks = [
             item["chronological_rank"]
             for item in message_index
@@ -447,10 +508,15 @@ def validate_annotation_rows(
     rows: list[dict[str, Any]],
     message_by_id: dict[str, dict[str, Any]],
     thread_by_pilot: dict[str, str],
+    expected_pilots: list[str] | None = None,
 ) -> None:
+    expected_pilots = expected_pilots or EXPECTED_PILOTS
     observed_pilots = sorted({str(row["pilot_id"]) for row in rows})
-    if observed_pilots != EXPECTED_PILOTS:
-        raise ValueError("Annotation workbook pilot IDs do not cover P001-P050 exactly")
+    if observed_pilots != expected_pilots:
+        raise ValueError(
+            "Annotation workbook pilot IDs do not cover the expected pilots exactly: "
+            f"expected={expected_pilots}, observed={observed_pilots}"
+        )
     qc_present = "qc_status" in headers
     duplicate_keys: set[tuple[str, str, str]] = set()
 
@@ -526,7 +592,9 @@ def select_usable_rows(
 
 
 def build_tasks(
-    usable_rows: list[dict[str, Any]], qc_present: bool
+    usable_rows: list[dict[str, Any]],
+    qc_present: bool,
+    annotation_workbook_name: str = DEFAULT_ANNOTATION_WORKBOOK_NAME,
 ) -> tuple[list[dict[str, Any]], list[dict[str, Any]]]:
     grouped: dict[tuple[str, str], list[dict[str, Any]]] = defaultdict(list)
     for row in usable_rows:
@@ -588,7 +656,7 @@ def build_tasks(
             "history": events,
             "evidence_message_ids": evidence_message_ids,
             "annotation_metadata": {
-                "source_workbook": "MailEx_annotation_v1.6.xlsx",
+                "source_workbook": annotation_workbook_name,
                 "annotation_statuses": ordered_unique(
                     event["annotation_status"] for event in events
                 ),
@@ -656,7 +724,10 @@ def build_questions(
     annotation_rows: list[dict[str, Any]],
     message_index: list[dict[str, Any]],
     thread_by_pilot: dict[str, str],
+    expected_pilots: list[str] | None = None,
+    question_id_prefix: str = DEFAULT_QUESTION_ID_PREFIX,
 ) -> list[dict[str, Any]]:
+    expected_pilots = expected_pilots or EXPECTED_PILOTS
     snapshots_by_pilot: dict[str, list[dict[str, Any]]] = defaultdict(list)
     histories_by_pilot: dict[str, list[dict[str, Any]]] = defaultdict(list)
     messages_by_pilot: dict[str, list[str]] = defaultdict(list)
@@ -667,7 +738,7 @@ def build_questions(
         histories_by_pilot[history["pilot_id"]].append(history)
     for message in message_index:
         messages_by_pilot[message["pilot_id"]].append(message["message_id"])
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         snapshots_by_pilot[pilot_id].sort(key=lambda item: task_sort_key(item["task_id"]))
         histories_by_pilot[pilot_id].sort(key=lambda item: task_sort_key(item["task_id"]))
 
@@ -703,7 +774,7 @@ def build_questions(
             }
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -738,7 +809,7 @@ def build_questions(
             negative_control=not tasks,
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -776,7 +847,7 @@ def build_questions(
             negative_control=not tasks,
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -806,7 +877,7 @@ def build_questions(
             difficulty_or_scope="thread_participant_mapping",
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -839,7 +910,7 @@ def build_questions(
             difficulty_or_scope="thread_participant_mapping",
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         task_histories = []
         related_tasks = []
         snapshots_by_task = {
@@ -896,7 +967,7 @@ def build_questions(
             difficulty_or_scope="thread_multi_transition_history",
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -923,7 +994,7 @@ def build_questions(
             difficulty_or_scope="thread_auxiliary_attribute",
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -953,7 +1024,7 @@ def build_questions(
             difficulty_or_scope="thread_auxiliary_attribute",
         )
 
-    for pilot_id in EXPECTED_PILOTS:
+    for pilot_id in expected_pilots:
         tasks = [
             task
             for task in snapshots_by_pilot[pilot_id]
@@ -1012,7 +1083,7 @@ def build_questions(
         )
 
     for index, question in enumerate(questions, start=1):
-        question["question_id"] = f"ISCMI-Q{index:04d}"
+        question["question_id"] = f"{question_id_prefix}{index:04d}"
     return questions
 
 
@@ -1143,28 +1214,43 @@ def write_questions_csv(path: Path, questions: list[dict[str, Any]]) -> None:
 
 def main() -> int:
     args = parse_args()
+    expected_pilots = parse_pilot_ids(args.pilot_ids)
+    expected_pilot_set = set(expected_pilots)
     generation_timestamp = normalize_timestamp(args.generation_timestamp)
-    headers, annotation_rows, sheet_name = read_xlsx_annotations(args.annotations)
+    headers, annotation_rows, sheet_name = read_xlsx_annotations(
+        args.annotations, args.worksheet
+    )
+    annotation_rows = [
+        row for row in annotation_rows if str(row.get("pilot_id")) in expected_pilot_set
+    ]
     (
         message_index,
         thread_by_pilot,
         packet_sha256,
         pilot_hashes,
         body_snippets,
-    ) = read_pilot_packet(args.pilot_packet)
+    ) = read_pilot_packet(
+        args.pilot_packet,
+        expected_pilots,
+        require_exact_files=not args.allow_extra_packet_files,
+    )
     message_by_id = {item["message_id"]: item for item in message_index}
     validate_annotation_rows(
-        headers, annotation_rows, message_by_id, thread_by_pilot
+        headers, annotation_rows, message_by_id, thread_by_pilot, expected_pilots
     )
     usable_rows, exclusions = select_usable_rows(headers, annotation_rows)
     qc_present = "qc_status" in headers
-    histories, snapshots = build_tasks(usable_rows, qc_present)
+    histories, snapshots = build_tasks(
+        usable_rows, qc_present, args.annotation_workbook_name
+    )
     questions = build_questions(
         snapshots,
         histories,
         annotation_rows,
         message_index,
         thread_by_pilot,
+        expected_pilots,
+        args.question_id_prefix,
     )
     validate_benchmark(
         histories, snapshots, questions, message_index, annotation_rows
@@ -1287,7 +1373,7 @@ def main() -> int:
             "raw_email_bodies_committed": False,
         },
         "annotation_workbook": {
-            "name": "MailEx_annotation_v1.6.xlsx",
+            "name": args.annotation_workbook_name,
             "worksheet": sheet_name,
             "columns": headers,
             "rows": len(annotation_rows),
@@ -1295,7 +1381,10 @@ def main() -> int:
             "qc_field_present": qc_present,
         },
         "pilot_packet": {
-            "description": "Corrected external P001.md-P050.md MailEx pilot packet",
+            "description": (
+                "Corrected external MailEx pilot packet for "
+                f"{expected_pilots[0]}-{expected_pilots[-1]}"
+            ),
             "file_count": len(pilot_hashes),
             "aggregate_sha256": packet_sha256,
             "file_sha256": dict(sorted(pilot_hashes.items())),
@@ -1306,6 +1395,7 @@ def main() -> int:
             "generation_timestamp_utc": generation_timestamp,
             "no_llm_or_paid_api_used": True,
             "deterministic_ordering": True,
+            "question_id_prefix": args.question_id_prefix,
             "timestamp_reproducibility": (
                 "Pass --generation-timestamp with the recorded value for a byte-identical manifest."
             ),
@@ -1337,7 +1427,7 @@ def main() -> int:
         },
         "evaluation_partition": {
             "type": "fixed_evaluation_set",
-            "pilot_ids": EXPECTED_PILOTS,
+            "pilot_ids": expected_pilots,
             "thread_level_split_required_if_partitioned_later": True,
             "row_level_split_used": False,
         },

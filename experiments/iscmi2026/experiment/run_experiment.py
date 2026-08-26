@@ -74,7 +74,11 @@ def select_questions(questions: list[dict[str, Any]], *, real_api: bool, limit: 
     else:
         selected = []
         for family in DRY_RUN_FAMILIES:
-            selected.append(next(row for row in questions if row["question_family"] == family))
+            match = next((row for row in questions if row["question_family"] == family), None)
+            if match is not None:
+                selected.append(match)
+        if not selected:
+            raise ValueError("No dry-run question families are available in this benchmark")
     if limit is not None:
         if limit < 1:
             raise ValueError("--limit must be positive")
@@ -285,16 +289,21 @@ def build_manifest(
     *,
     run_id: str,
     mode: str,
+    benchmark: dict[str, Any],
     configs: dict[str, dict[str, Any]],
     selected_questions: list[dict[str, Any]],
     packet_dir: Path,
     output_path: Path,
+    config_dir: Path,
+    generator_model_override: str | None,
 ) -> dict[str, Any]:
     shared = configs[CONDITIONS[0]]
     config_hashes = {
-        condition: sha256_file(EXPERIMENT_DIR / "configs" / config["config_file"])
+        condition: sha256_file(config_dir / config["config_file"])
         for condition, config in configs.items()
     }
+    benchmark_dir = Path(benchmark["benchmark_dir"])
+    benchmark_manifest_hash = sha256_file(benchmark_dir / "benchmark_manifest.json")
     return {
         "schema_version": "1.0",
         "run_id": run_id,
@@ -317,7 +326,7 @@ def build_manifest(
                 "similarity_metric": config["similarity_metric"],
                 "thread_scope": config["thread_scope"],
                 "question_count": len(selected_questions),
-                "benchmark_manifest_hash": sha256_file(BENCHMARK_DIR / "benchmark_manifest.json"),
+                "benchmark_manifest_hash": benchmark_manifest_hash,
                 "task_representation_mode": config["task_representation_mode"],
                 "config_sha256": config_hashes[condition],
             }
@@ -328,6 +337,9 @@ def build_manifest(
         "temperature": shared["temperature"],
         "max_output_tokens": shared["max_output_tokens"],
         "question_count": len(selected_questions),
+        "benchmark_dir": str(benchmark_dir),
+        "benchmark_manifest_hash": benchmark_manifest_hash,
+        "benchmark_question_count": len(benchmark["questions"]),
         "full_benchmark_question_count": 271,
         "expected_condition_question_pairs": len(selected_questions) * len(CONDITIONS),
         "question_ids_sha256": sha256_text(
@@ -335,9 +347,10 @@ def build_manifest(
         ),
         "corrected_packet": {
             "path": str(packet_dir),
-            "aggregate_sha256": load_benchmark()["manifest"]["pilot_packet"]["aggregate_sha256"],
+            "aggregate_sha256": benchmark["manifest"]["pilot_packet"]["aggregate_sha256"],
             "raw_content_committed": False,
         },
+        "generator_model_override": generator_model_override,
         "output_file": str(output_path),
         "prompt_sha256": sha256_text(__import__("experiment_core").SYSTEM_PROMPT),
         "environment": {
@@ -353,8 +366,13 @@ def build_manifest(
 
 
 def run(args: argparse.Namespace) -> int:
-    benchmark = load_benchmark()
-    configs = load_configs()
+    benchmark_dir = Path(args.benchmark_dir).resolve() if args.benchmark_dir else BENCHMARK_DIR
+    benchmark = load_benchmark(
+        benchmark_dir,
+        expected_question_count=None if args.benchmark_dir else 271,
+    )
+    config_dir = Path(args.config_dir).resolve() if args.config_dir else EXPERIMENT_DIR / "configs"
+    configs = load_configs(config_dir, generator_model=args.generator_model)
     packet_dir = resolve_packet_dir(args.packet_dir)
     email_documents = parse_corrected_packet(packet_dir, benchmark["evidence"])
     oracle_documents = build_oracle_documents(benchmark["histories"], benchmark["snapshots"])
@@ -377,10 +395,13 @@ def run(args: argparse.Namespace) -> int:
     manifest = build_manifest(
         run_id=run_id,
         mode=mode,
+        benchmark=benchmark,
         configs=configs,
         selected_questions=selected_questions,
         packet_dir=packet_dir,
         output_path=inference_path,
+        config_dir=config_dir,
+        generator_model_override=args.generator_model,
     )
     manifest["max_parallel_generations"] = args.max_workers if args.real_api else 1
     write_json(manifest_path, manifest)
@@ -483,7 +504,7 @@ def run(args: argparse.Namespace) -> int:
     ]
     expected_models = {config["generator_model"] for config in configs.values()}
     observed_models = set(manifest["observed_generator_models"])
-    if api_errors or observed_models != expected_models:
+    if args.real_api and (api_errors or observed_models != expected_models):
         manifest["status"] = "failed_api_validation"
         manifest["api_error_records"] = len(api_errors)
         write_json(manifest_path, manifest)
@@ -503,7 +524,19 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--real-api",
         action="store_true",
-        help="Run all 271 questions with the configured OpenAI models (813 generations).",
+        help="Run all loaded benchmark questions with the configured OpenAI model.",
+    )
+    parser.add_argument(
+        "--benchmark-dir",
+        help="Benchmark directory to load; defaults to the frozen 271-question benchmark.",
+    )
+    parser.add_argument(
+        "--config-dir",
+        help="Condition config directory; defaults to experiments/iscmi2026/experiment/configs.",
+    )
+    parser.add_argument(
+        "--generator-model",
+        help="Pinned generator snapshot to apply to all three condition configs.",
     )
     parser.add_argument(
         "--packet-dir",

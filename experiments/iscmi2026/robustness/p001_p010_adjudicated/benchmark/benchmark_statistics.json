@@ -1,0 +1,126 @@
+{
+  "annotation_rows_total": 84,
+  "annotation_status_distribution": {
+    "ANNOTATED": 77,
+    "NO_TASK": 5,
+    "SKIP_UNCERTAIN": 2
+  },
+  "confidence_distribution_usable": {
+    "3": 12,
+    "4": 46,
+    "5": 19
+  },
+  "excluded_annotations": {
+    "annotation_status:NO_TASK": 5,
+    "annotation_status:SKIP_UNCERTAIN": 2
+  },
+  "excluded_annotations_total": 7,
+  "messages": 47,
+  "negative_control_questions": 9,
+  "qc": {
+    "distribution": {},
+    "field_present": false,
+    "primary_filter": null
+  },
+  "questions_by_family": {
+    "ACTOR_RESPONSIBILITY": 9,
+    "BLOCKED_BY": 2,
+    "CLOSED_TASKS": 10,
+    "DEADLINE": 1,
+    "NO_TASK_CONTROL": 5,
+    "OPEN_TASKS": 10,
+    "REQUESTER": 6,
+    "TASK_HISTORY": 10,
+    "WAITING_FOR": 4
+  },
+  "questions_total": 57,
+  "rare_transition_policy": {
+    "CANCEL": "secondary_descriptive_only",
+    "REJECT": "secondary_descriptive_only"
+  },
+  "schema_version": "1.0",
+  "task_snapshot_coverage": {
+    "actor": {
+      "populated": 33,
+      "ratio": 0.75,
+      "total": 44
+    },
+    "blocked_by": {
+      "populated": 2,
+      "ratio": 0.045455,
+      "total": 44
+    },
+    "closure_reason": {
+      "populated": 12,
+      "ratio": 0.272727,
+      "total": 44
+    },
+    "deadline": {
+      "populated": 3,
+      "ratio": 0.068182,
+      "total": 44
+    },
+    "requester": {
+      "populated": 10,
+      "ratio": 0.227273,
+      "total": 44
+    },
+    "waiting_for": {
+      "populated": 6,
+      "ratio": 0.136364,
+      "total": 44
+    }
+  },
+  "tasks_by_closure_reason": {
+    "COMPLETE": 11,
+    "REJECT": 1
+  },
+  "tasks_by_final_state": {
+    "CLOSED": 12,
+    "OPEN": 31,
+    "UNCERTAIN": 1
+  },
+  "threads": 10,
+  "transition_distribution": {
+    "COMPLETE": 12,
+    "CONFIRM": 11,
+    "CREATE": 37,
+    "MODIFY": 7,
+    "NONE": 9,
+    "REJECT": 1
+  },
+  "unique_tasks": 44,
+  "usable_annotated_rows": 77,
+  "usable_row_coverage": {
+    "actor": {
+      "populated": 60,
+      "ratio": 0.779221,
+      "total": 77
+    },
+    "blocked_by": {
+      "populated": 3,
+      "ratio": 0.038961,
+      "total": 77
+    },
+    "closure_reason": {
+      "populated": 16,
+      "ratio": 0.207792,
+      "total": 77
+    },
+    "deadline": {
+      "populated": 4,
+      "ratio": 0.051948,
+      "total": 77
+    },
+    "requester": {
+      "populated": 26,
+      "ratio": 0.337662,
+      "total": 77
+    },
+    "waiting_for": {
+      "populated": 9,
+      "ratio": 0.116883,
+      "total": 77
+    }
+  }
+}

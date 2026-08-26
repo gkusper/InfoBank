@@ -539,7 +539,9 @@ def write_report(
             "",
             "## History",
             "",
-            "The dedicated 42-question HISTORY result compares exact transition/state sequences and ordered-subsequence LCS F1.",
+            "The dedicated "
+            f"{aggregate['by_condition'][CONDITIONS[0]]['history']['questions']}-question "
+            "HISTORY result compares exact transition/state sequences and ordered-subsequence LCS F1.",
             "",
             "| Condition | Exact sequence | Ordered structured score | Evidence F1 |",
             "|---|---:|---:|---:|",
@@ -622,7 +624,10 @@ def evaluate(args: argparse.Namespace) -> int:
     inference_path = Path(args.inference_results).resolve()
     output_dir = Path(args.output_dir).resolve() if args.output_dir else inference_path.parent
     output_dir.mkdir(parents=True, exist_ok=True)
-    benchmark = load_benchmark()
+    benchmark = load_benchmark(
+        args.benchmark_dir,
+        expected_question_count=None if args.benchmark_dir else 271,
+    )
     questions = {row["question_id"]: row for row in benchmark["questions"]}
     task_evidence_by_key = {
         (row["pilot_id"], row["task_id"]): set(row["evidence_message_ids"])
@@ -777,6 +782,10 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--output-dir",
         help="Evaluation output directory (defaults to the inference file directory).",
+    )
+    parser.add_argument(
+        "--benchmark-dir",
+        help="Benchmark directory to score against; defaults to the frozen 271-question benchmark.",
     )
     return parser
 

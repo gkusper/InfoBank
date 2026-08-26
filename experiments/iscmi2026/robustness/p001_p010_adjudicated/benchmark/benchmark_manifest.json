@@ -1,0 +1,121 @@
+{
+  "annotation_workbook": {
+    "columns": [
+      "annotator_id",
+      "pilot_id",
+      "thread_id",
+      "task_id",
+      "message_id",
+      "chronological_rank",
+      "sender",
+      "recipients",
+      "subject",
+      "requester",
+      "actor",
+      "created_at",
+      "deadline",
+      "completed_at",
+      "transition",
+      "resulting_state",
+      "closure_reason",
+      "waiting_for",
+      "blocked_by",
+      "confidence",
+      "notes",
+      "annotation_status"
+    ],
+    "name": "MailEx_annotation_001-010_v2.2.xlsx",
+    "qc_field_present": false,
+    "rows": 84,
+    "sha256": "ba37a5620c49b0424a76ab8f359e6d1365bf68f23f3e292495acbeac599927be",
+    "worksheet": "Finalized_Annotation"
+  },
+  "benchmark_generation": {
+    "deterministic_ordering": true,
+    "generation_timestamp_utc": "2026-08-26T11:30:00Z",
+    "no_llm_or_paid_api_used": true,
+    "question_id_prefix": "ISCMI-A10-Q",
+    "script": "build_benchmark.py",
+    "script_sha256": "0313fe680c8c91237a70f168fb423ec9f20a7d5b5d73bdc06b903809c03756ec",
+    "timestamp_reproducibility": "Pass --generation-timestamp with the recorded value for a byte-identical manifest."
+  },
+  "counts": {
+    "questions": 57,
+    "tasks": 44,
+    "usable_annotation_rows": 77
+  },
+  "evaluation_partition": {
+    "pilot_ids": [
+      "P001",
+      "P002",
+      "P003",
+      "P004",
+      "P005",
+      "P006",
+      "P007",
+      "P008",
+      "P009",
+      "P010"
+    ],
+    "row_level_split_used": false,
+    "thread_level_split_required_if_partitioned_later": true,
+    "type": "fixed_evaluation_set"
+  },
+  "generated_files_sha256": {
+    "benchmark_statistics.json": "a930f50370f58206c327be97e90baace0a521ef616d1a15af5b4ec2b8b0001af",
+    "message_evidence_index.jsonl": "43df777fb2b2675fc452708db8af430eed3dee135a37983cc999d0b91c7df026",
+    "questions.csv": "5fc50e9d76dc7b6ea0db8fc3b001435caa925f1298aa3f373c2dbd788011b570",
+    "questions.jsonl": "196860d41ed4b87fa25cebe08859db8a072bd9a05c948afbdf2bac315269c515",
+    "task_histories.jsonl": "e5c109c1e589485497d8e67dc1ba72c215eeba8a9fb9f491c10bd0430865237b",
+    "task_snapshots.jsonl": "2a47f9a11ac14ec3e068d0859dde198e1d34be2b3f49c5609265f36efe5e2d87"
+  },
+  "inclusion_rules": {
+    "annotation_status_excluded": [
+      "PENDING",
+      "NO_TASK",
+      "SKIP_UNCERTAIN"
+    ],
+    "annotation_status_included": [
+      "ANNOTATED"
+    ],
+    "minimum_confidence": 3,
+    "no_qc_status_invented": true,
+    "qc_filter": null
+  },
+  "information_separation": {
+    "derived_ground_truth": "task_snapshots.jsonl and question gold fields",
+    "gold_labels_in_retrieval_corpus": false,
+    "human_annotation": "task_histories.jsonl",
+    "input_corpus": "Corrected external original MailEx email evidence only; not copied into committed fixtures."
+  },
+  "pilot_packet": {
+    "aggregate_sha256": "73da4ff96fc7002f14820c7895c918760f2b968a2ec7ef7accab8f2cbd4b1574",
+    "description": "Corrected external MailEx pilot packet for P001-P010",
+    "file_count": 10,
+    "file_sha256": {
+      "P001.md": "0f2f2a0474d899d3c3b7e35276dd830697c1cb34f355273a328c3ee0cafd6221",
+      "P002.md": "f96aed5879ae312e8ca3321dd96983770f52cf9b951f526cf12130bb4295d283",
+      "P003.md": "59874afb16dc14c0314da00fefc344b45f16509ba96eafefaca727bc45a58a11",
+      "P004.md": "5fe475c051dfeb73b634db37253ccfa4184f42af924510f8e1117d58d1c1b246",
+      "P005.md": "72438d0c2154d8b9eba38750bdd7cbe966699c340b22a0ffcd1fd9123e1ba138",
+      "P006.md": "63ca4d7bcbe931d59e6b29c76c7164a51600f2cb2caf7ee25be3d9eefa6a1362",
+      "P007.md": "daf7ae2301582cff32515180a8a383ba958c2e2712fb5808322b37e98c13ea26",
+      "P008.md": "de82f801c45b7110d4743f9d1d91ae183f7e804f863123a4ee0ddb1d994bd295",
+      "P009.md": "43d2629707713bb6cf40ca50eb8430a509343f22d34d0f82d5bedbc8eacba739",
+      "P010.md": "b97c64c319d1840594e07d70891a973ae98237b9814bfa18b70a3678489f3358"
+    }
+  },
+  "schema_version": "1.0",
+  "snapshot_derivation": {
+    "auxiliary_attribute_propagation": "none",
+    "missing_values": "null",
+    "rule": "Use the last usable annotation in chronological order."
+  },
+  "source_dataset": {
+    "corrected_json_raw_message_alignment": true,
+    "name": "MailEx",
+    "pilot_messages": 47,
+    "pilot_threads": 10,
+    "raw_email_bodies_committed": false
+  }
+}

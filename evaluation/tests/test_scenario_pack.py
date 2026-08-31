@@ -183,6 +183,17 @@ def test_validator_rejects_empty_reason_and_invalid_citation_locator() -> None:
     assert {"MISSING_NEGATIVE_REASON", "INVALID_CITATION_PAGE"} <= error_codes
 
 
+def test_validator_allows_constrained_answer_without_negative_reason() -> None:
+    pack = _complete_s1_pack()
+    pack["queries"][0]["expected_output"] = "CONSTRAINED_ANSWER"
+    pack["queries"][0]["negative_reason"] = None
+
+    error_codes = {issue["code"] for issue in validate_scenario_pack(pack) if issue["severity"] == "ERROR"}
+
+    assert "MISSING_NEGATIVE_REASON" not in error_codes
+    assert "UNEXPECTED_NEGATIVE_REASON" not in error_codes
+
+
 def test_bundle_writer_is_deterministic_and_keeps_gold_outside_query_runtime_contract(tmp_path: Path) -> None:
     first = write_scenario_pack_bundle(tmp_path)
     second = write_scenario_pack_bundle(tmp_path)

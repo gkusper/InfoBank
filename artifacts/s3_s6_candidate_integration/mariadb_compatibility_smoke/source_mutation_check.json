@@ -1,0 +1,10 @@
+{
+  "AUTHOR_DECISIONS_CHANGED": "NO",
+  "REFERENCE_ANNOTATIONS_CHANGED": "NO",
+  "SOURCE_CODE_CHANGED_IN_THIS_TASK": "NO",
+  "TEST_CODE_CHANGED_IN_THIS_TASK": "NO",
+  "final_tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+  "final_tracked_diff_sha256_after_validation": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+  "preflight_tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+  "schema_version": "infobank-s3-s6-mariadb-source-mutation-check-v1"
+}

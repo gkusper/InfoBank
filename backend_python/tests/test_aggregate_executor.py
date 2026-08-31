@@ -47,8 +47,46 @@ def test_mixed_policy_aggregate_is_correct_deduplicated_and_non_disclosing() -> 
     serialized = json.dumps(result, sort_keys=True)
     for prohibited in ("source-a", "person-a", "999", "5000", "7000"):
         assert prohibited not in serialized
+    assert "distinct contributors" not in result["safe_output"]
+    assert "contributor_count" not in result["public_trace"]
+    assert "deduplicated_count" not in result["public_trace"]
     assert result["citations"] == []
     assert json.loads(result["generator_context"])["governed_aggregate"]["value"] == 20.0
+
+
+def test_equal_threshold_is_allowed_without_public_count() -> None:
+    result = execute_aggregate(contributions()[:3], decisions(), AggregateConfig(k_threshold=2, operation="sum"))
+    assert result["output_class"] == AGGREGATE_RESULT
+    assert result["aggregate"]["value"] == 30.0
+    assert result["aggregate"]["contributor_count"] == 2
+    assert "contributor_count" not in result["public_trace"]
+    assert "2" not in result["safe_output"]
+
+
+def test_above_threshold_is_allowed_without_source_or_component_disclosure() -> None:
+    result = execute_aggregate(contributions()[:4], decisions(), AggregateConfig(k_threshold=2, operation="mean"))
+    assert result["output_class"] == AGGREGATE_RESULT
+    assert result["aggregate"]["contributor_count"] == 3
+    serialized_public = json.dumps(
+        {
+            "safe_output": result["safe_output"],
+            "public_trace": result["public_trace"],
+            "citations": result["citations"],
+        },
+        sort_keys=True,
+    )
+    for prohibited in ("source-a", "person-a", "10.0", "20.0", "30.0"):
+        assert prohibited not in serialized_public
+
+
+def test_threshold_is_runtime_configuration_not_a_global_constant() -> None:
+    permitted = [AggregateContribution("entry-a", "group-a", 4.0), AggregateContribution("entry-b", "group-b", 8.0)]
+    policy = {"entry-a": relevance.USE_AGGREGATE, "entry-b": relevance.USE_AGGREGATE}
+    assert execute_aggregate(permitted, policy, AggregateConfig(k_threshold=2))["output_class"] == AGGREGATE_RESULT
+    assert (
+        execute_aggregate(permitted, policy, AggregateConfig(k_threshold=3))["output_class"]
+        == REFUSE_AGGREGATION_THRESHOLD
+    )
 
 
 def test_below_threshold_refusal_does_not_disclose_source_existence_or_count() -> None:

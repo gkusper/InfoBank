@@ -1,0 +1,824 @@
+{
+  "created_utc": "2026-08-31T21:12:07+00:00",
+  "files_over_github_limit": [],
+  "git_diff_cached_check_returncode": 0,
+  "git_diff_cached_check_stderr_line_count": 0,
+  "git_diff_cached_check_stdout_line_count": 0,
+  "largest_staged_file": {
+    "category": "C",
+    "git_status": "A",
+    "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip",
+    "sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c",
+    "size_bytes": 1773979,
+    "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+  },
+  "new_public_file_full_scan": [
+    {
+      "actual_local_path_findings": 0,
+      "path": ".gitattributes",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.csv",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.csv",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/PACKET_VALIDATION.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/README.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "scanned_members": 8,
+      "secret_findings": 0,
+      "type": "zip"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/SOURCE_EVIDENCE_MANIFEST.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.csv",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_execution_evidence.csv",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/database_row_counts.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_mariadb_assessment.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_sqlite_vs_mariadb.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_mariadb_public_summary.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.csv",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/schema_validation.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/source_mutation_check.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/policy_variant_validation.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_candidate_integration/reference_annotation_validation.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_REPORT.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_VALIDATION.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_INPUT_CONTINUITY.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_PACKAGE_VALIDATION.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "scanned_members": 35,
+      "secret_findings": 0,
+      "type": "zip"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip.sha256",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/FINAL_AUTHOR_REVIEWED_ARTIFACT_CHECKSUMS.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/HUMAN_CONFIRMATION_SOURCE_PACKET_CHECKSUM_AUDIT.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/MARIADB_SELECTED_EVIDENCE_CHECKSUMS.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/PRE_COMMIT_VALIDATION.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/PRE_COMMIT_WORKTREE_AUDIT.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/STAGING_PLAN.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/git_finalization/WORKTREE_CLASSIFICATION.csv",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/S3_S6_EVALUATION_REPRODUCE.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/S3_S6_FREEZE_CODE_STATE.json",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/S3_S6_FREEZE_NOTES_V1.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    },
+    {
+      "actual_local_path_findings": 0,
+      "path": "docs/integration/S3_S6_MARIADB_COMPATIBILITY_REPORT.md",
+      "placeholder_marker_findings": 0,
+      "provider_trace_findings": 0,
+      "secret_findings": 0,
+      "type": "text"
+    }
+  ],
+  "new_public_file_full_scan_totals": {
+    "actual_local_path_findings": 0,
+    "placeholder_marker_findings": 0,
+    "provider_trace_findings": 0,
+    "secret_findings": 0
+  },
+  "self_referential_hash_note": "Hashes for STAGED_CONTENT_AUDIT.json and .csv are omitted because they describe their own final staging.",
+  "source_and_test_diff_scan": {
+    "actual_local_path_findings": 0,
+    "case_specific_findings": 0,
+    "placeholder_marker_findings": 0,
+    "provider_trace_findings": 0,
+    "secret_findings": 0
+  },
+  "stage_policy": "explicit git add path list; no git add -A and no git add .",
+  "staged_file_count": 55,
+  "staged_files": [
+    {
+      "category": "D",
+      "git_status": "M",
+      "path": ".gitattributes",
+      "sha256": "108f69937281dfd17fb7b5e0aba6f01fc4605ffb16929f0dec399ef036a37c8d",
+      "size_bytes": 455,
+      "stage_reason": "repo metadata preserving literal freeze patch whitespace for staged diff validation"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.csv",
+      "sha256": "7af24464937f74261abee19be626c5a1f42166669570ce69fcf7456ab8450039",
+      "size_bytes": 17809,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.json",
+      "sha256": "8ef4fd364f8e83a3ad9c2555e1a033828e0b930e86a211dd48d342c8cf3a5e24",
+      "size_bytes": 43347,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.csv",
+      "sha256": "0af040e3e170d3c72d2c8b3f5798369165882461126736e99d3bb2ac7ff9a772",
+      "size_bytes": 759,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.json",
+      "sha256": "51749caf702a8108e4fddd4dab0bc0ea5da803411cf4ccdefab78078044f31a8",
+      "size_bytes": 3628,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/PACKET_VALIDATION.json",
+      "sha256": "ff5d842e7b88299b3d87e44b478129c02116b889f03bf7a3e6542682c89f8469",
+      "size_bytes": 4363,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/README.md",
+      "sha256": "f29e28848dcfc5da541f66253f31dc0c28c95a67d636634019b4bd5c967add03",
+      "size_bytes": 621,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip",
+      "sha256": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191",
+      "size_bytes": 12787,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/SOURCE_EVIDENCE_MANIFEST.json",
+      "sha256": "fdfdc7b2d1f7e991735175b89ccd916b7023ea006aeccc418fa3cc2c34fd8a3c",
+      "size_bytes": 7155,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.csv",
+      "sha256": "e3c2246cb90dd0750340959cf333aff457255962595a4a1c6cecb9e50571e28d",
+      "size_bytes": 6122,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.json",
+      "sha256": "7cc92da790b8e143eb519d681886912d568638b2082e729ee209162b06d2c0e7",
+      "size_bytes": 13816,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_execution_evidence.csv",
+      "sha256": "495c996bbee0e54c21e3d20a2dcd79dd3955e21f0ad072d46b1a1c51beda957d",
+      "size_bytes": 4348,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/database_row_counts.json",
+      "sha256": "919562442af306038a9360945a6ddf9d406b36e143070574b678593f9bf2a359",
+      "size_bytes": 2408,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_mariadb_assessment.json",
+      "sha256": "16ff7e0a03e01a6a216586c322bdf1103845bb29b68d8ea7540b0f40603e61f8",
+      "size_bytes": 26660,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_sqlite_vs_mariadb.json",
+      "sha256": "0e696eb447f07fa760152d0e2d0f05ececafaf051b4e94ce7a73eeca2dd393b8",
+      "size_bytes": 671,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_mariadb_public_summary.json",
+      "sha256": "af119fbc0b978c28bdab628a75ea75d3a9595279b15e2ed152f6c7f6293d6465",
+      "size_bytes": 56151,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.csv",
+      "sha256": "1fb02b1037ce5e394db3376bd4213d8972babd3bf234c467ebacea95616d3d86",
+      "size_bytes": 33,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.json",
+      "sha256": "663c854e139665b8f0e8c81e19ddd9548b708bdee32b473f3fc988880c4958f8",
+      "size_bytes": 672,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/schema_validation.json",
+      "sha256": "053495498be27565e1834c57d095270161dffc25aefb0bf58a7ea41e8b1914f9",
+      "size_bytes": 7089,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/source_mutation_check.json",
+      "sha256": "ed3a49088a193bc6d59c85dacad06139e64f12e4004fee5cc6b1c8067de8d8db",
+      "size_bytes": 565,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/policy_variant_validation.json",
+      "sha256": "2612e6be367a1ef6d75c86a25e28d1bff1f9c5106b7aada168c8e7033a25e140",
+      "size_bytes": 2414,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_candidate_integration/reference_annotation_validation.json",
+      "sha256": "e8b0ecaeff1e2e2b44ffd0cd86d7ebf3e1fde4b09662495b10777183871c16e0",
+      "size_bytes": 1086,
+      "stage_reason": "compact validation, MariaDB, or human-confirmation evidence"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_REPORT.json",
+      "sha256": "a68f63e81f3efee894e176c13cf7987f0a5f6dccc5814d5410cb1033d629d8aa",
+      "size_bytes": 7490,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_VALIDATION.json",
+      "sha256": "f3ba0253792bc4e96f69b05a153f9ef325b6229a5da5205ed8d6a952ec886f95",
+      "size_bytes": 1818,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_INPUT_CONTINUITY.json",
+      "sha256": "11d05aacf4a5b3a21eab1d80d9c790bf92de1976b0f5fd9f73ef2c110b9c8b03",
+      "size_bytes": 1785,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_PACKAGE_VALIDATION.json",
+      "sha256": "d87e9d3b6dbb9cc93939362783e051b33f8b1843d28864eac0b2ccc3c0eb3ec2",
+      "size_bytes": 1139,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip",
+      "sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c",
+      "size_bytes": 1773979,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip.sha256",
+      "sha256": "90a369006819fb6c04ced46a9bee7c977642b68ca3a1e8ee011749aff92a0502",
+      "size_bytes": 98,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/FINAL_AUTHOR_REVIEWED_ARTIFACT_CHECKSUMS.json",
+      "sha256": "51d36d44c6494a144e7621200242fa5d9164ca57a85a1c434779b524427e3448",
+      "size_bytes": 1472,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/HUMAN_CONFIRMATION_SOURCE_PACKET_CHECKSUM_AUDIT.json",
+      "sha256": "52c33af775ca26218f870f7e319f8983d14fab46492f95d82c8806a2687cb355",
+      "size_bytes": 659,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/MARIADB_SELECTED_EVIDENCE_CHECKSUMS.json",
+      "sha256": "5b336d4b295d2b2d4d716a9af035140723b65aedc454d4fb7b61a158105e64d9",
+      "size_bytes": 2216,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/PRE_COMMIT_VALIDATION.json",
+      "sha256": "b8a2e37450ddfbfa67bfeeafdca8b31c33296eb7e510be5e703e9d324acc7bf4",
+      "size_bytes": 4234,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/PRE_COMMIT_WORKTREE_AUDIT.json",
+      "sha256": "3eb30e6c0dcc802ee26915f378ee2da059fad082d78178db2f59a7188f8d7c8e",
+      "size_bytes": 13339,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/STAGED_CONTENT_AUDIT.csv",
+      "sha256": "SELF_REFERENTIAL_OMITTED",
+      "size_bytes": 11461,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/STAGED_CONTENT_AUDIT.json",
+      "sha256": "SELF_REFERENTIAL_OMITTED",
+      "size_bytes": 31917,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/STAGING_PLAN.json",
+      "sha256": "e4f0305d436be87a54663628ee32fa41cb9487f94d276be259f8f51561f137be",
+      "size_bytes": 16599,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "D",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/git_finalization/WORKTREE_CLASSIFICATION.csv",
+      "sha256": "f512e22e363b4d11178da9c4be312f670741200d24198d3fd1d59f5406a2463e",
+      "size_bytes": 10797,
+      "stage_reason": "compact git-finalization audit evidence"
+    },
+    {
+      "category": "C",
+      "git_status": "A",
+      "path": "artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch",
+      "sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+      "size_bytes": 86797,
+      "stage_reason": "canonical frozen S3-S6 package, checksum, or immutable freeze artifact"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "backend_python/aggregate_executor.py",
+      "sha256": "654714180b1267f3c693dd35f7846546b6514cf66f53ed3675d1b8d2ab1bee5e",
+      "size_bytes": 4999,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "backend_python/tests/test_aggregate_executor.py",
+      "sha256": "b8889fc0466d196c7ea98a1c17b98fc5164f7076ef14303aa2d0930ae71f0829",
+      "size_bytes": 9603,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+      "sha256": "3085dc6db7c16dc18a93b871cff1f8c63678b6fea6ac46a7d5efc91aa3d616e3",
+      "size_bytes": 7232,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md",
+      "sha256": "d23569033cea869c94e8c93be98260083becc07065553dc4e7a70420dbaf28e4",
+      "size_bytes": 3417,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+      "sha256": "9cda10c0edbff662fdd94e57d109f9e15574fd26fbeffc0620ce536115d1be9e",
+      "size_bytes": 5880,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/S3_S6_EVALUATION_REPRODUCE.md",
+      "sha256": "e5fec1b72d4c020a88f9d48092c15ef67a1658c05ce22425f6cdde0a72a8b812",
+      "size_bytes": 2017,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/S3_S6_FREEZE_CODE_STATE.json",
+      "sha256": "428745cbb23a453a9846a62e181bf5f1f012a2a4dfb5cf0fea79961109dbab0d",
+      "size_bytes": 4188,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/S3_S6_FREEZE_NOTES_V1.md",
+      "sha256": "a071c0282f03937dd652e6db319d1c5a0cfe7d3325dbb71f04342b65ef8fea4b",
+      "size_bytes": 1060,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "B",
+      "git_status": "A",
+      "path": "docs/integration/S3_S6_MARIADB_COMPATIBILITY_REPORT.md",
+      "sha256": "a97d095bbf8533436ab6dce66da1105be4e9927034a2a7aad5e561e22741a2f7",
+      "size_bytes": 9732,
+      "stage_reason": "canonical S3-S6 integration/freeze documentation"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/actual_pipeline_inputs.py",
+      "sha256": "ad69ffa37756fada0f3e8be6bc837fa4a20803b540b1704c78ed627bb82b92af",
+      "size_bytes": 5630,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/actual_pipeline_runner.py",
+      "sha256": "5a18f634c3ea8b52504150809de773a9140d2626e8d9a39eab202dcba8fdfe3b",
+      "size_bytes": 78289,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/external_scenario_corpus.py",
+      "sha256": "30a3b757aa0679ec0562522b7a7448c0e69216dd569ba8323b845f860510745c",
+      "size_bytes": 45874,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/scenario_pack.py",
+      "sha256": "5943789f5c876a31ec59435bf6bfcbf26001a019ee3cab67af7b926449ad5c38",
+      "size_bytes": 44506,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/tests/test_actual_pipeline.py",
+      "sha256": "23b667e89cbc4c57f3642550e0501af3d21704fafa9f2efc4adccf3608e12194",
+      "size_bytes": 51379,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/tests/test_external_scenario_corpus.py",
+      "sha256": "91502c1f75c270d34a617c515df992afa08bb97833f5e8248a7e6b857223c84f",
+      "size_bytes": 15101,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "evaluation/tests/test_scenario_pack.py",
+      "sha256": "a48708cf26db1629a7a73b828121f68c25bc9701fff5da591ad93a81dcff552d",
+      "size_bytes": 11693,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    },
+    {
+      "category": "A",
+      "git_status": "M",
+      "path": "scripts/bind_external_scenario_package.py",
+      "sha256": "112b68ddd37285582fb3f5cdb3cc3dfe46f34a2f07e0e89695c74692d061a3cd",
+      "size_bytes": 2086,
+      "stage_reason": "approved S3-S6 source or test integration change"
+    }
+  ],
+  "staged_s1_s2_files": [],
+  "total_staged_size_bytes": 2481445,
+  "unsafe_staged_path_findings": []
+}

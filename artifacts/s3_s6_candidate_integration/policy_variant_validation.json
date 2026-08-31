@@ -1,0 +1,87 @@
+{
+  "aggregate_cases": [
+    "S3-Q2",
+    "S3-Q4",
+    "S3-Q6",
+    "S3-Q9",
+    "S4B-Q3",
+    "S4B-Q6"
+  ],
+  "aggregate_only_case_count": 6,
+  "compatibility_blockers": [],
+  "document_citation_withholding_cases": [
+    "S3-Q2",
+    "S3-Q4",
+    "S3-Q6",
+    "S3-Q9",
+    "S4B-Q3",
+    "S4B-Q6"
+  ],
+  "owner_full_case_count": 24,
+  "per_case_thresholds": {
+    "S3-Q2": {
+      "aggregate_k": 3,
+      "expected_contributor_count": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "prohibited_disclosure_count": 11,
+      "public_document_citations_expected": false
+    },
+    "S3-Q4": {
+      "aggregate_k": 3,
+      "expected_contributor_count": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "prohibited_disclosure_count": 9,
+      "public_document_citations_expected": false
+    },
+    "S3-Q6": {
+      "aggregate_k": 3,
+      "expected_contributor_count": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "prohibited_disclosure_count": 9,
+      "public_document_citations_expected": false
+    },
+    "S3-Q9": {
+      "aggregate_k": 2,
+      "expected_contributor_count": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "prohibited_disclosure_count": 11,
+      "public_document_citations_expected": false
+    },
+    "S4B-Q3": {
+      "aggregate_k": 2,
+      "expected_contributor_count": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "prohibited_disclosure_count": 11,
+      "public_document_citations_expected": false
+    },
+    "S4B-Q6": {
+      "aggregate_k": 3,
+      "expected_contributor_count": 2,
+      "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "prohibited_disclosure_count": 7,
+      "public_document_citations_expected": false
+    }
+  },
+  "prohibited_marker_total": 58,
+  "s3_q9_reissue_deduplication": {
+    "aggregate_k": 2,
+    "distinct_relation_key_count": 2,
+    "expected_contributor_count": 2,
+    "relation_keys": [
+      "TCO-260321-H07",
+      "TCO-260306-G18"
+    ],
+    "source_ids": [
+      "s3-tesco-order-08",
+      "s3-tesco-order-09"
+    ]
+  },
+  "s4b_q6_threshold_refusal": {
+    "aggregate_k": 3,
+    "expected_contributor_count": 2,
+    "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+    "prohibited_disclosure_count": 7,
+    "public_document_citations_expected": false
+  },
+  "status": "PASS"
+}

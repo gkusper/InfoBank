@@ -1,0 +1,36 @@
+{
+  "created_utc": "2026-08-31T21:12:02+00:00",
+  "files": [
+    {
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.csv",
+      "sha256": "e3c2246cb90dd0750340959cf333aff457255962595a4a1c6cecb9e50571e28d",
+      "size_bytes": 6122
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.json",
+      "sha256": "7cc92da790b8e143eb519d681886912d568638b2082e729ee209162b06d2c0e7",
+      "size_bytes": 13816
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.csv",
+      "sha256": "0af040e3e170d3c72d2c8b3f5798369165882461126736e99d3bb2ac7ff9a772",
+      "size_bytes": 759
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.json",
+      "sha256": "51749caf702a8108e4fddd4dab0bc0ea5da803411cf4ccdefab78078044f31a8",
+      "size_bytes": 3628
+    },
+    {
+      "path": "docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+      "sha256": "3085dc6db7c16dc18a93b871cff1f8c63678b6fea6ac46a7d5efc91aa3d616e3",
+      "size_bytes": 7232
+    },
+    {
+      "path": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+      "sha256": "9cda10c0edbff662fdd94e57d109f9e15574fd26fbeffc0620ce536115d1be9e",
+      "size_bytes": 5880
+    }
+  ],
+  "status": "PASS"
+}

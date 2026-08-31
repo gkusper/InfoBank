@@ -607,6 +607,291 @@ def test_runner_uploads_external_source_pdf_bytes(tmp_path: Path) -> None:
     assert "connect internal port 9" not in record["generator_visible_text"]
 
 
+def test_runner_uses_generic_aggregate_numeric_extraction_without_public_count(tmp_path: Path) -> None:
+    dataset = tmp_path / "dataset"
+    dataset.mkdir()
+    query = QueryInput(
+        case_id="aggregate-case",
+        evaluation_identity="eval-aggregate",
+        query_text="What is the average private metric?",
+        declared_purpose="grounded_question_answering",
+        corpus_package_ref="aggregate-package",
+        policy_fixture_ref="aggregate",
+        runtime_parameters={"top_k": 2},
+    )
+    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict()])
+    metric_a = document_id("aggregate-package", "metric-a")
+    metric_b = document_id("aggregate-package", "metric-b")
+    corpus = {
+        "schema_version": CORPUS_SCHEMA_VERSION,
+        "metadata": {
+            "dataset_version": "actual-pipeline-development-v1",
+            "builder_version": "test",
+            "synthetic": True,
+        },
+        "documents": [
+            {
+                "document_id": metric_a,
+                "package_ref": "aggregate-package",
+                "object_id": "GROUP-A",
+                "document_type": "metric_record",
+                "original_filename": "metric-a.pdf",
+                "pages": ["Private contributor metric is 10 units."],
+                "keywords": ["metric"],
+                "archived": False,
+                "relation_key": "metric-a",
+            },
+            {
+                "document_id": metric_b,
+                "package_ref": "aggregate-package",
+                "object_id": "GROUP-A",
+                "document_type": "metric_record",
+                "original_filename": "metric-b.pdf",
+                "pages": ["Private contributor metric is 20 units."],
+                "keywords": ["metric"],
+                "archived": False,
+                "relation_key": "metric-b",
+            },
+        ],
+        "policy_fixtures": [
+            {
+                "fixture_id": "aggregate",
+                "access_by_document": {metric_a: "Aggregate", metric_b: "Aggregate"},
+                "purpose": "grounded_question_answering",
+                "conflict_policy": "query_sensitive",
+                "aggregate_k": 2,
+                "prohibited_markers": ["10 units", "20 units", metric_a, metric_b],
+            }
+        ],
+    }
+    corpus_path = dataset / "corpus_fixture.json"
+    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
+
+    run_actual_pipeline(
+        query_input_path=dataset / "query_inputs.jsonl",
+        corpus_fixture_path=corpus_path,
+        output_dir=tmp_path / "run" / "raw",
+        database_url=f"sqlite+pysqlite:///{(tmp_path / 'run' / 'eval.db').as_posix()}",
+        chroma_dir=tmp_path / "run" / "chroma",
+        source_storage_dir=tmp_path / "run" / "sources",
+        run_id="aggregate-run",
+        modes=["C2_PERMISSION_FILTERED"],
+        config=ActualPipelineConfig(),
+    )
+    record = json.loads((tmp_path / "run" / "raw" / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()[0])
+
+    assert record["actual_output_class"] == "AGGREGATE_RESULT"
+    assert record["actual_output_text"] == "Governed aggregate mean: 15."
+    assert record["actual_citations"] == []
+    assert record["aggregate_trace"]["threshold_satisfied"] is True
+    assert "contributor_count" not in record["aggregate_trace"]
+    assert "distinct contributors" not in record["actual_output_text"]
+    assert scan_record_safety(record)["aggregate_individual_value_exposure"] == 0
+
+
+def test_aggregate_fixture_policy_isolation_prevents_shared_identity_leakage(tmp_path: Path) -> None:
+    dataset = tmp_path / "aggregate-isolation-dataset"
+    dataset.mkdir()
+    package_ref = "aggregate-lab"
+    pass_ids = [document_id(package_ref, f"pass-{index}") for index in range(1, 4)]
+    short_ids = [document_id(package_ref, f"short-{index}") for index in range(1, 3)]
+    queries = [
+        QueryInput(
+            case_id="aggregate-pass",
+            evaluation_identity="shared-aggregate-user",
+            query_text="What total metric quantity was confirmed across the selected records?",
+            declared_purpose="grounded_question_answering",
+            corpus_package_ref=package_ref,
+            policy_fixture_ref="pass-fixture",
+            runtime_parameters={"top_k": 6},
+        ),
+        QueryInput(
+            case_id="aggregate-shortfall",
+            evaluation_identity="shared-aggregate-user",
+            query_text="What total metric quantity was confirmed across the selected records?",
+            declared_purpose="grounded_question_answering",
+            corpus_package_ref=package_ref,
+            policy_fixture_ref="shortfall-fixture",
+            runtime_parameters={"top_k": 6},
+        ),
+    ]
+    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict() for query in queries])
+    documents = [
+        {
+            "document_id": doc_id,
+            "package_ref": package_ref,
+            "object_id": f"PASS-{index}",
+            "document_type": "metric_record",
+            "original_filename": f"pass-{index}.pdf",
+            "pages": [f"Metric quantity\n{index + 2} units."],
+            "keywords": ["metric"],
+            "archived": False,
+            "relation_key": f"pass-relation-{index}",
+        }
+        for index, doc_id in enumerate(pass_ids, start=1)
+    ] + [
+        {
+            "document_id": doc_id,
+            "package_ref": package_ref,
+            "object_id": f"SHORT-{index}",
+            "document_type": "metric_record",
+            "original_filename": f"short-{index}.pdf",
+            "pages": [f"Metric quantity\n{index + 6} units."],
+            "keywords": ["metric"],
+            "archived": False,
+            "relation_key": f"short-relation-{index}",
+        }
+        for index, doc_id in enumerate(short_ids, start=1)
+    ]
+    corpus = {
+        "schema_version": CORPUS_SCHEMA_VERSION,
+        "metadata": {"dataset_version": "actual-pipeline-development-v1", "builder_version": "test", "synthetic": True},
+        "documents": documents,
+        "policy_fixtures": [
+            {
+                "fixture_id": "pass-fixture",
+                "access_by_document": {
+                    **{doc_id: "Aggregate" for doc_id in pass_ids},
+                    **{doc_id: "Deny" for doc_id in short_ids},
+                },
+                "purpose": "grounded_question_answering",
+                "conflict_policy": "query_sensitive",
+                "aggregate_k": 3,
+                "prohibited_markers": ["3 units", "4 units", "5 units", *pass_ids],
+            },
+            {
+                "fixture_id": "shortfall-fixture",
+                "access_by_document": {
+                    **{doc_id: "Deny" for doc_id in pass_ids},
+                    **{doc_id: "Aggregate" for doc_id in short_ids},
+                },
+                "purpose": "grounded_question_answering",
+                "conflict_policy": "query_sensitive",
+                "aggregate_k": 3,
+                "prohibited_markers": ["7 units", "8 units", *short_ids],
+            },
+        ],
+    }
+    corpus_path = dataset / "corpus_fixture.json"
+    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
+
+    run_actual_pipeline(
+        query_input_path=dataset / "query_inputs.jsonl",
+        corpus_fixture_path=corpus_path,
+        output_dir=tmp_path / "aggregate-isolation-run" / "raw",
+        database_url=f"sqlite+pysqlite:///{(tmp_path / 'aggregate-isolation-run' / 'eval.db').as_posix()}",
+        chroma_dir=tmp_path / "aggregate-isolation-run" / "chroma",
+        source_storage_dir=tmp_path / "aggregate-isolation-run" / "sources",
+        run_id="aggregate-isolation-run",
+        modes=["C2_PERMISSION_FILTERED", "C3_FULL_ROLE_AWARE"],
+        config=ActualPipelineConfig(),
+    )
+    records = [
+        json.loads(line)
+        for line in (tmp_path / "aggregate-isolation-run" / "raw" / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()
+    ]
+    classes = {(record["case_id"], record["mode"]): record["actual_output_class"] for record in records}
+    assert classes[("aggregate-pass", "C2_PERMISSION_FILTERED")] == "AGGREGATE_RESULT"
+    assert classes[("aggregate-pass", "C3_FULL_ROLE_AWARE")] == "AGGREGATE_RESULT"
+    assert classes[("aggregate-shortfall", "C2_PERMISSION_FILTERED")] == "REFUSE_AGGREGATION_THRESHOLD"
+    assert classes[("aggregate-shortfall", "C3_FULL_ROLE_AWARE")] == "REFUSE_AGGREGATION_THRESHOLD"
+    for record in records:
+        assert record["actual_citations"] == []
+        assert record["aggregate_trace"] is not None
+        assert "contributor_count" not in record["aggregate_trace"]
+        assert scan_record_safety(record)["aggregate_individual_value_exposure"] == 0
+
+
+def test_aggregate_fixture_deduplicates_relation_key_before_threshold_and_sum(tmp_path: Path) -> None:
+    dataset = tmp_path / "aggregate-dedup-dataset"
+    dataset.mkdir()
+    package_ref = "aggregate-reissue-lab"
+    original = document_id(package_ref, "original-record")
+    replacement = document_id(package_ref, "replacement-record")
+    separate = document_id(package_ref, "separate-record")
+    query = QueryInput(
+        case_id="aggregate-dedup",
+        evaluation_identity="reissue-aggregate-user",
+        query_text="What total metric quantity was confirmed across the current records?",
+        declared_purpose="grounded_question_answering",
+        corpus_package_ref=package_ref,
+        policy_fixture_ref="dedup-fixture",
+        runtime_parameters={"top_k": 6},
+    )
+    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict()])
+    corpus = {
+        "schema_version": CORPUS_SCHEMA_VERSION,
+        "metadata": {"dataset_version": "actual-pipeline-development-v1", "builder_version": "test", "synthetic": True},
+        "documents": [
+            {
+                "document_id": original,
+                "package_ref": package_ref,
+                "object_id": "RELATION-A",
+                "document_type": "metric_record",
+                "original_filename": "original.pdf",
+                "pages": ["Metric quantity\n4 units."],
+                "keywords": ["metric"],
+                "archived": False,
+                "relation_key": "relation-a",
+            },
+            {
+                "document_id": replacement,
+                "package_ref": package_ref,
+                "object_id": "RELATION-A",
+                "document_type": "metric_record",
+                "original_filename": "replacement.pdf",
+                "pages": ["Metric quantity\n4 units."],
+                "keywords": ["metric"],
+                "archived": False,
+                "relation_key": "relation-a",
+            },
+            {
+                "document_id": separate,
+                "package_ref": package_ref,
+                "object_id": "RELATION-B",
+                "document_type": "metric_record",
+                "original_filename": "separate.pdf",
+                "pages": ["Metric quantity\n6 units."],
+                "keywords": ["metric"],
+                "archived": False,
+                "relation_key": "relation-b",
+            },
+        ],
+        "policy_fixtures": [
+            {
+                "fixture_id": "dedup-fixture",
+                "access_by_document": {original: "Aggregate", replacement: "Aggregate", separate: "Aggregate"},
+                "purpose": "grounded_question_answering",
+                "conflict_policy": "query_sensitive",
+                "aggregate_k": 2,
+                "prohibited_markers": ["4 units", "6 units", original, replacement, separate],
+            }
+        ],
+    }
+    corpus_path = dataset / "corpus_fixture.json"
+    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
+
+    run_actual_pipeline(
+        query_input_path=dataset / "query_inputs.jsonl",
+        corpus_fixture_path=corpus_path,
+        output_dir=tmp_path / "aggregate-dedup-run" / "raw",
+        database_url=f"sqlite+pysqlite:///{(tmp_path / 'aggregate-dedup-run' / 'eval.db').as_posix()}",
+        chroma_dir=tmp_path / "aggregate-dedup-run" / "chroma",
+        source_storage_dir=tmp_path / "aggregate-dedup-run" / "sources",
+        run_id="aggregate-dedup-run",
+        modes=["C2_PERMISSION_FILTERED"],
+        config=ActualPipelineConfig(),
+    )
+    record = json.loads(
+        (tmp_path / "aggregate-dedup-run" / "raw" / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()[0]
+    )
+    assert record["actual_output_class"] == "AGGREGATE_RESULT"
+    assert record["actual_output_text"] == "Governed aggregate sum: 10."
+    assert record["actual_citations"] == []
+    assert "14" not in record["actual_output_text"]
+    assert scan_record_safety(record)["aggregate_individual_value_exposure"] == 0
+
+
 def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path: Path) -> None:
     _, _, gold_path = _minimal_fixture(tmp_path)
     current = json.loads(gold_path.read_text().splitlines()[0])

@@ -1,0 +1,78 @@
+{
+  "ahead_behind_origin_infocom2026": {
+    "ahead": 0,
+    "behind": 0
+  },
+  "branch": "infocom2026",
+  "excluded_noncanonical_status_entry_count": 1,
+  "excluded_noncanonical_status_entry_reasons": [
+    "malformed temporary pytest-quality path omitted from code-state identity"
+  ],
+  "external_provider_calls": 0,
+  "freeze_date": "2026-08-31",
+  "git_status_short": [
+    "M backend_python/aggregate_executor.py",
+    " M backend_python/tests/test_aggregate_executor.py",
+    " M evaluation/actual_pipeline_inputs.py",
+    " M evaluation/actual_pipeline_runner.py",
+    " M evaluation/external_scenario_corpus.py",
+    " M evaluation/scenario_pack.py",
+    " M evaluation/tests/test_actual_pipeline.py",
+    " M evaluation/tests/test_external_scenario_corpus.py",
+    " M evaluation/tests/test_scenario_pack.py",
+    " M scripts/bind_external_scenario_package.py",
+    "?? artifacts/s3_s6_candidate_integration/",
+    "?? artifacts/s3_s6_freeze/",
+    "?? backend_python/artifacts/",
+    "?? docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+    "?? docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md",
+    "?? docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+    "?? docs/integration/S3_S6_EVALUATION_REPRODUCE.md",
+    "?? docs/integration/S3_S6_FREEZE_CODE_STATE.json",
+    "?? docs/integration/S3_S6_FREEZE_NOTES_V1.md",
+    "?? docs/integration/S3_S6_MARIADB_COMPATIBILITY_REPORT.md"
+  ],
+  "head": "0b72faf194f202f4d5631344978003c17d084096",
+  "head_alone_identifies_evaluated_implementation": false,
+  "human_confirmation_source_file_hash": "ef84f91b0766f8607cdc356ad235e5daf1313e9975148a84550fdcb707e76525",
+  "mariadb_compatibility_manifest_hash": "8b56f8e591fc0a43701c733bca56dd378036fc31efdc81d0dee35871eda4c6bf",
+  "origin_infocom2026": "0b72faf194f202f4d5631344978003c17d084096",
+  "package_hashes": {
+    "corpus_fixture_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+    "package_sha256": "8fb5263a8fdeee554c2cfc48046b95108665d6b36fddf70bcdeeeda1b179a75d",
+    "policy_fixture_corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+    "query_input_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+    "reference_annotation_sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684"
+  },
+  "relevant_untracked_canonical_artifact_list": [
+    "?? artifacts/s3_s6_freeze/",
+    "?? docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+    "?? docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md",
+    "?? docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+    "?? docs/integration/S3_S6_EVALUATION_REPRODUCE.md",
+    "?? docs/integration/S3_S6_FREEZE_CODE_STATE.json",
+    "?? docs/integration/S3_S6_FREEZE_NOTES_V1.md",
+    "?? docs/integration/S3_S6_MARIADB_COMPATIBILITY_REPORT.md"
+  ],
+  "repository_url": "https://github.com/gkusper/InfoBank",
+  "runner_hash": "5a18f634c3ea8b52504150809de773a9140d2626e8d9a39eab202dcba8fdfe3b",
+  "schema_version": "infobank-s3-s6-freeze-code-state-v1",
+  "scorer_hash": "6041b1f4e8314b20689ccc76cd40ef1e856feb1b2082663ebe07aecaa87d7a71",
+  "source_code_diff_sha256": "78286f78ecb82a741c9efb968dab8d26321758a50681aa9c8653b721b2b5cb39",
+  "test_code_diff_sha256": "7e73a8dda74333ea4f1789ba562af102358d8115c40cffa5aea4d706140fabd2",
+  "tracked_changed_file_list": [
+    "backend_python/aggregate_executor.py",
+    "backend_python/tests/test_aggregate_executor.py",
+    "evaluation/actual_pipeline_inputs.py",
+    "evaluation/actual_pipeline_runner.py",
+    "evaluation/external_scenario_corpus.py",
+    "evaluation/scenario_pack.py",
+    "evaluation/tests/test_actual_pipeline.py",
+    "evaluation/tests/test_external_scenario_corpus.py",
+    "evaluation/tests/test_scenario_pack.py",
+    "scripts/bind_external_scenario_package.py"
+  ],
+  "tracked_working_tree_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+  "working_tree_patch_path": "artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch",
+  "working_tree_patch_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca"
+}

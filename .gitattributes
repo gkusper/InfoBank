@@ -1,6 +1,7 @@
 *.pdf binary
 *.zip binary
 artifacts/s1s2_freeze_working_tree.patch whitespace=-blank-at-eol,-blank-at-eof
+artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch whitespace=-blank-at-eol,-blank-at-eof
 artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/docs/integration/*.md whitespace=-blank-at-eof
 docs/integration/FREEZE_NOTES_S1_S2_JOURNAL_BENCHMARK_V2.md whitespace=-blank-at-eof
 docs/integration/human_confirmation_pass_v1.md whitespace=-blank-at-eof

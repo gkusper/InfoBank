@@ -1,0 +1,204 @@
+{
+  "MARIADB_SCHEMA_STATUS": "COMPATIBLE",
+  "created_at_utc": "2026-08-31T17:31:41Z",
+  "migration_identifiers": [
+    "001_citds_11",
+    "002_infocom_a_gate_phase1"
+  ],
+  "migration_mechanism": "backend_python.database_schema.apply_database_migrations",
+  "records": [
+    {
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "column_count": 113,
+      "compatible": true,
+      "configuration": "C2",
+      "database": "infobank_eval_s3s6_mariadb_focus_c2_20260831173131",
+      "database_name": "infobank_eval_s3s6_mariadb_focus_c2_20260831173131",
+      "enum_columns": [
+        "document_keywords.provenance_type:ENUM",
+        "document_metadata_provenance.provenance_type:ENUM",
+        "evidence_units.source_type:ENUM",
+        "policy_rules.access_mode:ENUM",
+        "user_document_permission.permission_type:ENUM"
+      ],
+      "errors": [],
+      "foreign_key_count": 10,
+      "index_count": 21,
+      "migration_identifiers": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "migration_status": "COMPATIBLE",
+      "migration_tracking_state": "TRACKED",
+      "purpose": "focused",
+      "schema_status": "COMPATIBLE",
+      "table_count": 13,
+      "target": "mysql://127.0.0.1:3307/infobank_eval_s3s6_mariadb_focus_c2_20260831173131"
+    },
+    {
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "column_count": 113,
+      "compatible": true,
+      "configuration": "C3",
+      "database": "infobank_eval_s3s6_mariadb_focus_c3_20260831173131",
+      "database_name": "infobank_eval_s3s6_mariadb_focus_c3_20260831173131",
+      "enum_columns": [
+        "document_keywords.provenance_type:ENUM",
+        "document_metadata_provenance.provenance_type:ENUM",
+        "evidence_units.source_type:ENUM",
+        "policy_rules.access_mode:ENUM",
+        "user_document_permission.permission_type:ENUM"
+      ],
+      "errors": [],
+      "foreign_key_count": 10,
+      "index_count": 21,
+      "migration_identifiers": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "migration_status": "COMPATIBLE",
+      "migration_tracking_state": "TRACKED",
+      "purpose": "focused",
+      "schema_status": "COMPATIBLE",
+      "table_count": 13,
+      "target": "mysql://127.0.0.1:3307/infobank_eval_s3s6_mariadb_focus_c3_20260831173131"
+    },
+    {
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "column_count": 113,
+      "compatible": true,
+      "configuration": "C0",
+      "database": "infobank_eval_s3s6_mariadb_full_c0_20260831173131",
+      "database_name": "infobank_eval_s3s6_mariadb_full_c0_20260831173131",
+      "enum_columns": [
+        "document_keywords.provenance_type:ENUM",
+        "document_metadata_provenance.provenance_type:ENUM",
+        "evidence_units.source_type:ENUM",
+        "policy_rules.access_mode:ENUM",
+        "user_document_permission.permission_type:ENUM"
+      ],
+      "errors": [],
+      "foreign_key_count": 10,
+      "index_count": 21,
+      "migration_identifiers": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "migration_status": "COMPATIBLE",
+      "migration_tracking_state": "TRACKED",
+      "purpose": "full",
+      "schema_status": "COMPATIBLE",
+      "table_count": 13,
+      "target": "mysql://127.0.0.1:3307/infobank_eval_s3s6_mariadb_full_c0_20260831173131"
+    },
+    {
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "column_count": 113,
+      "compatible": true,
+      "configuration": "C1",
+      "database": "infobank_eval_s3s6_mariadb_full_c1_20260831173131",
+      "database_name": "infobank_eval_s3s6_mariadb_full_c1_20260831173131",
+      "enum_columns": [
+        "document_keywords.provenance_type:ENUM",
+        "document_metadata_provenance.provenance_type:ENUM",
+        "evidence_units.source_type:ENUM",
+        "policy_rules.access_mode:ENUM",
+        "user_document_permission.permission_type:ENUM"
+      ],
+      "errors": [],
+      "foreign_key_count": 10,
+      "index_count": 21,
+      "migration_identifiers": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "migration_status": "COMPATIBLE",
+      "migration_tracking_state": "TRACKED",
+      "purpose": "full",
+      "schema_status": "COMPATIBLE",
+      "table_count": 13,
+      "target": "mysql://127.0.0.1:3307/infobank_eval_s3s6_mariadb_full_c1_20260831173131"
+    },
+    {
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "column_count": 113,
+      "compatible": true,
+      "configuration": "C2",
+      "database": "infobank_eval_s3s6_mariadb_full_c2_20260831173131",
+      "database_name": "infobank_eval_s3s6_mariadb_full_c2_20260831173131",
+      "enum_columns": [
+        "document_keywords.provenance_type:ENUM",
+        "document_metadata_provenance.provenance_type:ENUM",
+        "evidence_units.source_type:ENUM",
+        "policy_rules.access_mode:ENUM",
+        "user_document_permission.permission_type:ENUM"
+      ],
+      "errors": [],
+      "foreign_key_count": 10,
+      "index_count": 21,
+      "migration_identifiers": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "migration_status": "COMPATIBLE",
+      "migration_tracking_state": "TRACKED",
+      "purpose": "full",
+      "schema_status": "COMPATIBLE",
+      "table_count": 13,
+      "target": "mysql://127.0.0.1:3307/infobank_eval_s3s6_mariadb_full_c2_20260831173131"
+    },
+    {
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "column_count": 113,
+      "compatible": true,
+      "configuration": "C3",
+      "database": "infobank_eval_s3s6_mariadb_full_c3_20260831173131",
+      "database_name": "infobank_eval_s3s6_mariadb_full_c3_20260831173131",
+      "enum_columns": [
+        "document_keywords.provenance_type:ENUM",
+        "document_metadata_provenance.provenance_type:ENUM",
+        "evidence_units.source_type:ENUM",
+        "policy_rules.access_mode:ENUM",
+        "user_document_permission.permission_type:ENUM"
+      ],
+      "errors": [],
+      "foreign_key_count": 10,
+      "index_count": 21,
+      "migration_identifiers": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "migration_status": "COMPATIBLE",
+      "migration_tracking_state": "TRACKED",
+      "purpose": "full",
+      "schema_status": "COMPATIBLE",
+      "table_count": 13,
+      "target": "mysql://127.0.0.1:3307/infobank_eval_s3s6_mariadb_full_c3_20260831173131"
+    }
+  ],
+  "schema_version": "infobank-s3-s6-mariadb-schema-validation-v1"
+}

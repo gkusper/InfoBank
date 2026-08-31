@@ -1,0 +1,168 @@
+{
+  "canonical_confirmation_artifacts": {
+    "final_audit_csv": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.csv",
+    "final_audit_json": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.json",
+    "normalized_decision_record": "docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+    "updated_csv": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.csv",
+    "updated_json": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.json",
+    "updated_markdown_packet": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md"
+  },
+  "code_state_identity": {
+    "branch": "infocom2026",
+    "code_state_manifest_path": "docs/integration/S3_S6_FREEZE_CODE_STATE.json",
+    "head": "0b72faf194f202f4d5631344978003c17d084096",
+    "head_alone_complete": false,
+    "runner_hash": "5a18f634c3ea8b52504150809de773a9140d2626e8d9a39eab202dcba8fdfe3b",
+    "scorer_hash": "6041b1f4e8314b20689ccc76cd40ef1e856feb1b2082663ebe07aecaa87d7a71",
+    "tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+    "working_tree_patch_path": "artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch",
+    "working_tree_patch_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca"
+  },
+  "compatibility_evidence": {
+    "aggregate_class_mismatches": 0,
+    "focused_record_count": 12,
+    "full_record_count": 120,
+    "mariadb_server_version": "11.4.12-MariaDB-ubu2404",
+    "prohibited_exposure_count": 0,
+    "s3_q9_deduplication_status": "PASS",
+    "s4b_q6_threshold_status": "PASS",
+    "sqlite_mariadb_substantive_difference_count": 0
+  },
+  "final_author_confirmation_audit": {
+    "audit_csv": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.csv",
+    "audit_json": "artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.json",
+    "compared_case_count": 6,
+    "compared_execution_row_count": 12,
+    "mismatch_count": 0,
+    "unresolved_field_count": 0
+  },
+  "final_status": {
+    "AGGREGATE_HUMAN_CONFIRMATION_STATUS": "APPROVED",
+    "EVALUATION_SET_STATUS": "FROZEN",
+    "FURTHER_S3_S6_TUNING_ALLOWED": "NO",
+    "HUMAN_QA_STATUS": "APPROVED",
+    "REAL_PROVIDER_EVALUATION_STATUS": "NOT_STARTED"
+  },
+  "freeze_input_verification": {
+    "continuity_path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_INPUT_CONTINUITY.json",
+    "excluded_auxiliary_material": "PASS",
+    "output_class_distribution": {
+      "AGGREGATE_RESULT": 5,
+      "CLARIFICATION": 1,
+      "CONSTRAINED_ANSWER": 3,
+      "FULL_ANSWER": 18,
+      "REFUSE_AGGREGATION_THRESHOLD": 1,
+      "REFUSE_INSUFFICIENT_EVIDENCE": 2
+    },
+    "pdf_count": 31,
+    "policy_fixture_count": 30,
+    "question_count": 30,
+    "reference_annotation_count": 30,
+    "runtime_reference_separation": "PASS",
+    "scenario_count": 4
+  },
+  "frozen_package": {
+    "internal_checksum_status": "PASS",
+    "member_count": 66,
+    "package_directory": "artifacts/s3_s6_freeze/S3_S6_JOURNAL_EVALUATION_V1",
+    "package_identity": "S3_S6_JOURNAL_EVALUATION_V1",
+    "pdf_count": 31,
+    "question_count": 30,
+    "scenario_count": 4,
+    "zip_path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip",
+    "zip_sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c"
+  },
+  "mutation_and_provider_check": {
+    "AUTHOR_DECISIONS_CHANGED": "NO",
+    "COMMIT_CREATED": "NO",
+    "EXTERNAL_PROVIDER_CALLS": 0,
+    "MANUSCRIPT_CHANGED": "NO",
+    "POLICY_SEMANTICS_CHANGED": "NO",
+    "PUSH_PERFORMED": "NO",
+    "REFERENCE_ANNOTATIONS_CHANGED": "NO",
+    "REFERENCE_ANSWERS_CHANGED": "NO",
+    "REFERENCE_OUTPUT_CLASSES_CHANGED": "NO",
+    "S1_S2_CHANGED": "NO",
+    "SOURCE_CODE_CHANGED_IN_THIS_TASK": "NO",
+    "TEST_CODE_CHANGED_IN_THIS_TASK": "NO"
+  },
+  "s1_s2_preservation": {
+    "S1_S2_CHANGED": "NO",
+    "git_diff_name_only": [],
+    "git_status_short": [],
+    "pre_existing_checksum_warning": "not repaired in this task",
+    "schema_version": "infobank-s1-s2-preservation-check-v1",
+    "targets": [
+      "docs/integration/S1_S2_FREEZE_CODE_STATE.json",
+      "docs/integration/S1_S2_BENCHMARK_REPRODUCE.md",
+      "docs/integration/FREEZE_NOTES_S1_S2_JOURNAL_BENCHMARK_V2.md",
+      "artifacts/s1s2_freeze"
+    ]
+  },
+  "starting_state": {
+    "ahead": 0,
+    "behind": 0,
+    "branch": "infocom2026",
+    "existing_canonical_s3_s6_package_hashes": {
+      "corpus_fixture_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+      "package_sha256": "8fb5263a8fdeee554c2cfc48046b95108665d6b36fddf70bcdeeeda1b179a75d",
+      "policy_fixture_corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+      "query_input_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+      "reference_annotation_sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684"
+    },
+    "head": "0b72faf194f202f4d5631344978003c17d084096",
+    "origin_sha": "0b72faf194f202f4d5631344978003c17d084096",
+    "source_code_hash": "78286f78ecb82a741c9efb968dab8d26321758a50681aa9c8653b721b2b5cb39",
+    "test_code_hash": "7e73a8dda74333ea4f1789ba562af102358d8115c40cffa5aea4d706140fabd2",
+    "tracked_working_tree_diff_hash": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca"
+  },
+  "status": "READY_FOR_FROZEN_S1_S6_INTEGRATION",
+  "uploaded_author_confirmation": {
+    "actual_sha256": "ef84f91b0766f8607cdc356ad235e5daf1313e9975148a84550fdcb707e76525",
+    "confirmed_case_count": 6,
+    "expected_sha256": "ef84f91b0766f8607cdc356ad235e5daf1313e9975148a84550fdcb707e76525",
+    "filename": "HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md",
+    "rejected_case_count": 0,
+    "source_packet_identity": "S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip",
+    "source_packet_sha256": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191",
+    "status_normalization": {
+      "canonical_review_state": "COMPLETE",
+      "semantic_author_decision_change": "NO",
+      "uploaded_review_state": "IN_PROGRESS"
+    }
+  },
+  "validation": {
+    "author_review_validation": "PASS",
+    "checksum_validation": "PASS",
+    "diff_check": "PASS_WITH_CRLF_WARNINGS_ONLY",
+    "final_validation_path": "artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_VALIDATION.json",
+    "focused_tests": {
+      "deselected": 26,
+      "errors": 0,
+      "failed": 0,
+      "passed": 16,
+      "path": "artifacts/s3_s6_freeze/final_validation/focused_tests.log",
+      "skipped": 0,
+      "status": "PASS",
+      "summary": "16 passed, 26 deselected, 6 warnings in 5.13s",
+      "warnings": 6
+    },
+    "full_tests": {
+      "deselected": 0,
+      "errors": 0,
+      "failed": 0,
+      "passed": 337,
+      "path": "artifacts/s3_s6_freeze/final_validation/full_tests.log",
+      "skipped": 0,
+      "status": "PASS",
+      "summary": "337 passed, 75 warnings in 32.99s",
+      "warnings": 75
+    },
+    "human_confirmation_validation": "PASS",
+    "local_path_scan_count": 0,
+    "package_validation": "PASS",
+    "quality_gate": "PASS_WITH_PENDING_DOCKER_SMOKE",
+    "runtime_reference_separation": "PASS",
+    "secret_scan_count": 0
+  }
+}

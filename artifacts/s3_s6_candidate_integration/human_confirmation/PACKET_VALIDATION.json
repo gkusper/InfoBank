@@ -1,0 +1,85 @@
+{
+  "artifact_sha256": {
+    "cases_csv": "048a290a16fde0cb123ec7caa233aed053c662bd189e6062239a47ab6c0a435f",
+    "cases_json": "a66f4391ee101c59e3a1cb8d8fe6a66011298c31471ef6b90fa9debb271166c8",
+    "execution_evidence_csv": "495c996bbee0e54c21e3d20a2dcd79dd3955e21f0ad072d46b1a1c51beda957d",
+    "packet_markdown": "68facf16ba2367faa0f9e7be77c60d4bb81eebbc2731f6a66e4bc20f803f9710",
+    "readme": "f29e28848dcfc5da541f66253f31dc0c28c95a67d636634019b4bd5c967add03",
+    "review_order": "d23569033cea869c94e8c93be98260083becc07065553dc4e7a70420dbaf28e4",
+    "sha256sums": "8ba2a3cd253bca15802537686cfbcc8e2187428d1c429b602aa6e60eb411e096",
+    "source_evidence_manifest": "fdfdc7b2d1f7e991735175b89ccd916b7023ea006aeccc418fa3cc2c34fd8a3c",
+    "zip": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191"
+  },
+  "artifacts": {
+    "cases_csv": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.csv",
+    "cases_json": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.json",
+    "execution_evidence_csv": "artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_execution_evidence.csv",
+    "packet_markdown": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+    "readme": "artifacts/s3_s6_candidate_integration/human_confirmation/README.md",
+    "review_order": "docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md",
+    "sha256sums": "artifacts/s3_s6_candidate_integration/human_confirmation/SHA256SUMS.txt",
+    "source_evidence_manifest": "artifacts/s3_s6_candidate_integration/human_confirmation/SOURCE_EVIDENCE_MANIFEST.json",
+    "zip": "artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip"
+  },
+  "author_confirmation_status": "PENDING",
+  "author_decision_fields_completed": 0,
+  "case_count": 6,
+  "checked_confirmation_box_count": 0,
+  "execution_evidence_row_count": 12,
+  "full_mariadb_cross_check": {
+    "checked_case_mode_count": 12,
+    "conflict_count": 0,
+    "record_count": 120,
+    "source": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/raw_records_mariadb_combined.jsonl",
+    "source_sha256": "54198282d9133b77dcbcff43933b1996f9dcc0b4b1987bc15b0166ee719560f5",
+    "status": "PASS",
+    "summary": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_mariadb_public_summary.json",
+    "summary_sha256": "af119fbc0b978c28bdab628a75ea75d3a9595279b15e2ed152f6c7f6293d6465"
+  },
+  "mariadb_evidence_checksum_validation": {
+    "checked": 22,
+    "failure_count": 0,
+    "failures": [],
+    "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/SHA256SUMS.txt",
+    "status": "PASS"
+  },
+  "source_mutation": {
+    "author_decisions_changed": "NO",
+    "commit_created": "NO",
+    "external_provider_calls": 0,
+    "final_benchmark_freeze_performed": "NO",
+    "post_generation_tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+    "pre_task_tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+    "push_performed": "NO",
+    "reference_annotations_changed": "NO",
+    "reference_output_classes_changed": "NO",
+    "s1_s2_changed": "NO",
+    "source_code_changed_in_this_task": "NO",
+    "test_code_changed_in_this_task": "NO"
+  },
+  "status": "READY_FOR_AGGREGATE_HUMAN_CONFIRMATION",
+  "zip_validation": {
+    "checksum_checked": 7,
+    "checksum_failure_count": 0,
+    "checksum_failures": [],
+    "local_path_finding_count": 0,
+    "local_path_findings": [],
+    "member_count": 8,
+    "member_names": [
+      "S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md",
+      "S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md",
+      "aggregate_human_confirmation_cases.csv",
+      "aggregate_human_confirmation_cases.json",
+      "aggregate_human_confirmation_execution_evidence.csv",
+      "SOURCE_EVIDENCE_MANIFEST.json",
+      "README.md",
+      "SHA256SUMS.txt"
+    ],
+    "member_set_ok": true,
+    "secret_finding_count": 0,
+    "secret_findings": [],
+    "status": "PASS",
+    "zip_path": "artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip",
+    "zip_sha256": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191"
+  }
+}

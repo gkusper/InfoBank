@@ -1,0 +1,31 @@
+{
+  "POLICY_SEMANTIC_CHANGE_COUNT": 0,
+  "QUESTION_SEMANTIC_CHANGE_COUNT": 0,
+  "REFERENCE_SEMANTIC_CHANGE_COUNT": 0,
+  "RUNNER_SEMANTIC_CHANGE_COUNT": 0,
+  "SCORER_SEMANTIC_CHANGE_COUNT": 0,
+  "SOURCE_PDF_CHANGE_COUNT": 0,
+  "auxiliary_s4_tesco_bank_01_included": "NO",
+  "created_at_utc": "2026-08-31T20:15:37.292811Z",
+  "current_input_hashes": {
+    "corpus_fixture_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+    "gold_annotations_sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684",
+    "package_sha256": "8fb5263a8fdeee554c2cfc48046b95108665d6b36fddf70bcdeeeda1b179a75d",
+    "query_inputs_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+    "reference_annotations_sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684"
+  },
+  "input_hashes_from_successful_mariadb_run": {
+    "corpus_fixture_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+    "gold_annotations_sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684",
+    "package_sha256": "8fb5263a8fdeee554c2cfc48046b95108665d6b36fddf70bcdeeeda1b179a75d",
+    "query_inputs_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+    "reference_annotations_sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684"
+  },
+  "older_permission_counterfactual_candidates_mixed": "NO",
+  "package_identity": "S3_S6_JOURNAL_EVALUATION_V1",
+  "runtime_reference_separation": "PASS",
+  "s1_s2_content_included": "NO",
+  "schema_version": "infobank-s3-s6-freeze-input-continuity-v1",
+  "source_success_manifest": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/MARIADB_COMPATIBILITY_MANIFEST.json",
+  "status": "PASS"
+}

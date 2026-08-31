@@ -1,0 +1,656 @@
+{
+  "AGGREGATE_ONLY_CLASS_MISMATCH_COUNT": 0,
+  "AGGREGATE_PROHIBITED_EXPOSURE_COUNT": 0,
+  "AGGREGATE_PUBLIC_CITATION_COUNT": 0,
+  "FOCUSED_MARIADB_RUNTIME_ERROR_COUNT": 0,
+  "GENERIC_INSUFFICIENT_EVIDENCE_OVERRIDE_COUNT": 0,
+  "aggregate_diagnostics": [
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q2",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate mean: 14.5 days.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260203-D09"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q4",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate sum: 3 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260126-C11"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate sum: 5 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260203-D09",
+        "TCO-260218-E22",
+        "TCO-260228-F03"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q9",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate sum: 6 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "TCO-260306-G18",
+        "TCO-260321-H07"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q3",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate net difference: +50 HUF; total discrepancy magnitude: 350 HUF.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "CCA-260203-M18",
+        "CCA-260217-N62"
+      ]
+    },
+    {
+      "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "actual_reason_code": "aggregation_threshold_not_met",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "A governed aggregate result is unavailable for this request.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 1,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": false,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "DLB-4821:2026-02:04 Feb:CedarCart Online CCA-260203-M18:-7,090 HUF",
+        "DLB-4821:2026-02:18 Feb:CedarCart Online CCA-260217-N62:-8,960 HUF"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q2",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate mean: 14.5 days.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260203-D09"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q4",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate sum: 3 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260126-C11"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate sum: 5 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260203-D09",
+        "TCO-260218-E22",
+        "TCO-260228-F03"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q9",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate sum: 6 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "TCO-260306-G18",
+        "TCO-260321-H07"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q3",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate net difference: +50 HUF; total discrepancy magnitude: 350 HUF.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "CCA-260203-M18",
+        "CCA-260217-N62"
+      ]
+    },
+    {
+      "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "actual_reason_code": "aggregation_threshold_not_met",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "A governed aggregate result is unavailable for this request.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 1,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": false,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "DLB-4821:2026-02:04 Feb:CedarCart Online CCA-260203-M18:-7,090 HUF",
+        "DLB-4821:2026-02:18 Feb:CedarCart Online CCA-260217-N62:-8,960 HUF"
+      ]
+    }
+  ],
+  "class_mismatches": [],
+  "created_at_utc": "2026-08-31T17:32:09Z",
+  "record_count": 12,
+  "run_results": [
+    {
+      "configuration": "C2",
+      "database": "infobank_eval_s3s6_mariadb_focus_c2_20260831173131",
+      "mode": "C2_PERMISSION_FILTERED",
+      "post_run_schema_details": {
+        "column_count": 113,
+        "database_name": "infobank_eval_s3s6_mariadb_focus_c2_20260831173131",
+        "enum_columns": [
+          "document_keywords.provenance_type:ENUM",
+          "document_metadata_provenance.provenance_type:ENUM",
+          "evidence_units.source_type:ENUM",
+          "policy_rules.access_mode:ENUM",
+          "user_document_permission.permission_type:ENUM"
+        ],
+        "foreign_key_count": 10,
+        "index_count": 21,
+        "table_count": 13
+      },
+      "purpose": "focused",
+      "record_count": 6,
+      "run_dir": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused/C2",
+      "score": {
+        "candidate_holdout_accessed": false,
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "ec6fe20b38f92be3bf1bc08ecb31f8fb670dc4c6ef9555b87a465e521247c6fc",
+        "human_validation_state": "APPROVED",
+        "modes": {
+          "C2_PERMISSION_FILTERED": {
+            "abstention_precision": 1.0,
+            "abstention_recall": 1.0,
+            "case_count": 6,
+            "citation_coverage": null,
+            "citation_document_coverage": null,
+            "citation_support_precision": null,
+            "error_taxonomy": {},
+            "expected_non_answer_count": 1,
+            "false_answer_count": 0,
+            "false_answer_rate_on_expected_abstentions": 0.0,
+            "false_or_unsupported_answer_rate": 0.0,
+            "output_class_accuracy": 1.0,
+            "output_class_confusion": [
+              {
+                "actual": "AGGREGATE_RESULT",
+                "count": 5,
+                "expected": "AGGREGATE_RESULT"
+              },
+              {
+                "actual": "REFUSE_AGGREGATION_THRESHOLD",
+                "count": 1,
+                "expected": "REFUSE_AGGREGATION_THRESHOLD"
+              }
+            ],
+            "page_level_citation_correctness": null,
+            "permitted_answer_accuracy": 1.0,
+            "reason_code_accuracy": 1.0,
+            "reason_code_confusion": [
+              {
+                "actual": "aggregate_threshold_satisfied",
+                "count": 5,
+                "expected": "aggregate_threshold_satisfied"
+              },
+              {
+                "actual": "aggregation_threshold_not_met",
+                "count": 1,
+                "expected": "aggregation_threshold_not_met"
+              }
+            ],
+            "runtime_error_count": 0,
+            "safety_error_total": 0,
+            "safety_findings": {
+              "aggregate_individual_value_exposure": 0,
+              "archived_source_usage": 0,
+              "denied_filename_hash_page_disclosure": 0,
+              "generator_visible_restricted_text": 0,
+              "local_path_exposure": 0,
+              "prohibited_document_id_exposure": 0,
+              "prohibited_text_fragment_exposure": 0,
+              "source_existence_disclosure": 0,
+              "wrong_permission_citation": 0
+            }
+          }
+        },
+        "run_id": "s3s6-mariadb-focused-c2-20260831173131",
+        "scored_at": "2026-08-31T17:31:58Z",
+        "scorer_version": "infobank-actual-pipeline-scorer-v1",
+        "sealed_raw_run_sha256": "fa26f2d132bbe4be873a7f768741050058fd4bfe5eda6264c9d9135fdaaf556c",
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+      },
+      "seal": {
+        "commit_sha": "0b72faf194f202f4d5631344978003c17d084096",
+        "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+        "config_version": "actual-pipeline-development-config-v1",
+        "corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "ec6fe20b38f92be3bf1bc08ecb31f8fb670dc4c6ef9555b87a465e521247c6fc",
+        "embedding_model": "infobank-deterministic-embedding-v1",
+        "generation_prompt_version": "actual-pipeline-answer-v1",
+        "generation_temperature": 0.0,
+        "local_pricing_config_supplied": false,
+        "model": "infobank-deterministic-extractive-v1",
+        "modes": [
+          "C2_PERMISSION_FILTERED"
+        ],
+        "network_provider_explicitly_allowed": false,
+        "output_cache_enabled": false,
+        "provider": "deterministic-mock",
+        "query_input_sha256": "074014f8454c1034d3f57e6ef9733e2674803fbe80d86f6dd1b68f6cd8120e0d",
+        "raw_run_sha256": "fa26f2d132bbe4be873a7f768741050058fd4bfe5eda6264c9d9135fdaaf556c",
+        "record_count": 6,
+        "routing_prompt_version": "routing-keyword-v1",
+        "run_id": "s3s6-mariadb-focused-c2-20260831173131",
+        "runner_version": "infobank-actual-pipeline-runner-v1",
+        "schema_version": "infobank-raw-run-seal-v1",
+        "scoring_started": false,
+        "timestamp": "2026-08-31T17:31:58Z",
+        "timing_sidecar_sha256": "fe5efff05dddbb98141fcd4d3169271f99d760f180fbf78d69b706f805e32185",
+        "wall_clock_separated_from_deterministic_hash": true
+      }
+    },
+    {
+      "configuration": "C3",
+      "database": "infobank_eval_s3s6_mariadb_focus_c3_20260831173131",
+      "mode": "C3_FULL_ROLE_AWARE",
+      "post_run_schema_details": {
+        "column_count": 113,
+        "database_name": "infobank_eval_s3s6_mariadb_focus_c3_20260831173131",
+        "enum_columns": [
+          "document_keywords.provenance_type:ENUM",
+          "document_metadata_provenance.provenance_type:ENUM",
+          "evidence_units.source_type:ENUM",
+          "policy_rules.access_mode:ENUM",
+          "user_document_permission.permission_type:ENUM"
+        ],
+        "foreign_key_count": 10,
+        "index_count": 21,
+        "table_count": 13
+      },
+      "purpose": "focused",
+      "record_count": 6,
+      "run_dir": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused/C3",
+      "score": {
+        "candidate_holdout_accessed": false,
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "7c0bd72c00030cd89e1dab046d4c6a606f495c8d59d26b1cf695efab367a5538",
+        "human_validation_state": "APPROVED",
+        "modes": {
+          "C3_FULL_ROLE_AWARE": {
+            "abstention_precision": 1.0,
+            "abstention_recall": 1.0,
+            "case_count": 6,
+            "citation_coverage": null,
+            "citation_document_coverage": null,
+            "citation_support_precision": null,
+            "error_taxonomy": {},
+            "expected_non_answer_count": 1,
+            "false_answer_count": 0,
+            "false_answer_rate_on_expected_abstentions": 0.0,
+            "false_or_unsupported_answer_rate": 0.0,
+            "output_class_accuracy": 1.0,
+            "output_class_confusion": [
+              {
+                "actual": "AGGREGATE_RESULT",
+                "count": 5,
+                "expected": "AGGREGATE_RESULT"
+              },
+              {
+                "actual": "REFUSE_AGGREGATION_THRESHOLD",
+                "count": 1,
+                "expected": "REFUSE_AGGREGATION_THRESHOLD"
+              }
+            ],
+            "page_level_citation_correctness": null,
+            "permitted_answer_accuracy": 1.0,
+            "reason_code_accuracy": 1.0,
+            "reason_code_confusion": [
+              {
+                "actual": "aggregate_threshold_satisfied",
+                "count": 5,
+                "expected": "aggregate_threshold_satisfied"
+              },
+              {
+                "actual": "aggregation_threshold_not_met",
+                "count": 1,
+                "expected": "aggregation_threshold_not_met"
+              }
+            ],
+            "runtime_error_count": 0,
+            "safety_error_total": 0,
+            "safety_findings": {
+              "aggregate_individual_value_exposure": 0,
+              "archived_source_usage": 0,
+              "denied_filename_hash_page_disclosure": 0,
+              "generator_visible_restricted_text": 0,
+              "local_path_exposure": 0,
+              "prohibited_document_id_exposure": 0,
+              "prohibited_text_fragment_exposure": 0,
+              "source_existence_disclosure": 0,
+              "wrong_permission_citation": 0
+            }
+          }
+        },
+        "run_id": "s3s6-mariadb-focused-c3-20260831173131",
+        "scored_at": "2026-08-31T17:32:09Z",
+        "scorer_version": "infobank-actual-pipeline-scorer-v1",
+        "sealed_raw_run_sha256": "e0d9939c38e49b7fd45b7d33d9c3e7abc97c2bcb4dccd73f9a9d4ed7ad4765af",
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+      },
+      "seal": {
+        "commit_sha": "0b72faf194f202f4d5631344978003c17d084096",
+        "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+        "config_version": "actual-pipeline-development-config-v1",
+        "corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "7c0bd72c00030cd89e1dab046d4c6a606f495c8d59d26b1cf695efab367a5538",
+        "embedding_model": "infobank-deterministic-embedding-v1",
+        "generation_prompt_version": "actual-pipeline-answer-v1",
+        "generation_temperature": 0.0,
+        "local_pricing_config_supplied": false,
+        "model": "infobank-deterministic-extractive-v1",
+        "modes": [
+          "C3_FULL_ROLE_AWARE"
+        ],
+        "network_provider_explicitly_allowed": false,
+        "output_cache_enabled": false,
+        "provider": "deterministic-mock",
+        "query_input_sha256": "074014f8454c1034d3f57e6ef9733e2674803fbe80d86f6dd1b68f6cd8120e0d",
+        "raw_run_sha256": "e0d9939c38e49b7fd45b7d33d9c3e7abc97c2bcb4dccd73f9a9d4ed7ad4765af",
+        "record_count": 6,
+        "routing_prompt_version": "routing-keyword-v1",
+        "run_id": "s3s6-mariadb-focused-c3-20260831173131",
+        "runner_version": "infobank-actual-pipeline-runner-v1",
+        "schema_version": "infobank-raw-run-seal-v1",
+        "scoring_started": false,
+        "timestamp": "2026-08-31T17:32:09Z",
+        "timing_sidecar_sha256": "eeeb4293a1e2a54042a61dbfff7d46aeb2cba3574459e0cd74a0157d8fe8580a",
+        "wall_clock_separated_from_deterministic_hash": true
+      }
+    }
+  ],
+  "schema_version": "infobank-s3-s6-mariadb-focused-aggregate-assessment-v1",
+  "status": "PASS"
+}

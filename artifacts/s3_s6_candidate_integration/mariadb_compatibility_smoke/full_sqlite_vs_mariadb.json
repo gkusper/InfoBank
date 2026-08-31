@@ -1,0 +1,23 @@
+{
+  "compared_record_count": 120,
+  "created_at_utc": "2026-08-31T17:33:30Z",
+  "differences": [],
+  "extra_record_count": 0,
+  "extra_records": [],
+  "ignored_metadata_fields": [
+    "database identity",
+    "timestamps",
+    "run_id",
+    "audit_id",
+    "stage_timings_ms",
+    "local paths",
+    "raw_run_sha256",
+    "seal hashes",
+    "wall-clock latency"
+  ],
+  "missing_record_count": 0,
+  "missing_records": [],
+  "schema_version": "infobank-s3-s6-backend-equivalence-v1",
+  "semantic_difference_count": 0,
+  "sqlite_raw_records_path": "artifacts/s3_s6_candidate_integration/deterministic_c0_c3_after_aggregate_fix/raw/raw_records.jsonl"
+}

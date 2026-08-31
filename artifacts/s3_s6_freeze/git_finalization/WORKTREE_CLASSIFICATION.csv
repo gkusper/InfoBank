@@ -1,0 +1,77 @@
+path,category,stage,reason,status_scope
+.gitattributes,D,YES,repo metadata preserving literal freeze patch whitespace for staged diff validation,tracked-or-untracked
+backend_python/aggregate_executor.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+backend_python/tests/test_aggregate_executor.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/actual_pipeline_inputs.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/actual_pipeline_runner.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/external_scenario_corpus.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/scenario_pack.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/tests/test_actual_pipeline.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/tests/test_external_scenario_corpus.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+evaluation/tests/test_scenario_pack.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+scripts/bind_external_scenario_package.py,A,YES,approved S3-S6 source or test integration change,tracked-or-untracked
+docs/integration/HUMAN_CONFIRMATION_DECISIONS_S3_S6_AGGREGATE_FINAL.md,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_ORDER.md,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+docs/integration/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.md,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+docs/integration/S3_S6_EVALUATION_REPRODUCE.md,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+docs/integration/S3_S6_FREEZE_CODE_STATE.json,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+docs/integration/S3_S6_FREEZE_NOTES_V1.md,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+docs/integration/S3_S6_MARIADB_COMPATIBILITY_REPORT.md,B,YES,canonical S3-S6 integration/freeze documentation,tracked-or-untracked
+artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip.sha256,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_freeze/S3_S6_FREEZE_INPUT_CONTINUITY.json,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_freeze/S3_S6_FREEZE_PACKAGE_VALIDATION.json,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_VALIDATION.json,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_freeze/S3_S6_FREEZE_FINAL_REPORT.json,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch,C,YES,"canonical frozen S3-S6 package, checksum, or immutable freeze artifact",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.csv,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/reference_annotation_validation.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/policy_variant_validation.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/SOURCE_EVIDENCE_MANIFEST.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/PACKET_VALIDATION.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/README.md,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.csv,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_cases.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/aggregate_human_confirmation_execution_evidence.csv,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.csv,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/human_confirmation/FINAL_AUTHOR_CONFIRMATION_AUDIT.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_mariadb_assessment.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_mariadb_public_summary.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_sqlite_vs_mariadb.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.csv,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/database_row_counts.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/schema_validation.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/source_mutation_check.json,D,YES,"compact validation, MariaDB, or human-confirmation evidence",tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/PRE_COMMIT_WORKTREE_AUDIT.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/WORKTREE_CLASSIFICATION.csv,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/STAGING_PLAN.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/PRE_COMMIT_VALIDATION.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/HUMAN_CONFIRMATION_SOURCE_PACKET_CHECKSUM_AUDIT.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/FINAL_AUTHOR_REVIEWED_ARTIFACT_CHECKSUMS.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/MARIADB_SELECTED_EVIDENCE_CHECKSUMS.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/STAGED_CONTENT_AUDIT.json,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+artifacts/s3_s6_freeze/git_finalization/STAGED_CONTENT_AUDIT.csv,D,YES,compact git-finalization audit evidence,tracked-or-untracked
+.t_quality/,E,NO,pytest temp,excluded-generated-or-redundant
+t_focus/,E,NO,pytest temp,excluded-generated-or-redundant
+t_full/,E,NO,pytest temp,excluded-generated-or-redundant
+tc_focus/,E,NO,current pytest temp,excluded-generated-or-redundant
+tc_full/,E,NO,current pytest temp,excluded-generated-or-redundant
+tc_quality/,E,NO,current quality temp,excluded-generated-or-redundant
+UsersEKKE.codexvisualizations2026082501a0390f-2f5b-70c1-b982-b1f096c80beepytest_quality_tmp/,E,NO,malformed temp,excluded-generated-or-redundant
+backend_python/artifacts/,E,NO,runtime output,excluded-generated-or-redundant
+artifacts/local_quality_gate/,E,NO,runtime output summarized in audit,excluded-generated-or-redundant
+artifacts/s3_s6_freeze/S3_S6_JOURNAL_EVALUATION_V1/,F,NO,redundant extracted zip copy,excluded-generated-or-redundant
+artifacts/s3_s6_freeze/build_freeze_package.py,F,NO,one-off helper,excluded-generated-or-redundant
+artifacts/s3_s6_freeze/final_validation/,E,NO,verbose logs,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/actual_pipeline_inputs/,F,NO,redundant unzipped input mirror,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/S1_S2_PROTECTION_CHECK_AFTER_AGGREGATE_FIX.json,F,NO,S1-S2 diagnostic not staged,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/human_confirmation/SHA256SUMS.txt,F,NO,source-packet checksum list verified in audit JSON,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/MARIADB_COMPATIBILITY_MANIFEST.json,F,NO,verified diagnostic manifest with machine-local detail,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/S1_S2_PRESERVATION_MARIADB_CHECK.json,F,NO,S1-S2 diagnostic not staged,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/SHA256SUMS.txt,F,NO,directory checksum list verified in selected-evidence audit,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/*.log,E,NO,verbose logs,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused/,E,NO,runtime output,excluded-generated-or-redundant
+artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/,E,NO,runtime output,excluded-generated-or-redundant

@@ -53,6 +53,7 @@ class CorpusDocument:
     archived: bool = False
     source_pdf_path: str | None = None
     source_pdf_sha256: str | None = None
+    relation_key: str | None = None
 
     def __post_init__(self) -> None:
         if not self.document_id or not self.package_ref or not self.object_id or not self.pages:
@@ -73,6 +74,8 @@ class CorpusDocument:
             digest = str(self.source_pdf_sha256)
             if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
                 raise ValueError("source_pdf_sha256 must be lowercase hex SHA-256")
+        if self.relation_key is not None and not str(self.relation_key).strip():
+            raise ValueError("relation_key must not be empty when supplied")
 
     def to_dict(self) -> dict[str, Any]:
         value = asdict(self)
@@ -82,6 +85,8 @@ class CorpusDocument:
             value.pop("source_pdf_path")
         if value.get("source_pdf_sha256") is None:
             value.pop("source_pdf_sha256")
+        if value.get("relation_key") is None:
+            value.pop("relation_key")
         return value
 
 

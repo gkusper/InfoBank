@@ -1,0 +1,52 @@
+{
+  "created_utc": "2026-08-31T21:12:02+00:00",
+  "directory_sha256s_verification": {
+    "checked": 22,
+    "mismatches": [],
+    "status": "PASS",
+    "sums_file": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/SHA256SUMS.txt"
+  },
+  "selected_files": [
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_mariadb_assessment.json",
+      "sha256": "16ff7e0a03e01a6a216586c322bdf1103845bb29b68d8ea7540b0f40603e61f8",
+      "size_bytes": 26660
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_mariadb_public_summary.json",
+      "sha256": "af119fbc0b978c28bdab628a75ea75d3a9595279b15e2ed152f6c7f6293d6465",
+      "size_bytes": 56151
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_sqlite_vs_mariadb.json",
+      "sha256": "0e696eb447f07fa760152d0e2d0f05ececafaf051b4e94ce7a73eeca2dd393b8",
+      "size_bytes": 671
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.json",
+      "sha256": "663c854e139665b8f0e8c81e19ddd9548b708bdee32b473f3fc988880c4958f8",
+      "size_bytes": 672
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_sqlite_vs_mariadb.csv",
+      "sha256": "1fb02b1037ce5e394db3376bd4213d8972babd3bf234c467ebacea95616d3d86",
+      "size_bytes": 33
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/database_row_counts.json",
+      "sha256": "919562442af306038a9360945a6ddf9d406b36e143070574b678593f9bf2a359",
+      "size_bytes": 2408
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/schema_validation.json",
+      "sha256": "053495498be27565e1834c57d095270161dffc25aefb0bf58a7ea41e8b1914f9",
+      "size_bytes": 7089
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/source_mutation_check.json",
+      "sha256": "ed3a49088a193bc6d59c85dacad06139e64f12e4004fee5cc6b1c8067de8d8db",
+      "size_bytes": 565
+    }
+  ],
+  "status": "PASS"
+}

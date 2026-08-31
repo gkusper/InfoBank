@@ -1,0 +1,15 @@
+{
+  "created_utc": "2026-08-31T21:12:02+00:00",
+  "internal_sha256s": {
+    "checked": 7,
+    "mismatches": [],
+    "missing_members": [],
+    "status": "PASS",
+    "sums_file": "artifacts/s3_s6_candidate_integration/human_confirmation/SHA256SUMS.txt",
+    "zip_file": "artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip"
+  },
+  "source_packet_expected_sha256": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191",
+  "source_packet_sha256_matches": true,
+  "source_packet_zip_sha256": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191",
+  "status": "PASS"
+}

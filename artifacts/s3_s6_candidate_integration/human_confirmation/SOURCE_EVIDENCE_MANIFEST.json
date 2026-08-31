@@ -1,0 +1,203 @@
+{
+  "created_utc": "2026-08-31T18:15:46.320209Z",
+  "focused_source": {
+    "class_mismatch_count": null,
+    "prohibited_exposure_total": null,
+    "public_citation_count": null,
+    "record_count": 12,
+    "run_set": "s3s6-mariadb-focused-c2/c3-20260831173131"
+  },
+  "full_mariadb_cross_check": {
+    "checked_case_mode_count": 12,
+    "conflict_count": 0,
+    "record_count": 120,
+    "source": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/raw_records_mariadb_combined.jsonl",
+    "source_sha256": "54198282d9133b77dcbcff43933b1996f9dcc0b4b1987bc15b0166ee719560f5",
+    "status": "PASS",
+    "summary": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full_mariadb_public_summary.json",
+    "summary_sha256": "af119fbc0b978c28bdab628a75ea75d3a9595279b15e2ed152f6c7f6293d6465"
+  },
+  "policy_fixture_checks": [
+    {
+      "case_id": "S3-Q2",
+      "k": 3,
+      "policy_fixture_id": "S3-Q2:aggregate",
+      "status": "PASS"
+    },
+    {
+      "case_id": "S3-Q4",
+      "k": 3,
+      "policy_fixture_id": "S3-Q4:aggregate",
+      "status": "PASS"
+    },
+    {
+      "case_id": "S3-Q6",
+      "k": 3,
+      "policy_fixture_id": "S3-Q6:aggregate",
+      "status": "PASS"
+    },
+    {
+      "case_id": "S3-Q9",
+      "k": 2,
+      "policy_fixture_id": "S3-Q9:aggregate",
+      "status": "PASS"
+    },
+    {
+      "case_id": "S4B-Q3",
+      "k": 2,
+      "policy_fixture_id": "S4B-Q3:aggregate",
+      "status": "PASS"
+    },
+    {
+      "case_id": "S4B-Q6",
+      "k": 3,
+      "policy_fixture_id": "S4B-Q6:aggregate",
+      "status": "PASS"
+    }
+  ],
+  "primary_evidence": {
+    "c2_case_scores": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused/C2/scores/case_scores.jsonl",
+    "c2_case_scores_sha256": "fa59289e79a4768bdd7abf80d3da71677268b82aa8b408361170c39b07ed79a3",
+    "c3_case_scores": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused/C3/scores/case_scores.jsonl",
+    "c3_case_scores_sha256": "0b0cd4c80eae42f7084dabf9856e579171d75629e2760f6a1efe5b60e3f59857",
+    "focused_assessment": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused_mariadb_assessment.json",
+    "focused_assessment_sha256": "16ff7e0a03e01a6a216586c322bdf1103845bb29b68d8ea7540b0f40603e61f8",
+    "focused_raw_combined": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/focused/raw_records_mariadb_combined.jsonl",
+    "focused_raw_combined_sha256": "14e4dce53e2b9bf059b3eb7c5dd930aad03de9f416622689bdc5047566dfc301",
+    "kind": "latest successful MariaDB-backed C2/C3 focused outputs"
+  },
+  "raw_record_hashes": [
+    {
+      "case_id": "S3-Q2",
+      "mode": "C2",
+      "sha256": "d173050de1464156c078f2f92e21393eaf06c1ab6a0ae97acefc85ecc610b565"
+    },
+    {
+      "case_id": "S3-Q2",
+      "mode": "C3",
+      "sha256": "2ff31ab474d7506f7fa5064314e3754d6a303418d4e968998190b0b2caa9d56d"
+    },
+    {
+      "case_id": "S3-Q4",
+      "mode": "C2",
+      "sha256": "6574da8db23178066414e938e7c514f7ea3a42215c04865a34f89ea6d8efb40b"
+    },
+    {
+      "case_id": "S3-Q4",
+      "mode": "C3",
+      "sha256": "9e14849eaf57a6342baa8bc23edd8278c38c1678930de02796b09fedbd0fbe5b"
+    },
+    {
+      "case_id": "S3-Q6",
+      "mode": "C2",
+      "sha256": "8e9e9f60a832e622ce746d798d3b5f8260de1df1b0e199ea820081574b436c95"
+    },
+    {
+      "case_id": "S3-Q6",
+      "mode": "C3",
+      "sha256": "620de105a220563cb2a4b65862966ac195bdd81e2a6bfa140f080e70264c75a3"
+    },
+    {
+      "case_id": "S3-Q9",
+      "mode": "C2",
+      "sha256": "c15f06215c83349e9b2db2ee46bb54b701becf3949ac65c199a9c3735e150e8a"
+    },
+    {
+      "case_id": "S3-Q9",
+      "mode": "C3",
+      "sha256": "25cff7950ab232826e3280daf466aa87fc2ff56eb415bd57b7b8b4dbb9cab500"
+    },
+    {
+      "case_id": "S4B-Q3",
+      "mode": "C2",
+      "sha256": "743b47ecd3dc81f8c2a7640bcd4c6d118f7f1b6a4e81c44d2ef5a4d64d9ff2ea"
+    },
+    {
+      "case_id": "S4B-Q3",
+      "mode": "C3",
+      "sha256": "33090aee1cb86b2b53441e212059756b22bdb01c6729e120df7739a405ed922d"
+    },
+    {
+      "case_id": "S4B-Q6",
+      "mode": "C2",
+      "sha256": "06c8f980131d2b0003b4c63451594a0167143ab54349b727248e4e5058bad74c"
+    },
+    {
+      "case_id": "S4B-Q6",
+      "mode": "C3",
+      "sha256": "b289eed80140ebc4a8cdef523ec03f83f956a830ebff43927f82b43d3ce8708a"
+    }
+  ],
+  "repository": {
+    "branch": "infocom2026",
+    "head_commit": "0b72faf194f202f4d5631344978003c17d084096",
+    "origin_infocom2026": "0b72faf194f202f4d5631344978003c17d084096",
+    "post_generation_tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+    "pre_task_tracked_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca"
+  },
+  "scope": {
+    "benchmark_freeze_performed": false,
+    "external_provider_calls": 0,
+    "final_author_decisions_recorded": false,
+    "human_confirmation_only": true,
+    "modes": [
+      "C2",
+      "C3"
+    ],
+    "review_cases": [
+      "S3-Q2",
+      "S3-Q4",
+      "S3-Q6",
+      "S3-Q9",
+      "S4B-Q3",
+      "S4B-Q6"
+    ]
+  },
+  "source_artifacts": [
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/MARIADB_COMPATIBILITY_MANIFEST.json",
+      "role": "mariadb_compatibility_manifest",
+      "sha256": "8b56f8e591fc0a43701c733bca56dd378036fc31efdc81d0dee35871eda4c6bf"
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/SHA256SUMS.txt",
+      "role": "mariadb_compatibility_checksums",
+      "sha256": "83e392c98f18318c056869bb095a513e5da4b714c54dc9045bae3f8f822914c7",
+      "verification": {
+        "checked": 22,
+        "failure_count": 0,
+        "failures": [],
+        "path": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/SHA256SUMS.txt",
+        "status": "PASS"
+      }
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/actual_pipeline_inputs/query_inputs.jsonl",
+      "role": "normalized_queries",
+      "sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca"
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/actual_pipeline_inputs/gold_annotations.jsonl",
+      "role": "normalized_gold_annotations",
+      "sha256": "3d468a18e1896603372892c9931df6b4417cbd5b5ce623af16f829ca9e176684"
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/actual_pipeline_inputs/corpus_fixture.json",
+      "role": "policy_fixture_corpus",
+      "sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e"
+    },
+    {
+      "mismatch_count": 0,
+      "path": "artifacts/s3_s6_candidate_integration/author_decision_consistency_audit.json",
+      "role": "author_decision_consistency_audit",
+      "sha256": "8ef4fd364f8e83a3ad9c2555e1a033828e0b930e86a211dd48d342c8cf3a5e24"
+    },
+    {
+      "path": "artifacts/s3_s6_candidate_integration/reference_annotation_validation.json",
+      "role": "reference_annotation_validation",
+      "sha256": "e8b0ecaeff1e2e2b44ffd0cd86d7ebf3e1fde4b09662495b10777183871c16e0",
+      "status": "PASS"
+    }
+  ],
+  "status": "READY_FOR_HUMAN_CONFIRMATION_PACKET_GENERATION"
+}

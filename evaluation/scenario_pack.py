@@ -64,8 +64,7 @@ QUERY_FIELDS = {
 }
 CITATION_FIELDS = {"source_id", "page", "message_id", "record_id"}
 ANSWER_OUTPUTS = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
-NEGATIVE_REASON_OUTPUTS = {
-    "CONSTRAINED_ANSWER",
+NEGATIVE_REASON_REQUIRED_OUTPUTS = {
     "CLARIFICATION",
     "REFUSE_PERMISSION",
     "REFUSE_INSUFFICIENT_EVIDENCE",
@@ -73,6 +72,7 @@ NEGATIVE_REASON_OUTPUTS = {
     "REFUSE_AGGREGATION_THRESHOLD",
     "REFUSE_CONFLICT",
 }
+NEGATIVE_REASON_ALLOWED_OUTPUTS = NEGATIVE_REASON_REQUIRED_OUTPUTS | {"CONSTRAINED_ANSWER"}
 DEFAULT_REASON_CODES = {
     "FULL_ANSWER": "supported",
     "AGGREGATE_RESULT": "aggregate_threshold_satisfied",
@@ -652,11 +652,11 @@ def validate_scenario_pack(pack: dict[str, Any]) -> list[dict[str, str]]:
             issues.append(_issue("ERROR", "INVALID_REFERENCE_ANSWER", f"{path}.reference_answer", "reference_answer must be a non-empty string or null."))
 
         negative_reason = query.get("negative_reason")
-        if query.get("expected_output") in NEGATIVE_REASON_OUTPUTS and (
+        if query.get("expected_output") in NEGATIVE_REASON_REQUIRED_OUTPUTS and (
             not isinstance(negative_reason, str) or not negative_reason.strip()
         ):
             issues.append(_issue("ERROR", "MISSING_NEGATIVE_REASON", f"{path}.negative_reason", "This output requires a negative_reason."))
-        if query.get("expected_output") not in NEGATIVE_REASON_OUTPUTS and negative_reason is not None:
+        if query.get("expected_output") not in NEGATIVE_REASON_ALLOWED_OUTPUTS and negative_reason is not None:
             issues.append(_issue("ERROR", "UNEXPECTED_NEGATIVE_REASON", f"{path}.negative_reason", "This output must not have a negative_reason."))
 
         citations = query.get("reference_citations")

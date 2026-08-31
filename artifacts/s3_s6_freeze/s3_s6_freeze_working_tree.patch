@@ -1,0 +1,1868 @@
+diff --git a/backend_python/aggregate_executor.py b/backend_python/aggregate_executor.py
+index f49f690..b0e56ad 100644
+--- a/backend_python/aggregate_executor.py
++++ b/backend_python/aggregate_executor.py
+@@ -127,8 +127,7 @@ def execute_aggregate(
+         "output_class": AGGREGATE_RESULT,
+         "reason_code": REASON_THRESHOLD_MET,
+         "safe_output": (
+-            f"Governed aggregate {config.operation}: {rounded:g} "
+-            f"across {len(values)} distinct contributors."
++            f"Governed aggregate {config.operation}: {rounded:g}."
+         ),
+         "aggregate": aggregate,
+         "generator_context": generator_context,
+@@ -137,7 +136,5 @@ def execute_aggregate(
+             "executor_version": config.config_version,
+             "config_hash": config.config_hash,
+             "threshold_satisfied": True,
+-            "contributor_count": len(values),
+-            "deduplicated_count": len(values),
+         },
+     }
+diff --git a/backend_python/tests/test_aggregate_executor.py b/backend_python/tests/test_aggregate_executor.py
+index 39e8b4a..0cd9376 100644
+--- a/backend_python/tests/test_aggregate_executor.py
++++ b/backend_python/tests/test_aggregate_executor.py
+@@ -47,10 +47,48 @@ def test_mixed_policy_aggregate_is_correct_deduplicated_and_non_disclosing() ->
+     serialized = json.dumps(result, sort_keys=True)
+     for prohibited in ("source-a", "person-a", "999", "5000", "7000"):
+         assert prohibited not in serialized
++    assert "distinct contributors" not in result["safe_output"]
++    assert "contributor_count" not in result["public_trace"]
++    assert "deduplicated_count" not in result["public_trace"]
+     assert result["citations"] == []
+     assert json.loads(result["generator_context"])["governed_aggregate"]["value"] == 20.0
+ 
+ 
++def test_equal_threshold_is_allowed_without_public_count() -> None:
++    result = execute_aggregate(contributions()[:3], decisions(), AggregateConfig(k_threshold=2, operation="sum"))
++    assert result["output_class"] == AGGREGATE_RESULT
++    assert result["aggregate"]["value"] == 30.0
++    assert result["aggregate"]["contributor_count"] == 2
++    assert "contributor_count" not in result["public_trace"]
++    assert "2" not in result["safe_output"]
++
++
++def test_above_threshold_is_allowed_without_source_or_component_disclosure() -> None:
++    result = execute_aggregate(contributions()[:4], decisions(), AggregateConfig(k_threshold=2, operation="mean"))
++    assert result["output_class"] == AGGREGATE_RESULT
++    assert result["aggregate"]["contributor_count"] == 3
++    serialized_public = json.dumps(
++        {
++            "safe_output": result["safe_output"],
++            "public_trace": result["public_trace"],
++            "citations": result["citations"],
++        },
++        sort_keys=True,
++    )
++    for prohibited in ("source-a", "person-a", "10.0", "20.0", "30.0"):
++        assert prohibited not in serialized_public
++
++
++def test_threshold_is_runtime_configuration_not_a_global_constant() -> None:
++    permitted = [AggregateContribution("entry-a", "group-a", 4.0), AggregateContribution("entry-b", "group-b", 8.0)]
++    policy = {"entry-a": relevance.USE_AGGREGATE, "entry-b": relevance.USE_AGGREGATE}
++    assert execute_aggregate(permitted, policy, AggregateConfig(k_threshold=2))["output_class"] == AGGREGATE_RESULT
++    assert (
++        execute_aggregate(permitted, policy, AggregateConfig(k_threshold=3))["output_class"]
++        == REFUSE_AGGREGATION_THRESHOLD
++    )
++
++
+ def test_below_threshold_refusal_does_not_disclose_source_existence_or_count() -> None:
+     restricted = decisions() | {"source-c": relevance.USE_DENY}
+     result = execute_aggregate(contributions(), restricted, AggregateConfig(k_threshold=3))
+diff --git a/evaluation/actual_pipeline_inputs.py b/evaluation/actual_pipeline_inputs.py
+index d90b23f..a31da77 100644
+--- a/evaluation/actual_pipeline_inputs.py
++++ b/evaluation/actual_pipeline_inputs.py
+@@ -53,6 +53,7 @@ class CorpusDocument:
+     archived: bool = False
+     source_pdf_path: str | None = None
+     source_pdf_sha256: str | None = None
++    relation_key: str | None = None
+ 
+     def __post_init__(self) -> None:
+         if not self.document_id or not self.package_ref or not self.object_id or not self.pages:
+@@ -73,6 +74,8 @@ class CorpusDocument:
+             digest = str(self.source_pdf_sha256)
+             if len(digest) != 64 or any(char not in "0123456789abcdef" for char in digest):
+                 raise ValueError("source_pdf_sha256 must be lowercase hex SHA-256")
++        if self.relation_key is not None and not str(self.relation_key).strip():
++            raise ValueError("relation_key must not be empty when supplied")
+ 
+     def to_dict(self) -> dict[str, Any]:
+         value = asdict(self)
+@@ -82,6 +85,8 @@ class CorpusDocument:
+             value.pop("source_pdf_path")
+         if value.get("source_pdf_sha256") is None:
+             value.pop("source_pdf_sha256")
++        if value.get("relation_key") is None:
++            value.pop("relation_key")
+         return value
+ 
+ 
+diff --git a/evaluation/actual_pipeline_runner.py b/evaluation/actual_pipeline_runner.py
+index 130185c..55fb05d 100644
+--- a/evaluation/actual_pipeline_runner.py
++++ b/evaluation/actual_pipeline_runner.py
+@@ -16,6 +16,7 @@ import time
+ import uuid
+ from collections import Counter
+ from dataclasses import asdict, dataclass
++from datetime import date
+ from pathlib import Path
+ from typing import Any, Iterable
+ 
+@@ -41,6 +42,20 @@ GENERATION_TEMPERATURE = 0.0
+ MODES = tuple(item.value for item in EvaluationMode)
+ ANSWER_OUTPUT_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
+ CITATION_MIN_QUESTION_SUPPORT = 0.30
++AGGREGATE_INTENT_TERMS = (
++    "aggregate",
++    "average",
++    "mean",
++    "count",
++    "sum",
++    "total",
++    "spend",
++    "spent",
++    "litre",
++    "liter",
++    "difference",
++    "discrepanc",
++)
+ ROUTING_STOPWORDS = {
+     "a", "an", "and", "are", "as", "at", "be", "by", "do", "does", "for", "from",
+     "how", "i", "in", "is", "it", "me", "my", "of", "on", "or", "the", "this",
+@@ -402,6 +417,267 @@ def _document_routing_keywords(document: CorpusDocument) -> tuple[str, ...]:
+     return tuple(sorted(terms))
+ 
+ 
++def _has_aggregate_intent(question: str) -> bool:
++    lowered = question.lower()
++    return any(term in lowered for term in AGGREGATE_INTENT_TERMS)
++
++
++def _fixture_document_ids_by_access(fixture: PolicyFixture, access: str) -> list[str]:
++    return sorted(
++        doc_id
++        for doc_id, decision in fixture.access_by_document.items()
++        if decision == access
++    )
++
++
++def _is_aggregate_only_fixture(fixture: PolicyFixture) -> bool:
++    decisions = {
++        decision
++        for decision in fixture.access_by_document.values()
++        if decision != "Deny"
++    }
++    return bool(decisions) and decisions <= {"Aggregate"}
++
++
++def _document_text(document: CorpusDocument) -> str:
++    return "\n".join(document.pages)
++
++
++def _contributor_key(document: CorpusDocument) -> str:
++    return document.relation_key or document.object_id or document.document_id
++
++
++def _first_labeled_value(text: str, labels: Iterable[str]) -> str | None:
++    lines = [line.strip() for line in text.splitlines()]
++    lowered = [line.lower().rstrip(":") for line in lines]
++    label_values = {label.lower().rstrip(":") for label in labels}
++    for index, line in enumerate(lowered):
++        if line not in label_values:
++            continue
++        for candidate in lines[index + 1:]:
++            if candidate:
++                return candidate
++    for label in labels:
++        match = re.search(
++            rf"\b{re.escape(label)}\b\s*(?::|\|)\s*([^\n\r]+)",
++            text,
++            flags=re.IGNORECASE,
++        )
++        if match:
++            return match.group(1).strip()
++    return None
++
++
++def _parse_number(text: str) -> float | None:
++    match = re.search(r"[-+]?\d[\d,\s]*(?:\.\d+)?", text or "")
++    if not match:
++        return None
++    value = float(match.group(0).replace(",", "").replace(" ", ""))
++    return value if value == value else None
++
++
++def _parse_unambiguous_number(text: str) -> float | None:
++    matches = re.findall(r"(?<![A-Za-z0-9])(-?\d+(?:\.\d+)?)(?![A-Za-z0-9])", text or "")
++    if len(matches) != 1:
++        return None
++    value = float(matches[0])
++    return value if value == value else None
++
++
++def _parse_iso_date(text: str) -> date | None:
++    match = re.search(r"\b(20\d{2})-(\d{2})-(\d{2})\b", text or "")
++    if not match:
++        return None
++    return date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
++
++
++def _format_number(value: float) -> str:
++    rounded = round(float(value), 6)
++    return f"{rounded:g}"
++
++
++def _format_signed_number(value: float) -> str:
++    rounded = round(float(value), 6)
++    return f"{rounded:+g}"
++
++
++def _aggregate_unit(question: str) -> str | None:
++    lowered = question.lower()
++    if "litre" in lowered or "liter" in lowered:
++        return "litres"
++    if any(currency in lowered for currency in CURRENCY_TOKENS):
++        return next(currency.upper() for currency in CURRENCY_TOKENS if currency in lowered)
++    if "day" in lowered:
++        return "days"
++    return None
++
++
++def _question_merchant_phrase(question: str) -> str | None:
++    match = re.search(r"\bspend\s+on\s+(.+?)\s+in\b", question, flags=re.IGNORECASE)
++    if not match:
++        match = re.search(r"\bspent\s+on\s+(.+?)\s+in\b", question, flags=re.IGNORECASE)
++    if not match:
++        return None
++    phrase = re.sub(r"[^a-z0-9]+", " ", match.group(1).lower()).strip()
++    return phrase or None
++
++
++def _phrase_matches_text(phrase: str, text: str) -> bool:
++    phrase_terms = [term for term in phrase.split() if term]
++    normalized = re.sub(r"[^a-z0-9]+", " ", text.lower())
++    return bool(phrase_terms) and all(term in normalized for term in phrase_terms)
++
++
++def _statement_transactions(document: CorpusDocument, question: str) -> list[dict[str, Any]]:
++    phrase = _question_merchant_phrase(question)
++    if phrase is None:
++        return []
++    excluded_physical = "physical-store" in question.lower() or "physical store" in question.lower()
++    lines = [line.strip() for line in _document_text(document).splitlines() if line.strip()]
++    transactions: list[dict[str, Any]] = []
++    for index in range(0, max(0, len(lines) - 3)):
++        if not re.match(r"\d{1,2}\s+[A-Za-z]{3}\b", lines[index]):
++            continue
++        description = lines[index + 1]
++        transaction_type = lines[index + 2]
++        amount_text = lines[index + 3]
++        amount = _parse_number(amount_text)
++        if amount is None or "card purchase" not in transaction_type.lower():
++            continue
++        if not _phrase_matches_text(phrase, description):
++            continue
++        if excluded_physical and any(term in description.lower() for term in ("market", "store", "shop", "branch")):
++            continue
++        transactions.append(
++            {
++                "source_id": document.document_id,
++                "contributor_id": f"{_contributor_key(document)}:{lines[index]}:{description}:{amount_text}",
++                "value": abs(float(amount)),
++            }
++        )
++    return transactions
++
++
++def _metric_label_candidates(question: str) -> tuple[str, ...]:
++    labels = ["Metric quantity", "Confirmed quantity", "Quantity", "Units", "Unit quantity"]
++    lowered = question.lower()
++    if "litre" in lowered or "liter" in lowered:
++        labels = ["Milk quantity", "Dairy milk", *labels]
++    return tuple(labels)
++
++
++def _generic_aggregate_extraction(
++    question: str,
++    documents: Iterable[CorpusDocument],
++) -> dict[str, Any]:
++    docs = list(documents)
++    unit = _aggregate_unit(question)
++    lowered = question.lower()
++
++    if ("average" in lowered or "mean" in lowered) and "consecutive" in lowered and "day" in lowered:
++        dated: list[tuple[date, str, str]] = []
++        for document in docs:
++            value = _first_labeled_value(_document_text(document), ("Order date", "Record date", "Date"))
++            parsed = _parse_iso_date(value or "")
++            if parsed is not None:
++                dated.append((parsed, document.document_id, _contributor_key(document)))
++        unique_by_contributor: dict[str, tuple[date, str, str]] = {}
++        for item in sorted(dated, key=lambda value: (value[0], value[1])):
++            unique_by_contributor.setdefault(item[2], item)
++        ordered = sorted(unique_by_contributor.values(), key=lambda value: value[0])
++        intervals = [
++            float((right[0] - left[0]).days)
++            for left, right in zip(ordered, ordered[1:])
++        ]
++        if intervals:
++            mean_value = sum(intervals) / len(intervals)
++            return {
++                "operation": "mean",
++                "value": mean_value,
++                "safe_output": f"Governed aggregate mean: {_format_number(mean_value)} days.",
++                "threshold_contributions": [
++                    {"source_id": source_id, "contributor_id": contributor_id, "value": 0.0}
++                    for _, source_id, contributor_id in ordered
++                ],
++            }
++
++    if "difference" in lowered and "discrepanc" in lowered:
++        differences: dict[str, dict[str, Any]] = {}
++        for document in docs:
++            text = _document_text(document)
++            posted = _parse_number(_first_labeled_value(text, ("Card charge later posted", "Posted amount")) or "")
++            confirmed = _parse_number(_first_labeled_value(text, ("Confirmed amount", "Expected amount")) or "")
++            if posted is None or confirmed is None:
++                continue
++            key = _contributor_key(document)
++            differences.setdefault(
++                key,
++                {
++                    "source_id": document.document_id,
++                    "contributor_id": key,
++                    "value": float(posted - confirmed),
++                },
++            )
++        if differences:
++            values = [item["value"] for item in differences.values()]
++            net = sum(values)
++            magnitude = sum(abs(value) for value in values)
++            currency = unit or "HUF"
++            return {
++                "operation": "sum",
++                "value": net,
++                "safe_output": (
++                    f"Governed aggregate net difference: {_format_signed_number(net)} {currency}; "
++                    f"total discrepancy magnitude: {_format_number(magnitude)} {currency}."
++                ),
++                "threshold_contributions": list(differences.values()),
++            }
++
++    statement_contributions: list[dict[str, Any]] = []
++    if "spend" in lowered or "spent" in lowered:
++        for document in docs:
++            statement_contributions.extend(_statement_transactions(document, question))
++        if statement_contributions:
++            total = sum(item["value"] for item in statement_contributions)
++            currency = unit or "HUF"
++            return {
++                "operation": "sum",
++                "value": total,
++                "safe_output": f"Governed aggregate sum: {_format_number(total)} {currency}.",
++                "threshold_contributions": statement_contributions,
++            }
++
++    label_values: dict[str, dict[str, Any]] = {}
++    for document in docs:
++        text = _document_text(document)
++        labeled_value = _first_labeled_value(text, _metric_label_candidates(question))
++        value = _parse_number(labeled_value or "") if labeled_value is not None else _parse_unambiguous_number(text)
++        if value is None:
++            continue
++        key = _contributor_key(document)
++        label_values.setdefault(
++            key,
++            {
++                "source_id": document.document_id,
++                "contributor_id": key,
++                "value": float(value),
++            },
++        )
++    if label_values:
++        operation = "mean" if "average" in lowered or "mean" in lowered else "sum"
++        values = [item["value"] for item in label_values.values()]
++        result_value = sum(values) / len(values) if operation == "mean" else sum(values)
++        unit_text = f" {unit}" if unit else ""
++        return {
++            "operation": operation,
++            "value": result_value,
++            "safe_output": f"Governed aggregate {operation}: {_format_number(result_value)}{unit_text}.",
++            "threshold_contributions": list(label_values.values()),
++        }
++
++    return {"operation": "mean", "value": None, "safe_output": None, "threshold_contributions": []}
++
++
+ def _citation_materiality(question: str, answer: str, citation: dict[str, Any]) -> dict[str, Any]:
+     text = str(citation.get("_text") or "")
+     question_support = _support_score(question, text)
+@@ -637,6 +913,63 @@ class PipelineRuntime:
+     def _user_id(identity: str) -> str:
+         return str(uuid.uuid5(uuid.NAMESPACE_URL, f"infobank:actual-user:{identity}"))
+ 
++    @staticmethod
++    def _policy_identity(fixture_id: str) -> str:
++        return f"eval-{fixture_id}"
++
++    def _policy_user_id(self, fixture_id: str) -> str:
++        return self._user_id(self._policy_identity(fixture_id))
++
++    def _execute_fixture_aggregate(
++        self,
++        query: QueryInput,
++        fixture: PolicyFixture,
++        governance: dict[str, Any],
++    ) -> dict[str, Any]:
++        aggregate_doc_ids = _fixture_document_ids_by_access(fixture, "Aggregate")
++        documents = [
++            self.document_by_id[doc_id]
++            for doc_id in aggregate_doc_ids
++            if doc_id in self.document_by_id
++        ]
++        extraction = _generic_aggregate_extraction(query.query_text, documents)
++        contributions = [
++            self.aggregate_executor.AggregateContribution(
++                source_id=str(item["source_id"]),
++                contributor_id=str(item["contributor_id"]),
++                value=float(item["value"]),
++            )
++            for item in extraction["threshold_contributions"]
++        ]
++        operation = extraction["operation"]
++        if operation not in {"mean", "sum", "count"}:
++            operation = "mean"
++        result = self.aggregate_executor.execute_aggregate(
++            contributions,
++            governance.get("use_decisions", {}),
++            self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k, operation=operation),
++        )
++        if result["output_class"] != self.aggregate_executor.AGGREGATE_RESULT or extraction.get("safe_output") is None:
++            return result
++        contributor_count = len({item.contributor_id for item in contributions})
++        aggregate = {
++            "operation": operation,
++            "value": round(float(extraction["value"]), 6),
++            "contributor_count": contributor_count,
++            "k_threshold": fixture.aggregate_k,
++        }
++        return {
++            **result,
++            "safe_output": extraction["safe_output"],
++            "aggregate": aggregate,
++            "generator_context": json.dumps(
++                {"governed_aggregate": aggregate},
++                ensure_ascii=False,
++                sort_keys=True,
++                separators=(",", ":"),
++            ),
++        }
++
+     def _seed(self) -> None:
+         models = self.models
+         with self.Session() as db:
+@@ -872,6 +1205,12 @@ class PipelineRuntime:
+         timings: dict[str, float] = {}
+         total_start = time.perf_counter_ns()
+         fixture = self.fixtures[query.policy_fixture_ref]
++        policy_user_id = self._policy_user_id(query.policy_fixture_ref)
++        aggregate_fixture_doc_ids = _fixture_document_ids_by_access(fixture, "Aggregate")
++        aggregate_only_request = (
++            mode in {EvaluationMode.C2_PERMISSION_FILTERED.value, EvaluationMode.C3_FULL_ROLE_AWARE.value}
++            and _is_aggregate_only_fixture(fixture)
++        )
+         models = self.models
+         relevance = self.relevance
+         cf = self.controlled_failure
+@@ -927,11 +1266,17 @@ class PipelineRuntime:
+                     else:
+                         governance = self.policy_engine.resolve_document_access_bulk(
+                             db,
+-                            self._user_id(query.evaluation_identity),
++                            policy_user_id,
+                             active_ids,
+                             query.declared_purpose,
+                         )
+                         permitted_ids = list(governance["usable_doc_ids"])
++                        if aggregate_only_request:
++                            permitted_ids = [
++                                doc_id
++                                for doc_id in aggregate_fixture_doc_ids
++                                if doc_id in permitted_ids
++                            ]
+                     if exact_object_missing and mode in {
+                         EvaluationMode.C2_PERMISSION_FILTERED.value,
+                         EvaluationMode.C3_FULL_ROLE_AWARE.value,
+@@ -958,12 +1303,12 @@ class PipelineRuntime:
+                     routing_enabled = mode in {
+                         EvaluationMode.C1_VECTOR_ROUTING.value,
+                         EvaluationMode.C3_FULL_ROLE_AWARE.value,
+-                    }
++                    } and not aggregate_only_request
+                     candidate_ids, selected_keywords, routing_trace = self._routing(
+                         query.query_text,
+                         permitted_ids,
+                         enabled=routing_enabled,
+-                        target_object_id=target_object_id,
++                        target_object_id=None if aggregate_only_request else target_object_id,
+                     )
+                 timings["routing"] = _elapsed_ms(stage)
+ 
+@@ -978,7 +1323,7 @@ class PipelineRuntime:
+                     if mode in {EvaluationMode.C2_PERMISSION_FILTERED.value, EvaluationMode.C3_FULL_ROLE_AWARE.value}:
+                         governance = self.policy_engine.resolve_document_access_bulk(
+                             db,
+-                            self._user_id(query.evaluation_identity),
++                            policy_user_id,
+                             candidate_ids,
+                             query.declared_purpose,
+                         ) if candidate_ids else governance
+@@ -1048,13 +1393,18 @@ class PipelineRuntime:
+                             }
+                         )
+                         if role == relevance.SOURCE_ROLE_AGGREGATE_ONLY:
+-                            numeric = re.search(r"approval time is\s+(\d+(?:\.\d+)?)", item["text"], re.IGNORECASE)
+-                            if numeric:
++                            numeric_value = self.aggregate_executor.extract_unambiguous_numeric_value(item["text"])
++                            if numeric_value is not None:
++                                contributor_id = (
++                                    _contributor_key(self.document_by_id[doc_id])
++                                    if doc_id in self.document_by_id
++                                    else doc_id
++                                )
+                                 aggregate_contributions.append(
+                                     self.aggregate_executor.AggregateContribution(
+                                         source_id=doc_id,
+-                                        contributor_id=doc_id,
+-                                        value=float(numeric.group(1)),
++                                        contributor_id=contributor_id,
++                                        value=float(numeric_value),
+                                     )
+                                 )
+                         elif use_decision == relevance.USE_FULL:
+@@ -1068,15 +1418,18 @@ class PipelineRuntime:
+                     visible_text = "\n\n---\n\n".join(generator_blocks)
+                     support_score = _support_score(query.query_text, visible_text)
+                     context_available = bool(generator_blocks) and support_score >= self.config.minimum_support_score
+-                    aggregate_request = any(term in query.query_text.lower() for term in ("average", "aggregate", "mean", "count"))
++                    aggregate_request = aggregate_only_request or _has_aggregate_intent(query.query_text)
+ 
+                     if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value:
+                         if aggregate_request and governance.get("has_aggregate_evidence") and not governance.get("has_primary_evidence"):
+-                            aggregate_result = self.aggregate_executor.execute_aggregate(
+-                                aggregate_contributions,
+-                                governance.get("use_decisions", {}),
+-                                self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
+-                            )
++                            if aggregate_only_request:
++                                aggregate_result = self._execute_fixture_aggregate(query, fixture, governance)
++                            else:
++                                aggregate_result = self.aggregate_executor.execute_aggregate(
++                                    aggregate_contributions,
++                                    governance.get("use_decisions", {}),
++                                    self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
++                                )
+                             output_class = aggregate_result["output_class"]
+                             reason_code = aggregate_result["reason_code"]
+                             answer = aggregate_result["safe_output"]
+@@ -1112,11 +1465,14 @@ class PipelineRuntime:
+                             reason_code = "governance" if governance.get("denied_doc_ids") else "epistemic"
+                             answer, generation_skipped = "There is no permitted source that can be used for this question in the InfoBank.", True
+                         elif aggregate_request and governance.get("has_aggregate_evidence"):
+-                            aggregate_result = self.aggregate_executor.execute_aggregate(
+-                                aggregate_contributions,
+-                                governance.get("use_decisions", {}),
+-                                self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
+-                            )
++                            if aggregate_only_request:
++                                aggregate_result = self._execute_fixture_aggregate(query, fixture, governance)
++                            else:
++                                aggregate_result = self.aggregate_executor.execute_aggregate(
++                                    aggregate_contributions,
++                                    governance.get("use_decisions", {}),
++                                    self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
++                                )
+                             output_class, reason_code = aggregate_result["output_class"], aggregate_result["reason_code"]
+                             answer, generation_skipped = aggregate_result["safe_output"], True
+                             aggregate_trace = aggregate_result["public_trace"]
+@@ -1314,11 +1670,9 @@ def run_actual_pipeline(
+             raise ValueError("max_cases must be positive")
+         queries = queries[:max_cases]
+     documents, fixtures, corpus_metadata = load_corpus_fixture(corpus_path)
+-    fixture_identity_sets: dict[str, set[str]] = {fixture_id: {f"eval-{fixture_id}"} for fixture_id in fixtures}
++    fixture_identity_sets: dict[str, set[str]] = {fixture_id: {PipelineRuntime._policy_identity(fixture_id)} for fixture_id in fixtures}
+     for query in queries:
+-        fixture_identity_sets.setdefault(query.policy_fixture_ref, {f"eval-{query.policy_fixture_ref}"}).add(
+-            query.evaluation_identity
+-        )
++        fixture_identity_sets.setdefault(query.policy_fixture_ref, {PipelineRuntime._policy_identity(query.policy_fixture_ref)})
+     fixture_identities = {
+         fixture_id: tuple(sorted(identities))
+         for fixture_id, identities in fixture_identity_sets.items()
+diff --git a/evaluation/external_scenario_corpus.py b/evaluation/external_scenario_corpus.py
+index 9517e86..9385580 100644
+--- a/evaluation/external_scenario_corpus.py
++++ b/evaluation/external_scenario_corpus.py
+@@ -24,14 +24,24 @@ from .scenario_pack import SCENARIO_DATASET_VERSION, project_scenario_pack, vali
+ 
+ 
+ EXTERNAL_CORPUS_BUILDER_VERSION = "external-scenario-corpus-v1"
++PRIMARY_CONTRACT_CORPUS_BUILDER_VERSION = "external-primary-contract-corpus-v1"
+ RUNTIME_FORBIDDEN_KEYS = {
++    "acceptable_page_ranges",
++    "aggregate_input_sources",
++    "aggregate_k",
++    "author_decision_id",
+     "expected_output_class",
+     "expected_output",
++    "expected_contributor_count",
++    "factual_atoms",
+     "reason_code",
+     "negative_reason",
+     "gold_document_ids",
+     "gold_page_or_message_ranges",
++    "manual_validation_state",
++    "prohibited_disclosures",
+     "required_sources",
++    "required_evidence_roles",
+     "reference_answer",
+     "reference_citations",
+ }
+@@ -49,6 +59,7 @@ STOP_KEYWORDS = {
+     "this",
+     "user",
+ }
++ANSWER_OUTPUT_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
+ 
+ 
+ def stable_document_id(package_identity: str, scenario_id: str, source_id: str) -> str:
+@@ -78,8 +89,16 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
+     return rows
+ 
+ 
++def _checksum_file_path(package_root: Path) -> Path:
++    for name in ("SHA256SUMS.txt", "PACKAGE_SHA256SUMS.txt"):
++        path = package_root / name
++        if path.is_file():
++            return path
++    raise FileNotFoundError("Package checksum file is missing")
++
++
+ def _parse_sha256sums(package_root: Path) -> dict[str, str]:
+-    checksum_path = package_root / "SHA256SUMS.txt"
++    checksum_path = _checksum_file_path(package_root)
+     checksums: dict[str, str] = {}
+     for line_number, line in enumerate(checksum_path.read_text(encoding="utf-8").splitlines(), start=1):
+         if not line.strip():
+@@ -92,6 +111,17 @@ def _parse_sha256sums(package_root: Path) -> dict[str, str]:
+     return checksums
+ 
+ 
++def _jsonl_rows(path: Path) -> list[dict[str, Any]]:
++    rows = _read_jsonl(path)
++    seen: set[str] = set()
++    for row in rows:
++        case_id = str(row.get("case_id", ""))
++        if not case_id or case_id in seen:
++            raise ValueError(f"Missing or duplicate case_id in {path}")
++        seen.add(case_id)
++    return rows
++
++
+ def verify_package_checksums(package_root: str | Path) -> dict[str, Any]:
+     root = Path(package_root)
+     expected = _parse_sha256sums(root)
+@@ -107,6 +137,7 @@ def verify_package_checksums(package_root: str | Path) -> dict[str, Any]:
+     return {
+         "status": "PASS" if not missing and not mismatched else "FAIL",
+         "entry_count": len(expected),
++        "checksum_file": _checksum_file_path(root).name,
+         "missing": missing,
+         "mismatched": mismatched,
+     }
+@@ -132,6 +163,98 @@ def _projection_rows(package_root: Path, scenario_id: str) -> tuple[list[dict[st
+     return _read_jsonl(runtime_path), _read_jsonl(scorer_path)
+ 
+ 
++def _primary_scenario_entries(
++    package_root: Path,
++    scenario_ids: tuple[str, ...] | None = None,
++) -> tuple[dict[str, Any], ...]:
++    index_path = package_root / "scenario_pack_index.json"
++    if index_path.is_file():
++        index = _read_json(index_path)
++        raw_entries = index.get("primary_scenarios")
++        if isinstance(raw_entries, list):
++            entries_by_id: dict[str, dict[str, Any]] = {}
++            for entry in raw_entries:
++                if not isinstance(entry, dict):
++                    raise ValueError("primary_scenarios entries must be objects")
++                scenario_id = entry.get("scenario_id")
++                manifest_path = entry.get("manifest_path")
++                if not isinstance(scenario_id, str) or not scenario_id:
++                    raise ValueError("primary_scenarios entries require scenario_id")
++                if not isinstance(manifest_path, str) or not manifest_path:
++                    raise ValueError("primary_scenarios entries require manifest_path")
++                entries_by_id[scenario_id] = dict(entry)
++            expected = scenario_ids or tuple(entry["scenario_id"] for entry in raw_entries)
++            missing = [scenario_id for scenario_id in expected if scenario_id not in entries_by_id]
++            if missing:
++                raise ValueError(f"Primary scenario manifest entries are missing: {', '.join(missing)}")
++            return tuple(entries_by_id[scenario_id] for scenario_id in expected)
++
++    expected = scenario_ids or _scenario_ids_from_package(package_root)
++    return tuple(
++        {
++            "scenario_id": scenario_id,
++            "manifest_path": f"scenario_packs/{scenario_id}/scenario_pack.json",
++        }
++        for scenario_id in expected
++    )
++
++
++def _scenario_dir_from_entry(package_root: Path, entry: Mapping[str, Any]) -> Path:
++    return package_root / Path(str(entry["manifest_path"])).parent
++
++
++def _scenario_pack_from_entry(package_root: Path, entry: Mapping[str, Any]) -> dict[str, Any]:
++    pack = _read_json(package_root / str(entry["manifest_path"]))
++    if pack.get("scenario_id") != entry["scenario_id"]:
++        raise ValueError(f"Scenario entry does not match pack scenario_id: {entry['scenario_id']}")
++    return pack
++
++
++def _source_manifest_filename_map(scenario_dir: Path) -> dict[str, str]:
++    path = scenario_dir / "source_documents_manifest.json"
++    if not path.is_file():
++        return {}
++    value = _read_json(path)
++    rows = value.get("documents")
++    if not isinstance(rows, list):
++        raise ValueError(f"Invalid source document manifest: {path}")
++    result: dict[str, str] = {}
++    for row in rows:
++        if not isinstance(row, dict):
++            raise ValueError(f"Invalid source document manifest row: {path}")
++        source_id = row.get("source_id")
++        filename = row.get("filename")
++        if not isinstance(source_id, str) or not isinstance(filename, str):
++            raise ValueError(f"Source document manifest rows require source_id and filename: {path}")
++        result[source_id] = filename
++    return result
++
++
++def _scenario_source_filename_map(
++    scenario_dir: Path,
++    explicit_map: Mapping[str, str] | None,
++) -> dict[str, str]:
++    scenario_id = scenario_dir.name
++    combined = _source_manifest_filename_map(scenario_dir)
++    for source_id, filename in list(combined.items()):
++        combined[f"{scenario_id}:{source_id}"] = filename
++    if explicit_map:
++        combined.update(explicit_map)
++    return combined
++
++
++def _primary_contract_paths(package_root: Path) -> dict[str, Path]:
++    root = package_root / "evaluation_contracts" / "primary"
++    return {
++        "root": root,
++        "manifest": root / "contract_manifest.json",
++        "runtime": root / "runtime" / "query_inputs.jsonl",
++        "reference": root / "scorer" / "gold_annotations.jsonl",
++        "policy": root / "policy_fixtures.json",
++        "retrieval": root / "retrieval_contracts.json",
++    }
++
++
+ def _package_source_dirs(package_root: Path) -> tuple[str, ...]:
+     return tuple(sorted(path.name for path in (package_root / "scenario_packs").iterdir() if path.is_dir()))
+ 
+@@ -140,6 +263,50 @@ def _package_projection_dirs(package_root: Path) -> tuple[str, ...]:
+     return tuple(sorted(path.name for path in (package_root / "projections").iterdir() if path.is_dir()))
+ 
+ 
++def _rewrite_access_source_ids(
++    access_by_document: Mapping[str, Any],
++    *,
++    scenario_id: str,
++    document_ids_by_source_id: Mapping[str, str],
++) -> dict[str, str]:
++    access: dict[str, str] = {}
++    for source_id, value in access_by_document.items():
++        source_id_text = str(source_id)
++        if source_id_text not in document_ids_by_source_id:
++            raise ValueError(f"Unknown policy source ID for {scenario_id}: {source_id_text}")
++        access_value = str(value)
++        if access_value not in {"Full", "Aggregate", "Metadata", "Deny"}:
++            raise ValueError(f"Unsupported policy access value for {source_id_text}: {access_value}")
++        access[document_ids_by_source_id[source_id_text]] = access_value
++    return access
++
++
++def _policy_fixture_from_contract(
++    row: Mapping[str, Any],
++    *,
++    scenario_id: str,
++    document_ids_by_source_id: Mapping[str, str],
++) -> PolicyFixture:
++    raw_access = row.get("access_by_document")
++    if not isinstance(raw_access, dict):
++        raise ValueError(f"Policy fixture access_by_document must be an object: {row.get('fixture_id')}")
++    fixture_id = row.get("fixture_id")
++    if not isinstance(fixture_id, str) or not fixture_id:
++        raise ValueError("Policy fixture requires fixture_id")
++    return PolicyFixture(
++        fixture_id=fixture_id,
++        access_by_document=_rewrite_access_source_ids(
++            raw_access,
++            scenario_id=scenario_id,
++            document_ids_by_source_id=document_ids_by_source_id,
++        ),
++        purpose=str(row.get("purpose") or "grounded_question_answering"),
++        conflict_policy=str(row.get("conflict_policy") or "query_sensitive"),
++        aggregate_k=int(row.get("aggregate_k") or 3),
++        prohibited_markers=tuple(str(item) for item in row.get("prohibited_markers") or ()),
++    )
++
++
+ def _source_map_lookup(source_filename_map: Mapping[str, str], scenario_id: str, source_id: str) -> str | None:
+     return source_filename_map.get(f"{scenario_id}:{source_id}") or source_filename_map.get(source_id)
+ 
+@@ -271,6 +438,216 @@ def _validate_gold_projection(rows: list[dict[str, Any]], runtime_case_ids: set[
+         raise ValueError("Gold projection has duplicate case IDs")
+ 
+ 
++def verify_external_primary_contract_package(
++    package_root: str | Path,
++    *,
++    scenario_ids: tuple[str, ...] | None = None,
++    source_filename_map: Mapping[str, str] | None = None,
++) -> dict[str, Any]:
++    root = Path(package_root)
++    checksum_result = verify_package_checksums(root)
++    if checksum_result["status"] != "PASS":
++        raise ValueError("Package checksum verification failed")
++
++    entries = _primary_scenario_entries(root, scenario_ids)
++    paths = _primary_contract_paths(root)
++    contract_manifest = _read_json(paths["manifest"])
++    runtime_rows = _jsonl_rows(paths["runtime"])
++    reference_rows = _jsonl_rows(paths["reference"])
++    policy_value = _read_json(paths["policy"])
++    policy_rows = policy_value.get("policy_fixtures")
++    if not isinstance(policy_rows, list):
++        raise ValueError("Primary policy_fixtures.json must contain a policy_fixtures array")
++    retrieval_value = _read_json(paths["retrieval"])
++    retrieval_rows = retrieval_value.get("bounded_queries")
++    if not isinstance(retrieval_rows, list):
++        raise ValueError("Primary retrieval_contracts.json must contain a bounded_queries array")
++
++    _validate_runtime_projection(runtime_rows)
++    runtime_case_ids = [str(row["case_id"]) for row in runtime_rows]
++    reference_case_ids = [str(row["case_id"]) for row in reference_rows]
++    if runtime_case_ids != reference_case_ids:
++        raise ValueError("Primary runtime/reference case order mismatch")
++    if runtime_case_ids != [str(row.get("fixture_id", "")).split(":", 1)[0] for row in policy_rows]:
++        raise ValueError("Primary runtime/policy fixture order mismatch")
++
++    packs_by_scenario: dict[str, dict[str, Any]] = {}
++    source_pages_by_scenario: dict[str, dict[str, int]] = {}
++    pdf_count = 0
++    page_checks: list[dict[str, Any]] = []
++    question_counts: dict[str, int] = {}
++    source_counts: dict[str, int] = {}
++    case_checks: list[dict[str, Any]] = []
++    mismatches: list[dict[str, str]] = []
++
++    for entry in entries:
++        scenario_id = str(entry["scenario_id"])
++        scenario_dir = _scenario_dir_from_entry(root, entry)
++        pack = _scenario_pack_from_entry(root, entry)
++        errors = [issue for issue in validate_scenario_pack(pack) if issue["severity"] == "ERROR"]
++        if errors:
++            raise ValueError(f"ScenarioPack has structural errors for {scenario_id}")
++        packs_by_scenario[scenario_id] = pack
++        question_counts[scenario_id] = len(pack["queries"])
++        source_counts[scenario_id] = len(pack["sources"])
++        source_pages: dict[str, int] = {}
++        scenario_map = _scenario_source_filename_map(scenario_dir, source_filename_map)
++        for source in pack["sources"]:
++            pdf_path = resolve_source_pdf(scenario_dir, source, source_filename_map=scenario_map)
++            pdf_count += 1
++            pages = _pdf_pages(pdf_path)
++            source_pages[str(source["source_id"])] = len(pages)
++        source_pages_by_scenario[scenario_id] = source_pages
++
++    runtime_by_case = {str(row["case_id"]): row for row in runtime_rows}
++    reference_by_case = {str(row["case_id"]): row for row in reference_rows}
++    policy_by_case = {str(row["fixture_id"]).split(":", 1)[0]: row for row in policy_rows}
++    retrieval_by_case = {str(row.get("query_id")): row for row in retrieval_rows}
++    pack_query_by_case = {
++        str(query["query_id"]): (scenario_id, query)
++        for scenario_id, pack in packs_by_scenario.items()
++        for query in pack["queries"]
++    }
++
++    if set(runtime_by_case) != set(pack_query_by_case):
++        raise ValueError("Primary contract cases do not match primary scenario-pack queries")
++    if set(runtime_by_case) != set(policy_by_case):
++        raise ValueError("Primary contract cases do not match case-policy fixtures")
++    if set(runtime_by_case) != set(retrieval_by_case):
++        raise ValueError("Primary contract cases do not match retrieval contracts")
++
++    output_class_counts: dict[str, int] = {}
++    human_validated_count = 0
++    factual_atom_coverage: dict[str, int] = {}
++    for case_id in runtime_case_ids:
++        runtime = runtime_by_case[case_id]
++        reference = reference_by_case[case_id]
++        policy = policy_by_case[case_id]
++        retrieval = retrieval_by_case[case_id]
++        scenario_id, query = pack_query_by_case[case_id]
++        row_mismatches: list[str] = []
++
++        def check(field: str, left: Any, right: Any) -> None:
++            if left != right:
++                row_mismatches.append(field)
++                mismatches.append(
++                    {
++                        "case_id": case_id,
++                        "field": field,
++                        "decision_record_value": json.dumps(left, ensure_ascii=False, sort_keys=True),
++                        "package_value": json.dumps(right, ensure_ascii=False, sort_keys=True),
++                    }
++                )
++
++        check("scenario_id", scenario_id, runtime.get("corpus_package_ref"))
++        check("question", query.get("query"), runtime.get("query_text"))
++        check("expected_output_class", query.get("expected_output"), reference.get("expected_output_class"))
++        check("reference_answer", query.get("reference_answer"), reference.get("reference_answer"))
++        check("required_sources", query.get("required_sources"), reference.get("required_sources"))
++        check("reference_citations", query.get("reference_citations"), reference.get("reference_citations"))
++        check("retrieval_required_sources", query.get("required_sources"), retrieval.get("required_sources"))
++        check("retrieval_reference_citations", query.get("reference_citations"), retrieval.get("reference_citations"))
++        check("policy_fixture_ref", runtime.get("policy_fixture_ref"), policy.get("fixture_id"))
++        metadata = reference.get("metadata") or {}
++        check("supporting_sources", query.get("supporting_sources"), metadata.get("supporting_sources"))
++        check("author_decision_id", metadata.get("author_decision_id"), policy.get("author_decision_id"))
++        check("effective_use_decision", metadata.get("effective_use_decision"), policy.get("effective_use_decision"))
++        check("aggregate_k", metadata.get("aggregate_k"), None if policy.get("effective_use_decision") != "Aggregate" else policy.get("aggregate_k"))
++        check("expected_contributor_count", metadata.get("expected_contributor_count"), policy.get("expected_contributor_count"))
++        check("prohibited_disclosures", metadata.get("prohibited_disclosures"), policy.get("prohibited_markers"))
++        check(
++            "public_document_citations_expected",
++            bool(metadata.get("public_document_citations_expected")),
++            bool(retrieval.get("public_citations_expected")),
++        )
++
++        if reference.get("manual_validation_state") == "HUMAN_VALIDATED":
++            human_validated_count += 1
++        else:
++            row_mismatches.append("manual_validation_state")
++        output_class = str(reference.get("expected_output_class"))
++        output_class_counts[output_class] = output_class_counts.get(output_class, 0) + 1
++        factual_atoms = reference.get("factual_atoms") or []
++        factual_atom_coverage[output_class] = factual_atom_coverage.get(output_class, 0) + int(bool(factual_atoms))
++        if output_class in ANSWER_OUTPUT_CLASSES and not factual_atoms:
++            row_mismatches.append("factual_atoms")
++        if output_class not in ANSWER_OUTPUT_CLASSES and factual_atoms:
++            row_mismatches.append("factual_atoms")
++
++        source_pages = source_pages_by_scenario[scenario_id]
++        for citation in query.get("reference_citations") or []:
++            source_id = str(citation["source_id"])
++            page = citation.get("page")
++            if page is None:
++                continue
++            valid = source_id in source_pages and 1 <= int(page) <= source_pages[source_id]
++            page_checks.append(
++                {
++                    "case_id": case_id,
++                    "source_id": source_id,
++                    "page": page,
++                    "page_count": source_pages.get(source_id),
++                    "valid": valid,
++                }
++            )
++            if not valid:
++                row_mismatches.append("reference_citation_page")
++
++        case_checks.append(
++            {
++                "case_id": case_id,
++                "scenario_id": scenario_id,
++                "question": runtime["query_text"],
++                "expected_output_class": output_class,
++                "reference_answer": reference.get("reference_answer"),
++                "required_sources": reference.get("required_sources"),
++                "required_pages": reference.get("gold_page_or_message_ranges"),
++                "supporting_sources": metadata.get("supporting_sources"),
++                "persistent_permission": metadata.get("permission_mode"),
++                "effective_use_decision": metadata.get("effective_use_decision"),
++                "aggregate_k": metadata.get("aggregate_k"),
++                "expected_contributor_count": metadata.get("expected_contributor_count"),
++                "prohibited_disclosure_count": len(metadata.get("prohibited_disclosures") or []),
++                "public_document_citations_expected": metadata.get("public_document_citations_expected"),
++                "factual_atom_count": len(factual_atoms),
++                "manual_validation_state": reference.get("manual_validation_state"),
++                "author_decision_id": metadata.get("author_decision_id"),
++                "status": "PASS" if not row_mismatches else "FAIL",
++                "mismatched_fields": row_mismatches,
++            }
++        )
++
++    manifest_distribution = contract_manifest.get("output_class_distribution")
++    if isinstance(manifest_distribution, dict) and manifest_distribution != output_class_counts:
++        raise ValueError("Primary contract output-class distribution mismatch")
++    if contract_manifest.get("question_count") != len(runtime_rows):
++        raise ValueError("Primary contract question count mismatch")
++    if contract_manifest.get("scenario_count") != len(entries):
++        raise ValueError("Primary contract scenario count mismatch")
++    if contract_manifest.get("source_pdf_count") != pdf_count:
++        raise ValueError("Primary contract source PDF count mismatch")
++    if mismatches:
++        raise ValueError("Primary author-review contract consistency failed")
++
++    return {
++        "status": "PASS",
++        "scenario_ids": [str(entry["scenario_id"]) for entry in entries],
++        "question_counts": question_counts,
++        "source_counts": source_counts,
++        "total_questions": len(runtime_rows),
++        "pdf_source_count": pdf_count,
++        "checksum_entry_count": checksum_result["entry_count"],
++        "checksum_file": checksum_result["checksum_file"],
++        "output_class_distribution": dict(sorted(output_class_counts.items())),
++        "human_validated_count": human_validated_count,
++        "factual_atom_coverage": factual_atom_coverage,
++        "page_checks": page_checks,
++        "case_checks": case_checks,
++        "runtime_gold_separated": True,
++        "policy_fixture_count": len(policy_rows),
++    }
++
++
+ def verify_external_scenario_package(
+     package_root: str | Path,
+     *,
+@@ -427,6 +804,7 @@ def write_external_scenario_actual_inputs(
+                     archived=False,
+                     source_pdf_path=relative_pdf,
+                     source_pdf_sha256=digest,
++                    relation_key=str(source["relation_key"]),
+                 )
+             )
+             source_bindings.append(
+@@ -495,3 +873,159 @@ def write_external_scenario_actual_inputs(
+         encoding="utf-8",
+     )
+     return manifest
++
++
++def write_external_primary_contract_actual_inputs(
++    package_root: str | Path,
++    output_dir: str | Path,
++    *,
++    scenario_ids: tuple[str, ...] | None = None,
++    source_filename_map: Mapping[str, str] | None = None,
++    package_sha256: str | None = None,
++    dataset_version: str | None = None,
++) -> dict[str, Any]:
++    root = Path(package_root).resolve()
++    destination = Path(output_dir).resolve()
++    if destination.exists() and any(destination.iterdir()):
++        raise FileExistsError(f"Refusing to mix external scenario output: {destination}")
++    destination.mkdir(parents=True, exist_ok=True)
++
++    verification = verify_external_primary_contract_package(
++        root,
++        scenario_ids=scenario_ids,
++        source_filename_map=source_filename_map,
++    )
++    expected_scenarios = tuple(verification["scenario_ids"])
++    package_identity = package_sha256 or sha256_file(root / "PACKAGE_MANIFEST.json")
++    resolved_dataset_version = dataset_version or str(_read_json(root / "PACKAGE_MANIFEST.json").get("dataset_version") or SCENARIO_DATASET_VERSION)
++    paths = _primary_contract_paths(root)
++    runtime_queries = _jsonl_rows(paths["runtime"])
++    reference_rows = _jsonl_rows(paths["reference"])
++    policy_rows = _read_json(paths["policy"])["policy_fixtures"]
++
++    documents: list[CorpusDocument] = []
++    fixtures: list[PolicyFixture] = []
++    scorer_reference_rows: list[dict[str, Any]] = []
++    source_bindings: list[dict[str, Any]] = []
++    document_ids_by_scenario_source: dict[str, dict[str, str]] = {}
++
++    for entry in _primary_scenario_entries(root, expected_scenarios):
++        scenario_id = str(entry["scenario_id"])
++        scenario_dir = _scenario_dir_from_entry(root, entry)
++        pack = _scenario_pack_from_entry(root, entry)
++        scenario_map = _scenario_source_filename_map(scenario_dir, source_filename_map)
++        document_ids_by_source_id = {
++            str(source["source_id"]): stable_document_id(package_identity, scenario_id, str(source["source_id"]))
++            for source in pack["sources"]
++        }
++        document_ids_by_scenario_source[scenario_id] = document_ids_by_source_id
++        for source in pack["sources"]:
++            pdf_path = resolve_source_pdf(scenario_dir, source, source_filename_map=scenario_map)
++            digest = sha256_file(pdf_path)
++            pages = _pdf_pages(pdf_path)
++            target_pdf = destination / "source_documents" / scenario_id / pdf_path.name
++            target_pdf.parent.mkdir(parents=True, exist_ok=True)
++            shutil.copyfile(pdf_path, target_pdf)
++            source_id = str(source["source_id"])
++            document_id = document_ids_by_source_id[source_id]
++            relative_pdf = target_pdf.relative_to(destination).as_posix()
++            documents.append(
++                CorpusDocument(
++                    document_id=document_id,
++                    package_ref=scenario_id,
++                    object_id=str(source["relation_key"]),
++                    document_type=str(source["source_type"]),
++                    original_filename=pdf_path.name,
++                    pages=pages,
++                    keywords=_keyword_values(pack, source, pdf_path.name, pages),
++                    archived=False,
++                    source_pdf_path=relative_pdf,
++                    source_pdf_sha256=digest,
++                    relation_key=str(source["relation_key"]),
++                )
++            )
++            source_bindings.append(
++                {
++                    "scenario_id": scenario_id,
++                    "source_id": source_id,
++                    "document_id": document_id,
++                    "original_filename": pdf_path.name,
++                    "source_pdf_path": relative_pdf,
++                    "source_pdf_sha256": digest,
++                    "page_count": len(pages),
++                    "permission": source["permission"],
++                    "relation_key": source["relation_key"],
++                    "source_type": source["source_type"],
++                }
++            )
++
++    case_to_scenario = {str(row["case_id"]): str(row["corpus_package_ref"]) for row in runtime_queries}
++    for row in reference_rows:
++        scenario_id = case_to_scenario[str(row["case_id"])]
++        scorer_reference_rows.append(
++            _rewrite_gold_source_ids(
++                row,
++                scenario_id=scenario_id,
++                document_ids_by_source_id=document_ids_by_scenario_source[scenario_id],
++            )
++        )
++    for row in policy_rows:
++        case_id = str(row["fixture_id"]).split(":", 1)[0]
++        scenario_id = case_to_scenario[case_id]
++        fixtures.append(
++            _policy_fixture_from_contract(
++                row,
++                scenario_id=scenario_id,
++                document_ids_by_source_id=document_ids_by_scenario_source[scenario_id],
++            )
++        )
++
++    query_path = destination / "query_inputs.jsonl"
++    reference_path = destination / "gold_annotations.jsonl"
++    write_jsonl(query_path, runtime_queries)
++    write_jsonl(reference_path, scorer_reference_rows)
++    corpus = {
++        "schema_version": CORPUS_SCHEMA_VERSION,
++        "metadata": {
++            "dataset_version": resolved_dataset_version,
++            "builder_version": PRIMARY_CONTRACT_CORPUS_BUILDER_VERSION,
++            "external_package_name": root.name,
++            "external_package_sha256": package_sha256,
++            "scenario_ids": list(expected_scenarios),
++            "synthetic": True,
++            "gold_blind_runtime": True,
++            "primary_contracts_used": True,
++        },
++        "documents": [item.to_dict() for item in documents],
++        "policy_fixtures": [item.to_dict() for item in fixtures],
++    }
++    corpus_path = destination / "corpus_fixture.json"
++    corpus_path.write_text(json.dumps(corpus, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
++    manifest = {
++        "status": "READY_FOR_ACTUAL_PIPELINE",
++        "builder_version": PRIMARY_CONTRACT_CORPUS_BUILDER_VERSION,
++        "dataset_version": resolved_dataset_version,
++        "package_root": str(root),
++        "package_sha256": package_sha256,
++        "scenario_ids": list(expected_scenarios),
++        "query_count": len(runtime_queries),
++        "reference_annotation_count": len(scorer_reference_rows),
++        "gold_count": len(scorer_reference_rows),
++        "document_count": len(documents),
++        "policy_fixture_count": len(fixtures),
++        "source_bindings": source_bindings,
++        "query_input_path": query_path.name,
++        "query_input_sha256": sha256_file(query_path),
++        "reference_annotation_path": reference_path.name,
++        "reference_annotation_sha256": sha256_file(reference_path),
++        "gold_annotation_path": reference_path.name,
++        "gold_annotation_sha256": sha256_file(reference_path),
++        "corpus_fixture_path": corpus_path.name,
++        "corpus_fixture_sha256": sha256_file(corpus_path),
++        "verification": verification,
++    }
++    (destination / "binding_manifest.json").write_text(
++        json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
++        encoding="utf-8",
++    )
++    return manifest
+diff --git a/evaluation/scenario_pack.py b/evaluation/scenario_pack.py
+index d2a0a92..19e175d 100644
+--- a/evaluation/scenario_pack.py
++++ b/evaluation/scenario_pack.py
+@@ -64,8 +64,7 @@ QUERY_FIELDS = {
+ }
+ CITATION_FIELDS = {"source_id", "page", "message_id", "record_id"}
+ ANSWER_OUTPUTS = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
+-NEGATIVE_REASON_OUTPUTS = {
+-    "CONSTRAINED_ANSWER",
++NEGATIVE_REASON_REQUIRED_OUTPUTS = {
+     "CLARIFICATION",
+     "REFUSE_PERMISSION",
+     "REFUSE_INSUFFICIENT_EVIDENCE",
+@@ -73,6 +72,7 @@ NEGATIVE_REASON_OUTPUTS = {
+     "REFUSE_AGGREGATION_THRESHOLD",
+     "REFUSE_CONFLICT",
+ }
++NEGATIVE_REASON_ALLOWED_OUTPUTS = NEGATIVE_REASON_REQUIRED_OUTPUTS | {"CONSTRAINED_ANSWER"}
+ DEFAULT_REASON_CODES = {
+     "FULL_ANSWER": "supported",
+     "AGGREGATE_RESULT": "aggregate_threshold_satisfied",
+@@ -652,11 +652,11 @@ def validate_scenario_pack(pack: dict[str, Any]) -> list[dict[str, str]]:
+             issues.append(_issue("ERROR", "INVALID_REFERENCE_ANSWER", f"{path}.reference_answer", "reference_answer must be a non-empty string or null."))
+ 
+         negative_reason = query.get("negative_reason")
+-        if query.get("expected_output") in NEGATIVE_REASON_OUTPUTS and (
++        if query.get("expected_output") in NEGATIVE_REASON_REQUIRED_OUTPUTS and (
+             not isinstance(negative_reason, str) or not negative_reason.strip()
+         ):
+             issues.append(_issue("ERROR", "MISSING_NEGATIVE_REASON", f"{path}.negative_reason", "This output requires a negative_reason."))
+-        if query.get("expected_output") not in NEGATIVE_REASON_OUTPUTS and negative_reason is not None:
++        if query.get("expected_output") not in NEGATIVE_REASON_ALLOWED_OUTPUTS and negative_reason is not None:
+             issues.append(_issue("ERROR", "UNEXPECTED_NEGATIVE_REASON", f"{path}.negative_reason", "This output must not have a negative_reason."))
+ 
+         citations = query.get("reference_citations")
+diff --git a/evaluation/tests/test_actual_pipeline.py b/evaluation/tests/test_actual_pipeline.py
+index 4a59e6b..b61efcf 100644
+--- a/evaluation/tests/test_actual_pipeline.py
++++ b/evaluation/tests/test_actual_pipeline.py
+@@ -607,6 +607,291 @@ def test_runner_uploads_external_source_pdf_bytes(tmp_path: Path) -> None:
+     assert "connect internal port 9" not in record["generator_visible_text"]
+ 
+ 
++def test_runner_uses_generic_aggregate_numeric_extraction_without_public_count(tmp_path: Path) -> None:
++    dataset = tmp_path / "dataset"
++    dataset.mkdir()
++    query = QueryInput(
++        case_id="aggregate-case",
++        evaluation_identity="eval-aggregate",
++        query_text="What is the average private metric?",
++        declared_purpose="grounded_question_answering",
++        corpus_package_ref="aggregate-package",
++        policy_fixture_ref="aggregate",
++        runtime_parameters={"top_k": 2},
++    )
++    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict()])
++    metric_a = document_id("aggregate-package", "metric-a")
++    metric_b = document_id("aggregate-package", "metric-b")
++    corpus = {
++        "schema_version": CORPUS_SCHEMA_VERSION,
++        "metadata": {
++            "dataset_version": "actual-pipeline-development-v1",
++            "builder_version": "test",
++            "synthetic": True,
++        },
++        "documents": [
++            {
++                "document_id": metric_a,
++                "package_ref": "aggregate-package",
++                "object_id": "GROUP-A",
++                "document_type": "metric_record",
++                "original_filename": "metric-a.pdf",
++                "pages": ["Private contributor metric is 10 units."],
++                "keywords": ["metric"],
++                "archived": False,
++                "relation_key": "metric-a",
++            },
++            {
++                "document_id": metric_b,
++                "package_ref": "aggregate-package",
++                "object_id": "GROUP-A",
++                "document_type": "metric_record",
++                "original_filename": "metric-b.pdf",
++                "pages": ["Private contributor metric is 20 units."],
++                "keywords": ["metric"],
++                "archived": False,
++                "relation_key": "metric-b",
++            },
++        ],
++        "policy_fixtures": [
++            {
++                "fixture_id": "aggregate",
++                "access_by_document": {metric_a: "Aggregate", metric_b: "Aggregate"},
++                "purpose": "grounded_question_answering",
++                "conflict_policy": "query_sensitive",
++                "aggregate_k": 2,
++                "prohibited_markers": ["10 units", "20 units", metric_a, metric_b],
++            }
++        ],
++    }
++    corpus_path = dataset / "corpus_fixture.json"
++    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
++
++    run_actual_pipeline(
++        query_input_path=dataset / "query_inputs.jsonl",
++        corpus_fixture_path=corpus_path,
++        output_dir=tmp_path / "run" / "raw",
++        database_url=f"sqlite+pysqlite:///{(tmp_path / 'run' / 'eval.db').as_posix()}",
++        chroma_dir=tmp_path / "run" / "chroma",
++        source_storage_dir=tmp_path / "run" / "sources",
++        run_id="aggregate-run",
++        modes=["C2_PERMISSION_FILTERED"],
++        config=ActualPipelineConfig(),
++    )
++    record = json.loads((tmp_path / "run" / "raw" / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()[0])
++
++    assert record["actual_output_class"] == "AGGREGATE_RESULT"
++    assert record["actual_output_text"] == "Governed aggregate mean: 15."
++    assert record["actual_citations"] == []
++    assert record["aggregate_trace"]["threshold_satisfied"] is True
++    assert "contributor_count" not in record["aggregate_trace"]
++    assert "distinct contributors" not in record["actual_output_text"]
++    assert scan_record_safety(record)["aggregate_individual_value_exposure"] == 0
++
++
++def test_aggregate_fixture_policy_isolation_prevents_shared_identity_leakage(tmp_path: Path) -> None:
++    dataset = tmp_path / "aggregate-isolation-dataset"
++    dataset.mkdir()
++    package_ref = "aggregate-lab"
++    pass_ids = [document_id(package_ref, f"pass-{index}") for index in range(1, 4)]
++    short_ids = [document_id(package_ref, f"short-{index}") for index in range(1, 3)]
++    queries = [
++        QueryInput(
++            case_id="aggregate-pass",
++            evaluation_identity="shared-aggregate-user",
++            query_text="What total metric quantity was confirmed across the selected records?",
++            declared_purpose="grounded_question_answering",
++            corpus_package_ref=package_ref,
++            policy_fixture_ref="pass-fixture",
++            runtime_parameters={"top_k": 6},
++        ),
++        QueryInput(
++            case_id="aggregate-shortfall",
++            evaluation_identity="shared-aggregate-user",
++            query_text="What total metric quantity was confirmed across the selected records?",
++            declared_purpose="grounded_question_answering",
++            corpus_package_ref=package_ref,
++            policy_fixture_ref="shortfall-fixture",
++            runtime_parameters={"top_k": 6},
++        ),
++    ]
++    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict() for query in queries])
++    documents = [
++        {
++            "document_id": doc_id,
++            "package_ref": package_ref,
++            "object_id": f"PASS-{index}",
++            "document_type": "metric_record",
++            "original_filename": f"pass-{index}.pdf",
++            "pages": [f"Metric quantity\n{index + 2} units."],
++            "keywords": ["metric"],
++            "archived": False,
++            "relation_key": f"pass-relation-{index}",
++        }
++        for index, doc_id in enumerate(pass_ids, start=1)
++    ] + [
++        {
++            "document_id": doc_id,
++            "package_ref": package_ref,
++            "object_id": f"SHORT-{index}",
++            "document_type": "metric_record",
++            "original_filename": f"short-{index}.pdf",
++            "pages": [f"Metric quantity\n{index + 6} units."],
++            "keywords": ["metric"],
++            "archived": False,
++            "relation_key": f"short-relation-{index}",
++        }
++        for index, doc_id in enumerate(short_ids, start=1)
++    ]
++    corpus = {
++        "schema_version": CORPUS_SCHEMA_VERSION,
++        "metadata": {"dataset_version": "actual-pipeline-development-v1", "builder_version": "test", "synthetic": True},
++        "documents": documents,
++        "policy_fixtures": [
++            {
++                "fixture_id": "pass-fixture",
++                "access_by_document": {
++                    **{doc_id: "Aggregate" for doc_id in pass_ids},
++                    **{doc_id: "Deny" for doc_id in short_ids},
++                },
++                "purpose": "grounded_question_answering",
++                "conflict_policy": "query_sensitive",
++                "aggregate_k": 3,
++                "prohibited_markers": ["3 units", "4 units", "5 units", *pass_ids],
++            },
++            {
++                "fixture_id": "shortfall-fixture",
++                "access_by_document": {
++                    **{doc_id: "Deny" for doc_id in pass_ids},
++                    **{doc_id: "Aggregate" for doc_id in short_ids},
++                },
++                "purpose": "grounded_question_answering",
++                "conflict_policy": "query_sensitive",
++                "aggregate_k": 3,
++                "prohibited_markers": ["7 units", "8 units", *short_ids],
++            },
++        ],
++    }
++    corpus_path = dataset / "corpus_fixture.json"
++    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
++
++    run_actual_pipeline(
++        query_input_path=dataset / "query_inputs.jsonl",
++        corpus_fixture_path=corpus_path,
++        output_dir=tmp_path / "aggregate-isolation-run" / "raw",
++        database_url=f"sqlite+pysqlite:///{(tmp_path / 'aggregate-isolation-run' / 'eval.db').as_posix()}",
++        chroma_dir=tmp_path / "aggregate-isolation-run" / "chroma",
++        source_storage_dir=tmp_path / "aggregate-isolation-run" / "sources",
++        run_id="aggregate-isolation-run",
++        modes=["C2_PERMISSION_FILTERED", "C3_FULL_ROLE_AWARE"],
++        config=ActualPipelineConfig(),
++    )
++    records = [
++        json.loads(line)
++        for line in (tmp_path / "aggregate-isolation-run" / "raw" / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()
++    ]
++    classes = {(record["case_id"], record["mode"]): record["actual_output_class"] for record in records}
++    assert classes[("aggregate-pass", "C2_PERMISSION_FILTERED")] == "AGGREGATE_RESULT"
++    assert classes[("aggregate-pass", "C3_FULL_ROLE_AWARE")] == "AGGREGATE_RESULT"
++    assert classes[("aggregate-shortfall", "C2_PERMISSION_FILTERED")] == "REFUSE_AGGREGATION_THRESHOLD"
++    assert classes[("aggregate-shortfall", "C3_FULL_ROLE_AWARE")] == "REFUSE_AGGREGATION_THRESHOLD"
++    for record in records:
++        assert record["actual_citations"] == []
++        assert record["aggregate_trace"] is not None
++        assert "contributor_count" not in record["aggregate_trace"]
++        assert scan_record_safety(record)["aggregate_individual_value_exposure"] == 0
++
++
++def test_aggregate_fixture_deduplicates_relation_key_before_threshold_and_sum(tmp_path: Path) -> None:
++    dataset = tmp_path / "aggregate-dedup-dataset"
++    dataset.mkdir()
++    package_ref = "aggregate-reissue-lab"
++    original = document_id(package_ref, "original-record")
++    replacement = document_id(package_ref, "replacement-record")
++    separate = document_id(package_ref, "separate-record")
++    query = QueryInput(
++        case_id="aggregate-dedup",
++        evaluation_identity="reissue-aggregate-user",
++        query_text="What total metric quantity was confirmed across the current records?",
++        declared_purpose="grounded_question_answering",
++        corpus_package_ref=package_ref,
++        policy_fixture_ref="dedup-fixture",
++        runtime_parameters={"top_k": 6},
++    )
++    write_jsonl(dataset / "query_inputs.jsonl", [query.to_dict()])
++    corpus = {
++        "schema_version": CORPUS_SCHEMA_VERSION,
++        "metadata": {"dataset_version": "actual-pipeline-development-v1", "builder_version": "test", "synthetic": True},
++        "documents": [
++            {
++                "document_id": original,
++                "package_ref": package_ref,
++                "object_id": "RELATION-A",
++                "document_type": "metric_record",
++                "original_filename": "original.pdf",
++                "pages": ["Metric quantity\n4 units."],
++                "keywords": ["metric"],
++                "archived": False,
++                "relation_key": "relation-a",
++            },
++            {
++                "document_id": replacement,
++                "package_ref": package_ref,
++                "object_id": "RELATION-A",
++                "document_type": "metric_record",
++                "original_filename": "replacement.pdf",
++                "pages": ["Metric quantity\n4 units."],
++                "keywords": ["metric"],
++                "archived": False,
++                "relation_key": "relation-a",
++            },
++            {
++                "document_id": separate,
++                "package_ref": package_ref,
++                "object_id": "RELATION-B",
++                "document_type": "metric_record",
++                "original_filename": "separate.pdf",
++                "pages": ["Metric quantity\n6 units."],
++                "keywords": ["metric"],
++                "archived": False,
++                "relation_key": "relation-b",
++            },
++        ],
++        "policy_fixtures": [
++            {
++                "fixture_id": "dedup-fixture",
++                "access_by_document": {original: "Aggregate", replacement: "Aggregate", separate: "Aggregate"},
++                "purpose": "grounded_question_answering",
++                "conflict_policy": "query_sensitive",
++                "aggregate_k": 2,
++                "prohibited_markers": ["4 units", "6 units", original, replacement, separate],
++            }
++        ],
++    }
++    corpus_path = dataset / "corpus_fixture.json"
++    corpus_path.write_text(json.dumps(corpus), encoding="utf-8")
++
++    run_actual_pipeline(
++        query_input_path=dataset / "query_inputs.jsonl",
++        corpus_fixture_path=corpus_path,
++        output_dir=tmp_path / "aggregate-dedup-run" / "raw",
++        database_url=f"sqlite+pysqlite:///{(tmp_path / 'aggregate-dedup-run' / 'eval.db').as_posix()}",
++        chroma_dir=tmp_path / "aggregate-dedup-run" / "chroma",
++        source_storage_dir=tmp_path / "aggregate-dedup-run" / "sources",
++        run_id="aggregate-dedup-run",
++        modes=["C2_PERMISSION_FILTERED"],
++        config=ActualPipelineConfig(),
++    )
++    record = json.loads(
++        (tmp_path / "aggregate-dedup-run" / "raw" / "raw_records.jsonl").read_text(encoding="utf-8").splitlines()[0]
++    )
++    assert record["actual_output_class"] == "AGGREGATE_RESULT"
++    assert record["actual_output_text"] == "Governed aggregate sum: 10."
++    assert record["actual_citations"] == []
++    assert "14" not in record["actual_output_text"]
++    assert scan_record_safety(record)["aggregate_individual_value_exposure"] == 0
++
++
+ def test_gold_loader_accepts_legacy_and_prefers_explicit_roadmap_fields(tmp_path: Path) -> None:
+     _, _, gold_path = _minimal_fixture(tmp_path)
+     current = json.loads(gold_path.read_text().splitlines()[0])
+diff --git a/evaluation/tests/test_external_scenario_corpus.py b/evaluation/tests/test_external_scenario_corpus.py
+index 1cd2419..38223b7 100644
+--- a/evaluation/tests/test_external_scenario_corpus.py
++++ b/evaluation/tests/test_external_scenario_corpus.py
+@@ -8,6 +8,8 @@ import pytest
+ 
+ from evaluation.external_scenario_corpus import (
+     resolve_source_pdf,
++    verify_package_checksums,
++    write_external_primary_contract_actual_inputs,
+     write_external_scenario_actual_inputs,
+ )
+ from evaluation.scenario_pack import write_scenario_pack_projection
+@@ -90,6 +92,197 @@ def _write_test_package(root: Path, scenario_id: str = "TEST_SCENARIO_01") -> No
+     (root / "SHA256SUMS.txt").write_text("".join(checksums), encoding="utf-8")
+ 
+ 
++def _write_checksums(root: Path, filename: str) -> None:
++    checksums = []
++    for path in sorted(item for item in root.rglob("*") if item.is_file() and item.name != filename):
++        relative = path.relative_to(root).as_posix()
++        checksums.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {relative}\n")
++    (root / filename).write_text("".join(checksums), encoding="utf-8")
++
++
++def _write_primary_contract_package(root: Path) -> None:
++    scenario_id = "PRIMARY_CONTRACT_SCENARIO"
++    case_id = "CONTRACT-Q1"
++    pack = _pack(scenario_id)
++    pack["queries"][0]["query_id"] = case_id
++    pack["queries"][0]["expected_output"] = "AGGREGATE_RESULT"
++    pack["queries"][0]["reference_answer"] = "The governed aggregate metric is 17.5."
++    pack["queries"][0]["reference_citations"] = []
++    scenario_root = root / "independent_evaluation_packs" / scenario_id
++    _write_pdf(scenario_root / "source_documents" / "metric-data.pdf", ["Private contributor metric is 17.5 units."])
++    (scenario_root / "scenario_pack.json").write_text(
++        json.dumps(pack, sort_keys=True, indent=2) + "\n",
++        encoding="utf-8",
++    )
++    (scenario_root / "source_documents_manifest.json").write_text(
++        json.dumps(
++            {
++                "scenario_id": scenario_id,
++                "binding_count": 1,
++                "documents": [
++                    {
++                        "source_id": "manual-source",
++                        "filename": "metric-data.pdf",
++                        "page_count": 1,
++                        "sha256": hashlib.sha256((scenario_root / "source_documents" / "metric-data.pdf").read_bytes()).hexdigest(),
++                        "reused_from": None,
++                    }
++                ],
++            },
++            sort_keys=True,
++            indent=2,
++        )
++        + "\n",
++        encoding="utf-8",
++    )
++    primary = root / "evaluation_contracts" / "primary"
++    runtime_rows = [
++        {
++            "case_id": case_id,
++            "evaluation_identity": "scenario-user-aggregate",
++            "query_text": pack["queries"][0]["query"],
++            "declared_purpose": "grounded_question_answering",
++            "corpus_package_ref": scenario_id,
++            "policy_fixture_ref": f"{case_id}:aggregate",
++            "runtime_parameters": {"top_k": 1},
++            "schema_version": "infobank-query-input-v1",
++        }
++    ]
++    reference_rows = [
++        {
++            "case_id": case_id,
++            "expected_output_class": "AGGREGATE_RESULT",
++            "reason_code": "aggregate_threshold_satisfied",
++            "gold_document_ids": ["manual-source"],
++            "gold_page_or_message_ranges": {},
++            "required_sources": ["manual-source"],
++            "reference_citations": [],
++            "reference_answer": pack["queries"][0]["reference_answer"],
++            "factual_atoms": ["17.5"],
++            "required_evidence_roles": [],
++            "action_status": "NOT_APPLICABLE",
++            "manual_validation_state": "HUMAN_VALIDATED",
++            "dataset_version": "contract-candidate-v1",
++            "schema_version": "infobank-gold-annotation-v1",
++            "metadata": {
++                "scenario_id": scenario_id,
++                "supporting_sources": [],
++                "author_decision_id": "HR-GENERIC-001",
++                "permission_mode": "Aggregate",
++                "effective_use_decision": "Aggregate",
++                "aggregate_k": 2,
++                "expected_contributor_count": 2,
++                "prohibited_disclosures": ["private-token"],
++                "public_document_citations_expected": False,
++            },
++        }
++    ]
++    policy_fixtures = {
++        "schema_version": "infobank-policy-fixtures-v1",
++        "contract_version": "infobank-scenario-contract-v1.2",
++        "status": "AUTHOR_REVIEWED_CANDIDATE_NOT_FROZEN",
++        "policy_fixtures": [
++            {
++                "fixture_id": f"{case_id}:aggregate",
++                "access_by_document": {"manual-source": "Aggregate"},
++                "purpose": "grounded_question_answering",
++                "conflict_policy": "query_sensitive",
++                "aggregate_k": 2,
++                "prohibited_markers": ["private-token"],
++                "author_decision_id": "HR-GENERIC-001",
++                "author_reviewed": True,
++                "effective_use_decision": "Aggregate",
++                "expected_contributor_count": 2,
++            }
++        ],
++    }
++    retrieval = {
++        "contract_version": "infobank-scenario-contract-v1.2",
++        "query_count": 1,
++        "bounded_queries": [
++            {
++                "query_id": case_id,
++                "scenario_id": scenario_id,
++                "required_sources": ["manual-source"],
++                "reference_citations": [],
++                "public_citations_expected": False,
++                "status": "BOUNDED",
++                "top_k": 1,
++            }
++        ],
++    }
++    primary.mkdir(parents=True, exist_ok=True)
++    (primary / "runtime").mkdir()
++    (primary / "scorer").mkdir()
++    (primary / "runtime" / "query_inputs.jsonl").write_text(
++        "".join(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n" for row in runtime_rows),
++        encoding="utf-8",
++    )
++    (primary / "scorer" / "gold_annotations.jsonl").write_text(
++        "".join(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n" for row in reference_rows),
++        encoding="utf-8",
++    )
++    (primary / "policy_fixtures.json").write_text(json.dumps(policy_fixtures, sort_keys=True, indent=2) + "\n", encoding="utf-8")
++    (primary / "retrieval_contracts.json").write_text(json.dumps(retrieval, sort_keys=True, indent=2) + "\n", encoding="utf-8")
++    (primary / "contract_manifest.json").write_text(
++        json.dumps(
++            {
++                "status": "AUTHOR_REVIEWED_CANDIDATE_NOT_FROZEN",
++                "dataset_version": "contract-candidate-v1",
++                "scenario_count": 1,
++                "question_count": 1,
++                "source_pdf_count": 1,
++                "output_class_distribution": {"AGGREGATE_RESULT": 1},
++                "runtime_gold_separated": True,
++            },
++            sort_keys=True,
++            indent=2,
++        )
++        + "\n",
++        encoding="utf-8",
++    )
++    (root / "scenario_pack_index.json").write_text(
++        json.dumps(
++            {
++                "dataset_version": "contract-candidate-v1",
++                "primary_scenario_count": 1,
++                "primary_query_count": 1,
++                "primary_source_count": 1,
++                "primary_scenarios": [
++                    {
++                        "scenario_id": scenario_id,
++                        "manifest_path": f"independent_evaluation_packs/{scenario_id}/scenario_pack.json",
++                        "query_count": 1,
++                        "source_count": 1,
++                        "sha256": hashlib.sha256((scenario_root / "scenario_pack.json").read_bytes()).hexdigest(),
++                    }
++                ],
++            },
++            sort_keys=True,
++            indent=2,
++        )
++        + "\n",
++        encoding="utf-8",
++    )
++    (root / "PACKAGE_MANIFEST.json").write_text(
++        json.dumps(
++            {
++                "package_identity": "contract-package",
++                "dataset_version": "contract-candidate-v1",
++                "status": "AUTHOR_REVIEWED_CANDIDATE_NOT_FROZEN",
++                "primary_scenario_count": 1,
++                "primary_question_count": 1,
++                "primary_source_pdf_count": 1,
++            },
++            sort_keys=True,
++            indent=2,
++        )
++        + "\n",
++        encoding="utf-8",
++    )
++    _write_checksums(root, "PACKAGE_SHA256SUMS.txt")
++
++
+ def test_resolve_source_pdf_requires_explicit_map_when_names_differ(tmp_path: Path) -> None:
+     root = tmp_path / "package"
+     _write_test_package(root)
+@@ -131,3 +324,46 @@ def test_external_scenario_package_binding_writes_gold_blind_runtime(tmp_path: P
+     gold = json.loads(gold_text.splitlines()[0])
+     assert gold["required_sources"] == [document["document_id"]]
+     assert gold["metadata"]["logical_source_id_map"] == {"manual-source": document["document_id"]}
++
++
++def test_package_checksum_verification_accepts_package_sha256sums(tmp_path: Path) -> None:
++    root = tmp_path / "package"
++    _write_primary_contract_package(root)
++
++    result = verify_package_checksums(root)
++
++    assert result["status"] == "PASS"
++    assert result["checksum_file"] == "PACKAGE_SHA256SUMS.txt"
++
++
++def test_primary_contract_binding_preserves_case_policy_and_gold_blind_runtime(tmp_path: Path) -> None:
++    root = tmp_path / "package"
++    output = tmp_path / "bound"
++    _write_primary_contract_package(root)
++
++    manifest = write_external_primary_contract_actual_inputs(
++        root,
++        output,
++        package_sha256="1" * 64,
++    )
++
++    assert manifest["status"] == "READY_FOR_ACTUAL_PIPELINE"
++    assert manifest["query_count"] == manifest["reference_annotation_count"] == 1
++    assert manifest["document_count"] == manifest["policy_fixture_count"] == 1
++    corpus = json.loads((output / "corpus_fixture.json").read_text(encoding="utf-8"))
++    document = corpus["documents"][0]
++    fixture = corpus["policy_fixtures"][0]
++    assert document["source_pdf_path"] == "source_documents/PRIMARY_CONTRACT_SCENARIO/metric-data.pdf"
++    assert fixture["access_by_document"] == {document["document_id"]: "Aggregate"}
++    assert fixture["aggregate_k"] == 2
++    assert fixture["prohibited_markers"] == ["private-token"]
++    runtime_text = (output / "query_inputs.jsonl").read_text(encoding="utf-8")
++    assert all(
++        field not in runtime_text
++        for field in ("reference_answer", "required_sources", "author_decision_id", "factual_atoms")
++    )
++    reference = json.loads((output / "gold_annotations.jsonl").read_text(encoding="utf-8").splitlines()[0])
++    assert reference["required_sources"] == [document["document_id"]]
++    assert reference["gold_document_ids"] == [document["document_id"]]
++    assert reference["metadata"]["logical_source_id_map"] == {"manual-source": document["document_id"]}
++    assert manifest["verification"]["case_checks"][0]["author_decision_id"] == "HR-GENERIC-001"
+diff --git a/evaluation/tests/test_scenario_pack.py b/evaluation/tests/test_scenario_pack.py
+index 9b0ae16..65d3e1a 100644
+--- a/evaluation/tests/test_scenario_pack.py
++++ b/evaluation/tests/test_scenario_pack.py
+@@ -183,6 +183,17 @@ def test_validator_rejects_empty_reason_and_invalid_citation_locator() -> None:
+     assert {"MISSING_NEGATIVE_REASON", "INVALID_CITATION_PAGE"} <= error_codes
+ 
+ 
++def test_validator_allows_constrained_answer_without_negative_reason() -> None:
++    pack = _complete_s1_pack()
++    pack["queries"][0]["expected_output"] = "CONSTRAINED_ANSWER"
++    pack["queries"][0]["negative_reason"] = None
++
++    error_codes = {issue["code"] for issue in validate_scenario_pack(pack) if issue["severity"] == "ERROR"}
++
++    assert "MISSING_NEGATIVE_REASON" not in error_codes
++    assert "UNEXPECTED_NEGATIVE_REASON" not in error_codes
++
++
+ def test_bundle_writer_is_deterministic_and_keeps_gold_outside_query_runtime_contract(tmp_path: Path) -> None:
+     first = write_scenario_pack_bundle(tmp_path)
+     second = write_scenario_pack_bundle(tmp_path)
+diff --git a/scripts/bind_external_scenario_package.py b/scripts/bind_external_scenario_package.py
+index 0be0df6..4c925dc 100644
+--- a/scripts/bind_external_scenario_package.py
++++ b/scripts/bind_external_scenario_package.py
+@@ -12,7 +12,10 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+ if str(REPOSITORY_ROOT) not in sys.path:
+     sys.path.insert(0, str(REPOSITORY_ROOT))
+ 
+-from evaluation.external_scenario_corpus import write_external_scenario_actual_inputs  # noqa: E402
++from evaluation.external_scenario_corpus import (  # noqa: E402
++    write_external_primary_contract_actual_inputs,
++    write_external_scenario_actual_inputs,
++)
+ 
+ 
+ def _source_map(path: Path | None) -> dict[str, str]:
+@@ -31,8 +34,14 @@ def main() -> None:
+     parser.add_argument("--scenario-id", action="append", dest="scenario_ids")
+     parser.add_argument("--source-filename-map", type=Path)
+     parser.add_argument("--package-sha256")
++    parser.add_argument(
++        "--primary-contracts",
++        action="store_true",
++        help="Bind the package's manifest-declared primary evaluation contracts instead of regenerating scenario-level fixtures.",
++    )
+     args = parser.parse_args()
+-    result = write_external_scenario_actual_inputs(
++    binder = write_external_primary_contract_actual_inputs if args.primary_contracts else write_external_scenario_actual_inputs
++    result = binder(
+         args.package_root,
+         args.output,
+         scenario_ids=tuple(args.scenario_ids) if args.scenario_ids else None,

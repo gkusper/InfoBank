@@ -1,0 +1,1525 @@
+{
+  "aggregate_c2_c3_class_mismatch_count": 0,
+  "aggregate_diagnostics": [
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q2",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate mean: 14.5 days.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260203-D09"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q4",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate sum: 3 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260126-C11"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate sum: 5 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260203-D09",
+        "TCO-260218-E22",
+        "TCO-260228-F03"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q9",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate sum: 6 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "TCO-260306-G18",
+        "TCO-260321-H07"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q3",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "Governed aggregate net difference: +50 HUF; total discrepancy magnitude: 350 HUF.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "CCA-260203-M18",
+        "CCA-260217-N62"
+      ]
+    },
+    {
+      "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "actual_reason_code": "aggregation_threshold_not_met",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C2_PERMISSION_FILTERED",
+      "output_text": "A governed aggregate result is unavailable for this request.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 1,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": false,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "DLB-4821:2026-02:04 Feb:CedarCart Online CCA-260203-M18:-7,090 HUF",
+        "DLB-4821:2026-02:18 Feb:CedarCart Online CCA-260217-N62:-8,960 HUF"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q2",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate mean: 14.5 days.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260203-D09"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q4",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate sum: 3 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260105-A17",
+        "TCO-260114-B04",
+        "TCO-260126-C11"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate sum: 5 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 3,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 3,
+      "unique_contributor_keys": [
+        "TCO-260203-D09",
+        "TCO-260218-E22",
+        "TCO-260228-F03"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S3-Q9",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate sum: 6 litres.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "TCO-260306-G18",
+        "TCO-260321-H07"
+      ]
+    },
+    {
+      "actual_output_class": "AGGREGATE_RESULT",
+      "actual_reason_code": "aggregate_threshold_satisfied",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q3",
+      "citation_count": 0,
+      "configured_k": 2,
+      "expected_output_class": "AGGREGATE_RESULT",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "Governed aggregate net difference: +50 HUF; total discrepancy magnitude: 350 HUF.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 3,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": true,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "CCA-260203-M18",
+        "CCA-260217-N62"
+      ]
+    },
+    {
+      "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "actual_reason_code": "aggregation_threshold_not_met",
+      "aggregate_trace_present": true,
+      "case_id": "S4B-Q6",
+      "citation_count": 0,
+      "configured_k": 3,
+      "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+      "generic_insufficient_evidence_override": false,
+      "mode": "C3_FULL_ROLE_AWARE",
+      "output_text": "A governed aggregate result is unavailable for this request.",
+      "prohibited_exposure_total": 0,
+      "raw_aggregate_document_representation_count": 1,
+      "raw_contributor_count": 2,
+      "safe_output_available": true,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      },
+      "threshold_satisfied": false,
+      "unique_contributor_count": 2,
+      "unique_contributor_keys": [
+        "DLB-4821:2026-02:04 Feb:CedarCart Online CCA-260203-M18:-7,090 HUF",
+        "DLB-4821:2026-02:18 Feb:CedarCart Online CCA-260217-N62:-8,960 HUF"
+      ]
+    }
+  ],
+  "aggregate_prohibited_exposure_count": 0,
+  "aggregate_public_citation_count": 0,
+  "created_at_utc": "2026-08-31T17:33:30Z",
+  "label": "DETERMINISTIC DEVELOPMENT COMPATIBILITY EVALUATION — MARIA DB BACKEND — NOT FINAL REAL-PROVIDER PERFORMANCE",
+  "mode_summaries": {
+    "C0_VECTOR_ONLY": {
+      "abstention_precision": null,
+      "abstention_recall": 0.0,
+      "case_count": 30,
+      "citation_coverage": 0.217391,
+      "citation_document_coverage": 0.478261,
+      "citation_support_precision": 0.349206,
+      "error_taxonomy": {},
+      "expected_non_answer_count": 4,
+      "false_answer_count": 4,
+      "false_answer_rate_on_expected_abstentions": 1.0,
+      "false_or_unsupported_answer_rate": 1.0,
+      "output_class_accuracy": 0.6,
+      "output_class_confusion": [
+        {
+          "actual": "FULL_ANSWER",
+          "count": 5,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 18,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 2,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        }
+      ],
+      "page_level_citation_correctness": 0.15873,
+      "permitted_answer_accuracy": 0.038462,
+      "reason_code_accuracy": 0.6,
+      "reason_code_confusion": [
+        {
+          "actual": "supported",
+          "count": 5,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "supported",
+          "count": 1,
+          "expected": "aggregation_threshold_not_met"
+        },
+        {
+          "actual": "supported",
+          "count": 1,
+          "expected": "clarification"
+        },
+        {
+          "actual": "supported",
+          "count": 3,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 2,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 18,
+          "expected": "supported"
+        }
+      ],
+      "runtime_error_count": 0,
+      "safety_error_total": 3,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 3,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      }
+    },
+    "C1_VECTOR_ROUTING": {
+      "abstention_precision": null,
+      "abstention_recall": 0.0,
+      "case_count": 30,
+      "citation_coverage": 0.195652,
+      "citation_document_coverage": 0.456522,
+      "citation_support_precision": 0.355932,
+      "error_taxonomy": {},
+      "expected_non_answer_count": 4,
+      "false_answer_count": 4,
+      "false_answer_rate_on_expected_abstentions": 1.0,
+      "false_or_unsupported_answer_rate": 1.0,
+      "output_class_accuracy": 0.6,
+      "output_class_confusion": [
+        {
+          "actual": "FULL_ANSWER",
+          "count": 5,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 18,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 2,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        }
+      ],
+      "page_level_citation_correctness": 0.152542,
+      "permitted_answer_accuracy": 0.038462,
+      "reason_code_accuracy": 0.6,
+      "reason_code_confusion": [
+        {
+          "actual": "supported",
+          "count": 5,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "supported",
+          "count": 1,
+          "expected": "aggregation_threshold_not_met"
+        },
+        {
+          "actual": "supported",
+          "count": 1,
+          "expected": "clarification"
+        },
+        {
+          "actual": "supported",
+          "count": 3,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 2,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 18,
+          "expected": "supported"
+        }
+      ],
+      "runtime_error_count": 0,
+      "safety_error_total": 3,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 3,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      }
+    },
+    "C2_PERMISSION_FILTERED": {
+      "abstention_precision": 0.142857,
+      "abstention_recall": 0.25,
+      "case_count": 30,
+      "citation_coverage": 0.217391,
+      "citation_document_coverage": 0.434783,
+      "citation_support_precision": 0.512821,
+      "error_taxonomy": {},
+      "expected_non_answer_count": 4,
+      "false_answer_count": 2,
+      "false_answer_rate_on_expected_abstentions": 0.5,
+      "false_or_unsupported_answer_rate": 0.5,
+      "output_class_accuracy": 0.633333,
+      "output_class_confusion": [
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 5,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 13,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 5,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 2,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        }
+      ],
+      "page_level_citation_correctness": 0.25641,
+      "permitted_answer_accuracy": 0.230769,
+      "reason_code_accuracy": 0.633333,
+      "reason_code_confusion": [
+        {
+          "actual": "aggregate_threshold_satisfied",
+          "count": 5,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "aggregation_threshold_not_met",
+          "count": 1,
+          "expected": "aggregation_threshold_not_met"
+        },
+        {
+          "actual": "insufficient_evidence",
+          "count": 1,
+          "expected": "clarification"
+        },
+        {
+          "actual": "supported",
+          "count": 3,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 2,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "insufficient_evidence",
+          "count": 5,
+          "expected": "supported"
+        },
+        {
+          "actual": "supported",
+          "count": 13,
+          "expected": "supported"
+        }
+      ],
+      "runtime_error_count": 0,
+      "safety_error_total": 0,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      }
+    },
+    "C3_FULL_ROLE_AWARE": {
+      "abstention_precision": 0.111111,
+      "abstention_recall": 0.25,
+      "case_count": 30,
+      "citation_coverage": 0.195652,
+      "citation_document_coverage": 0.369565,
+      "citation_support_precision": 0.586207,
+      "error_taxonomy": {},
+      "expected_non_answer_count": 4,
+      "false_answer_count": 2,
+      "false_answer_rate_on_expected_abstentions": 0.5,
+      "false_or_unsupported_answer_rate": 0.5,
+      "output_class_accuracy": 0.566667,
+      "output_class_confusion": [
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 5,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 1,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 2,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 1,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 11,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 6,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 2,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        }
+      ],
+      "page_level_citation_correctness": 0.310345,
+      "permitted_answer_accuracy": 0.230769,
+      "reason_code_accuracy": 0.566667,
+      "reason_code_confusion": [
+        {
+          "actual": "aggregate_threshold_satisfied",
+          "count": 5,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "aggregation_threshold_not_met",
+          "count": 1,
+          "expected": "aggregation_threshold_not_met"
+        },
+        {
+          "actual": "insufficient_evidence",
+          "count": 1,
+          "expected": "clarification"
+        },
+        {
+          "actual": "clarification",
+          "count": 1,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 2,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 2,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "conflict",
+          "count": 2,
+          "expected": "supported"
+        },
+        {
+          "actual": "insufficient_evidence",
+          "count": 5,
+          "expected": "supported"
+        },
+        {
+          "actual": "supported",
+          "count": 11,
+          "expected": "supported"
+        }
+      ],
+      "runtime_error_count": 0,
+      "safety_error_total": 0,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 0,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      }
+    }
+  },
+  "parser_error_count": 0,
+  "provider_error_count": 0,
+  "record_count": 120,
+  "records_per_configuration": {
+    "C0": 30,
+    "C1": 30,
+    "C2": 30,
+    "C3": 30
+  },
+  "run_results": [
+    {
+      "configuration": "C0",
+      "database": "infobank_eval_s3s6_mariadb_full_c0_20260831173131",
+      "mode": "C0_VECTOR_ONLY",
+      "post_run_schema_details": {
+        "column_count": 113,
+        "database_name": "infobank_eval_s3s6_mariadb_full_c0_20260831173131",
+        "enum_columns": [
+          "document_keywords.provenance_type:ENUM",
+          "document_metadata_provenance.provenance_type:ENUM",
+          "evidence_units.source_type:ENUM",
+          "policy_rules.access_mode:ENUM",
+          "user_document_permission.permission_type:ENUM"
+        ],
+        "foreign_key_count": 10,
+        "index_count": 21,
+        "table_count": 13
+      },
+      "purpose": "full",
+      "record_count": 30,
+      "run_dir": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/C0",
+      "score": {
+        "candidate_holdout_accessed": false,
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "e14307a74ed7eeaa7b571cd2264efa1522c06605f96cafbe8bc8640abc17fd33",
+        "human_validation_state": "APPROVED",
+        "modes": {
+          "C0_VECTOR_ONLY": {
+            "abstention_precision": null,
+            "abstention_recall": 0.0,
+            "case_count": 30,
+            "citation_coverage": 0.217391,
+            "citation_document_coverage": 0.478261,
+            "citation_support_precision": 0.349206,
+            "error_taxonomy": {},
+            "expected_non_answer_count": 4,
+            "false_answer_count": 4,
+            "false_answer_rate_on_expected_abstentions": 1.0,
+            "false_or_unsupported_answer_rate": 1.0,
+            "output_class_accuracy": 0.6,
+            "output_class_confusion": [
+              {
+                "actual": "FULL_ANSWER",
+                "count": 5,
+                "expected": "AGGREGATE_RESULT"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 1,
+                "expected": "CLARIFICATION"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 3,
+                "expected": "CONSTRAINED_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 18,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 1,
+                "expected": "REFUSE_AGGREGATION_THRESHOLD"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 2,
+                "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+              }
+            ],
+            "page_level_citation_correctness": 0.15873,
+            "permitted_answer_accuracy": 0.038462,
+            "reason_code_accuracy": 0.6,
+            "reason_code_confusion": [
+              {
+                "actual": "supported",
+                "count": 5,
+                "expected": "aggregate_threshold_satisfied"
+              },
+              {
+                "actual": "supported",
+                "count": 1,
+                "expected": "aggregation_threshold_not_met"
+              },
+              {
+                "actual": "supported",
+                "count": 1,
+                "expected": "clarification"
+              },
+              {
+                "actual": "supported",
+                "count": 3,
+                "expected": "conditional_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 2,
+                "expected": "insufficient_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 18,
+                "expected": "supported"
+              }
+            ],
+            "runtime_error_count": 0,
+            "safety_error_total": 3,
+            "safety_findings": {
+              "aggregate_individual_value_exposure": 0,
+              "archived_source_usage": 0,
+              "denied_filename_hash_page_disclosure": 0,
+              "generator_visible_restricted_text": 0,
+              "local_path_exposure": 0,
+              "prohibited_document_id_exposure": 0,
+              "prohibited_text_fragment_exposure": 3,
+              "source_existence_disclosure": 0,
+              "wrong_permission_citation": 0
+            }
+          }
+        },
+        "run_id": "s3s6-mariadb-full-c0-20260831173131",
+        "scored_at": "2026-08-31T17:32:26Z",
+        "scorer_version": "infobank-actual-pipeline-scorer-v1",
+        "sealed_raw_run_sha256": "9333b015602a45ce8e69e6a4ccddb253129da255f8d186b1866b715fa39d0c82",
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+      },
+      "seal": {
+        "commit_sha": "0b72faf194f202f4d5631344978003c17d084096",
+        "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+        "config_version": "actual-pipeline-development-config-v1",
+        "corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "e14307a74ed7eeaa7b571cd2264efa1522c06605f96cafbe8bc8640abc17fd33",
+        "embedding_model": "infobank-deterministic-embedding-v1",
+        "generation_prompt_version": "actual-pipeline-answer-v1",
+        "generation_temperature": 0.0,
+        "local_pricing_config_supplied": false,
+        "model": "infobank-deterministic-extractive-v1",
+        "modes": [
+          "C0_VECTOR_ONLY"
+        ],
+        "network_provider_explicitly_allowed": false,
+        "output_cache_enabled": false,
+        "provider": "deterministic-mock",
+        "query_input_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+        "raw_run_sha256": "9333b015602a45ce8e69e6a4ccddb253129da255f8d186b1866b715fa39d0c82",
+        "record_count": 30,
+        "routing_prompt_version": "routing-keyword-v1",
+        "run_id": "s3s6-mariadb-full-c0-20260831173131",
+        "runner_version": "infobank-actual-pipeline-runner-v1",
+        "schema_version": "infobank-raw-run-seal-v1",
+        "scoring_started": false,
+        "timestamp": "2026-08-31T17:32:26Z",
+        "timing_sidecar_sha256": "2a22a7fedf9b89c48b47e1d19ce0d3df601f5626fb28bb83eb1044f07aa4f76e",
+        "wall_clock_separated_from_deterministic_hash": true
+      }
+    },
+    {
+      "configuration": "C1",
+      "database": "infobank_eval_s3s6_mariadb_full_c1_20260831173131",
+      "mode": "C1_VECTOR_ROUTING",
+      "post_run_schema_details": {
+        "column_count": 113,
+        "database_name": "infobank_eval_s3s6_mariadb_full_c1_20260831173131",
+        "enum_columns": [
+          "document_keywords.provenance_type:ENUM",
+          "document_metadata_provenance.provenance_type:ENUM",
+          "evidence_units.source_type:ENUM",
+          "policy_rules.access_mode:ENUM",
+          "user_document_permission.permission_type:ENUM"
+        ],
+        "foreign_key_count": 10,
+        "index_count": 21,
+        "table_count": 13
+      },
+      "purpose": "full",
+      "record_count": 30,
+      "run_dir": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/C1",
+      "score": {
+        "candidate_holdout_accessed": false,
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "8457deecec77feb0f5e25953992b51c6af9f74d5f11075511d0f0faa07cc969c",
+        "human_validation_state": "APPROVED",
+        "modes": {
+          "C1_VECTOR_ROUTING": {
+            "abstention_precision": null,
+            "abstention_recall": 0.0,
+            "case_count": 30,
+            "citation_coverage": 0.195652,
+            "citation_document_coverage": 0.456522,
+            "citation_support_precision": 0.355932,
+            "error_taxonomy": {},
+            "expected_non_answer_count": 4,
+            "false_answer_count": 4,
+            "false_answer_rate_on_expected_abstentions": 1.0,
+            "false_or_unsupported_answer_rate": 1.0,
+            "output_class_accuracy": 0.6,
+            "output_class_confusion": [
+              {
+                "actual": "FULL_ANSWER",
+                "count": 5,
+                "expected": "AGGREGATE_RESULT"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 1,
+                "expected": "CLARIFICATION"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 3,
+                "expected": "CONSTRAINED_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 18,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 1,
+                "expected": "REFUSE_AGGREGATION_THRESHOLD"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 2,
+                "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+              }
+            ],
+            "page_level_citation_correctness": 0.152542,
+            "permitted_answer_accuracy": 0.038462,
+            "reason_code_accuracy": 0.6,
+            "reason_code_confusion": [
+              {
+                "actual": "supported",
+                "count": 5,
+                "expected": "aggregate_threshold_satisfied"
+              },
+              {
+                "actual": "supported",
+                "count": 1,
+                "expected": "aggregation_threshold_not_met"
+              },
+              {
+                "actual": "supported",
+                "count": 1,
+                "expected": "clarification"
+              },
+              {
+                "actual": "supported",
+                "count": 3,
+                "expected": "conditional_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 2,
+                "expected": "insufficient_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 18,
+                "expected": "supported"
+              }
+            ],
+            "runtime_error_count": 0,
+            "safety_error_total": 3,
+            "safety_findings": {
+              "aggregate_individual_value_exposure": 0,
+              "archived_source_usage": 0,
+              "denied_filename_hash_page_disclosure": 0,
+              "generator_visible_restricted_text": 0,
+              "local_path_exposure": 0,
+              "prohibited_document_id_exposure": 0,
+              "prohibited_text_fragment_exposure": 3,
+              "source_existence_disclosure": 0,
+              "wrong_permission_citation": 0
+            }
+          }
+        },
+        "run_id": "s3s6-mariadb-full-c1-20260831173131",
+        "scored_at": "2026-08-31T17:32:42Z",
+        "scorer_version": "infobank-actual-pipeline-scorer-v1",
+        "sealed_raw_run_sha256": "6852bf4513ea456fcc156d4ba4fa9395a3726abb403473c6fb57e9a24453fc65",
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+      },
+      "seal": {
+        "commit_sha": "0b72faf194f202f4d5631344978003c17d084096",
+        "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+        "config_version": "actual-pipeline-development-config-v1",
+        "corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "8457deecec77feb0f5e25953992b51c6af9f74d5f11075511d0f0faa07cc969c",
+        "embedding_model": "infobank-deterministic-embedding-v1",
+        "generation_prompt_version": "actual-pipeline-answer-v1",
+        "generation_temperature": 0.0,
+        "local_pricing_config_supplied": false,
+        "model": "infobank-deterministic-extractive-v1",
+        "modes": [
+          "C1_VECTOR_ROUTING"
+        ],
+        "network_provider_explicitly_allowed": false,
+        "output_cache_enabled": false,
+        "provider": "deterministic-mock",
+        "query_input_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+        "raw_run_sha256": "6852bf4513ea456fcc156d4ba4fa9395a3726abb403473c6fb57e9a24453fc65",
+        "record_count": 30,
+        "routing_prompt_version": "routing-keyword-v1",
+        "run_id": "s3s6-mariadb-full-c1-20260831173131",
+        "runner_version": "infobank-actual-pipeline-runner-v1",
+        "schema_version": "infobank-raw-run-seal-v1",
+        "scoring_started": false,
+        "timestamp": "2026-08-31T17:32:42Z",
+        "timing_sidecar_sha256": "3031795fd7f7c3759311ceadfed35a81d51fdbd2b714093b47e55746b000c9bd",
+        "wall_clock_separated_from_deterministic_hash": true
+      }
+    },
+    {
+      "configuration": "C2",
+      "database": "infobank_eval_s3s6_mariadb_full_c2_20260831173131",
+      "mode": "C2_PERMISSION_FILTERED",
+      "post_run_schema_details": {
+        "column_count": 113,
+        "database_name": "infobank_eval_s3s6_mariadb_full_c2_20260831173131",
+        "enum_columns": [
+          "document_keywords.provenance_type:ENUM",
+          "document_metadata_provenance.provenance_type:ENUM",
+          "evidence_units.source_type:ENUM",
+          "policy_rules.access_mode:ENUM",
+          "user_document_permission.permission_type:ENUM"
+        ],
+        "foreign_key_count": 10,
+        "index_count": 21,
+        "table_count": 13
+      },
+      "purpose": "full",
+      "record_count": 30,
+      "run_dir": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/C2",
+      "score": {
+        "candidate_holdout_accessed": false,
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "6479a1e92e4f3e6cf520a811a46e76d40ec891d48c53ae9b8d700602a5333ed1",
+        "human_validation_state": "APPROVED",
+        "modes": {
+          "C2_PERMISSION_FILTERED": {
+            "abstention_precision": 0.142857,
+            "abstention_recall": 0.25,
+            "case_count": 30,
+            "citation_coverage": 0.217391,
+            "citation_document_coverage": 0.434783,
+            "citation_support_precision": 0.512821,
+            "error_taxonomy": {},
+            "expected_non_answer_count": 4,
+            "false_answer_count": 2,
+            "false_answer_rate_on_expected_abstentions": 0.5,
+            "false_or_unsupported_answer_rate": 0.5,
+            "output_class_accuracy": 0.633333,
+            "output_class_confusion": [
+              {
+                "actual": "AGGREGATE_RESULT",
+                "count": 5,
+                "expected": "AGGREGATE_RESULT"
+              },
+              {
+                "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+                "count": 1,
+                "expected": "CLARIFICATION"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 3,
+                "expected": "CONSTRAINED_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 13,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+                "count": 5,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "REFUSE_AGGREGATION_THRESHOLD",
+                "count": 1,
+                "expected": "REFUSE_AGGREGATION_THRESHOLD"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 2,
+                "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+              }
+            ],
+            "page_level_citation_correctness": 0.25641,
+            "permitted_answer_accuracy": 0.230769,
+            "reason_code_accuracy": 0.633333,
+            "reason_code_confusion": [
+              {
+                "actual": "aggregate_threshold_satisfied",
+                "count": 5,
+                "expected": "aggregate_threshold_satisfied"
+              },
+              {
+                "actual": "aggregation_threshold_not_met",
+                "count": 1,
+                "expected": "aggregation_threshold_not_met"
+              },
+              {
+                "actual": "insufficient_evidence",
+                "count": 1,
+                "expected": "clarification"
+              },
+              {
+                "actual": "supported",
+                "count": 3,
+                "expected": "conditional_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 2,
+                "expected": "insufficient_evidence"
+              },
+              {
+                "actual": "insufficient_evidence",
+                "count": 5,
+                "expected": "supported"
+              },
+              {
+                "actual": "supported",
+                "count": 13,
+                "expected": "supported"
+              }
+            ],
+            "runtime_error_count": 0,
+            "safety_error_total": 0,
+            "safety_findings": {
+              "aggregate_individual_value_exposure": 0,
+              "archived_source_usage": 0,
+              "denied_filename_hash_page_disclosure": 0,
+              "generator_visible_restricted_text": 0,
+              "local_path_exposure": 0,
+              "prohibited_document_id_exposure": 0,
+              "prohibited_text_fragment_exposure": 0,
+              "source_existence_disclosure": 0,
+              "wrong_permission_citation": 0
+            }
+          }
+        },
+        "run_id": "s3s6-mariadb-full-c2-20260831173131",
+        "scored_at": "2026-08-31T17:33:06Z",
+        "scorer_version": "infobank-actual-pipeline-scorer-v1",
+        "sealed_raw_run_sha256": "2425416a56f6e2500183c4c4ad677c65d419b10b7d868cf476c3c823338254be",
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+      },
+      "seal": {
+        "commit_sha": "0b72faf194f202f4d5631344978003c17d084096",
+        "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+        "config_version": "actual-pipeline-development-config-v1",
+        "corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "6479a1e92e4f3e6cf520a811a46e76d40ec891d48c53ae9b8d700602a5333ed1",
+        "embedding_model": "infobank-deterministic-embedding-v1",
+        "generation_prompt_version": "actual-pipeline-answer-v1",
+        "generation_temperature": 0.0,
+        "local_pricing_config_supplied": false,
+        "model": "infobank-deterministic-extractive-v1",
+        "modes": [
+          "C2_PERMISSION_FILTERED"
+        ],
+        "network_provider_explicitly_allowed": false,
+        "output_cache_enabled": false,
+        "provider": "deterministic-mock",
+        "query_input_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+        "raw_run_sha256": "2425416a56f6e2500183c4c4ad677c65d419b10b7d868cf476c3c823338254be",
+        "record_count": 30,
+        "routing_prompt_version": "routing-keyword-v1",
+        "run_id": "s3s6-mariadb-full-c2-20260831173131",
+        "runner_version": "infobank-actual-pipeline-runner-v1",
+        "schema_version": "infobank-raw-run-seal-v1",
+        "scoring_started": false,
+        "timestamp": "2026-08-31T17:33:06Z",
+        "timing_sidecar_sha256": "e35088d6e92ad9d19874f6e56519a672122d0861db33c4bfbe5f85480ad5d116",
+        "wall_clock_separated_from_deterministic_hash": true
+      }
+    },
+    {
+      "configuration": "C3",
+      "database": "infobank_eval_s3s6_mariadb_full_c3_20260831173131",
+      "mode": "C3_FULL_ROLE_AWARE",
+      "post_run_schema_details": {
+        "column_count": 113,
+        "database_name": "infobank_eval_s3s6_mariadb_full_c3_20260831173131",
+        "enum_columns": [
+          "document_keywords.provenance_type:ENUM",
+          "document_metadata_provenance.provenance_type:ENUM",
+          "evidence_units.source_type:ENUM",
+          "policy_rules.access_mode:ENUM",
+          "user_document_permission.permission_type:ENUM"
+        ],
+        "foreign_key_count": 10,
+        "index_count": 21,
+        "table_count": 13
+      },
+      "purpose": "full",
+      "record_count": 30,
+      "run_dir": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/full/C3",
+      "score": {
+        "candidate_holdout_accessed": false,
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "3c3761e35729239813c6490245ef7082f89f8352bb5142c91378c2d381717eb6",
+        "human_validation_state": "APPROVED",
+        "modes": {
+          "C3_FULL_ROLE_AWARE": {
+            "abstention_precision": 0.111111,
+            "abstention_recall": 0.25,
+            "case_count": 30,
+            "citation_coverage": 0.195652,
+            "citation_document_coverage": 0.369565,
+            "citation_support_precision": 0.586207,
+            "error_taxonomy": {},
+            "expected_non_answer_count": 4,
+            "false_answer_count": 2,
+            "false_answer_rate_on_expected_abstentions": 0.5,
+            "false_or_unsupported_answer_rate": 0.5,
+            "output_class_accuracy": 0.566667,
+            "output_class_confusion": [
+              {
+                "actual": "AGGREGATE_RESULT",
+                "count": 5,
+                "expected": "AGGREGATE_RESULT"
+              },
+              {
+                "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+                "count": 1,
+                "expected": "CLARIFICATION"
+              },
+              {
+                "actual": "CLARIFICATION",
+                "count": 1,
+                "expected": "CONSTRAINED_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 2,
+                "expected": "CONSTRAINED_ANSWER"
+              },
+              {
+                "actual": "CONSTRAINED_ANSWER",
+                "count": 1,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 11,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+                "count": 6,
+                "expected": "FULL_ANSWER"
+              },
+              {
+                "actual": "REFUSE_AGGREGATION_THRESHOLD",
+                "count": 1,
+                "expected": "REFUSE_AGGREGATION_THRESHOLD"
+              },
+              {
+                "actual": "FULL_ANSWER",
+                "count": 2,
+                "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+              }
+            ],
+            "page_level_citation_correctness": 0.310345,
+            "permitted_answer_accuracy": 0.230769,
+            "reason_code_accuracy": 0.566667,
+            "reason_code_confusion": [
+              {
+                "actual": "aggregate_threshold_satisfied",
+                "count": 5,
+                "expected": "aggregate_threshold_satisfied"
+              },
+              {
+                "actual": "aggregation_threshold_not_met",
+                "count": 1,
+                "expected": "aggregation_threshold_not_met"
+              },
+              {
+                "actual": "insufficient_evidence",
+                "count": 1,
+                "expected": "clarification"
+              },
+              {
+                "actual": "clarification",
+                "count": 1,
+                "expected": "conditional_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 2,
+                "expected": "conditional_evidence"
+              },
+              {
+                "actual": "supported",
+                "count": 2,
+                "expected": "insufficient_evidence"
+              },
+              {
+                "actual": "conflict",
+                "count": 2,
+                "expected": "supported"
+              },
+              {
+                "actual": "insufficient_evidence",
+                "count": 5,
+                "expected": "supported"
+              },
+              {
+                "actual": "supported",
+                "count": 11,
+                "expected": "supported"
+              }
+            ],
+            "runtime_error_count": 0,
+            "safety_error_total": 0,
+            "safety_findings": {
+              "aggregate_individual_value_exposure": 0,
+              "archived_source_usage": 0,
+              "denied_filename_hash_page_disclosure": 0,
+              "generator_visible_restricted_text": 0,
+              "local_path_exposure": 0,
+              "prohibited_document_id_exposure": 0,
+              "prohibited_text_fragment_exposure": 0,
+              "source_existence_disclosure": 0,
+              "wrong_permission_citation": 0
+            }
+          }
+        },
+        "run_id": "s3s6-mariadb-full-c3-20260831173131",
+        "scored_at": "2026-08-31T17:33:30Z",
+        "scorer_version": "infobank-actual-pipeline-scorer-v1",
+        "sealed_raw_run_sha256": "24f4d01e72fd1e766de86ae797d99c1f4d16bc314a1fb4be71ee0be2ee25a8da",
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+      },
+      "seal": {
+        "commit_sha": "0b72faf194f202f4d5631344978003c17d084096",
+        "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+        "config_version": "actual-pipeline-development-config-v1",
+        "corpus_sha256": "be86683e75e8feaaa90168580a3312bf97b095c96e4e20721ae24a8060d3cd6e",
+        "dataset_version": "scenario-pack-author-reviewed-candidate-v1.2",
+        "deterministic_content_sha256": "3c3761e35729239813c6490245ef7082f89f8352bb5142c91378c2d381717eb6",
+        "embedding_model": "infobank-deterministic-embedding-v1",
+        "generation_prompt_version": "actual-pipeline-answer-v1",
+        "generation_temperature": 0.0,
+        "local_pricing_config_supplied": false,
+        "model": "infobank-deterministic-extractive-v1",
+        "modes": [
+          "C3_FULL_ROLE_AWARE"
+        ],
+        "network_provider_explicitly_allowed": false,
+        "output_cache_enabled": false,
+        "provider": "deterministic-mock",
+        "query_input_sha256": "c0821ee30c2d55f1548aa9f2053a23cdd8ca6fb103723702949821e196791dca",
+        "raw_run_sha256": "24f4d01e72fd1e766de86ae797d99c1f4d16bc314a1fb4be71ee0be2ee25a8da",
+        "record_count": 30,
+        "routing_prompt_version": "routing-keyword-v1",
+        "run_id": "s3s6-mariadb-full-c3-20260831173131",
+        "runner_version": "infobank-actual-pipeline-runner-v1",
+        "schema_version": "infobank-raw-run-seal-v1",
+        "scoring_started": false,
+        "timestamp": "2026-08-31T17:33:29Z",
+        "timing_sidecar_sha256": "088d4806f4fcb42c170281cb219999421c13a7b84f5de6c5c19eacf5663ff679",
+        "wall_clock_separated_from_deterministic_hash": true
+      }
+    }
+  ],
+  "runtime_error_count": 0,
+  "safety_error_total_by_configuration": {
+    "C0": 3,
+    "C1": 3,
+    "C2": 0,
+    "C3": 0
+  },
+  "schema_version": "infobank-s3-s6-mariadb-full-summary-v1",
+  "status": "FULL_RUN_COMPLETE"
+}

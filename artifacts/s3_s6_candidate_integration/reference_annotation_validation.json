@@ -1,0 +1,34 @@
+{
+  "annotation_count": 30,
+  "answer_producing_cases_with_empty_atoms": [],
+  "factual_atom_empty_by_class": {
+    "CLARIFICATION": 1,
+    "REFUSE_AGGREGATION_THRESHOLD": 1,
+    "REFUSE_INSUFFICIENT_EVIDENCE": 2
+  },
+  "factual_atom_nonempty_by_class": {
+    "AGGREGATE_RESULT": 5,
+    "CONSTRAINED_ANSWER": 3,
+    "FULL_ANSWER": 18
+  },
+  "generic_scorer_concern": "Exact-substring factual-atom scoring remains intentionally strict; no S3-S6 reference answer or output class was changed to improve score.",
+  "human_validated_count": 30,
+  "non_answer_cases_with_atoms": [],
+  "output_class_distribution": {
+    "AGGREGATE_RESULT": 5,
+    "CLARIFICATION": 1,
+    "CONSTRAINED_ANSWER": 3,
+    "FULL_ANSWER": 18,
+    "REFUSE_AGGREGATION_THRESHOLD": 1,
+    "REFUSE_INSUFFICIENT_EVIDENCE": 2
+  },
+  "runtime_reference_separation": {
+    "query_input_reference_only_field_leaks": [],
+    "verification_runtime_gold_separated": true
+  },
+  "source_page_validation": {
+    "invalid_page_check_count": 0,
+    "page_check_count": 49
+  },
+  "status": "PASS"
+}

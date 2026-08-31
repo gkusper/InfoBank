@@ -1,0 +1,52 @@
+{
+  "author_review_validation": "PASS",
+  "checksum_failure_count": 0,
+  "checksum_validation": "PASS",
+  "created_at_utc": "2026-08-31T20:22:49.618643Z",
+  "diff_check": "PASS_WITH_CRLF_WARNINGS_ONLY",
+  "excluded_material_hit_count": 0,
+  "focused_tests": {
+    "deselected": 26,
+    "errors": 0,
+    "failed": 0,
+    "passed": 16,
+    "path": "artifacts/s3_s6_freeze/final_validation/focused_tests.log",
+    "skipped": 0,
+    "status": "PASS",
+    "summary": "16 passed, 26 deselected, 6 warnings in 5.13s",
+    "warnings": 6
+  },
+  "full_tests": {
+    "deselected": 0,
+    "errors": 0,
+    "failed": 0,
+    "passed": 337,
+    "path": "artifacts/s3_s6_freeze/final_validation/full_tests.log",
+    "skipped": 0,
+    "status": "PASS",
+    "summary": "337 passed, 75 warnings in 32.99s",
+    "warnings": 75
+  },
+  "human_confirmation_validation": "PASS",
+  "local_path_scan_count": 0,
+  "package_validation": "PASS",
+  "quality_gate": {
+    "docker_api_smoke": "PENDING",
+    "failed": 0,
+    "passed": 337,
+    "path": "artifacts/s3_s6_freeze/final_validation/quality_gate_non_docker.log",
+    "skipped": 0,
+    "status": "PASS_WITH_PENDING_DOCKER_SMOKE",
+    "total": 337
+  },
+  "runtime_reference_separation": "PASS",
+  "s1_s2_changed": "NO",
+  "schema_version": "infobank-s3-s6-freeze-final-validation-v1",
+  "secret_scan_count": 0,
+  "source_code_diff_sha256": "78286f78ecb82a741c9efb968dab8d26321758a50681aa9c8653b721b2b5cb39",
+  "status": "PASS",
+  "test_code_diff_sha256": "7e73a8dda74333ea4f1789ba562af102358d8115c40cffa5aea4d706140fabd2",
+  "tracked_working_tree_diff_sha256": "ddea9de6df43a02144f08faccf220c1fa0116279b27002157e7067ccdccdbfca",
+  "zip_member_count": 66,
+  "zip_sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c"
+}

@@ -12,7 +12,10 @@ REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
-from evaluation.external_scenario_corpus import write_external_scenario_actual_inputs  # noqa: E402
+from evaluation.external_scenario_corpus import (  # noqa: E402
+    write_external_primary_contract_actual_inputs,
+    write_external_scenario_actual_inputs,
+)
 
 
 def _source_map(path: Path | None) -> dict[str, str]:
@@ -31,8 +34,14 @@ def main() -> None:
     parser.add_argument("--scenario-id", action="append", dest="scenario_ids")
     parser.add_argument("--source-filename-map", type=Path)
     parser.add_argument("--package-sha256")
+    parser.add_argument(
+        "--primary-contracts",
+        action="store_true",
+        help="Bind the package's manifest-declared primary evaluation contracts instead of regenerating scenario-level fixtures.",
+    )
     args = parser.parse_args()
-    result = write_external_scenario_actual_inputs(
+    binder = write_external_primary_contract_actual_inputs if args.primary_contracts else write_external_scenario_actual_inputs
+    result = binder(
         args.package_root,
         args.output,
         scenario_ids=tuple(args.scenario_ids) if args.scenario_ids else None,

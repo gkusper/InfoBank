@@ -1,0 +1,101 @@
+{
+  "artifact_checks": {
+    "author_decision_audit_status": "PASS",
+    "freeze_final_report_status": "READY_FOR_FROZEN_S1_S6_INTEGRATION",
+    "freeze_final_validation_status": "PASS",
+    "frozen_package_identity": "S3_S6_JOURNAL_EVALUATION_V1",
+    "frozen_zip_expected_sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c",
+    "frozen_zip_member_count": 66,
+    "frozen_zip_member_count_matches": true,
+    "frozen_zip_sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c",
+    "frozen_zip_sha256_matches": true,
+    "human_packet_internal_sha256s": {
+      "checked": 7,
+      "mismatches": [],
+      "missing_members": [],
+      "status": "PASS",
+      "sums_file": "artifacts/s3_s6_candidate_integration/human_confirmation/SHA256SUMS.txt",
+      "zip_file": "artifacts/s3_s6_candidate_integration/human_confirmation/S3_S6_AGGREGATE_HUMAN_CONFIRMATION_PACKET_V1.zip"
+    },
+    "human_packet_sha256": "e25c94f9fcbd5c431a4526d2cc4692121d11fbb8d594f62b635e0ac0e0fa5191",
+    "human_packet_sha256_matches": true,
+    "human_packet_validation_status": "READY_FOR_AGGREGATE_HUMAN_CONFIRMATION",
+    "input_continuity_status": "PASS",
+    "mariadb_assessment_status": "PASS",
+    "mariadb_directory_sha256s_verification": {
+      "checked": 22,
+      "mismatches": [],
+      "status": "PASS",
+      "sums_file": "artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/SHA256SUMS.txt"
+    },
+    "mariadb_schema_status": "COMPATIBLE",
+    "mariadb_summary_status": "FULL_RUN_COMPLETE",
+    "package_validation_status": "PASS",
+    "policy_variant_validation_status": "PASS",
+    "reference_annotation_validation_status": "PASS",
+    "source_mutation_author_decisions_changed": "NO",
+    "source_mutation_reference_annotations_changed": "NO"
+  },
+  "created_utc": "2026-08-31T21:12:06+00:00",
+  "git_checks": {
+    "ahead_behind_before_commit": "0\t0",
+    "diff_check_returncode": 0,
+    "head_matches_origin_before_commit": true,
+    "origin_main_unchanged_before_commit": true
+  },
+  "invariants": {
+    "AUTHOR_DECISIONS_CHANGED": "NO",
+    "EXTERNAL_PROVIDER_CALLS": 0,
+    "FORCE_PUSH_USED": "NO",
+    "FROZEN_PACKAGE_CHANGED": "NO",
+    "FURTHER_S3_S6_TUNING_PERFORMED": "NO",
+    "MAIN_CHANGED": "NO",
+    "POLICY_SEMANTICS_CHANGED": "NO",
+    "REFERENCE_ANNOTATIONS_CHANGED": "NO",
+    "REFERENCE_ANSWERS_CHANGED": "NO",
+    "REFERENCE_OUTPUT_CLASSES_CHANGED": "NO",
+    "S1_S2_CHANGED": "NO"
+  },
+  "s1_s2_checks": {
+    "changed": false,
+    "status_files": [
+      "?? .tc_quality/test_bundle_writer_is_determin0/scenario_packs/S1_SOFA_01/scenario_pack.json",
+      "?? .tc_quality/test_bundle_writer_is_determin0/scenario_packs/S2_TV_WARRANTY_01/scenario_pack.json",
+      "?? artifacts/s3_s6_candidate_integration/S1_S2_PROTECTION_CHECK_AFTER_AGGREGATE_FIX.json",
+      "?? artifacts/s3_s6_candidate_integration/mariadb_compatibility_smoke/S1_S2_PRESERVATION_MARIADB_CHECK.json",
+      "?? tc_full/test_bundle_writer_is_determin0/scenario_packs/S1_SOFA_01/scenario_pack.json",
+      "?? tc_full/test_bundle_writer_is_determin0/scenario_packs/S2_TV_WARRANTY_01/scenario_pack.json"
+    ],
+    "status_mentions_note": "S1-S2-named preservation diagnostics and pytest fixture outputs remain unstaged/excluded if present.",
+    "tracked_diff_files": []
+  },
+  "scan_checks": {
+    "new_public_files_actual_local_path_findings": 0,
+    "new_public_files_placeholder_marker_findings": 0,
+    "new_public_files_provider_trace_findings": 0,
+    "new_public_files_secret_findings": 0,
+    "source_diff_actual_local_path_findings": 0,
+    "source_diff_case_specific_findings": 0,
+    "source_diff_placeholder_marker_findings": 0,
+    "source_diff_secret_findings": 0
+  },
+  "test_results": {
+    "focused_tests": {
+      "deselected": 26,
+      "passed": 16,
+      "status": "PASS",
+      "warnings": 6
+    },
+    "full_tests": {
+      "passed": 337,
+      "status": "PASS",
+      "warnings": 75
+    },
+    "quality_gate": {
+      "docker_api_smoke": "PENDING",
+      "status": "PASS_WITH_PENDING_DOCKER_SMOKE",
+      "tests_failed": 0,
+      "tests_passed": 337
+    }
+  }
+}

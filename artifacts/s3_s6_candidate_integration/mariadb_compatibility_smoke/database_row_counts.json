@@ -1,0 +1,84 @@
+{
+  "all_pdf_ingest_31_of_31": true,
+  "records": [
+    {
+      "database": "infobank_eval_s3s6_mariadb_focus_c2_20260831173131",
+      "mode": "C2_PERMISSION_FILTERED",
+      "pdf_ingest_status": "PASS",
+      "purpose": "focused",
+      "row_counts": {
+        "document_chunks": 170,
+        "documents": 31,
+        "policy_rules": 0,
+        "schema_migrations": 2,
+        "user_document_permission": 233
+      }
+    },
+    {
+      "database": "infobank_eval_s3s6_mariadb_focus_c3_20260831173131",
+      "mode": "C3_FULL_ROLE_AWARE",
+      "pdf_ingest_status": "PASS",
+      "purpose": "focused",
+      "row_counts": {
+        "document_chunks": 170,
+        "documents": 31,
+        "policy_rules": 0,
+        "schema_migrations": 2,
+        "user_document_permission": 233
+      }
+    },
+    {
+      "database": "infobank_eval_s3s6_mariadb_full_c0_20260831173131",
+      "mode": "C0_VECTOR_ONLY",
+      "pdf_ingest_status": "PASS",
+      "purpose": "full",
+      "row_counts": {
+        "document_chunks": 170,
+        "documents": 31,
+        "policy_rules": 0,
+        "schema_migrations": 2,
+        "user_document_permission": 233
+      }
+    },
+    {
+      "database": "infobank_eval_s3s6_mariadb_full_c1_20260831173131",
+      "mode": "C1_VECTOR_ROUTING",
+      "pdf_ingest_status": "PASS",
+      "purpose": "full",
+      "row_counts": {
+        "document_chunks": 170,
+        "documents": 31,
+        "policy_rules": 0,
+        "schema_migrations": 2,
+        "user_document_permission": 233
+      }
+    },
+    {
+      "database": "infobank_eval_s3s6_mariadb_full_c2_20260831173131",
+      "mode": "C2_PERMISSION_FILTERED",
+      "pdf_ingest_status": "PASS",
+      "purpose": "full",
+      "row_counts": {
+        "document_chunks": 170,
+        "documents": 31,
+        "policy_rules": 0,
+        "schema_migrations": 2,
+        "user_document_permission": 233
+      }
+    },
+    {
+      "database": "infobank_eval_s3s6_mariadb_full_c3_20260831173131",
+      "mode": "C3_FULL_ROLE_AWARE",
+      "pdf_ingest_status": "PASS",
+      "purpose": "full",
+      "row_counts": {
+        "document_chunks": 170,
+        "documents": 31,
+        "policy_rules": 0,
+        "schema_migrations": 2,
+        "user_document_permission": 233
+      }
+    }
+  ],
+  "schema_version": "infobank-s3-s6-mariadb-row-counts-v1"
+}

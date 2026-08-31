@@ -127,8 +127,7 @@ def execute_aggregate(
         "output_class": AGGREGATE_RESULT,
         "reason_code": REASON_THRESHOLD_MET,
         "safe_output": (
-            f"Governed aggregate {config.operation}: {rounded:g} "
-            f"across {len(values)} distinct contributors."
+            f"Governed aggregate {config.operation}: {rounded:g}."
         ),
         "aggregate": aggregate,
         "generator_context": generator_context,
@@ -137,7 +136,5 @@ def execute_aggregate(
             "executor_version": config.config_version,
             "config_hash": config.config_hash,
             "threshold_satisfied": True,
-            "contributor_count": len(values),
-            "deduplicated_count": len(values),
         },
     }

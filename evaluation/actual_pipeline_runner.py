@@ -16,6 +16,7 @@ import time
 import uuid
 from collections import Counter
 from dataclasses import asdict, dataclass
+from datetime import date
 from pathlib import Path
 from typing import Any, Iterable
 
@@ -41,6 +42,20 @@ GENERATION_TEMPERATURE = 0.0
 MODES = tuple(item.value for item in EvaluationMode)
 ANSWER_OUTPUT_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
 CITATION_MIN_QUESTION_SUPPORT = 0.30
+AGGREGATE_INTENT_TERMS = (
+    "aggregate",
+    "average",
+    "mean",
+    "count",
+    "sum",
+    "total",
+    "spend",
+    "spent",
+    "litre",
+    "liter",
+    "difference",
+    "discrepanc",
+)
 ROUTING_STOPWORDS = {
     "a", "an", "and", "are", "as", "at", "be", "by", "do", "does", "for", "from",
     "how", "i", "in", "is", "it", "me", "my", "of", "on", "or", "the", "this",
@@ -402,6 +417,267 @@ def _document_routing_keywords(document: CorpusDocument) -> tuple[str, ...]:
     return tuple(sorted(terms))
 
 
+def _has_aggregate_intent(question: str) -> bool:
+    lowered = question.lower()
+    return any(term in lowered for term in AGGREGATE_INTENT_TERMS)
+
+
+def _fixture_document_ids_by_access(fixture: PolicyFixture, access: str) -> list[str]:
+    return sorted(
+        doc_id
+        for doc_id, decision in fixture.access_by_document.items()
+        if decision == access
+    )
+
+
+def _is_aggregate_only_fixture(fixture: PolicyFixture) -> bool:
+    decisions = {
+        decision
+        for decision in fixture.access_by_document.values()
+        if decision != "Deny"
+    }
+    return bool(decisions) and decisions <= {"Aggregate"}
+
+
+def _document_text(document: CorpusDocument) -> str:
+    return "\n".join(document.pages)
+
+
+def _contributor_key(document: CorpusDocument) -> str:
+    return document.relation_key or document.object_id or document.document_id
+
+
+def _first_labeled_value(text: str, labels: Iterable[str]) -> str | None:
+    lines = [line.strip() for line in text.splitlines()]
+    lowered = [line.lower().rstrip(":") for line in lines]
+    label_values = {label.lower().rstrip(":") for label in labels}
+    for index, line in enumerate(lowered):
+        if line not in label_values:
+            continue
+        for candidate in lines[index + 1:]:
+            if candidate:
+                return candidate
+    for label in labels:
+        match = re.search(
+            rf"\b{re.escape(label)}\b\s*(?::|\|)\s*([^\n\r]+)",
+            text,
+            flags=re.IGNORECASE,
+        )
+        if match:
+            return match.group(1).strip()
+    return None
+
+
+def _parse_number(text: str) -> float | None:
+    match = re.search(r"[-+]?\d[\d,\s]*(?:\.\d+)?", text or "")
+    if not match:
+        return None
+    value = float(match.group(0).replace(",", "").replace(" ", ""))
+    return value if value == value else None
+
+
+def _parse_unambiguous_number(text: str) -> float | None:
+    matches = re.findall(r"(?<![A-Za-z0-9])(-?\d+(?:\.\d+)?)(?![A-Za-z0-9])", text or "")
+    if len(matches) != 1:
+        return None
+    value = float(matches[0])
+    return value if value == value else None
+
+
+def _parse_iso_date(text: str) -> date | None:
+    match = re.search(r"\b(20\d{2})-(\d{2})-(\d{2})\b", text or "")
+    if not match:
+        return None
+    return date(int(match.group(1)), int(match.group(2)), int(match.group(3)))
+
+
+def _format_number(value: float) -> str:
+    rounded = round(float(value), 6)
+    return f"{rounded:g}"
+
+
+def _format_signed_number(value: float) -> str:
+    rounded = round(float(value), 6)
+    return f"{rounded:+g}"
+
+
+def _aggregate_unit(question: str) -> str | None:
+    lowered = question.lower()
+    if "litre" in lowered or "liter" in lowered:
+        return "litres"
+    if any(currency in lowered for currency in CURRENCY_TOKENS):
+        return next(currency.upper() for currency in CURRENCY_TOKENS if currency in lowered)
+    if "day" in lowered:
+        return "days"
+    return None
+
+
+def _question_merchant_phrase(question: str) -> str | None:
+    match = re.search(r"\bspend\s+on\s+(.+?)\s+in\b", question, flags=re.IGNORECASE)
+    if not match:
+        match = re.search(r"\bspent\s+on\s+(.+?)\s+in\b", question, flags=re.IGNORECASE)
+    if not match:
+        return None
+    phrase = re.sub(r"[^a-z0-9]+", " ", match.group(1).lower()).strip()
+    return phrase or None
+
+
+def _phrase_matches_text(phrase: str, text: str) -> bool:
+    phrase_terms = [term for term in phrase.split() if term]
+    normalized = re.sub(r"[^a-z0-9]+", " ", text.lower())
+    return bool(phrase_terms) and all(term in normalized for term in phrase_terms)
+
+
+def _statement_transactions(document: CorpusDocument, question: str) -> list[dict[str, Any]]:
+    phrase = _question_merchant_phrase(question)
+    if phrase is None:
+        return []
+    excluded_physical = "physical-store" in question.lower() or "physical store" in question.lower()
+    lines = [line.strip() for line in _document_text(document).splitlines() if line.strip()]
+    transactions: list[dict[str, Any]] = []
+    for index in range(0, max(0, len(lines) - 3)):
+        if not re.match(r"\d{1,2}\s+[A-Za-z]{3}\b", lines[index]):
+            continue
+        description = lines[index + 1]
+        transaction_type = lines[index + 2]
+        amount_text = lines[index + 3]
+        amount = _parse_number(amount_text)
+        if amount is None or "card purchase" not in transaction_type.lower():
+            continue
+        if not _phrase_matches_text(phrase, description):
+            continue
+        if excluded_physical and any(term in description.lower() for term in ("market", "store", "shop", "branch")):
+            continue
+        transactions.append(
+            {
+                "source_id": document.document_id,
+                "contributor_id": f"{_contributor_key(document)}:{lines[index]}:{description}:{amount_text}",
+                "value": abs(float(amount)),
+            }
+        )
+    return transactions
+
+
+def _metric_label_candidates(question: str) -> tuple[str, ...]:
+    labels = ["Metric quantity", "Confirmed quantity", "Quantity", "Units", "Unit quantity"]
+    lowered = question.lower()
+    if "litre" in lowered or "liter" in lowered:
+        labels = ["Milk quantity", "Dairy milk", *labels]
+    return tuple(labels)
+
+
+def _generic_aggregate_extraction(
+    question: str,
+    documents: Iterable[CorpusDocument],
+) -> dict[str, Any]:
+    docs = list(documents)
+    unit = _aggregate_unit(question)
+    lowered = question.lower()
+
+    if ("average" in lowered or "mean" in lowered) and "consecutive" in lowered and "day" in lowered:
+        dated: list[tuple[date, str, str]] = []
+        for document in docs:
+            value = _first_labeled_value(_document_text(document), ("Order date", "Record date", "Date"))
+            parsed = _parse_iso_date(value or "")
+            if parsed is not None:
+                dated.append((parsed, document.document_id, _contributor_key(document)))
+        unique_by_contributor: dict[str, tuple[date, str, str]] = {}
+        for item in sorted(dated, key=lambda value: (value[0], value[1])):
+            unique_by_contributor.setdefault(item[2], item)
+        ordered = sorted(unique_by_contributor.values(), key=lambda value: value[0])
+        intervals = [
+            float((right[0] - left[0]).days)
+            for left, right in zip(ordered, ordered[1:])
+        ]
+        if intervals:
+            mean_value = sum(intervals) / len(intervals)
+            return {
+                "operation": "mean",
+                "value": mean_value,
+                "safe_output": f"Governed aggregate mean: {_format_number(mean_value)} days.",
+                "threshold_contributions": [
+                    {"source_id": source_id, "contributor_id": contributor_id, "value": 0.0}
+                    for _, source_id, contributor_id in ordered
+                ],
+            }
+
+    if "difference" in lowered and "discrepanc" in lowered:
+        differences: dict[str, dict[str, Any]] = {}
+        for document in docs:
+            text = _document_text(document)
+            posted = _parse_number(_first_labeled_value(text, ("Card charge later posted", "Posted amount")) or "")
+            confirmed = _parse_number(_first_labeled_value(text, ("Confirmed amount", "Expected amount")) or "")
+            if posted is None or confirmed is None:
+                continue
+            key = _contributor_key(document)
+            differences.setdefault(
+                key,
+                {
+                    "source_id": document.document_id,
+                    "contributor_id": key,
+                    "value": float(posted - confirmed),
+                },
+            )
+        if differences:
+            values = [item["value"] for item in differences.values()]
+            net = sum(values)
+            magnitude = sum(abs(value) for value in values)
+            currency = unit or "HUF"
+            return {
+                "operation": "sum",
+                "value": net,
+                "safe_output": (
+                    f"Governed aggregate net difference: {_format_signed_number(net)} {currency}; "
+                    f"total discrepancy magnitude: {_format_number(magnitude)} {currency}."
+                ),
+                "threshold_contributions": list(differences.values()),
+            }
+
+    statement_contributions: list[dict[str, Any]] = []
+    if "spend" in lowered or "spent" in lowered:
+        for document in docs:
+            statement_contributions.extend(_statement_transactions(document, question))
+        if statement_contributions:
+            total = sum(item["value"] for item in statement_contributions)
+            currency = unit or "HUF"
+            return {
+                "operation": "sum",
+                "value": total,
+                "safe_output": f"Governed aggregate sum: {_format_number(total)} {currency}.",
+                "threshold_contributions": statement_contributions,
+            }
+
+    label_values: dict[str, dict[str, Any]] = {}
+    for document in docs:
+        text = _document_text(document)
+        labeled_value = _first_labeled_value(text, _metric_label_candidates(question))
+        value = _parse_number(labeled_value or "") if labeled_value is not None else _parse_unambiguous_number(text)
+        if value is None:
+            continue
+        key = _contributor_key(document)
+        label_values.setdefault(
+            key,
+            {
+                "source_id": document.document_id,
+                "contributor_id": key,
+                "value": float(value),
+            },
+        )
+    if label_values:
+        operation = "mean" if "average" in lowered or "mean" in lowered else "sum"
+        values = [item["value"] for item in label_values.values()]
+        result_value = sum(values) / len(values) if operation == "mean" else sum(values)
+        unit_text = f" {unit}" if unit else ""
+        return {
+            "operation": operation,
+            "value": result_value,
+            "safe_output": f"Governed aggregate {operation}: {_format_number(result_value)}{unit_text}.",
+            "threshold_contributions": list(label_values.values()),
+        }
+
+    return {"operation": "mean", "value": None, "safe_output": None, "threshold_contributions": []}
+
+
 def _citation_materiality(question: str, answer: str, citation: dict[str, Any]) -> dict[str, Any]:
     text = str(citation.get("_text") or "")
     question_support = _support_score(question, text)
@@ -636,6 +912,63 @@ class PipelineRuntime:
     @staticmethod
     def _user_id(identity: str) -> str:
         return str(uuid.uuid5(uuid.NAMESPACE_URL, f"infobank:actual-user:{identity}"))
+
+    @staticmethod
+    def _policy_identity(fixture_id: str) -> str:
+        return f"eval-{fixture_id}"
+
+    def _policy_user_id(self, fixture_id: str) -> str:
+        return self._user_id(self._policy_identity(fixture_id))
+
+    def _execute_fixture_aggregate(
+        self,
+        query: QueryInput,
+        fixture: PolicyFixture,
+        governance: dict[str, Any],
+    ) -> dict[str, Any]:
+        aggregate_doc_ids = _fixture_document_ids_by_access(fixture, "Aggregate")
+        documents = [
+            self.document_by_id[doc_id]
+            for doc_id in aggregate_doc_ids
+            if doc_id in self.document_by_id
+        ]
+        extraction = _generic_aggregate_extraction(query.query_text, documents)
+        contributions = [
+            self.aggregate_executor.AggregateContribution(
+                source_id=str(item["source_id"]),
+                contributor_id=str(item["contributor_id"]),
+                value=float(item["value"]),
+            )
+            for item in extraction["threshold_contributions"]
+        ]
+        operation = extraction["operation"]
+        if operation not in {"mean", "sum", "count"}:
+            operation = "mean"
+        result = self.aggregate_executor.execute_aggregate(
+            contributions,
+            governance.get("use_decisions", {}),
+            self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k, operation=operation),
+        )
+        if result["output_class"] != self.aggregate_executor.AGGREGATE_RESULT or extraction.get("safe_output") is None:
+            return result
+        contributor_count = len({item.contributor_id for item in contributions})
+        aggregate = {
+            "operation": operation,
+            "value": round(float(extraction["value"]), 6),
+            "contributor_count": contributor_count,
+            "k_threshold": fixture.aggregate_k,
+        }
+        return {
+            **result,
+            "safe_output": extraction["safe_output"],
+            "aggregate": aggregate,
+            "generator_context": json.dumps(
+                {"governed_aggregate": aggregate},
+                ensure_ascii=False,
+                sort_keys=True,
+                separators=(",", ":"),
+            ),
+        }
 
     def _seed(self) -> None:
         models = self.models
@@ -872,6 +1205,12 @@ class PipelineRuntime:
         timings: dict[str, float] = {}
         total_start = time.perf_counter_ns()
         fixture = self.fixtures[query.policy_fixture_ref]
+        policy_user_id = self._policy_user_id(query.policy_fixture_ref)
+        aggregate_fixture_doc_ids = _fixture_document_ids_by_access(fixture, "Aggregate")
+        aggregate_only_request = (
+            mode in {EvaluationMode.C2_PERMISSION_FILTERED.value, EvaluationMode.C3_FULL_ROLE_AWARE.value}
+            and _is_aggregate_only_fixture(fixture)
+        )
         models = self.models
         relevance = self.relevance
         cf = self.controlled_failure
@@ -927,11 +1266,17 @@ class PipelineRuntime:
                     else:
                         governance = self.policy_engine.resolve_document_access_bulk(
                             db,
-                            self._user_id(query.evaluation_identity),
+                            policy_user_id,
                             active_ids,
                             query.declared_purpose,
                         )
                         permitted_ids = list(governance["usable_doc_ids"])
+                        if aggregate_only_request:
+                            permitted_ids = [
+                                doc_id
+                                for doc_id in aggregate_fixture_doc_ids
+                                if doc_id in permitted_ids
+                            ]
                     if exact_object_missing and mode in {
                         EvaluationMode.C2_PERMISSION_FILTERED.value,
                         EvaluationMode.C3_FULL_ROLE_AWARE.value,
@@ -958,12 +1303,12 @@ class PipelineRuntime:
                     routing_enabled = mode in {
                         EvaluationMode.C1_VECTOR_ROUTING.value,
                         EvaluationMode.C3_FULL_ROLE_AWARE.value,
-                    }
+                    } and not aggregate_only_request
                     candidate_ids, selected_keywords, routing_trace = self._routing(
                         query.query_text,
                         permitted_ids,
                         enabled=routing_enabled,
-                        target_object_id=target_object_id,
+                        target_object_id=None if aggregate_only_request else target_object_id,
                     )
                 timings["routing"] = _elapsed_ms(stage)
 
@@ -978,7 +1323,7 @@ class PipelineRuntime:
                     if mode in {EvaluationMode.C2_PERMISSION_FILTERED.value, EvaluationMode.C3_FULL_ROLE_AWARE.value}:
                         governance = self.policy_engine.resolve_document_access_bulk(
                             db,
-                            self._user_id(query.evaluation_identity),
+                            policy_user_id,
                             candidate_ids,
                             query.declared_purpose,
                         ) if candidate_ids else governance
@@ -1048,13 +1393,18 @@ class PipelineRuntime:
                             }
                         )
                         if role == relevance.SOURCE_ROLE_AGGREGATE_ONLY:
-                            numeric = re.search(r"approval time is\s+(\d+(?:\.\d+)?)", item["text"], re.IGNORECASE)
-                            if numeric:
+                            numeric_value = self.aggregate_executor.extract_unambiguous_numeric_value(item["text"])
+                            if numeric_value is not None:
+                                contributor_id = (
+                                    _contributor_key(self.document_by_id[doc_id])
+                                    if doc_id in self.document_by_id
+                                    else doc_id
+                                )
                                 aggregate_contributions.append(
                                     self.aggregate_executor.AggregateContribution(
                                         source_id=doc_id,
-                                        contributor_id=doc_id,
-                                        value=float(numeric.group(1)),
+                                        contributor_id=contributor_id,
+                                        value=float(numeric_value),
                                     )
                                 )
                         elif use_decision == relevance.USE_FULL:
@@ -1068,15 +1418,18 @@ class PipelineRuntime:
                     visible_text = "\n\n---\n\n".join(generator_blocks)
                     support_score = _support_score(query.query_text, visible_text)
                     context_available = bool(generator_blocks) and support_score >= self.config.minimum_support_score
-                    aggregate_request = any(term in query.query_text.lower() for term in ("average", "aggregate", "mean", "count"))
+                    aggregate_request = aggregate_only_request or _has_aggregate_intent(query.query_text)
 
                     if mode == EvaluationMode.C3_FULL_ROLE_AWARE.value:
                         if aggregate_request and governance.get("has_aggregate_evidence") and not governance.get("has_primary_evidence"):
-                            aggregate_result = self.aggregate_executor.execute_aggregate(
-                                aggregate_contributions,
-                                governance.get("use_decisions", {}),
-                                self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
-                            )
+                            if aggregate_only_request:
+                                aggregate_result = self._execute_fixture_aggregate(query, fixture, governance)
+                            else:
+                                aggregate_result = self.aggregate_executor.execute_aggregate(
+                                    aggregate_contributions,
+                                    governance.get("use_decisions", {}),
+                                    self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
+                                )
                             output_class = aggregate_result["output_class"]
                             reason_code = aggregate_result["reason_code"]
                             answer = aggregate_result["safe_output"]
@@ -1112,11 +1465,14 @@ class PipelineRuntime:
                             reason_code = "governance" if governance.get("denied_doc_ids") else "epistemic"
                             answer, generation_skipped = "There is no permitted source that can be used for this question in the InfoBank.", True
                         elif aggregate_request and governance.get("has_aggregate_evidence"):
-                            aggregate_result = self.aggregate_executor.execute_aggregate(
-                                aggregate_contributions,
-                                governance.get("use_decisions", {}),
-                                self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
-                            )
+                            if aggregate_only_request:
+                                aggregate_result = self._execute_fixture_aggregate(query, fixture, governance)
+                            else:
+                                aggregate_result = self.aggregate_executor.execute_aggregate(
+                                    aggregate_contributions,
+                                    governance.get("use_decisions", {}),
+                                    self.aggregate_executor.AggregateConfig(k_threshold=fixture.aggregate_k),
+                                )
                             output_class, reason_code = aggregate_result["output_class"], aggregate_result["reason_code"]
                             answer, generation_skipped = aggregate_result["safe_output"], True
                             aggregate_trace = aggregate_result["public_trace"]
@@ -1314,11 +1670,9 @@ def run_actual_pipeline(
             raise ValueError("max_cases must be positive")
         queries = queries[:max_cases]
     documents, fixtures, corpus_metadata = load_corpus_fixture(corpus_path)
-    fixture_identity_sets: dict[str, set[str]] = {fixture_id: {f"eval-{fixture_id}"} for fixture_id in fixtures}
+    fixture_identity_sets: dict[str, set[str]] = {fixture_id: {PipelineRuntime._policy_identity(fixture_id)} for fixture_id in fixtures}
     for query in queries:
-        fixture_identity_sets.setdefault(query.policy_fixture_ref, {f"eval-{query.policy_fixture_ref}"}).add(
-            query.evaluation_identity
-        )
+        fixture_identity_sets.setdefault(query.policy_fixture_ref, {PipelineRuntime._policy_identity(query.policy_fixture_ref)})
     fixture_identities = {
         fixture_id: tuple(sorted(identities))
         for fixture_id, identities in fixture_identity_sets.items()

@@ -1,4 +1,6 @@
 import datetime as dt
+import json
+import uuid
 
 from fastapi import APIRouter, Depends, Form, HTTPException
 from sqlalchemy.orm import Session
@@ -16,6 +18,8 @@ def grant_persistent_document_permission(
     doc_id: str,
     target_username: str = Form(...),
     permission_type: str = Form(...),
+    max_queries: int | None = Form(None),
+    requires_explainability: bool = Form(False),
     user_id: str = Depends(security.get_current_user_id),
     db: Session = Depends(get_db),
 ):
@@ -29,13 +33,32 @@ def grant_persistent_document_permission(
             document_id=doc_id,
             target_user_id=target.id,
             permission_type=permission_type,
+            max_queries=max_queries,
+            requires_explainability=requires_explainability,
         )
+        audit_id = str(uuid.uuid4())
+        db.add(models.AuditLog(
+            id=audit_id,
+            user_id=user_id,
+            action="DOCUMENT_PERMISSION_GRANTED",
+            target_id=doc_id,
+            details=json.dumps({
+                "target_user_id": target.id,
+                "permission_type": relation.permission_type.value,
+                "max_queries": relation.max_queries,
+                "requires_explainability": relation.requires_explainability,
+            }, ensure_ascii=False, sort_keys=True),
+        ))
+        policy_engine.record_document_audit_links(db, audit_id, {"permission_grant": [doc_id]})
         db.commit()
         return {
             "status": "success",
             "document_id": doc_id,
             "target_user_id": target.id,
             "permission_type": relation.permission_type.value,
+            "max_queries": relation.max_queries,
+            "queries_used": relation.queries_used,
+            "requires_explainability": relation.requires_explainability,
         }
     except PermissionError as exc:
         db.rollback()
@@ -59,6 +82,18 @@ def revoke_persistent_document_permission(
             document_id=doc_id,
             target_user_id=target_user_id,
         )
+        audit_id = str(uuid.uuid4())
+        db.add(models.AuditLog(
+            id=audit_id,
+            user_id=user_id,
+            action="DOCUMENT_PERMISSION_REVOKED",
+            target_id=doc_id,
+            details=json.dumps({
+                "target_user_id": target_user_id,
+                "revoked": removed,
+            }, ensure_ascii=False, sort_keys=True),
+        ))
+        policy_engine.record_document_audit_links(db, audit_id, {"permission_revoke": [doc_id]})
         db.commit()
         return {"status": "success", "document_id": doc_id, "revoked": removed}
     except PermissionError as exc:

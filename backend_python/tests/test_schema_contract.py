@@ -17,7 +17,7 @@ def sql_text() -> str:
 
 
 def test_required_runtime_tables_exist_in_sql_and_models() -> None:
-    required = {"evidence_units", "policy_rules", "connector_accounts", "audit_logs"}
+    required = {"evidence_units", "policy_rules", "connector_accounts", "audit_logs", "document_audit_links"}
     sql = sql_text().lower()
     for table in required:
         assert re.search(rf"create\s+table\s+if\s+not\s+exists\s+{table}\b", sql)
@@ -26,13 +26,17 @@ def test_required_runtime_tables_exist_in_sql_and_models() -> None:
 
 def test_sql_and_sqlalchemy_enum_values_agree() -> None:
     sql = sql_text()
+    permission_match = re.search(r"permission_type\s+ENUM\(([^)]+)\)", sql, re.IGNORECASE)
     evidence_match = re.search(r"source_type\s+ENUM\(([^)]+)\)", sql, re.IGNORECASE)
     policy_match = re.search(r"access_mode\s+ENUM\(([^)]+)\)", sql, re.IGNORECASE)
-    assert evidence_match and policy_match
+    assert permission_match and evidence_match and policy_match
+    sql_permissions = set(re.findall(r"'([^']+)'", permission_match.group(1)))
     sql_evidence = set(re.findall(r"'([^']+)'", evidence_match.group(1)))
     sql_policy = set(re.findall(r"'([^']+)'", policy_match.group(1)))
+    assert sql_permissions == {item.value for item in models.PermissionType}
     assert sql_evidence == {item.value for item in models.EvidenceSourceType}
     assert sql_policy == {item.value for item in models.PolicyAccessMode}
+    assert isinstance(models.UserDocumentPermission.__table__.c.permission_type.type, Enum)
     assert isinstance(models.EvidenceUnit.__table__.c.source_type.type, Enum)
     assert isinstance(models.PolicyRule.__table__.c.access_mode.type, Enum)
 
@@ -46,13 +50,21 @@ def test_key_field_lengths_and_foreign_keys_are_compatible() -> None:
     assert models.ConnectorAccount.__table__.c.id.type.length == 36
     assert models.ConnectorAccount.__table__.c.user_id.type.length == 36
     assert models.AuditLog.__table__.c.id.type.length == 50
+    assert models.DocumentAuditLink.__table__.c.id.type.length == 36
+    assert models.DocumentAuditLink.__table__.c.audit_log_id.type.length == 50
+    assert models.DocumentAuditLink.__table__.c.document_id.type.length == 255
     targets = {
         foreign_key.target_fullname
-        for table in (models.EvidenceUnit.__table__, models.PolicyRule.__table__, models.ConnectorAccount.__table__)
+        for table in (
+            models.EvidenceUnit.__table__,
+            models.PolicyRule.__table__,
+            models.ConnectorAccount.__table__,
+            models.DocumentAuditLink.__table__,
+        )
         for column in table.columns
         for foreign_key in column.foreign_keys
     }
-    assert targets == {"users.id"}
+    assert targets == {"users.id", "audit_logs.id", "documents.id"}
 
 
 def test_known_sql_only_permission_unique_constraint_is_explicitly_recorded() -> None:

@@ -110,7 +110,10 @@ CREATE TABLE IF NOT EXISTS user_document_permission (
     id VARCHAR(36) PRIMARY KEY,
     user_id VARCHAR(36) NOT NULL,
     document_id VARCHAR(255) NOT NULL,
-    permission_type ENUM('Owner', 'Reader', 'Aggregate', 'Metadata') NOT NULL,
+    permission_type ENUM('Owner', 'Reader', 'Aggregate', 'Metadata', 'Audit') NOT NULL,
+    max_queries INT NULL,
+    queries_used INT NOT NULL DEFAULT 0,
+    requires_explainability BOOLEAN NOT NULL DEFAULT FALSE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE,
@@ -173,4 +176,16 @@ CREATE TABLE IF NOT EXISTS audit_logs (
     INDEX ix_audit_logs_id (id),
     INDEX ix_audit_logs_user_id (user_id),
     INDEX ix_audit_logs_action (action)
+) ENGINE=InnoDB;
+
+CREATE TABLE IF NOT EXISTS document_audit_links (
+    id VARCHAR(36) PRIMARY KEY,
+    audit_log_id VARCHAR(50) NOT NULL,
+    document_id VARCHAR(255) NOT NULL,
+    relation_type VARCHAR(50) NOT NULL DEFAULT 'governance',
+    created_at DATETIME NULL,
+    INDEX ix_document_audit_links_audit_log_id (audit_log_id),
+    INDEX ix_document_audit_links_document_id (document_id),
+    FOREIGN KEY (audit_log_id) REFERENCES audit_logs(id) ON DELETE CASCADE,
+    FOREIGN KEY (document_id) REFERENCES documents(id) ON DELETE CASCADE
 ) ENGINE=InnoDB;

@@ -1,0 +1,159 @@
+{
+  "status": "implementation_complete_push_blocked",
+  "updated_at": "2026-09-01T18:11:27.7520485Z",
+  "branch": "feature/permission-extensions-v1",
+  "base_branch": "origin/infocom2026",
+  "base_commit": "039dfac5c83266a54b725e614736bd4c3595e204",
+  "scope": {
+    "implemented": [
+      "query_limited_access",
+      "explainability_required_access",
+      "audit_only_access"
+    ],
+    "out_of_scope": [
+      "persistent_time_bounded_grants",
+      "persistent_purpose_bound_grants"
+    ]
+  },
+  "permission_model": {
+    "persistent_permissions": [
+      "Owner",
+      "Reader",
+      "Aggregate",
+      "Metadata",
+      "Audit"
+    ],
+    "query_time_effective_decisions": [
+      "Full",
+      "Aggregate",
+      "Metadata",
+      "Deny"
+    ],
+    "document_level_policy_rule_conditions": [
+      "purpose",
+      "valid_from",
+      "valid_until"
+    ],
+    "document_inventory_caveat": "Document inventory currently follows direct account permissions rather than the full document policy-rule path. Audit-only rows are withheld from chat inventory to avoid metadata access."
+  },
+  "features": {
+    "query_limited_access": {
+      "implemented": true,
+      "runtime_enforced": true,
+      "storage": [
+        "user_document_permission.max_queries",
+        "user_document_permission.queries_used"
+      ],
+      "notes": [
+        "Quota is checked during direct persistent permission resolution.",
+        "Quota is consumed once per used quota-limited persistent permission during /api/ask.",
+        "Atomic conditional update prevents concurrent overspend.",
+        "Diagnostics and non-ask reads do not consume quota."
+      ]
+    },
+    "explainability_required_access": {
+      "implemented": true,
+      "runtime_enforced": true,
+      "storage": [
+        "user_document_permission.requires_explainability"
+      ],
+      "notes": [
+        "Full-source answers require traceable citation metadata.",
+        "Metadata-only and governed aggregate outputs satisfy the requirement through public trace paths.",
+        "Unsatisfied requirements return EXPLAINABILITY_REQUIRED_UNSATISFIED via controlled governance refusal."
+      ]
+    },
+    "audit_only_access": {
+      "implemented": true,
+      "runtime_enforced": true,
+      "storage": [
+        "PermissionType.Audit",
+        "document_audit_links"
+      ],
+      "notes": [
+        "Audit-only grants do not grant Full, Aggregate, Metadata, source, graph, or chat inventory access.",
+        "Document-scoped audit endpoint returns redacted audit records to owners and audit-only grantees."
+      ]
+    },
+    "persistent_time_bounded_grants": {
+      "implemented": false,
+      "status": "out_of_scope",
+      "notes": [
+        "No valid_from or valid_until columns exist on persistent user-document permissions.",
+        "Existing document-level PolicyRule.valid_from and PolicyRule.valid_until behavior is preserved."
+      ]
+    },
+    "persistent_purpose_bound_grants": {
+      "implemented": false,
+      "status": "out_of_scope",
+      "notes": [
+        "No purpose column exists on persistent user-document permissions.",
+        "Existing document-level PolicyRule.purpose behavior is preserved."
+      ]
+    }
+  },
+  "schema": {
+    "persistent_permission_columns": [
+      "id",
+      "user_id",
+      "document_id",
+      "permission_type",
+      "max_queries",
+      "queries_used",
+      "requires_explainability",
+      "created_at"
+    ],
+    "out_of_scope_persistent_permission_columns_absent": [
+      "purpose",
+      "valid_from",
+      "valid_until"
+    ],
+    "policy_rule_columns_preserved": [
+      "purpose",
+      "valid_from",
+      "valid_until"
+    ],
+    "new_tables": [
+      "document_audit_links"
+    ]
+  },
+  "tests": {
+    "permission_unit_specs": {
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp pytest-tmp backend_python/tests/test_permission_unit_specs.py",
+      "result": "25 passed, 23 warnings"
+    },
+    "focused_permission_extensions": {
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp pytest-tmp backend_python/tests/test_permission_extensions_v1.py",
+      "result": "10 passed, 18 warnings"
+    },
+    "permission_related_regression": {
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp pytest-tmp backend_python/tests/test_permission_unit_specs.py backend_python/tests/test_permission_extensions_v1.py backend_python/tests/test_policy_invariants.py backend_python/tests/test_aggregate_executor.py backend_python/tests/test_citations.py backend_python/tests/test_document_inventory.py backend_python/tests/test_security_invariants.py backend_python/tests/test_semantic_graph.py",
+      "result": "83 passed, 61 warnings"
+    },
+    "policy_schema_inventory_regression": {
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp pytest-tmp backend_python/tests/test_permission_extensions_v1.py backend_python/tests/test_policy_invariants.py backend_python/tests/test_schema_contract.py backend_python/tests/test_database_schema.py backend_python/tests/test_citations.py backend_python/tests/test_document_inventory.py",
+      "result": "51 passed, 42 warnings"
+    },
+    "reviewer_security_semantic_regression": {
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp pytest-tmp backend_python/tests/test_reviewer_contracts.py backend_python/tests/test_security_invariants.py backend_python/tests/test_semantic_graph.py",
+      "result": "43 passed, 11 warnings"
+    },
+    "full_backend": {
+      "command": "python -m pytest -q -p no:cacheprovider --basetemp pytest-tmp backend_python/tests",
+      "result": "268 passed, 101 warnings"
+    }
+  },
+  "public_redaction": {
+    "document_ids_redacted_from_public_failures": true,
+    "permission_ids_redacted_from_public_failures": true,
+    "query_counter_details_redacted_from_public_failures": true,
+    "audit_records_redact_raw_document_content": true
+  },
+  "git": {
+    "local_commit_ready": true,
+    "push_attempted": true,
+    "push_status": "blocked_by_host_github_auth_or_transport_environment",
+    "latest_push_result": "exit_code_1_after_verbose_output_pushing_to_https_github_com_gkusper_infobank_git",
+    "remote_branch_created": false
+  }
+}

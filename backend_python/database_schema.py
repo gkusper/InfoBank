@@ -42,6 +42,10 @@ MIGRATION_FILES = (
         "002_infocom_a_gate_phase1",
         REPOSITORY_ROOT / "backend_python" / "migrations" / "infocom_a_gate_phase1_mysql.sql",
     ),
+    (
+        "003_permission_extensions_v1",
+        REPOSITORY_ROOT / "backend_python" / "migrations" / "permission_extensions_v1_mysql.sql",
+    ),
 )
 
 

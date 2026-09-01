@@ -106,15 +106,17 @@ async def _read_validated_pdf_upload(file: UploadFile) -> tuple[bytes, str]:
 
 
 def _audit(db: Session, user_id: str, action: str, document_id: str, details: dict[str, Any]) -> None:
+    audit_id = str(uuid.uuid4())
     db.add(
         models.AuditLog(
-            id=str(uuid.uuid4()),
+            id=audit_id,
             user_id=user_id,
             action=action,
             target_id=document_id,
             details=json.dumps(details, ensure_ascii=False, sort_keys=True),
         )
     )
+    policy_engine.record_document_audit_links(db, audit_id, {"document_action": [document_id]})
 
 
 def _record_processing_failure(
@@ -606,6 +608,30 @@ def build_document_list(user_id: str, db: Session):
     for permission in permissions:
         document = db.query(models.Document).filter(models.Document.id == permission.document_id).first()
         if not document:
+            continue
+        permission_value = permission.permission_type.value if hasattr(permission.permission_type, "value") else str(permission.permission_type)
+        if permission_value == models.PermissionType.Audit.value:
+            documents.append(
+                {
+                    "document_id": document.id,
+                    "file_name": "[audit-only document]",
+                    "permission": models.PermissionType.Audit.value,
+                    "visibility": "Private",
+                    "is_owner": False,
+                    "keywords": [],
+                    "upload_date": "N/A",
+                    "source_status": "WITHHELD",
+                    "source_sha256": None,
+                    "page_count": None,
+                    "processing_status": "WITHHELD",
+                    "chunk_count": 0,
+                    "provenance": [],
+                    "reviewer_links": {
+                        "audit": f"/api/admin/documents/{document.id}/audit",
+                        "permission": f"/api/policy/resolve/document/{document.id}",
+                    },
+                }
+            )
             continue
         keyword_rows = db.query(models.Keyword.word).join(
             models.DocumentKeyword, models.Keyword.id == models.DocumentKeyword.keyword_id

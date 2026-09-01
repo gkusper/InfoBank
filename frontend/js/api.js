@@ -67,6 +67,7 @@ function resetSessionScopedUI() {
         'log-email', 'log-pass', 'reg-name', 'reg-email', 'reg-pass',
         'prof-full-name', 'prof-email', 'prof-avatar-url',
         'policy-doc-id', 'policy-target-username', 'policy-valid-from', 'policy-valid-until',
+        'policy-grant-max-queries',
         'transferDocId', 'transferUsernameInput',
     ]) {
         const element = document.getElementById(id);
@@ -78,6 +79,8 @@ function resetSessionScopedUI() {
     if (policyMode) policyMode.value = 'Full';
     const grantType = document.getElementById('policy-grant-type');
     if (grantType) grantType.value = 'Reader';
+    const explainability = document.getElementById('policy-grant-explainability');
+    if (explainability) explainability.checked = false;
     const uploadPermission = document.getElementById('upload-permission');
     if (uploadPermission) uploadPermission.value = 'Owner';
     const docsBody = document.getElementById('docs-tbody');
@@ -600,6 +603,8 @@ async function loadDocs() {
                 : `<input type="text" id="kw-${doc.document_id}" value="${escapeHtml((doc.keywords || []).join(', '))}" readonly aria-readonly="true" class="w-full border border-gray-200 bg-gray-100 text-gray-600 rounded-md px-3 py-1.5 text-xs cursor-not-allowed"><div class="mt-1 text-[10px] text-amber-700" data-owner-only="true">Owner review only</div>`;
             const sourceAction = !isOwner && doc.permission === 'Aggregate'
                 ? `<span class="text-amber-700" title="Individual source withheld by Aggregate policy" aria-label="Individual source withheld by Aggregate policy"><i class="fas fa-eye-slash"></i></span>`
+                : !isOwner && doc.permission === 'Audit'
+                ? `<button onclick="selectPolicyDocument('${doc.document_id}'); loadDocumentAudit();" class="text-slate-600" title="Open document audit" aria-label="Open document audit"><i class="fas fa-clipboard-list"></i></button>`
                 : `<button onclick="openAuthorizedSource('/api/documents/${doc.document_id}/source?page=1')" class="text-blue-600" title="${!isOwner && doc.permission === 'Metadata' ? 'Open permitted metadata' : 'Open page 1'}" aria-label="${!isOwner && doc.permission === 'Metadata' ? 'Open permitted metadata' : 'Open page 1'}"><i class="fas fa-external-link-alt"></i></button>`;
             const policyTitle = isOwner ? 'Manage permissions' : 'Resolve effective access';
             const selectId = `perm-${doc.document_id}`;
@@ -792,6 +797,11 @@ async function grantReviewerPermission() {
     const fd = new FormData();
     fd.append('target_username', document.getElementById('policy-target-username').value.trim());
     fd.append('permission_type', document.getElementById('policy-grant-type').value);
+    const maxQueries = document.getElementById('policy-grant-max-queries')?.value;
+    if (maxQueries) fd.append('max_queries', maxQueries);
+    if (document.getElementById('policy-grant-explainability')?.checked) {
+        fd.append('requires_explainability', 'true');
+    }
     try {
         const r = await fetch(`${API}/policy/documents/${docId}/permissions`, {method:'POST', headers:authHeaders(), body:fd});
         const data = await readApiResponse(r);
@@ -816,6 +826,15 @@ async function resolveReviewerPolicy(showEmpty = true) {
     const purpose = encodeURIComponent(document.getElementById('policy-purpose').value || 'grounded_question_answering');
     try {
         const r = await fetch(`${API}/policy/resolve/document/${docId}?purpose=${purpose}`, {headers:authHeaders()});
+        policyOutput(await readApiResponse(r));
+    } catch(e) { policyOutput({error:e.message}); }
+}
+
+async function loadDocumentAudit() {
+    const docId = document.getElementById('policy-doc-id')?.value.trim();
+    if (!docId) return policyOutput({status:'Select a document UUID.'});
+    try {
+        const r = await fetch(`${API}/admin/documents/${docId}/audit`, {headers:authHeaders()});
         policyOutput(await readApiResponse(r));
     } catch(e) { policyOutput({error:e.message}); }
 }

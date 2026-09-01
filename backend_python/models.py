@@ -12,6 +12,7 @@ class PermissionType(str, enum.Enum):
     Reader = 'Reader'
     Aggregate = 'Aggregate'
     Metadata = 'Metadata'
+    Audit = 'Audit'
 
 class EvidenceSourceType(str, enum.Enum):
     Email = 'Email'
@@ -149,6 +150,9 @@ class UserDocumentPermission(Base):
     user_id = Column(String(36), ForeignKey("users.id", ondelete="CASCADE"), nullable=False)
     document_id = Column(String(255), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False)
     permission_type = Column(Enum(PermissionType), nullable=False)
+    max_queries = Column(Integer, nullable=True)
+    queries_used = Column(Integer, nullable=False, default=0)
+    requires_explainability = Column(Boolean, nullable=False, default=False)
     created_at = Column(TIMESTAMP, server_default=func.now())
     
     document = relationship("Document", back_populates="permissions")
@@ -218,3 +222,11 @@ class AuditLog(Base):
     target_id = Column(String(50), nullable=True)
     details = Column(Text, nullable=True)
     timestamp = Column(DateTime, default=datetime.datetime.utcnow)
+
+class DocumentAuditLink(Base):
+    __tablename__ = "document_audit_links"
+    id = Column(String(36), primary_key=True)
+    audit_log_id = Column(String(50), ForeignKey("audit_logs.id", ondelete="CASCADE"), nullable=False, index=True)
+    document_id = Column(String(255), ForeignKey("documents.id", ondelete="CASCADE"), nullable=False, index=True)
+    relation_type = Column(String(50), nullable=False, default="governance")
+    created_at = Column(DateTime, default=_utcnow_naive)

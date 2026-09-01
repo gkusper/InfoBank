@@ -44,6 +44,11 @@ def log_chat_event(db: Session, user_id: str, question: str, answer: str, keywor
     }, ensure_ascii=False)
     log_entry = models.AuditLog(id=audit_id or str(uuid.uuid4()), user_id=user_id, action="CHAT_ASK", details=details)
     db.add(log_entry)
+    policy_engine.record_document_audit_links(
+        db,
+        log_entry.id,
+        policy_engine.document_audit_relations_from_governance(governance or {}, sources or []),
+    )
     db.commit()
 
 
@@ -66,8 +71,9 @@ def get_permitted_fallback_doc_ids(db: Session, user_id: str) -> list[str]:
 def get_governance_scope_doc_ids(db: Session) -> list[str]:
     """Return identifiers for internal policy resolution, never public routing.
 
-    Policy must run before routing so revoked, archived, expired, purpose-bound,
-    and explicit-Deny sources remain distinguishable from a genuine no-match.
+    Policy must run before routing so revoked, archived, inactive document
+    policy rules, and explicit-Deny sources remain distinguishable from a
+    genuine no-match.
     The resulting denied identifiers are kept in the privileged audit trace and
     are removed from the public response by ``_public_governance_context``.
     """
@@ -802,6 +808,8 @@ def _document_inventory_rows(db: Session, user_id: str) -> list[dict]:
     by_document: dict[str, dict] = {}
     for document, permission in rows:
         permission_value = _permission_value(permission)
+        if permission_value == models.PermissionType.Audit.value:
+            continue
         candidate = {
             "document_id": document.id,
             "file_name": _safe_document_display_name(document),
@@ -1273,6 +1281,57 @@ async def ask_infobank(
         governance_context["routing_trace"] = routing_decision.to_trace()
         governance_context["owned_object_resolution_trace"] = owned_object_trace
         governance_context["fallback_used"] = routing_decision.fallback_used
+        quota_consumption = policy_engine.consume_query_quotas_for_governance(
+            db,
+            governance_context,
+            request_id=audit_id,
+        )
+        governance_context["query_quota_consumption"] = quota_consumption
+        if not quota_consumption["ok"]:
+            db.rollback()
+            governance_context = policy_engine.resolve_document_access_bulk(
+                db=db,
+                user_id=user_id,
+                doc_ids=candidate_doc_ids,
+                purpose=query_profile.get("purpose", "grounded_question_answering"),
+            )
+            governance_context["governance_before_routing"] = True
+            governance_context["pre_routing_usable_count"] = len(permitted_doc_ids)
+            governance_context["pre_routing_denied_count"] = len(pre_routing_governance["denied_doc_ids"])
+            governance_context["routing_trace"] = routing_decision.to_trace()
+            governance_context["owned_object_resolution_trace"] = owned_object_trace
+            governance_context["fallback_used"] = routing_decision.fallback_used
+            governance_context["query_quota_consumption"] = {
+                "ok": False,
+                "request_id": audit_id,
+                "consumed_count": 0,
+                "failed_count": quota_consumption["failed_count"],
+                "reason_code": policy_engine.QUERY_LIMIT_EXHAUSTED,
+            }
+            msg = "The request cannot be answered from the sources available for this purpose."
+            cf = controlled_failure.make_controlled_failure(
+                controlled_failure.STATUS_REFUSE,
+                controlled_failure.REASON_GOVERNANCE,
+                controlled_failure.evidence_state([], query_profile, False),
+                controlled_failure.safe_policy_state(governance_context),
+                msg,
+                ["Ask the document owner to refresh the limited grant or use another permitted source."],
+                {
+                    "gate": "query_limit",
+                    "reason_code": policy_engine.QUERY_LIMIT_EXHAUSTED,
+                    "failed_grant_count": quota_consumption["failed_count"],
+                },
+            )
+            evidence_check = {
+                "decision": "controlled_failure",
+                "controlled_failure": cf,
+                "output_mode": cf["status"],
+            }
+            log_chat_event(
+                db, user_id, question, msg, question_keywords, [], "query_quota_exhausted",
+                query_profile, governance_context, evidence_check, cf, cf["status"], audit_id,
+            )
+            return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf, [], audit_id)
         content_doc_ids = governance_context["content_doc_ids"]
         metadata_doc_ids = governance_context["metadata_only_doc_ids"]
 
@@ -1393,6 +1452,40 @@ async def ask_infobank(
             evidence_check["controlled_failure"] = output_gate["controlled_failure"]
             evidence_check["decision"] = output_gate.get("decision")
 
+        explainability_check = policy_engine.evaluate_explainability_requirements(
+            governance_context,
+            sources_list,
+            aggregate_execution=aggregate_execution,
+        )
+        evidence_check["explainability"] = policy_engine.public_explainability_state(explainability_check)
+        if (
+            not explainability_check["ok"]
+            and aggregate_execution is None
+            and output_gate.get("decision") != "controlled_failure"
+        ):
+            msg = "The request cannot be answered with the required traceable provenance."
+            cf = controlled_failure.make_controlled_failure(
+                controlled_failure.STATUS_REFUSE,
+                controlled_failure.REASON_GOVERNANCE,
+                controlled_failure.evidence_state([], query_profile, False),
+                controlled_failure.safe_policy_state(governance_context),
+                msg,
+                ["Use a source with page and chunk traceability, or remove the explainability requirement for this grant."],
+                {
+                    "gate": "explainability_required",
+                    "reason_code": policy_engine.EXPLAINABILITY_REQUIRED_UNSATISFIED,
+                    "unsatisfied_source_count": explainability_check["unsatisfied_source_count"],
+                },
+            )
+            evidence_check["decision"] = "controlled_failure"
+            evidence_check["controlled_failure"] = cf
+            evidence_check["output_mode"] = cf["status"]
+            log_chat_event(
+                db, user_id, question, msg, question_keywords, [], "explainability_required_unsatisfied",
+                query_profile, governance_context, evidence_check, cf, cf["status"], audit_id,
+            )
+            return controlled_failure_payload(msg, query_profile, governance_context, evidence_check, cf, [], audit_id)
+
         if not content_doc_ids and metadata_doc_ids:
             cf = output_gate.get("controlled_failure")
             msg = cf.get("safeOutput") if cf else "Only metadata-level sources are available for this question; document content is withheld by policy, so the answer cannot be found in the document content."
@@ -1419,6 +1512,13 @@ async def ask_infobank(
                 "generation_skipped": True,
                 }
             }
+            public_evidence_check["explainability"] = policy_engine.public_explainability_state(
+                policy_engine.evaluate_explainability_requirements(
+                    governance_context,
+                    sources_list,
+                    aggregate_execution=aggregate_execution,
+                )
+            )
             answer = aggregate_execution["safe_output"]
             if aggregate_execution["output_class"] == "REFUSE_AGGREGATION_THRESHOLD":
                 cf = controlled_failure.make_controlled_failure(

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "a5c456ac3efe607e2c5f9e3e53ae6030556e3e03695549a0685d07d198c86cd5",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1305,
+    "output_tokens": 52,
+    "retries": 0,
+    "text": "The provided context does not contain information about three confirmed orders in 2026 that contained dairy milk, nor does it provide any dates for consecutive orders. Therefore, it is not possible to calculate the average number of days between consecutive orders based on the available information.",
+    "total_tokens": 1357,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,152 @@
+{
+  "generated_at": "2026-08-31T22:20:44Z",
+  "packages": [
+    {
+      "actual_sha256": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1",
+      "annotation_count": 12,
+      "canonical_input_scan": {
+        "findings": [],
+        "status": "PASS"
+      },
+      "checks": {
+        "annotation_count": true,
+        "forbidden_scan": true,
+        "identity": true,
+        "internal_checksums": true,
+        "query_count": true,
+        "scenario_count": true,
+        "sha256": true,
+        "source_pdf_count": true,
+        "status_fields": true,
+        "zip": true
+      },
+      "expected_sha256": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1",
+      "internal_checksums": {
+        "checked_count": 42,
+        "checksum_member": "S1_S2_JOURNAL_BENCHMARK_V2/SHA256SUMS.txt",
+        "mismatches": [],
+        "status": "PASS"
+      },
+      "label": "S1-S2",
+      "manifest_member": "S1_S2_JOURNAL_BENCHMARK_V2/PACKAGE_MANIFEST.json",
+      "manifest_statuses": {
+        "benchmark_status": {
+          "actual": "FROZEN",
+          "expected": "FROZEN",
+          "pass": true
+        },
+        "further_s1s2_tuning_allowed": {
+          "actual": "NO",
+          "expected": "NO",
+          "pass": true
+        },
+        "human_confirmation_status": {
+          "actual": "APPROVED_WITH_DOCUMENTED_LIMITATIONS",
+          "expected": "APPROVED_WITH_DOCUMENTED_LIMITATIONS",
+          "pass": true
+        },
+        "human_qa_status": {
+          "actual": "APPROVED",
+          "expected": "APPROVED",
+          "pass": true
+        }
+      },
+      "output_class_distribution": {
+        "FULL_ANSWER": 11,
+        "REFUSE_INSUFFICIENT_EVIDENCE": 1
+      },
+      "package_identity": "S1_S2_JOURNAL_BENCHMARK_V2",
+      "path": "artifacts/s1s2_freeze/S1_S2_journal_benchmark_v2.zip",
+      "policy_fixture_count": 2,
+      "query_count": 12,
+      "runtime_reference_separation": "PASS",
+      "scenario_count": 2,
+      "scenario_ids": [
+        "S1_SOFA_01",
+        "S2_TV_WARRANTY_01"
+      ],
+      "source_pdf_count": 10,
+      "status": "PASS",
+      "zip_integrity": "PASS"
+    },
+    {
+      "actual_sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c",
+      "annotation_count": 30,
+      "canonical_input_scan": {
+        "findings": [],
+        "status": "PASS"
+      },
+      "checks": {
+        "annotation_count": true,
+        "forbidden_scan": true,
+        "identity": true,
+        "internal_checksums": true,
+        "query_count": true,
+        "scenario_count": true,
+        "sha256": true,
+        "source_pdf_count": true,
+        "status_fields": true,
+        "zip": true
+      },
+      "expected_sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c",
+      "internal_checksums": {
+        "checked_count": 65,
+        "checksum_member": "S3_S6_JOURNAL_EVALUATION_V1/SHA256SUMS.txt",
+        "mismatches": [],
+        "status": "PASS"
+      },
+      "label": "S3-S6",
+      "manifest_member": "S3_S6_JOURNAL_EVALUATION_V1/PACKAGE_MANIFEST.json",
+      "manifest_statuses": {
+        "aggregate_human_confirmation_status": {
+          "actual": "APPROVED",
+          "expected": "APPROVED",
+          "pass": true
+        },
+        "evaluation_set_status": {
+          "actual": "FROZEN",
+          "expected": "FROZEN",
+          "pass": true
+        },
+        "further_s3_s6_tuning_allowed": {
+          "actual": "NO",
+          "expected": "NO",
+          "pass": true
+        },
+        "human_qa_status": {
+          "actual": "APPROVED",
+          "expected": "APPROVED",
+          "pass": true
+        },
+        "real_provider_evaluation_status": {
+          "actual": "NOT_STARTED",
+          "expected": "NOT_STARTED",
+          "pass": true
+        }
+      },
+      "output_class_distribution": {
+        "AGGREGATE_RESULT": 5,
+        "CLARIFICATION": 1,
+        "CONSTRAINED_ANSWER": 3,
+        "FULL_ANSWER": 18,
+        "REFUSE_AGGREGATION_THRESHOLD": 1,
+        "REFUSE_INSUFFICIENT_EVIDENCE": 2
+      },
+      "package_identity": "S3_S6_JOURNAL_EVALUATION_V1",
+      "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip",
+      "policy_fixture_count": 30,
+      "query_count": 30,
+      "runtime_reference_separation": "PASS",
+      "scenario_count": 4,
+      "scenario_ids": [
+        "S3_TESCO_ORDERS_01",
+        "S4_TESCO_BANK_02",
+        "S5_TV_INSURANCE_02",
+        "S6_EV_SOLAR_01"
+      ],
+      "source_pdf_count": 31,
+      "status": "PASS",
+      "zip_integrity": "PASS"
+    }
+  ]
+}

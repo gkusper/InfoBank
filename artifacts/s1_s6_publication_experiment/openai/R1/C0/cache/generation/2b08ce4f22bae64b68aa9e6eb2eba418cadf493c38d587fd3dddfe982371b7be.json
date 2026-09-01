@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "ba27a51bd583c44946f200da6402a468680ee18d0eb0a9c96d6b612896860b80",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 531,
+    "output_tokens": 12,
+    "retries": 0,
+    "text": "You paid 249,900 HUF for the sofa.",
+    "total_tokens": 543,
+    "usage_source": "provider_reported"
+  }
+}

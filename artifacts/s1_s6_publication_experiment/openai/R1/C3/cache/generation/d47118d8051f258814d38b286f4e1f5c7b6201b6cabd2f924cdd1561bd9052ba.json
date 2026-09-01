@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "ba77abc1ebb4beee7c590f834f32a25a80283674ae20b8fce6b9c93d3ca46cc3",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1289,
+    "output_tokens": 47,
+    "retries": 0,
+    "text": "The stated 24-month manufacturer warranty period for the Aurelia Q62 runs from 04 October 2025 through 04 October 2027 inclusive. Therefore, on 15 December 2026, the warranty is still valid.",
+    "total_tokens": 1336,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,9 @@
+Configuration,Permission group,Cases,Output accuracy,Permitted-answer accuracy,Controlled-failure correctness,Citation coverage,Support precision,Page correctness,Safety findings,Tokens,Mean latency,Runtime/parser/provider errors
+C0,Aggregate-only,6,0.0,0.0,0.0,0.0,0.0,0.0,3,4813,322.074167,0
+C0,Owner/Full,36,0.805556,0.375,0.0,0.416667,0.52381,0.333333,0,25840,310.236472,0
+C1,Aggregate-only,6,0.0,0.0,0.0,0.0,0.0,0.0,3,4813,270.438,0
+C1,Owner/Full,36,0.805556,0.375,0.0,0.402778,0.561404,0.350877,0,25222,220.145358,0
+C2,Aggregate-only,6,1.0,1.0,1.0,0.0,,,0,0,495.092317,0
+C2,Owner/Full,36,0.694444,0.375,0.142857,0.416667,0.596154,0.403846,0,20141,573.798372,0
+C3,Aggregate-only,6,1.0,1.0,1.0,0.0,,,0,0,344.759333,0
+C3,Owner/Full,36,0.638889,0.375,0.142857,0.402778,0.7,0.5,0,23006,415.184589,0

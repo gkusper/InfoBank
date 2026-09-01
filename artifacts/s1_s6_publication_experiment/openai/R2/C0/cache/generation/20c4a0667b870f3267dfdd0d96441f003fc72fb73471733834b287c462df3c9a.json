@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "400cf0d34def921f0531debcc495fdc56dd15b276b095fbd5517ef5a40f5f1e9",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1119,
+    "output_tokens": 162,
+    "retries": 0,
+    "text": "If the Orion E4 is at 20% and you want to charge it to 80%, the change in state of charge (SoC) is 60%. The required battery energy is calculated as 64 kWh multiplied by 0.60, which equals 38.4 kWh. \n\nUsing a wall-to-battery efficiency of 90%, the grid energy required for this charge is 38.4 kWh divided by 0.90, resulting in approximately 42.67 kWh. \n\nAt a sustained charging power of 11 kW, the time to charge from 20% to 80% would be 42.67 kWh divided by 11 kW, which equals approximately 3.88 hours, or about 3 hours and 53 minutes.",
+    "total_tokens": 1281,
+    "usage_source": "provider_reported"
+  }
+}

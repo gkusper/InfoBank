@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "a0aaf3735c1ac7169e5d811cca62da604d2e509a15ba2bfa32ec4d093de344c7",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1305,
+    "output_tokens": 21,
+    "retries": 0,
+    "text": "Across the current March 2026 orders, a total of 4 litres of dairy milk were confirmed.",
+    "total_tokens": 1326,
+    "usage_source": "provider_reported"
+  }
+}

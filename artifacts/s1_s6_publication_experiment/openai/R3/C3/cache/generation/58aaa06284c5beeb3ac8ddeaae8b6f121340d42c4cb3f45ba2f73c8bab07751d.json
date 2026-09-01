@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "9c00763fe498e2a42924a0ddc3db2cf5264c01abae6be1e62321285a4bc42376",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 980,
+    "output_tokens": 42,
+    "retries": 0,
+    "text": "Yes, the care guide and purchase receipt refer to the same sofa. Both documents mention the \"LUNARA S3 three-seat fabric sofa\" with the product code \"LUN-S3-2401.\"",
+    "total_tokens": 1022,
+    "usage_source": "provider_reported"
+  }
+}

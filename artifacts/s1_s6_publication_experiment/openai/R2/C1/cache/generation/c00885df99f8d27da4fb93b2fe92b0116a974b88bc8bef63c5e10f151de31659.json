@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "d5254a11828ad042d54b56116ad2faaa9f9751f66f48257d2e70ad0b7a203404",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 359,
+    "output_tokens": 14,
+    "retries": 0,
+    "text": "Do not use chlorine bleach on the LUNARA S3 fabric.",
+    "total_tokens": 373,
+    "usage_source": "provider_reported"
+  }
+}

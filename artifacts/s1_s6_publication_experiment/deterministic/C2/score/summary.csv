@@ -1,0 +1,2 @@
+mode,case_count,output_class_accuracy,reason_code_accuracy,permitted_answer_accuracy,false_or_unsupported_answer_rate,false_answer_rate_on_expected_abstentions,false_answer_count,expected_non_answer_count,abstention_precision,abstention_recall,citation_document_coverage,citation_support_precision,page_level_citation_correctness,citation_coverage,safety_error_total,runtime_error_count
+C2_PERMISSION_FILTERED,42,0.738095,0.738095,0.459459,0.4,0.4,2,5,0.25,0.4,0.516667,0.596154,0.403846,0.35,0,0

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "e2cfcc6f94a89fca460b87ae2997d37141c6f4343bc132876dabde15f7af4009",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 535,
+    "output_tokens": 162,
+    "retries": 0,
+    "text": "To clean a coffee spill on the LUNARA S3 fabric sofa, follow these steps:\n\n1. Blot the spill immediately with a clean white absorbent cloth. Do not rub the fabric.\n2. Mix 5 mL of neutral liquid soap with 250 mL of lukewarm water.\n3. Test the solution on a hidden area and wait until the test area is dry.\n4. Dab from the outer edge toward the center, using only enough solution to dampen the surface.\n5. Remove soap residue with a separate cloth lightly dampened with clean water, then allow the sofa to air dry.\n\nProhibited cleaning methods include using chlorine bleach, solvent cleaners, abrasive powders, steam cleaners, or direct heat. Do not saturate the cushion or remove the fixed cover for machine washing.",
+    "total_tokens": 697,
+    "usage_source": "provider_reported"
+  }
+}

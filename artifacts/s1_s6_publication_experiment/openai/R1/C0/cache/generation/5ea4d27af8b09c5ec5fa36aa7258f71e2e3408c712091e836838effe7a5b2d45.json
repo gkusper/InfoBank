@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "ae465e9dacafdea8151467bee295bdeac5f538618ac77eba8b78301377f7c443",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1558,
+    "output_tokens": 59,
+    "retries": 0,
+    "text": "The context provided does not include specific information about the current state of charge (SoC), target SoC, or available charging power for the Orion E4 Long Range vehicle. Therefore, it is not possible to determine how long it will take to charge the car to 100% right now.",
+    "total_tokens": 1617,
+    "usage_source": "provider_reported"
+  }
+}

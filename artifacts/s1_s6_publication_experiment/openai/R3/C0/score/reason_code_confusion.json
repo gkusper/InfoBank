@@ -1,0 +1,34 @@
+{
+  "C0_VECTOR_ONLY": [
+    {
+      "actual": "supported",
+      "count": 5,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "supported",
+      "count": 1,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "supported",
+      "count": 1,
+      "expected": "clarification"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 29,
+      "expected": "supported"
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "8372779951147bebd85b4f72fdb2cc25ce5e41c5c9e7aadc2e535c2e42eb8ce2",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 959,
+    "output_tokens": 12,
+    "retries": 0,
+    "text": "You bought the sofa on 14 November 2025.",
+    "total_tokens": 971,
+    "usage_source": "provider_reported"
+  }
+}

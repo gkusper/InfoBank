@@ -1,0 +1,30 @@
+{
+  "commit_sha": "ea6d3a2b6f13abdb8fe949b0de247617d782858c",
+  "config_hash": "473419d9e87afad07a0ea33d52894635d31d7506f62b8fa0a82d2dde04b582ad",
+  "config_version": "actual-pipeline-development-config-v1",
+  "corpus_sha256": "d594620e32c480699a413fcbda6ee2b27474e28f59355eb20845b9ca037363b8",
+  "dataset_version": "s1-s6-combined-journal-evaluation-v1",
+  "deterministic_content_sha256": "3f8acae6e700f381b2d8cd426aae0bbec4637f77da42bc7b1aebfc8894b9d845",
+  "embedding_model": "text-embedding-3-small",
+  "generation_prompt_version": "actual-pipeline-answer-v1",
+  "generation_temperature": 0.0,
+  "local_pricing_config_supplied": false,
+  "model": "gpt-4o-mini",
+  "modes": [
+    "C0_VECTOR_ONLY"
+  ],
+  "network_provider_explicitly_allowed": true,
+  "output_cache_enabled": true,
+  "provider": "openai",
+  "query_input_sha256": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd",
+  "raw_run_sha256": "6c74d98caf1e4c69c8f5ef4104c2b7eb56672f6b9bb21452afb1a62170970cf0",
+  "record_count": 42,
+  "routing_prompt_version": "routing-keyword-v1",
+  "run_id": "s1s6-openai-r1-c0-20260831222414",
+  "runner_version": "infobank-actual-pipeline-runner-v1",
+  "schema_version": "infobank-raw-run-seal-v1",
+  "scoring_started": false,
+  "timestamp": "2026-08-31T22:26:15Z",
+  "timing_sidecar_sha256": "275e057c53f4c139faf79a27787c92257f6e9f9ab496d7d8c0a7cbe81a0e675a",
+  "wall_clock_separated_from_deterministic_hash": true
+}

@@ -1,0 +1,34 @@
+{
+  "C0_VECTOR_ONLY": [
+    {
+      "actual": "FULL_ANSWER",
+      "count": 5,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 1,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 3,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 29,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 1,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 3,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    }
+  ]
+}

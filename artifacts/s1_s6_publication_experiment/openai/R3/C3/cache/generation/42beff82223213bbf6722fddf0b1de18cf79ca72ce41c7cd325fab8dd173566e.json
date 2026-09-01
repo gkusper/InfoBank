@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "86808e5e6a6c951bb0ab857ffc53d82465ab214a7a8590cc6d1ab18fc6654a24",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1457,
+    "output_tokens": 86,
+    "retries": 0,
+    "text": "The confirmed amount for order CCA-260203-M18 is an estimate at checkout, and a replacement item, weighed product, or unavailable line can change the final amount collected. A matching date and amount can support a likely match, but those two fields alone do not prove that a bank transaction belongs to this order. For an unexplained difference, it is advised to contact CedarCart with the order number and the posted transaction.",
+    "total_tokens": 1543,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "c221d4c67295206eaa6d83f1aa267926ca515181c2f7393fbc0f8c5d4fd4088c",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "2026"
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "bc37634c45b7f277661b111d4a319aeb12266a63f111f32e6972e71c6dc33c32",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1685,
+    "output_tokens": 63,
+    "retries": 0,
+    "text": "The bank charge for order CCA-260203-M18 was 150 HUF lower than the confirmed amount due to potential differences that can occur after picking, substitution, or weight adjustment. The confirmed amount was 7,240 HUF, while the card charge later posted was 7,090 HUF.",
+    "total_tokens": 1748,
+    "usage_source": "provider_reported"
+  }
+}

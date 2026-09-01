@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "7ab18410faac2534a06de95e5e2d9c17c08faa4c1d558f01a48ad8597e60ed17",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 887,
+    "output_tokens": 76,
+    "retries": 1,
+    "text": "The context provided does not contain specific numerical values or details regarding the overall net difference between bank charges and confirmed amounts for February CedarCart Online orders, nor does it specify the total discrepancies. It only mentions that the confirmed amount is an estimate and that differences may occur due to various factors. For unexplained differences, it suggests contacting CedarCart with the order number and the posted transaction.",
+    "total_tokens": 963,
+    "usage_source": "provider_reported"
+  }
+}

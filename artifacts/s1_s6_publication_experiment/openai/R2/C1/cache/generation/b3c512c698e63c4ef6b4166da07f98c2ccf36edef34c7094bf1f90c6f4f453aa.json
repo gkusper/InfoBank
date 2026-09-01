@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "b05f3a060ad979ae40c20014897bb22b23f0741b420cb2453fa53ced92657984",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1247,
+    "output_tokens": 67,
+    "retries": 0,
+    "text": "The Velora V55 has 4 HDMI ports and 2 USB-A ports. Other wired connections listed include:\n\n- 1 Ethernet (RJ-45) port for a wired network connection\n- 1 Optical digital audio port for connecting to a soundbar or receiver\n- 1 Antenna input for terrestrial or cable broadcast feed",
+    "total_tokens": 1314,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,5 @@
+Configuration,Deterministic records,OpenAI records,Deterministic output accuracy,OpenAI output accuracy,Deterministic controlled failure,OpenAI controlled failure,Deterministic citation coverage,OpenAI citation coverage,Deterministic safety findings,OpenAI safety findings,Interpretation
+C0,42,126,0.690476,0.690476,0.0,0.0,0.357143,0.369048,3,9,Deterministic results validate reproducible pipeline behavior; OpenAI results measure real-provider behavior.
+C1,42,126,0.690476,0.571429,0.0,0.0,0.345238,0.313492,3,7,Deterministic results validate reproducible pipeline behavior; OpenAI results measure real-provider behavior.
+C2,42,126,0.738095,0.738095,0.538462,0.538462,0.357143,0.369048,0,0,Deterministic results validate reproducible pipeline behavior; OpenAI results measure real-provider behavior.
+C3,42,126,0.690476,0.690476,0.538462,0.538462,0.345238,0.369048,0,0,Deterministic results validate reproducible pipeline behavior; OpenAI results measure real-provider behavior.

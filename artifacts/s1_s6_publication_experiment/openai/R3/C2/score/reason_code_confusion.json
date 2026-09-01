@@ -1,0 +1,44 @@
+{
+  "C2_PERMISSION_FILTERED": [
+    {
+      "actual": "aggregate_threshold_satisfied",
+      "count": 5,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregation_threshold_not_met",
+      "count": 1,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 1,
+      "expected": "clarification"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 2,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 5,
+      "expected": "supported"
+    },
+    {
+      "actual": "supported",
+      "count": 24,
+      "expected": "supported"
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "36bfd945da66218a9d7f8b1dee70778e0edd68c8e2199dcead0e91f4c5c6d5ff",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "100",
+    "charge"
+  ]
+}

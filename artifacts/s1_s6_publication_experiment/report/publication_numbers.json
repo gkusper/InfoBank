@@ -1,0 +1,181 @@
+{
+  "generated_at": "2026-09-01T05:45:02Z",
+  "numbers": [
+    {
+      "configuration": "C0",
+      "denominator": 126,
+      "metric_name": "output_class_accuracy",
+      "numerator": 87,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.690476
+    },
+    {
+      "configuration": "C0",
+      "denominator": 126,
+      "metric_name": "reason_code_accuracy",
+      "numerator": 87,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.690476
+    },
+    {
+      "configuration": "C0",
+      "denominator": 111,
+      "metric_name": "permitted_answer_accuracy",
+      "numerator": 36,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.324324
+    },
+    {
+      "configuration": "C0",
+      "denominator": 39,
+      "metric_name": "controlled_failure_correctness",
+      "numerator": 0,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.0
+    },
+    {
+      "configuration": "C1",
+      "denominator": 126,
+      "metric_name": "output_class_accuracy",
+      "numerator": 72,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.571429
+    },
+    {
+      "configuration": "C1",
+      "denominator": 126,
+      "metric_name": "reason_code_accuracy",
+      "numerator": 72,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.571429
+    },
+    {
+      "configuration": "C1",
+      "denominator": 111,
+      "metric_name": "permitted_answer_accuracy",
+      "numerator": 35,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.315315
+    },
+    {
+      "configuration": "C1",
+      "denominator": 39,
+      "metric_name": "controlled_failure_correctness",
+      "numerator": 0,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.0
+    },
+    {
+      "configuration": "C2",
+      "denominator": 126,
+      "metric_name": "output_class_accuracy",
+      "numerator": 93,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.738095
+    },
+    {
+      "configuration": "C2",
+      "denominator": 126,
+      "metric_name": "reason_code_accuracy",
+      "numerator": 93,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.738095
+    },
+    {
+      "configuration": "C2",
+      "denominator": 111,
+      "metric_name": "permitted_answer_accuracy",
+      "numerator": 51,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.459459
+    },
+    {
+      "configuration": "C2",
+      "denominator": 39,
+      "metric_name": "controlled_failure_correctness",
+      "numerator": 21,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.538462
+    },
+    {
+      "configuration": "C3",
+      "denominator": 126,
+      "metric_name": "output_class_accuracy",
+      "numerator": 87,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.690476
+    },
+    {
+      "configuration": "C3",
+      "denominator": 126,
+      "metric_name": "reason_code_accuracy",
+      "numerator": 87,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.690476
+    },
+    {
+      "configuration": "C3",
+      "denominator": 111,
+      "metric_name": "permitted_answer_accuracy",
+      "numerator": 51,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.459459
+    },
+    {
+      "configuration": "C3",
+      "denominator": 39,
+      "metric_name": "controlled_failure_correctness",
+      "numerator": 21,
+      "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
+      "scenario_or_class_scope": "all_cases",
+      "source_artifact_path": "artifacts/s1_s6_publication_experiment/openai/c0_c3_real_provider_summary.json",
+      "source_artifact_sha256": "9058bf932e23bc94c533d1d29ca5fc364df2317461ffa40cfa9fcee08072bc54",
+      "value": 0.538462
+    }
+  ]
+}

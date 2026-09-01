@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "122bb533b5e2d00523cb367174864deef3d9e3a8ee16497d7fee68496e0bfdf2",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1306,
+    "output_tokens": 49,
+    "retries": 0,
+    "text": "The reissued confirmation for order TCO-260306-G18 is the one that states \"Reissued confirmation - address line corrected.\" A reissued confirmation with the same identifier represents the same order and must not be counted as a separate purchase.",
+    "total_tokens": 1355,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "C2_PERMISSION_FILTERED": [
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 5,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 1,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 3,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 24,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 5,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 1,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 2,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 1,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "ca2c0403a9c8c2d0375984016fa79cb4d3d171c3e3d5b0de0cd51ca38a9ebe70",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "bank"
+  ]
+}

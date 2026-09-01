@@ -1,0 +1,25 @@
+{
+  "COMMIT_CREATED": "NO",
+  "MANUSCRIPT_CHANGED": "NO",
+  "MODEL_CHANGED_DURING_RUN": "NO",
+  "POLICY_FIXTURES_CHANGED": "NO",
+  "PROMPTS_CHANGED": "NO",
+  "PUSH_PERFORMED": "NO",
+  "QUESTIONS_CHANGED": "NO",
+  "REFERENCE_ANNOTATIONS_CHANGED": "NO",
+  "RESULT_DEPENDENT_RERUNS": 0,
+  "S1_S2_PACKAGE_CHANGED": "NO",
+  "S1_S6_TUNING_PERFORMED": "NO",
+  "S3_S6_PACKAGE_CHANGED": "NO",
+  "SCORER_CHANGED": "NO",
+  "SOURCE_CODE_CHANGED": "NO",
+  "TEST_CODE_CHANGED": "NO",
+  "final_status": "READY_FOR_MANUSCRIPT_RESULTS_UPDATE",
+  "git_diff_check_returncode": 0,
+  "missing_required_artifacts": [],
+  "secret_scan": {
+    "findings": [],
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

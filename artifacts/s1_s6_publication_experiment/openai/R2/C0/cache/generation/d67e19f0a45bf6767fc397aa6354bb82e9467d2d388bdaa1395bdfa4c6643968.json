@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "6e85598b080b2c4bea9a2d423d87bd6cc32b35b39bb6072a4be7c571a96912a3",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 560,
+    "output_tokens": 90,
+    "retries": 0,
+    "text": "You should consider using the warranty for your TV, as the Aurelia manufacturer warranty provides repair or replacement remedies for the product. The warranty is valid for 24 months and requires you to use an Aurelia-authorised service route for assessment. If an external cause is identified, you can retain the service report for a separate home-insurance inquiry. However, the warranty does not provide an automatic cash settlement, as it is not an insurance cash benefit.",
+    "total_tokens": 650,
+    "usage_source": "provider_reported"
+  }
+}

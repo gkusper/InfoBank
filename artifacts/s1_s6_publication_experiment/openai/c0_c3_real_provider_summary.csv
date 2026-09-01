@@ -1,0 +1,5 @@
+Configuration,Cases,Output accuracy,Permitted-answer accuracy,Controlled-failure correctness,Citation coverage,Support precision,Page correctness,Safety findings,Tokens,Mean latency,Runtime/parser/provider errors
+C0,126,0.690476,0.324324,0.0,0.369048,0.409639,0.277108,9,136581,3198.564717,0
+C1,126,0.571429,0.315315,0.0,0.313492,0.432584,0.314607,7,108820,8030.413585,22
+C2,126,0.738095,0.459459,0.538462,0.369048,0.578947,0.403509,0,89845,2677.139003,0
+C3,126,0.690476,0.459459,0.538462,0.369048,0.697674,0.534884,0,133259,5456.281132,0

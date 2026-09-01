@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "86da76fb19a7ead3e576b9f13c1d4ea2a5790856f0af6608facddf2a2c5f9a01",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1168,
+    "output_tokens": 63,
+    "retries": 0,
+    "text": "You should consider using the warranty for your TV, as it provides repair or replacement remedies. The warranty terms specify that you should use an Aurelia-authorised service route for a warranty assessment. If an external cause is identified for the TV's malfunction, you can retain the service report for any separate home insurance inquiry.",
+    "total_tokens": 1231,
+    "usage_source": "provider_reported"
+  }
+}

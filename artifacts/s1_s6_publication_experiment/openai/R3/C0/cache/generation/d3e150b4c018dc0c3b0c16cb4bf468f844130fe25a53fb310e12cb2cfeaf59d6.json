@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "5c1b1e5108ddad3d053f283b1b43c9962cfcdb563e46d3f86ad417acb222bd60",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1323,
+    "output_tokens": 67,
+    "retries": 0,
+    "text": "For the Velora V55, product code VEL-V55-2025, error E06 refers to an HDMI error, not a temperature-sensor fault. The recovery procedure for E06 involves turning off the television and the HDMI source device, unplugging both from mains power for 60 seconds, and then reconnecting them.",
+    "total_tokens": 1390,
+    "usage_source": "provider_reported"
+  }
+}

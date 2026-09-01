@@ -1,0 +1,54 @@
+{
+  "C3_FULL_ROLE_AWARE": [
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 5,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 1,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 1,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 2,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 22,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 6,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 1,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 2,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 1,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    }
+  ]
+}

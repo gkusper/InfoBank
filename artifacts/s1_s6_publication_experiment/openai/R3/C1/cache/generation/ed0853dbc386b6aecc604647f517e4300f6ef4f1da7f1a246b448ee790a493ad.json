@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "2c1c1e6a22b119a1bb9016c817302928045faf6c6dfdd474ea08061d4f4262ff",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 301,
+    "output_tokens": 28,
+    "retries": 0,
+    "text": "You own a Velora V55 Smart TV, which you purchased on 12 March 2025 for 319,900 HUF.",
+    "total_tokens": 329,
+    "usage_source": "provider_reported"
+  }
+}

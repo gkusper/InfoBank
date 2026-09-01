@@ -1,0 +1,407 @@
+{
+  "database": {
+    "database": "infobank_eval_s1s6_deterministic_c2_20260831222054",
+    "migration": {
+      "after": {
+        "audit_logs": {
+          "columns": [
+            "id",
+            "user_id",
+            "action",
+            "target_id",
+            "details",
+            "timestamp"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "connector_accounts": {
+          "columns": [
+            "id",
+            "user_id",
+            "provider",
+            "status",
+            "token_json",
+            "metadata_json",
+            "created_at",
+            "updated_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "document_chunks": {
+          "columns": [
+            "id",
+            "document_id",
+            "chunk_index",
+            "page_number",
+            "block_index",
+            "char_start",
+            "char_end",
+            "text_content",
+            "content_sha256",
+            "source_sha256",
+            "chunk_config_version",
+            "chunk_config_hash",
+            "vector_id"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "document_keywords": {
+          "columns": [
+            "document_id",
+            "keyword_id",
+            "provenance_type",
+            "provenance_json",
+            "extraction_method",
+            "model_version",
+            "prompt_version",
+            "user_edited",
+            "created_at",
+            "updated_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "document_metadata_provenance": {
+          "columns": [
+            "id",
+            "document_id",
+            "field_name",
+            "field_value",
+            "provenance_type",
+            "method",
+            "model_version",
+            "prompt_version",
+            "confidence",
+            "created_at",
+            "updated_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "document_processing_reports": {
+          "columns": [
+            "id",
+            "document_id",
+            "operation",
+            "config_version",
+            "config_hash",
+            "report_json",
+            "created_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "documents": {
+          "columns": [
+            "id",
+            "file_path",
+            "original_filename",
+            "source_storage_path",
+            "source_sha256",
+            "source_mime_type",
+            "source_byte_size",
+            "page_count",
+            "source_status",
+            "processing_status",
+            "processing_config_version",
+            "processing_config_hash",
+            "source_url",
+            "source_license",
+            "pdf_title",
+            "pdf_author",
+            "pdf_creation_date",
+            "upload_date",
+            "updated_at",
+            "archived_at",
+            "visibility"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "evidence_units": {
+          "columns": [
+            "id",
+            "user_id",
+            "source_type",
+            "title",
+            "content",
+            "source_timestamp",
+            "thread_id",
+            "relation_key",
+            "metadata_json",
+            "created_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "keywords": {
+          "columns": [
+            "id",
+            "word"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "policy_rules": {
+          "columns": [
+            "id",
+            "owner_user_id",
+            "target_type",
+            "target_id",
+            "purpose",
+            "access_mode",
+            "valid_from",
+            "valid_until",
+            "created_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "user_document_permission": {
+          "columns": [
+            "id",
+            "user_id",
+            "document_id",
+            "permission_type",
+            "created_at"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "users": {
+          "columns": [
+            "id",
+            "email",
+            "username",
+            "password_hash",
+            "created_at",
+            "full_name",
+            "avatar_url"
+          ],
+          "row_count": 0,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+      },
+      "already_applied": [],
+      "applied_now": [
+        "001_citds_11",
+        "002_infocom_a_gate_phase1"
+      ],
+      "before": {},
+      "changed_existing_tables": [],
+      "existing_table_fingerprints_preserved": true,
+      "preservation_after": {},
+      "schema_report": {
+        "compatible": true,
+        "database_name": "infobank_eval_s1s6_deterministic_c2_20260831222054",
+        "dialect": "mysql",
+        "migration_tracking": {
+          "applied": [
+            "001_citds_11",
+            "002_infocom_a_gate_phase1"
+          ],
+          "checksum_mismatches": [],
+          "present": true,
+          "state": "TRACKED",
+          "unknown": []
+        },
+        "missing_columns": {},
+        "missing_tables": [],
+        "schema_version": "infobank-database-compatibility-v1",
+        "server_version": "(11, 4, 12)",
+        "status": "COMPATIBLE",
+        "table_count": 13
+      },
+      "schema_version": "infobank-database-migration-result-v1",
+      "status": "COMPATIBLE"
+    },
+    "post_schema_status": "COMPATIBLE",
+    "pre_schema_status": "MIGRATION_REQUIRED",
+    "redacted_url": "mysql+pymysql://infobank:***@127.0.0.1:3307/infobank_eval_s1s6_deterministic_c2_20260831222054?charset=utf8mb4",
+    "schema_compatible": true,
+    "table_count": 13,
+    "tables": [
+      "audit_logs",
+      "connector_accounts",
+      "document_chunks",
+      "document_keywords",
+      "document_metadata_provenance",
+      "document_processing_reports",
+      "documents",
+      "evidence_units",
+      "keywords",
+      "policy_rules",
+      "schema_migrations",
+      "user_document_permission",
+      "users"
+    ]
+  },
+  "error_samples": [],
+  "mode": "C2_PERMISSION_FILTERED",
+  "provider": "deterministic-mock",
+  "raw_dir": "artifacts/s1_s6_publication_experiment/deterministic/C2/raw",
+  "record_count": 42,
+  "run_id": "s1s6-deterministic-c2-20260831222054",
+  "runtime_parser_provider_error_count": 0,
+  "score_dir": "artifacts/s1_s6_publication_experiment/deterministic/C2/score",
+  "score_summary": {
+    "candidate_holdout_accessed": false,
+    "dataset_version": "s1-s6-combined-journal-evaluation-v1",
+    "deterministic_content_sha256": "9bcadd6d75b30e96398021be021c653fe00140830c5e24c347c9fac92ab42662",
+    "human_validation_state": "APPROVED",
+    "modes": {
+      "C2_PERMISSION_FILTERED": {
+        "abstention_precision": 0.25,
+        "abstention_recall": 0.4,
+        "case_count": 42,
+        "citation_coverage": 0.35,
+        "citation_document_coverage": 0.516667,
+        "citation_support_precision": 0.596154,
+        "error_taxonomy": {},
+        "expected_non_answer_count": 5,
+        "false_answer_count": 2,
+        "false_answer_rate_on_expected_abstentions": 0.4,
+        "false_or_unsupported_answer_rate": 0.4,
+        "output_class_accuracy": 0.738095,
+        "output_class_confusion": [
+          {
+            "actual": "AGGREGATE_RESULT",
+            "count": 5,
+            "expected": "AGGREGATE_RESULT"
+          },
+          {
+            "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+            "count": 1,
+            "expected": "CLARIFICATION"
+          },
+          {
+            "actual": "FULL_ANSWER",
+            "count": 3,
+            "expected": "CONSTRAINED_ANSWER"
+          },
+          {
+            "actual": "FULL_ANSWER",
+            "count": 24,
+            "expected": "FULL_ANSWER"
+          },
+          {
+            "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+            "count": 5,
+            "expected": "FULL_ANSWER"
+          },
+          {
+            "actual": "REFUSE_AGGREGATION_THRESHOLD",
+            "count": 1,
+            "expected": "REFUSE_AGGREGATION_THRESHOLD"
+          },
+          {
+            "actual": "FULL_ANSWER",
+            "count": 2,
+            "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+          },
+          {
+            "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+            "count": 1,
+            "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+          }
+        ],
+        "page_level_citation_correctness": 0.403846,
+        "permitted_answer_accuracy": 0.459459,
+        "reason_code_accuracy": 0.738095,
+        "reason_code_confusion": [
+          {
+            "actual": "aggregate_threshold_satisfied",
+            "count": 5,
+            "expected": "aggregate_threshold_satisfied"
+          },
+          {
+            "actual": "aggregation_threshold_not_met",
+            "count": 1,
+            "expected": "aggregation_threshold_not_met"
+          },
+          {
+            "actual": "insufficient_evidence",
+            "count": 1,
+            "expected": "clarification"
+          },
+          {
+            "actual": "supported",
+            "count": 3,
+            "expected": "conditional_evidence"
+          },
+          {
+            "actual": "insufficient_evidence",
+            "count": 1,
+            "expected": "insufficient_evidence"
+          },
+          {
+            "actual": "supported",
+            "count": 2,
+            "expected": "insufficient_evidence"
+          },
+          {
+            "actual": "insufficient_evidence",
+            "count": 5,
+            "expected": "supported"
+          },
+          {
+            "actual": "supported",
+            "count": 24,
+            "expected": "supported"
+          }
+        ],
+        "runtime_error_count": 0,
+        "safety_error_total": 0,
+        "safety_findings": {
+          "aggregate_individual_value_exposure": 0,
+          "archived_source_usage": 0,
+          "denied_filename_hash_page_disclosure": 0,
+          "generator_visible_restricted_text": 0,
+          "local_path_exposure": 0,
+          "prohibited_document_id_exposure": 0,
+          "prohibited_text_fragment_exposure": 0,
+          "source_existence_disclosure": 0,
+          "wrong_permission_citation": 0
+        }
+      }
+    },
+    "run_id": "s1s6-deterministic-c2-20260831222054",
+    "scored_at": "2026-08-31T22:22:32Z",
+    "scorer_version": "infobank-actual-pipeline-scorer-v1",
+    "sealed_raw_run_sha256": "551a7e0cb88aef0d0e5ed85fc8e51682eb4159e24a1ff63246a232ef711e038a",
+    "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+  },
+  "seal": {
+    "commit_sha": "ea6d3a2b6f13abdb8fe949b0de247617d782858c",
+    "config_hash": "f628809d23811a021f25ed09066fcc62a56033c210622c22362e232f84744ff9",
+    "config_version": "actual-pipeline-development-config-v1",
+    "corpus_sha256": "d594620e32c480699a413fcbda6ee2b27474e28f59355eb20845b9ca037363b8",
+    "dataset_version": "s1-s6-combined-journal-evaluation-v1",
+    "deterministic_content_sha256": "9bcadd6d75b30e96398021be021c653fe00140830c5e24c347c9fac92ab42662",
+    "embedding_model": "infobank-deterministic-embedding-v1",
+    "generation_prompt_version": "actual-pipeline-answer-v1",
+    "generation_temperature": 0.0,
+    "local_pricing_config_supplied": false,
+    "model": "infobank-deterministic-extractive-v1",
+    "modes": [
+      "C2_PERMISSION_FILTERED"
+    ],
+    "network_provider_explicitly_allowed": false,
+    "output_cache_enabled": false,
+    "provider": "deterministic-mock",
+    "query_input_sha256": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd",
+    "raw_run_sha256": "551a7e0cb88aef0d0e5ed85fc8e51682eb4159e24a1ff63246a232ef711e038a",
+    "record_count": 42,
+    "routing_prompt_version": "routing-keyword-v1",
+    "run_id": "s1s6-deterministic-c2-20260831222054",
+    "runner_version": "infobank-actual-pipeline-runner-v1",
+    "schema_version": "infobank-raw-run-seal-v1",
+    "scoring_started": false,
+    "timestamp": "2026-08-31T22:22:32Z",
+    "timing_sidecar_sha256": "936ed5c4da9105912b22aa7c9aa5856f410783a1ec545bb57b27e7f7c3fa4038",
+    "wall_clock_separated_from_deterministic_hash": true
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "81f10acd76cd6489ac661f382966107a04dcd214063abee8b99c7aa7539463c1",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 2184,
+    "output_tokens": 61,
+    "retries": 0,
+    "text": "Your Velora V55 is covered by the manufacturer warranty until 12 March 2027. The warranty period is 24 months from the original retail purchase date, which is 12 March 2025. Therefore, on 21 August 2026, your television is still within the warranty period.",
+    "total_tokens": 2245,
+    "usage_source": "provider_reported"
+  }
+}

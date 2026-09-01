@@ -1,0 +1,49 @@
+{
+  "C1_VECTOR_ROUTING": [
+    {
+      "actual": "ERROR",
+      "count": 1,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 4,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "ERROR",
+      "count": 1,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "ERROR",
+      "count": 3,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "ERROR",
+      "count": 15,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 14,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "ERROR",
+      "count": 1,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "ERROR",
+      "count": 1,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 2,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    }
+  ]
+}

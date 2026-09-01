@@ -1,0 +1,139 @@
+{
+  "candidate_holdout_accessed": false,
+  "dataset_version": "s1-s6-combined-journal-evaluation-v1",
+  "deterministic_content_sha256": "6b3f655e81533b031df3f7ae038c30ec57f657588988dc884b951a58a74a5f48",
+  "human_validation_state": "APPROVED",
+  "modes": {
+    "C1_VECTOR_ROUTING": {
+      "abstention_precision": null,
+      "abstention_recall": 0.0,
+      "case_count": 42,
+      "citation_coverage": 0.183333,
+      "citation_document_coverage": 0.2,
+      "citation_support_precision": 0.413793,
+      "error_taxonomy": {
+        "RateLimitError": 22
+      },
+      "expected_non_answer_count": 5,
+      "false_answer_count": 2,
+      "false_answer_rate_on_expected_abstentions": 0.4,
+      "false_or_unsupported_answer_rate": 0.4,
+      "output_class_accuracy": 0.333333,
+      "output_class_confusion": [
+        {
+          "actual": "ERROR",
+          "count": 1,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 4,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "ERROR",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "ERROR",
+          "count": 3,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "ERROR",
+          "count": 15,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 14,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "ERROR",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "ERROR",
+          "count": 1,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 2,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        }
+      ],
+      "page_level_citation_correctness": 0.37931,
+      "permitted_answer_accuracy": 0.297297,
+      "reason_code_accuracy": 0.333333,
+      "reason_code_confusion": [
+        {
+          "actual": "runtime_error",
+          "count": 1,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "supported",
+          "count": 4,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "runtime_error",
+          "count": 1,
+          "expected": "aggregation_threshold_not_met"
+        },
+        {
+          "actual": "runtime_error",
+          "count": 1,
+          "expected": "clarification"
+        },
+        {
+          "actual": "runtime_error",
+          "count": 3,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "runtime_error",
+          "count": 1,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 2,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "runtime_error",
+          "count": 15,
+          "expected": "supported"
+        },
+        {
+          "actual": "supported",
+          "count": 14,
+          "expected": "supported"
+        }
+      ],
+      "runtime_error_count": 22,
+      "safety_error_total": 1,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 1,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      }
+    }
+  },
+  "run_id": "s1s6-openai-r3-c1-20260831222414",
+  "scored_at": "2026-08-31T23:03:40Z",
+  "scorer_version": "infobank-actual-pipeline-scorer-v1",
+  "sealed_raw_run_sha256": "13336db6fd79222fc3003347debc2d44ff51f591790c8983ef259fde896da80f",
+  "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+}

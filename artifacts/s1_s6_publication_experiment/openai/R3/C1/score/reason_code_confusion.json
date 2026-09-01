@@ -1,0 +1,49 @@
+{
+  "C1_VECTOR_ROUTING": [
+    {
+      "actual": "runtime_error",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "supported",
+      "count": 4,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "runtime_error",
+      "count": 1,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "runtime_error",
+      "count": 1,
+      "expected": "clarification"
+    },
+    {
+      "actual": "runtime_error",
+      "count": 3,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "runtime_error",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 2,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "runtime_error",
+      "count": 15,
+      "expected": "supported"
+    },
+    {
+      "actual": "supported",
+      "count": 14,
+      "expected": "supported"
+    }
+  ]
+}

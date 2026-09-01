@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "c85f2ee6186ba58978fe08a0470efb55ddfdc5aca422535f98fe170f7ee04f3b",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 894,
+    "output_tokens": 50,
+    "retries": 0,
+    "text": "The order CCA-260320-R53 appears on your March bank statement with a transaction dated 21 Mar for a card purchase of -6,300 HUF. The order CCA-260328-S14 does not appear on the statement.",
+    "total_tokens": 944,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,5 @@
+Configuration,Cases,Citation document coverage,Citation support precision,Page-level citation correctness,Citation coverage,Required document slots,Covered document slots,Unsupported citation count,Wrong-document citation count,Wrong-page citation count,Missing-required-document count,Citation-free intentionally withheld
+C0,42,0.55,0.434211,0.276316,0.357143,60,33,43,43,12,27,0
+C1,42,0.533333,0.457143,0.285714,0.345238,60,32,38,38,12,28,0
+C2,42,0.516667,0.596154,0.403846,0.357143,60,31,21,21,10,29,13
+C3,42,0.466667,0.7,0.5,0.345238,60,28,12,12,8,32,15

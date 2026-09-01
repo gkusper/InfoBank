@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "b2d7cf071377f40b429621e97e8d1b6ddbe2f0207e05d3e8e7777f6c1e75ff81",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1137,
+    "output_tokens": 38,
+    "retries": 0,
+    "text": "The Orion E4 supports a maximum AC charging power of 11 kW using a Type 2 connector. It can charge with three-phase 400 V at 16 A per phase.",
+    "total_tokens": 1175,
+    "usage_source": "provider_reported"
+  }
+}

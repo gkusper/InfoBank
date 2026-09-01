@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "9b41dd8c69f58d8e9bd106f9e54a10bed0ececcb865294f6c964861eae770a7d",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 2220,
+    "output_tokens": 19,
+    "retries": 0,
+    "text": "The dairy milk from order TCO-260105-A17 was consumed by Anna Varga.",
+    "total_tokens": 2239,
+    "usage_source": "provider_reported"
+  }
+}

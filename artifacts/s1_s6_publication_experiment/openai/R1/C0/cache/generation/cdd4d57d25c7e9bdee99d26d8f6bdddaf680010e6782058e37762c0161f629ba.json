@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "4da076a6040b78ceda820c866ebf112e38eeae59077a27428433ba63587b3efe",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 609,
+    "output_tokens": 132,
+    "retries": 0,
+    "text": "On the Aurelia Q62, H17 means that HDMI handshake negotiation did not complete. It is commonly associated with an inactive source, a cable connection, incompatible signal mode, or a temporary HDCP negotiation failure. \n\nFirst action: Turn off the television and the connected HDMI source. Unplug both devices from mains power for 60 seconds. Reconnect the HDMI cable firmly, restore power to the source first, then start the television and select the correct HDMI input. \n\nIf H17 remains, try another known-good cable and another Q62 HDMI input. Confirm the source output format. Do not open the cabinet; contact qualified service if the code persists.",
+    "total_tokens": 741,
+    "usage_source": "provider_reported"
+  }
+}

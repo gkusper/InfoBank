@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "14cceebe05f3e5fe890524eecc182ab1b349eabf6bffb2212653ec34351e9250",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1100,
+    "output_tokens": 72,
+    "retries": 0,
+    "text": "You cannot connect the Orion E4 directly to the solar panels. The vehicle must receive controlled AC through compliant conversion, protection, and charging equipment. There is no permitted direct panel-to-vehicle path in this installation. Solar-surplus charging still uses the site's AC distribution system, protective devices, and wallbox, and is not a direct connection from the panels.",
+    "total_tokens": 1172,
+    "usage_source": "provider_reported"
+  }
+}

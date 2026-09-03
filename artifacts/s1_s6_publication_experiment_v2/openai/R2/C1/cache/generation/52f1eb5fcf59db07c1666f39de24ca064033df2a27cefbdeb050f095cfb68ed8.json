@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "823b8b68f84ba6181e7a00a42aab1b67b7e579e30895d9b7977fb334d11d3a9b",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1211,
+    "output_tokens": 74,
+    "retries": 0,
+    "text": "To charge the Orion E4 from 20% to 80%, a total of 38.4 kWh of energy is required. Considering the efficiency assumption of 90%, the grid energy needed is 42.67 kWh. At a sustained charging power of 11 kW, the time to charge would be approximately 3 hours and 53 minutes.",
+    "total_tokens": 1285,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,14 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "42a97e2db9339c9ac2ef2a68dc413fa748e71928d43e39138449585783c7fe31",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "can",
+    "connect",
+    "directly"
+  ]
+}

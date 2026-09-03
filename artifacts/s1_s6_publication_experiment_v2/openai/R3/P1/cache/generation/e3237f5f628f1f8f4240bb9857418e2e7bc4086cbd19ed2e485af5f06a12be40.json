@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "d414c5907238fe1e86f021f3f26ea2d3fb60c6c844c117c3c8192d9fec5c95e2",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 2272,
+    "output_tokens": 87,
+    "retries": 0,
+    "text": "{\"output_class\":\"FULL_ANSWER\",\"reason_code\":\"charge_time_estimate\",\"answer\":\"To charge your Orion E4 to 100%, you need to consider the current state of charge (SoC), the target SoC (100%), and the available charging power. The Orion E4 has a usable battery capacity of 64 kWh. Without the current SoC and charging power details, an exact time cannot be provided.\"}",
+    "total_tokens": 2359,
+    "usage_source": "provider_reported"
+  }
+}

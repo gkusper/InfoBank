@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "8a75c9e86f8dc0e9e9749bd4aeff64bdc877afefe000aeb6f2f3e48486d166c8",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1293,
+    "output_tokens": 84,
+    "retries": 0,
+    "text": "1. Damage caused by lightning, an externally originating power surge, abnormal supply, accident, liquid, misuse, or unauthorized repair is not a manufacturing defect and is excluded from the manufacturer warranty.\n2. A service report should distinguish the observed symptom from the probable technical cause.\n3. Keep replaced parts and cause findings where a warranty or insurance claim may follow.\n4. Proof of purchase is required, specifically a dated receipt.",
+    "total_tokens": 1377,
+    "usage_source": "provider_reported"
+  }
+}

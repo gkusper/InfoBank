@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "a0413082c839e92066ad7e70ac619fe787b8b3da25fa3214151b4bfee66bb355",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 976,
+    "output_tokens": 69,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"warranty_recommendation\",\n  \"answer\": \"You should consider using the warranty for your TV, as it provides repair or replacement remedies without any cash settlement. If the warranty does not cover the issue, you can then explore your home insurance options.\"\n}",
+    "total_tokens": 1045,
+    "usage_source": "provider_reported"
+  }
+}

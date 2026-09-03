@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "4d4bb3f8b4fa226c8165db65c7e779a254b0413e879c30b3cb2eb7375947083c",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 887,
+    "output_tokens": 44,
+    "retries": 0,
+    "text": "The confirmed amount is an estimate at checkout. A replacement item, weighed product, or unavailable line can change the final amount collected. For an unexplained difference, contact CedarCart with the order number and the posted transaction.",
+    "total_tokens": 931,
+    "usage_source": "provider_reported"
+  }
+}

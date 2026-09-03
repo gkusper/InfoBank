@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "c4e5494f9c1b2332388113d92d22fa03bcf3303e4f89d553e0ebaf4e3ff7b20d",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 2164,
+    "output_tokens": 46,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"AGGREGATE_RESULT\",\n  \"reason_code\": \"average_days_between_orders\",\n  \"answer\": \"The average number of days between consecutive orders containing dairy milk is 9 days.\"\n}",
+    "total_tokens": 2210,
+    "usage_source": "provider_reported"
+  }
+}

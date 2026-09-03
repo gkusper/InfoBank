@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "b78e156a92c9175b78bba068e051e845161457c99a0456c230549aa934105229",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1118,
+    "output_tokens": 105,
+    "retries": 0,
+    "text": "```json\n{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"insurance_coverage_possible\",\n  \"answer\": \"Your home insurance may cover damage from an external power surge, but this depends on your specific policy. You should check with your insurance provider for details on coverage and the deductible amount. To support your claim, you will need evidence such as a service report from a qualified technician that distinguishes the observed symptom from the probable cause of the damage, along with any replaced parts.\"\n}\n```",
+    "total_tokens": 1223,
+    "usage_source": "provider_reported"
+  }
+}

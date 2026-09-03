@@ -1,0 +1,13 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "48dd5b9a13852f82bff273e6745ff72df61f74f39f80de87ca17bd1f03030a6e",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "charge",
+    "gridnest"
+  ]
+}

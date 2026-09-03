@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "4a4805e87c71fab7715db9ef57efa2f527ad983879294834a58782a32946b71d",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1833,
+    "output_tokens": 31,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"confirmed_milk_quantity\",\n  \"answer\": \"4 litres\"\n}",
+    "total_tokens": 1864,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "20f8ed82b7cdb07bd166193400d7c08f9a845223f5ebd6f20af40395ed34a79a",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 887,
+    "output_tokens": 30,
+    "retries": 0,
+    "text": "{\"output_class\":\"FULL_ANSWER\",\"reason_code\":\"purchase_date_found\",\"answer\":\"You bought the sofa on 14 November 2025.\"}",
+    "total_tokens": 917,
+    "usage_source": "provider_reported"
+  }
+}

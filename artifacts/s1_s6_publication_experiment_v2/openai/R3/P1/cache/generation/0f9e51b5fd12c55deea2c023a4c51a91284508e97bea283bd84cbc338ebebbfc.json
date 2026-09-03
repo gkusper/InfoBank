@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "5b474469d183925adc4a80258351cd9d6d8c0dc677db109bfa4d3fd00886f8f4",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1366,
+    "output_tokens": 58,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"AGGREGATE_RESULT\",\"reason_code\":\"aggregate_difference\",\"answer\":\"The overall net difference between the bank charges and the confirmed amounts for the February CedarCart Online orders is -290 HUF, indicating a total discrepancy of 290 HUF.\"}\n```",
+    "total_tokens": 1424,
+    "usage_source": "provider_reported"
+  }
+}

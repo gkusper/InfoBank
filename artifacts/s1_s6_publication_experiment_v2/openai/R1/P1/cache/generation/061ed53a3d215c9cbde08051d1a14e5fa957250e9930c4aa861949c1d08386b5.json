@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "120338dd34cdcc8a7b3d35cd3e85a0d995ec5c1341efd68e4483b1c5607f2367",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1594,
+    "output_tokens": 104,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"hdmi_handshake_failure\",\n  \"answer\": \"E06 on the Velora V55 indicates an HDMI handshake or connection failure. To resolve this, first power-cycle both the television and the HDMI source device by turning them off and unplugging them from mains power for 60 seconds. After that, reconnect the HDMI cable firmly, restore power to the source device, and then start the television, selecting the correct HDMI input.\"\n}",
+    "total_tokens": 1698,
+    "usage_source": "provider_reported"
+  }
+}

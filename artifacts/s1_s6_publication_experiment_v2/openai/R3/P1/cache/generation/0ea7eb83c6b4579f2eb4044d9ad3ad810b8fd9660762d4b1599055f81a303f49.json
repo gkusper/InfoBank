@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "3c256971b51ef7ecb6b8acdba41558d1e71b5f006f6d7fe1a2f2d59302baab82",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1672,
+    "output_tokens": 66,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"bank_charge_difference\",\n  \"answer\": \"The bank charge for order CCA-260203-M18 was 150 HUF lower than the confirmed amount due to possible adjustments after picking, substitution, or weight changes of the items ordered.\"\n}",
+    "total_tokens": 1738,
+    "usage_source": "provider_reported"
+  }
+}

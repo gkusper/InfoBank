@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "2d038a1a4b9b395385e895cdad9786d3449d93062aff3ff51206de0d66722f0e",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 656,
+    "output_tokens": 48,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"chlorine_bleach_prohibited\",\n  \"answer\": \"No, you should not use chlorine bleach on the LUNARA S3 fabric sofa.\"\n}",
+    "total_tokens": 704,
+    "usage_source": "provider_reported"
+  }
+}

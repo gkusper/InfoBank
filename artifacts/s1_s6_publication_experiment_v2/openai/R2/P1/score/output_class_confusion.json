@@ -1,0 +1,59 @@
+{
+  "P1_PROMPT_ONLY_GOVERNANCE": [
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 5,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 1,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 3,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 25,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 1,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 2,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 1,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    }
+  ]
+}

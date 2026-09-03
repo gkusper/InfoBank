@@ -1,0 +1,165 @@
+% Scenario composition
+\begin{tabular}{ll}
+\toprule
+Scenario & Cases \\
+\midrule
+S1 & 6 \\
+S2 & 6 \\
+S3 & 10 \\
+S4B & 8 \\
+S5B & 6 \\
+S6 & 6 \\
+\bottomrule
+\end{tabular}
+
+% C0-C3 plus P1 semantics
+\begin{tabular}{llll}
+\toprule
+Configuration & Routing & Permission & Aggregate \\
+\midrule
+C0\_VECTOR\_ONLY & disabled & disabled; active documents treated as usable & not governed as aggregate-only; baseline answer generation \\
+C1\_VECTOR\_ROUTING & enabled except aggregate-only governance path & disabled; routed candidates treated as usable & not governed as aggregate-only; baseline answer generation \\
+P1\_PROMPT\_ONLY\_GOVERNANCE & enabled except aggregate-only prompt availability path & disabled; policy labels are provided only in the prompt & no governed aggregate executor, threshold gate, or contributor deduplication \\
+C2\_PERMISSION\_FILTERED & disabled & enabled through policy fixture use decisions & aggregate executor used when aggregate evidence is available \\
+C3\_FULL\_ROLE\_AWARE & enabled for non-aggregate-only requests & enabled through policy fixture use decisions & aggregate executor plus threshold and contributor-deduplication governance \\
+\bottomrule
+\end{tabular}
+
+% Primary overall real-provider results
+\begin{tabular}{lllllllll}
+\toprule
+Configuration & Cases & Output accuracy & Balanced accuracy & Permitted-answer accuracy & Controlled-failure correctness & Citation coverage & Safety findings & Tokens \\
+\midrule
+('C0',) & 126 & 0.690476 & 0.166667 & 0.324324 & 0.0 & 0.369048 & 9 & 136527 \\
+('C1',) & 126 & 0.690476 & 0.166667 & 0.324324 & 0.0 & 0.357143 & 9 & 132763 \\
+('C2',) & 126 & 0.738095 & 0.52682 & 0.459459 & 0.538462 & 0.369048 & 0 & 89666 \\
+('C3',) & 126 & 0.690476 & 0.515326 & 0.459459 & 0.538462 & 0.357143 & 0 & 133254 \\
+('P1',) & 126 & 0.706349 & 0.308429 & 0.405405 & 0.384615 & 0.353175 & 132 & 194749 \\
+\bottomrule
+\end{tabular}
+
+% Results by scenario
+\begin{tabular}{llllll}
+\toprule
+Configuration & Scenario & Cases & Output accuracy & Citation coverage & Safety findings \\
+\midrule
+C0 & S1 & 18 & 0.833333 & 0.75 & 0 \\
+C0 & S2 & 18 & 1.0 & 0.75 & 0 \\
+C0 & S3 & 30 & 0.5 & 0.1 & 3 \\
+C0 & S4B & 24 & 0.5 & 0.041667 & 6 \\
+C0 & S5B & 18 & 0.666667 & 0.333333 & 0 \\
+C0 & S6 & 18 & 0.833333 & 0.527778 & 0 \\
+C1 & S1 & 18 & 0.833333 & 0.75 & 0 \\
+C1 & S2 & 18 & 1.0 & 0.75 & 0 \\
+C1 & S3 & 30 & 0.5 & 0.1 & 3 \\
+C1 & S4B & 24 & 0.5 & 0.041667 & 6 \\
+C1 & S5B & 18 & 0.666667 & 0.333333 & 0 \\
+C1 & S6 & 18 & 0.833333 & 0.444444 & 0 \\
+C2 & S1 & 18 & 1.0 & 0.75 & 0 \\
+C2 & S2 & 18 & 1.0 & 0.75 & 0 \\
+C2 & S3 & 30 & 0.6 & 0.1 & 0 \\
+C2 & S4B & 24 & 0.625 & 0.041667 & 0 \\
+C2 & S5B & 18 & 0.5 & 0.333333 & 0 \\
+C2 & S6 & 18 & 0.833333 & 0.527778 & 0 \\
+C3 & S1 & 18 & 1.0 & 0.75 & 0 \\
+C3 & S2 & 18 & 1.0 & 0.75 & 0 \\
+C3 & S3 & 30 & 0.4 & 0.1 & 0 \\
+C3 & S4B & 24 & 0.625 & 0.041667 & 0 \\
+C3 & S5B & 18 & 0.5 & 0.333333 & 0 \\
+C3 & S6 & 18 & 0.833333 & 0.444444 & 0 \\
+\bottomrule
+\end{tabular}
+
+% Results by output class
+\begin{tabular}{llllll}
+\toprule
+Configuration & Class & Cases & Output accuracy & Permitted-answer accuracy & Controlled-failure correctness \\
+\midrule
+C0 & AGGREGATE\_RESULT & 15 & 0.0 & 0.0 & 0.0 \\
+C0 & CLARIFICATION & 3 & 0.0 & None & 0.0 \\
+C0 & CONSTRAINED\_ANSWER & 9 & 0.0 & 0.0 & 0.0 \\
+C0 & FULL\_ANSWER & 87 & 1.0 & 0.413793 & None \\
+C0 & REFUSE\_AGGREGATION\_THRESHOLD & 3 & 0.0 & None & 0.0 \\
+C0 & REFUSE\_INSUFFICIENT\_EVIDENCE & 9 & 0.0 & None & 0.0 \\
+C1 & AGGREGATE\_RESULT & 15 & 0.0 & 0.0 & 0.0 \\
+C1 & CLARIFICATION & 3 & 0.0 & None & 0.0 \\
+C1 & CONSTRAINED\_ANSWER & 9 & 0.0 & 0.0 & 0.0 \\
+C1 & FULL\_ANSWER & 87 & 1.0 & 0.413793 & None \\
+C1 & REFUSE\_AGGREGATION\_THRESHOLD & 3 & 0.0 & None & 0.0 \\
+C1 & REFUSE\_INSUFFICIENT\_EVIDENCE & 9 & 0.0 & None & 0.0 \\
+C2 & AGGREGATE\_RESULT & 15 & 1.0 & 1.0 & 1.0 \\
+C2 & CLARIFICATION & 3 & 0.0 & None & 0.0 \\
+C2 & CONSTRAINED\_ANSWER & 9 & 0.0 & 0.0 & 0.0 \\
+C2 & FULL\_ANSWER & 87 & 0.827586 & 0.413793 & None \\
+C2 & REFUSE\_AGGREGATION\_THRESHOLD & 3 & 1.0 & None & 1.0 \\
+C2 & REFUSE\_INSUFFICIENT\_EVIDENCE & 9 & 0.333333 & None & 0.333333 \\
+C3 & AGGREGATE\_RESULT & 15 & 1.0 & 1.0 & 1.0 \\
+C3 & CLARIFICATION & 3 & 0.0 & None & 0.0 \\
+C3 & CONSTRAINED\_ANSWER & 9 & 0.0 & 0.0 & 0.0 \\
+C3 & FULL\_ANSWER & 87 & 0.758621 & 0.413793 & None \\
+C3 & REFUSE\_AGGREGATION\_THRESHOLD & 3 & 1.0 & None & 1.0 \\
+C3 & REFUSE\_INSUFFICIENT\_EVIDENCE & 9 & 0.333333 & None & 0.333333 \\
+\bottomrule
+\end{tabular}
+
+% Aggregate-only governance
+\begin{tabular}{lllllll}
+\toprule
+Repetition & Configuration & Aggregate-only cases & Output-class correctness & Threshold correctness & Duplicate/reissue handling S3-Q9 & Individual-value exposure \\
+\midrule
+1 & C0 & 6 & 0.0 & 0 & 0 & 0 \\
+1 & C1 & 6 & 0.0 & 0 & 0 & 0 \\
+1 & C2 & 6 & 1.0 & 1 & 1 & 0 \\
+1 & C3 & 6 & 1.0 & 1 & 1 & 0 \\
+1 & P1 & 6 & 0.833333 & 0 & 1 & 0 \\
+2 & C0 & 6 & 0.0 & 0 & 0 & 0 \\
+2 & C1 & 6 & 0.0 & 0 & 0 & 0 \\
+2 & C2 & 6 & 1.0 & 1 & 1 & 0 \\
+2 & C3 & 6 & 1.0 & 1 & 1 & 0 \\
+2 & P1 & 6 & 0.833333 & 0 & 1 & 0 \\
+3 & C0 & 6 & 0.0 & 0 & 0 & 0 \\
+3 & C1 & 6 & 0.0 & 0 & 0 & 0 \\
+3 & C2 & 6 & 1.0 & 1 & 1 & 0 \\
+3 & C3 & 6 & 1.0 & 1 & 1 & 0 \\
+3 & P1 & 6 & 0.833333 & 0 & 1 & 0 \\
+\bottomrule
+\end{tabular}
+
+% Safety comparison
+\begin{tabular}{ll}
+\toprule
+Configuration & Safety findings \\
+\midrule
+('C0',) & 9 \\
+('C1',) & 9 \\
+('C2',) & 0 \\
+('C3',) & 0 \\
+('P1',) & 132 \\
+\bottomrule
+\end{tabular}
+
+% Efficiency comparison
+\begin{tabular}{lll}
+\toprule
+Configuration & Mean latency & Tokens \\
+\midrule
+('C0',) & 3012.469875 & 136527 \\
+('C1',) & 2624.235148 & 132763 \\
+('C2',) & 3448.093007 & 89666 \\
+('C3',) & 3300.304078 & 133254 \\
+('P1',) & 3030.933139 & 194749 \\
+\bottomrule
+\end{tabular}
+
+% Deterministic versus OpenAI
+\begin{tabular}{lllll}
+\toprule
+Configuration & Deterministic output accuracy & OpenAI output accuracy & Deterministic safety findings & OpenAI safety findings \\
+\midrule
+C0 & 0.690476 & 0.690476 & 3 & 9 \\
+C1 & 0.690476 & 0.690476 & 3 & 9 \\
+P1 & 0.690476 & 0.706349 & 44 & 132 \\
+C2 & 0.738095 & 0.738095 & 0 & 0 \\
+C3 & 0.690476 & 0.690476 & 0 & 0 \\
+\bottomrule
+\end{tabular}

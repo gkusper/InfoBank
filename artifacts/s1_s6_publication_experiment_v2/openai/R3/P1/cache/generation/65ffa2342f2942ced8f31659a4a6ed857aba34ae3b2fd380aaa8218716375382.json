@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "4bb60b7ba70131922d960fde4b86b56be854470183352ab1f301d22c649b402a",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 2168,
+    "output_tokens": 51,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"AGGREGATE_RESULT\",\n  \"reason_code\": \"safe_aggregate_conclusion\",\n  \"answer\": \"The total confirmed litres of dairy milk across the three February 2026 orders is 5 litres.\"\n}",
+    "total_tokens": 2219,
+    "usage_source": "provider_reported"
+  }
+}

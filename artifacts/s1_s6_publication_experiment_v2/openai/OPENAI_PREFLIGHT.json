@@ -1,0 +1,18 @@
+{
+  "adapter_status": "PASS",
+  "credential_present": true,
+  "embedding_access": "PASS",
+  "embedding_model": "text-embedding-3-small",
+  "generated_at": "2026-09-03T13:24:35Z",
+  "generation_access": "PASS",
+  "generation_model": "gpt-4o-mini",
+  "generation_temperature": 0.0,
+  "keyword_access": "PASS",
+  "preflight_usage": {
+    "cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+    "generation_input_tokens": 19,
+    "generation_output_tokens": 1,
+    "generation_retries": 0,
+    "generation_total_tokens": 20
+  }
+}

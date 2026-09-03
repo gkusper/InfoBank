@@ -1,0 +1,11 @@
+Configuration,Permission group,Cases,Output accuracy,Balanced accuracy,Macro recall,Permitted-answer accuracy,Controlled-failure correctness,Citation coverage,Support precision,Page correctness,Safety findings,Tokens,Mean latency,Runtime/parser/provider errors
+C0,Aggregate-only,18,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9,21940,333.894444,0
+C0,Owner/Full,108,0.805556,0.25,0.25,0.375,0.0,0.430556,0.5,0.338235,0,114587,3458.899113,0
+C1,Aggregate-only,18,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,9,22036,238.832611,0
+C1,Owner/Full,108,0.805556,0.25,0.25,0.375,0.0,0.416667,0.542373,0.372881,0,110727,3021.802237,0
+C2,Aggregate-only,18,1.0,1.0,1.0,1.0,1.0,0.0,,,0,0,1697.931944,0
+C2,Owner/Full,108,0.694444,0.29023,0.29023,0.375,0.142857,0.430556,0.578947,0.403509,0,89666,3739.786518,0
+C3,Aggregate-only,18,1.0,1.0,1.0,1.0,1.0,0.0,,,0,0,1704.42965,0
+C3,Owner/Full,108,0.638889,0.272988,0.272988,0.375,0.142857,0.416667,0.690476,0.52381,0,133254,3566.283149,0
+P1,Aggregate-only,18,0.833333,0.5,0.5,0.6,0.833333,0.0,0.0,0.0,90,33978,2323.471144,0
+P1,Owner/Full,108,0.685185,0.212644,0.212644,0.375,0.0,0.412037,0.585526,0.427632,42,160771,3148.843471,0

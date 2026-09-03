@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "7aa143709504451426e0023d0fc448c50db34861e9823a982dac2a09288c70b3",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1720,
+    "output_tokens": 38,
+    "retries": 0,
+    "text": "The context provided does not contain information about the charging time for the Orion E4 Long Range car. Therefore, I cannot determine how long it will take to charge the car to 100%.",
+    "total_tokens": 1758,
+    "usage_source": "provider_reported"
+  }
+}

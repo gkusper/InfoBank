@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "b40742f2508697dcea380826484a9f30b7b822253a584d3ed3b3c32c7d11c437",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 886,
+    "output_tokens": 36,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"REFUSE_NO_MATCH\",\"reason_code\":\"no_warranty_info\",\"answer\":\"The retrieved sources do not provide information regarding the manufacturer's warranty.\"}\n```",
+    "total_tokens": 922,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "90cf7fa15af09c1f9a2099da26566168eb1fef106a2116ecdbed2600ddff7fb0",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 978,
+    "output_tokens": 46,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"AGGREGATE_RESULT\",\"reason_code\":\"aggregate_online_spending\",\"answer\":\"You spent a total of 16,050 HUF on CedarCart Online in February 2026.\"}\n```",
+    "total_tokens": 1024,
+    "usage_source": "provider_reported"
+  }
+}

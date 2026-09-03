@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "36f31b730ded12ff270b9352c09e93b7a0ed1b88024d1b185d902f65c07e8df8",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1781,
+    "output_tokens": 61,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"REFUSE_PERMISSION\",\n  \"reason_code\": \"no_direct_pv_charging\",\n  \"answer\": \"You cannot connect your Orion E4 directly to the solar panels. The system requires an inverter to convert the PV DC to AC before it can be used.\"\n}",
+    "total_tokens": 1842,
+    "usage_source": "provider_reported"
+  }
+}

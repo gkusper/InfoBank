@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "42e5befb68f9186b1d8001c4ef87fffabbc9d748378180f77e4463b13ae96b70",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 528,
+    "output_tokens": 15,
+    "retries": 0,
+    "text": "The provided context does not include information about the length of the manufacturer's warranty.",
+    "total_tokens": 543,
+    "usage_source": "provider_reported"
+  }
+}

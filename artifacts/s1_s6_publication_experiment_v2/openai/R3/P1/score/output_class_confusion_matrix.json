@@ -1,0 +1,244 @@
+{
+  "P1_PROMPT_ONLY_GOVERNANCE": [
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 0,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 24,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 0,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 0,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 1,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 2,
+      "expected": "FULL_ANSWER"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 5,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 0,
+      "expected": "AGGREGATE_RESULT"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 3,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 0,
+      "expected": "CONSTRAINED_ANSWER"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 0,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 0,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 0,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 2,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 0,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 0,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 1,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 0,
+      "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 1,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 0,
+      "expected": "REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "actual": "AGGREGATE_RESULT",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "CLARIFICATION",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "CONSTRAINED_ANSWER",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "FULL_ANSWER",
+      "count": 1,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "REFUSE_AGGREGATION_THRESHOLD",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "REFUSE_NO_MATCH",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    },
+    {
+      "actual": "REFUSE_PERMISSION",
+      "count": 0,
+      "expected": "CLARIFICATION"
+    }
+  ]
+}

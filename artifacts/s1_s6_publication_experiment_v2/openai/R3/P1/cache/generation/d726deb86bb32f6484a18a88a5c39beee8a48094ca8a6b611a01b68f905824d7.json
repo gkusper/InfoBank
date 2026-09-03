@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "7e4a38ac1c7ec42cb4b46d421d291aa2d2cea176896ed189aca04468f4812b76",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1170,
+    "output_tokens": 63,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"h17_hmdi_handshake_issue\",\n  \"answer\": \"H17 on your Aurelia Q62 indicates that the HDMI handshake negotiation did not complete. It does not prove a fan fault or establish an external power surge.\"\n}",
+    "total_tokens": 1233,
+    "usage_source": "provider_reported"
+  }
+}

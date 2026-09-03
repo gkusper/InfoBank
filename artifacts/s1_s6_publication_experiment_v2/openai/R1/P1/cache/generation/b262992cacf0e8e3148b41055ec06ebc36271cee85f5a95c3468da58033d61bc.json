@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "dc802699e9c7e49ccb300cdc67358950491f9497b8d35e1b28e4701d94a138a6",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 893,
+    "output_tokens": 55,
+    "retries": 0,
+    "text": "{\"output_class\":\"FULL_ANSWER\",\"reason_code\":\"same_product_code\",\"answer\":\"Yes, the care guide and purchase receipt refer to the same sofa, the LUNARA S3 three-seat fabric sofa, with the product code LUN-S3-2401.\"}",
+    "total_tokens": 948,
+    "usage_source": "provider_reported"
+  }
+}

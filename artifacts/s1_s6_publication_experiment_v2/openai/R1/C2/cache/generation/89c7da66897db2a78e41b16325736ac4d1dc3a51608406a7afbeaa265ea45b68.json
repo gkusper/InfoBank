@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "fcef10d2bd49cedbc3e7df894ff2727d4e689bbd9cb543a2151f2d66463b8576",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 948,
+    "output_tokens": 54,
+    "retries": 0,
+    "text": "No, you cannot connect the Orion E4 directly to the solar panels. The vehicle must receive controlled AC through compliant conversion, protection, and charging equipment, as photovoltaic panels are not a vehicle charger. There is no permitted direct panel-to-vehicle path in this installation.",
+    "total_tokens": 1002,
+    "usage_source": "provider_reported"
+  }
+}

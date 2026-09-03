@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "2f72d46b5c005cce4342c57fbd19ee9b05a19d9652a0ea3667353516e2f327fd",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1316,
+    "output_tokens": 95,
+    "retries": 0,
+    "text": "The Orion E4 can charge at a maximum of 11 kW AC using three-phase 400 V, 16 A per phase through a Type 2 connection. A wallbox advertised at 22 kW does not increase the charging power above 11 kW, as the onboard charger of the E4 accepts no more than the vehicle rating. \n\nThe GridNest W11 can charge up to a configured maximum of 11 kW, subject to site configuration.",
+    "total_tokens": 1411,
+    "usage_source": "provider_reported"
+  }
+}

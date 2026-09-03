@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "8a75c9e86f8dc0e9e9749bd4aeff64bdc877afefe000aeb6f2f3e48486d166c8",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1293,
+    "output_tokens": 89,
+    "retries": 0,
+    "text": "Your home insurance may cover damage caused by an external power surge, but this depends on your specific policy. You will need to check the terms of your insurance for coverage details and the deductible amount. \n\nFor evidence, you should provide:\n- A dated receipt as proof of purchase.\n- A service report that distinguishes the observed symptom from the probable technical cause.\n- Keep any replaced parts and findings related to the cause of the damage for the claim.",
+    "total_tokens": 1382,
+    "usage_source": "provider_reported"
+  }
+}

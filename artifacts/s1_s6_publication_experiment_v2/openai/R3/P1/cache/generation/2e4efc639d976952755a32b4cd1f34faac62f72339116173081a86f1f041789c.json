@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "4d96028b88aa5e8ea29287c86e1927dfcec3e310e508ad6c59f9a57048125a02",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1806,
+    "output_tokens": 162,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"warranty_and_service_periods_explained\",\n  \"answer\": \"The Velora V55 has two distinct periods: a 24-month manufacturer warranty and an 18-month regional service period. The manufacturer warranty lasts for 24 months from the original retail purchase date, covering defects in materials or workmanship. This warranty begins on the date printed on the valid sales receipt or invoice. On the other hand, the regional service period is 18 months from the same purchase date, applicable for products handled under the Central Region service program. This service period is intended for support and service arrangements through participating regional retailers. Both periods run concurrently from the same starting date, but they serve different purposes and do not replace one another.\"\n}",
+    "total_tokens": 1968,
+    "usage_source": "provider_reported"
+  }
+}

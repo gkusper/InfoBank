@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "fd7a7296d4406512c42150ed075e7b7e8e882a6d3720a6f16c7c5c19cd6a49c2",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1965,
+    "output_tokens": 81,
+    "retries": 0,
+    "text": "The error code E06 on the Velora V55 indicates an HDMI handshake or connection failure. The first action you should take is to power-cycle both the television and the HDMI source device by turning them off and unplugging them from mains power for 60 seconds. After that, reconnect the HDMI cable firmly, restore power to the source device, and then start the television, selecting the correct HDMI input.",
+    "total_tokens": 2046,
+    "usage_source": "provider_reported"
+  }
+}

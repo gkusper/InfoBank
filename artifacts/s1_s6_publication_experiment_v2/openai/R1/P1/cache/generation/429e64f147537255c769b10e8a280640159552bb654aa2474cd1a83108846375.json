@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "e6e84cda2496306921f90c0f5bfc36616b23b5880c77bcc8916b87908280a59c",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1145,
+    "output_tokens": 49,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"television_details_provided\",\n  \"answer\": \"You own the Aurelia Q62 television, which you purchased on 04 October 2025.\"\n}",
+    "total_tokens": 1194,
+    "usage_source": "provider_reported"
+  }
+}

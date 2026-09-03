@@ -1,0 +1,14 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "041b9721db48a81c606786c39c99cc98ed31584b6197a8f9950a60397b422dcc",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "2026",
+    "aurelia",
+    "home"
+  ]
+}

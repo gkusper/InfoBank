@@ -1,0 +1,217 @@
+{
+  "HEAD": "f144cc381fc82f6c012d693c03b3f5f51990cdfb",
+  "REAL_PROVIDER_PREREGISTRATION_LOCKED": "YES",
+  "branch": "experiment/infocom2026-s1-s6-results-v2",
+  "canonical_case_order": [
+    "S1-Q1",
+    "S1-Q2",
+    "S1-Q3",
+    "S1-Q4",
+    "S1-Q5",
+    "S1-Q6",
+    "S2-Q1",
+    "S2-Q2",
+    "S2-Q3",
+    "S2-Q4",
+    "S2-Q5",
+    "S2-Q6",
+    "S3-Q1",
+    "S3-Q2",
+    "S3-Q3",
+    "S3-Q4",
+    "S3-Q5",
+    "S3-Q6",
+    "S3-Q7",
+    "S3-Q8",
+    "S3-Q9",
+    "S3-Q10",
+    "S4B-Q1",
+    "S4B-Q2",
+    "S4B-Q3",
+    "S4B-Q4",
+    "S4B-Q5",
+    "S4B-Q6",
+    "S4B-Q7",
+    "S4B-Q8",
+    "S5B-Q1",
+    "S5B-Q2",
+    "S5B-Q3",
+    "S5B-Q4",
+    "S5B-Q5",
+    "S5B-Q6",
+    "S6-Q1",
+    "S6-Q2",
+    "S6-Q3",
+    "S6-Q4",
+    "S6-Q5",
+    "S6-Q6"
+  ],
+  "case_count": 42,
+  "combined_overlay_hashes": {
+    "combined_manifest": "49916e4cd707eb9e79c3583abfcb062ce1d0962d847a65385feed62962185d53",
+    "corpus_hash": "22ebf2e2a27f009041b3f4979a1d36f94b212edaf259b5c14663386da52b894b",
+    "policy_fixture_hash": "dffd7f841b8f4e7a7720b211d4522f421d5e90d312e69cdd1c55671e1bebeaf8",
+    "query_hash": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd",
+    "reference_annotation_hash": "d7526442bc36fd174b8f5b1fb3981cce37504b297052f67069f18e395021abed",
+    "source_map_hash": "005806a877cd017854df0dd6e05b06eacc3f51af329a78aed2c4199e15741aa4"
+  },
+  "configuration_semantics": [
+    {
+      "Aggregate handling": "not governed as aggregate-only; baseline answer generation",
+      "Citation handling": "answer citation selector after generation; refusals withhold citations",
+      "Configuration": "C0_VECTOR_ONLY",
+      "Controlled-failure logic": "disabled; baseline generation except exact runtime errors",
+      "Evidence roles": "not enforced",
+      "Permission filtering": "disabled; active documents treated as usable",
+      "Retrieval": "active documents ranked by vector/page-aware retrieval",
+      "Routing": "disabled"
+    },
+    {
+      "Aggregate handling": "not governed as aggregate-only; baseline answer generation",
+      "Citation handling": "answer citation selector after generation; refusals withhold citations",
+      "Configuration": "C1_VECTOR_ROUTING",
+      "Controlled-failure logic": "disabled; baseline generation except exact runtime errors",
+      "Evidence roles": "not enforced",
+      "Permission filtering": "disabled; routed candidates treated as usable",
+      "Retrieval": "keyword-routed candidate documents ranked by vector/page-aware retrieval",
+      "Routing": "enabled except aggregate-only governance path"
+    },
+    {
+      "Aggregate handling": "no governed aggregate executor, threshold gate, or contributor deduplication",
+      "Citation handling": "answer citation selector after generation; refusals withhold citations",
+      "Configuration": "P1_PROMPT_ONLY_GOVERNANCE",
+      "Controlled-failure logic": "disabled; output class is selected by the provider response",
+      "Evidence roles": "policy labels and descriptions are visible to the generator but not enforced",
+      "Permission filtering": "disabled; policy labels are provided only in the prompt",
+      "Retrieval": "keyword-routed candidate documents ranked by vector/page-aware retrieval",
+      "Routing": "enabled except aggregate-only prompt availability path"
+    },
+    {
+      "Aggregate handling": "aggregate executor used when aggregate evidence is available",
+      "Citation handling": "citations withheld for refusals and aggregate outputs; selected for answers",
+      "Configuration": "C2_PERMISSION_FILTERED",
+      "Controlled-failure logic": "post-retrieval permission, no-match, insufficient-evidence, and aggregate-threshold gates",
+      "Evidence roles": "aggregate/content/metadata/deny roles used for governance",
+      "Permission filtering": "enabled through policy fixture use decisions",
+      "Retrieval": "permitted documents ranked by vector/page-aware retrieval",
+      "Routing": "disabled"
+    },
+    {
+      "Aggregate handling": "aggregate executor plus threshold and contributor-deduplication governance",
+      "Citation handling": "citations withheld for refusals and aggregate outputs; selected with role-aware support for answers",
+      "Configuration": "C3_FULL_ROLE_AWARE",
+      "Controlled-failure logic": "pre-generation and post-retrieval controlled-failure and clarification gates",
+      "Evidence roles": "query-sensitive primary/contextual/aggregate/governance roles",
+      "Permission filtering": "enabled through policy fixture use decisions",
+      "Retrieval": "routed permitted documents ranked by vector/page-aware retrieval",
+      "Routing": "enabled for non-aggregate-only requests"
+    }
+  ],
+  "created_at": "2026-09-03T13:22:55Z",
+  "frozen_packages": [
+    {
+      "path": "artifacts/s1s2_freeze/S1_S2_journal_benchmark_v2.zip",
+      "sha256": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1"
+    },
+    {
+      "path": "artifacts/s3_s6_freeze/S3_S6_journal_evaluation_v1.zip",
+      "sha256": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c"
+    }
+  ],
+  "generation_parameters": {
+    "temperature": 0.0
+  },
+  "isolation_plan": "Fresh MariaDB evaluation database, Chroma directory, source-storage directory, raw-output directory, and score-output directory for every repetition/configuration group.",
+  "known_evaluation_limitations": [
+    "42 controlled synthetic cases are not production-scale generalization.",
+    "The three repetitions assess provider stability over the same cases, not independent case expansion.",
+    "S1-S2 historical citation-completeness limitations remain inherited and visible.",
+    "Provider-call totals beyond generation calls are not fully recorded per case by the current evaluator."
+  ],
+  "models": {
+    "embedding_model": "text-embedding-3-small",
+    "generation_model": "gpt-4o-mini",
+    "keyword_model": "gpt-4o-mini"
+  },
+  "no_result_dependent_rerun_rule": true,
+  "no_tuning_rule": true,
+  "planned_measured_record_count": 630,
+  "prompt_only_governance": {
+    "configuration": "P1_PROMPT_ONLY_GOVERNANCE",
+    "controlled_failure_gate": false,
+    "deterministic_threshold_or_deduplication": false,
+    "gold_blind": true,
+    "governed_aggregate_executor": false,
+    "hard_permission_filtering": false,
+    "post_generation_correction": false,
+    "prompt_path": "artifacts/s1_s6_publication_experiment_v2/protocol/prompt_only_governance_prompt.txt",
+    "prompt_sha256": "982f197df7e1508cb978529f582cf405469abdc25fce84a6534d901a1b80bb4e",
+    "prompt_version": "prompt-only-governance-v1"
+  },
+  "repetitions": 3,
+  "repository": "https://github.com/gkusper/InfoBank",
+  "retrieval_and_governance_parameters": {
+    "config_hash": "473419d9e87afad07a0ea33d52894635d31d7506f62b8fa0a82d2dde04b582ad",
+    "conflict_policy": "query_sensitive",
+    "embedding_model": "text-embedding-3-small",
+    "generation_model": "gpt-4o-mini",
+    "generation_prompt_version": "actual-pipeline-answer-v1",
+    "generation_temperature": 0.0,
+    "minimum_primary_sources": 1,
+    "minimum_source_diversity": 1,
+    "minimum_support_score": 0.45,
+    "prompt_only_governance_prompt_sha256": "982f197df7e1508cb978529f582cf405469abdc25fce84a6534d901a1b80bb4e",
+    "prompt_only_governance_prompt_version": "prompt-only-governance-v1",
+    "routing_mode": "KEYWORD_ROUTING",
+    "routing_prompt_version": "routing-keyword-v1",
+    "top_k": 6
+  },
+  "retry_policy": {
+    "allowed_reasons": [
+      "connection_or_transport",
+      "timeout",
+      "HTTP_429",
+      "retryable_HTTP_5xx_or_SDK_error"
+    ],
+    "committed_adapter_behavior": "OpenAI generate_with_usage attempts up to 3 calls and records retries for generation calls; keyword and embedding calls use committed adapter behavior.",
+    "forbidden_reasons": [
+      "incorrect_answer",
+      "unexpected_output_class",
+      "incomplete_citation",
+      "safety_finding",
+      "poor_metric",
+      "malformed_but_parseable_scientific_result",
+      "reference_disagreement"
+    ]
+  },
+  "run_order": {
+    "repetition_1": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ],
+    "repetition_2": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ],
+    "repetition_3": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ]
+  },
+  "runner_hash": "cdf6d2e6461f911207d5ee28a93bb43c3068642f6a8f2bdd8038d98181cc1901",
+  "runner_identity": "infobank-actual-pipeline-runner-v2",
+  "schema_version": "infobank-real-provider-preregistration-v2",
+  "scorer_hash": "b094235f3ce90e12000b9b7c2ba75c33f4bf4e2ad91f5ab15523b2bc8576559b",
+  "scorer_identity": "infobank-actual-pipeline-scorer-v2",
+  "source_code_hash": "6342a4d81f706d07f1f68b1af4748b7b551829cee5b5368744ef6985cb84a8da",
+  "test_code_hash": "d319b5694ec51129bf3ce83f350958378dc4bf14a555bf6b3723a128324a3be2"
+}

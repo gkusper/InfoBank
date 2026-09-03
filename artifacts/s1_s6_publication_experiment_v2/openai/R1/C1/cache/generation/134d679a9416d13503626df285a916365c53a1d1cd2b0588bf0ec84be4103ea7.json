@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "1e9a04f046a284471418754c564e02e3dff17c82cfeedabb60c916dacb81cc41",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 727,
+    "output_tokens": 32,
+    "retries": 0,
+    "text": "You own the Aurelia Q62 television, which you purchased on 04 October 2025. The price you paid is not mentioned in the provided context.",
+    "total_tokens": 759,
+    "usage_source": "provider_reported"
+  }
+}

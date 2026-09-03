@@ -1,0 +1,15 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "eda9285a9d5b3f71fba6e5ff2447ffd339e34e136029bde42693e0c871ffead9",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "24-month",
+    "2026",
+    "aurelia",
+    "manufacturer"
+  ]
+}

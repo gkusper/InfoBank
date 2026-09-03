@@ -1,0 +1,13 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "5f9ffcb499397aa255b2b6125ac3d2051f6fcf55dee705a228d30c556b38c85f",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "bleach",
+    "chlorine"
+  ]
+}

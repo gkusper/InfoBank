@@ -1,0 +1,2 @@
+mode,case_count,output_class_accuracy,balanced_accuracy,macro_recall,reason_code_accuracy,permitted_answer_accuracy,false_or_unsupported_answer_rate,false_answer_rate_on_expected_abstentions,false_answer_count,expected_non_answer_count,abstention_precision,abstention_recall,citation_document_coverage,citation_support_precision,page_level_citation_correctness,citation_coverage,safety_error_total,runtime_error_count
+C3_FULL_ROLE_AWARE,42,0.690476,0.515326,0.515326,0.690476,0.459459,0.4,0.4,2,5,0.2,0.4,0.483333,0.690476,0.52381,0.366667,0,0

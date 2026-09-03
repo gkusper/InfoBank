@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "40b775da9ae7273739e1d797ce387a7208ecec9b698660c2d9c6d1e2e422c17e",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 2097,
+    "output_tokens": 187,
+    "retries": 0,
+    "text": "To charge the Orion E4 from 20% to 80%, a total of 60% change in state of charge (SoC) is required. The usable capacity of the Orion E4 is 64 kWh, so the energy needed for this charge is calculated as follows:\n\nRequired battery energy = Usable capacity \u00d7 Change in SoC = 64 kWh \u00d7 0.60 = 38.4 kWh.\n\nConsidering a wall-to-battery efficiency of 90%, the grid energy required is:\n\nGrid energy = Required battery energy / Efficiency = 38.4 kWh / 0.90 = 42.67 kWh.\n\nAt a sustained charging power of 11 kW, the time to charge is:\n\nTime = Grid energy / Charging power = 42.67 kWh / 11 kW = 3.88 hours, which is approximately 3 hours and 53 minutes.",
+    "total_tokens": 2284,
+    "usage_source": "provider_reported"
+  }
+}

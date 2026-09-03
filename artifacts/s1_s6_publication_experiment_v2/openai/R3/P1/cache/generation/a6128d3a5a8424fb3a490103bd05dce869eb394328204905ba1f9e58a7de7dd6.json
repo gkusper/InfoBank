@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "df034634910499b5407db0ca400eaf2d42f8aec4b5b49a41663538764395e2c0",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1842,
+    "output_tokens": 43,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"REFUSE_NO_MATCH\",\"reason_code\":\"no_orders_found\",\"answer\":\"There are not enough confirmed orders containing dairy milk to calculate the average number of days between consecutive orders.\"}\n```",
+    "total_tokens": 1885,
+    "usage_source": "provider_reported"
+  }
+}

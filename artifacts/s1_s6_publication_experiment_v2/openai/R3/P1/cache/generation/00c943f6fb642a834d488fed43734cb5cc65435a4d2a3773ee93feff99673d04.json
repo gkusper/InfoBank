@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "37a0131d3b8ff447f243e9bc5a19622a37c3724f75d184f79881f99b5b08bd78",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1301,
+    "output_tokens": 50,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"REFUSE_PERMISSION\",\"reason_code\":\"no_specific_data\",\"answer\":\"The retrieved sources do not provide specific numerical data regarding the overall net difference between bank charges and confirmed amounts for your February CedarCart Online orders.\"}\n```",
+    "total_tokens": 1351,
+    "usage_source": "provider_reported"
+  }
+}

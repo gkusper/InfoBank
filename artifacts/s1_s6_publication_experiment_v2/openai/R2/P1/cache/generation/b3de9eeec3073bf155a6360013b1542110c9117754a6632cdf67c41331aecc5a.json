@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "ed0d86a854554ecc8c5ff4d95036278817f80406cebbf03836ed8fdd4a8009ed",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1290,
+    "output_tokens": 100,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"order_matching_caution\",\n  \"answer\": \"The bank charge that most likely matches order CCA-260311-Q27 would appear as CEDARCART ONLINE. However, while a matching date and amount can support a likely match, they do not definitively prove that a bank transaction belongs to this order. For certainty, it is recommended to contact CedarCart with the order number and the posted transaction.\"\n}",
+    "total_tokens": 1390,
+    "usage_source": "provider_reported"
+  }
+}

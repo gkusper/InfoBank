@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "5bd388853ad601206183090d8157e6a6723789f26b86bc666e82123cc89bc973",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1856,
+    "output_tokens": 84,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"FULL_ANSWER\",\"reason_code\":\"orion_e4_max_11kw\",\"answer\":\"The Orion E4 can charge at a maximum of 11 kW AC, even if a wallbox is rated for 22 kW. Therefore, it cannot charge at 22 kW. The GridNest W11 also has a maximum charging capability of 11 kW.\"}\n```",
+    "total_tokens": 1940,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "f1c33cd0ff9d97d369e30871ef96231487f414811d1886470d3d421511d6fcc6",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1288,
+    "output_tokens": 69,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"CLARIFICATION\",\"reason_code\":\"order_amount_estimate\",\"answer\":\"The confirmed amount for order CCA-260203-M18 is an estimate at checkout and may change due to factors like replacement items or unavailable products. Therefore, a direct match with the bank charge cannot be guaranteed without further details.\"}\n```",
+    "total_tokens": 1357,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "f4642b3bab327a3e494189e7d3ebec81765adbdf551199951b6f6dca435b208f",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1755,
+    "output_tokens": 72,
+    "retries": 0,
+    "text": "```json\n{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"charge_time_calculation\",\n  \"answer\": \"To charge the Orion E4 from 20% to 80% using the GridNest W11 at full power (11 kW), it would take approximately 3 hours and 53 minutes.\"\n}\n```",
+    "total_tokens": 1827,
+    "usage_source": "provider_reported"
+  }
+}

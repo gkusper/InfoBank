@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "599cf86eeb7d996d0f5654f7e31d01eb107b9e1f55fd9fb94bf023954bbe1195",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 977,
+    "output_tokens": 88,
+    "retries": 0,
+    "text": "In February 2026, you spent the following amounts on CedarCart Online, excluding physical-store purchases:\n\n1. Order placed on 03 February 2026: 7,240 HUF\n2. Order placed on 17 February 2026: 8,760 HUF\n\nTotal spent in February 2026: 7,240 HUF + 8,760 HUF = 16,000 HUF.",
+    "total_tokens": 1065,
+    "usage_source": "provider_reported"
+  }
+}

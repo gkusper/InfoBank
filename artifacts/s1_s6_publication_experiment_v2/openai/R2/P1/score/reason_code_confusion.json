@@ -1,0 +1,199 @@
+{
+  "P1_PROMPT_ONLY_GOVERNANCE": [
+    {
+      "actual": "aggregate_difference",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_milk_quantity",
+      "count": 2,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "average_days_between_orders",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "total_milk_quantity",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_online_spending",
+      "count": 1,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "charge_time_estimate",
+      "count": 1,
+      "expected": "clarification"
+    },
+    {
+      "actual": "insurance_coverage_possible",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "order_matching_caution",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "warranty_recommendation",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "bank_charge_difference",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "no_match",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "order_customer_identified",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "charge_time_calculation",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "charging_power_limits",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "chlorine_bleach_prohibited",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "clarification",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "cleaning_instructions_provided",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "confirmed_milk_quantity",
+      "count": 3,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_available",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_content",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "e06_hdmi_error",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "full_answer_available",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "h17_hdmi_handshake_issue",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "h17_hmdi_handshake_issue",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "hdmi_handshake_failure",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "max_ac_power_and_connector",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "no_direct_pv_charging",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "no_match",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "order_found_in_statement",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "orion_e4_max_11kw",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "permission_refusal",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "purchase_date_found",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "same_order_reissue",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "same_product_code",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "successful_retrieval",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "total_spent",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "warranty_and_service_periods_explained",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "warranty_period_check",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "warranty_period_validity",
+      "count": 1,
+      "expected": "supported"
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "af_always_full_baseline": "artifacts/s1_s6_publication_experiment_v2/baselines/AF_ALWAYS_FULL_summary.json",
+  "combined_evaluation_id": "S1_S6_COMBINED_JOURNAL_EVALUATION_V2",
+  "combined_input_validation": "artifacts/s1_s6_publication_experiment_v2/combined_input/COMBINED_INPUT_VALIDATION.json",
+  "deterministic_manifest": "artifacts/s1_s6_publication_experiment_v2/deterministic/run_manifest.json",
+  "final_status": "READY_FOR_MANUSCRIPT_RESULTS_UPDATE",
+  "frozen_input_verification": "artifacts/s1_s6_publication_experiment_v2/protocol/FROZEN_INPUT_VERIFICATION.json",
+  "generated_at": "2026-09-03T14:09:33Z",
+  "git": {
+    "ahead_behind": "3\t0",
+    "branch": "experiment/infocom2026-s1-s6-results-v2",
+    "branch_vv": [
+      "* experiment/infocom2026-s1-s6-results-v2 f144cc3 [origin/experiment/infocom2026-s1-s6-results-v2] Add deterministic S1-S6 v2 validation artifacts",
+      "  feature/permission-extensions-v1        50b2fff [origin/feature/permission-extensions-v1] Add permission governance extensions",
+      "+ infocom2026                             50b2fff ([REDACTED_LOCAL_PATH]) [origin/infocom2026] Add permission governance extensions",
+      "  main                                    8eb5c3d [origin/main] Merge feature/scenario-workflows into main",
+      "+ s1s6-rerun-v2-ea6d3a2-local             ea6d3a2 ([REDACTED_LOCAL_PATH]) Finalize S3-S6 evaluation integration and frozen package"
+    ],
+    "git_diff_check_returncode": 0,
+    "git_diff_check_stderr": [
+      "warning: in the working copy of 'artifacts/s1_s6_publication_experiment/scripts/run_s1_s6_publication_experiment.py', LF will be replaced by CRLF the next time Git touches it"
+    ],
+    "git_diff_check_stdout": [],
+    "head": "f144cc381fc82f6c012d693c03b3f5f51990cdfb",
+    "origin_infocom2026": "50b2fff6a25c1132c8ddd0fed97ef55425909826",
+    "source_test_changed_paths": [],
+    "status_short": [
+      " M artifacts/s1_s6_publication_experiment/scripts/run_s1_s6_publication_experiment.py",
+      " M artifacts/s1_s6_publication_experiment_v2/QUALITY_CHECKS_V2.json",
+      "?? artifacts/s1_s6_publication_experiment_v2/FINAL_VALIDATION_V2.json",
+      "?? artifacts/s1_s6_publication_experiment_v2/STOP_STATUS_V2.json",
+      "?? artifacts/s1_s6_publication_experiment_v2/openai/",
+      "?? artifacts/s1_s6_publication_experiment_v2/report/"
+    ],
+    "status_stderr": [],
+    "tracked_source_test_clean": true
+  },
+  "openai_manifest": "artifacts/s1_s6_publication_experiment_v2/openai/run_manifest.json",
+  "reports": [
+    "artifacts/s1_s6_publication_experiment_v2/report/S1_S6_630_PROMPT_BASELINE_RESULTS_V2_REPORT.md",
+    "artifacts/s1_s6_publication_experiment_v2/report/S1_S6_PUBLICATION_RESULTS_SUMMARY.md",
+    "artifacts/s1_s6_publication_experiment_v2/report/publication_numbers.json",
+    "artifacts/s1_s6_publication_experiment_v2/report/publication_tables.tex",
+    "artifacts/s1_s6_publication_experiment_v2/report/case_failure_inventory.csv"
+  ]
+}

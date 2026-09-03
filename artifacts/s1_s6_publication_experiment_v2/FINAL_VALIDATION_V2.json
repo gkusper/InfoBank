@@ -1,0 +1,39 @@
+{
+  "COMMIT_CREATED": "NO",
+  "MANUSCRIPT_CHANGED": "NO",
+  "MODEL_CHANGED_DURING_RUN": "NO",
+  "POLICY_FIXTURES_CHANGED": "NO",
+  "PROMPTS_CHANGED": "NO",
+  "PUSH_PERFORMED": "NO",
+  "QUESTIONS_CHANGED": "NO",
+  "REFERENCE_ANNOTATIONS_CHANGED": "NO",
+  "RESULT_DEPENDENT_RERUNS": 0,
+  "S1_S2_PACKAGE_CHANGED": "NO",
+  "S1_S6_TUNING_PERFORMED": "NO",
+  "S3_S6_PACKAGE_CHANGED": "NO",
+  "SCORER_CHANGED": "NO",
+  "SOURCE_CODE_CHANGED": "NO",
+  "TEST_CODE_CHANGED": "NO",
+  "final_status": "READY_FOR_MANUSCRIPT_RESULTS_UPDATE",
+  "git_diff_check_returncode": 0,
+  "missing_required_artifacts": [],
+  "record_checks": {
+    "af_accuracy": 0.690476,
+    "af_always_full_status": "PASS",
+    "af_balanced_accuracy": 0.166667,
+    "deterministic_record_count_ok": true,
+    "openai_case_count_per_group_ok": true,
+    "openai_group_count_ok": true,
+    "openai_record_count_ok": true,
+    "openai_runtime_parser_provider_errors": 0,
+    "openai_unique_key_count_ok": true,
+    "prompt_hash_matches_manifest": true,
+    "protocol_locked": "YES",
+    "quality_status": "PASS"
+  },
+  "secret_scan": {
+    "findings": [],
+    "status": "PASS"
+  },
+  "status": "PASS"
+}

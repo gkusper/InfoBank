@@ -283,6 +283,14 @@ def git_out(args: list[str]) -> str:
     return git(args).stdout.strip()
 
 
+def sanitize_local_paths(value: str) -> str:
+    return re.sub(
+        r"[A-Za-z]:[\\/](?:Users|Temp|Windows|Program Files|ProgramData)[^)\]\r\n]*",
+        "[REDACTED_LOCAL_PATH]",
+        value,
+    )
+
+
 def git_state() -> dict[str, Any]:
     git(["fetch", "origin"])
     branch = git_out(["rev-parse", "--abbrev-ref", "HEAD"])
@@ -303,7 +311,7 @@ def git_state() -> dict[str, Any]:
         "ahead_behind": ahead_behind,
         "status_short": status.stdout.splitlines(),
         "status_stderr": status.stderr.splitlines(),
-        "branch_vv": branch_vv.splitlines(),
+        "branch_vv": sanitize_local_paths(branch_vv).splitlines(),
         "git_diff_check_returncode": diff_check.returncode,
         "git_diff_check_stdout": diff_check.stdout.splitlines(),
         "git_diff_check_stderr": diff_check.stderr.splitlines(),

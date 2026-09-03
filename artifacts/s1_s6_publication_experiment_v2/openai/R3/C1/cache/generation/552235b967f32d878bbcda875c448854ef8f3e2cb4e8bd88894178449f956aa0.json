@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "e83aa472f88e44506da556a64518fe2cd91bb40f3f285441048caaae03c5f700",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 700,
+    "output_tokens": 119,
+    "retries": 0,
+    "text": "Based on the provided context, here are the supported factual sentences:\n\n1. Damage caused by an externally originating power surge is excluded from the manufacturer warranty.\n2. Aurelia may require diagnosis to identify the probable cause of the failure.\n3. A service report should distinguish the observed symptom from the probable technical cause.\n4. Keep replaced parts and cause findings where a warranty or insurance claim may follow.\n5. Proof of purchase is required for warranty claims, specifically a dated receipt. \n\nThe context does not provide information about home insurance coverage, deductible amounts, or specific evidence required for an insurance claim.",
+    "total_tokens": 819,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "291f771000b4db34bde9d8ccb5746594b214855132e18d69002541035b7462f6",
+    "model": "gpt-4o-mini",
+    "prompt_version": "routing-keyword-v1",
+    "provider": "openai"
+  },
+  "value": [
+    "aurelia",
+    "h17"
+  ]
+}

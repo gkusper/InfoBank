@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "b6eaa47ec1a46cfc82a1d3005045ab6f47c5d9340105ab5e0d0bcb2c6a941763",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1852,
+    "output_tokens": 54,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"FULL_ANSWER\",\"reason_code\":\"e06_hdmi_error\",\"answer\":\"Error E06 on the Velora V55 indicates an HDMI error, not a temperature-sensor fault as described in the Aster M55 manual.\"}\n```",
+    "total_tokens": 1906,
+    "usage_source": "provider_reported"
+  }
+}

@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "2db0f9cbdba7d6a69b0e9b06abdc3d8fa09471ac737322238f47521e7d6545b1",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1108,
+    "output_tokens": 114,
+    "retries": 0,
+    "text": "Yes, the HelioSync I10 can charge the Orion E4 through the GridNest W11. The charging power is limited by several factors, including the configured wallbox current setpoint, the vehicle's maximum AC input of 11 kW, and the site's circuit or load-management settings. The GridNest W11 can request up to its configured 11 kW while the grid supplies any shortfall after available photovoltaic (PV) contribution. Additionally, if grid import is disabled, the controller may reduce or pause charging to maintain net import near the configured threshold.",
+    "total_tokens": 1222,
+    "usage_source": "provider_reported"
+  }
+}

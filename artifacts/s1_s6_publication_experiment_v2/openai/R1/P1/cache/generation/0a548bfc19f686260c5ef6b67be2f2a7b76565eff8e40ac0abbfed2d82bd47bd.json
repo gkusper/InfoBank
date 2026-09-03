@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "8e795b23e28771754be145044e748d31e57f7fd2def9b41eb35651c7c1a1c813",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1310,
+    "output_tokens": 36,
+    "retries": 0,
+    "text": "```json\n{\"output_class\":\"FULL_ANSWER\",\"reason_code\":\"order_found\",\"answer\":\"Order CCA-260320-R53 appears on your March bank statement.\"}\n```",
+    "total_tokens": 1346,
+    "usage_source": "provider_reported"
+  }
+}

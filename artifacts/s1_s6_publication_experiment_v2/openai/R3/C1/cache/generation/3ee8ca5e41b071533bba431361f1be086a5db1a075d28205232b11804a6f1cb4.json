@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "586126633f497bbf056ae6114196cdad439c1a3ab1d056d9ac95752463d2dabf",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1239,
+    "output_tokens": 47,
+    "retries": 0,
+    "text": "You cannot connect the Orion E4 directly to the solar panels. The system requires inverter conversion, the AC distribution and protective devices, and the wallbox control function. There is no permitted direct panel-to-vehicle path in this installation.",
+    "total_tokens": 1286,
+    "usage_source": "provider_reported"
+  }
+}

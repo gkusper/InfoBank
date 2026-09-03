@@ -1,20 +1,29 @@
 {
-  "ahead_behind": "2\t0",
+  "ahead_behind": "3\t0",
   "branch": "experiment/infocom2026-s1-s6-results-v2",
   "branch_vv": [
-    "* experiment/infocom2026-s1-s6-results-v2 f673cb1 [origin/infocom2026: ahead 2] Freeze S1-S6 v2 execution protocol",
+    "* experiment/infocom2026-s1-s6-results-v2 f144cc3 [origin/experiment/infocom2026-s1-s6-results-v2] Add deterministic S1-S6 v2 validation artifacts",
     "  feature/permission-extensions-v1        50b2fff [origin/feature/permission-extensions-v1] Add permission governance extensions",
-    "+ infocom2026                             50b2fff (C:/Users/EKKE/Documents/Codex/2026-09-01/files-pasted-by-the-user-you/work/InfoBank-infocom2026-openssl) [origin/infocom2026] Add permission governance extensions",
+    "+ infocom2026                             50b2fff ([REDACTED_LOCAL_PATH]) [origin/infocom2026] Add permission governance extensions",
     "  main                                    8eb5c3d [origin/main] Merge feature/scenario-workflows into main",
-    "+ s1s6-rerun-v2-ea6d3a2-local             ea6d3a2 (C:/Users/EKKE/Documents/Codex/2026-09-01/files-pasted-by-the-user-you/work/InfoBank-s1s6-rerun-v2-ea6d3a2) Finalize S3-S6 evaluation integration and frozen package"
+    "+ s1s6-rerun-v2-ea6d3a2-local             ea6d3a2 ([REDACTED_LOCAL_PATH]) Finalize S3-S6 evaluation integration and frozen package"
   ],
   "git_diff_check_returncode": 0,
-  "git_diff_check_stderr": [],
+  "git_diff_check_stderr": [
+    "warning: in the working copy of 'artifacts/s1_s6_publication_experiment/scripts/run_s1_s6_publication_experiment.py', LF will be replaced by CRLF the next time Git touches it"
+  ],
   "git_diff_check_stdout": [],
-  "head": "f673cb1fe29a40abb4a5f0daf49f3c3ffa786519",
+  "head": "f144cc381fc82f6c012d693c03b3f5f51990cdfb",
   "origin_infocom2026": "50b2fff6a25c1132c8ddd0fed97ef55425909826",
   "source_test_changed_paths": [],
-  "status_short": [],
+  "status_short": [
+    " M artifacts/s1_s6_publication_experiment/scripts/run_s1_s6_publication_experiment.py",
+    " M artifacts/s1_s6_publication_experiment_v2/QUALITY_CHECKS_V2.json",
+    "?? artifacts/s1_s6_publication_experiment_v2/FINAL_VALIDATION_V2.json",
+    "?? artifacts/s1_s6_publication_experiment_v2/STOP_STATUS_V2.json",
+    "?? artifacts/s1_s6_publication_experiment_v2/openai/",
+    "?? artifacts/s1_s6_publication_experiment_v2/report/"
+  ],
   "status_stderr": [],
   "tracked_source_test_clean": true
 }

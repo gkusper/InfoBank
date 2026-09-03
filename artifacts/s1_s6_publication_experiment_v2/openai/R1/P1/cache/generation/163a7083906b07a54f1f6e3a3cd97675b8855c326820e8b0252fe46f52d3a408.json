@@ -1,0 +1,18 @@
+{
+  "cache_identity": {
+    "config_hash": "793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3",
+    "input_hash": "bfbf6eecbda2e39f898b92ec2977242d08241a5903f944ae27a19a2f37fcf3ab",
+    "model": "gpt-4o-mini",
+    "prompt_version": "actual-pipeline-answer-v1",
+    "provider": "openai"
+  },
+  "value": {
+    "cost": null,
+    "input_tokens": 1830,
+    "output_tokens": 75,
+    "retries": 0,
+    "text": "{\n  \"output_class\": \"FULL_ANSWER\",\n  \"reason_code\": \"warranty_period_check\",\n  \"answer\": \"Your Velora V55 is covered by the manufacturer warranty until 12 March 2027. Since the purchase date is 12 March 2025, it falls within the 24-month warranty period, which ends on that date.\"\n}",
+    "total_tokens": 1905,
+    "usage_source": "provider_reported"
+  }
+}

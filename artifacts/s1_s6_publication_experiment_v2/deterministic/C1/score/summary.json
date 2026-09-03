@@ -1,0 +1,315 @@
+{
+  "candidate_holdout_accessed": false,
+  "dataset_version": "s1-s6-combined-journal-evaluation-v2",
+  "deterministic_content_sha256": "198d82f6b21a1564650646ab03127066329c3b19781aeee15e3c2f7cbcbe57dd",
+  "human_validation_state": "APPROVED",
+  "modes": {
+    "C1_VECTOR_ROUTING": {
+      "abstention_precision": null,
+      "abstention_recall": 0.0,
+      "balanced_accuracy": 0.166667,
+      "case_count": 42,
+      "citation_coverage": 0.333333,
+      "citation_document_coverage": 0.533333,
+      "citation_support_precision": 0.457143,
+      "class_support": {
+        "AGGREGATE_RESULT": 5,
+        "CLARIFICATION": 1,
+        "CONSTRAINED_ANSWER": 3,
+        "FULL_ANSWER": 29,
+        "REFUSE_AGGREGATION_THRESHOLD": 1,
+        "REFUSE_INSUFFICIENT_EVIDENCE": 3
+      },
+      "error_taxonomy": {},
+      "expected_non_answer_count": 5,
+      "false_answer_count": 5,
+      "false_answer_rate_on_expected_abstentions": 1.0,
+      "false_or_unsupported_answer_rate": 1.0,
+      "macro_recall": 0.166667,
+      "output_class_accuracy": 0.690476,
+      "output_class_confusion": [
+        {
+          "actual": "FULL_ANSWER",
+          "count": 5,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 29,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        }
+      ],
+      "output_class_confusion_columns": [
+        "AGGREGATE_RESULT",
+        "CLARIFICATION",
+        "CONSTRAINED_ANSWER",
+        "FULL_ANSWER",
+        "REFUSE_AGGREGATION_THRESHOLD",
+        "REFUSE_INSUFFICIENT_EVIDENCE"
+      ],
+      "output_class_confusion_matrix": [
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 0,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 0,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 0,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 29,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 0,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 0,
+          "expected": "FULL_ANSWER"
+        },
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 0,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 0,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 0,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 5,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 0,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 0,
+          "expected": "AGGREGATE_RESULT"
+        },
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 0,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 0,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 0,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 0,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 0,
+          "expected": "CONSTRAINED_ANSWER"
+        },
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 0,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 0,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 0,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 3,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 0,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 0,
+          "expected": "REFUSE_INSUFFICIENT_EVIDENCE"
+        },
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 0,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 0,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 0,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 0,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 0,
+          "expected": "REFUSE_AGGREGATION_THRESHOLD"
+        },
+        {
+          "actual": "AGGREGATE_RESULT",
+          "count": 0,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "CLARIFICATION",
+          "count": 0,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "CONSTRAINED_ANSWER",
+          "count": 0,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "FULL_ANSWER",
+          "count": 1,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "REFUSE_AGGREGATION_THRESHOLD",
+          "count": 0,
+          "expected": "CLARIFICATION"
+        },
+        {
+          "actual": "REFUSE_INSUFFICIENT_EVIDENCE",
+          "count": 0,
+          "expected": "CLARIFICATION"
+        }
+      ],
+      "page_level_citation_correctness": 0.285714,
+      "per_class_recall": {
+        "AGGREGATE_RESULT": 0.0,
+        "CLARIFICATION": 0.0,
+        "CONSTRAINED_ANSWER": 0.0,
+        "FULL_ANSWER": 1.0,
+        "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+        "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+      },
+      "permitted_answer_accuracy": 0.324324,
+      "reason_code_accuracy": 0.690476,
+      "reason_code_confusion": [
+        {
+          "actual": "supported",
+          "count": 5,
+          "expected": "aggregate_threshold_satisfied"
+        },
+        {
+          "actual": "supported",
+          "count": 1,
+          "expected": "aggregation_threshold_not_met"
+        },
+        {
+          "actual": "supported",
+          "count": 1,
+          "expected": "clarification"
+        },
+        {
+          "actual": "supported",
+          "count": 3,
+          "expected": "conditional_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 3,
+          "expected": "insufficient_evidence"
+        },
+        {
+          "actual": "supported",
+          "count": 29,
+          "expected": "supported"
+        }
+      ],
+      "runtime_error_count": 0,
+      "safety_error_total": 3,
+      "safety_findings": {
+        "aggregate_individual_value_exposure": 0,
+        "archived_source_usage": 0,
+        "denied_filename_hash_page_disclosure": 0,
+        "generator_visible_restricted_text": 0,
+        "local_path_exposure": 0,
+        "prohibited_document_id_exposure": 0,
+        "prohibited_text_fragment_exposure": 3,
+        "source_existence_disclosure": 0,
+        "wrong_permission_citation": 0
+      }
+    }
+  },
+  "run_id": "s1s6-deterministic-c1-20260903125827",
+  "scored_at": "2026-09-03T12:59:27Z",
+  "scorer_version": "infobank-actual-pipeline-scorer-v2",
+  "sealed_raw_run_sha256": "06003f366f581ad27bdcfb8bb10d09723e65d2c1801760aa8a5d2e2d1482e682",
+  "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION"
+}

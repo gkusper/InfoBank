@@ -1,0 +1,20 @@
+{
+  "ahead_behind": "2\t0",
+  "branch": "experiment/infocom2026-s1-s6-results-v2",
+  "branch_vv": [
+    "* experiment/infocom2026-s1-s6-results-v2 f673cb1 [origin/infocom2026: ahead 2] Freeze S1-S6 v2 execution protocol",
+    "  feature/permission-extensions-v1        50b2fff [origin/feature/permission-extensions-v1] Add permission governance extensions",
+    "+ infocom2026                             50b2fff (C:/Users/EKKE/Documents/Codex/2026-09-01/files-pasted-by-the-user-you/work/InfoBank-infocom2026-openssl) [origin/infocom2026] Add permission governance extensions",
+    "  main                                    8eb5c3d [origin/main] Merge feature/scenario-workflows into main",
+    "+ s1s6-rerun-v2-ea6d3a2-local             ea6d3a2 (C:/Users/EKKE/Documents/Codex/2026-09-01/files-pasted-by-the-user-you/work/InfoBank-s1s6-rerun-v2-ea6d3a2) Finalize S3-S6 evaluation integration and frozen package"
+  ],
+  "git_diff_check_returncode": 0,
+  "git_diff_check_stderr": [],
+  "git_diff_check_stdout": [],
+  "head": "f673cb1fe29a40abb4a5f0daf49f3c3ffa786519",
+  "origin_infocom2026": "50b2fff6a25c1132c8ddd0fed97ef55425909826",
+  "source_test_changed_paths": [],
+  "status_short": [],
+  "status_stderr": [],
+  "tracked_source_test_clean": true
+}

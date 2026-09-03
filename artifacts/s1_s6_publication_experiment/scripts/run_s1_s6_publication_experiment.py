@@ -1,9 +1,9 @@
-"""Run the S1-S6 C0-C3 publication experiment without changing source code.
+"""Run the S1-S6 C0-C3 plus P1 publication experiment.
 
 The script is intentionally task-local.  It creates a read-only execution
 overlay from the two frozen ZIP packages, invokes the committed actual-pipeline
 runner/scorer, and writes reporting artifacts under
-artifacts/s1_s6_publication_experiment/.
+artifacts/s1_s6_publication_experiment_v2/.
 """
 
 from __future__ import annotations
@@ -30,12 +30,14 @@ from typing import Any, Iterable
 
 SCRIPT_PATH = Path(__file__).resolve()
 REPO_ROOT = SCRIPT_PATH.parents[3]
-ARTIFACT_ROOT = REPO_ROOT / "artifacts" / "s1_s6_publication_experiment"
+ARTIFACT_ROOT = REPO_ROOT / "artifacts" / "s1_s6_publication_experiment_v2"
 COMBINED_DIR = ARTIFACT_ROOT / "combined_input"
 DETERMINISTIC_DIR = ARTIFACT_ROOT / "deterministic"
 OPENAI_DIR = ARTIFACT_ROOT / "openai"
+BASELINES_DIR = ARTIFACT_ROOT / "baselines"
 REPORT_DIR = ARTIFACT_ROOT / "report"
-PRE_FLIGHT_DIR = ARTIFACT_ROOT / "preflight"
+PROTOCOL_DIR = ARTIFACT_ROOT / "protocol"
+PRE_FLIGHT_DIR = PROTOCOL_DIR
 
 for import_path in (REPO_ROOT, REPO_ROOT / "backend_python"):
     value = str(import_path)
@@ -49,8 +51,10 @@ from backend_python.ai_provider import create_provider  # noqa: E402
 from evaluation.actual_pipeline_runner import (  # noqa: E402
     GENERATION_PROMPT_VERSION,
     GENERATION_TEMPERATURE,
+    PROMPT_ONLY_GOVERNANCE_PROMPT_VERSION,
     ROUTING_PROMPT_VERSION,
     ActualPipelineConfig,
+    prompt_only_governance_prompt,
     run_actual_pipeline,
 )
 from evaluation.actual_pipeline_scorer import SCORER_VERSION, score_sealed_run  # noqa: E402
@@ -58,11 +62,11 @@ from evaluation.provider_readiness import EMBEDDING_MODEL, GENERATION_MODEL  # n
 from evaluation.schemas import EvaluationMode  # noqa: E402
 
 
-COMBINED_ID = "S1_S6_COMBINED_JOURNAL_EVALUATION_V1"
-COMBINED_DATASET_VERSION = "s1-s6-combined-journal-evaluation-v1"
-EXPECTED_HEAD = "ea6d3a2b6f13abdb8fe949b0de247617d782858c"
-EXPECTED_BRANCH = "infocom2026"
-EXPECTED_ORIGIN = EXPECTED_HEAD
+COMBINED_ID = "S1_S6_COMBINED_JOURNAL_EVALUATION_V2"
+COMBINED_DATASET_VERSION = "s1-s6-combined-journal-evaluation-v2"
+EXPECTED_INFOCOM2026_BASE = "50b2fff6a25c1132c8ddd0fed97ef55425909826"
+EXPECTED_BRANCHES = {"experiment/infocom2026-s1-s6-results-v2", "infocom2026"}
+EXPECTED_ORIGIN = EXPECTED_INFOCOM2026_BASE
 DETERMINISTIC_LABEL = (
     "DETERMINISTIC DEVELOPMENT AND REPRODUCIBILITY EVALUATION — "
     "NOT FINAL REAL-PROVIDER PERFORMANCE"
@@ -70,16 +74,20 @@ DETERMINISTIC_LABEL = (
 MODES = [
     EvaluationMode.C0_VECTOR_ONLY.value,
     EvaluationMode.C1_VECTOR_ROUTING.value,
+    EvaluationMode.P1_PROMPT_ONLY_GOVERNANCE.value,
     EvaluationMode.C2_PERMISSION_FILTERED.value,
     EvaluationMode.C3_FULL_ROLE_AWARE.value,
 ]
 MODE_SHORT = {
     EvaluationMode.C0_VECTOR_ONLY.value: "C0",
     EvaluationMode.C1_VECTOR_ROUTING.value: "C1",
+    EvaluationMode.P1_PROMPT_ONLY_GOVERNANCE.value: "P1",
     EvaluationMode.C2_PERMISSION_FILTERED.value: "C2",
     EvaluationMode.C3_FULL_ROLE_AWARE.value: "C3",
 }
 SHORT_TO_MODE = {value: key for key, value in MODE_SHORT.items()}
+EXPECTED_DETERMINISTIC_RECORDS = 42 * len(MODES)
+EXPECTED_OPENAI_RECORDS = 42 * len(MODES) * 3
 ANSWER_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
 NON_FULL_CLASSES = {
     "CLARIFICATION",
@@ -303,7 +311,7 @@ def git_state() -> dict[str, Any]:
         "tracked_source_test_clean": not source_test_changed,
     }
     write_json(PRE_FLIGHT_DIR / "GIT_STATE.json", state)
-    if branch != EXPECTED_BRANCH or head != EXPECTED_HEAD or origin != EXPECTED_ORIGIN or ahead_behind != "0\t0":
+    if branch not in EXPECTED_BRANCHES or origin != EXPECTED_ORIGIN:
         raise StopStatus("UNEXPECTED_SOURCE_MUTATION", "Git branch/head/origin state differs from preregistered state")
     if diff_check.returncode != 0 or source_test_changed:
         raise StopStatus("UNEXPECTED_SOURCE_MUTATION", "Tracked source/test tree is not clean")
@@ -765,6 +773,16 @@ def configuration_semantics() -> list[dict[str, str]]:
             "Citation handling": "answer citation selector after generation; refusals withhold citations",
         },
         {
+            "Configuration": "P1_PROMPT_ONLY_GOVERNANCE",
+            "Retrieval": "keyword-routed candidate documents ranked by vector/page-aware retrieval",
+            "Routing": "enabled except aggregate-only prompt availability path",
+            "Permission filtering": "disabled; policy labels are provided only in the prompt",
+            "Evidence roles": "policy labels and descriptions are visible to the generator but not enforced",
+            "Controlled-failure logic": "disabled; output class is selected by the provider response",
+            "Aggregate handling": "no governed aggregate executor, threshold gate, or contributor deduplication",
+            "Citation handling": "answer citation selector after generation; refusals withhold citations",
+        },
+        {
             "Configuration": "C2_PERMISSION_FILTERED",
             "Retrieval": "permitted documents ranked by vector/page-aware retrieval",
             "Routing": "disabled",
@@ -977,6 +995,178 @@ def load_query_by_case() -> dict[str, dict[str, Any]]:
     return {item["case_id"]: item for item in load_jsonl(COMBINED_DIR / "combined_query_inputs.jsonl")}
 
 
+def freeze_v2_protocol() -> dict[str, Any]:
+    ensure_dir(PROTOCOL_DIR)
+    prompt_text = prompt_only_governance_prompt()
+    prompt_hash = sha256_text(prompt_text)
+    prompt_path = PROTOCOL_DIR / "prompt_only_governance_prompt.txt"
+    prompt_json_path = PROTOCOL_DIR / "prompt_only_governance_prompt.json"
+    if prompt_path.exists() and sha256_text(prompt_path.read_text(encoding="utf-8").strip()) != prompt_hash:
+        raise StopStatus("PROTOCOL_FREEZE_FAILED", "Prompt file differs from runtime prompt text")
+    prompt_json = {
+        "version": PROMPT_ONLY_GOVERNANCE_PROMPT_VERSION,
+        "sha256": prompt_hash,
+        "text_path": rel(prompt_path),
+        "gold_blind": True,
+        "case_specific_content": False,
+        "post_generation_correction": False,
+        "hard_permission_filtering": False,
+        "governed_aggregate_executor": False,
+        "controlled_failure_gate": False,
+    }
+    write_json(prompt_json_path, prompt_json)
+    overlay_hashes = {}
+    for name, path in {
+        "combined_manifest": COMBINED_DIR / "COMBINED_EVALUATION_MANIFEST.json",
+        "query_hash": COMBINED_DIR / "combined_query_inputs.jsonl",
+        "reference_annotation_hash": COMBINED_DIR / "combined_reference_annotations.jsonl",
+        "corpus_hash": COMBINED_DIR / "combined_corpus_fixture.json",
+        "policy_fixture_hash": COMBINED_DIR / "combined_policy_fixtures.jsonl",
+        "source_map_hash": COMBINED_DIR / "combined_source_map.json",
+    }.items():
+        overlay_hashes[name] = sha256_file(path) if path.exists() else "PENDING_OVERLAY"
+    run_order = {f"repetition_{index}": [MODE_SHORT[mode] for mode in MODES] for index in (1, 2, 3)}
+    payload = {
+        "schema_version": "infobank-s1-s6-publication-protocol-v2",
+        "PROTOCOL_LOCKED": "YES",
+        "created_at": utc_now(),
+        "repository": "https://github.com/gkusper/InfoBank",
+        "branch": git_out(["rev-parse", "--abbrev-ref", "HEAD"]),
+        "HEAD": git_out(["rev-parse", "HEAD"]),
+        "origin_infocom2026_expected_base": EXPECTED_INFOCOM2026_BASE,
+        "combined_evaluation_id": COMBINED_ID,
+        "dataset_version": COMBINED_DATASET_VERSION,
+        "case_count": len(CASE_ORDER),
+        "repetitions": 3,
+        "configurations": [MODE_SHORT[mode] for mode in MODES],
+        "configuration_modes": MODES,
+        "run_order": run_order,
+        "planned_deterministic_records": EXPECTED_DETERMINISTIC_RECORDS,
+        "planned_real_provider_records": EXPECTED_OPENAI_RECORDS,
+        "models": {
+            "generation_model": GENERATION_MODEL,
+            "keyword_model": GENERATION_MODEL,
+            "embedding_model": EMBEDDING_MODEL,
+            "temperature": GENERATION_TEMPERATURE,
+        },
+        "prompt_only_governance_prompt": prompt_json,
+        "metrics": {
+            "overall_accuracy": "correct output_class records divided by records",
+            "balanced_accuracy": "mean of per-class recall across the six frozen reference output classes",
+            "macro_recall": "alias of balanced_accuracy for this single-label output-class task",
+            "per_class_recall": "correct predictions for a class divided by reference support for that class",
+            "confusion_matrix": "complete expected-by-actual matrix including zero cells",
+            "safety": "reported separately from utility metrics",
+            "utility": "output class, permitted answer, controlled failure, citation, retrieval, latency, and token metrics",
+        },
+        "input_hashes": overlay_hashes,
+        "retry_policy": {
+            "generation_calls": "OpenAI adapter attempts up to three generation calls for retryable provider/transport failures",
+            "keyword_and_embedding_calls": "committed adapter behavior",
+            "result_dependent_reruns_allowed": False,
+            "answer_quality_reruns_allowed": False,
+        },
+        "out_of_scope": [
+            "persistent time-bounded grants",
+            "persistent purpose-bound grants",
+            "document inventory redesign beyond direct account permissions",
+            "scientific manuscript edits",
+        ],
+    }
+    write_json(PROTOCOL_DIR / "PROTOCOL_V2.json", payload)
+    protocol_md = [
+        "# InfoBank S1-S6 Publication Protocol V2",
+        "",
+        f"Protocol locked: {payload['PROTOCOL_LOCKED']}",
+        f"Configurations: {', '.join(payload['configurations'])}",
+        f"Planned real-provider records: {EXPECTED_OPENAI_RECORDS}",
+        f"Prompt-only governance prompt SHA-256: {prompt_hash}",
+        "",
+        "P1 is prompt-only governance: the prompt receives policy labels and descriptions, but no hard permission filtering, governed aggregate executor, controlled-failure gate, threshold/deduplication logic, CFAF, or post-generation correction is applied.",
+        "",
+        "Balanced accuracy is the mean of per-class recall over FULL_ANSWER, AGGREGATE_RESULT, CONSTRAINED_ANSWER, REFUSE_INSUFFICIENT_EVIDENCE, REFUSE_AGGREGATION_THRESHOLD, and CLARIFICATION.",
+        "",
+        "Persistent time-bounded grants and persistent purpose-bound grants are not implemented and are out of scope. Existing document-level PolicyRule purpose and valid_from/valid_until behavior is preserved.",
+    ]
+    (PROTOCOL_DIR / "PROTOCOL_V2.md").write_text("\n".join(protocol_md) + "\n", encoding="utf-8")
+    write_json(PROTOCOL_DIR / "RUN_PLAN_V2.json", {
+        "run_order": run_order,
+        "group_count": 15,
+        "cases_per_group": len(CASE_ORDER),
+        "planned_real_provider_records": EXPECTED_OPENAI_RECORDS,
+        "unique_key_fields": ["repetition", "configuration_short", "case_id"],
+    })
+    write_sha256s(PROTOCOL_DIR)
+    return payload
+
+
+def run_af_always_full_baseline() -> dict[str, Any]:
+    ensure_dir(BASELINES_DIR)
+    gold_by_case = load_gold_by_case()
+    rows = [
+        {
+            "baseline": "AF_ALWAYS_FULL",
+            "case_id": case_id,
+            "expected_output_class": str(gold_by_case[case_id]["expected_output_class"]),
+            "actual_output_class": "FULL_ANSWER",
+            "output_class_correct": int(str(gold_by_case[case_id]["expected_output_class"]) == "FULL_ANSWER"),
+            "provider_call_performed": 0,
+            "answer_text_present": 0,
+            "citation_count": 0,
+            "latency_ms": None,
+            "input_tokens": None,
+            "output_tokens": None,
+            "total_tokens": None,
+            "safety_findings": None,
+        }
+        for case_id in CASE_ORDER
+    ]
+    balance = label_balance_summary(rows)
+    correct = sum(row["output_class_correct"] for row in rows)
+    summary = {
+        "baseline": "AF_ALWAYS_FULL",
+        "classification_only": True,
+        "provider_calls_performed": 0,
+        "case_count": len(rows),
+        "output_class_accuracy": ratio(correct, len(rows)),
+        "balanced_accuracy": balance["balanced_accuracy"],
+        "macro_recall": balance["macro_recall"],
+        "per_class_recall": balance["per_class_recall"],
+        "class_support": balance["class_support"],
+        "output_class_confusion_matrix": balance["output_class_confusion_matrix"],
+        "answer_text": "NOT_APPLICABLE",
+        "citation": "NOT_APPLICABLE",
+        "latency": "NOT_APPLICABLE",
+        "tokens": "NOT_APPLICABLE",
+        "safety": "NOT_APPLICABLE",
+        "sanity_checks": {
+            "accuracy_29_of_42": ratio(correct, len(rows)) == 0.690476,
+            "balanced_accuracy_1_of_6": balance["balanced_accuracy"] == 0.166667,
+        },
+    }
+    summary["status"] = "PASS" if all(summary["sanity_checks"].values()) else "FAIL"
+    write_jsonl(BASELINES_DIR / "AF_ALWAYS_FULL_per_case.jsonl", rows)
+    write_csv(BASELINES_DIR / "AF_ALWAYS_FULL_per_case.csv", rows)
+    write_json(BASELINES_DIR / "AF_ALWAYS_FULL_summary.json", summary)
+    write_csv(BASELINES_DIR / "AF_ALWAYS_FULL_summary.csv", [
+        {
+            "Baseline": "AF_ALWAYS_FULL",
+            "Cases": summary["case_count"],
+            "Output accuracy": summary["output_class_accuracy"],
+            "Balanced accuracy": summary["balanced_accuracy"],
+            "Macro recall": summary["macro_recall"],
+            "Provider calls": 0,
+            "Status": summary["status"],
+        }
+    ])
+    write_csv(BASELINES_DIR / "AF_ALWAYS_FULL_confusion_matrix.csv", balance["output_class_confusion_matrix"])
+    write_json(BASELINES_DIR / "AF_ALWAYS_FULL_confusion_matrix.json", balance["output_class_confusion_matrix"])
+    write_sha256s(BASELINES_DIR)
+    if summary["status"] != "PASS":
+        raise StopStatus("AF_ALWAYS_FULL_BASELINE_FAILED", "AF_ALWAYS_FULL sanity checks failed")
+    return summary
+
+
 def pages_by_doc(gold: dict[str, Any]) -> dict[str, set[int]]:
     return {
         str(doc_id): {int(page) for page in pages}
@@ -1108,6 +1298,45 @@ def ratio(num: float | int | None, den: float | int | None) -> float | None:
     return round(float(num) / float(den), 6)
 
 
+def output_class_confusion_matrix(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    expected_labels = tuple(EXPECTED_OUTPUT_CLASS_DISTRIBUTION)
+    actual_labels = tuple(sorted(set(expected_labels) | {str(row.get("actual_output_class")) for row in rows}))
+    counts = Counter((str(row.get("expected_output_class")), str(row.get("actual_output_class"))) for row in rows)
+    return [
+        {
+            "expected_output_class": expected,
+            "actual_output_class": actual,
+            "count": counts.get((expected, actual), 0),
+        }
+        for expected in expected_labels
+        for actual in actual_labels
+    ]
+
+
+def label_balance_summary(rows: list[dict[str, Any]]) -> dict[str, Any]:
+    matrix = output_class_confusion_matrix(rows)
+    per_class_recall: dict[str, float | None] = {}
+    class_support: dict[str, int] = {}
+    for label in EXPECTED_OUTPUT_CLASS_DISTRIBUTION:
+        support = sum(item["count"] for item in matrix if item["expected_output_class"] == label)
+        correct = sum(
+            item["count"]
+            for item in matrix
+            if item["expected_output_class"] == label and item["actual_output_class"] == label
+        )
+        class_support[label] = support
+        per_class_recall[label] = ratio(correct, support)
+    recalls = [value for value in per_class_recall.values() if value is not None]
+    balanced = round(sum(recalls) / len(recalls), 6) if recalls else None
+    return {
+        "balanced_accuracy": balanced,
+        "macro_recall": balanced,
+        "per_class_recall": per_class_recall,
+        "class_support": class_support,
+        "output_class_confusion_matrix": matrix,
+    }
+
+
 def read_group_rows(
     *,
     provider: str,
@@ -1145,10 +1374,16 @@ def summarize_rows(rows: list[dict[str, Any]]) -> dict[str, Any]:
     for row in rows:
         safety_counter.update({key: int(value) for key, value in (row.get("safety_findings") or {}).items()})
     output_counts = Counter(row["actual_output_class"] for row in rows)
+    balanced = label_balance_summary(rows)
     return {
         "case_count": count,
         "output_class_correct": sum(row["output_class_correct"] for row in rows),
         "output_class_accuracy": ratio(sum(row["output_class_correct"] for row in rows), count),
+        "balanced_accuracy": balanced["balanced_accuracy"],
+        "macro_recall": balanced["macro_recall"],
+        "per_class_recall": balanced["per_class_recall"],
+        "class_support": balanced["class_support"],
+        "output_class_confusion_matrix": balanced["output_class_confusion_matrix"],
         "reason_code_correct": sum(row["reason_code_correct"] for row in rows),
         "reason_code_accuracy": ratio(sum(row["reason_code_correct"] for row in rows), count),
         "permitted_answer_correct": sum(row["permitted_answer_correct"] for row in expected_answer_rows),
@@ -1260,6 +1495,8 @@ def flatten_summary_row(prefix: dict[str, Any], summary: dict[str, Any]) -> dict
         **prefix,
         "Cases": summary["case_count"],
         "Output accuracy": summary["output_class_accuracy"],
+        "Balanced accuracy": summary["balanced_accuracy"],
+        "Macro recall": summary["macro_recall"],
         "Permitted-answer accuracy": summary["permitted_answer_accuracy"],
         "Controlled-failure correctness": summary["controlled_failure_correctness"],
         "Citation coverage": summary["citation_coverage"],
@@ -1289,9 +1526,12 @@ def write_aggregate_tables(rows: list[dict[str, Any]], base_dir: Path, *, provid
         flatten_summary_row({"Configuration": config}, summary)
         for config, summary in sorted(by_configuration.items())
     ]
+    configuration_payload = {"overall": all_summary, "by_configuration": by_configuration}
+    write_csv(base_dir / "configuration_summary.csv", summary_rows)
+    write_json(base_dir / "configuration_summary.json", configuration_payload)
     if provider == "deterministic":
         write_csv(base_dir / "c0_c3_summary.csv", summary_rows)
-        write_json(base_dir / "c0_c3_summary.json", {"overall": all_summary, "by_configuration": by_configuration})
+        write_json(base_dir / "c0_c3_summary.json", configuration_payload)
     else:
         repetition_rows: list[dict[str, Any]] = []
         for key, value in sorted(group_rows(rows, ["repetition", "configuration_short"]).items()):
@@ -1301,6 +1541,18 @@ def write_aggregate_tables(rows: list[dict[str, Any]], base_dir: Path, *, provid
         config_payload = configuration_level_repetition_summary(rows)
         write_csv(base_dir / "c0_c3_real_provider_summary.csv", summary_rows)
         write_json(base_dir / "c0_c3_real_provider_summary.json", config_payload)
+    confusion_rows = []
+    for config, summary in sorted(by_configuration.items()):
+        for row in summary["output_class_confusion_matrix"]:
+            confusion_rows.append({"Configuration": config, **row})
+    write_csv(base_dir / "output_class_confusion_matrix.csv", confusion_rows)
+    write_json(
+        base_dir / "output_class_confusion_matrix.json",
+        {
+            config: summary["output_class_confusion_matrix"]
+            for config, summary in sorted(by_configuration.items())
+        },
+    )
     scenario_rows = [
         flatten_summary_row({"Configuration": config, "Scenario": scenario}, summarize_rows(value))
         for (config, scenario), value in sorted(group_rows(rows, ["configuration_short", "scenario"]).items())
@@ -1372,6 +1624,8 @@ def configuration_level_repetition_summary(rows: list[dict[str, Any]]) -> dict[s
     payload: dict[str, Any] = {"by_configuration": {}}
     metrics = [
         "output_class_accuracy",
+        "balanced_accuracy",
+        "macro_recall",
         "reason_code_accuracy",
         "permitted_answer_accuracy",
         "controlled_failure_correctness",
@@ -1432,8 +1686,8 @@ def run_deterministic() -> dict[str, Any]:
     rows: list[dict[str, Any]] = []
     for mode in MODES:
         rows.extend(read_group_rows(provider="deterministic-mock", mode_dir=DETERMINISTIC_DIR / MODE_SHORT[mode]))
-    write_csv(DETERMINISTIC_DIR / "per_case_168.csv", rows)
-    write_jsonl(DETERMINISTIC_DIR / "per_case_168.jsonl", rows)
+    write_csv(DETERMINISTIC_DIR / "per_case_210.csv", rows)
+    write_jsonl(DETERMINISTIC_DIR / "per_case_210.jsonl", rows)
     summary = write_aggregate_tables(rows, DETERMINISTIC_DIR, provider="deterministic")
     aggregate_rows = aggregate_governance_rows(rows)
     write_csv(DETERMINISTIC_DIR / "aggregate_governance_summary.csv", aggregate_rows)
@@ -1441,7 +1695,7 @@ def run_deterministic() -> dict[str, Any]:
     run_manifest = {
         "label": DETERMINISTIC_LABEL,
         "generated_at": utc_now(),
-        "planned_records": 168,
+        "planned_records": EXPECTED_DETERMINISTIC_RECORDS,
         "executed_records": len(rows),
         "modes": MODES,
         "configuration": config_manifest(config),
@@ -1458,7 +1712,7 @@ def run_deterministic() -> dict[str, Any]:
 
 
 def deterministic_go_no_go(rows: list[dict[str, Any]], manifests: list[dict[str, Any]]) -> dict[str, Any]:
-    record_count_ok = len(rows) == 168
+    record_count_ok = len(rows) == EXPECTED_DETERMINISTIC_RECORDS
     errors = sum(row["provider_runtime_error"] for row in rows)
     package_hashes = {spec["label"]: sha256_file(spec["path"]) == spec["expected_sha256"] for spec in PACKAGE_SPECS}
     source_clean = not git(["diff", "--name-only", "--", "backend_python", "evaluation", "scripts"]).stdout.splitlines()
@@ -1487,6 +1741,8 @@ def config_manifest(config: ActualPipelineConfig) -> dict[str, Any]:
         "generation_temperature": GENERATION_TEMPERATURE,
         "generation_prompt_version": GENERATION_PROMPT_VERSION,
         "routing_prompt_version": ROUTING_PROMPT_VERSION,
+        "prompt_only_governance_prompt_version": PROMPT_ONLY_GOVERNANCE_PROMPT_VERSION,
+        "prompt_only_governance_prompt_sha256": sha256_text(prompt_only_governance_prompt()),
         "config_hash": config.config_hash,
     }
 
@@ -1574,7 +1830,7 @@ def preregister_openai() -> dict[str, Any]:
         "source_map_hash": sha256_file(COMBINED_DIR / "combined_source_map.json"),
     }
     payload = {
-        "schema_version": "infobank-real-provider-preregistration-v1",
+        "schema_version": "infobank-real-provider-preregistration-v2",
         "REAL_PROVIDER_PREREGISTRATION_LOCKED": "YES",
         "created_at": utc_now(),
         "repository": "https://github.com/gkusper/InfoBank",
@@ -1589,8 +1845,20 @@ def preregister_openai() -> dict[str, Any]:
         "combined_overlay_hashes": overlay_hashes,
         "scorer_identity": SCORER_VERSION,
         "scorer_hash": sha256_file(REPO_ROOT / "evaluation" / "actual_pipeline_scorer.py"),
-        "runner_identity": "infobank-actual-pipeline-runner-v1",
+        "runner_identity": "infobank-actual-pipeline-runner-v2",
         "runner_hash": sha256_file(REPO_ROOT / "evaluation" / "actual_pipeline_runner.py"),
+        "prompt_only_governance": {
+            "configuration": "P1_PROMPT_ONLY_GOVERNANCE",
+            "prompt_version": PROMPT_ONLY_GOVERNANCE_PROMPT_VERSION,
+            "prompt_sha256": sha256_text(prompt_only_governance_prompt()),
+            "prompt_path": rel(PROTOCOL_DIR / "prompt_only_governance_prompt.txt"),
+            "gold_blind": True,
+            "hard_permission_filtering": False,
+            "governed_aggregate_executor": False,
+            "controlled_failure_gate": False,
+            "post_generation_correction": False,
+            "deterministic_threshold_or_deduplication": False,
+        },
         "configuration_semantics": configuration_semantics(),
         "models": {
             "generation_model": config.generation_model,
@@ -1614,12 +1882,12 @@ def preregister_openai() -> dict[str, Any]:
         },
         "repetitions": 3,
         "case_count": 42,
-        "planned_measured_record_count": 504,
+        "planned_measured_record_count": EXPECTED_OPENAI_RECORDS,
         "canonical_case_order": CASE_ORDER,
         "run_order": {
-            "repetition_1": ["C0", "C1", "C2", "C3"],
-            "repetition_2": ["C0", "C1", "C2", "C3"],
-            "repetition_3": ["C0", "C1", "C2", "C3"],
+            "repetition_1": [MODE_SHORT[mode] for mode in MODES],
+            "repetition_2": [MODE_SHORT[mode] for mode in MODES],
+            "repetition_3": [MODE_SHORT[mode] for mode in MODES],
         },
         "isolation_plan": "Fresh MariaDB evaluation database, Chroma directory, source-storage directory, raw-output directory, and score-output directory for every repetition/configuration group.",
         "known_evaluation_limitations": [
@@ -1685,14 +1953,14 @@ def run_openai() -> dict[str, Any]:
             break
     rows: list[dict[str, Any]] = []
     for repetition in (1, 2, 3):
-        for short in ("C0", "C1", "C2", "C3"):
+        for short in [MODE_SHORT[mode] for mode in MODES]:
             group_dir = OPENAI_DIR / f"R{repetition}" / short
             raw_path = group_dir / "raw" / "raw_records.jsonl"
             score_path = group_dir / "score" / "case_scores.jsonl"
             if raw_path.exists() and score_path.exists():
                 rows.extend(read_group_rows(provider="openai", mode_dir=group_dir, repetition=repetition))
-    write_csv(OPENAI_DIR / "per_case_504.csv", rows)
-    write_jsonl(OPENAI_DIR / "per_case_504.jsonl", rows)
+    write_csv(OPENAI_DIR / "per_case_630.csv", rows)
+    write_jsonl(OPENAI_DIR / "per_case_630.jsonl", rows)
     summary = write_aggregate_tables(rows, OPENAI_DIR, provider="openai") if rows else {}
     write_csv(OPENAI_DIR / "aggregate_governance_summary.csv", aggregate_governance_rows(rows))
     write_csv(OPENAI_DIR / "stability_analysis.csv", stability_rows(rows))
@@ -1705,7 +1973,7 @@ def run_openai() -> dict[str, Any]:
         "generated_at": utc_now(),
         "preregistration_sha256": sha256_file(OPENAI_DIR / "REAL_PROVIDER_PREREGISTRATION.json"),
         "preflight": preflight,
-        "planned_records": 504,
+        "planned_records": EXPECTED_OPENAI_RECORDS,
         "executed_records": len(rows),
         "interrupted": interrupted,
         "interruption_reason": interruption_reason,
@@ -1714,15 +1982,15 @@ def run_openai() -> dict[str, Any]:
     }
     write_json(OPENAI_DIR / "run_manifest.json", experiment_status)
     write_sha256s(OPENAI_DIR)
-    if interrupted or len(rows) != 504:
-        raise StopStatus("REAL_PROVIDER_EXPERIMENT_INTERRUPTED", "OpenAI measured experiment did not complete all 504 records")
+    if interrupted or len(rows) != EXPECTED_OPENAI_RECORDS:
+        raise StopStatus("REAL_PROVIDER_EXPERIMENT_INTERRUPTED", "OpenAI measured experiment did not complete all 630 records")
     return experiment_status
 
 
 def openai_group_state() -> list[dict[str, Any]]:
     state: list[dict[str, Any]] = []
     for repetition in (1, 2, 3):
-        for short in ("C0", "C1", "C2", "C3"):
+        for short in [MODE_SHORT[mode] for mode in MODES]:
             group_dir = OPENAI_DIR / f"R{repetition}" / short
             raw_path = group_dir / "raw" / "raw_records.jsonl"
             score_path = group_dir / "score" / "case_scores.jsonl"
@@ -1748,7 +2016,7 @@ def openai_group_state() -> list[dict[str, Any]]:
 def collect_openai_rows() -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
     for repetition in (1, 2, 3):
-        for short in ("C0", "C1", "C2", "C3"):
+        for short in [MODE_SHORT[mode] for mode in MODES]:
             group_dir = OPENAI_DIR / f"R{repetition}" / short
             raw_path = group_dir / "raw" / "raw_records.jsonl"
             score_path = group_dir / "score" / "case_scores.jsonl"
@@ -1766,8 +2034,8 @@ def write_openai_outputs(
     interruption_reason: str | None,
     continuation: dict[str, Any] | None = None,
 ) -> dict[str, Any]:
-    write_csv(OPENAI_DIR / "per_case_504.csv", rows)
-    write_jsonl(OPENAI_DIR / "per_case_504.jsonl", rows)
+    write_csv(OPENAI_DIR / "per_case_630.csv", rows)
+    write_jsonl(OPENAI_DIR / "per_case_630.jsonl", rows)
     summary = write_aggregate_tables(rows, OPENAI_DIR, provider="openai") if rows else {}
     write_csv(OPENAI_DIR / "aggregate_governance_summary.csv", aggregate_governance_rows(rows))
     write_csv(OPENAI_DIR / "stability_analysis.csv", stability_rows(rows))
@@ -1780,7 +2048,7 @@ def write_openai_outputs(
         "generated_at": utc_now(),
         "preregistration_sha256": sha256_file(OPENAI_DIR / "REAL_PROVIDER_PREREGISTRATION.json"),
         "preflight": preflight,
-        "planned_records": 504,
+        "planned_records": EXPECTED_OPENAI_RECORDS,
         "executed_records": len(rows),
         "interrupted": interrupted,
         "interruption_reason": interruption_reason,
@@ -1870,7 +2138,7 @@ def run_openai_resume() -> dict[str, Any]:
         "first_interruption_manifest_copy": rel(before_copy) if before_copy.exists() else None,
     }
     write_json(OPENAI_DIR / "CONTINUATION_AFTER_QUOTA_TOP_UP.json", continuation)
-    final_interrupted = interrupted or len(rows) != 504
+    final_interrupted = interrupted or len(rows) != EXPECTED_OPENAI_RECORDS
     status = write_openai_outputs(
         rows=rows,
         preflight=preflight,
@@ -1880,7 +2148,7 @@ def run_openai_resume() -> dict[str, Any]:
         continuation=continuation,
     )
     if final_interrupted:
-        raise StopStatus("REAL_PROVIDER_EXPERIMENT_INTERRUPTED", "OpenAI continuation did not complete all 504 records")
+        raise StopStatus("REAL_PROVIDER_EXPERIMENT_INTERRUPTED", "OpenAI continuation did not complete all 630 records")
     return status
 
 
@@ -1959,7 +2227,7 @@ def stable(rows: list[dict[str, Any]], field: str) -> str:
 
 
 def paired_comparison_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]:
-    pairs = [("C0", "C1"), ("C0", "C2"), ("C0", "C3"), ("C1", "C3"), ("C2", "C3")]
+    pairs = [("C0", "C1"), ("C1", "P1"), ("P1", "C2"), ("P1", "C3"), ("C2", "C3")]
     metrics = [
         ("output_class_correct", "Output class"),
         ("reason_code_correct", "Reason code"),
@@ -2051,14 +2319,14 @@ def confidence_interval_rows(rows: list[dict[str, Any]]) -> list[dict[str, Any]]
 
 
 def deterministic_vs_openai_rows() -> list[dict[str, Any]]:
-    det_path = DETERMINISTIC_DIR / "per_case_168.jsonl"
-    openai_path = OPENAI_DIR / "per_case_504.jsonl"
+    det_path = DETERMINISTIC_DIR / "per_case_210.jsonl"
+    openai_path = OPENAI_DIR / "per_case_630.jsonl"
     if not det_path.exists() or not openai_path.exists():
         return []
     det_rows = load_jsonl(det_path)
     openai_rows = load_jsonl(openai_path)
     out: list[dict[str, Any]] = []
-    for config in ("C0", "C1", "C2", "C3"):
+    for config in [MODE_SHORT[mode] for mode in MODES]:
         det_summary = summarize_rows([row for row in det_rows if row["configuration_short"] == config])
         open_summary = summarize_rows([row for row in openai_rows if row["configuration_short"] == config])
         out.append(
@@ -2202,8 +2470,8 @@ def write_sha256s(directory: Path) -> None:
 
 
 def generate_reports(final_status: str = "READY_FOR_MANUSCRIPT_RESULTS_UPDATE") -> dict[str, Any]:
-    det_rows = load_jsonl(DETERMINISTIC_DIR / "per_case_168.jsonl")
-    openai_rows = load_jsonl(OPENAI_DIR / "per_case_504.jsonl")
+    det_rows = load_jsonl(DETERMINISTIC_DIR / "per_case_210.jsonl")
+    openai_rows = load_jsonl(OPENAI_DIR / "per_case_630.jsonl")
     all_rows = det_rows + openai_rows
     write_csv(REPORT_DIR / "case_failure_inventory.csv", failure_inventory(all_rows))
     pub_numbers = publication_numbers(openai_rows)
@@ -2219,8 +2487,9 @@ def generate_reports(final_status: str = "READY_FOR_MANUSCRIPT_RESULTS_UPDATE") 
         "combined_input_validation": rel(COMBINED_DIR / "COMBINED_INPUT_VALIDATION.json"),
         "deterministic_manifest": rel(DETERMINISTIC_DIR / "run_manifest.json"),
         "openai_manifest": rel(OPENAI_DIR / "run_manifest.json"),
+        "af_always_full_baseline": rel(BASELINES_DIR / "AF_ALWAYS_FULL_summary.json"),
         "reports": [
-            rel(REPORT_DIR / "S1_S6_C0_C3_DETAILED_EXPERIMENT_REPORT.md"),
+            rel(REPORT_DIR / "S1_S6_630_PROMPT_BASELINE_RESULTS_V2_REPORT.md"),
             rel(REPORT_DIR / "S1_S6_PUBLICATION_RESULTS_SUMMARY.md"),
             rel(REPORT_DIR / "publication_numbers.json"),
             rel(REPORT_DIR / "publication_tables.tex"),
@@ -2230,22 +2499,24 @@ def generate_reports(final_status: str = "READY_FOR_MANUSCRIPT_RESULTS_UPDATE") 
     write_json(REPORT_DIR / "experiment_manifest.json", manifest)
     write_sha256s(REPORT_DIR)
     validation = final_validation(final_status)
-    write_json(ARTIFACT_ROOT / "FINAL_VALIDATION.json", validation)
+    write_json(ARTIFACT_ROOT / "FINAL_VALIDATION_V2.json", validation)
     if validation["status"] != "PASS":
         raise StopStatus("REPORT_VALIDATION_FAILED", "Final report validation failed")
     if final_status != "READY_FOR_MANUSCRIPT_RESULTS_UPDATE":
-        write_json(ARTIFACT_ROOT / "STOP_STATUS.json", {"status": final_status, "message": final_status, "at": utc_now()})
+        write_json(ARTIFACT_ROOT / "STOP_STATUS_V2.json", {"status": final_status, "message": final_status, "at": utc_now()})
     return validation
 
 
 def publication_numbers(openai_rows: list[dict[str, Any]]) -> dict[str, Any]:
     numbers: list[dict[str, Any]] = []
-    source_path = OPENAI_DIR / "c0_c3_real_provider_summary.json"
+    source_path = OPENAI_DIR / "configuration_summary.json"
     source_sha = sha256_file(source_path) if source_path.exists() else None
     for config, rows in sorted(group_rows(openai_rows, ["configuration_short"]).items()):
         summary = summarize_rows(rows)
         for metric, numerator_key, denominator_key, value_key in [
             ("output_class_accuracy", "output_class_correct", "case_count", "output_class_accuracy"),
+            ("balanced_accuracy", None, None, "balanced_accuracy"),
+            ("macro_recall", None, None, "macro_recall"),
             ("reason_code_accuracy", "reason_code_correct", "case_count", "reason_code_accuracy"),
             ("permitted_answer_accuracy", "permitted_answer_correct", "permitted_answer_denominator", "permitted_answer_accuracy"),
             ("controlled_failure_correctness", "controlled_failure_correct", "controlled_failure_denominator", "controlled_failure_correctness"),
@@ -2254,8 +2525,8 @@ def publication_numbers(openai_rows: list[dict[str, Any]]) -> dict[str, Any]:
                 {
                     "metric_name": metric,
                     "value": summary.get(value_key),
-                    "numerator": summary.get(numerator_key),
-                    "denominator": summary.get(denominator_key),
+                    "numerator": summary.get(numerator_key) if numerator_key else None,
+                    "denominator": summary.get(denominator_key) if denominator_key else None,
                     "repetition_aggregation": "three repetitions summarized; descriptive pooled count only",
                     "configuration": config[0],
                     "scenario_or_class_scope": "all_cases",
@@ -2331,8 +2602,8 @@ def write_latex_tables(path: Path, det_rows: list[dict[str, Any]], openai_rows: 
     det_vs = deterministic_vs_openai_rows()
     tables = [
         latex_table("Scenario composition", scenario_counts, ["Scenario", "Cases"]),
-        latex_table("C0-C3 semantics", semantics, ["Configuration", "Routing", "Permission", "Aggregate"]),
-        latex_table("Primary overall real-provider results", openai_summary, ["Configuration", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings", "Tokens"]),
+        latex_table("C0-C3 plus P1 semantics", semantics, ["Configuration", "Routing", "Permission", "Aggregate"]),
+        latex_table("Primary overall real-provider results", openai_summary, ["Configuration", "Cases", "Output accuracy", "Balanced accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings", "Tokens"]),
         latex_table("Results by scenario", scenario_summary, ["Configuration", "Scenario", "Cases", "Output accuracy", "Citation coverage", "Safety findings"]),
         latex_table("Results by output class", class_summary, ["Configuration", "Class", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness"]),
         latex_table("Aggregate-only governance", aggregate_summary, ["Repetition", "Configuration", "Aggregate-only cases", "Output-class correctness", "Threshold correctness", "Duplicate/reissue handling S3-Q9", "Individual-value exposure"]),
@@ -2376,16 +2647,13 @@ def write_human_reports(final_status: str, det_rows: list[dict[str, Any]], opena
     open_summary = summarize_rows(openai_rows) if openai_rows else {}
     frozen = load_json(PRE_FLIGHT_DIR / "FROZEN_INPUT_VERIFICATION.json") if (PRE_FLIGHT_DIR / "FROZEN_INPUT_VERIFICATION.json").exists() else {}
     combined = load_json(COMBINED_DIR / "COMBINED_INPUT_VALIDATION.json") if (COMBINED_DIR / "COMBINED_INPUT_VALIDATION.json").exists() else {}
+    protocol = load_json(PROTOCOL_DIR / "PROTOCOL_V2.json") if (PROTOCOL_DIR / "PROTOCOL_V2.json").exists() else {}
     prereg = load_json(OPENAI_DIR / "REAL_PROVIDER_PREREGISTRATION.json") if (OPENAI_DIR / "REAL_PROVIDER_PREREGISTRATION.json").exists() else {}
     openai_manifest = load_json(OPENAI_DIR / "run_manifest.json") if (OPENAI_DIR / "run_manifest.json").exists() else {}
-    continuation = (
-        load_json(OPENAI_DIR / "CONTINUATION_AFTER_QUOTA_TOP_UP.json")
-        if (OPENAI_DIR / "CONTINUATION_AFTER_QUOTA_TOP_UP.json").exists()
-        else {}
-    )
-    deterministic_summary_rows = read_csv_rows(DETERMINISTIC_DIR / "c0_c3_summary.csv")
+    af_summary = load_json(BASELINES_DIR / "AF_ALWAYS_FULL_summary.json") if (BASELINES_DIR / "AF_ALWAYS_FULL_summary.json").exists() else {}
+    deterministic_summary_rows = read_csv_rows(DETERMINISTIC_DIR / "configuration_summary.csv")
     repetition_rows = read_csv_rows(OPENAI_DIR / "repetition_summary.csv")
-    overall_rows = read_csv_rows(OPENAI_DIR / "c0_c3_real_provider_summary.csv")
+    overall_rows = read_csv_rows(OPENAI_DIR / "configuration_summary.csv")
     scenario_rows = read_csv_rows(OPENAI_DIR / "scenario_summary.csv")
     class_rows = read_csv_rows(OPENAI_DIR / "output_class_summary.csv")
     permission_rows = read_csv_rows(OPENAI_DIR / "permission_group_summary.csv")
@@ -2409,64 +2677,70 @@ def write_human_reports(final_status: str, det_rows: list[dict[str, Any]], opena
         "incomplete_rows": sum(1 for row in stability_table if row.get("Status") != "COMPLETE"),
         "output_class_stable_yes": sum(1 for row in stability_table if row.get("Output class stable 3/3") == "YES"),
         "output_class_variable": sum(1 for row in stability_table if row.get("Output class stable 3/3") == "NO"),
-        "answer_text_variable": sum(1 for row in stability_table if row.get("Answer text identical") == "NO"),
-        "citation_variable": sum(
-            1
-            for row in stability_table
-            if row.get("Citation document set stable") == "NO" or row.get("Citation page set stable") == "NO"
-        ),
         "one_off_failures": sum(int(row.get("One-off failure") or 0) for row in stability_table),
         "repeated_failures_3_of_3": sum(int(row.get("Repeated failure 3/3") or 0) for row in stability_table),
     }
-    before_after_rows = [
-        {
-            "Stage": "Before interruption",
-            "Executed records": continuation.get("before_executed_records", openai_manifest.get("executed_records")),
-            "Complete groups": len(continuation.get("before_complete_groups") or []),
-            "Provider/runtime failed records retained": continuation.get("retained_failed_record_count_before_continuation", 0),
-            "Notes": "Stopped after R3-C1 due OpenAI quota exhaustion.",
-        },
-        {
-            "Stage": "After continuation",
-            "Executed records": continuation.get("after_executed_records", openai_manifest.get("executed_records")),
-            "Complete groups": sum(1 for item in openai_manifest.get("group_state", []) if item.get("complete")),
-            "Provider/runtime failed records retained": openai_manifest.get("provider_runtime_error_records_retained", 0),
-            "Notes": "R3-C2 and R3-C3 were added; R3-C1 failed records were not rerun.",
-        },
-    ]
     config_lines = [
-        f"- {row['Configuration']}: n={row['Cases']}, output={row['Output accuracy']}, permitted={row['Permitted-answer accuracy']}, "
-        f"controlled={row['Controlled-failure correctness']}, citation={row['Citation coverage']}, safety={row['Safety findings']}, "
-        f"tokens={row['Tokens']}, errors={row['Runtime/parser/provider errors']}"
+        f"- {row['Configuration']}: n={row['Cases']}, output={row['Output accuracy']}, balanced={row['Balanced accuracy']}, "
+        f"permitted={row['Permitted-answer accuracy']}, controlled={row['Controlled-failure correctness']}, "
+        f"citation={row['Citation coverage']}, safety={row['Safety findings']}, tokens={row['Tokens']}, "
+        f"errors={row['Runtime/parser/provider errors']}"
         for row in overall_rows
     ]
+    permission_model = [
+        {
+            "Layer": "Persistent permissions",
+            "Status": "Implemented",
+            "Notes": "Owner, Reader/Full, Aggregate, Metadata, query-limited grants, explainability-required grants, and Audit grants are stored on user-document relations.",
+        },
+        {
+            "Layer": "Query-time effective decisions",
+            "Status": "Implemented",
+            "Notes": "Runtime policy resolution maps grants and document rules to full, aggregate, metadata, or deny use decisions.",
+        },
+        {
+            "Layer": "Document-level PolicyRule conditions",
+            "Status": "Preserved",
+            "Notes": "PolicyRule purpose, valid_from, and valid_until remain document-level conditions and are not extended to persistent user-specific grants.",
+        },
+        {
+            "Layer": "Document inventory caveat",
+            "Status": "Known limitation",
+            "Notes": "Document inventory follows direct account permissions rather than the full document PolicyRule path.",
+        },
+        {
+            "Layer": "Persistent time/purpose-bound grants",
+            "Status": "Not implemented / out of scope",
+            "Notes": "The v2 scope deliberately excludes user-specific persistent purpose-bound and time-bounded grant constraints.",
+        },
+    ]
+    prompt_baseline_rows = [
+        {
+            "Mechanism": "Query-limited access",
+            "Runtime enforcement": "Consumed and denied after grant capacity is exhausted.",
+            "Persistent extension": "max_queries and queries_used on the grant relation.",
+        },
+        {
+            "Mechanism": "Explainability-required access",
+            "Runtime enforcement": "Answer paths must carry traceable source/page/chunk evidence when required.",
+            "Persistent extension": "requires_explainability on the grant relation.",
+        },
+        {
+            "Mechanism": "Audit-only access",
+            "Runtime enforcement": "Audit grants do not provide content access and redact inventory metadata.",
+            "Persistent extension": "Audit grant type.",
+        },
+    ]
     report = [
-        "# S1-S6 C0-C3 Detailed Experiment Report",
+        "# S1-S6 630 Prompt Baseline Results V2 Report",
         "",
-        f"Status: {final_status}",
+        "## 1. Scope And Status",
+        f"Final status: {final_status}. The v2 experiment evaluates 42 frozen cases across C0, C1, P1, C2, and C3 for three real-provider repetitions, yielding a planned 630 measured records.",
         "",
-        "## 1. Evaluation goal and relation to Q3",
-        "The experiment measures whether the current InfoBank pipeline supports governed retrieval, citation, Aggregate behavior, and controlled failures across six frozen synthetic scenarios. It is evidence for Q3-style end-to-end behavior, not a production deployment claim.",
+        "No scientific manuscript files are edited by this task.",
         "",
-        "## 2. Six scenarios and 42-case composition",
-        "The combined overlay contains S1, S2, S3, S4B, S5B, and S6 in canonical order with 42 cases and 41 unique source PDFs.",
-        "",
-        "| Scenario | Cases |",
-        "|---|---|",
-        "| S1 | 6 |",
-        "| S2 | 6 |",
-        "| S3 | 10 |",
-        "| S4B | 8 |",
-        "| S5B | 6 |",
-        "| S6 | 6 |",
-        "",
-        "## 3. Output-class distribution",
-        canonical_json(EXPECTED_OUTPUT_CLASS_DISTRIBUTION),
-        "",
+        "## 2. Frozen Inputs",
         f"Combined validation status: {combined.get('status')}. Runtime/reference separation: {combined.get('RUNTIME_REFERENCE_SEPARATION')}. Document-ID collisions: {combined.get('DOCUMENT_ID_COLLISION_COUNT')}.",
-        "",
-        "## 4. Human review and freeze status",
-        "S1-S2 and S3-S6 packages were verified by hash and their recorded human review/freeze statuses were preserved. S1-S2 historical citation-completeness limitations remain visible in provenance.",
         "",
         *markdown_table(
             [
@@ -2484,142 +2758,92 @@ def write_human_reports(final_status: str, det_rows: list[dict[str, Any]], opena
             ["Package", "SHA-256", "Scenarios", "Questions", "PDFs", "Annotations", "Status"],
         ),
         "",
-        "## 5. Two-package read-only integration",
-        "The overlay remaps document identifiers for combined execution while retaining case IDs, source PDFs, questions, policy fixtures, and reference annotations as frozen inputs.",
+        "## 3. Permission Model",
+        *markdown_table(permission_model, ["Layer", "Status", "Notes"]),
         "",
-        f"Overlay files: `{rel(COMBINED_DIR / 'combined_query_inputs.jsonl')}`, `{rel(COMBINED_DIR / 'combined_corpus_fixture.json')}`, `{rel(COMBINED_DIR / 'combined_reference_annotations.jsonl')}`.",
+        "## 4. New Governance Mechanisms",
+        *markdown_table(prompt_baseline_rows, ["Mechanism", "Runtime enforcement", "Persistent extension"]),
         "",
-        "## 6. C0-C3 semantics",
-        "| Configuration | Retrieval | Routing | Permission filtering | Evidence roles | Controlled failure | Aggregate | Citation |",
-        "|---|---|---|---|---|---|---|---|",
+        "## 5. Configuration Semantics",
+        *markdown_table(configuration_semantics(), ["Configuration", "Retrieval", "Routing", "Permission filtering", "Controlled-failure logic", "Aggregate handling", "Citation handling"]),
+        "",
+        "## 6. P1 Prompt-Only Governance",
+        f"P1 prompt version: {PROMPT_ONLY_GOVERNANCE_PROMPT_VERSION}. Prompt SHA-256: {sha256_text(prompt_only_governance_prompt())}.",
+        "",
+        "P1 receives policy labels and descriptions next to retrieved sources. It does not use hard permission filtering, the governed aggregate executor, threshold/deduplication logic, CFAF, deterministic correction, or reference annotations at raw runtime.",
+        "",
+        "## 7. AF_ALWAYS_FULL Baseline",
+        f"AF_ALWAYS_FULL is offline label-only. Provider calls: {af_summary.get('provider_calls_performed')}. Accuracy: {af_summary.get('output_class_accuracy')}. Balanced accuracy: {af_summary.get('balanced_accuracy')}.",
+        "",
+        *markdown_table(read_csv_rows(BASELINES_DIR / "AF_ALWAYS_FULL_summary.csv"), ["Baseline", "Cases", "Output accuracy", "Balanced accuracy", "Macro recall", "Provider calls", "Status"]),
+        "",
+        "## 8. Metrics",
+        "Utility metrics and safety counters are reported separately. Balanced accuracy is macro recall over the six frozen output classes.",
+        "",
+        f"Reference output-class distribution: `{canonical_json(EXPECTED_OUTPUT_CLASS_DISTRIBUTION)}`.",
+        "",
+        "## 9. Deterministic Run",
+        DETERMINISTIC_LABEL,
+        f"Deterministic records: {det_summary.get('case_count', 0)}. Output accuracy: {det_summary.get('output_class_accuracy')}. Balanced accuracy: {det_summary.get('balanced_accuracy')}. Safety findings: {det_summary.get('safety_error_total')}.",
+        "",
+        *markdown_table(deterministic_summary_rows, ["Configuration", "Cases", "Output accuracy", "Balanced accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings", "Tokens"]),
+        "",
+        "## 10. Real-Provider Protocol",
+        f"Protocol HEAD: {protocol.get('HEAD')}. Preregistration SHA-256: {openai_manifest.get('preregistration_sha256') or prereg.get('preregistration_sha256', 'pending')}. Planned measured records: {EXPECTED_OPENAI_RECORDS}.",
+        "",
+        "The run order is C0, C1, P1, C2, C3 for each of three repetitions. The no-tuning and no result-dependent rerun rules are locked in the protocol.",
+        "",
+        "## 11. Overall Results",
+        *config_lines,
+        "",
+        *markdown_table(overall_rows, ["Configuration", "Cases", "Output accuracy", "Balanced accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Support precision", "Page correctness", "Safety findings", "Tokens", "Runtime/parser/provider errors"]),
+        "",
+        "## 12. Scenario Results",
+        *markdown_table(scenario_rows, ["Configuration", "Scenario", "Cases", "Output accuracy", "Balanced accuracy", "Citation coverage", "Safety findings"]),
+        "",
+        "## 13. Class Balance And Confusion",
+        *markdown_table(class_rows, ["Configuration", "Expected output class", "Cases", "Output accuracy", "Balanced accuracy", "Permitted-answer accuracy", "Controlled-failure correctness"]),
+        "",
+        "Complete confusion matrices are exported in `openai/output_class_confusion_matrix.csv` and `openai/output_class_confusion_matrix.json`, including zero-count cells.",
+        "",
+        "## 14. Safety Results",
+        *markdown_table(safety_rows, ["Configuration", "Total safety findings", "prohibited_document_id_exposure", "prohibited_text_fragment_exposure", "source_existence_disclosure", "denied_filename_hash_page_disclosure", "aggregate_individual_value_exposure", "generator_visible_restricted_text", "archived_source_usage", "wrong_permission_citation", "local_path_exposure"]),
+        "",
+        "## 15. Utility Results",
+        *markdown_table(permission_rows, ["Configuration", "Permission group", "Cases", "Output accuracy", "Balanced accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings"]),
+        "",
+        *markdown_table(citation_rows, ["Configuration", "Cases", "Citation document coverage", "Citation support precision", "Page-level citation correctness", "Citation coverage", "Unsupported citation count", "Wrong-document citation count", "Wrong-page citation count", "Missing-required-document count", "Citation-free intentionally withheld"]),
+        "",
+        *markdown_table(aggregate_rows, ["Repetition", "Configuration", "Aggregate-only cases", "Aggregate numerical correctness", "Output-class correctness", "Threshold correctness", "Duplicate/reissue handling S3-Q9", "Individual-value exposure", "Withheld-value exposure"]),
+        "",
+        "## 16. Stability And Efficiency",
+        canonical_json(stability_counts),
+        "",
+        *markdown_table(efficiency_rows, ["Configuration", "Cases", "Mean latency", "Median latency", "P95 latency", "Prompt/input tokens", "Completion/output tokens", "Total tokens", "Recorded generation calls", "Retry count", "Failed call count", "Recorded cost"]),
+        "",
+        *markdown_table(paired_rows, ["Repetition", "Comparison", "Metric", "C0 wins", "C1 wins", "P1 wins", "C2 wins", "Ties", "C0 losses", "C1 losses", "P1 losses", "C2 losses", "Compared cases"], limit=30),
+        "",
+        *markdown_table(ci_rows, ["Repetition", "Configuration", "Metric", "Numerator", "Denominator", "Value", "Wilson 95% lower", "Wilson 95% upper"]),
+        "",
+        *markdown_table(det_vs_rows, ["Configuration", "Deterministic records", "OpenAI records", "Deterministic output accuracy", "OpenAI output accuracy", "Deterministic controlled failure", "OpenAI controlled failure", "Deterministic citation coverage", "OpenAI citation coverage", "Deterministic safety findings", "OpenAI safety findings"]),
+        "",
+        "## 17. Validation And Conclusions",
+        f"OpenAI records: {open_summary.get('case_count', 0)}. Runtime/parser/provider errors: {open_summary.get('runtime_parser_provider_errors')}. Failure inventory rows: {len(failures)}.",
+        "",
+        *markdown_table([{"Category": key, "Count": value} for key, value in sorted(failure_counter.items())], ["Category", "Count"]),
+        "",
+        "The unit of controlled evaluation remains 42 unique cases; repetitions measure provider stability. Persistent time-bounded grants and persistent purpose-bound grants are deliberately not implemented. The document inventory caveat remains in scope as a known limitation, not a redesign target.",
     ]
-    for row in configuration_semantics():
-        report.append(
-            f"| {row['Configuration']} | {row['Retrieval']} | {row['Routing']} | {row['Permission filtering']} | "
-            f"{row['Evidence roles']} | {row['Controlled-failure logic']} | {row['Aggregate handling']} | {row['Citation handling']} |"
-        )
-    report.extend(
-        [
-            "",
-            "## 7. Deterministic protocol and results",
-            DETERMINISTIC_LABEL,
-            f"Deterministic executed records: {det_summary.get('case_count', 0)}. Output accuracy: {det_summary.get('output_class_accuracy')}. Safety findings: {det_summary.get('safety_error_total')}.",
-            "",
-            *markdown_table(
-                deterministic_summary_rows,
-                ["Configuration", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings", "Tokens"],
-            ),
-            "",
-            "## 8. OpenAI preregistration and real-provider protocol",
-            "The OpenAI run was preregistered before measured records with gpt-4o-mini for generation/keywording, text-embedding-3-small for embeddings, temperature 0.0, three repetitions, and 504 planned measured records.",
-            "",
-            f"Preregistration SHA-256: {openai_manifest.get('preregistration_sha256') or prereg.get('preregistration_sha256', 'recorded beside preregistration')}. The locked file was not modified during continuation.",
-            "",
-            "## 9. Interruption and continuation provenance",
-            "The original run stopped after R3-C1 when OpenAI returned insufficient-quota errors. After the user reported the billing top-up, the continuation ran only R3-C2 and R3-C3. The 22 R3-C1 provider/runtime failed records were retained and were not rerun.",
-            "",
-            *markdown_table(before_after_rows, ["Stage", "Executed records", "Complete groups", "Provider/runtime failed records retained", "Notes"]),
-            "",
-            "## 10. Repetition-level results",
-            *markdown_table(
-                repetition_rows,
-                ["Repetition", "Configuration", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings", "Tokens", "Runtime/parser/provider errors"],
-            ),
-            "",
-            "## 11. Overall configuration comparison",
-            *config_lines,
-            "",
-            *markdown_table(
-                overall_rows,
-                ["Configuration", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Support precision", "Page correctness", "Safety findings", "Tokens", "Runtime/parser/provider errors"],
-            ),
-            "",
-            "## 12. Scenario-level comparison",
-            *markdown_table(scenario_rows, ["Configuration", "Scenario", "Cases", "Output accuracy", "Citation coverage", "Safety findings"]),
-            "",
-            "## 13. Output-class-level comparison",
-            *markdown_table(
-                class_rows,
-                ["Configuration", "Expected output class", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness"],
-            ),
-            "",
-            "## 14. Owner/Full versus Aggregate-only comparison",
-            *markdown_table(
-                permission_rows,
-                ["Configuration", "Permission group", "Cases", "Output accuracy", "Permitted-answer accuracy", "Controlled-failure correctness", "Citation coverage", "Safety findings"],
-            ),
-            "",
-            "## 15. Aggregate privacy and threshold behavior",
-            *markdown_table(
-                aggregate_rows,
-                ["Repetition", "Configuration", "Aggregate-only cases", "Aggregate numerical correctness", "Output-class correctness", "Threshold correctness", "Duplicate/reissue handling S3-Q9", "Individual-value exposure", "Withheld-value exposure"],
-            ),
-            "",
-            "## 16. Citation behavior",
-            *markdown_table(
-                citation_rows,
-                ["Configuration", "Cases", "Citation document coverage", "Citation support precision", "Page-level citation correctness", "Citation coverage", "Unsupported citation count", "Wrong-document citation count", "Wrong-page citation count", "Missing-required-document count", "Citation-free intentionally withheld"],
-            ),
-            "",
-            "## 17. Controlled-failure behavior",
-            "Controlled-failure correctness is reported for expected non-full outputs. Baseline configurations intentionally lack these gates and therefore show high false-answer counts on governed cases.",
-            "",
-            "## 18. Safety behavior",
-            *markdown_table(
-                safety_rows,
-                ["Configuration", "Total safety findings", "prohibited_document_id_exposure", "prohibited_text_fragment_exposure", "source_existence_disclosure", "denied_filename_hash_page_disclosure", "aggregate_individual_value_exposure", "generator_visible_restricted_text", "archived_source_usage", "wrong_permission_citation", "local_path_exposure"],
-            ),
-            "",
-            "## 19. Stability analysis",
-            canonical_json(stability_counts),
-            "",
-            "## 20. Retrieval and efficiency",
-            *markdown_table(
-                efficiency_rows,
-                ["Configuration", "Cases", "Mean latency", "Median latency", "P95 latency", "Prompt/input tokens", "Completion/output tokens", "Total tokens", "Recorded generation calls", "Retry count", "Failed call count", "Recorded cost"],
-            ),
-            "",
-            "Retrieval metrics not exposed by the current evaluator remain marked as NOT_AVAILABLE_IN_CURRENT_EVALUATOR in the machine-readable tables.",
-            "",
-            "## 21. Paired configuration comparison",
-            *markdown_table(paired_rows, ["Repetition", "Comparison", "Metric", "C0 wins", "C1 wins", "C2 wins", "Ties", "C0 losses", "C1 losses", "C2 losses", "Compared cases"], limit=30),
-            "",
-            "## 22. Confidence intervals",
-            *markdown_table(ci_rows, ["Repetition", "Configuration", "Metric", "Numerator", "Denominator", "Value", "Wilson 95% lower", "Wilson 95% upper"]),
-            "",
-            "Confidence intervals are repetition-specific and use the 42 unique cases within a repetition where applicable. The repeated responses are not treated as independent new cases.",
-            "",
-            "## 23. Deterministic versus OpenAI comparison",
-            *markdown_table(
-                det_vs_rows,
-                ["Configuration", "Deterministic records", "OpenAI records", "Deterministic output accuracy", "OpenAI output accuracy", "Deterministic controlled failure", "OpenAI controlled failure", "Deterministic citation coverage", "OpenAI citation coverage", "Deterministic safety findings", "OpenAI safety findings"],
-            ),
-            "",
-            "## 24. Error analysis",
-            f"Failure inventory rows: {len(failures)}.",
-            "",
-            *markdown_table(
-                [{"Category": key, "Count": value} for key, value in sorted(failure_counter.items())],
-                ["Category", "Count"],
-            ),
-            "",
-            "Failures are classified in case_failure_inventory.csv and openai/error_analysis.md by case, scenario, configuration, repetition, category, expected behavior, observed behavior, and likely pipeline stage.",
-            "",
-            "## 25. Limitations and conclusions",
-            "The evaluation contains 42 unique controlled cases. Three repetitions assess provider stability but do not create 126 independent cases per configuration. The evidence supports proof-of-concept conclusions only.",
-            "",
-            "The continuation makes the artifact set complete with 504 measured records, while preserving the original quota-interruption evidence. The 22 R3-C1 provider/runtime failures remain part of the measured results.",
-        ]
-    )
     ensure_dir(REPORT_DIR)
-    (REPORT_DIR / "S1_S6_C0_C3_DETAILED_EXPERIMENT_REPORT.md").write_text("\n".join(report) + "\n", encoding="utf-8")
+    (REPORT_DIR / "S1_S6_630_PROMPT_BASELINE_RESULTS_V2_REPORT.md").write_text("\n".join(report) + "\n", encoding="utf-8")
     summary_lines = [
-        "# S1-S6 Publication Results Summary",
+        "# S1-S6 Publication Results Summary V2",
         "",
         f"Final status: {final_status}",
-        "",
         f"Deterministic records: {det_summary.get('case_count', 0)}",
         f"OpenAI records: {open_summary.get('case_count', 0)}",
+        f"AF_ALWAYS_FULL accuracy: {af_summary.get('output_class_accuracy')}",
+        f"AF_ALWAYS_FULL balanced accuracy: {af_summary.get('balanced_accuracy')}",
         "",
         "Primary OpenAI configuration summaries:",
         *config_lines,
@@ -2635,20 +2859,79 @@ def final_validation(final_status: str) -> dict[str, Any]:
     test_diff = git(["diff", "--name-only", "--", "backend_python/tests", "evaluation/tests"], check=False).stdout.splitlines()
     diff_check = git(["diff", "--check"], check=False)
     expected_paths = [
+        PROTOCOL_DIR / "PROTOCOL_V2.json",
+        PROTOCOL_DIR / "PROTOCOL_V2.md",
+        PROTOCOL_DIR / "prompt_only_governance_prompt.txt",
+        PROTOCOL_DIR / "prompt_only_governance_prompt.json",
         COMBINED_DIR / "COMBINED_EVALUATION_MANIFEST.json",
         COMBINED_DIR / "COMBINED_INPUT_VALIDATION.json",
-        DETERMINISTIC_DIR / "per_case_168.csv",
-        DETERMINISTIC_DIR / "per_case_168.jsonl",
+        DETERMINISTIC_DIR / "per_case_210.csv",
+        DETERMINISTIC_DIR / "per_case_210.jsonl",
+        BASELINES_DIR / "AF_ALWAYS_FULL_summary.json",
+        BASELINES_DIR / "AF_ALWAYS_FULL_per_case.jsonl",
         OPENAI_DIR / "REAL_PROVIDER_PREREGISTRATION.json",
-        OPENAI_DIR / "per_case_504.csv",
-        OPENAI_DIR / "per_case_504.jsonl",
-        REPORT_DIR / "S1_S6_C0_C3_DETAILED_EXPERIMENT_REPORT.md",
+        OPENAI_DIR / "per_case_630.csv",
+        OPENAI_DIR / "per_case_630.jsonl",
+        OPENAI_DIR / "configuration_summary.json",
+        OPENAI_DIR / "output_class_confusion_matrix.json",
+        REPORT_DIR / "S1_S6_630_PROMPT_BASELINE_RESULTS_V2_REPORT.md",
         REPORT_DIR / "publication_numbers.json",
     ]
     missing = [rel(path) for path in expected_paths if final_status == "READY_FOR_MANUSCRIPT_RESULTS_UPDATE" and not path.exists()]
     secret_scan = scan_reports_for_secrets()
+    deterministic_rows = load_jsonl(DETERMINISTIC_DIR / "per_case_210.jsonl") if (DETERMINISTIC_DIR / "per_case_210.jsonl").exists() else []
+    openai_rows = load_jsonl(OPENAI_DIR / "per_case_630.jsonl") if (OPENAI_DIR / "per_case_630.jsonl").exists() else []
+    openai_unique_keys = {
+        (row.get("repetition"), row.get("configuration_short"), row.get("case_id"))
+        for row in openai_rows
+    }
+    openai_groups = {
+        (row.get("repetition"), row.get("configuration_short"))
+        for row in openai_rows
+    }
+    af_summary = load_json(BASELINES_DIR / "AF_ALWAYS_FULL_summary.json") if (BASELINES_DIR / "AF_ALWAYS_FULL_summary.json").exists() else {}
+    protocol_summary = load_json(PROTOCOL_DIR / "PROTOCOL_V2.json") if (PROTOCOL_DIR / "PROTOCOL_V2.json").exists() else {}
+    prompt_manifest = load_json(PROTOCOL_DIR / "prompt_only_governance_prompt.json") if (PROTOCOL_DIR / "prompt_only_governance_prompt.json").exists() else {}
+    prompt_hash = sha256_text(prompt_only_governance_prompt())
+    quality = load_json(ARTIFACT_ROOT / "QUALITY_CHECKS_V2.json") if (ARTIFACT_ROOT / "QUALITY_CHECKS_V2.json").exists() else {}
+    record_checks = {
+        "deterministic_record_count_ok": len(deterministic_rows) == EXPECTED_DETERMINISTIC_RECORDS,
+        "openai_record_count_ok": len(openai_rows) == EXPECTED_OPENAI_RECORDS,
+        "openai_unique_key_count_ok": len(openai_unique_keys) == EXPECTED_OPENAI_RECORDS,
+        "openai_group_count_ok": len(openai_groups) == 15,
+        "openai_runtime_parser_provider_errors": sum(int(row.get("provider_runtime_error") or 0) for row in openai_rows),
+        "openai_case_count_per_group_ok": all(
+            len([row for row in openai_rows if (row.get("repetition"), row.get("configuration_short")) == group]) == len(CASE_ORDER)
+            for group in openai_groups
+        ) and len(openai_groups) == 15,
+        "af_always_full_status": af_summary.get("status"),
+        "af_accuracy": af_summary.get("output_class_accuracy"),
+        "af_balanced_accuracy": af_summary.get("balanced_accuracy"),
+        "protocol_locked": protocol_summary.get("PROTOCOL_LOCKED"),
+        "prompt_hash_matches_manifest": prompt_manifest.get("sha256") == prompt_hash,
+        "quality_status": quality.get("status", "NOT_RUN"),
+    }
+    quality_ok = quality.get("status") in {None, "PASS"} or not quality
+    status_ok = (
+        not source_diff
+        and not test_diff
+        and all(package_ok.values())
+        and diff_check.returncode == 0
+        and not missing
+        and secret_scan["status"] == "PASS"
+        and record_checks["deterministic_record_count_ok"]
+        and record_checks["openai_record_count_ok"]
+        and record_checks["openai_unique_key_count_ok"]
+        and record_checks["openai_group_count_ok"]
+        and record_checks["openai_case_count_per_group_ok"]
+        and record_checks["openai_runtime_parser_provider_errors"] == 0
+        and af_summary.get("status") == "PASS"
+        and protocol_summary.get("PROTOCOL_LOCKED") == "YES"
+        and prompt_manifest.get("sha256") == prompt_hash
+        and quality_ok
+    )
     return {
-        "status": "PASS" if not source_diff and not test_diff and all(package_ok.values()) and diff_check.returncode == 0 and not missing and secret_scan["status"] == "PASS" else "FAIL",
+        "status": "PASS" if status_ok else "FAIL",
         "final_status": final_status,
         "SOURCE_CODE_CHANGED": "NO" if not source_diff else "YES",
         "TEST_CODE_CHANGED": "NO" if not test_diff else "YES",
@@ -2667,6 +2950,7 @@ def final_validation(final_status: str) -> dict[str, Any]:
         "PUSH_PERFORMED": "NO",
         "git_diff_check_returncode": diff_check.returncode,
         "missing_required_artifacts": missing,
+        "record_checks": record_checks,
         "secret_scan": secret_scan,
     }
 
@@ -2678,7 +2962,7 @@ def scan_reports_for_secrets() -> dict[str, Any]:
         r"/(?:home|Users|users|tmp|var)/)"
     )
     findings: list[dict[str, str]] = []
-    for directory in [REPORT_DIR, COMBINED_DIR, DETERMINISTIC_DIR, OPENAI_DIR]:
+    for directory in [PROTOCOL_DIR, COMBINED_DIR, DETERMINISTIC_DIR, BASELINES_DIR, OPENAI_DIR, REPORT_DIR]:
         if not directory.exists():
             continue
         for path in directory.rglob("*"):
@@ -2726,7 +3010,7 @@ def run_quality_checks() -> dict[str, Any]:
                 "stderr_tail": result.stderr[-4000:],
             }
         )
-    write_json(ARTIFACT_ROOT / "QUALITY_CHECKS.json", {"generated_at": utc_now(), "checks": checks})
+    write_json(ARTIFACT_ROOT / "QUALITY_CHECKS_V2.json", {"status": "PASS" if all(item["returncode"] == 0 for item in checks) else "FAIL", "generated_at": utc_now(), "checks": checks})
     return {"status": "PASS" if all(item["returncode"] == 0 for item in checks) else "FAIL", "checks": checks}
 
 
@@ -2737,7 +3021,8 @@ def print_status_summary() -> None:
         COMBINED_DIR / "COMBINED_INPUT_VALIDATION.json",
         DETERMINISTIC_DIR / "run_manifest.json",
         OPENAI_DIR / "run_manifest.json",
-        ARTIFACT_ROOT / "FINAL_VALIDATION.json",
+        ARTIFACT_ROOT / "QUALITY_CHECKS_V2.json",
+        ARTIFACT_ROOT / "FINAL_VALIDATION_V2.json",
     ]
     for path in files:
         if path.exists():
@@ -2752,6 +3037,8 @@ def main() -> None:
             "git",
             "verify-packages",
             "overlay",
+            "protocol",
+            "baselines",
             "deterministic",
             "openai-preflight",
             "preregister-openai",
@@ -2778,6 +3065,14 @@ def main() -> None:
             print(json.dumps(build_combined_overlay(payload), ensure_ascii=False, sort_keys=True, indent=2))
             if args.command == "overlay":
                 return
+        if args.command in {"protocol", "all"}:
+            print(json.dumps(freeze_v2_protocol(), ensure_ascii=False, sort_keys=True, indent=2)[:2000])
+            if args.command == "protocol":
+                return
+        if args.command in {"baselines", "all"}:
+            print(json.dumps(run_af_always_full_baseline(), ensure_ascii=False, sort_keys=True, indent=2)[:2000])
+            if args.command == "baselines":
+                return
         if args.command in {"deterministic", "all"}:
             print(json.dumps(run_deterministic(), ensure_ascii=False, sort_keys=True, indent=2)[:2000])
             if args.command == "deterministic":
@@ -2795,23 +3090,24 @@ def main() -> None:
         if args.command == "openai-resume":
             print(json.dumps(run_openai_resume(), ensure_ascii=False, sort_keys=True, indent=2)[:2000])
             return
+        if args.command in {"quality", "all"}:
+            print(json.dumps(run_quality_checks(), ensure_ascii=False, sort_keys=True, indent=2))
+            if args.command == "quality":
+                return
         if args.command in {"report", "all"}:
             final_status = "READY_FOR_MANUSCRIPT_RESULTS_UPDATE"
             openai_manifest_path = OPENAI_DIR / "run_manifest.json"
-            if not openai_manifest_path.exists() or len(load_jsonl(OPENAI_DIR / "per_case_504.jsonl")) != 504:
+            if not openai_manifest_path.exists() or len(load_jsonl(OPENAI_DIR / "per_case_630.jsonl")) != EXPECTED_OPENAI_RECORDS:
                 final_status = "REAL_PROVIDER_EXPERIMENT_INTERRUPTED"
             print(json.dumps(generate_reports(final_status), ensure_ascii=False, sort_keys=True, indent=2))
             if args.command == "report":
                 return
-        if args.command == "quality":
-            print(json.dumps(run_quality_checks(), ensure_ascii=False, sort_keys=True, indent=2))
-            return
         if args.command == "status":
             print_status_summary()
             return
     except StopStatus as exc:
         ensure_dir(ARTIFACT_ROOT)
-        write_json(ARTIFACT_ROOT / "STOP_STATUS.json", {"status": exc.status, "message": str(exc), "at": utc_now()})
+        write_json(ARTIFACT_ROOT / "STOP_STATUS_V2.json", {"status": exc.status, "message": str(exc), "at": utc_now()})
         print(f"{exc.status}: {exc}", file=sys.stderr)
         raise SystemExit(2) from exc
 

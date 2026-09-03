@@ -622,7 +622,47 @@ class DeterministicMockProvider(AIProvider):
 
     def generate(self, messages: Sequence[dict[str, str]], *, model: str, temperature: float = 0.0) -> str:
         del model, temperature
+        system_text = "\n".join(message.get("content", "") for message in messages if message.get("role") == "system")
         user_text = "\n".join(message.get("content", "") for message in messages if message.get("role") == "user")
+        if "prompt-only governance baseline" in system_text.lower():
+            source_text = re.search(r"Retrieved sources:\s*(.+)", user_text, flags=re.DOTALL)
+            source_body = source_text.group(1).strip() if source_text else ""
+            question_match = re.search(r"Question:\s*(.+?)(?:\n|$)", user_text)
+            question = question_match.group(1) if question_match else ""
+            non_denied_source_available = any(
+                f"policy_label: {label}" in source_body
+                for label in ("Full", "Aggregate", "Metadata")
+            )
+            facts: list[str] = []
+            for block in re.split(r"\n\s*---\s*\n", source_body):
+                text_match = re.search(r"text:\s*(.+)", block, flags=re.DOTALL)
+                if text_match:
+                    facts.append(re.sub(r"\s+", " ", text_match.group(1)).strip())
+            question_tokens = set(self._tokens(question))
+            ranked = sorted(
+                facts,
+                key=lambda fact: (
+                    -len(question_tokens.intersection(self._tokens(fact))),
+                    facts.index(fact),
+                ),
+            )
+            if not non_denied_source_available:
+                return json.dumps(
+                    {
+                        "output_class": "REFUSE_PERMISSION",
+                        "reason_code": "permission_refusal",
+                        "answer": "The request cannot be answered from the sources available for this purpose.",
+                    },
+                    sort_keys=True,
+                )
+            return json.dumps(
+                {
+                    "output_class": "FULL_ANSWER",
+                    "reason_code": "supported",
+                    "answer": (ranked[0] if ranked else "The answer cannot be found in the document.")[:640],
+                },
+                sort_keys=True,
+            )
         context = re.search(r"Context from the document\(s\):\s*(.+)", user_text, flags=re.DOTALL)
         if context:
             context_text = context.group(1).strip()

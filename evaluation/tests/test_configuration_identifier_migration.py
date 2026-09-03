@@ -12,9 +12,16 @@ from evaluation.schemas import EvaluationMode, RunRecord
 REPO_ROOT = Path(__file__).resolve().parents[2]
 MIGRATION_ARTIFACT = REPO_ROOT / "artifacts" / "configuration_identifier_migration_b_to_c.json"
 VALIDATION_ARTIFACT = REPO_ROOT / "artifacts" / "configuration_identifier_migration_b_to_c_validation.json"
-CANONICAL_MODES = (
+CANONICAL_C0_C3_MODES = (
     "C0_VECTOR_ONLY",
     "C1_VECTOR_ROUTING",
+    "C2_PERMISSION_FILTERED",
+    "C3_FULL_ROLE_AWARE",
+)
+PUBLICATION_V2_MODES = (
+    "C0_VECTOR_ONLY",
+    "C1_VECTOR_ROUTING",
+    "P1_PROMPT_ONLY_GOVERNANCE",
     "C2_PERMISSION_FILTERED",
     "C3_FULL_ROLE_AWARE",
 )
@@ -31,8 +38,9 @@ def _json(path: Path) -> dict:
 
 
 def test_c0_c3_enum_parsing_and_serialization() -> None:
-    assert tuple(mode.value for mode in EvaluationMode) == CANONICAL_MODES
-    assert [EvaluationMode(value).value for value in CANONICAL_MODES] == list(CANONICAL_MODES)
+    assert tuple(mode.value for mode in EvaluationMode) == PUBLICATION_V2_MODES
+    assert [EvaluationMode(value).value for value in CANONICAL_C0_C3_MODES] == list(CANONICAL_C0_C3_MODES)
+    assert EvaluationMode("P1_PROMPT_ONLY_GOVERNANCE") is EvaluationMode.P1_PROMPT_ONLY_GOVERNANCE
 
     record = RunRecord(
         run_id="migration-regression",
@@ -51,23 +59,23 @@ def test_c0_c3_enum_parsing_and_serialization() -> None:
 
 
 def test_cli_and_provider_estimate_modes_are_c0_c3_only() -> None:
-    assert E1_MODES == CANONICAL_MODES
+    assert E1_MODES == CANONICAL_C0_C3_MODES
     runner = (REPO_ROOT / "scripts" / "run_real_provider_evaluation.py").read_text(encoding="utf-8")
     actual_pipeline = (REPO_ROOT / "scripts" / "run_actual_pipeline_evaluation.py").read_text(encoding="utf-8")
     assert "choices=E1_MODES" in runner
     assert 'modes=["C3_FULL_ROLE_AWARE"]' in runner
-    assert all(mode in actual_pipeline for mode in CANONICAL_MODES)
+    assert all(mode in actual_pipeline for mode in CANONICAL_C0_C3_MODES)
     assert "B0_VECTOR_ONLY" not in runner + actual_pipeline
 
 
 def test_new_d_gate_runs_emit_no_canonical_b_modes_and_report_c_rows(tmp_path: Path) -> None:
     result = run_c0_c3(tmp_path / "c0_c3")
     modes = {record["mode"] for record in result["records"]}
-    assert modes == set(CANONICAL_MODES)
+    assert modes == set(CANONICAL_C0_C3_MODES)
     assert not any(mode.startswith("B") for mode in modes)
 
     rows = list(csv.DictReader((tmp_path / "c0_c3" / "summary.csv").open(encoding="utf-8")))
-    assert [row["mode"] for row in rows] == list(CANONICAL_MODES)
+    assert [row["mode"] for row in rows] == list(CANONICAL_C0_C3_MODES)
     summary_md = (tmp_path / "c0_c3" / "summary.md").read_text(encoding="utf-8")
     assert "D-GATE C0-C3 development table" in summary_md
     assert "B0" not in summary_md and "B3" not in summary_md

@@ -1,0 +1,11 @@
+{
+  "case_specific_content": false,
+  "controlled_failure_gate": false,
+  "gold_blind": true,
+  "governed_aggregate_executor": false,
+  "hard_permission_filtering": false,
+  "post_generation_correction": false,
+  "sha256": "982f197df7e1508cb978529f582cf405469abdc25fce84a6534d901a1b80bb4e",
+  "text_path": "artifacts/s1_s6_publication_experiment_v2/protocol/prompt_only_governance_prompt.txt",
+  "version": "prompt-only-governance-v1"
+}

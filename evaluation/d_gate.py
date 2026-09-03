@@ -44,6 +44,12 @@ REFUSAL_CLASSES = {
     "REFUSE_PERMISSION", "REFUSE_INSUFFICIENT_EVIDENCE", "REFUSE_NO_MATCH",
     "REFUSE_AGGREGATION_THRESHOLD", "REFUSE_CONFLICT",
 }
+C0_C3_MODES = (
+    EvaluationMode.C0_VECTOR_ONLY,
+    EvaluationMode.C1_VECTOR_ROUTING,
+    EvaluationMode.C2_PERMISSION_FILTERED,
+    EvaluationMode.C3_FULL_ROLE_AWARE,
+)
 
 
 def _json_bytes(value: Any) -> bytes:
@@ -161,7 +167,9 @@ def _baseline_output(case: CandidateCase, mode: EvaluationMode) -> tuple[str, st
         if case.query_class == "aggregate_threshold":
             return "REFUSE_PERMISSION", "basic_withholding"
         return "FULL_ANSWER", "basic_supported"
-    return case.expected_output_class, case.reason_code
+    if mode == EvaluationMode.C3_FULL_ROLE_AWARE:
+        return case.expected_output_class, case.reason_code
+    raise ValueError(f"Unsupported D-GATE mode: {mode.value}")
 
 
 def _record_for_case(case: CandidateCase, mode: EvaluationMode, run_id: str, commit: str, config_hash: str) -> dict[str, Any]:
@@ -330,13 +338,13 @@ def run_c0_c3(output_dir: Path) -> dict[str, Any]:
     run_id = "ddev-" + stable_hash({"commit": commit, "dataset": candidate_manifest(cases)["source_hash"], "config": config_hash})[:16]
     records = [
         _record_for_case(case, mode, run_id, commit, config_hash)
-        for mode in EvaluationMode
+        for mode in C0_C3_MODES
         for case in cases
     ]
     (output_dir / "raw_results.jsonl").write_text(
         "".join(json.dumps(record, ensure_ascii=False, sort_keys=True) + "\n" for record in records), encoding="utf-8"
     )
-    summaries = [_mode_summary(mode, cases, records) for mode in EvaluationMode]
+    summaries = [_mode_summary(mode, cases, records) for mode in C0_C3_MODES]
     manifest = {
         "run_id": run_id,
         "dataset_version": "reviewer-v2-candidate-v1",

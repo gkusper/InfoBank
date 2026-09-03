@@ -1,0 +1,33 @@
+{
+  "cases_per_group": 42,
+  "group_count": 15,
+  "planned_real_provider_records": 630,
+  "run_order": {
+    "repetition_1": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ],
+    "repetition_2": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ],
+    "repetition_3": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ]
+  },
+  "unique_key_fields": [
+    "repetition",
+    "configuration_short",
+    "case_id"
+  ]
+}

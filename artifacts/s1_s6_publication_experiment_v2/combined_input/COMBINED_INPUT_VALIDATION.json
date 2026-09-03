@@ -1,0 +1,31 @@
+{
+  "COMBINED_CASE_COUNT": 42,
+  "COMBINED_REFERENCE_ANNOTATION_COUNT": 42,
+  "COMBINED_SCENARIO_COUNT": 6,
+  "COMBINED_SOURCE_PDF_COUNT": 41,
+  "DOCUMENT_ID_COLLISION_COUNT": 0,
+  "RUNTIME_REFERENCE_SEPARATION": "PASS",
+  "case_order_sha256": "0ac6fe6fa0d2dcecaded0be3f4a20ca009f05f89469dc1eabfaaf660fa32c7d5",
+  "collision_rows": [],
+  "combined_evaluation_id": "S1_S6_COMBINED_JOURNAL_EVALUATION_V2",
+  "generated_at": "2026-09-03T12:50:21Z",
+  "output_class_distribution": {
+    "AGGREGATE_RESULT": 5,
+    "CLARIFICATION": 1,
+    "CONSTRAINED_ANSWER": 3,
+    "FULL_ANSWER": 29,
+    "REFUSE_AGGREGATION_THRESHOLD": 1,
+    "REFUSE_INSUFFICIENT_EVIDENCE": 3
+  },
+  "permission_group_distribution": {
+    "Aggregate-only": 6,
+    "Owner/Full": 36
+  },
+  "policy_binding_count": 42,
+  "policy_binding_missing_cases": [],
+  "source_package_hashes": {
+    "S1-S2": "83a9bb2394946b378af4efe2445be1e6e7095a60f5c14f6206ea1405f275bcd1",
+    "S3-S6": "3a5db23fddf55a007d013e09fd11ade74fcdf692847d01b0135346bdd3ddc50c"
+  },
+  "status": "PASS"
+}

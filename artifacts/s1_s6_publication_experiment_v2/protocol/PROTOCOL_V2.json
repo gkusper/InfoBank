@@ -1,0 +1,98 @@
+{
+  "HEAD": "50b2fff6a25c1132c8ddd0fed97ef55425909826",
+  "PROTOCOL_LOCKED": "YES",
+  "branch": "experiment/infocom2026-s1-s6-results-v2",
+  "case_count": 42,
+  "combined_evaluation_id": "S1_S6_COMBINED_JOURNAL_EVALUATION_V2",
+  "configuration_modes": [
+    "C0_VECTOR_ONLY",
+    "C1_VECTOR_ROUTING",
+    "P1_PROMPT_ONLY_GOVERNANCE",
+    "C2_PERMISSION_FILTERED",
+    "C3_FULL_ROLE_AWARE"
+  ],
+  "configurations": [
+    "C0",
+    "C1",
+    "P1",
+    "C2",
+    "C3"
+  ],
+  "created_at": "2026-09-03T12:50:43Z",
+  "dataset_version": "s1-s6-combined-journal-evaluation-v2",
+  "input_hashes": {
+    "combined_manifest": "49916e4cd707eb9e79c3583abfcb062ce1d0962d847a65385feed62962185d53",
+    "corpus_hash": "22ebf2e2a27f009041b3f4979a1d36f94b212edaf259b5c14663386da52b894b",
+    "policy_fixture_hash": "dffd7f841b8f4e7a7720b211d4522f421d5e90d312e69cdd1c55671e1bebeaf8",
+    "query_hash": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd",
+    "reference_annotation_hash": "d7526442bc36fd174b8f5b1fb3981cce37504b297052f67069f18e395021abed",
+    "source_map_hash": "005806a877cd017854df0dd6e05b06eacc3f51af329a78aed2c4199e15741aa4"
+  },
+  "metrics": {
+    "balanced_accuracy": "mean of per-class recall across the six frozen reference output classes",
+    "confusion_matrix": "complete expected-by-actual matrix including zero cells",
+    "macro_recall": "alias of balanced_accuracy for this single-label output-class task",
+    "overall_accuracy": "correct output_class records divided by records",
+    "per_class_recall": "correct predictions for a class divided by reference support for that class",
+    "safety": "reported separately from utility metrics",
+    "utility": "output class, permitted answer, controlled failure, citation, retrieval, latency, and token metrics"
+  },
+  "models": {
+    "embedding_model": "text-embedding-3-small",
+    "generation_model": "gpt-4o-mini",
+    "keyword_model": "gpt-4o-mini",
+    "temperature": 0.0
+  },
+  "origin_infocom2026_expected_base": "50b2fff6a25c1132c8ddd0fed97ef55425909826",
+  "out_of_scope": [
+    "persistent time-bounded grants",
+    "persistent purpose-bound grants",
+    "document inventory redesign beyond direct account permissions",
+    "scientific manuscript edits"
+  ],
+  "planned_deterministic_records": 210,
+  "planned_real_provider_records": 630,
+  "prompt_only_governance_prompt": {
+    "case_specific_content": false,
+    "controlled_failure_gate": false,
+    "gold_blind": true,
+    "governed_aggregate_executor": false,
+    "hard_permission_filtering": false,
+    "post_generation_correction": false,
+    "sha256": "982f197df7e1508cb978529f582cf405469abdc25fce84a6534d901a1b80bb4e",
+    "text_path": "artifacts/s1_s6_publication_experiment_v2/protocol/prompt_only_governance_prompt.txt",
+    "version": "prompt-only-governance-v1"
+  },
+  "repetitions": 3,
+  "repository": "https://github.com/gkusper/InfoBank",
+  "retry_policy": {
+    "answer_quality_reruns_allowed": false,
+    "generation_calls": "OpenAI adapter attempts up to three generation calls for retryable provider/transport failures",
+    "keyword_and_embedding_calls": "committed adapter behavior",
+    "result_dependent_reruns_allowed": false
+  },
+  "run_order": {
+    "repetition_1": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ],
+    "repetition_2": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ],
+    "repetition_3": [
+      "C0",
+      "C1",
+      "P1",
+      "C2",
+      "C3"
+    ]
+  },
+  "schema_version": "infobank-s1-s6-publication-protocol-v2"
+}

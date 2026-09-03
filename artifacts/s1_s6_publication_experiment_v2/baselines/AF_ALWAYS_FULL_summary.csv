@@ -1,0 +1,2 @@
+Baseline,Cases,Output accuracy,Balanced accuracy,Macro recall,Provider calls,Status
+AF_ALWAYS_FULL,42,0.690476,0.166667,0.166667,0,PASS

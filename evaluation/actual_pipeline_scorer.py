@@ -16,7 +16,7 @@ from .reason_codes import canonical_reason_code
 from .schemas import EvaluationMode, utc_timestamp
 
 
-SCORER_VERSION = "infobank-actual-pipeline-scorer-v1"
+SCORER_VERSION = "infobank-actual-pipeline-scorer-v2"
 ANSWER_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
 ABSTENTION_CLASSES = {
     "CLARIFICATION",
@@ -26,6 +26,14 @@ ABSTENTION_CLASSES = {
     "REFUSE_AGGREGATION_THRESHOLD",
     "REFUSE_CONFLICT",
 }
+REFERENCE_OUTPUT_CLASSES = (
+    "FULL_ANSWER",
+    "AGGREGATE_RESULT",
+    "CONSTRAINED_ANSWER",
+    "REFUSE_INSUFFICIENT_EVIDENCE",
+    "REFUSE_AGGREGATION_THRESHOLD",
+    "CLARIFICATION",
+)
 
 
 def _sha256_file(path: Path) -> str:
@@ -117,6 +125,42 @@ def _atom_supported(answer: str, annotation: GoldAnnotation) -> bool:
         return True
     normalized = re.sub(r"\s+", " ", answer.lower())
     return all(re.sub(r"\s+", " ", atom.lower()).strip(" .") in normalized for atom in annotation.factual_atoms)
+
+
+def _balanced_output_metrics(
+    confusion: Counter[tuple[str, str]],
+    actual_classes: Iterable[str],
+) -> dict[str, Any]:
+    columns = tuple(sorted(set(REFERENCE_OUTPUT_CLASSES) | set(actual_classes)))
+    class_support: dict[str, int] = {}
+    per_class_recall: dict[str, float | None] = {}
+    for label in REFERENCE_OUTPUT_CLASSES:
+        support = sum(confusion.get((label, actual), 0) for actual in columns)
+        class_support[label] = support
+        per_class_recall[label] = (
+            round(confusion.get((label, label), 0) / support, 6)
+            if support
+            else None
+        )
+    recalls = [value for value in per_class_recall.values() if value is not None]
+    balanced = round(sum(recalls) / len(recalls), 6) if recalls else None
+    complete_matrix = [
+        {
+            "expected": expected,
+            "actual": actual,
+            "count": confusion.get((expected, actual), 0),
+        }
+        for expected in REFERENCE_OUTPUT_CLASSES
+        for actual in columns
+    ]
+    return {
+        "balanced_accuracy": balanced,
+        "macro_recall": balanced,
+        "per_class_recall": per_class_recall,
+        "class_support": class_support,
+        "output_class_confusion_matrix": complete_matrix,
+        "output_class_confusion_columns": list(columns),
+    }
 
 
 def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]) -> tuple[dict[str, Any], list[dict[str, Any]]]:
@@ -229,6 +273,7 @@ def _score_mode(records: list[dict[str, Any]], annotations: list[GoldAnnotation]
             for (expected, actual), value in sorted(reason_confusion.items())
         ],
     }
+    summary.update(_balanced_output_metrics(output_confusion, [item["actual_output_class"] for item in details]))
     return summary, details
 
 
@@ -282,6 +327,8 @@ def score_sealed_run(
         "mode",
         "case_count",
         "output_class_accuracy",
+        "balanced_accuracy",
+        "macro_recall",
         "reason_code_accuracy",
         "permitted_answer_accuracy",
         "false_or_unsupported_answer_rate",
@@ -309,6 +356,10 @@ def score_sealed_run(
     )
     (destination / "output_class_confusion.json").write_text(
         json.dumps({mode: value["output_class_confusion"] for mode, value in by_mode.items()}, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (destination / "output_class_confusion_matrix.json").write_text(
+        json.dumps({mode: value["output_class_confusion_matrix"] for mode, value in by_mode.items()}, sort_keys=True, indent=2) + "\n",
         encoding="utf-8",
     )
     (destination / "reason_code_confusion.json").write_text(

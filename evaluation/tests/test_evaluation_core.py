@@ -103,6 +103,7 @@ def test_required_fields_and_generic_modes_are_enforced() -> None:
     assert {mode.value for mode in EvaluationMode} == {
         "C0_VECTOR_ONLY",
         "C1_VECTOR_ROUTING",
+        "P1_PROMPT_ONLY_GOVERNANCE",
         "C2_PERMISSION_FILTERED",
         "C3_FULL_ROLE_AWARE",
     }

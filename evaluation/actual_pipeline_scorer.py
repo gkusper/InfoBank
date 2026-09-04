@@ -120,6 +120,97 @@ def _validate_identity(records: list[dict[str, Any]], annotations: list[GoldAnno
     return modes
 
 
+def _record_repetition_index(record: dict[str, Any]) -> int:
+    value = record.get("repetition_index", 1)
+    try:
+        repetition = int(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Raw record has an invalid repetition_index") from exc
+    if repetition < 1:
+        raise ValueError("Raw record has an invalid repetition_index")
+    return repetition
+
+
+def _expected_modes(records: list[dict[str, Any]], seal: dict[str, Any]) -> list[str]:
+    modes = seal.get("modes")
+    if modes is None:
+        return list(dict.fromkeys(str(item.get("mode")) for item in records))
+    if not isinstance(modes, list) or not modes:
+        raise ValueError("Seal modes must be a non-empty list")
+    return [str(mode) for mode in modes]
+
+
+def _expected_repetitions(records: list[dict[str, Any]], seal: dict[str, Any]) -> list[int]:
+    value = seal.get("repetitions")
+    if value is None:
+        return sorted({_record_repetition_index(record) for record in records})
+    try:
+        repetitions = int(value)
+    except (TypeError, ValueError) as exc:
+        raise ValueError("Seal repetitions must be a positive integer") from exc
+    if repetitions < 1:
+        raise ValueError("Seal repetitions must be a positive integer")
+    return list(range(1, repetitions + 1))
+
+
+def _validate_repetition_identity(
+    records: list[dict[str, Any]],
+    annotations: list[GoldAnnotation],
+    seal: dict[str, Any],
+) -> tuple[list[str], list[int], dict[tuple[str, int], list[dict[str, Any]]]]:
+    if not records:
+        raise ValueError("Raw run has no records")
+    if any(item.get("dataset_version") != annotations[0].dataset_version for item in records):
+        raise ValueError("Gold/run version mismatch")
+    if seal.get("dataset_version") != annotations[0].dataset_version:
+        raise ValueError("Gold/seal version mismatch")
+    gold_ids = [item.case_id for item in annotations]
+    if len(gold_ids) != len(set(gold_ids)):
+        raise ValueError("Duplicate gold case IDs")
+
+    modes = _expected_modes(records, seal)
+    repetitions = _expected_repetitions(records, seal)
+    mode_set = set(modes)
+    repetition_set = set(repetitions)
+    unexpected_modes = sorted({str(record.get("mode")) for record in records} - mode_set)
+    if unexpected_modes:
+        raise ValueError(f"Unexpected raw modes: {', '.join(unexpected_modes)}")
+    unexpected_repetitions = sorted({_record_repetition_index(record) for record in records} - repetition_set)
+    if unexpected_repetitions:
+        raise ValueError(f"Unexpected raw repetition_index values: {unexpected_repetitions}")
+
+    composite_keys = [
+        (str(record.get("case_id", "")), str(record.get("mode")), _record_repetition_index(record))
+        for record in records
+    ]
+    missing_case = [key for key in composite_keys if not key[0]]
+    if missing_case:
+        raise ValueError("Missing raw case IDs")
+    duplicates = [key for key, count in Counter(composite_keys).items() if count > 1]
+    if duplicates:
+        raise ValueError(f"Duplicate raw composite case/mode/repetition keys: {duplicates[:5]}")
+
+    groups: dict[tuple[str, int], list[dict[str, Any]]] = {}
+    for mode in modes:
+        for repetition in repetitions:
+            group = [
+                record
+                for record in records
+                if str(record.get("mode")) == mode and _record_repetition_index(record) == repetition
+            ]
+            group_ids = [str(item.get("case_id", "")) for item in group]
+            if len(group_ids) != len(gold_ids):
+                raise ValueError(
+                    f"Expected {len(gold_ids)} raw records for {mode} repetition {repetition}; got {len(group_ids)}"
+                )
+            if len(group_ids) != len(set(group_ids)):
+                raise ValueError(f"Duplicate raw case IDs for {mode} repetition {repetition}")
+            if group_ids != gold_ids:
+                raise ValueError(f"Gold/run order or identity mismatch for {mode} repetition {repetition}")
+            groups[(mode, repetition)] = group
+    return modes, repetitions, groups
+
+
 def _atom_supported(answer: str, annotation: GoldAnnotation) -> bool:
     if not annotation.factual_atoms:
         return True
@@ -360,6 +451,126 @@ def score_sealed_run(
     )
     (destination / "output_class_confusion_matrix.json").write_text(
         json.dumps({mode: value["output_class_confusion_matrix"] for mode, value in by_mode.items()}, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (destination / "reason_code_confusion.json").write_text(
+        json.dumps({mode: value["reason_code_confusion"] for mode, value in by_mode.items()}, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    return result
+
+
+def score_repetition_aware_sealed_run(
+    *,
+    raw_run_path: str | Path,
+    seal_path: str | Path,
+    gold_annotation_path: str | Path,
+    output_dir: str | Path,
+) -> dict[str, Any]:
+    raw_path = Path(raw_run_path)
+    seal_file = Path(seal_path)
+    gold_path = Path(gold_annotation_path)
+    destination = Path(output_dir)
+    destination.mkdir(parents=True, exist_ok=True)
+    seal = json.loads(seal_file.read_text(encoding="utf-8"))
+    if seal.get("scoring_started") is not False:
+        raise ValueError("Raw run was not sealed before scoring")
+    if _sha256_file(raw_path) != seal.get("raw_run_sha256"):
+        raise ValueError("Raw run hash does not match seal")
+    records = _load_jsonl(raw_path)
+    annotations = load_gold_annotations(gold_path)
+    modes, repetitions, groups = _validate_repetition_identity(records, annotations, seal)
+
+    by_mode_repetition: list[dict[str, Any]] = []
+    mode_repetition_confusion: dict[str, list[dict[str, Any]]] = {}
+    detail_rows: list[dict[str, Any]] = []
+    for mode in modes:
+        for repetition in repetitions:
+            summary, details = _score_mode(groups[(mode, repetition)], annotations)
+            by_mode_repetition.append({"mode": mode, "repetition_index": repetition, **summary})
+            mode_repetition_confusion[f"{mode}__R{repetition}"] = summary["output_class_confusion"]
+            detail_rows.extend(
+                {"mode": mode, "repetition_index": repetition, **item}
+                for item in details
+            )
+
+    by_mode: dict[str, Any] = {}
+    for mode in modes:
+        mode_records: list[dict[str, Any]] = []
+        mode_annotations: list[GoldAnnotation] = []
+        for repetition in repetitions:
+            mode_records.extend(groups[(mode, repetition)])
+            mode_annotations.extend(annotations)
+        summary, _details = _score_mode(mode_records, mode_annotations)
+        by_mode[mode] = summary
+
+    result = {
+        "status": "ACTUAL_PIPELINE_DEVELOPMENT_EVALUATION",
+        "scorer_version": SCORER_VERSION,
+        "scoring_strategy": "repetition_aware_mode_repetition_partitioned_v1",
+        "scored_at": utc_timestamp(),
+        "sealed_raw_run_sha256": seal["raw_run_sha256"],
+        "deterministic_content_sha256": seal["deterministic_content_sha256"],
+        "run_id": seal["run_id"],
+        "dataset_version": seal["dataset_version"],
+        "modes": by_mode,
+        "repetitions": repetitions,
+        "mode_repetition_groups": by_mode_repetition,
+        "group_count": len(by_mode_repetition),
+        "human_validation_state": _human_validation_state(annotations),
+        "candidate_holdout_accessed": False,
+    }
+    (destination / "summary.json").write_text(json.dumps(result, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    fields = [
+        "mode",
+        "case_count",
+        "output_class_accuracy",
+        "balanced_accuracy",
+        "macro_recall",
+        "reason_code_accuracy",
+        "permitted_answer_accuracy",
+        "false_or_unsupported_answer_rate",
+        "false_answer_rate_on_expected_abstentions",
+        "false_answer_count",
+        "expected_non_answer_count",
+        "abstention_precision",
+        "abstention_recall",
+        "citation_document_coverage",
+        "citation_support_precision",
+        "page_level_citation_correctness",
+        "citation_coverage",
+        "safety_error_total",
+        "runtime_error_count",
+    ]
+    buffer = io.StringIO(newline="")
+    writer = csv.DictWriter(buffer, fieldnames=fields)
+    writer.writeheader()
+    for mode, summary in by_mode.items():
+        writer.writerow({"mode": mode, **{key: summary.get(key) for key in fields if key != "mode"}})
+    (destination / "summary.csv").write_text(buffer.getvalue(), encoding="utf-8", newline="")
+
+    repetition_fields = ["mode", "repetition_index", *[field for field in fields if field != "mode"]]
+    repetition_buffer = io.StringIO(newline="")
+    repetition_writer = csv.DictWriter(repetition_buffer, fieldnames=repetition_fields)
+    repetition_writer.writeheader()
+    for row in by_mode_repetition:
+        repetition_writer.writerow({key: row.get(key) for key in repetition_fields})
+    (destination / "mode_repetition_summary.csv").write_text(repetition_buffer.getvalue(), encoding="utf-8", newline="")
+
+    (destination / "case_scores.jsonl").write_text(
+        "".join(json.dumps(item, sort_keys=True, separators=(",", ":")) + "\n" for item in detail_rows),
+        encoding="utf-8",
+    )
+    (destination / "output_class_confusion.json").write_text(
+        json.dumps({mode: value["output_class_confusion"] for mode, value in by_mode.items()}, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (destination / "output_class_confusion_matrix.json").write_text(
+        json.dumps({mode: value["output_class_confusion_matrix"] for mode, value in by_mode.items()}, sort_keys=True, indent=2) + "\n",
+        encoding="utf-8",
+    )
+    (destination / "mode_repetition_output_class_confusion.json").write_text(
+        json.dumps(mode_repetition_confusion, sort_keys=True, indent=2) + "\n",
         encoding="utf-8",
     )
     (destination / "reason_code_confusion.json").write_text(

@@ -1,0 +1,5169 @@
+{
+  "by_configuration": {
+    "C0": {
+      "metrics": {
+        "balanced_accuracy": {
+          "maximum": 0.166667,
+          "mean": 0.166667,
+          "minimum": 0.166667,
+          "repetition_values": [
+            0.166667,
+            0.166667,
+            0.166667
+          ],
+          "standard_deviation": 0.0
+        },
+        "citation_coverage": {
+          "maximum": 0.404762,
+          "mean": 0.388889,
+          "minimum": 0.380952,
+          "repetition_values": [
+            0.380952,
+            0.380952,
+            0.404762
+          ],
+          "standard_deviation": 0.013747
+        },
+        "citation_support_precision": {
+          "maximum": 0.390805,
+          "mean": 0.386082,
+          "minimum": 0.383721,
+          "repetition_values": [
+            0.383721,
+            0.383721,
+            0.390805
+          ],
+          "standard_deviation": 0.00409
+        },
+        "controlled_failure_correctness": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "minimum": 0.0,
+          "repetition_values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "standard_deviation": 0.0
+        },
+        "macro_recall": {
+          "maximum": 0.166667,
+          "mean": 0.166667,
+          "minimum": 0.166667,
+          "repetition_values": [
+            0.166667,
+            0.166667,
+            0.166667
+          ],
+          "standard_deviation": 0.0
+        },
+        "output_class_accuracy": {
+          "maximum": 0.690476,
+          "mean": 0.690476,
+          "minimum": 0.690476,
+          "repetition_values": [
+            0.690476,
+            0.690476,
+            0.690476
+          ],
+          "standard_deviation": 0.0
+        },
+        "page_level_citation_correctness": {
+          "maximum": 0.287356,
+          "mean": 0.281832,
+          "minimum": 0.27907,
+          "repetition_values": [
+            0.27907,
+            0.27907,
+            0.287356
+          ],
+          "standard_deviation": 0.004784
+        },
+        "permitted_answer_accuracy": {
+          "maximum": 0.351351,
+          "mean": 0.351351,
+          "minimum": 0.351351,
+          "repetition_values": [
+            0.351351,
+            0.351351,
+            0.351351
+          ],
+          "standard_deviation": 0.0
+        },
+        "reason_code_accuracy": {
+          "maximum": 0.690476,
+          "mean": 0.690476,
+          "minimum": 0.690476,
+          "repetition_values": [
+            0.690476,
+            0.690476,
+            0.690476
+          ],
+          "standard_deviation": 0.0
+        }
+      },
+      "pooled_record_count_descriptive_only": 126,
+      "raw_numerators_denominators": {
+        "controlled_failure": [
+          0,
+          39
+        ],
+        "output_class": [
+          87,
+          126
+        ],
+        "permitted_answer": [
+          39,
+          111
+        ],
+        "reason_code": [
+          87,
+          126
+        ]
+      },
+      "repetitions": [
+        {
+          "balanced_accuracy": 0.166667,
+          "case_count": 42,
+          "citation_coverage": 0.380952,
+          "citation_document_coverage": 0.55,
+          "citation_support_precision": 0.383721,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 6208,
+          "controlled_failure_correct": 0,
+          "controlled_failure_correctness": 0.0,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 33,
+          "factual_atom_support_accuracy": 0.428571,
+          "factual_atom_support_correct": 18,
+          "failed_call_count": 0,
+          "false_answer_count": 5,
+          "false_refusal_count": 0,
+          "intentional_citation_withheld_count": 0,
+          "latency_generation_ms": {
+            "max": 5334.2834,
+            "mean": 2452.539779,
+            "median": 2156.92235,
+            "min": 977.1177,
+            "p50": 2156.92235,
+            "p95": 4280.12068,
+            "stdev": 976.874399
+          },
+          "latency_retrieval_ms": {
+            "max": 2383.3456,
+            "mean": 348.959069,
+            "median": 272.57265,
+            "min": 160.092,
+            "p50": 272.57265,
+            "p95": 400.706615,
+            "stdev": 376.65927
+          },
+          "latency_total_ms": {
+            "max": 7822.1059,
+            "mean": 2914.332945,
+            "median": 2597.42375,
+            "min": 1225.4103,
+            "p50": 2597.42375,
+            "p95": 4775.56181,
+            "stdev": 1175.161368
+          },
+          "macro_recall": 0.166667,
+          "mean_candidate_document_count": 15.428571,
+          "mean_retrieved_chunk_count": 4.904762,
+          "mean_retrieved_document_count": 3.380952,
+          "missing_required_document_count": 27,
+          "mrr": 0.940476,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 29,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.27907,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 1.0,
+            "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.351351,
+          "permitted_answer_correct": 13,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.278175,
+          "predicted_aggregate_result_count": 0,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 42,
+          "predicted_refusal_count": 0,
+          "predicted_refusal_counts_by_class": {},
+          "prompt_input_tokens": 49667,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.65,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 1,
+          "required_document_retrieval_coverage": 0.65,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 3,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 3,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 55875,
+          "unsupported_citation_count": 53,
+          "wrong_document_citation_count": 53,
+          "wrong_page_citation_count": 9
+        },
+        {
+          "balanced_accuracy": 0.166667,
+          "case_count": 42,
+          "citation_coverage": 0.380952,
+          "citation_document_coverage": 0.55,
+          "citation_support_precision": 0.383721,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 6183,
+          "controlled_failure_correct": 0,
+          "controlled_failure_correctness": 0.0,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 33,
+          "factual_atom_support_accuracy": 0.428571,
+          "factual_atom_support_correct": 18,
+          "failed_call_count": 0,
+          "false_answer_count": 5,
+          "false_refusal_count": 0,
+          "intentional_citation_withheld_count": 0,
+          "latency_generation_ms": {
+            "max": 4722.9344,
+            "mean": 2449.009631,
+            "median": 2409.5407,
+            "min": 879.6645,
+            "p50": 2409.5407,
+            "p95": 4441.700665,
+            "stdev": 939.274495
+          },
+          "latency_retrieval_ms": {
+            "max": 859.8408,
+            "mean": 395.705448,
+            "median": 317.82145,
+            "min": 166.2884,
+            "p50": 317.82145,
+            "p95": 697.319695,
+            "stdev": 175.879662
+          },
+          "latency_total_ms": {
+            "max": 5661.6481,
+            "mean": 3034.9956,
+            "median": 2940.1869,
+            "min": 1217.9158,
+            "p50": 2940.1869,
+            "p95": 5121.563625,
+            "stdev": 1079.702062
+          },
+          "macro_recall": 0.166667,
+          "mean_candidate_document_count": 15.428571,
+          "mean_retrieved_chunk_count": 4.904762,
+          "mean_retrieved_document_count": 3.380952,
+          "missing_required_document_count": 27,
+          "mrr": 0.940476,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 29,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.27907,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 1.0,
+            "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.351351,
+          "permitted_answer_correct": 13,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.278175,
+          "predicted_aggregate_result_count": 0,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 42,
+          "predicted_refusal_count": 0,
+          "predicted_refusal_counts_by_class": {},
+          "prompt_input_tokens": 49667,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.65,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 2,
+          "required_document_retrieval_coverage": 0.65,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 3,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 3,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 55850,
+          "unsupported_citation_count": 53,
+          "wrong_document_citation_count": 53,
+          "wrong_page_citation_count": 9
+        },
+        {
+          "balanced_accuracy": 0.166667,
+          "case_count": 42,
+          "citation_coverage": 0.404762,
+          "citation_document_coverage": 0.566667,
+          "citation_support_precision": 0.390805,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 6405,
+          "controlled_failure_correct": 0,
+          "controlled_failure_correctness": 0.0,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 34,
+          "factual_atom_support_accuracy": 0.428571,
+          "factual_atom_support_correct": 18,
+          "failed_call_count": 0,
+          "false_answer_count": 5,
+          "false_refusal_count": 0,
+          "intentional_citation_withheld_count": 0,
+          "latency_generation_ms": {
+            "max": 4820.8464,
+            "mean": 2362.773719,
+            "median": 2199.07425,
+            "min": 824.7654,
+            "p50": 2199.07425,
+            "p95": 4478.329405,
+            "stdev": 899.605554
+          },
+          "latency_retrieval_ms": {
+            "max": 1468.2857,
+            "mean": 328.591526,
+            "median": 271.2569,
+            "min": 172.923,
+            "p50": 271.2569,
+            "p95": 629.06682,
+            "stdev": 218.690603
+          },
+          "latency_total_ms": {
+            "max": 5439.237,
+            "mean": 2837.81244,
+            "median": 2605.5621,
+            "min": 1072.0016,
+            "p50": 2605.5621,
+            "p95": 5135.92296,
+            "stdev": 1019.16639
+          },
+          "macro_recall": 0.166667,
+          "mean_candidate_document_count": 15.428571,
+          "mean_retrieved_chunk_count": 4.904762,
+          "mean_retrieved_document_count": 3.380952,
+          "missing_required_document_count": 26,
+          "mrr": 0.940476,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 29,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.287356,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 1.0,
+            "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.351351,
+          "permitted_answer_correct": 13,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.278175,
+          "predicted_aggregate_result_count": 0,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 42,
+          "predicted_refusal_count": 0,
+          "predicted_refusal_counts_by_class": {},
+          "prompt_input_tokens": 49667,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.65,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 3,
+          "required_document_retrieval_coverage": 0.65,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 3,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 3,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 56072,
+          "unsupported_citation_count": 53,
+          "wrong_document_citation_count": 53,
+          "wrong_page_citation_count": 9
+        }
+      ]
+    },
+    "C1": {
+      "metrics": {
+        "balanced_accuracy": {
+          "maximum": 0.166667,
+          "mean": 0.166667,
+          "minimum": 0.166667,
+          "repetition_values": [
+            0.166667,
+            0.166667,
+            0.166667
+          ],
+          "standard_deviation": 0.0
+        },
+        "citation_coverage": {
+          "maximum": 0.369048,
+          "mean": 0.36508,
+          "minimum": 0.357143,
+          "repetition_values": [
+            0.357143,
+            0.369048,
+            0.369048
+          ],
+          "standard_deviation": 0.006873
+        },
+        "citation_support_precision": {
+          "maximum": 0.421053,
+          "mean": 0.417407,
+          "minimum": 0.415584,
+          "repetition_values": [
+            0.415584,
+            0.415584,
+            0.421053
+          ],
+          "standard_deviation": 0.003158
+        },
+        "controlled_failure_correctness": {
+          "maximum": 0.0,
+          "mean": 0.0,
+          "minimum": 0.0,
+          "repetition_values": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "standard_deviation": 0.0
+        },
+        "macro_recall": {
+          "maximum": 0.166667,
+          "mean": 0.166667,
+          "minimum": 0.166667,
+          "repetition_values": [
+            0.166667,
+            0.166667,
+            0.166667
+          ],
+          "standard_deviation": 0.0
+        },
+        "output_class_accuracy": {
+          "maximum": 0.690476,
+          "mean": 0.690476,
+          "minimum": 0.690476,
+          "repetition_values": [
+            0.690476,
+            0.690476,
+            0.690476
+          ],
+          "standard_deviation": 0.0
+        },
+        "page_level_citation_correctness": {
+          "maximum": 0.302632,
+          "mean": 0.295682,
+          "minimum": 0.285714,
+          "repetition_values": [
+            0.285714,
+            0.298701,
+            0.302632
+          ],
+          "standard_deviation": 0.008854
+        },
+        "permitted_answer_accuracy": {
+          "maximum": 0.351351,
+          "mean": 0.342342,
+          "minimum": 0.324324,
+          "repetition_values": [
+            0.324324,
+            0.351351,
+            0.351351
+          ],
+          "standard_deviation": 0.015604
+        },
+        "reason_code_accuracy": {
+          "maximum": 0.690476,
+          "mean": 0.690476,
+          "minimum": 0.690476,
+          "repetition_values": [
+            0.690476,
+            0.690476,
+            0.690476
+          ],
+          "standard_deviation": 0.0
+        }
+      },
+      "pooled_record_count_descriptive_only": 126,
+      "raw_numerators_denominators": {
+        "controlled_failure": [
+          0,
+          39
+        ],
+        "output_class": [
+          87,
+          126
+        ],
+        "permitted_answer": [
+          38,
+          111
+        ],
+        "reason_code": [
+          87,
+          126
+        ]
+      },
+      "repetitions": [
+        {
+          "balanced_accuracy": 0.166667,
+          "case_count": 42,
+          "citation_coverage": 0.357143,
+          "citation_document_coverage": 0.533333,
+          "citation_support_precision": 0.415584,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 6208,
+          "controlled_failure_correct": 0,
+          "controlled_failure_correctness": 0.0,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 32,
+          "factual_atom_support_accuracy": 0.404762,
+          "factual_atom_support_correct": 17,
+          "failed_call_count": 0,
+          "false_answer_count": 5,
+          "false_refusal_count": 0,
+          "intentional_citation_withheld_count": 0,
+          "latency_generation_ms": {
+            "max": 4818.9157,
+            "mean": 2351.911371,
+            "median": 2388.93555,
+            "min": 973.8142,
+            "p50": 2388.93555,
+            "p95": 3511.312685,
+            "stdev": 805.695523
+          },
+          "latency_retrieval_ms": {
+            "max": 669.5221,
+            "mean": 336.492945,
+            "median": 325.5366,
+            "min": 189.3232,
+            "p50": 325.5366,
+            "p95": 528.243855,
+            "stdev": 119.562008
+          },
+          "latency_total_ms": {
+            "max": 9977.4665,
+            "mean": 5504.75734,
+            "median": 5475.8551,
+            "min": 2223.455,
+            "p50": 5475.8551,
+            "p95": 7768.864675,
+            "stdev": 1474.091389
+          },
+          "macro_recall": 0.166667,
+          "mean_candidate_document_count": 5.595238,
+          "mean_retrieved_chunk_count": 4.738095,
+          "mean_retrieved_document_count": 2.785714,
+          "missing_required_document_count": 28,
+          "mrr": 0.964286,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 29,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.285714,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 1.0,
+            "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.324324,
+          "permitted_answer_correct": 12,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.389683,
+          "predicted_aggregate_result_count": 0,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 42,
+          "predicted_refusal_count": 0,
+          "predicted_refusal_counts_by_class": {},
+          "prompt_input_tokens": 48346,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.633333,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 1,
+          "required_document_retrieval_coverage": 0.633333,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 3,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 3,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 54554,
+          "unsupported_citation_count": 45,
+          "wrong_document_citation_count": 45,
+          "wrong_page_citation_count": 10
+        },
+        {
+          "balanced_accuracy": 0.166667,
+          "case_count": 42,
+          "citation_coverage": 0.369048,
+          "citation_document_coverage": 0.533333,
+          "citation_support_precision": 0.415584,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 6126,
+          "controlled_failure_correct": 0,
+          "controlled_failure_correctness": 0.0,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 32,
+          "factual_atom_support_accuracy": 0.428571,
+          "factual_atom_support_correct": 18,
+          "failed_call_count": 0,
+          "false_answer_count": 5,
+          "false_refusal_count": 0,
+          "intentional_citation_withheld_count": 0,
+          "latency_generation_ms": {
+            "max": 4331.7627,
+            "mean": 2325.192831,
+            "median": 2223.9448,
+            "min": 1065.4379,
+            "p50": 2223.9448,
+            "p95": 3776.33372,
+            "stdev": 764.084109
+          },
+          "latency_retrieval_ms": {
+            "max": 701.491,
+            "mean": 366.867257,
+            "median": 343.6793,
+            "min": 176.6443,
+            "p50": 343.6793,
+            "p95": 618.77001,
+            "stdev": 128.079085
+          },
+          "latency_total_ms": {
+            "max": 10045.509,
+            "mean": 5612.611167,
+            "median": 5491.9572,
+            "min": 3206.6311,
+            "p50": 5491.9572,
+            "p95": 7617.326015,
+            "stdev": 1451.077361
+          },
+          "macro_recall": 0.166667,
+          "mean_candidate_document_count": 5.571429,
+          "mean_retrieved_chunk_count": 4.714286,
+          "mean_retrieved_document_count": 2.761905,
+          "missing_required_document_count": 28,
+          "mrr": 0.964286,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 29,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.298701,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 1.0,
+            "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.351351,
+          "permitted_answer_correct": 13,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.39127,
+          "predicted_aggregate_result_count": 0,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 42,
+          "predicted_refusal_count": 0,
+          "predicted_refusal_counts_by_class": {},
+          "prompt_input_tokens": 48302,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.633333,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 2,
+          "required_document_retrieval_coverage": 0.633333,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 3,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 3,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 54428,
+          "unsupported_citation_count": 45,
+          "wrong_document_citation_count": 45,
+          "wrong_page_citation_count": 9
+        },
+        {
+          "balanced_accuracy": 0.166667,
+          "case_count": 42,
+          "citation_coverage": 0.369048,
+          "citation_document_coverage": 0.533333,
+          "citation_support_precision": 0.421053,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 5985,
+          "controlled_failure_correct": 0,
+          "controlled_failure_correctness": 0.0,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 32,
+          "factual_atom_support_accuracy": 0.428571,
+          "factual_atom_support_correct": 18,
+          "failed_call_count": 0,
+          "false_answer_count": 5,
+          "false_refusal_count": 0,
+          "intentional_citation_withheld_count": 0,
+          "latency_generation_ms": {
+            "max": 4566.76,
+            "mean": 2384.02255,
+            "median": 2418.0787,
+            "min": 933.0277,
+            "p50": 2418.0787,
+            "p95": 3634.422495,
+            "stdev": 827.454182
+          },
+          "latency_retrieval_ms": {
+            "max": 636.4748,
+            "mean": 364.38665,
+            "median": 389.20775,
+            "min": 156.7056,
+            "p50": 389.20775,
+            "p95": 541.8538,
+            "stdev": 119.51145
+          },
+          "latency_total_ms": {
+            "max": 9791.4794,
+            "mean": 5775.873683,
+            "median": 5516.67345,
+            "min": 2986.6475,
+            "p50": 5516.67345,
+            "p95": 8276.019805,
+            "stdev": 1637.671079
+          },
+          "macro_recall": 0.166667,
+          "mean_candidate_document_count": 5.571429,
+          "mean_retrieved_chunk_count": 4.690476,
+          "mean_retrieved_document_count": 2.761905,
+          "missing_required_document_count": 28,
+          "mrr": 0.981481,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 29,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.302632,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 1.0,
+            "REFUSE_AGGREGATION_THRESHOLD": 0.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.351351,
+          "permitted_answer_correct": 13,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.36746,
+          "predicted_aggregate_result_count": 0,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 42,
+          "predicted_refusal_count": 0,
+          "predicted_refusal_counts_by_class": {},
+          "prompt_input_tokens": 48201,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.616667,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 3,
+          "required_document_retrieval_coverage": 0.616667,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 3,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 3,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 54186,
+          "unsupported_citation_count": 44,
+          "wrong_document_citation_count": 44,
+          "wrong_page_citation_count": 9
+        }
+      ]
+    },
+    "C2": {
+      "metrics": {
+        "balanced_accuracy": {
+          "maximum": 0.52682,
+          "mean": 0.52682,
+          "minimum": 0.52682,
+          "repetition_values": [
+            0.52682,
+            0.52682,
+            0.52682
+          ],
+          "standard_deviation": 0.0
+        },
+        "citation_coverage": {
+          "maximum": 0.404762,
+          "mean": 0.388889,
+          "minimum": 0.380952,
+          "repetition_values": [
+            0.404762,
+            0.380952,
+            0.380952
+          ],
+          "standard_deviation": 0.013747
+        },
+        "citation_support_precision": {
+          "maximum": 0.55,
+          "mean": 0.541439,
+          "minimum": 0.533333,
+          "repetition_values": [
+            0.55,
+            0.533333,
+            0.540984
+          ],
+          "standard_deviation": 0.008343
+        },
+        "controlled_failure_correctness": {
+          "maximum": 0.538462,
+          "mean": 0.538462,
+          "minimum": 0.538462,
+          "repetition_values": [
+            0.538462,
+            0.538462,
+            0.538462
+          ],
+          "standard_deviation": 0.0
+        },
+        "macro_recall": {
+          "maximum": 0.52682,
+          "mean": 0.52682,
+          "minimum": 0.52682,
+          "repetition_values": [
+            0.52682,
+            0.52682,
+            0.52682
+          ],
+          "standard_deviation": 0.0
+        },
+        "output_class_accuracy": {
+          "maximum": 0.738095,
+          "mean": 0.738095,
+          "minimum": 0.738095,
+          "repetition_values": [
+            0.738095,
+            0.738095,
+            0.738095
+          ],
+          "standard_deviation": 0.0
+        },
+        "page_level_citation_correctness": {
+          "maximum": 0.416667,
+          "mean": 0.40337,
+          "minimum": 0.393443,
+          "repetition_values": [
+            0.416667,
+            0.4,
+            0.393443
+          ],
+          "standard_deviation": 0.011973
+        },
+        "permitted_answer_accuracy": {
+          "maximum": 0.513514,
+          "mean": 0.486486,
+          "minimum": 0.459459,
+          "repetition_values": [
+            0.459459,
+            0.513514,
+            0.486486
+          ],
+          "standard_deviation": 0.027028
+        },
+        "reason_code_accuracy": {
+          "maximum": 0.738095,
+          "mean": 0.738095,
+          "minimum": 0.738095,
+          "repetition_values": [
+            0.738095,
+            0.738095,
+            0.738095
+          ],
+          "standard_deviation": 0.0
+        }
+      },
+      "pooled_record_count_descriptive_only": 126,
+      "raw_numerators_denominators": {
+        "controlled_failure": [
+          21,
+          39
+        ],
+        "output_class": [
+          93,
+          126
+        ],
+        "permitted_answer": [
+          54,
+          111
+        ],
+        "reason_code": [
+          93,
+          126
+        ]
+      },
+      "repetitions": [
+        {
+          "balanced_accuracy": 0.52682,
+          "case_count": 42,
+          "citation_coverage": 0.404762,
+          "citation_document_coverage": 0.55,
+          "citation_support_precision": 0.55,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 4863,
+          "controlled_failure_correct": 7,
+          "controlled_failure_correctness": 0.538462,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 33,
+          "factual_atom_support_accuracy": 0.52381,
+          "factual_atom_support_correct": 22,
+          "failed_call_count": 0,
+          "false_answer_count": 2,
+          "false_refusal_count": 5,
+          "intentional_citation_withheld_count": 13,
+          "latency_generation_ms": {
+            "max": 4330.0904,
+            "mean": 1753.325162,
+            "median": 1995.6194,
+            "min": 0.0006,
+            "p50": 1995.6194,
+            "p95": 4049.1627,
+            "stdev": 1431.316107
+          },
+          "latency_retrieval_ms": {
+            "max": 639.1661,
+            "mean": 307.833833,
+            "median": 288.49965,
+            "min": 181.4625,
+            "p50": 288.49965,
+            "p95": 483.65055,
+            "stdev": 95.549973
+          },
+          "latency_total_ms": {
+            "max": 5430.8602,
+            "mean": 2688.46266,
+            "median": 2963.7527,
+            "min": 621.2011,
+            "p50": 2963.7527,
+            "p95": 4973.76439,
+            "stdev": 1524.088013
+          },
+          "macro_recall": 0.52682,
+          "mean_candidate_document_count": 4.380952,
+          "mean_retrieved_chunk_count": 4.880952,
+          "mean_retrieved_document_count": 3.380952,
+          "missing_required_document_count": 27,
+          "mrr": 0.940476,
+          "output_class_accuracy": 0.738095,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 24,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 5,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 31,
+          "page_level_citation_correctness": 0.416667,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 1.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 0.827586,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.333333
+          },
+          "permitted_answer_accuracy": 0.459459,
+          "permitted_answer_correct": 17,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.278175,
+          "predicted_aggregate_result_count": 5,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 29,
+          "predicted_refusal_count": 8,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 7
+          },
+          "prompt_input_tokens": 32011,
+          "reason_code_accuracy": 0.738095,
+          "reason_code_correct": 31,
+          "recall_at_k": 0.65,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 29,
+          "repetition": 1,
+          "required_document_retrieval_coverage": 0.65,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 0,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 0,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 36874,
+          "unsupported_citation_count": 27,
+          "wrong_document_citation_count": 27,
+          "wrong_page_citation_count": 8
+        },
+        {
+          "balanced_accuracy": 0.52682,
+          "case_count": 42,
+          "citation_coverage": 0.380952,
+          "citation_document_coverage": 0.533333,
+          "citation_support_precision": 0.533333,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 4814,
+          "controlled_failure_correct": 7,
+          "controlled_failure_correctness": 0.538462,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 32,
+          "factual_atom_support_accuracy": 0.571429,
+          "factual_atom_support_correct": 24,
+          "failed_call_count": 0,
+          "false_answer_count": 2,
+          "false_refusal_count": 5,
+          "intentional_citation_withheld_count": 13,
+          "latency_generation_ms": {
+            "max": 4804.7554,
+            "mean": 1718.398186,
+            "median": 1817.3114,
+            "min": 0.0002,
+            "p50": 1817.3114,
+            "p95": 3986.07918,
+            "stdev": 1415.219349
+          },
+          "latency_retrieval_ms": {
+            "max": 517.6163,
+            "mean": 273.611567,
+            "median": 273.73965,
+            "min": 176.0962,
+            "p50": 273.73965,
+            "p95": 356.711235,
+            "stdev": 64.13504
+          },
+          "latency_total_ms": {
+            "max": 5735.0503,
+            "mean": 2405.794398,
+            "median": 2454.4776,
+            "min": 454.3088,
+            "p50": 2454.4776,
+            "p95": 5022.76134,
+            "stdev": 1483.767036
+          },
+          "macro_recall": 0.52682,
+          "mean_candidate_document_count": 4.380952,
+          "mean_retrieved_chunk_count": 4.880952,
+          "mean_retrieved_document_count": 3.380952,
+          "missing_required_document_count": 28,
+          "mrr": 0.940476,
+          "output_class_accuracy": 0.738095,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 24,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 5,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 31,
+          "page_level_citation_correctness": 0.4,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 1.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 0.827586,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.333333
+          },
+          "permitted_answer_accuracy": 0.513514,
+          "permitted_answer_correct": 19,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.278175,
+          "predicted_aggregate_result_count": 5,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 29,
+          "predicted_refusal_count": 8,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 7
+          },
+          "prompt_input_tokens": 32011,
+          "reason_code_accuracy": 0.738095,
+          "reason_code_correct": 31,
+          "recall_at_k": 0.65,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 29,
+          "repetition": 2,
+          "required_document_retrieval_coverage": 0.65,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 0,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 0,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 36825,
+          "unsupported_citation_count": 28,
+          "wrong_document_citation_count": 28,
+          "wrong_page_citation_count": 8
+        },
+        {
+          "balanced_accuracy": 0.52682,
+          "case_count": 42,
+          "citation_coverage": 0.380952,
+          "citation_document_coverage": 0.55,
+          "citation_support_precision": 0.540984,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 4794,
+          "controlled_failure_correct": 7,
+          "controlled_failure_correctness": 0.538462,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 33,
+          "factual_atom_support_accuracy": 0.547619,
+          "factual_atom_support_correct": 23,
+          "failed_call_count": 0,
+          "false_answer_count": 2,
+          "false_refusal_count": 5,
+          "intentional_citation_withheld_count": 13,
+          "latency_generation_ms": {
+            "max": 4671.0927,
+            "mean": 1771.367993,
+            "median": 1980.4881,
+            "min": 0.0005,
+            "p50": 1980.4881,
+            "p95": 4563.279535,
+            "stdev": 1488.574925
+          },
+          "latency_retrieval_ms": {
+            "max": 1417.9548,
+            "mean": 339.225157,
+            "median": 294.3518,
+            "min": 197.2607,
+            "p50": 294.3518,
+            "p95": 487.92603,
+            "stdev": 190.1659
+          },
+          "latency_total_ms": {
+            "max": 6764.5158,
+            "mean": 2726.869471,
+            "median": 2947.40125,
+            "min": 658.6305,
+            "p50": 2947.40125,
+            "p95": 5749.26995,
+            "stdev": 1677.798991
+          },
+          "macro_recall": 0.52682,
+          "mean_candidate_document_count": 4.380952,
+          "mean_retrieved_chunk_count": 4.880952,
+          "mean_retrieved_document_count": 3.380952,
+          "missing_required_document_count": 27,
+          "mrr": 0.940476,
+          "output_class_accuracy": 0.738095,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 24,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 5,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 3,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 31,
+          "page_level_citation_correctness": 0.393443,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 1.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 0.827586,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.333333
+          },
+          "permitted_answer_accuracy": 0.486486,
+          "permitted_answer_correct": 18,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.278175,
+          "predicted_aggregate_result_count": 5,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 0,
+          "predicted_full_answer_count": 29,
+          "predicted_refusal_count": 8,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 7
+          },
+          "prompt_input_tokens": 32011,
+          "reason_code_accuracy": 0.738095,
+          "reason_code_correct": 31,
+          "recall_at_k": 0.65,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 29,
+          "repetition": 3,
+          "required_document_retrieval_coverage": 0.65,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 0,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 0,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 36805,
+          "unsupported_citation_count": 28,
+          "wrong_document_citation_count": 28,
+          "wrong_page_citation_count": 9
+        }
+      ]
+    },
+    "C3": {
+      "metrics": {
+        "balanced_accuracy": {
+          "maximum": 0.515326,
+          "mean": 0.515326,
+          "minimum": 0.515326,
+          "repetition_values": [
+            0.515326,
+            0.515326,
+            0.515326
+          ],
+          "standard_deviation": 0.0
+        },
+        "citation_coverage": {
+          "maximum": 0.369048,
+          "mean": 0.361111,
+          "minimum": 0.357143,
+          "repetition_values": [
+            0.357143,
+            0.357143,
+            0.369048
+          ],
+          "standard_deviation": 0.006873
+        },
+        "citation_support_precision": {
+          "maximum": 0.666667,
+          "mean": 0.661616,
+          "minimum": 0.659091,
+          "repetition_values": [
+            0.659091,
+            0.659091,
+            0.666667
+          ],
+          "standard_deviation": 0.004374
+        },
+        "controlled_failure_correctness": {
+          "maximum": 0.538462,
+          "mean": 0.538462,
+          "minimum": 0.538462,
+          "repetition_values": [
+            0.538462,
+            0.538462,
+            0.538462
+          ],
+          "standard_deviation": 0.0
+        },
+        "macro_recall": {
+          "maximum": 0.515326,
+          "mean": 0.515326,
+          "minimum": 0.515326,
+          "repetition_values": [
+            0.515326,
+            0.515326,
+            0.515326
+          ],
+          "standard_deviation": 0.0
+        },
+        "output_class_accuracy": {
+          "maximum": 0.690476,
+          "mean": 0.690476,
+          "minimum": 0.690476,
+          "repetition_values": [
+            0.690476,
+            0.690476,
+            0.690476
+          ],
+          "standard_deviation": 0.0
+        },
+        "page_level_citation_correctness": {
+          "maximum": 0.511111,
+          "mean": 0.503704,
+          "minimum": 0.5,
+          "repetition_values": [
+            0.5,
+            0.5,
+            0.511111
+          ],
+          "standard_deviation": 0.006415
+        },
+        "permitted_answer_accuracy": {
+          "maximum": 0.513514,
+          "mean": 0.495495,
+          "minimum": 0.486486,
+          "repetition_values": [
+            0.486486,
+            0.486486,
+            0.513514
+          ],
+          "standard_deviation": 0.015605
+        },
+        "reason_code_accuracy": {
+          "maximum": 0.690476,
+          "mean": 0.690476,
+          "minimum": 0.690476,
+          "repetition_values": [
+            0.690476,
+            0.690476,
+            0.690476
+          ],
+          "standard_deviation": 0.0
+        }
+      },
+      "pooled_record_count_descriptive_only": 126,
+      "raw_numerators_denominators": {
+        "controlled_failure": [
+          21,
+          39
+        ],
+        "output_class": [
+          87,
+          126
+        ],
+        "permitted_answer": [
+          55,
+          111
+        ],
+        "reason_code": [
+          87,
+          126
+        ]
+      },
+      "repetitions": [
+        {
+          "balanced_accuracy": 0.515326,
+          "case_count": 42,
+          "citation_coverage": 0.357143,
+          "citation_document_coverage": 0.483333,
+          "citation_support_precision": 0.659091,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 4812,
+          "controlled_failure_correct": 7,
+          "controlled_failure_correctness": 0.538462,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 29,
+          "factual_atom_support_accuracy": 0.547619,
+          "factual_atom_support_correct": 23,
+          "failed_call_count": 0,
+          "false_answer_count": 2,
+          "false_refusal_count": 7,
+          "intentional_citation_withheld_count": 15,
+          "latency_generation_ms": {
+            "max": 5045.1,
+            "mean": 1849.174345,
+            "median": 2222.5851,
+            "min": 0.0002,
+            "p50": 2222.5851,
+            "p95": 4223.104885,
+            "stdev": 1589.23797
+          },
+          "latency_retrieval_ms": {
+            "max": 1223.4985,
+            "mean": 377.169536,
+            "median": 343.60695,
+            "min": 167.5165,
+            "p50": 343.60695,
+            "p95": 838.262685,
+            "stdev": 221.362207
+          },
+          "latency_total_ms": {
+            "max": 10289.967,
+            "mean": 5089.98985,
+            "median": 5249.81245,
+            "min": 489.3215,
+            "p50": 5249.81245,
+            "p95": 9179.67253,
+            "stdev": 2615.900556
+          },
+          "macro_recall": 0.515326,
+          "mean_candidate_document_count": 3.333333,
+          "mean_retrieved_chunk_count": 4.714286,
+          "mean_retrieved_document_count": 2.47619,
+          "missing_required_document_count": 31,
+          "mrr": 0.981481,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 22,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 6,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.5,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 1.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 0.758621,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.333333
+          },
+          "permitted_answer_accuracy": 0.486486,
+          "permitted_answer_correct": 18,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.431349,
+          "predicted_aggregate_result_count": 5,
+          "predicted_clarification_count": 1,
+          "predicted_constrained_answer_count": 1,
+          "predicted_full_answer_count": 26,
+          "predicted_refusal_count": 9,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 8
+          },
+          "prompt_input_tokens": 49117,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.616667,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 27,
+          "repetition": 1,
+          "required_document_retrieval_coverage": 0.616667,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 0,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 0,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 53929,
+          "unsupported_citation_count": 15,
+          "wrong_document_citation_count": 15,
+          "wrong_page_citation_count": 7
+        },
+        {
+          "balanced_accuracy": 0.515326,
+          "case_count": 42,
+          "citation_coverage": 0.357143,
+          "citation_document_coverage": 0.483333,
+          "citation_support_precision": 0.659091,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 4820,
+          "controlled_failure_correct": 7,
+          "controlled_failure_correctness": 0.538462,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 29,
+          "factual_atom_support_accuracy": 0.547619,
+          "factual_atom_support_correct": 23,
+          "failed_call_count": 0,
+          "false_answer_count": 2,
+          "false_refusal_count": 7,
+          "intentional_citation_withheld_count": 15,
+          "latency_generation_ms": {
+            "max": 4570.9226,
+            "mean": 1817.126833,
+            "median": 2305.7401,
+            "min": 0.0005,
+            "p50": 2305.7401,
+            "p95": 3860.17589,
+            "stdev": 1541.686259
+          },
+          "latency_retrieval_ms": {
+            "max": 1159.8656,
+            "mean": 388.047933,
+            "median": 358.7801,
+            "min": 193.816,
+            "p50": 358.7801,
+            "p95": 662.302525,
+            "stdev": 179.18251
+          },
+          "latency_total_ms": {
+            "max": 9831.6126,
+            "mean": 5112.88454,
+            "median": 5542.866,
+            "min": 676.5873,
+            "p50": 5542.866,
+            "p95": 8864.271015,
+            "stdev": 2540.819476
+          },
+          "macro_recall": 0.515326,
+          "mean_candidate_document_count": 3.404762,
+          "mean_retrieved_chunk_count": 4.642857,
+          "mean_retrieved_document_count": 2.547619,
+          "missing_required_document_count": 31,
+          "mrr": 0.981481,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 22,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 6,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.5,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 1.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 0.758621,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.333333
+          },
+          "permitted_answer_accuracy": 0.486486,
+          "permitted_answer_correct": 18,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.423413,
+          "predicted_aggregate_result_count": 5,
+          "predicted_clarification_count": 1,
+          "predicted_constrained_answer_count": 1,
+          "predicted_full_answer_count": 26,
+          "predicted_refusal_count": 9,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 8
+          },
+          "prompt_input_tokens": 48400,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.616667,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 27,
+          "repetition": 2,
+          "required_document_retrieval_coverage": 0.616667,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 0,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 0,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 53220,
+          "unsupported_citation_count": 15,
+          "wrong_document_citation_count": 15,
+          "wrong_page_citation_count": 7
+        },
+        {
+          "balanced_accuracy": 0.515326,
+          "case_count": 42,
+          "citation_coverage": 0.369048,
+          "citation_document_coverage": 0.5,
+          "citation_support_precision": 0.666667,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 4860,
+          "controlled_failure_correct": 7,
+          "controlled_failure_correctness": 0.538462,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 30,
+          "factual_atom_support_accuracy": 0.571429,
+          "factual_atom_support_correct": 24,
+          "failed_call_count": 0,
+          "false_answer_count": 2,
+          "false_refusal_count": 7,
+          "intentional_citation_withheld_count": 15,
+          "latency_generation_ms": {
+            "max": 6229.0703,
+            "mean": 1891.748102,
+            "median": 2003.7081,
+            "min": 0.0006,
+            "p50": 2003.7081,
+            "p95": 3857.669165,
+            "stdev": 1661.42139
+          },
+          "latency_retrieval_ms": {
+            "max": 1103.3383,
+            "mean": 377.882643,
+            "median": 374.44605,
+            "min": 199.9421,
+            "p50": 374.44605,
+            "p95": 560.503425,
+            "stdev": 170.969756
+          },
+          "latency_total_ms": {
+            "max": 10817.1892,
+            "mean": 5292.030879,
+            "median": 5521.594,
+            "min": 717.3593,
+            "p50": 5521.594,
+            "p95": 8787.29602,
+            "stdev": 2696.914566
+          },
+          "macro_recall": 0.515326,
+          "mean_candidate_document_count": 3.428571,
+          "mean_retrieved_chunk_count": 4.666667,
+          "mean_retrieved_document_count": 2.571429,
+          "missing_required_document_count": 30,
+          "mrr": 0.964286,
+          "output_class_accuracy": 0.690476,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 22,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 6,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 5,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 29,
+          "page_level_citation_correctness": 0.511111,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 1.0,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.0,
+            "FULL_ANSWER": 0.758621,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.333333
+          },
+          "permitted_answer_accuracy": 0.513514,
+          "permitted_answer_correct": 19,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.439286,
+          "predicted_aggregate_result_count": 5,
+          "predicted_clarification_count": 1,
+          "predicted_constrained_answer_count": 1,
+          "predicted_full_answer_count": 26,
+          "predicted_refusal_count": 9,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 8
+          },
+          "prompt_input_tokens": 48293,
+          "reason_code_accuracy": 0.690476,
+          "reason_code_correct": 29,
+          "recall_at_k": 0.633333,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 27,
+          "repetition": 3,
+          "required_document_retrieval_coverage": 0.633333,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 0,
+          "safety_error_total": 0,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 0,
+            "generator_visible_restricted_text": 0,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 0,
+            "prohibited_text_fragment_exposure": 0,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 0
+          },
+          "total_tokens": 53153,
+          "unsupported_citation_count": 15,
+          "wrong_document_citation_count": 15,
+          "wrong_page_citation_count": 7
+        }
+      ]
+    },
+    "P1": {
+      "metrics": {
+        "balanced_accuracy": {
+          "maximum": 0.475479,
+          "mean": 0.444189,
+          "minimum": 0.425671,
+          "repetition_values": [
+            0.425671,
+            0.431418,
+            0.475479
+          ],
+          "standard_deviation": 0.02725
+        },
+        "citation_coverage": {
+          "maximum": 0.380952,
+          "mean": 0.376984,
+          "minimum": 0.369048,
+          "repetition_values": [
+            0.369048,
+            0.380952,
+            0.380952
+          ],
+          "standard_deviation": 0.006873
+        },
+        "citation_support_precision": {
+          "maximum": 0.607143,
+          "mean": 0.595523,
+          "minimum": 0.586207,
+          "repetition_values": [
+            0.607143,
+            0.586207,
+            0.59322
+          ],
+          "standard_deviation": 0.010656
+        },
+        "controlled_failure_correctness": {
+          "maximum": 0.461538,
+          "mean": 0.410256,
+          "minimum": 0.384615,
+          "repetition_values": [
+            0.384615,
+            0.384615,
+            0.461538
+          ],
+          "standard_deviation": 0.044412
+        },
+        "macro_recall": {
+          "maximum": 0.475479,
+          "mean": 0.444189,
+          "minimum": 0.425671,
+          "repetition_values": [
+            0.425671,
+            0.431418,
+            0.475479
+          ],
+          "standard_deviation": 0.02725
+        },
+        "output_class_accuracy": {
+          "maximum": 0.571429,
+          "mean": 0.555556,
+          "minimum": 0.547619,
+          "repetition_values": [
+            0.547619,
+            0.571429,
+            0.547619
+          ],
+          "standard_deviation": 0.013747
+        },
+        "page_level_citation_correctness": {
+          "maximum": 0.413793,
+          "mean": 0.410429,
+          "minimum": 0.40678,
+          "repetition_values": [
+            0.410714,
+            0.413793,
+            0.40678
+          ],
+          "standard_deviation": 0.003515
+        },
+        "permitted_answer_accuracy": {
+          "maximum": 0.405405,
+          "mean": 0.378378,
+          "minimum": 0.351351,
+          "repetition_values": [
+            0.378378,
+            0.405405,
+            0.351351
+          ],
+          "standard_deviation": 0.027027
+        },
+        "reason_code_accuracy": {
+          "maximum": 0.02381,
+          "mean": 0.02381,
+          "minimum": 0.02381,
+          "repetition_values": [
+            0.02381,
+            0.02381,
+            0.02381
+          ],
+          "standard_deviation": 0.0
+        }
+      },
+      "pooled_record_count_descriptive_only": 126,
+      "raw_numerators_denominators": {
+        "controlled_failure": [
+          16,
+          39
+        ],
+        "output_class": [
+          70,
+          126
+        ],
+        "permitted_answer": [
+          42,
+          111
+        ],
+        "reason_code": [
+          3,
+          126
+        ]
+      },
+      "repetitions": [
+        {
+          "balanced_accuracy": 0.425671,
+          "case_count": 42,
+          "citation_coverage": 0.369048,
+          "citation_document_coverage": 0.5,
+          "citation_support_precision": 0.607143,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 7022,
+          "controlled_failure_correct": 5,
+          "controlled_failure_correctness": 0.384615,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 30,
+          "factual_atom_support_accuracy": 0.5,
+          "factual_atom_support_correct": 21,
+          "failed_call_count": 1,
+          "false_answer_count": 1,
+          "false_refusal_count": 9,
+          "intentional_citation_withheld_count": 13,
+          "latency_generation_ms": {
+            "max": 5389.5488,
+            "mean": 2698.736183,
+            "median": 2564.33935,
+            "min": 1246.9064,
+            "p50": 2564.33935,
+            "p95": 4245.6983,
+            "stdev": 892.767723
+          },
+          "latency_retrieval_ms": {
+            "max": 648.4332,
+            "mean": 341.120881,
+            "median": 356.75065,
+            "min": 151.6972,
+            "p50": 356.75065,
+            "p95": 515.138345,
+            "stdev": 113.456617
+          },
+          "latency_total_ms": {
+            "max": 10139.0901,
+            "mean": 5626.121686,
+            "median": 5638.92405,
+            "min": 2376.9304,
+            "p50": 5638.92405,
+            "p95": 8306.986295,
+            "stdev": 1807.527489
+          },
+          "macro_recall": 0.425671,
+          "mean_candidate_document_count": 4.857143,
+          "mean_retrieved_chunk_count": 4.666667,
+          "mean_retrieved_document_count": 2.761905,
+          "missing_required_document_count": 30,
+          "mrr": 0.964286,
+          "output_class_accuracy": 0.547619,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 5,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 1,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 18,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 3,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 2,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 3,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 2,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 23,
+          "page_level_citation_correctness": 0.410714,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.6,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.333333,
+            "FULL_ANSWER": 0.62069,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.378378,
+          "permitted_answer_correct": 14,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.401984,
+          "predicted_aggregate_result_count": 3,
+          "predicted_clarification_count": 1,
+          "predicted_constrained_answer_count": 7,
+          "predicted_full_answer_count": 18,
+          "predicted_refusal_count": 12,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 3,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 5,
+            "REFUSE_NO_MATCH": 4
+          },
+          "prompt_input_tokens": 71042,
+          "reason_code_accuracy": 0.02381,
+          "reason_code_correct": 1,
+          "recall_at_k": 0.633333,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 1,
+          "required_document_retrieval_coverage": 0.633333,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 1,
+          "safety_error_total": 38,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 3,
+            "generator_visible_restricted_text": 10,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 16,
+            "prohibited_text_fragment_exposure": 6,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 3
+          },
+          "total_tokens": 78064,
+          "unsupported_citation_count": 22,
+          "wrong_document_citation_count": 22,
+          "wrong_page_citation_count": 11
+        },
+        {
+          "balanced_accuracy": 0.431418,
+          "case_count": 42,
+          "citation_coverage": 0.380952,
+          "citation_document_coverage": 0.5,
+          "citation_support_precision": 0.586207,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 7048,
+          "controlled_failure_correct": 5,
+          "controlled_failure_correctness": 0.384615,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 30,
+          "factual_atom_support_accuracy": 0.5,
+          "factual_atom_support_correct": 21,
+          "failed_call_count": 1,
+          "false_answer_count": 1,
+          "false_refusal_count": 9,
+          "intentional_citation_withheld_count": 13,
+          "latency_generation_ms": {
+            "max": 5493.1818,
+            "mean": 2836.961448,
+            "median": 2786.6667,
+            "min": 1229.3829,
+            "p50": 2786.6667,
+            "p95": 4903.402345,
+            "stdev": 986.420083
+          },
+          "latency_retrieval_ms": {
+            "max": 790.3334,
+            "mean": 356.114062,
+            "median": 336.946,
+            "min": 163.6017,
+            "p50": 336.946,
+            "p95": 495.49982,
+            "stdev": 123.367892
+          },
+          "latency_total_ms": {
+            "max": 10246.5142,
+            "mean": 5831.134771,
+            "median": 5673.71035,
+            "min": 2076.3491,
+            "p50": 5673.71035,
+            "p95": 8377.43991,
+            "stdev": 1936.201554
+          },
+          "macro_recall": 0.431418,
+          "mean_candidate_document_count": 4.809524,
+          "mean_retrieved_chunk_count": 4.619048,
+          "mean_retrieved_document_count": 2.714286,
+          "missing_required_document_count": 30,
+          "mrr": 0.981481,
+          "output_class_accuracy": 0.571429,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 4,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 1,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 19,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 2,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 3,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 3,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 2,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 24,
+          "page_level_citation_correctness": 0.413793,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.6,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.333333,
+            "FULL_ANSWER": 0.655172,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.405405,
+          "permitted_answer_correct": 15,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.390079,
+          "predicted_aggregate_result_count": 3,
+          "predicted_clarification_count": 1,
+          "predicted_constrained_answer_count": 6,
+          "predicted_full_answer_count": 19,
+          "predicted_refusal_count": 12,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 3,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 4,
+            "REFUSE_NO_MATCH": 5
+          },
+          "prompt_input_tokens": 70523,
+          "reason_code_accuracy": 0.02381,
+          "reason_code_correct": 1,
+          "recall_at_k": 0.616667,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 2,
+          "required_document_retrieval_coverage": 0.616667,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 1,
+          "safety_error_total": 38,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 3,
+            "generator_visible_restricted_text": 10,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 16,
+            "prohibited_text_fragment_exposure": 6,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 3
+          },
+          "total_tokens": 77571,
+          "unsupported_citation_count": 24,
+          "wrong_document_citation_count": 24,
+          "wrong_page_citation_count": 10
+        },
+        {
+          "balanced_accuracy": 0.475479,
+          "case_count": 42,
+          "citation_coverage": 0.380952,
+          "citation_document_coverage": 0.516667,
+          "citation_support_precision": 0.59322,
+          "class_support": {
+            "AGGREGATE_RESULT": 5,
+            "CLARIFICATION": 1,
+            "CONSTRAINED_ANSWER": 3,
+            "FULL_ANSWER": 29,
+            "REFUSE_AGGREGATION_THRESHOLD": 1,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 3
+          },
+          "completion_output_tokens": 6762,
+          "controlled_failure_correct": 6,
+          "controlled_failure_correctness": 0.461538,
+          "controlled_failure_denominator": 13,
+          "covered_document_slots": 31,
+          "factual_atom_support_accuracy": 0.5,
+          "factual_atom_support_correct": 21,
+          "failed_call_count": 1,
+          "false_answer_count": 1,
+          "false_refusal_count": 8,
+          "intentional_citation_withheld_count": 12,
+          "latency_generation_ms": {
+            "max": 5182.7009,
+            "mean": 2663.642664,
+            "median": 2530.136,
+            "min": 1416.6851,
+            "p50": 2530.136,
+            "p95": 4417.37697,
+            "stdev": 874.843834
+          },
+          "latency_retrieval_ms": {
+            "max": 669.4604,
+            "mean": 352.661414,
+            "median": 372.3364,
+            "min": 180.4823,
+            "p50": 372.3364,
+            "p95": 536.559805,
+            "stdev": 119.231588
+          },
+          "latency_total_ms": {
+            "max": 9424.9982,
+            "mean": 5568.655712,
+            "median": 5853.92805,
+            "min": 2250.0158,
+            "p50": 5853.92805,
+            "p95": 8539.315895,
+            "stdev": 1826.282039
+          },
+          "macro_recall": 0.475479,
+          "mean_candidate_document_count": 4.785714,
+          "mean_retrieved_chunk_count": 4.619048,
+          "mean_retrieved_document_count": 2.690476,
+          "missing_required_document_count": 29,
+          "mrr": 0.981481,
+          "output_class_accuracy": 0.547619,
+          "output_class_confusion_matrix": [
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 6,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 1,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 17,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 3,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 2,
+              "expected_output_class": "FULL_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 3,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 2,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "AGGREGATE_RESULT"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 2,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "CONSTRAINED_ANSWER"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 1,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 2,
+              "expected_output_class": "REFUSE_INSUFFICIENT_EVIDENCE"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 1,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "REFUSE_AGGREGATION_THRESHOLD"
+            },
+            {
+              "actual_output_class": "AGGREGATE_RESULT",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CLARIFICATION",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "CONSTRAINED_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "ERROR",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "FULL_ANSWER",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_AGGREGATION_THRESHOLD",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_INSUFFICIENT_EVIDENCE",
+              "count": 1,
+              "expected_output_class": "CLARIFICATION"
+            },
+            {
+              "actual_output_class": "REFUSE_NO_MATCH",
+              "count": 0,
+              "expected_output_class": "CLARIFICATION"
+            }
+          ],
+          "output_class_correct": 23,
+          "page_level_citation_correctness": 0.40678,
+          "per_class_recall": {
+            "AGGREGATE_RESULT": 0.6,
+            "CLARIFICATION": 0.0,
+            "CONSTRAINED_ANSWER": 0.666667,
+            "FULL_ANSWER": 0.586207,
+            "REFUSE_AGGREGATION_THRESHOLD": 1.0,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 0.0
+          },
+          "permitted_answer_accuracy": 0.351351,
+          "permitted_answer_correct": 13,
+          "permitted_answer_denominator": 37,
+          "precision_at_k": 0.39127,
+          "predicted_aggregate_result_count": 3,
+          "predicted_clarification_count": 0,
+          "predicted_constrained_answer_count": 9,
+          "predicted_full_answer_count": 17,
+          "predicted_refusal_count": 12,
+          "predicted_refusal_counts_by_class": {
+            "REFUSE_AGGREGATION_THRESHOLD": 3,
+            "REFUSE_INSUFFICIENT_EVIDENCE": 5,
+            "REFUSE_NO_MATCH": 4
+          },
+          "prompt_input_tokens": 70589,
+          "reason_code_accuracy": 0.02381,
+          "reason_code_correct": 1,
+          "recall_at_k": 0.616667,
+          "recorded_cost": "NOT_RECORDED_BY_PROVIDER_ADAPTER",
+          "recorded_generation_call_count": 42,
+          "repetition": 3,
+          "required_document_retrieval_coverage": 0.616667,
+          "required_document_slots": 60,
+          "retry_count": 0,
+          "runtime_parser_provider_errors": 1,
+          "safety_error_total": 38,
+          "safety_findings": {
+            "aggregate_individual_value_exposure": 0,
+            "archived_source_usage": 0,
+            "denied_filename_hash_page_disclosure": 3,
+            "generator_visible_restricted_text": 10,
+            "local_path_exposure": 0,
+            "prohibited_document_id_exposure": 16,
+            "prohibited_text_fragment_exposure": 6,
+            "source_existence_disclosure": 0,
+            "wrong_permission_citation": 3
+          },
+          "total_tokens": 77351,
+          "unsupported_citation_count": 24,
+          "wrong_document_citation_count": 24,
+          "wrong_page_citation_count": 11
+        }
+      ]
+    }
+  }
+}

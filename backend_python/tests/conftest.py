@@ -1,8 +1,10 @@
 from __future__ import annotations
 
 import atexit
+import ipaddress
 import os
 import shutil
+import socket
 import sys
 import tempfile
 from pathlib import Path
@@ -36,6 +38,33 @@ os.environ["CHROMA_PERSIST_DIR"] = str(TEST_CHROMA_DIR)
 os.environ["SOURCE_STORAGE_DIR"] = str(TEST_SOURCE_DIR)
 
 import models  # noqa: E402
+
+
+def _loopback_address(address):
+    if not isinstance(address, tuple) or not address:
+        return False
+    host = address[0]
+    if host == "localhost":
+        return True
+    try:
+        return ipaddress.ip_address(str(host)).is_loopback
+    except ValueError:
+        return False
+
+
+@pytest.fixture(autouse=True)
+def no_external_network_guard(monkeypatch):
+    if os.getenv("INFOBANK_TEST_NO_NETWORK") != "1":
+        return
+
+    original_connect = socket.socket.connect
+
+    def guarded_connect(self, address):
+        if _loopback_address(address):
+            return original_connect(self, address)
+        raise RuntimeError("External network access is disabled for offline tests")
+
+    monkeypatch.setattr(socket.socket, "connect", guarded_connect)
 
 
 @pytest.fixture

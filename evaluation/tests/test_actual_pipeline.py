@@ -14,6 +14,7 @@ from evaluation.actual_pipeline_runner import (
     PROMPT_ONLY_GOVERNANCE_PROMPT_VERSION,
     PipelineRuntime,
     _document_routing_keywords,
+    _extract_json_object,
     _informative_routing_keyword,
     _parse_prompt_only_response,
     _select_answer_citations,
@@ -593,6 +594,40 @@ def test_prompt_only_response_parser_accepts_strict_json_and_rejects_unknown_cla
         _parse_prompt_only_response(
             'Here is the JSON:\n{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"No."}'
         )
+
+
+def test_prompt_only_response_parser_boundary_cases_do_not_relax_contract() -> None:
+    answer_with_escapes = "A quoted \"fact\".\nNext line."
+    assert _parse_prompt_only_response(
+        json.dumps({"output_class": "FULL_ANSWER", "reason_code": "supported", "answer": answer_with_escapes})
+    ) == ("FULL_ANSWER", "supported", answer_with_escapes)
+    assert _parse_prompt_only_response(
+        '\ufeff{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"BOM-normalized."}'
+    ) == ("FULL_ANSWER", "supported", "BOM-normalized.")
+
+    invalid_payloads = [
+        "",
+        "plain prose",
+        '{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"truncated"',
+        '{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"first"}\n'
+        '{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"second"}',
+        '```json\n{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"ok"}\n```\nextra',
+        '{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"ok"}\n```',
+    ]
+    for payload in invalid_payloads:
+        with pytest.raises(ValueError, match="strict JSON object"):
+            _extract_json_object(payload)
+
+
+def test_prompt_only_response_parser_does_not_echo_invalid_provider_text() -> None:
+    provider_text = "DENIED-SECRET should never be mirrored in parser errors"
+
+    with pytest.raises(ValueError, match="unsupported output_class") as exc_info:
+        _parse_prompt_only_response(
+            json.dumps({"output_class": provider_text, "reason_code": "supported", "answer": "No."})
+        )
+
+    assert provider_text not in str(exc_info.value)
 
 
 def test_prompt_only_governance_prompt_is_generic_and_versioned() -> None:

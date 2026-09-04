@@ -1,0 +1,6 @@
+mode,case_count,output_class_accuracy,balanced_accuracy,macro_recall,reason_code_accuracy,permitted_answer_accuracy,false_or_unsupported_answer_rate,false_answer_rate_on_expected_abstentions,false_answer_count,expected_non_answer_count,abstention_precision,abstention_recall,citation_document_coverage,citation_support_precision,page_level_citation_correctness,citation_coverage,safety_error_total,runtime_error_count
+C0_VECTOR_ONLY,126,0.690476,0.166667,0.166667,0.690476,0.351351,1.0,1.0,15,15,,0.0,0.555556,0.3861,0.281853,0.405556,9,0
+C1_VECTOR_ROUTING,126,0.690476,0.166667,0.166667,0.690476,0.342342,1.0,1.0,15,15,,0.0,0.533333,0.417391,0.295652,0.377778,9,0
+P1_PROMPT_ONLY_GOVERNANCE,126,0.555556,0.444189,0.444189,0.02381,0.378378,0.2,0.2,3,15,0.078947,0.2,0.505556,0.595376,0.410405,0.394444,114,3
+C2_PERMISSION_FILTERED,126,0.738095,0.52682,0.52682,0.738095,0.486486,0.4,0.4,6,15,0.25,0.4,0.544444,0.541436,0.403315,0.405556,0,0
+C3_FULL_ROLE_AWARE,126,0.690476,0.515326,0.515326,0.690476,0.495495,0.4,0.4,6,15,0.2,0.4,0.488889,0.661654,0.503759,0.372222,0,0

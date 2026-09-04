@@ -1,0 +1,482 @@
+{
+  "C0_VECTOR_ONLY": [
+    {
+      "actual": "supported",
+      "count": 15,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "clarification"
+    },
+    {
+      "actual": "supported",
+      "count": 9,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 9,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 87,
+      "expected": "supported"
+    }
+  ],
+  "C1_VECTOR_ROUTING": [
+    {
+      "actual": "supported",
+      "count": 15,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "supported",
+      "count": 3,
+      "expected": "clarification"
+    },
+    {
+      "actual": "supported",
+      "count": 9,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 9,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 87,
+      "expected": "supported"
+    }
+  ],
+  "C2_PERMISSION_FILTERED": [
+    {
+      "actual": "aggregate_threshold_satisfied",
+      "count": 15,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregation_threshold_not_met",
+      "count": 3,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 3,
+      "expected": "clarification"
+    },
+    {
+      "actual": "supported",
+      "count": 9,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 3,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 6,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 15,
+      "expected": "supported"
+    },
+    {
+      "actual": "supported",
+      "count": 72,
+      "expected": "supported"
+    }
+  ],
+  "C3_FULL_ROLE_AWARE": [
+    {
+      "actual": "aggregate_threshold_satisfied",
+      "count": 15,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregation_threshold_not_met",
+      "count": 3,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 3,
+      "expected": "clarification"
+    },
+    {
+      "actual": "clarification",
+      "count": 3,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 6,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 3,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "supported",
+      "count": 6,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "conflict",
+      "count": 6,
+      "expected": "supported"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 15,
+      "expected": "supported"
+    },
+    {
+      "actual": "supported",
+      "count": 66,
+      "expected": "supported"
+    }
+  ],
+  "P1_PROMPT_ONLY_GOVERNANCE": [
+    {
+      "actual": "aggregate_dairy_milk_confirmed",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_deduplication_permitted",
+      "count": 2,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_milk_across_three_january_orders",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_milk_quantity_permitted",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_milk_quantity_safe",
+      "count": 2,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregate_safe_disclosure",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregation_threshold_not_met",
+      "count": 6,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "safe_aggregate_from_policy_compliant_sources",
+      "count": 1,
+      "expected": "aggregate_threshold_satisfied"
+    },
+    {
+      "actual": "aggregation_threshold_not_met",
+      "count": 3,
+      "expected": "aggregation_threshold_not_met"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 3,
+      "expected": "clarification"
+    },
+    {
+      "actual": "certainty_explicitly_denied_by_source",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "clarification",
+      "count": 2,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 3,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "matching_guidance_insufficient_for_certainty",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "warranty_vs_insurance_decision_requires_claim_assessment",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "warranty_vs_insurance_scope_distinction",
+      "count": 1,
+      "expected": "conditional_evidence"
+    },
+    {
+      "actual": "no_match",
+      "count": 6,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "partial_answer_from_full_source",
+      "count": 1,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "partial_answer_from_permitted_source",
+      "count": 2,
+      "expected": "insufficient_evidence"
+    },
+    {
+      "actual": "all_parameters_available_in_sources",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "bank_statement_contains_order_reference",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "bank_statement_direct_evidence",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "compatible_system_with_power_limits",
+      "count": 3,
+      "expected": "supported"
+    },
+    {
+      "actual": "complete_calculation_supported",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "complete_data_from_permitted_sources",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_from_full_policy_source",
+      "count": 3,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_from_full_policy_sources",
+      "count": 4,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_from_full_sources",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_permitted",
+      "count": 8,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_answer_permitted_full_label",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_connection_explicitly_prohibited",
+      "count": 2,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_content_permitted_full_label",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_match_in_bank_statement",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_match_orion_e4_spec",
+      "count": 2,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_prohibition_stated",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "direct_pv_charging_prohibited",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "error_code_defined_in_product_manual",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "explicit_prohibition_in_care_guide",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "explicit_prohibition_in_source",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "full_label_permits_direct_answer",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "full_policy_permits_direct_answer",
+      "count": 4,
+      "expected": "supported"
+    },
+    {
+      "actual": "insufficient_evidence",
+      "count": 8,
+      "expected": "supported"
+    },
+    {
+      "actual": "matching_product_codes",
+      "count": 3,
+      "expected": "supported"
+    },
+    {
+      "actual": "no_match",
+      "count": 7,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_answer_with_explicit_exclusions",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_answer_with_explicit_limitations",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_capability_mismatch",
+      "count": 3,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_clarification_required",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_data_available_price_absent",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_data_available_price_missing",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "partial_information_available",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "product_document_match_found",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "product_specific_error_definition_found",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "purchase_date_in_full_policy_source",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "runtime_error",
+      "count": 3,
+      "expected": "supported"
+    },
+    {
+      "actual": "single_order_dairy_milk_confirmed",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "single_order_deduplication_applied",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "single_order_deduplication_confirmed",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "synthetic_data_disclaimer",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "two_distinct_periods_established",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "two_distinct_periods_no_supersession_stated",
+      "count": 2,
+      "expected": "supported"
+    },
+    {
+      "actual": "two_online_orders_feb_2026_identified",
+      "count": 1,
+      "expected": "supported"
+    },
+    {
+      "actual": "two_online_orders_february_2026",
+      "count": 2,
+      "expected": "supported"
+    },
+    {
+      "actual": "warranty_period_confirmed",
+      "count": 3,
+      "expected": "supported"
+    }
+  ]
+}

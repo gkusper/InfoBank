@@ -255,6 +255,7 @@ def test_query_only_run_uses_seed_false_fresh_groups_and_manifest_collection(mon
         return {
             "database_counts": {"documents": 41, "document_chunks": 245},
             "source_storage_fingerprint": {"sha256": "source"},
+            "chroma_vector_count": 245,
             "chroma_collection_count": 245,
             "chroma_fingerprint_before": {"sha256": "chroma"},
         }
@@ -467,6 +468,7 @@ def test_dry_run_and_full_confirmation_guard_make_no_provider_calls(monkeypatch,
             "manifest": {},
             "database_counts": {},
             "source_storage_fingerprint": {"sha256": "source", "total_bytes": 1},
+            "chroma_vector_count": 245,
             "chroma_collection_count": 245,
             "chroma_fingerprint_before": {"sha256": "chroma", "total_bytes": 1},
             "chroma_fingerprint_after": {"sha256": "chroma", "total_bytes": 1},

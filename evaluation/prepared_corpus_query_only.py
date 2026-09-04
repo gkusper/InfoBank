@@ -44,7 +44,7 @@ from .actual_pipeline_runner import (
     _sha256_file,
     prompt_only_governance_prompt,
 )
-from .actual_pipeline_scorer import scan_record_safety, score_sealed_run
+from .actual_pipeline_scorer import scan_record_safety, score_repetition_aware_sealed_run, score_sealed_run
 from .backend import REPO_ROOT, ensure_backend_path
 from .provider_readiness import (
     MAX_CONTEXT_TOKEN_BUDGET_PER_CASE,
@@ -464,6 +464,7 @@ def inspect_prepared_corpus(
         "document_embeddings_reused_without_provider_calls": True,
         "manifest": prepared.metadata(),
         "database_counts": database_counts,
+        "chroma_vector_count": vector_count,
         "chroma_collection_count": vector_count,
         "source_storage_fingerprint": source_fingerprint,
         "chroma_fingerprint_before": chroma_fingerprint_before,
@@ -1203,7 +1204,7 @@ def run_prepared_query_only(
     base_stable = (
         base_before["database_counts"] == base_after["database_counts"]
         and base_before["source_storage_fingerprint"]["sha256"] == base_after["source_storage_fingerprint"]["sha256"]
-        and base_before["chroma_collection_count"] == base_after["chroma_collection_count"]
+        and base_before["chroma_vector_count"] == base_after["chroma_vector_count"]
     )
     seal = {
         "schema_version": SEAL_SCHEMA_VERSION,
@@ -1265,7 +1266,8 @@ def run_prepared_query_only(
             selected_case_ids=[query.case_id for query in queries],
             output_path=subset_gold,
         )
-        scores = score_sealed_run(
+        score_function = score_repetition_aware_sealed_run if repetitions > 1 else score_sealed_run
+        scores = score_function(
             raw_run_path=raw_path,
             seal_path=seal_path,
             gold_annotation_path=subset_gold,

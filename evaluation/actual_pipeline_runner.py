@@ -647,7 +647,7 @@ def _prompt_only_messages(query: QueryInput, generator_blocks: list[str]) -> lis
 
 
 def _extract_json_object(text_value: str) -> dict[str, Any]:
-    stripped = text_value.strip()
+    stripped = text_value.strip().removeprefix("\ufeff").strip()
     fence = re.fullmatch(r"```(?:json)?\s*(.*?)\s*```", stripped, flags=re.IGNORECASE | re.DOTALL)
     if fence is not None:
         stripped = fence.group(1).strip()
@@ -668,7 +668,7 @@ def _parse_prompt_only_response(text_value: str) -> tuple[str, str, str]:
     reason_code = str(parsed.get("reason_code") or "").strip()
     answer = str(parsed.get("answer") or "").strip()
     if output_class not in PROMPT_ONLY_OUTPUT_CLASSES:
-        raise ValueError(f"unsupported output_class from prompt-only baseline: {output_class!r}")
+        raise ValueError("unsupported output_class from prompt-only baseline")
     if not reason_code:
         reason_code = "supported" if output_class in ANSWER_OUTPUT_CLASSES else output_class.lower()
     if not answer:

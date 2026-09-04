@@ -560,16 +560,15 @@ def _prompt_only_messages(query: QueryInput, generator_blocks: list[str]) -> lis
 
 def _extract_json_object(text_value: str) -> dict[str, Any]:
     stripped = text_value.strip()
-    if stripped.startswith("```"):
-        stripped = re.sub(r"^```(?:json)?\s*", "", stripped, flags=re.IGNORECASE)
-        stripped = re.sub(r"\s*```$", "", stripped)
+    fence = re.fullmatch(r"```(?:json)?\s*(.*?)\s*```", stripped, flags=re.IGNORECASE | re.DOTALL)
+    if fence is not None:
+        stripped = fence.group(1).strip()
+    elif stripped.startswith("```") or stripped.endswith("```"):
+        raise ValueError("response did not contain a strict JSON object")
     try:
         parsed = json.loads(stripped)
-    except json.JSONDecodeError:
-        match = re.search(r"\{.*\}", stripped, flags=re.DOTALL)
-        if not match:
-            raise ValueError("response did not contain a JSON object")
-        parsed = json.loads(match.group(0))
+    except json.JSONDecodeError as exc:
+        raise ValueError("response did not contain a strict JSON object") from exc
     if not isinstance(parsed, dict):
         raise ValueError("response JSON was not an object")
     return parsed

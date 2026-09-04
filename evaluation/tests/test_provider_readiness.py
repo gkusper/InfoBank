@@ -1,6 +1,9 @@
 from __future__ import annotations
 
 import json
+import os
+import subprocess
+import sys
 from pathlib import Path
 
 import pytest
@@ -108,7 +111,7 @@ def test_llm_cache_key_separates_provider_model_and_generation_config(tmp_path: 
     anthropic_config = ReadinessConfig(
         provider="anthropic",
         embedding_provider="openai",
-        generation_model="claude-sonnet-5",
+        generation_model="claude-haiku-4-5-20251001",
         embedding_model="text-embedding-3-small",
     )
     anthropic = CachedEvaluationProvider(
@@ -119,12 +122,12 @@ def test_llm_cache_key_separates_provider_model_and_generation_config(tmp_path: 
         tmp_path / "cache",
         anthropic_config.config_hash,
     )
-    anthropic.generate_with_usage(messages, model="claude-sonnet-5")
+    anthropic.generate_with_usage(messages, model="claude-haiku-4-5-20251001")
     cache_files = list((tmp_path / "cache/generation").glob("*.json"))
     assert len(cache_files) == 1
     cached = json.loads(cache_files[0].read_text(encoding="utf-8"))
     assert cached["cache_identity"]["provider"] == "anthropic"
-    assert cached["cache_identity"]["model"] == "claude-sonnet-5"
+    assert cached["cache_identity"]["model"] == "claude-haiku-4-5-20251001"
     assert "generation_config_hash" in cached["cache_identity"]
 
     openai_key, _ = cache_key(
@@ -144,8 +147,181 @@ def test_real_provider_cli_exposes_required_guards() -> None:
         "--provider", "--allow-network-provider", "--max-cases", "--estimated-cost-only", "--estimate-only",
         "--repeats", "--modes", "--include-scale-subset", "--pricing-config",
         "--average-provider-latency-ms", "--max-estimated-cost", "--output",
+        "--full-experiment-preflight", "--full-experiment-modes", "--confirm-full-experiment",
+        "--max-provider-request-attempts", "--max-anthropic-estimated-cost",
+        "--max-provider-output-tokens", "--max-provider-retries",
     ):
         assert flag in source
+
+
+def _write_cli_fixture(tmp_path: Path, query_count: int) -> tuple[Path, Path, Path]:
+    query_input = tmp_path / "query_inputs.jsonl"
+    query_input.write_text(
+        "\n".join(
+            json.dumps(
+                {
+                    "case_id": f"Q{i}",
+                    "evaluation_identity": f"identity-{i}",
+                    "query_text": f"What is fact {i}?",
+                    "declared_purpose": "grounded_question_answering",
+                    "corpus_package_ref": "package-1",
+                    "policy_fixture_ref": "fixture-1",
+                }
+            )
+            for i in range(query_count)
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+    corpus_fixture = tmp_path / "corpus_fixture.json"
+    corpus_fixture.write_text(
+        json.dumps(
+            {
+                "schema_version": "infobank-actual-corpus-v1",
+                "documents": [
+                    {
+                        "document_id": "doc-1",
+                        "package_ref": "package-1",
+                        "object_id": "object-1",
+                        "document_type": "note",
+                        "original_filename": "doc-1.pdf",
+                        "pages": ["Synthetic governed corpus text."],
+                        "keywords": ["synthetic"],
+                    }
+                ],
+                "policy_fixtures": [
+                    {
+                        "fixture_id": "fixture-1",
+                        "access_by_document": {"doc-1": "Full"},
+                    }
+                ],
+                "metadata": {"dataset_version": "test"},
+            }
+        ),
+        encoding="utf-8",
+    )
+    gold_annotations = tmp_path / "gold_annotations.jsonl"
+    gold_annotations.write_text(
+        "\n".join(json.dumps({"case_id": f"Q{i}"}) for i in range(query_count)) + "\n",
+        encoding="utf-8",
+    )
+    return query_input, corpus_fixture, gold_annotations
+
+
+def test_full_experiment_preflight_is_network_free_and_blocked_on_corpus_reuse(tmp_path: Path) -> None:
+    query_input, corpus_fixture, gold_annotations = _write_cli_fixture(tmp_path, 42)
+    env = os.environ.copy()
+    env["PYTHONPATH"] = os.pathsep.join(
+        [
+            str(Path(__file__).parents[2]),
+            str(Path(__file__).parents[2] / "backend_python"),
+            env.get("PYTHONPATH", ""),
+        ]
+    )
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/run_real_provider_evaluation.py",
+            "--full-experiment-preflight",
+            "--provider",
+            "anthropic",
+            "--generation-model",
+            "claude-haiku-4-5-20251001",
+            "--embedding-provider",
+            "openai",
+            "--embedding-model",
+            "text-embedding-3-small",
+            "--repeats",
+            "3",
+            "--query-input",
+            str(query_input),
+            "--corpus-fixture",
+            str(corpus_fixture),
+            "--gold-annotations",
+            str(gold_annotations),
+        ],
+        cwd=Path(__file__).parents[2],
+        env=env,
+        text=True,
+        capture_output=True,
+        check=True,
+    )
+    payload = json.loads(result.stdout)
+    assert payload["network_called"] is False
+    assert payload["api_key_read"] is False
+    assert payload["generation_model"] == "claude-haiku-4-5-20251001"
+    assert payload["planned_records"] == 630
+    assert payload["keyword_selection_operations"] == 378
+    assert payload["generation_operations_upper_bound"] == 630
+    assert payload["anthropic_request_upper_bound"] == 1008
+    assert payload["anthropic_cost_cap_usd"] == 2.0
+    assert payload["anthropic_cost_cap_status"] == "WITHIN_CAP"
+    assert payload["prepared_corpus_mode_available"] is False
+    assert payload["document_embeddings_reused_without_provider_calls"] is False
+    assert payload["requires_confirm_full_experiment"] is True
+
+
+def test_anthropic_smoke_guard_caps_request_attempts_before_network_approval(tmp_path: Path) -> None:
+    query_input, corpus_fixture, _gold_annotations = _write_cli_fixture(tmp_path, 18)
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/run_real_provider_evaluation.py",
+            "--provider",
+            "anthropic",
+            "--max-cases",
+            "18",
+            "--query-input",
+            str(query_input),
+            "--corpus-fixture",
+            str(corpus_fixture),
+        ],
+        cwd=Path(__file__).parents[2],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode != 0
+    assert "Provider request attempts upper bound 72 exceeds --max-provider-request-attempts 70" in result.stderr
+
+
+def test_anthropic_smoke_guard_caps_configured_output_tokens_before_network_approval(tmp_path: Path) -> None:
+    query_input, corpus_fixture, _gold_annotations = _write_cli_fixture(tmp_path, 1)
+    env = os.environ.copy()
+    env["ANTHROPIC_MAX_TOKENS"] = "2048"
+    result = subprocess.run(
+        [
+            sys.executable,
+            "scripts/run_real_provider_evaluation.py",
+            "--provider",
+            "anthropic",
+            "--max-cases",
+            "1",
+            "--query-input",
+            str(query_input),
+            "--corpus-fixture",
+            str(corpus_fixture),
+        ],
+        cwd=Path(__file__).parents[2],
+        env=env,
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode != 0
+    assert "ANTHROPIC_MAX_TOKENS=2048 exceeds --max-provider-output-tokens 1024" in result.stderr
+
+
+def test_confirm_full_experiment_guard_refuses_execution() -> None:
+    result = subprocess.run(
+        [sys.executable, "scripts/run_real_provider_evaluation.py", "--confirm-full-experiment"],
+        cwd=Path(__file__).parents[2],
+        text=True,
+        capture_output=True,
+        check=False,
+    )
+    assert result.returncode != 0
+    assert "Full experiment execution remains disabled" in result.stderr
 
 
 def test_full_e1_estimate_reads_holdout_counts_and_keeps_unknowns_explicit(tmp_path: Path) -> None:

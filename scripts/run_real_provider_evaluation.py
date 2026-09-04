@@ -9,6 +9,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import math
 import sys
 from pathlib import Path
 
@@ -18,6 +19,8 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from evaluation.provider_readiness import (  # noqa: E402
+    MAX_CONTEXT_TOKEN_BUDGET_PER_CASE,
+    OUTPUT_TOKEN_BUDGET_PER_CASE,
     READINESS_STATUS,
     E1_MODES,
     embedding_model_for_provider,
@@ -30,10 +33,178 @@ from evaluation.provider_readiness import (  # noqa: E402
 )
 
 
+FULL_EXPERIMENT_MODES = (
+    "C0_VECTOR_ONLY",
+    "C1_VECTOR_ROUTING",
+    "P1_PROMPT_ONLY_GOVERNANCE",
+    "C2_PERMISSION_FILTERED",
+    "C3_FULL_ROLE_AWARE",
+)
+S1_S6_INPUT_DIR = REPOSITORY_ROOT / "artifacts/s1_s6_publication_experiment_v2/combined_input"
+DEFAULT_FULL_QUERY_INPUT = S1_S6_INPUT_DIR / "combined_query_inputs.jsonl"
+DEFAULT_FULL_CORPUS_FIXTURE = S1_S6_INPUT_DIR / "combined_corpus_fixture.json"
+DEFAULT_FULL_GOLD_ANNOTATIONS = S1_S6_INPUT_DIR / "combined_reference_annotations.jsonl"
+HAIKU_45_INPUT_PER_MILLION = 1.0
+HAIKU_45_OUTPUT_PER_MILLION = 5.0
+DEFAULT_MAX_PROVIDER_REQUEST_ATTEMPTS = 70
+DEFAULT_MAX_ANTHROPIC_ESTIMATED_COST = 2.0
+DEFAULT_MAX_PROVIDER_OUTPUT_TOKENS = 1024
+DEFAULT_MAX_PROVIDER_RETRIES = 1
+
+
 def _required(path: Path | None, flag: str) -> Path:
     if path is None:
         raise ValueError(f"{flag} is required for an actual provider run")
     return path
+
+
+def _jsonl_count(path: Path) -> int:
+    return sum(1 for line in path.read_text(encoding="utf-8").splitlines() if line.strip())
+
+
+def _load_json_object(path: Path) -> dict:
+    value = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(value, dict):
+        raise ValueError(f"Expected a JSON object in {path}")
+    return value
+
+
+def _token_estimate(text: str) -> int:
+    return max(1, math.ceil(len(text) / 4))
+
+
+def _token_estimate_from_char_count(character_count: int) -> int:
+    return max(1, math.ceil(character_count / 4))
+
+
+def _full_corpus_summary(corpus_path: Path) -> dict:
+    corpus = _load_json_object(corpus_path)
+    documents = corpus.get("documents", [])
+    if not isinstance(documents, list):
+        raise ValueError(f"Expected documents[] in {corpus_path}")
+    page_count = 0
+    text_chars = 0
+    for document in documents:
+        pages = document.get("pages") if isinstance(document, dict) else None
+        if not isinstance(pages, list):
+            raise ValueError(f"Expected document pages[] in {corpus_path}")
+        page_count += len(pages)
+        text_chars += sum(len(str(page)) for page in pages)
+    return {
+        "document_count": len(documents),
+        "page_count": page_count,
+        "text_character_count": text_chars,
+        "corpus_token_estimate": _token_estimate_from_char_count(text_chars),
+    }
+
+
+def _full_query_token_estimate(query_input_path: Path) -> int:
+    total = 0
+    for line in query_input_path.read_text(encoding="utf-8").splitlines():
+        if not line.strip():
+            continue
+        row = json.loads(line)
+        text = row.get("query_text") or row.get("question") or row.get("query") or ""
+        total += _token_estimate(str(text))
+    return total
+
+
+def full_experiment_preflight_plan(
+    *,
+    provider: str,
+    generation_model: str | None,
+    embedding_provider: str | None,
+    embedding_model: str | None,
+    repeats: int,
+    modes: tuple[str, ...],
+    query_input_path: Path,
+    corpus_fixture_path: Path,
+    gold_annotations_path: Path,
+    anthropic_cost_cap: float,
+) -> dict:
+    if repeats < 1:
+        raise ValueError("repeats must be at least one")
+    if not modes or len(set(modes)) != len(modes):
+        raise ValueError("full experiment modes must be non-empty and unique")
+    unknown_modes = sorted(set(modes) - set(FULL_EXPERIMENT_MODES))
+    if unknown_modes:
+        raise ValueError(f"Unsupported full-experiment modes: {', '.join(unknown_modes)}")
+
+    normalized_provider = provider if provider != "deterministic-mock" else "openai"
+    generation_model = generation_model or generation_model_for_provider(normalized_provider)
+    embedding_provider = embedding_provider or embedding_provider_for_provider(normalized_provider)
+    embedding_model = embedding_model or embedding_model_for_provider(normalized_provider)
+    query_count = _jsonl_count(query_input_path)
+    gold_count = _jsonl_count(gold_annotations_path)
+    corpus = _full_corpus_summary(corpus_fixture_path)
+    query_tokens = _full_query_token_estimate(query_input_path)
+    mode_count = len(modes)
+    planned_records = query_count * mode_count * repeats
+    routing_keyword_modes = {
+        "C1_VECTOR_ROUTING",
+        "P1_PROMPT_ONLY_GOVERNANCE",
+        "C3_FULL_ROLE_AWARE",
+    }
+    keyword_operations = query_count * repeats * sum(1 for mode in modes if mode in routing_keyword_modes)
+    generation_operations_upper_bound = planned_records
+    estimated_input_tokens = repeats * mode_count * (
+        query_tokens + query_count * min(int(corpus["corpus_token_estimate"]), MAX_CONTEXT_TOKEN_BUDGET_PER_CASE)
+    )
+    estimated_output_tokens = planned_records * OUTPUT_TOKEN_BUDGET_PER_CASE
+    estimated_anthropic_cost = round(
+        estimated_input_tokens / 1_000_000 * HAIKU_45_INPUT_PER_MILLION
+        + estimated_output_tokens / 1_000_000 * HAIKU_45_OUTPUT_PER_MILLION,
+        8,
+    )
+    return {
+        "status": READINESS_STATUS,
+        "preflight_only": True,
+        "network_called": False,
+        "api_key_read": False,
+        "do_not_run_yet": True,
+        "provider": normalized_provider,
+        "generation_model": generation_model,
+        "embedding_provider": embedding_provider,
+        "embedding_model": embedding_model,
+        "modes": list(modes),
+        "repeats": repeats,
+        "query_count": query_count,
+        "gold_annotation_count": gold_count,
+        "planned_records": planned_records,
+        "expected_records_for_default_s1_s6": 630,
+        "keyword_selection_operations": keyword_operations,
+        "generation_operations_upper_bound": generation_operations_upper_bound,
+        "anthropic_request_upper_bound": keyword_operations + generation_operations_upper_bound,
+        "openai_query_embedding_operations_upper_bound": planned_records,
+        "openai_document_embedding_reuse_required": True,
+        "prepared_corpus_mode_available": False,
+        "document_embeddings_reused_without_provider_calls": False,
+        "stored_corpus_integrity_blocker": (
+            "The current actual-pipeline runner seeds an isolated corpus and Chroma index for provider runs; "
+            "a prepared-corpus query-only reuse mode is required before running this full experiment."
+        ),
+        "corpus": corpus,
+        "token_estimate_method": (
+            "local Unicode character count divided by four; 4096-token maximum context and "
+            "512-token output budget per case; not provider-billed usage"
+        ),
+        "haiku_45_preliminary_pricing_usd_per_million_tokens": {
+            "input": HAIKU_45_INPUT_PER_MILLION,
+            "output": HAIKU_45_OUTPUT_PER_MILLION,
+        },
+        "estimated_anthropic_input_tokens": estimated_input_tokens,
+        "estimated_anthropic_output_tokens": estimated_output_tokens,
+        "estimated_anthropic_cost_usd": estimated_anthropic_cost,
+        "estimated_anthropic_cost_with_25_percent_margin_usd": round(estimated_anthropic_cost * 1.25, 8),
+        "anthropic_cost_cap_usd": anthropic_cost_cap,
+        "anthropic_cost_cap_status": "WITHIN_CAP" if estimated_anthropic_cost <= anthropic_cost_cap else "EXCEEDS_CAP",
+        "confirmation_guard": (
+            "Full execution is disabled; current --confirm-full-experiment refuses execution until prepared-corpus "
+            "query-only reuse is implemented."
+        ),
+        "requires_confirm_full_experiment": True,
+        "current_execution_limit": "preflight-only",
+    }
 
 
 def main() -> None:
@@ -44,8 +215,15 @@ def main() -> None:
     parser.add_argument("--estimate-only", "--estimated-cost-only", dest="estimate_only", action="store_true")
     parser.add_argument("--repeats", type=int, default=1)
     parser.add_argument("--modes", nargs="+", choices=E1_MODES)
+    parser.add_argument("--full-experiment-preflight", action="store_true")
+    parser.add_argument("--full-experiment-modes", nargs="+", choices=FULL_EXPERIMENT_MODES)
+    parser.add_argument("--confirm-full-experiment", action="store_true")
     parser.add_argument("--include-scale-subset", action="store_true")
     parser.add_argument("--max-estimated-cost", type=float)
+    parser.add_argument("--max-anthropic-estimated-cost", type=float, default=DEFAULT_MAX_ANTHROPIC_ESTIMATED_COST)
+    parser.add_argument("--max-provider-request-attempts", type=int, default=DEFAULT_MAX_PROVIDER_REQUEST_ATTEMPTS)
+    parser.add_argument("--max-provider-output-tokens", type=int, default=DEFAULT_MAX_PROVIDER_OUTPUT_TOKENS)
+    parser.add_argument("--max-provider-retries", type=int, default=DEFAULT_MAX_PROVIDER_RETRIES)
     parser.add_argument("--pricing-config", type=Path)
     parser.add_argument("--average-provider-latency-ms", type=float)
     parser.add_argument("--generation-model")
@@ -65,6 +243,28 @@ def main() -> None:
     parser.add_argument("--database-url")
     parser.add_argument("--admin-database-url")
     args = parser.parse_args()
+
+    if args.full_experiment_preflight:
+        plan = full_experiment_preflight_plan(
+            provider=args.provider,
+            generation_model=args.generation_model,
+            embedding_provider=args.embedding_provider,
+            embedding_model=args.embedding_model,
+            repeats=args.repeats,
+            modes=tuple(args.full_experiment_modes or FULL_EXPERIMENT_MODES),
+            query_input_path=args.query_input or DEFAULT_FULL_QUERY_INPUT,
+            corpus_fixture_path=args.corpus_fixture or DEFAULT_FULL_CORPUS_FIXTURE,
+            gold_annotations_path=args.gold_annotations or DEFAULT_FULL_GOLD_ANNOTATIONS,
+            anthropic_cost_cap=args.max_anthropic_estimated_cost,
+        )
+        print(json.dumps(plan, sort_keys=True, indent=2))
+        return
+
+    if args.confirm_full_experiment:
+        raise RuntimeError(
+            "Full experiment execution remains disabled until a prepared-corpus query-only runner exists; "
+            "use --full-experiment-preflight for a network-free plan."
+        )
 
     if args.estimate_only:
         estimate_provider = args.provider if args.provider != "deterministic-mock" else "openai"
@@ -129,6 +329,51 @@ def main() -> None:
             raise RuntimeError(
                 f"Projected cost {estimate['projected_cost']} exceeds --max-estimated-cost {args.max_estimated_cost}"
             )
+    if args.provider == "anthropic":
+        if args.max_provider_output_tokens < 1:
+            raise RuntimeError("--max-provider-output-tokens must be positive")
+        if args.max_provider_retries < 0:
+            raise RuntimeError("--max-provider-retries must not be negative")
+        preliminary_anthropic_cost = round(
+            estimate["estimated_input_tokens"] / 1_000_000 * HAIKU_45_INPUT_PER_MILLION
+            + estimate["estimated_output_tokens"] / 1_000_000 * HAIKU_45_OUTPUT_PER_MILLION,
+            8,
+        )
+        if preliminary_anthropic_cost > args.max_anthropic_estimated_cost:
+            raise RuntimeError(
+                f"Projected preliminary Anthropic cost {preliminary_anthropic_cost} exceeds "
+                f"--max-anthropic-estimated-cost {args.max_anthropic_estimated_cost}"
+            )
+        if estimate["projected_cost"] is not None and estimate["projected_cost"] > args.max_anthropic_estimated_cost:
+            raise RuntimeError(
+                f"Projected Anthropic cost {estimate['projected_cost']} exceeds --max-anthropic-estimated-cost "
+                f"{args.max_anthropic_estimated_cost}"
+            )
+        configured_max_tokens = int(os.getenv("ANTHROPIC_MAX_TOKENS", "512"))
+        configured_retries = int(os.getenv("ANTHROPIC_MAX_RETRIES", "1"))
+        retry_attempts = 1 + args.max_provider_retries
+        provider_operations_upper_bound = int(estimate["case_count"]) * 2
+        request_attempts_upper_bound = provider_operations_upper_bound * retry_attempts
+        if request_attempts_upper_bound > args.max_provider_request_attempts:
+            raise RuntimeError(
+                f"Provider request attempts upper bound {request_attempts_upper_bound} exceeds "
+                f"--max-provider-request-attempts {args.max_provider_request_attempts}"
+            )
+        if args.max_provider_output_tokens > DEFAULT_MAX_PROVIDER_OUTPUT_TOKENS:
+            raise RuntimeError("--max-provider-output-tokens must be 1024 or lower for the Anthropic smoke guard")
+        if args.max_provider_retries > DEFAULT_MAX_PROVIDER_RETRIES:
+            raise RuntimeError("--max-provider-retries must be 1 or lower for the Anthropic smoke guard")
+        if configured_max_tokens > args.max_provider_output_tokens:
+            raise RuntimeError(
+                f"ANTHROPIC_MAX_TOKENS={configured_max_tokens} exceeds --max-provider-output-tokens "
+                f"{args.max_provider_output_tokens}"
+            )
+        if configured_retries > args.max_provider_retries:
+            raise RuntimeError(
+                f"ANTHROPIC_MAX_RETRIES={configured_retries} exceeds --max-provider-retries {args.max_provider_retries}"
+            )
+        os.environ.setdefault("ANTHROPIC_MAX_TOKENS", str(configured_max_tokens))
+        os.environ.setdefault("ANTHROPIC_MAX_RETRIES", str(configured_retries))
     validate_provider_request(args.provider, args.allow_network_provider)
     output = _required(args.output, "--output")
     cache_dir = _required(args.cache_dir, "--cache-dir")

@@ -31,10 +31,10 @@ unless `--include-scale-subset` is explicit.
 
 | Scenario | Queries | Modes | Repeats | Cases | Input tokens | Output tokens | Total tokens | Embedding operations | Generation operations | Cache hits / misses | Provider requests | Retry budget | Artifact estimate | Runtime | Cost |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---|---|
-| Base | 45 | 4 | 1 | 180 | 180472 | 92160 | 272632 | 181 | 180 | 135 / 406 | 406 | 360 | 1667040 bytes | `UNKNOWN` | `null` |
-| Base | 45 | 4 | 2 | 360 | 360944 | 184320 | 545264 | 362 | 360 | 270 / 812 | 812 | 720 | 3334080 bytes | `UNKNOWN` | `null` |
-| Base | 45 | 4 | 3 | 540 | 541416 | 276480 | 817896 | 543 | 540 | 405 / 1218 | 1218 | 1080 | 5001120 bytes | `UNKNOWN` | `null` |
-| Optional scale subset | 24 | 2 | 1 | 48 | 197308 | 24576 | 221884 | 49 | 48 | 24 / 121 | 121 | 96 | 1047792 bytes | `UNKNOWN` | `null` |
+| Base | 45 | 4 | 1 | 180 | 180472 | 92160 | 272632 | 181 | 180 | 135 / 406 | 406 | 180 | 1667040 bytes | `UNKNOWN` | `null` |
+| Base | 45 | 4 | 2 | 360 | 360944 | 184320 | 545264 | 362 | 360 | 270 / 812 | 812 | 360 | 3334080 bytes | `UNKNOWN` | `null` |
+| Base | 45 | 4 | 3 | 540 | 541416 | 276480 | 817896 | 543 | 540 | 405 / 1218 | 1218 | 540 | 5001120 bytes | `UNKNOWN` | `null` |
+| Optional scale subset | 24 | 2 | 1 | 48 | 197308 | 24576 | 221884 | 49 | 48 | 24 / 121 | 121 | 48 | 1047792 bytes | `UNKNOWN` | `null` |
 
 Token counts are transparent local upper-bound estimates: Unicode character
 count divided by four, at most 4096 context tokens and 512 output tokens per
@@ -61,7 +61,7 @@ multi-repeat run, each repeat must use a distinct ignored cache root so that a
 repeat is an independent provider execution. A cache may resume only the same
 run/repeat identity with identical frozen input and configuration hashes.
 
-Current generation has at most two explicit retries after its initial request;
+Current generation has at most one explicit retry after its initial request;
 the estimate reports that upper budget. Keyword or embedding failure has no
 additional evaluator retry budget and must fail the repeat. The current runner
 does not support record-level continuation of a partial raw file. A failed

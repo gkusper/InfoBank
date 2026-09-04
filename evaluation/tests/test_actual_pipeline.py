@@ -581,9 +581,17 @@ def test_prompt_only_response_parser_accepts_strict_json_and_rejects_unknown_cla
         '{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"A supported fact."}'
     )
     assert (output_class, reason_code, answer) == ("FULL_ANSWER", "supported", "A supported fact.")
+    fenced = _parse_prompt_only_response(
+        '```json\n{"output_class":"REFUSE_PERMISSION","reason_code":"deny","answer":"I cannot answer from the permitted sources."}\n```'
+    )
+    assert fenced == ("REFUSE_PERMISSION", "deny", "I cannot answer from the permitted sources.")
     with pytest.raises(ValueError, match="unsupported output_class"):
         _parse_prompt_only_response(
             '{"output_class":"REFERENCE_ORACLE","reason_code":"supported","answer":"No."}'
+        )
+    with pytest.raises(ValueError, match="strict JSON object"):
+        _parse_prompt_only_response(
+            'Here is the JSON:\n{"output_class":"FULL_ANSWER","reason_code":"supported","answer":"No."}'
         )
 
 

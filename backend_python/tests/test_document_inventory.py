@@ -235,7 +235,7 @@ def test_normal_query_with_anthropic_llm_reuses_existing_chunks_and_vectors(db_s
         return ["warranty"], {
             "provider": "anthropic",
             "adapter": "anthropic-python",
-            "model": "claude-sonnet-5",
+            "model": "claude-haiku-4-5-20251001",
             "prompt_version": "routing-keyword-v1",
             "available_keyword_count": 1,
             "parsed_item_count": 1,
@@ -263,11 +263,11 @@ def test_normal_query_with_anthropic_llm_reuses_existing_chunks_and_vectors(db_s
             cost=None,
             usage_source="provider_reported",
             provider="anthropic",
-            model="claude-sonnet-5",
+            model="claude-haiku-4-5-20251001",
             latency_ms=1.25,
             provider_request_id="msg_smoke",
             stop_reason="end_turn",
-            configured_max_retries=2,
+            configured_max_retries=1,
         )
 
     class FakeCollection:
@@ -288,7 +288,7 @@ def test_normal_query_with_anthropic_llm_reuses_existing_chunks_and_vectors(db_s
         "effective_provider_configuration",
         lambda: {
             "llm_provider": "anthropic",
-            "llm_model": "claude-sonnet-5",
+            "llm_model": "claude-haiku-4-5-20251001",
             "embedding_provider": "openai",
             "embedding_model": "text-embedding-3-small",
             "hybrid_configuration": True,
@@ -307,5 +307,5 @@ def test_normal_query_with_anthropic_llm_reuses_existing_chunks_and_vectors(db_s
     assert result["sources"][0]["document_id"] == document_id
     assert result["query_profile"]["keyword_selection_trace"]["provider"] == "anthropic"
     assert result["query_profile"]["generation_trace"]["provider"] == "anthropic"
-    assert result["query_profile"]["generation_trace"]["model"] == "claude-sonnet-5"
+    assert result["query_profile"]["generation_trace"]["model"] == "claude-haiku-4-5-20251001"
     assert keyword_calls and query_embedding_calls and generation_calls

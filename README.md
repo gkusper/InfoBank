@@ -42,7 +42,7 @@ Claude can be selected for chat/text generation only:
 ```powershell
 $env:AI_PROVIDER='anthropic'
 $env:ANTHROPIC_API_KEY='<secret>'
-$env:ANTHROPIC_MODEL='claude-sonnet-5'
+$env:ANTHROPIC_MODEL='claude-haiku-4-5-20251001'
 $env:EMBEDDING_PROVIDER='openai'
 $env:OPENAI_EMBEDDING_MODEL='text-embedding-3-small'
 backend_python\.venv_r1a\Scripts\python.exe -m uvicorn main:app --app-dir backend_python --host 127.0.0.1 --port 8000
@@ -92,7 +92,10 @@ For a guarded one-case Claude actual-pipeline smoke, use
 `scripts\run_real_provider_evaluation.py` with `--provider anthropic`,
 `--allow-network-provider`, `--max-cases 1`, and explicit task-owned output,
 cache, Chroma, source-storage, query, corpus, and gold paths. The full
-cross-generator S1-S6 experiment has intentionally not been run by this branch.
+cross-generator S1-S6 experiment has intentionally not been run by this branch;
+`--full-experiment-preflight` is network-free and `--confirm-full-experiment`
+currently refuses execution until a prepared-corpus query-only reuse mode
+exists.
 
 `main` is the protected integration/release baseline. The current
 `feature/infocom-cd-gates` branch contains reviewer and evaluation hardening and

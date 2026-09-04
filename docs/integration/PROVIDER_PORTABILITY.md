@@ -34,7 +34,7 @@ The supported production hybrid for Claude is:
 
 ```text
 LLM provider: anthropic
-LLM model: claude-sonnet-5
+LLM model: claude-haiku-4-5-20251001
 Embedding provider: openai
 Embedding model: text-embedding-3-small
 ```
@@ -62,20 +62,21 @@ Messages API:
 - OpenAI-only parameters such as `temperature`, `top_p`, `top_k`, and response
   format objects are not sent to Claude by default.
 
-For `claude-sonnet-5`, sampling parameters are omitted by default. This differs
-from the OpenAI call path, which preserves the existing call-site temperature
-behavior.
+For `claude-haiku-4-5-20251001`, sampling parameters are omitted by default:
+no temperature, top-p, top-k, tools, batch API, extended thinking, or structured
+response-format parameter is sent. This differs from the OpenAI call path,
+which preserves the existing call-site temperature behavior.
 
 ## Configuration
 
 ```text
 AI_PROVIDER=openai|anthropic
 OPENAI_CHAT_MODEL=gpt-4o-mini
-ANTHROPIC_MODEL=claude-sonnet-5
+ANTHROPIC_MODEL=claude-haiku-4-5-20251001
 ANTHROPIC_API_KEY=<secret>
 ANTHROPIC_MAX_TOKENS=512
 ANTHROPIC_TIMEOUT_SECONDS=60
-ANTHROPIC_MAX_RETRIES=2
+ANTHROPIC_MAX_RETRIES=1
 EMBEDDING_PROVIDER=openai
 OPENAI_EMBEDDING_MODEL=text-embedding-3-small
 ```
@@ -112,7 +113,7 @@ Claude runtime smoke uses the existing stored corpus and OpenAI embeddings:
 
 ```powershell
 $env:AI_PROVIDER='anthropic'
-$env:ANTHROPIC_MODEL='claude-sonnet-5'
+$env:ANTHROPIC_MODEL='claude-haiku-4-5-20251001'
 $env:ANTHROPIC_API_KEY='<secret>'
 $env:EMBEDDING_PROVIDER='openai'
 $env:OPENAI_EMBEDDING_MODEL='text-embedding-3-small'
@@ -125,8 +126,10 @@ Guarded one-case actual-pipeline smoke:
 ```powershell
 backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation.py `
   --provider anthropic --allow-network-provider --max-cases 1 `
-  --generation-model claude-sonnet-5 --embedding-provider openai `
+  --generation-model claude-haiku-4-5-20251001 --embedding-provider openai `
   --embedding-model text-embedding-3-small `
+  --max-provider-request-attempts 70 --max-anthropic-estimated-cost 2 `
+  --max-provider-output-tokens 1024 --max-provider-retries 1 `
   --query-input <query_inputs.jsonl> --corpus-fixture <corpus_fixture.json> `
   --gold-annotations <gold_annotations.jsonl> `
   --database-url <isolated-eval-database-url> `
@@ -134,8 +137,12 @@ backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation
   --chroma-dir <task-owned-chroma-dir> --source-storage-dir <task-owned-source-dir>
 ```
 
-The script only runs a C3 smoke path unless a future branch adds and documents
-an explicit full-experiment confirmation flag.
+The script only runs a C3 smoke path. Full experiment execution is currently
+disabled even when `--confirm-full-experiment` is supplied, because the current
+actual-pipeline runner seeds a fresh corpus and Chroma collection. Use
+`--full-experiment-preflight` for a network-free 42-case, five-mode,
+three-repeat plan and add a prepared-corpus query-only reuse mode before any
+full provider run.
 
 ## Limitations
 

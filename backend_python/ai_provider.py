@@ -23,10 +23,10 @@ from openai import OpenAI
 
 PROVIDER_CONFIG_VERSION = "infocom-provider-v2"
 KEYWORD_SELECTION_STRATEGY_VERSION = "infocom-keyword-selector-v2"
-ANTHROPIC_DEFAULT_MODEL = "claude-sonnet-5"
+ANTHROPIC_DEFAULT_MODEL = "claude-haiku-4-5-20251001"
 ANTHROPIC_DEFAULT_MAX_TOKENS = 512
 ANTHROPIC_DEFAULT_TIMEOUT_SECONDS = 60.0
-ANTHROPIC_DEFAULT_MAX_RETRIES = 2
+ANTHROPIC_DEFAULT_MAX_RETRIES = 1
 OPENAI_EMBEDDING_DIMENSIONS = {
     "text-embedding-3-small": 1536,
     "text-embedding-3-large": 3072,
@@ -886,6 +886,9 @@ class AnthropicProvider(AIProvider):
         except Exception as exc:
             self._raise_safe_error(exc, model=model)
         latency_ms = _elapsed_ms(start_ns)
+        stop_reason = _safe_str(getattr(response, "stop_reason", None))
+        if stop_reason == "max_tokens":
+            raise AIProviderResponseError("Anthropic response stopped at max_tokens before completing output.")
         text = self._extract_text(response)
         usage = getattr(response, "usage", None)
         input_tokens = _safe_int(getattr(usage, "input_tokens", None))
@@ -902,7 +905,7 @@ class AnthropicProvider(AIProvider):
             model=model,
             latency_ms=latency_ms,
             provider_request_id=_safe_str(getattr(response, "id", None) or getattr(response, "_request_id", None)),
-            stop_reason=_safe_str(getattr(response, "stop_reason", None)),
+            stop_reason=stop_reason,
             configured_max_retries=self.max_retries,
         )
 
@@ -916,6 +919,8 @@ class AnthropicProvider(AIProvider):
             else:
                 block_type = getattr(block, "type", None)
                 text = getattr(block, "text", None)
+            if block_type == "refusal":
+                raise AIProviderResponseError("Anthropic response contained a refusal block.")
             if block_type == "text" and text is not None:
                 text_parts.append(str(text))
         text = "".join(text_parts).strip()

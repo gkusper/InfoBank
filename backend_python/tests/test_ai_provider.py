@@ -120,7 +120,7 @@ def test_anthropic_provider_constructs_client_from_environment(monkeypatch: pyte
         {
             "api_key": "test-anthropic-key",
             "timeout": 60.0,
-            "max_retries": 2,
+            "max_retries": 1,
         }
     ]
 
@@ -258,6 +258,51 @@ def test_empty_anthropic_text_response_is_rejected() -> None:
     provider = AnthropicProvider(client_factory=lambda: client)
 
     with pytest.raises(AIProviderResponseError, match="no text blocks"):
+        provider.generate_with_usage(
+            [{"role": "user", "content": "hello"}],
+            model=ANTHROPIC_DEFAULT_MODEL,
+        )
+
+
+def test_anthropic_max_token_stop_is_rejected() -> None:
+    class Messages:
+        @staticmethod
+        def create(**kwargs):
+            del kwargs
+            usage = type("Usage", (), {"input_tokens": 1, "output_tokens": 1})()
+            block = type("TextBlock", (), {"type": "text", "text": "truncated"})()
+            return type(
+                "Response",
+                (),
+                {"id": "msg_truncated", "content": [block], "usage": usage, "stop_reason": "max_tokens"},
+            )()
+
+    client = type("Client", (), {"messages": Messages()})()
+    provider = AnthropicProvider(client_factory=lambda: client)
+
+    with pytest.raises(AIProviderResponseError, match="max_tokens"):
+        provider.generate_with_usage(
+            [{"role": "user", "content": "hello"}],
+            model=ANTHROPIC_DEFAULT_MODEL,
+        )
+
+
+def test_anthropic_refusal_block_is_rejected() -> None:
+    class Messages:
+        @staticmethod
+        def create(**kwargs):
+            del kwargs
+            usage = type("Usage", (), {"input_tokens": 1, "output_tokens": 1})()
+            return type(
+                "Response",
+                (),
+                {"id": "msg_refusal", "content": [{"type": "refusal", "text": "No."}], "usage": usage},
+            )()
+
+    client = type("Client", (), {"messages": Messages()})()
+    provider = AnthropicProvider(client_factory=lambda: client)
+
+    with pytest.raises(AIProviderResponseError, match="refusal"):
         provider.generate_with_usage(
             [{"role": "user", "content": "hello"}],
             model=ANTHROPIC_DEFAULT_MODEL,

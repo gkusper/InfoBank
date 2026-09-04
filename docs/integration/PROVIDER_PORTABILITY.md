@@ -73,7 +73,7 @@ which preserves the existing call-site temperature behavior.
 AI_PROVIDER=openai|anthropic
 OPENAI_CHAT_MODEL=gpt-4o-mini
 ANTHROPIC_MODEL=claude-haiku-4-5-20251001
-ANTHROPIC_API_KEY=<secret>
+ANTHROPIC_API_KEY is required in the process environment.
 ANTHROPIC_MAX_TOKENS=512
 ANTHROPIC_TIMEOUT_SECONDS=60
 ANTHROPIC_MAX_RETRIES=1
@@ -114,10 +114,9 @@ Claude runtime smoke uses the existing stored corpus and OpenAI embeddings:
 ```powershell
 $env:AI_PROVIDER='anthropic'
 $env:ANTHROPIC_MODEL='claude-haiku-4-5-20251001'
-$env:ANTHROPIC_API_KEY='<secret>'
 $env:EMBEDDING_PROVIDER='openai'
 $env:OPENAI_EMBEDDING_MODEL='text-embedding-3-small'
-$env:OPENAI_API_KEY='<secret>'
+# Set ANTHROPIC_API_KEY and OPENAI_API_KEY in the process environment before running.
 backend_python\.venv_r1a\Scripts\python.exe -m uvicorn main:app --app-dir backend_python --host 127.0.0.1 --port 8000
 ```
 
@@ -128,7 +127,7 @@ backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation
   --provider anthropic --allow-network-provider --max-cases 1 `
   --generation-model claude-haiku-4-5-20251001 --embedding-provider openai `
   --embedding-model text-embedding-3-small `
-  --max-provider-request-attempts 70 --max-anthropic-estimated-cost 2 `
+  --max-provider-request-attempts 70 --max-anthropic-estimated-cost 6.0 `
   --max-provider-output-tokens 1024 --max-provider-retries 1 `
   --query-input <query_inputs.jsonl> --corpus-fixture <corpus_fixture.json> `
   --gold-annotations <gold_annotations.jsonl> `

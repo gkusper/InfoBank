@@ -24,6 +24,7 @@ artifacts/human_qa/
 artifacts/api_workflows/
 artifacts/reviewer_screenshots/
 artifacts/pre_push_runtime_audit/
+artifacts/anthropic_provider_readiness/*/runtime/
 backend_python/runtime/source_storage/
 .pytest_cache/
 temp_*.pdf

@@ -1,0 +1,64 @@
+{
+  "actual_pipeline_config": {
+    "config_hash": "002e7aea57218737b16baec95cb819a6b6264d4262581bd54ddb1f603db0e7cf",
+    "config_version": "actual-pipeline-development-config-v1",
+    "embedding_model": "text-embedding-3-small",
+    "generation_model": "infobank-deterministic-extractive-v1"
+  },
+  "chroma": {
+    "collections": [
+      {
+        "count": 245,
+        "metadata": {
+          "hnsw:space": "cosine"
+        },
+        "name": "actual_c50133cf5fe652c9"
+      }
+    ],
+    "persist_dir": "artifacts/anthropic_provider_readiness/prepared_corpus_openai_20260904/runtime/chroma",
+    "total_vector_count": 245
+  },
+  "created_at_utc": "2026-09-04T16:36:58.901233+00:00",
+  "database": {
+    "name": "infobank_eval_claude_prepare_20260904",
+    "table_counts": {
+      "audit_logs": 0,
+      "document_chunks": 245,
+      "document_keywords": 1640,
+      "documents": 41,
+      "keywords": 584,
+      "user_document_permission": 253,
+      "users": 33
+    },
+    "url_redacted": "mysql+pymysql://infobank:***@127.0.0.1:3307/infobank_eval_claude_prepare_20260904"
+  },
+  "embedding_model": "text-embedding-3-small",
+  "embedding_dimensions": 1536,
+  "embedding_provider": "openai",
+  "full_experiment_run": false,
+  "generation_calls": 0,
+  "inputs": {
+    "corpus_fixture_path": "artifacts/s1_s6_publication_experiment_v2/combined_input/combined_corpus_fixture.json",
+    "corpus_fixture_sha256": "22ebf2e2a27f009041b3f4979a1d36f94b212edaf259b5c14663386da52b894b",
+    "dataset_version": "s1-s6-combined-journal-evaluation-v2",
+    "document_count": 41,
+    "page_count": 202,
+    "policy_fixture_count": 32,
+    "query_count": 42,
+    "query_input_path": "artifacts/s1_s6_publication_experiment_v2/combined_input/combined_query_inputs.jsonl",
+    "query_input_sha256": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd"
+  },
+  "keyword_selection_calls": 0,
+  "openai_embedding_input_characters": 162964,
+  "openai_embedding_input_count": 245,
+  "openai_embedding_requests_inferred_from_seed_path": 1,
+  "purpose": "Prepared S1-S6 corpus with OpenAI document embeddings for later Claude query-only pilot/full experiment validation.",
+  "preparation_status": "READY",
+  "queries_run": 0,
+  "schema_version": "infobank-openai-prepared-corpus-v1",
+  "source_storage": {
+    "dir": "artifacts/anthropic_provider_readiness/prepared_corpus_openai_20260904/runtime/source_storage",
+    "file_count": 41,
+    "total_bytes": 1915270
+  }
+}

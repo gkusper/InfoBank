@@ -1,0 +1,29 @@
+{
+  "created_at_utc": "2026-09-04T17:50:58Z",
+  "gold_annotation_path": "artifacts/s1_s6_publication_experiment_v2/combined_input/combined_reference_annotations.jsonl",
+  "gold_annotation_sha256": "d7526442bc36fd174b8f5b1fb3981cce37504b297052f67069f18e395021abed",
+  "plan_sha256": "1491004b6a47e254deca2f62a81b8811fe2f9c20f118bd6c5fd35fbad026a6e4",
+  "query_input_path": "artifacts/s1_s6_publication_experiment_v2/combined_input/combined_query_inputs.jsonl",
+  "query_input_sha256": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd",
+  "schema_version": "infobank-prepared-corpus-readiness-selection-plan-v1",
+  "selected_case_ids": [
+    "S1-Q6",
+    "S3-Q2"
+  ],
+  "selected_cases": [
+    {
+      "case_id": "S1-Q6",
+      "reference_category": "FULL_ANSWER",
+      "required_source_count": 2,
+      "selection_rule": "lexicographically first FULL_ANSWER requiring multiple sources when available"
+    },
+    {
+      "case_id": "S3-Q2",
+      "reference_category": "AGGREGATE_RESULT",
+      "required_source_count": 3,
+      "selection_rule": "lexicographically first AGGREGATE_RESULT"
+    }
+  ],
+  "selection_rule": "two-case C3 smoke: multi-source FULL_ANSWER plus governed AGGREGATE_RESULT",
+  "selection_status": "FROZEN_BEFORE_PROVIDER_OUTPUTS"
+}

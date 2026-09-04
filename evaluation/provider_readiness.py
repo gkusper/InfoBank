@@ -152,6 +152,20 @@ class CachedEvaluationProvider(AIProvider):
         self, text: str, *, model: str, prompt: str, prompt_version: str,
         available_keywords: Sequence[str] | None = None, limit: int = 5,
     ) -> list[str]:
+        values, _ = self.extract_keywords_with_trace(
+            text,
+            model=model,
+            prompt=prompt,
+            prompt_version=prompt_version,
+            available_keywords=available_keywords,
+            limit=limit,
+        )
+        return values
+
+    def extract_keywords_with_trace(
+        self, text: str, *, model: str, prompt: str, prompt_version: str,
+        available_keywords: Sequence[str] | None = None, limit: int = 5,
+    ) -> tuple[list[str], dict[str, Any]]:
         generation_config = self.wrapped.keyword_cache_config()
         input_value = {
             "text": text,
@@ -170,13 +184,29 @@ class CachedEvaluationProvider(AIProvider):
         )
         cached = self._read("keywords", key)
         if cached:
-            return list(cached["value"])
-        value = self.wrapped.extract_keywords(
+            cached_value = cached["value"]
+            if isinstance(cached_value, dict):
+                values = list(cached_value.get("values") or [])
+                trace = dict(cached_value.get("trace") or {})
+            else:
+                values = list(cached_value)
+                trace = self._keyword_selection_trace(
+                    prompt_version=prompt_version,
+                    available_keywords=available_keywords,
+                    selected_count=len(values),
+                    parsed_item_count=len(values),
+                    rejected_item_count=0,
+                    outcome="cache_hit_legacy",
+                    model=model,
+                )
+            trace["usage_source"] = f"cache:{trace.get('usage_source', 'provider_trace')}"
+            return values, trace
+        value, trace = self.wrapped.extract_keywords_with_trace(
             text, model=model, prompt=prompt, prompt_version=prompt_version,
             available_keywords=available_keywords, limit=limit,
         )
-        self._write("keywords", key, identity, value)
-        return value
+        self._write("keywords", key, identity, {"values": value, "trace": trace})
+        return value, trace
 
     def embed(self, texts: Sequence[str], *, model: str) -> list[list[float]]:
         input_value = {"texts": list(texts)}

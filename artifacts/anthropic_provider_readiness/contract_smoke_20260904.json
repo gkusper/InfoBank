@@ -1,0 +1,58 @@
+{
+  "calls": [
+    {
+      "call": "claude_connectivity",
+      "input_tokens": 11,
+      "latency_ms": 9971.7184,
+      "model": "claude-haiku-4-5-20251001",
+      "output_tokens": 5,
+      "pass": true,
+      "provider": "anthropic",
+      "request_id": "msg_011CeipnEKEAKJPh8D6114N4",
+      "retry_count": 0,
+      "stop_reason": "end_turn"
+    },
+    {
+      "call": "system_user_mapping",
+      "input_tokens": 22,
+      "latency_ms": 750.0693,
+      "model": "claude-haiku-4-5-20251001",
+      "output_tokens": 13,
+      "pass": true,
+      "provider": "anthropic",
+      "request_id": "msg_011CeipnJBeV3Uz3NP2FTGTV",
+      "retry_count": 0,
+      "stop_reason": "end_turn"
+    },
+    {
+      "call": "p1_strict_json_contract",
+      "input_tokens": 42,
+      "latency_ms": 1601.9844,
+      "model": "claude-haiku-4-5-20251001",
+      "output_tokens": 49,
+      "pass": true,
+      "provider": "anthropic",
+      "request_id": "msg_011CeipnMR7VJPH8MBcipbRW",
+      "retry_count": 0,
+      "stop_reason": "end_turn",
+      "strict_json_parse": "PASS"
+    },
+    {
+      "call": "governed_keyword_selection",
+      "error_type": null,
+      "input_tokens": 49,
+      "latency_ms": null,
+      "model": "claude-haiku-4-5-20251001",
+      "output_tokens": 6,
+      "pass": true,
+      "provider": "anthropic",
+      "request_id": "msg_011CeipnUM5W6KE31nFZbakf",
+      "retry_count": 0,
+      "selected_count": 2,
+      "stop_reason": "end_turn"
+    }
+  ],
+  "max_calls_allowed": 4,
+  "prompt_contents_recorded": false,
+  "status": "PASS"
+}

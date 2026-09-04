@@ -62,7 +62,8 @@ def test_cli_and_provider_estimate_modes_are_c0_c3_only() -> None:
     assert E1_MODES == CANONICAL_C0_C3_MODES
     runner = (REPO_ROOT / "scripts" / "run_real_provider_evaluation.py").read_text(encoding="utf-8")
     actual_pipeline = (REPO_ROOT / "scripts" / "run_actual_pipeline_evaluation.py").read_text(encoding="utf-8")
-    assert "choices=E1_MODES" in runner
+    assert "choices=FULL_EXPERIMENT_MODES" in runner
+    assert "--query-only" in runner
     assert 'modes=["C3_FULL_ROLE_AWARE"]' in runner
     assert all(mode in actual_pipeline for mode in CANONICAL_C0_C3_MODES)
     assert "B0_VECTOR_ONLY" not in runner + actual_pipeline

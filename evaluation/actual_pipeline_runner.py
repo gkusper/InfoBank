@@ -35,6 +35,8 @@ from .schemas import EvaluationMode, utc_timestamp
 RUNNER_VERSION = "infobank-actual-pipeline-runner-v2"
 RAW_SCHEMA_VERSION = "infobank-actual-raw-record-v1"
 SEAL_SCHEMA_VERSION = "infobank-raw-run-seal-v1"
+EXECUTION_MODE_SEEDED = "seeded_actual_pipeline"
+EXECUTION_MODE_PREPARED_QUERY_ONLY = "prepared_corpus_query_only"
 DEFAULT_MODEL = "infobank-deterministic-extractive-v1"
 GENERATION_PROMPT_VERSION = "actual-pipeline-answer-v1"
 ROUTING_PROMPT_VERSION = "routing-keyword-v1"
@@ -160,6 +162,92 @@ class ActualPipelineConfig:
     def config_hash(self) -> str:
         value = json.dumps(asdict(self), sort_keys=True, separators=(",", ":"))
         return hashlib.sha256(value.encode("utf-8")).hexdigest()
+
+
+@dataclass
+class QueryOnlyOperationCounters:
+    document_pdf_parse_calls: int = 0
+    document_chunking_calls: int = 0
+    document_keyword_extraction_calls: int = 0
+    document_embedding_calls: int = 0
+    chroma_add_calls: int = 0
+    corpus_seed_calls: int = 0
+    query_embedding_calls: int = 0
+    keyword_selection_calls: int = 0
+    generation_calls: int = 0
+
+    def snapshot(self) -> dict[str, int]:
+        return asdict(self)
+
+    def delta(self, before: dict[str, int]) -> dict[str, int]:
+        current = self.snapshot()
+        return {key: current[key] - int(before.get(key, 0)) for key in current}
+
+
+class QueryOnlyDocumentProcessingGuard:
+    def __init__(self, wrapped: Any, counters: QueryOnlyOperationCounters) -> None:
+        self._wrapped = wrapped
+        self._counters = counters
+        self.DEFAULT_PROCESSING_CONFIG = wrapped.DEFAULT_PROCESSING_CONFIG
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._wrapped, name)
+
+    def extract_pdf_pages(self, *_args: Any, **_kwargs: Any) -> Any:
+        self._counters.document_pdf_parse_calls += 1
+        raise RuntimeError("PDF extraction is forbidden in prepared-corpus query-only mode")
+
+    def chunk_pages(self, *_args: Any, **_kwargs: Any) -> Any:
+        self._counters.document_chunking_calls += 1
+        raise RuntimeError("Document chunking is forbidden in prepared-corpus query-only mode")
+
+
+class QueryOnlySourceStorageGuard:
+    def __init__(self, wrapped: Any) -> None:
+        self._wrapped = wrapped
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._wrapped, name)
+
+    def save(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Source storage writes are forbidden in prepared-corpus query-only mode")
+
+    def remove(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Source storage removal is forbidden in prepared-corpus query-only mode")
+
+    def stage_remove(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Source storage mutation is forbidden in prepared-corpus query-only mode")
+
+    def restore_staged(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Source storage mutation is forbidden in prepared-corpus query-only mode")
+
+    def purge_staged(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Source storage mutation is forbidden in prepared-corpus query-only mode")
+
+
+class QueryOnlyChromaCollectionGuard:
+    def __init__(self, wrapped: Any, counters: QueryOnlyOperationCounters) -> None:
+        self._wrapped = wrapped
+        self._counters = counters
+        self.name = wrapped.name
+        self.metadata = wrapped.metadata
+
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._wrapped, name)
+
+    def add(self, *_args: Any, **_kwargs: Any) -> Any:
+        self._counters.chroma_add_calls += 1
+        raise RuntimeError("Chroma vector insertion is forbidden in prepared-corpus query-only mode")
+
+    def upsert(self, *_args: Any, **_kwargs: Any) -> Any:
+        self._counters.chroma_add_calls += 1
+        raise RuntimeError("Chroma vector mutation is forbidden in prepared-corpus query-only mode")
+
+    def update(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Chroma vector mutation is forbidden in prepared-corpus query-only mode")
+
+    def delete(self, *_args: Any, **_kwargs: Any) -> Any:
+        raise RuntimeError("Chroma vector mutation is forbidden in prepared-corpus query-only mode")
 
 
 def _sha256_bytes(value: bytes) -> str:
@@ -981,6 +1069,10 @@ class PipelineRuntime:
         allow_network_provider: bool = False,
         cache_dir: Path | None = None,
         pricing_config_path: Path | None = None,
+        seed_corpus: bool = True,
+        prepared_collection_name: str | None = None,
+        operation_counters: QueryOnlyOperationCounters | None = None,
+        prepared_metadata: dict[str, Any] | None = None,
     ) -> None:
         ensure_backend_path()
         os.environ["DATABASE_URL"] = database_url
@@ -989,6 +1081,10 @@ class PipelineRuntime:
             "openai" if provider_name in {"openai", "anthropic"} else provider_name
         )
         os.environ["EMBEDDING_PROVIDER"] = embedding_provider_name
+        if provider_name == "anthropic":
+            os.environ["ANTHROPIC_MODEL"] = config.generation_model
+        if embedding_provider_name == "openai":
+            os.environ["OPENAI_EMBEDDING_MODEL"] = config.embedding_model
 
         import chromadb
         from sqlalchemy import create_engine, text
@@ -1022,6 +1118,10 @@ class PipelineRuntime:
         self.corpus_base_dir = corpus_base_dir
         self.dataset_version = dataset_version
         self.fixture_identities = fixture_identities
+        self.execution_mode = EXECUTION_MODE_SEEDED if seed_corpus else EXECUTION_MODE_PREPARED_QUERY_ONLY
+        self.operation_counters = operation_counters
+        self.prepared_metadata = dict(prepared_metadata or {})
+        self.cache_namespace_version: str | None = None
         llm_provider = ai_provider.create_provider(provider_name)
         embedding_provider = ai_provider.create_provider(embedding_provider_name)
         if (
@@ -1039,6 +1139,7 @@ class PipelineRuntime:
                 generation_model=config.generation_model,
                 embedding_model=config.embedding_model,
             )
+            self.cache_namespace_version = readiness.config_hash
             pricing, _ = load_pricing(pricing_config_path, config.generation_model)
             llm_provider = CachedEvaluationProvider(llm_provider, cache_dir, readiness.config_hash, pricing)
             embedding_provider = CachedEvaluationProvider(embedding_provider, cache_dir, readiness.config_hash)
@@ -1049,24 +1150,45 @@ class PipelineRuntime:
         if self.engine.dialect.name == "mysql":
             database_name = self.engine.url.database or ""
             if not database_name.startswith("infobank_eval_"):
-                raise ValueError("Refusing to reset a non-evaluation MySQL database")
-            with self.engine.begin() as connection:
-                connection.execute(text("SET FOREIGN_KEY_CHECKS=0"))
-                for table in reversed(database.Base.metadata.sorted_tables):
-                    connection.execute(text(f"DELETE FROM `{table.name}`"))
-                connection.execute(text("SET FOREIGN_KEY_CHECKS=1"))
-        else:
+                action = "reset" if seed_corpus else "open"
+                raise ValueError(f"Refusing to {action} a non-evaluation MySQL database")
+            if seed_corpus:
+                with self.engine.begin() as connection:
+                    connection.execute(text("SET FOREIGN_KEY_CHECKS=0"))
+                    for table in reversed(database.Base.metadata.sorted_tables):
+                        connection.execute(text(f"DELETE FROM `{table.name}`"))
+                    connection.execute(text("SET FOREIGN_KEY_CHECKS=1"))
+        elif seed_corpus:
             database.Base.metadata.drop_all(self.engine)
             database.Base.metadata.create_all(self.engine)
         self.Session = sessionmaker(bind=self.engine, autoflush=False, expire_on_commit=False)
-        chroma_dir.mkdir(parents=True, exist_ok=True)
+        if seed_corpus:
+            chroma_dir.mkdir(parents=True, exist_ok=True)
+        elif not chroma_dir.is_dir():
+            raise FileNotFoundError(f"Prepared Chroma directory is missing: {chroma_dir}")
         self.chroma = chromadb.PersistentClient(path=str(chroma_dir))
-        self.collection = self.chroma.get_or_create_collection(
-            name=f"actual_{hashlib.sha256(f'{embedding_provider.provider_name}:{config.embedding_model}:{config.config_hash}'.encode()).hexdigest()[:16]}",
-            metadata={"hnsw:space": "cosine"},
-        )
-        self.source_storage = source_storage.SourceStorage(source_storage_dir)
-        self._seed()
+        if seed_corpus:
+            self.collection = self.chroma.get_or_create_collection(
+                name=f"actual_{hashlib.sha256(f'{embedding_provider.provider_name}:{config.embedding_model}:{config.config_hash}'.encode()).hexdigest()[:16]}",
+                metadata={"hnsw:space": "cosine"},
+            )
+            self.source_storage = source_storage.SourceStorage(source_storage_dir)
+            self._seed()
+        else:
+            if not prepared_collection_name:
+                raise ValueError("prepared_collection_name is required in prepared-corpus query-only mode")
+            if operation_counters is None:
+                raise ValueError("operation_counters are required in prepared-corpus query-only mode")
+            try:
+                collection = self.chroma.get_collection(name=prepared_collection_name)
+            except Exception as exc:
+                raise RuntimeError(
+                    f"Prepared Chroma collection {prepared_collection_name!r} is missing; "
+                    "query-only mode refuses to create collections."
+                ) from exc
+            self.collection = QueryOnlyChromaCollectionGuard(collection, operation_counters)
+            self.source_storage = QueryOnlySourceStorageGuard(source_storage.SourceStorage(source_storage_dir))
+            self.document_processing = QueryOnlyDocumentProcessingGuard(document_processing, operation_counters)
 
     @staticmethod
     def _user_id(identity: str) -> str:
@@ -1130,6 +1252,10 @@ class PipelineRuntime:
         }
 
     def _seed(self) -> None:
+        if self.execution_mode == EXECUTION_MODE_PREPARED_QUERY_ONLY:
+            if self.operation_counters is not None:
+                self.operation_counters.corpus_seed_calls += 1
+            raise RuntimeError("Corpus seeding is forbidden in prepared-corpus query-only mode")
         models = self.models
         with self.Session() as db:
             fixture_users = sorted({identity for identities in self.fixture_identities.values() for identity in identities})
@@ -1233,6 +1359,8 @@ class PipelineRuntime:
                             )
                         )
             db.commit()
+            if self.operation_counters is not None:
+                self.operation_counters.document_embedding_calls += 1
             embeddings = self.embedding_provider.embed(all_chunk_texts, model=self.config.embedding_model)
             self.collection.add(
                 ids=all_chunk_ids,
@@ -1287,25 +1415,43 @@ class PipelineRuntime:
                 and value.lower() not in scoped_terms
             }
         )
-        selected = self.llm_provider.extract_keywords(
-            question,
-            model=self.config.generation_model,
-            prompt="Select governed routing tags.",
-            prompt_version=ROUTING_PROMPT_VERSION,
-            available_keywords=available,
-            limit=4,
-        )
+        if enabled:
+            counters = getattr(self, "operation_counters", None)
+            if counters is not None:
+                counters.keyword_selection_calls += 1
+            selected, keyword_provider_trace = self.llm_provider.extract_keywords_with_trace(
+                question,
+                model=self.config.generation_model,
+                prompt="Select governed routing tags.",
+                prompt_version=ROUTING_PROMPT_VERSION,
+                available_keywords=available,
+                limit=4,
+            )
+        else:
+            selected = []
+            keyword_provider_trace = {
+                "provider": self.llm_provider.provider_name,
+                "model": self.config.generation_model,
+                "prompt_version": ROUTING_PROMPT_VERSION,
+                "available_keyword_count": len(available),
+                "selected_keyword_count": 0,
+                "outcome": "routing_disabled",
+            }
         mode = self.routing.RoutingMode.KEYWORD_ROUTING if enabled else self.routing.RoutingMode.ROUTING_OFF
         decision = self.routing.route_documents(routing_input, document_keywords, selected, mode)
         trace = decision.to_trace()
         trace["object_scope_target"] = target or None
         trace["object_scope_applied"] = bool(object_scoped)
         trace["routing_available_keyword_count"] = len(available)
+        trace["keyword_provider_trace"] = keyword_provider_trace
         return list(decision.candidate_document_ids), selected, trace
 
     def _retrieve(self, question: str, candidate_ids: list[str], top_k: int) -> list[dict[str, Any]]:
         if not candidate_ids:
             return []
+        counters = getattr(self, "operation_counters", None)
+        if counters is not None:
+            counters.query_embedding_calls += 1
         question_vector = self.embedding_provider.embed([question], model=self.config.embedding_model)[0]
         where = {"document_id": candidate_ids[0]} if len(candidate_ids) == 1 else {"document_id": {"$in": candidate_ids}}
         chunk_count = sum(
@@ -1360,8 +1506,23 @@ class PipelineRuntime:
                 break
         return selected
 
+    def _attach_execution_metadata(self, record: dict[str, Any], counter_before: dict[str, int]) -> dict[str, Any]:
+        record["execution_mode"] = getattr(self, "execution_mode", EXECUTION_MODE_SEEDED)
+        record["cache_namespace_version"] = getattr(self, "cache_namespace_version", None)
+        counters = getattr(self, "operation_counters", None)
+        if counters is not None:
+            record["operation_counters"] = counters.delta(counter_before)
+        else:
+            record["operation_counters"] = {}
+        prepared_metadata = getattr(self, "prepared_metadata", {})
+        if prepared_metadata:
+            record["prepared_corpus"] = dict(prepared_metadata)
+        return record
+
     def run_case(self, query: QueryInput, mode: str) -> tuple[dict[str, Any], dict[str, float]]:
         timings: dict[str, float] = {}
+        counters = getattr(self, "operation_counters", None)
+        counter_before = counters.snapshot() if counters is not None else {}
         total_start = time.perf_counter_ns()
         fixture = self.fixtures[query.policy_fixture_ref]
         policy_user_id = self._policy_user_id(query.policy_fixture_ref)
@@ -1702,6 +1863,9 @@ class PipelineRuntime:
                                     "content": f"Question: {query.query_text}\n\nContext from the document(s):\n{visible_text}",
                                 },
                             ]
+                        counters = getattr(self, "operation_counters", None)
+                        if counters is not None:
+                            counters.generation_calls += 1
                         generated = self.llm_provider.generate_with_usage(
                             messages,
                             model=self.config.generation_model,
@@ -1873,6 +2037,7 @@ class PipelineRuntime:
                 "safety_constraints": {"prohibited_document_ids": [], "prohibited_markers": [], "archived_document_ids": []},
                 "error": error,
             }
+        record = self._attach_execution_metadata(record, counter_before)
         timings["total"] = _elapsed_ms(total_start)
         return record, timings
 

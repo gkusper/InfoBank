@@ -1,0 +1,57 @@
+{
+  "created_at_utc": "2026-09-04T17:50:58Z",
+  "gold_annotation_path": "artifacts/s1_s6_publication_experiment_v2/combined_input/combined_reference_annotations.jsonl",
+  "gold_annotation_sha256": "d7526442bc36fd174b8f5b1fb3981cce37504b297052f67069f18e395021abed",
+  "plan_sha256": "31d1e9f3174dca1152592703846aac5a22bce93a9e7af6b619755b91ed21a754",
+  "query_input_path": "artifacts/s1_s6_publication_experiment_v2/combined_input/combined_query_inputs.jsonl",
+  "query_input_sha256": "744f349a36775304ae1449b6a180f5fe7e815f3f009f6371c8b64feb9c3b17bd",
+  "schema_version": "infobank-prepared-corpus-readiness-selection-plan-v1",
+  "selected_case_ids": [
+    "S1-Q6",
+    "S3-Q2",
+    "S4B-Q7",
+    "S1-Q4",
+    "S4B-Q6",
+    "S6-Q4"
+  ],
+  "selected_cases": [
+    {
+      "case_id": "S1-Q6",
+      "reference_category": "FULL_ANSWER",
+      "required_source_count": 2,
+      "selection_rule": "lexicographically first FULL_ANSWER requiring multiple sources when available"
+    },
+    {
+      "case_id": "S3-Q2",
+      "reference_category": "AGGREGATE_RESULT",
+      "required_source_count": 3,
+      "selection_rule": "lexicographically first AGGREGATE_RESULT"
+    },
+    {
+      "case_id": "S4B-Q7",
+      "reference_category": "CONSTRAINED_ANSWER",
+      "required_source_count": 2,
+      "selection_rule": "lexicographically first CONSTRAINED_ANSWER"
+    },
+    {
+      "case_id": "S1-Q4",
+      "reference_category": "REFUSE_INSUFFICIENT_EVIDENCE",
+      "required_source_count": 0,
+      "selection_rule": "lexicographically first REFUSE_INSUFFICIENT_EVIDENCE"
+    },
+    {
+      "case_id": "S4B-Q6",
+      "reference_category": "REFUSE_AGGREGATION_THRESHOLD",
+      "required_source_count": 1,
+      "selection_rule": "lexicographically first REFUSE_AGGREGATION_THRESHOLD"
+    },
+    {
+      "case_id": "S6-Q4",
+      "reference_category": "CLARIFICATION",
+      "required_source_count": 1,
+      "selection_rule": "lexicographically first CLARIFICATION"
+    }
+  ],
+  "selection_rule": "one case per reference category; FULL_ANSWER prefers a multi-source case; all other categories use lexicographic first eligible case",
+  "selection_status": "FROZEN_BEFORE_PROVIDER_OUTPUTS"
+}

@@ -148,6 +148,9 @@ def test_real_provider_cli_exposes_required_guards() -> None:
         "--repeats", "--modes", "--include-scale-subset", "--pricing-config",
         "--average-provider-latency-ms", "--max-estimated-cost", "--output",
         "--full-experiment-preflight", "--full-experiment-modes", "--confirm-full-experiment",
+        "--confirm-readiness-pilot", "--prepared-manifest", "--query-only", "--dry-run",
+        "--case-ids-file", "--keep-workspaces", "--selection-plan-kind", "--selection-plan-output",
+        "--case-ids-output", "--repetitions",
         "--max-provider-request-attempts", "--max-anthropic-estimated-cost",
         "--max-provider-output-tokens", "--max-provider-retries",
     ):
@@ -254,7 +257,7 @@ def test_full_experiment_preflight_is_network_free_and_blocked_on_corpus_reuse(t
     assert payload["keyword_selection_operations"] == 378
     assert payload["generation_operations_upper_bound"] == 630
     assert payload["anthropic_request_upper_bound"] == 1008
-    assert payload["anthropic_cost_cap_usd"] == 2.0
+    assert payload["anthropic_cost_cap_usd"] == 6.0
     assert payload["anthropic_cost_cap_status"] == "WITHIN_CAP"
     assert payload["prepared_corpus_mode_available"] is False
     assert payload["document_embeddings_reused_without_provider_calls"] is False

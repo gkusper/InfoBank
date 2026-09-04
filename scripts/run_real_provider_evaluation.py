@@ -47,7 +47,7 @@ DEFAULT_FULL_GOLD_ANNOTATIONS = S1_S6_INPUT_DIR / "combined_reference_annotation
 HAIKU_45_INPUT_PER_MILLION = 1.0
 HAIKU_45_OUTPUT_PER_MILLION = 5.0
 DEFAULT_MAX_PROVIDER_REQUEST_ATTEMPTS = 70
-DEFAULT_MAX_ANTHROPIC_ESTIMATED_COST = 2.0
+DEFAULT_MAX_ANTHROPIC_ESTIMATED_COST = 6.0
 DEFAULT_MAX_PROVIDER_OUTPUT_TOKENS = 1024
 DEFAULT_MAX_PROVIDER_RETRIES = 1
 
@@ -180,8 +180,8 @@ def full_experiment_preflight_plan(
         "prepared_corpus_mode_available": False,
         "document_embeddings_reused_without_provider_calls": False,
         "stored_corpus_integrity_blocker": (
-            "The current actual-pipeline runner seeds an isolated corpus and Chroma index for provider runs; "
-            "a prepared-corpus query-only reuse mode is required before running this full experiment."
+            "The legacy seeded runner creates an isolated corpus and Chroma index for provider runs; "
+            "full Claude execution must use --query-only with an approved prepared manifest."
         ),
         "corpus": corpus,
         "token_estimate_method": (
@@ -197,10 +197,10 @@ def full_experiment_preflight_plan(
         "estimated_anthropic_cost_usd": estimated_anthropic_cost,
         "estimated_anthropic_cost_with_25_percent_margin_usd": round(estimated_anthropic_cost * 1.25, 8),
         "anthropic_cost_cap_usd": anthropic_cost_cap,
-        "anthropic_cost_cap_status": "WITHIN_CAP" if estimated_anthropic_cost <= anthropic_cost_cap else "EXCEEDS_CAP",
+        "anthropic_cost_cap_status": "WITHIN_CAP" if estimated_anthropic_cost * 1.25 <= anthropic_cost_cap else "EXCEEDS_CAP",
         "confirmation_guard": (
-            "Full execution is disabled; current --confirm-full-experiment refuses execution until prepared-corpus "
-            "query-only reuse is implemented."
+            "Full seeded execution is disabled; use --query-only with --prepared-manifest and explicit "
+            "full-experiment confirmation for the prepared-corpus path."
         ),
         "requires_confirm_full_experiment": True,
         "current_execution_limit": "preflight-only",
@@ -214,10 +214,20 @@ def main() -> None:
     parser.add_argument("--max-cases", type=int)
     parser.add_argument("--estimate-only", "--estimated-cost-only", dest="estimate_only", action="store_true")
     parser.add_argument("--repeats", type=int, default=1)
-    parser.add_argument("--modes", nargs="+", choices=E1_MODES)
+    parser.add_argument("--repetitions", type=int)
+    parser.add_argument("--modes", nargs="+", choices=FULL_EXPERIMENT_MODES)
     parser.add_argument("--full-experiment-preflight", action="store_true")
     parser.add_argument("--full-experiment-modes", nargs="+", choices=FULL_EXPERIMENT_MODES)
     parser.add_argument("--confirm-full-experiment", action="store_true")
+    parser.add_argument("--confirm-readiness-pilot", action="store_true")
+    parser.add_argument("--prepared-manifest", type=Path)
+    parser.add_argument("--query-only", action="store_true")
+    parser.add_argument("--dry-run", action="store_true")
+    parser.add_argument("--case-ids-file", type=Path)
+    parser.add_argument("--keep-workspaces", action="store_true")
+    parser.add_argument("--selection-plan-kind", choices=["two-case-smoke", "six-case-readiness"])
+    parser.add_argument("--selection-plan-output", type=Path)
+    parser.add_argument("--case-ids-output", type=Path)
     parser.add_argument("--include-scale-subset", action="store_true")
     parser.add_argument("--max-estimated-cost", type=float)
     parser.add_argument("--max-anthropic-estimated-cost", type=float, default=DEFAULT_MAX_ANTHROPIC_ESTIMATED_COST)
@@ -244,6 +254,90 @@ def main() -> None:
     parser.add_argument("--admin-database-url")
     args = parser.parse_args()
 
+    if args.selection_plan_kind:
+        from evaluation.prepared_corpus_query_only import (
+            make_readiness_selection_plan,
+            make_two_case_smoke_selection_plan,
+            write_case_id_file,
+        )
+
+        gold_annotations = args.gold_annotations or DEFAULT_FULL_GOLD_ANNOTATIONS
+        query_input = args.query_input or DEFAULT_FULL_QUERY_INPUT
+        if args.selection_plan_kind == "two-case-smoke":
+            plan = make_two_case_smoke_selection_plan(
+                query_input_path=query_input,
+                gold_annotation_path=gold_annotations,
+                output_path=args.selection_plan_output,
+            )
+        else:
+            plan = make_readiness_selection_plan(
+                query_input_path=query_input,
+                gold_annotation_path=gold_annotations,
+                output_path=args.selection_plan_output,
+            )
+        if args.case_ids_output is not None:
+            write_case_id_file(plan["selected_case_ids"], args.case_ids_output)
+            plan["case_ids_file"] = str(args.case_ids_output)
+        print(json.dumps(plan, sort_keys=True, indent=2))
+        return
+
+    if args.query_only or args.prepared_manifest is not None:
+        if args.prepared_manifest is None:
+            raise ValueError("--prepared-manifest is required for --query-only")
+        import os
+
+        from evaluation.prepared_corpus_query_only import query_only_dry_run_plan, run_prepared_query_only
+
+        repetitions = args.repetitions if args.repetitions is not None else args.repeats
+        resolved_modes = tuple(args.full_experiment_modes or args.modes or FULL_EXPERIMENT_MODES)
+        database_url = args.database_url or os.getenv("INFOBANK_EVAL_DATABASE_URL")
+        admin_database_url = args.admin_database_url or os.getenv("INFOBANK_EVAL_ADMIN_DATABASE_URL")
+        generation_model = args.generation_model or generation_model_for_provider(args.provider)
+        embedding_provider = args.embedding_provider or embedding_provider_for_provider(args.provider)
+        embedding_model = args.embedding_model or embedding_model_for_provider(args.provider)
+        if args.dry_run or args.full_experiment_preflight:
+            plan = query_only_dry_run_plan(
+                prepared_manifest_path=args.prepared_manifest,
+                database_url=database_url,
+                case_ids_file=args.case_ids_file,
+                modes=resolved_modes,
+                repetitions=repetitions,
+                output_dir=args.output,
+                cache_dir=args.cache_dir,
+                max_provider_output_tokens=args.max_provider_output_tokens,
+                max_anthropic_estimated_cost=args.max_anthropic_estimated_cost,
+            )
+            print(json.dumps(plan, sort_keys=True, indent=2))
+            return
+        if not database_url:
+            raise ValueError("--database-url or INFOBANK_EVAL_DATABASE_URL is required for query-only execution")
+        result = run_prepared_query_only(
+            prepared_manifest_path=args.prepared_manifest,
+            output_dir=_required(args.output, "--output"),
+            database_url=database_url,
+            admin_database_url=admin_database_url,
+            provider_name=args.provider,
+            generation_model=generation_model,
+            embedding_provider_name=embedding_provider,
+            embedding_model=embedding_model,
+            modes=resolved_modes,
+            repetitions=repetitions,
+            case_ids_file=args.case_ids_file,
+            gold_annotation_path=args.gold_annotations or DEFAULT_FULL_GOLD_ANNOTATIONS,
+            allow_network_provider=args.allow_network_provider,
+            cache_dir=args.cache_dir,
+            pricing_config_path=args.pricing_config,
+            confirm_readiness_pilot=args.confirm_readiness_pilot,
+            confirm_full_experiment=args.confirm_full_experiment,
+            keep_workspaces=args.keep_workspaces,
+            max_provider_request_attempts=args.max_provider_request_attempts,
+            max_provider_output_tokens=args.max_provider_output_tokens,
+            max_provider_retries=args.max_provider_retries,
+            max_anthropic_estimated_cost=args.max_anthropic_estimated_cost,
+        )
+        print(json.dumps(result, sort_keys=True, indent=2))
+        return
+
     if args.full_experiment_preflight:
         plan = full_experiment_preflight_plan(
             provider=args.provider,
@@ -262,8 +356,8 @@ def main() -> None:
 
     if args.confirm_full_experiment:
         raise RuntimeError(
-            "Full experiment execution remains disabled until a prepared-corpus query-only runner exists; "
-            "use --full-experiment-preflight for a network-free plan."
+            "Full experiment execution remains disabled on the legacy seeded path; use --query-only "
+            "with --prepared-manifest for prepared-corpus execution."
         )
 
     if args.estimate_only:

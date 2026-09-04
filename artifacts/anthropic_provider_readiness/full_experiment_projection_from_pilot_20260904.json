@@ -1,0 +1,77 @@
+{
+  "by_mode": {
+    "C0_VECTOR_ONLY": {
+      "generation_calls": 6,
+      "generation_skipped": 0,
+      "keyword_selection_calls": 0,
+      "output_class_accuracy": 0.166667,
+      "query_embedding_calls": 6,
+      "records": 6,
+      "runtime_errors": 0,
+      "safety_error_total": 1
+    },
+    "C1_VECTOR_ROUTING": {
+      "generation_calls": 6,
+      "generation_skipped": 0,
+      "keyword_selection_calls": 6,
+      "output_class_accuracy": 0.166667,
+      "query_embedding_calls": 6,
+      "records": 6,
+      "runtime_errors": 0,
+      "safety_error_total": 1
+    },
+    "C2_PERMISSION_FILTERED": {
+      "generation_calls": 2,
+      "generation_skipped": 4,
+      "keyword_selection_calls": 0,
+      "output_class_accuracy": 0.666667,
+      "query_embedding_calls": 6,
+      "records": 6,
+      "runtime_errors": 0,
+      "safety_error_total": 0
+    },
+    "C3_FULL_ROLE_AWARE": {
+      "generation_calls": 1,
+      "generation_skipped": 5,
+      "keyword_selection_calls": 4,
+      "output_class_accuracy": 0.666667,
+      "query_embedding_calls": 6,
+      "records": 6,
+      "runtime_errors": 0,
+      "safety_error_total": 0
+    },
+    "P1_PROMPT_ONLY_GOVERNANCE": {
+      "generation_calls": 6,
+      "generation_skipped": 0,
+      "keyword_selection_calls": 4,
+      "output_class_accuracy": 0.333333,
+      "query_embedding_calls": 6,
+      "records": 6,
+      "runtime_errors": 0,
+      "safety_error_total": 9
+    }
+  },
+  "estimated_anthropic_cost_usd": 1.296855,
+  "estimated_anthropic_cost_with_25pct_margin_usd": 1.62106875,
+  "forbidden_operation_counters_zero": true,
+  "full_factor": 21,
+  "payload_boundary_status": "PASS",
+  "pilot_guard_keyword_selection_calls": 18,
+  "pilot_provider_request_attempts_guard_basis": 39,
+  "pilot_records": 30,
+  "pilot_total_wall_clock_seconds": 76.691,
+  "prepared_base_stable": true,
+  "projected_document_embedding_calls": 0,
+  "projected_full_records": 630,
+  "projected_generation_calls_from_actual": 441,
+  "projected_generation_skipped_records": 189,
+  "projected_input_tokens": 790125,
+  "projected_keyword_selection_calls_from_actual": 294,
+  "projected_openai_query_embedding_calls": 630,
+  "projected_output_tokens": 101346,
+  "projected_provider_operations_actual_basis": 735,
+  "projected_provider_operations_guard_basis": 819,
+  "projected_wall_clock_seconds_linear": 1610.507,
+  "source_run": "evaluation/results/aqo6_20260904",
+  "technical_failures": []
+}

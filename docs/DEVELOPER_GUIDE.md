@@ -9,8 +9,8 @@ The browser frontend in `frontend/` calls FastAPI routers in
 provenance, evidence and audit rows in MariaDB. `document_processing.py`
 performs page-aware PDF extraction/chunking; `source_storage.py` performs
 UUID-namespaced atomic source writes and hash verification. `ai_service.py`
-owns a provider/model/dimension-specific Chroma collection and delegates
-embedding, keyword extraction and generation to `ai_provider.py`.
+owns an embedding-provider/model/dimension-specific Chroma collection and
+delegates embedding, keyword extraction and generation to `ai_provider.py`.
 
 `policy_engine.py` resolves Owner/Reader/Aggregate/Metadata and scoped
 Full/Aggregate/Metadata/Deny rules before routing. `routers/chat.py` applies the
@@ -66,16 +66,21 @@ the API worker rather than a distributed queue.
 
 Relative Chroma and source-store paths are anchored to `backend_python/`, so
 starting Uvicorn from the repository root or from `backend_python/` reaches the
-same state. The collection identity contains the canonical provider, embedding
-model, expected dimension and a configuration hash. A provider/model/dimension
-change deliberately selects a new collection instead of mixing incompatible
-vectors. `ai_service.vector_store_manifest()` exposes the non-secret resolved
-path and identity for diagnostics.
+same state. The collection identity contains the canonical embedding provider,
+embedding model, expected dimension and a configuration hash. An embedding
+provider/model/dimension change deliberately selects a new collection instead
+of mixing incompatible vectors. Switching only `AI_PROVIDER` between OpenAI and
+Anthropic does not reprocess documents because embeddings remain
+`EMBEDDING_PROVIDER=openai`. `ai_service.vector_store_manifest()` exposes the
+non-secret resolved path and identity for diagnostics.
 
 ## Provider and evaluation discipline
 
 `AI_PROVIDER=deterministic-mock` is offline and used by tests/development.
-Provider-backed evaluation is explicit, estimate-first and separately sealed.
+`AI_PROVIDER=anthropic` selects Claude for query-time keyword selection and
+answer generation only; OpenAI `text-embedding-3-small` remains the production
+embedding path. Provider-backed evaluation is explicit, estimate-first and
+separately sealed.
 Runtime inputs are `QueryInput`; held-out expectations are `GoldAnnotation` and
 must not be imported by the runner. Raw runs are sealed before scoring. Do not
 tune on candidate holdout or the frozen D1-D8 benchmark.

@@ -978,6 +978,7 @@ class PipelineRuntime:
         dataset_version: str,
         fixture_identities: dict[str, tuple[str, ...]],
         provider_name: str = "deterministic-mock",
+        embedding_provider_name: str | None = None,
         allow_network_provider: bool = False,
         cache_dir: Path | None = None,
         pricing_config_path: Path | None = None,
@@ -985,8 +986,10 @@ class PipelineRuntime:
         ensure_backend_path()
         os.environ["DATABASE_URL"] = database_url
         os.environ["AI_PROVIDER"] = provider_name
-        if provider_name != "openai":
-            os.environ.pop("OPENAI_API_KEY", None)
+        embedding_provider_name = embedding_provider_name or (
+            "openai" if provider_name in {"openai", "anthropic"} else provider_name
+        )
+        os.environ["EMBEDDING_PROVIDER"] = embedding_provider_name
 
         import chromadb
         from sqlalchemy import create_engine, text
@@ -1020,8 +1023,11 @@ class PipelineRuntime:
         self.corpus_base_dir = corpus_base_dir
         self.dataset_version = dataset_version
         self.fixture_identities = fixture_identities
-        provider = ai_provider.create_provider(provider_name)
-        if provider.external_network_required and not allow_network_provider:
+        llm_provider = ai_provider.create_provider(provider_name)
+        embedding_provider = ai_provider.create_provider(embedding_provider_name)
+        if (
+            llm_provider.external_network_required or embedding_provider.external_network_required
+        ) and not allow_network_provider:
             raise RuntimeError(
                 "External evaluation provider requires explicit --allow-network-provider approval; no mock fallback is permitted."
             )
@@ -1029,13 +1035,17 @@ class PipelineRuntime:
             from .provider_readiness import CachedEvaluationProvider, ReadinessConfig, load_pricing
 
             readiness = ReadinessConfig(
-                provider=provider.provider_name,
+                provider=llm_provider.provider_name,
+                embedding_provider=embedding_provider.provider_name,
                 generation_model=config.generation_model,
                 embedding_model=config.embedding_model,
             )
             pricing, _ = load_pricing(pricing_config_path, config.generation_model)
-            provider = CachedEvaluationProvider(provider, cache_dir, readiness.config_hash, pricing)
-        self.provider = provider
+            llm_provider = CachedEvaluationProvider(llm_provider, cache_dir, readiness.config_hash, pricing)
+            embedding_provider = CachedEvaluationProvider(embedding_provider, cache_dir, readiness.config_hash)
+        self.provider = llm_provider
+        self.llm_provider = llm_provider
+        self.embedding_provider = embedding_provider
         self.engine = create_engine(database_url, pool_pre_ping=True)
         if self.engine.dialect.name == "mysql":
             database_name = self.engine.url.database or ""
@@ -1053,7 +1063,7 @@ class PipelineRuntime:
         chroma_dir.mkdir(parents=True, exist_ok=True)
         self.chroma = chromadb.PersistentClient(path=str(chroma_dir))
         self.collection = self.chroma.get_or_create_collection(
-            name=f"actual_{hashlib.sha256(f'{provider.provider_name}:{config.config_hash}'.encode()).hexdigest()[:16]}",
+            name=f"actual_{hashlib.sha256(f'{embedding_provider.provider_name}:{config.embedding_model}:{config.config_hash}'.encode()).hexdigest()[:16]}",
             metadata={"hnsw:space": "cosine"},
         )
         self.source_storage = source_storage.SourceStorage(source_storage_dir)
@@ -1224,7 +1234,7 @@ class PipelineRuntime:
                             )
                         )
             db.commit()
-            embeddings = self.provider.embed(all_chunk_texts, model=self.config.embedding_model)
+            embeddings = self.embedding_provider.embed(all_chunk_texts, model=self.config.embedding_model)
             self.collection.add(
                 ids=all_chunk_ids,
                 documents=all_chunk_texts,
@@ -1278,7 +1288,7 @@ class PipelineRuntime:
                 and value.lower() not in scoped_terms
             }
         )
-        selected = self.provider.extract_keywords(
+        selected = self.llm_provider.extract_keywords(
             question,
             model=self.config.generation_model,
             prompt="Select governed routing tags.",
@@ -1297,7 +1307,7 @@ class PipelineRuntime:
     def _retrieve(self, question: str, candidate_ids: list[str], top_k: int) -> list[dict[str, Any]]:
         if not candidate_ids:
             return []
-        question_vector = self.provider.embed([question], model=self.config.embedding_model)[0]
+        question_vector = self.embedding_provider.embed([question], model=self.config.embedding_model)[0]
         where = {"document_id": candidate_ids[0]} if len(candidate_ids) == 1 else {"document_id": {"$in": candidate_ids}}
         chunk_count = sum(
             self.collection.count() for _ in [0]
@@ -1381,6 +1391,13 @@ class PipelineRuntime:
             "retries": 0,
             "cost": 0.0,
             "usage_source": "generation_skipped",
+            "provider": self.llm_provider.provider_name,
+            "model": self.config.generation_model,
+            "latency_ms": 0.0,
+            "provider_request_id": None,
+            "stop_reason": "generation_skipped",
+            "status": "skipped",
+            "configured_max_retries": 0,
         }
         candidate_ids: list[str] = []
         selected_keywords: list[str] = []
@@ -1686,7 +1703,7 @@ class PipelineRuntime:
                                     "content": f"Question: {query.query_text}\n\nContext from the document(s):\n{visible_text}",
                                 },
                             ]
-                        generated = self.provider.generate_with_usage(
+                        generated = self.llm_provider.generate_with_usage(
                             messages,
                             model=self.config.generation_model,
                             temperature=GENERATION_TEMPERATURE,
@@ -1789,6 +1806,10 @@ class PipelineRuntime:
                     "actual_reason_category": raw_reason_code,
                     "actual_citations": citations,
                     "support_score": support_score,
+                    "llm_provider": self.llm_provider.provider_name,
+                    "llm_model": self.config.generation_model,
+                    "embedding_provider": self.embedding_provider.provider_name,
+                    "embedding_model": self.config.embedding_model,
                     "provider_usage": provider_usage,
                     "generation_skipped": generation_skipped,
                     "audit_id": audit_id,
@@ -1841,6 +1862,10 @@ class PipelineRuntime:
                 "actual_reason_category": "runtime_error",
                 "actual_citations": [],
                 "support_score": 0.0,
+                "llm_provider": self.llm_provider.provider_name,
+                "llm_model": self.config.generation_model,
+                "embedding_provider": self.embedding_provider.provider_name,
+                "embedding_model": self.config.embedding_model,
                 "provider_usage": provider_usage,
                 "generation_skipped": True,
                 "audit_id": str(uuid.uuid5(uuid.NAMESPACE_URL, f"infobank:actual-error:{query.case_id}:{mode}")),
@@ -1869,6 +1894,7 @@ def run_actual_pipeline(
     modes: Iterable[str] = MODES,
     config: ActualPipelineConfig = ActualPipelineConfig(),
     provider_name: str = "deterministic-mock",
+    embedding_provider_name: str | None = None,
     allow_network_provider: bool = False,
     cache_dir: str | Path | None = None,
     max_cases: int | None = None,
@@ -1907,6 +1933,7 @@ def run_actual_pipeline(
         dataset_version=str(corpus_metadata["dataset_version"]),
         fixture_identities=fixture_identities,
         provider_name=provider_name,
+        embedding_provider_name=embedding_provider_name,
         allow_network_provider=allow_network_provider,
         cache_dir=Path(cache_dir) if cache_dir is not None else None,
         pricing_config_path=Path(pricing_config_path) if pricing_config_path is not None else None,
@@ -1939,8 +1966,11 @@ def run_actual_pipeline(
         "query_input_sha256": _sha256_file(queries_path),
         "corpus_sha256": _sha256_file(corpus_path),
         "commit_sha": _git_head(),
-        "provider": runtime.provider.provider_name,
+        "provider": runtime.llm_provider.provider_name,
         "model": config.generation_model,
+        "llm_provider": runtime.llm_provider.provider_name,
+        "llm_model": config.generation_model,
+        "embedding_provider": runtime.embedding_provider.provider_name,
         "embedding_model": config.embedding_model,
         "runner_version": RUNNER_VERSION,
         "dataset_version": corpus_metadata["dataset_version"],

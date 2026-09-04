@@ -8,6 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from dotenv import load_dotenv
 import models
+import ai_service
 from database import engine, get_db
 from database_errors import install_database_exception_handlers
 from database_schema import (
@@ -55,6 +56,14 @@ app.add_middleware(
 
 @app.on_event("startup")
 def verify_database_schema_on_startup() -> None:
+    provider_config = ai_service.effective_provider_configuration()
+    logging.getLogger("infobank.startup").info(
+        "InfoBank AI configuration: LLM provider=%s; LLM model=%s; Embedding provider=%s; Embedding model=%s",
+        provider_config["llm_provider"],
+        provider_config["llm_model"],
+        provider_config["embedding_provider"],
+        provider_config["embedding_model"],
+    )
     report = check_database_schema(engine)
     app.state.database_schema = report
     if report["status"] != SCHEMA_COMPATIBLE:

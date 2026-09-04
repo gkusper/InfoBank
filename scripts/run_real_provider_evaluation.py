@@ -1,7 +1,8 @@
-"""Estimate or explicitly execute a cached OpenAI actual-pipeline evaluation.
+"""Estimate or explicitly execute a cached OpenAI/Anthropic actual-pipeline evaluation.
 
 The default path is network-free.  A real run requires both ``--provider
-openai`` and ``--allow-network-provider``; it never falls back to a mock.
+openai`` or ``--provider anthropic`` and ``--allow-network-provider``; it never
+falls back to a mock. Anthropic runs still use OpenAI embeddings.
 """
 
 from __future__ import annotations
@@ -17,12 +18,13 @@ if str(REPOSITORY_ROOT) not in sys.path:
     sys.path.insert(0, str(REPOSITORY_ROOT))
 
 from evaluation.provider_readiness import (  # noqa: E402
-    E1_MODES,
-    EMBEDDING_MODEL,
-    GENERATION_MODEL,
     READINESS_STATUS,
+    E1_MODES,
+    embedding_model_for_provider,
+    embedding_provider_for_provider,
     estimate_evaluation,
     estimate_full_e1,
+    generation_model_for_provider,
     validate_provider_request,
     write_e1_estimate_bundle,
 )
@@ -36,7 +38,7 @@ def _required(path: Path | None, flag: str) -> Path:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--provider", choices=["deterministic-mock", "openai"], default="deterministic-mock")
+    parser.add_argument("--provider", choices=["deterministic-mock", "openai", "anthropic"], default="deterministic-mock")
     parser.add_argument("--allow-network-provider", action="store_true")
     parser.add_argument("--max-cases", type=int)
     parser.add_argument("--estimate-only", "--estimated-cost-only", dest="estimate_only", action="store_true")
@@ -46,6 +48,9 @@ def main() -> None:
     parser.add_argument("--max-estimated-cost", type=float)
     parser.add_argument("--pricing-config", type=Path)
     parser.add_argument("--average-provider-latency-ms", type=float)
+    parser.add_argument("--generation-model")
+    parser.add_argument("--embedding-provider")
+    parser.add_argument("--embedding-model")
     parser.add_argument("--pre-freeze-manifest", type=Path, default=REPOSITORY_ROOT / "artifacts/pre_freeze/reviewer_v2_candidate/dataset_manifest.json")
     parser.add_argument("--gold-queries", type=Path, default=REPOSITORY_ROOT / "artifacts/pre_freeze/reviewer_v2_candidate/gold_queries.json")
     parser.add_argument("--source-manifest", type=Path, default=REPOSITORY_ROOT / "artifacts/pre_freeze/reviewer_v2_candidate/source_manifest.json")
@@ -62,6 +67,7 @@ def main() -> None:
     args = parser.parse_args()
 
     if args.estimate_only:
+        estimate_provider = args.provider if args.provider != "deterministic-mock" else "openai"
         estimate = estimate_full_e1(
             dataset_manifest_path=args.pre_freeze_manifest,
             gold_queries_path=args.gold_queries,
@@ -72,6 +78,10 @@ def main() -> None:
             scale_manifest_path=args.scale_manifest,
             pricing_config=args.pricing_config,
             average_provider_latency_ms=args.average_provider_latency_ms,
+            provider=estimate_provider,
+            generation_model=args.generation_model,
+            embedding_provider=args.embedding_provider,
+            embedding_model=args.embedding_model,
         )
         if args.max_estimated_cost is not None:
             if estimate["combined_projected_cost"] is None:
@@ -108,6 +118,9 @@ def main() -> None:
         max_cases=args.max_cases,
         provider=args.provider,
         pricing_config=args.pricing_config,
+        generation_model=args.generation_model,
+        embedding_provider=args.embedding_provider,
+        embedding_model=args.embedding_model,
     )
     if args.max_estimated_cost is not None:
         if estimate["projected_cost"] is None:
@@ -128,9 +141,10 @@ def main() -> None:
         raise ValueError("--database-url or INFOBANK_EVAL_DATABASE_URL is required for an actual provider run")
     _prepare_mysql_database(database_url, admin_database_url)
     config = ActualPipelineConfig(
-        generation_model=GENERATION_MODEL if args.provider == "openai" else "infobank-deterministic-extractive-v1",
-        embedding_model=EMBEDDING_MODEL if args.provider == "openai" else "infobank-deterministic-embedding-v1",
+        generation_model=args.generation_model or generation_model_for_provider(args.provider),
+        embedding_model=args.embedding_model or embedding_model_for_provider(args.provider),
     )
+    embedding_provider = args.embedding_provider or embedding_provider_for_provider(args.provider)
     seal = run_actual_pipeline(
         query_input_path=query_input,
         corpus_fixture_path=corpus_fixture,
@@ -142,6 +156,7 @@ def main() -> None:
         modes=["C3_FULL_ROLE_AWARE"],
         config=config,
         provider_name=args.provider,
+        embedding_provider_name=embedding_provider,
         allow_network_provider=args.allow_network_provider,
         cache_dir=cache_dir,
         max_cases=args.max_cases,

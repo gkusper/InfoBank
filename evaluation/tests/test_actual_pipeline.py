@@ -450,6 +450,7 @@ def test_retrieval_overfetches_before_page_aware_truncation() -> None:
 
     runtime = object.__new__(PipelineRuntime)
     runtime.provider = FakeProvider()
+    runtime.embedding_provider = FakeProvider()
     runtime.collection = FakeCollection()
     runtime.config = ActualPipelineConfig()
     runtime.document_by_id = {
@@ -497,6 +498,7 @@ def test_retrieval_diversifies_top_rows_across_documents() -> None:
 
     runtime = object.__new__(PipelineRuntime)
     runtime.provider = FakeProvider()
+    runtime.embedding_provider = FakeProvider()
     runtime.collection = FakeCollection()
     runtime.config = ActualPipelineConfig()
     runtime.document_by_id = {

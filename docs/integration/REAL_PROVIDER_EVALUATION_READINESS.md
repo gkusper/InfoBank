@@ -4,35 +4,43 @@ Status: `PENDING_EXPLICIT_PROVIDER_RUN_APPROVAL`
 
 No real provider run occurred while preparing this gate. The implementation
 does not call a network provider by default and never falls back from a
-requested OpenAI run to a mock.
+requested OpenAI or Anthropic run to a mock.
 
 ## Fixed configuration
 
-- provider must be explicitly `openai`;
-- generation model: `gpt-4o-mini`;
+- provider must be explicitly `openai` or `anthropic`;
+- OpenAI generation model default: `gpt-4o-mini`;
+- Anthropic generation model default: `claude-sonnet-5`;
+- embedding provider: `openai`;
 - embedding model: `text-embedding-3-small`;
-- temperature: `0.0`;
+- OpenAI temperature: existing call-site value, `0.0` in the actual-pipeline runner;
+- Anthropic sampling parameters: omitted by default;
 - generation prompt: `actual-pipeline-answer-v1`;
 - routing prompt: `routing-keyword-v1`;
 - keyword selection strategy: `infocom-keyword-selector-v2`;
 - readiness config: `real-provider-readiness-v2`;
-- config hash: `793f39dd8519b0d3f0229e847698ff4b887df4b1e6a4c4b38673e008953b1eb3`.
+- config hash: derived per provider/model/embedding-provider configuration.
 
-`scripts/run_real_provider_evaluation.py` exposes `--provider openai`,
+`scripts/run_real_provider_evaluation.py` exposes `--provider openai|anthropic`,
 `--allow-network-provider`, `--max-cases`, `--estimate-only` (with the legacy
 `--estimated-cost-only` alias), `--repeats`, `--modes`,
 `--include-scale-subset`, `--pricing-config`,
-`--average-provider-latency-ms`, `--max-estimated-cost`, and `--output`. An actual OpenAI execution requires both the provider
-selection and network-approval flag. Missing credentials or provider errors
-are hard failures. The sealed runner records provider/model identifiers,
-prompt versions, temperature, retry count, provider-reported token usage,
+`--average-provider-latency-ms`, `--max-estimated-cost`,
+`--generation-model`, `--embedding-provider`, `--embedding-model`, and
+`--output`. An actual OpenAI or Anthropic execution requires both the provider
+selection and network-approval flag. Anthropic execution also requires
+`EMBEDDING_PROVIDER=openai` semantics and a compatible `OPENAI_API_KEY` for
+embeddings. Missing credentials or provider errors are hard failures. The
+sealed runner records LLM provider/model and embedding provider/model
+identifiers, prompt versions, temperature/sampling policy, retry count,
+provider-reported token usage,
 local-price-derived cost when supplied, and actual generation wall-clock time
 in the separate stage-timing sidecar.
 
 Provider outputs are cached under an explicit ignored cache directory. Each
-cache identity contains the input hash, provider, model, prompt version, and
-evaluation config hash. Keyword, embedding, and generation operations use
-separate cache namespaces.
+LLM cache identity contains the input hash, provider, model, prompt version,
+generation configuration hash, and evaluation config hash. Keyword, embedding,
+and generation operations use separate cache namespaces.
 
 ## Network-free complete E1 estimates
 
@@ -60,6 +68,19 @@ and run:
 backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation.py `
   --provider openai --allow-network-provider --max-cases 20 `
   --max-estimated-cost <approved-cap> --pricing-config <local-pricing.json> `
+  --query-input <query-input.jsonl> --corpus-fixture <corpus-fixture.json> `
+  --gold-annotations <gold-annotations.jsonl> --output <ignored-output> `
+  --cache-dir <ignored-cache> --chroma-dir <isolated-chroma> `
+  --source-storage-dir <isolated-source-store> --database-url <isolated-eval-url>
+```
+
+For a one-case Claude smoke, replace the provider/model flags with:
+
+```powershell
+backend_python\.venv_r1a\Scripts\python.exe scripts\run_real_provider_evaluation.py `
+  --provider anthropic --allow-network-provider --max-cases 1 `
+  --generation-model claude-sonnet-5 --embedding-provider openai `
+  --embedding-model text-embedding-3-small `
   --query-input <query-input.jsonl> --corpus-fixture <corpus-fixture.json> `
   --gold-annotations <gold-annotations.jsonl> --output <ignored-output> `
   --cache-dir <ignored-cache> --chroma-dir <isolated-chroma> `

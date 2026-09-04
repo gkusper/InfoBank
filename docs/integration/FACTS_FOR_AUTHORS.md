@@ -21,8 +21,8 @@ This file is a factual technical handoff. It is not manuscript or reviewer-respo
 
 ## Review C tested facts
 
-- `backend_python/ai_provider.py` supplies OpenAI, deterministic-mock, and network-free local-compatible adapters for keywords, embeddings, and generation. Selection uses `AI_PROVIDER`.
-- Provider/model/config hashes are recorded in document processing and evaluation manifests.
+- `backend_python/ai_provider.py` supplies OpenAI, Anthropic Claude, deterministic-mock, and network-free local-compatible adapters for keyword selection and generation. Embeddings remain OpenAI-compatible for the Claude path.
+- LLM provider/model, embedding provider/model, and config hashes are recorded in document processing and evaluation manifests.
 - Runtime action reconstruction uses the same versioned four-state closure resolver as the evaluation engine: `OPEN`, `CLOSED_COMPLETED`, `CLOSED_CANCELLED`, and `SUPERSEDED`.
 - Persistent grant/revoke endpoints are `POST /api/policy/documents/{doc_id}/permissions` and `DELETE /api/policy/documents/{doc_id}/permissions/{target_user_id}`.
 - Runtime policy resolution precedes routing: revoke, explicit Deny, archive, purpose mismatch, expiry/future validity, and stale-index rejection produce internal `REFUSE_PERMISSION`; `REFUSE_NO_MATCH` is reserved for a genuine miss inside a permitted scope. Public failure payloads do not enumerate denied sources.

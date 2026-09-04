@@ -9,7 +9,9 @@ from fastapi import BackgroundTasks
 import ai_service
 import models
 import relevance
+from ai_provider import ProviderGenerationResult
 from routers import chat
+from routers import documents as documents_router
 
 
 USER_ID = "00000000-0000-0000-0000-000000000071"
@@ -169,3 +171,141 @@ def test_empty_inventory_returns_successful_metadata_answer_without_enumeration(
     assert result["sources"] == []
     assert result["evidence_check"]["counts"] == {"documents": 0, "owned": 0, "shared": 0}
     assert result["answer"] == "Jelenleg nincs a fiókodhoz rendelt feltöltött dokumentum."
+
+
+def test_normal_query_with_anthropic_llm_reuses_existing_chunks_and_vectors(db_session, monkeypatch) -> None:
+    _add_user(db_session, USER_ID, "normal-query-user")
+    document_id = "normal-query-document"
+    chunk_id = "normal-query-chunk"
+    chunk_text = "Warranty period for TV-TEST-1 is 24 months from the purchase date."
+    _add_document(
+        db_session,
+        document_id=document_id,
+        file_path="normal-query.pdf",
+        original_filename="normal-query.pdf",
+        user_id=USER_ID,
+        permission=models.PermissionType.Reader,
+    )
+    db_session.add(
+        models.DocumentChunk(
+            id=chunk_id,
+            document_id=document_id,
+            chunk_index=0,
+            page_number=1,
+            block_index=0,
+            char_start=0,
+            char_end=len(chunk_text),
+            text_content=chunk_text,
+            content_sha256=chat.sha256_text(chunk_text),
+            source_sha256=None,
+            chunk_config_version="test",
+            chunk_config_hash="test-config",
+            vector_id=chunk_id,
+        )
+    )
+    keyword = models.Keyword(word="warranty")
+    db_session.add(keyword)
+    db_session.flush()
+    db_session.add(
+        models.DocumentKeyword(
+            document_id=document_id,
+            keyword_id=keyword.id,
+            provenance_type=models.ProvenanceType.Rule,
+            extraction_method="test",
+            user_edited=False,
+        )
+    )
+    db_session.commit()
+
+    def forbidden_ingestion(*_args, **_kwargs):
+        raise AssertionError("normal query must not invoke ingestion, chunking, or document embedding")
+
+    monkeypatch.setattr(documents_router, "process_document_source", forbidden_ingestion)
+    monkeypatch.setattr(documents_router, "_embed_chunks", forbidden_ingestion)
+    monkeypatch.setattr(documents_router, "extract_pdf_pages", forbidden_ingestion)
+    monkeypatch.setattr(documents_router, "chunk_pages", forbidden_ingestion)
+    monkeypatch.setattr(ai_service, "embed_texts", forbidden_ingestion)
+
+    keyword_calls = []
+    query_embedding_calls = []
+    generation_calls = []
+
+    def fake_keywords(*_args, **_kwargs):
+        keyword_calls.append(_kwargs)
+        return ["warranty"], {
+            "provider": "anthropic",
+            "adapter": "anthropic-python",
+            "model": "claude-sonnet-5",
+            "prompt_version": "routing-keyword-v1",
+            "available_keyword_count": 1,
+            "parsed_item_count": 1,
+            "selected_keyword_count": 1,
+            "rejected_item_count": 0,
+            "selection_strategy_version": "infocom-keyword-selector-v2",
+            "provider_outcome": "selected",
+            "provider_selected_keyword_count": 1,
+            "deterministic_match_count": 0,
+            "outcome": "selected",
+        }
+
+    def fake_embed_text(text: str, *, model: str):
+        query_embedding_calls.append({"text": text, "model": model})
+        return [0.0]
+
+    def fake_generation(messages, *, model: str, temperature: float):
+        generation_calls.append({"messages": messages, "model": model, "temperature": temperature})
+        return ProviderGenerationResult(
+            text="Warranty period is 24 months.",
+            input_tokens=10,
+            output_tokens=5,
+            total_tokens=15,
+            retries=0,
+            cost=None,
+            usage_source="provider_reported",
+            provider="anthropic",
+            model="claude-sonnet-5",
+            latency_ms=1.25,
+            provider_request_id="msg_smoke",
+            stop_reason="end_turn",
+            configured_max_retries=2,
+        )
+
+    class FakeCollection:
+        @staticmethod
+        def query(**_kwargs):
+            return {
+                "ids": [[chunk_id]],
+                "documents": [[chunk_text]],
+                "metadatas": [[{"document_id": document_id, "chunk_id": chunk_id, "page_number": 1}]],
+            }
+
+    monkeypatch.setattr(ai_service, "extract_provider_keywords_with_trace", fake_keywords)
+    monkeypatch.setattr(ai_service, "embed_text", fake_embed_text)
+    monkeypatch.setattr(ai_service, "generate_answer_with_usage", fake_generation)
+    monkeypatch.setattr(ai_service, "collection", FakeCollection())
+    monkeypatch.setattr(
+        ai_service,
+        "effective_provider_configuration",
+        lambda: {
+            "llm_provider": "anthropic",
+            "llm_model": "claude-sonnet-5",
+            "embedding_provider": "openai",
+            "embedding_model": "text-embedding-3-small",
+            "hybrid_configuration": True,
+        },
+    )
+
+    result = asyncio.run(chat.ask_infobank(
+        BackgroundTasks(),
+        question="What is the warranty period for TV-TEST-1?",
+        user_id=USER_ID,
+        db=db_session,
+    ))
+
+    assert result["status"] == "success"
+    assert result["answer"] == "Warranty period is 24 months."
+    assert result["sources"][0]["document_id"] == document_id
+    assert result["query_profile"]["keyword_selection_trace"]["provider"] == "anthropic"
+    assert result["query_profile"]["generation_trace"]["provider"] == "anthropic"
+    assert result["query_profile"]["generation_trace"]["model"] == "claude-sonnet-5"
+    assert keyword_calls and query_embedding_calls and generation_calls

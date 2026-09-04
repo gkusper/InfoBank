@@ -163,6 +163,11 @@ def _public_keyword_selection_trace(trace: dict | None) -> dict:
         for key in (
             "provider",
             "adapter",
+            "model",
+            "provider_request_id",
+            "stop_reason",
+            "input_tokens",
+            "output_tokens",
             "prompt_version",
             "available_keyword_count",
             "parsed_item_count",
@@ -186,6 +191,26 @@ def _public_query_profile(query_profile: dict | None) -> dict:
         public["keyword_selection_trace"] = _public_keyword_selection_trace(
             public.get("keyword_selection_trace")
         )
+    if "generation_trace" in public:
+        trace = public.get("generation_trace") or {}
+        public["generation_trace"] = {
+            key: trace[key]
+            for key in (
+                "provider",
+                "model",
+                "input_tokens",
+                "output_tokens",
+                "total_tokens",
+                "latency_ms",
+                "provider_request_id",
+                "stop_reason",
+                "status",
+                "retries",
+                "configured_max_retries",
+                "usage_source",
+            )
+            if key in trace
+        }
     return public
 
 
@@ -1229,6 +1254,7 @@ async def ask_infobank(
         query_profile = relevance.build_query_profile(question, question_keywords)
         query_profile["keyword_selection_trace"] = keyword_selection_trace
         query_profile["owned_object_resolution_trace"] = owned_object_trace
+        query_profile["provider_configuration"] = ai_service.effective_provider_configuration()
         scoped_routing_decision = route_documents(
             permitted_document_ids=routing_input_doc_ids,
             document_keywords=document_keywords,
@@ -1562,7 +1588,7 @@ async def ask_infobank(
             "If the Output mode gate contains a controlled_failure object, obey its safeOutput and nextSteps while still answering only within the allowed restriction. "
             "If information is missing or unclear, answer strictly with: 'The answer cannot be found in the document.' No hallucinations."
         )
-        answer = ai_service.generate_answer(
+        generated = ai_service.generate_answer_with_usage(
             [
                 {"role": "system", "content": system_instruction},
                 {"role": "user", "content": f"Question: {question}\n\nQuery profile:\n{json.dumps(query_profile, ensure_ascii=False)}\n\nGovernance/source-role summary:\n{json.dumps(governance_context, ensure_ascii=False)}\n\nSource role summary:\n{json.dumps(role_summary, ensure_ascii=False)}\n\nRelevance level summary:\n{json.dumps(relevance_level_summary, ensure_ascii=False)}\n\nEvidence check:\n{json.dumps(evidence_check, ensure_ascii=False)}\n\nOutput mode gate:\n{json.dumps(output_gate, ensure_ascii=False)}\n\nContext from the document(s):\n{context_text}"},
@@ -1570,6 +1596,10 @@ async def ask_infobank(
             model=ai_service.MODEL_NAME,
             temperature=0.1,
         )
+        answer = generated.text
+        generation_trace = generated.to_dict()
+        generation_trace.pop("text", None)
+        query_profile["generation_trace"] = generation_trace
         final_cf = generation_cf
         if is_browser_history_action_rule_question(question):
             answer = "No. Browser history or activity traces can provide contextual support, refine details, or help prioritize an existing task, but they cannot create an action item by themselves without primary evidence such as an official request, assignment, calendar obligation, or user commitment."

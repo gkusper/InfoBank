@@ -5,11 +5,15 @@ Status: `PRE_FREEZE`
 ## Secrets and environment
 
 Set `DATABASE_URL`, `JWT_SECRET_KEY`, `JWT_ACCESS_TOKEN_TTL_SECONDS`, exact
-`CORS_ALLOWED_ORIGINS`, `AI_PROVIDER`, `CHROMA_PERSIST_DIR`,
-`SOURCE_STORAGE_DIR`, `MAX_UPLOAD_BYTES`, `AGGREGATE_K_THRESHOLD` and optional model/provider names
+`CORS_ALLOWED_ORIGINS`, `AI_PROVIDER`, `EMBEDDING_PROVIDER`,
+`CHROMA_PERSIST_DIR`, `SOURCE_STORAGE_DIR`, `MAX_UPLOAD_BYTES`,
+`AGGREGATE_K_THRESHOLD` and optional model/provider names
 outside Git. Restrict `.env` permissions, rotate exposed values and never put
-secrets in backups or logs. `OPENAI_API_KEY` is required only for an explicitly
-authorized provider run. Gmail OAuth state is encrypted, browser-bound and
+secrets in backups or logs. `OPENAI_API_KEY` is required for OpenAI embeddings
+and OpenAI LLM runs; `ANTHROPIC_API_KEY` is required only when
+`AI_PROVIDER=anthropic`. Claude mode is hybrid and normally needs both
+`ANTHROPIC_API_KEY` and `OPENAI_API_KEY` because query embeddings remain
+OpenAI-compatible. Gmail OAuth state is encrypted, browser-bound and
 short-lived. Connector tokens are stored in a versioned Fernet envelope using
 `CONNECTOR_TOKEN_ENCRYPTION_KEY`, or a domain-separated key derived from
 `JWT_SECRET_KEY` when no dedicated key is configured. Prefer dedicated
@@ -41,11 +45,13 @@ retry through `POST /api/documents/{id}/reindex`. A
 run the documented dry-run consistency scanner before retrying.
 
 Relative `CHROMA_PERSIST_DIR` and `SOURCE_STORAGE_DIR` values are resolved from
-the `backend_python/` directory. Each provider/model/dimension combination has
-its own deterministic Chroma collection identity. After changing embedding
-configuration, rebuild the selected derived index from verified durable source;
-do not copy vectors between collections. `AI_EMBEDDING_DIMENSIONS` is optional
-and valid only for OpenAI `text-embedding-3-*` models.
+the `backend_python/` directory. Each embedding provider/model/dimension
+combination has its own deterministic Chroma collection identity. After
+changing embedding configuration, rebuild the selected derived index from
+verified durable source; do not copy vectors between collections. Switching
+only `AI_PROVIDER` between OpenAI and Anthropic does not require reindexing.
+`AI_EMBEDDING_DIMENSIONS` is optional and valid only for OpenAI
+`text-embedding-3-*` models.
 
 Before serving an existing database, run
 `backend_python/.venv_r1a/Scripts/python.exe scripts/check_database_schema.py`.

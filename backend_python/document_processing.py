@@ -5,6 +5,7 @@ from __future__ import annotations
 import dataclasses
 import hashlib
 import json
+import os
 import re
 import statistics
 import time
@@ -13,6 +14,8 @@ from dataclasses import dataclass, field
 from typing import Any
 
 import fitz
+
+from ai_provider import ANTHROPIC_DEFAULT_MODEL, canonical_provider_name
 
 
 PROCESSING_CONFIG_VERSION = "infocom-a1-v1"
@@ -25,6 +28,20 @@ KEYWORD_PROMPT = (
     "Return only a comma-separated list without commentary."
 )
 TOKEN_FALLBACK_VERSION = "token-frequency-v1"
+
+
+def _default_keyword_model() -> str:
+    provider = canonical_provider_name(os.getenv("AI_PROVIDER", "openai"))
+    if provider == "anthropic":
+        return os.getenv("ANTHROPIC_MODEL", ANTHROPIC_DEFAULT_MODEL)
+    return os.getenv("AI_KEYWORD_MODEL", "").strip() or os.getenv(
+        "OPENAI_CHAT_MODEL",
+        os.getenv("AI_GENERATION_MODEL", "gpt-4o-mini"),
+    )
+
+
+def _default_embedding_model() -> str:
+    return os.getenv("OPENAI_EMBEDDING_MODEL", os.getenv("AI_EMBEDDING_MODEL", "text-embedding-3-small"))
 
 STOP_WORDS = {
     "about", "after", "again", "also", "and", "are", "been", "before", "being",
@@ -67,8 +84,8 @@ class ProcessingConfig:
     separator_policy: str = "character-offsets-no-cross-page"
     keyword_extractor_type: str = "ai-with-deterministic-fallback"
     keyword_prompt_version: str = KEYWORD_PROMPT_VERSION
-    keyword_model: str = "gpt-4o-mini"
-    embedding_model: str = "text-embedding-3-small"
+    keyword_model: str = field(default_factory=_default_keyword_model)
+    embedding_model: str = field(default_factory=_default_embedding_model)
     config_version: str = PROCESSING_CONFIG_VERSION
 
     def __post_init__(self) -> None:

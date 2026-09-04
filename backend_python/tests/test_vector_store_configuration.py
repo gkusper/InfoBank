@@ -52,7 +52,7 @@ def test_embedding_response_dimension_is_rejected_before_chroma(monkeypatch: pyt
             return [[0.0] * 24 for _ in texts]
 
     monkeypatch.delenv("AI_EMBEDDING_DIMENSIONS", raising=False)
-    monkeypatch.setattr(ai_service, "get_ai_provider", lambda: WrongDimensionProvider())
+    monkeypatch.setattr(ai_service, "get_embedding_provider", lambda: WrongDimensionProvider())
     with pytest.raises(RuntimeError, match="dimension 24.*expected 1536"):
         ai_service.embed_texts(["synthetic"], model="text-embedding-3-small")
 

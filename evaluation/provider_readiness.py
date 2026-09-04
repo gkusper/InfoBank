@@ -15,11 +15,19 @@ from .backend import ensure_backend_path
 
 
 ensure_backend_path()
-from ai_provider import AIProvider, KEYWORD_SELECTION_STRATEGY_VERSION, ProviderGenerationResult  # noqa: E402
+from ai_provider import (  # noqa: E402
+    AIProvider,
+    ANTHROPIC_DEFAULT_MODEL,
+    KEYWORD_SELECTION_STRATEGY_VERSION,
+    ProviderGenerationResult,
+    canonical_provider_name,
+)
 
 
 READINESS_STATUS = "PENDING_EXPLICIT_PROVIDER_RUN_APPROVAL"
 GENERATION_MODEL = "gpt-4o-mini"
+ANTHROPIC_GENERATION_MODEL = ANTHROPIC_DEFAULT_MODEL
+EMBEDDING_PROVIDER = "openai"
 EMBEDDING_MODEL = "text-embedding-3-small"
 GENERATION_TEMPERATURE = 0.0
 GENERATION_PROMPT_VERSION = "actual-pipeline-answer-v1"
@@ -44,16 +52,43 @@ def canonical_hash(value: Any) -> str:
 
 
 def validate_provider_request(provider: str, allow_network_provider: bool) -> None:
-    normalized = provider.strip().lower()
-    if normalized == "openai" and not allow_network_provider:
-        raise RuntimeError("OpenAI evaluation requires explicit --allow-network-provider approval; no mock fallback is permitted.")
-    if normalized not in {"openai", "deterministic-mock"}:
+    try:
+        normalized = canonical_provider_name(provider)
+    except RuntimeError as exc:
+        raise RuntimeError(f"Unsupported evaluation provider: {provider}") from exc
+    if normalized in {"openai", "anthropic"} and not allow_network_provider:
+        raise RuntimeError(f"{normalized} evaluation requires explicit --allow-network-provider approval; no mock fallback is permitted.")
+    if normalized not in {"openai", "anthropic", "deterministic-mock"}:
         raise RuntimeError(f"Unsupported evaluation provider: {provider}")
+
+
+def generation_model_for_provider(provider: str) -> str:
+    normalized = canonical_provider_name(provider)
+    if normalized == "anthropic":
+        return ANTHROPIC_GENERATION_MODEL
+    if normalized == "openai":
+        return GENERATION_MODEL
+    return "infobank-deterministic-extractive-v1"
+
+
+def embedding_model_for_provider(provider: str) -> str:
+    normalized = canonical_provider_name(provider)
+    if normalized in {"openai", "anthropic"}:
+        return EMBEDDING_MODEL
+    return "infobank-deterministic-embedding-v1"
+
+
+def embedding_provider_for_provider(provider: str) -> str:
+    normalized = canonical_provider_name(provider)
+    if normalized in {"openai", "anthropic"}:
+        return EMBEDDING_PROVIDER
+    return normalized
 
 
 @dataclass(frozen=True)
 class ReadinessConfig:
     provider: str
+    embedding_provider: str = EMBEDDING_PROVIDER
     generation_model: str = GENERATION_MODEL
     embedding_model: str = EMBEDDING_MODEL
     temperature: float = GENERATION_TEMPERATURE
@@ -67,7 +102,15 @@ class ReadinessConfig:
         return canonical_hash(asdict(self))
 
 
-def cache_key(*, input_value: Any, provider: str, model: str, prompt_version: str, config_hash: str) -> tuple[str, dict[str, str]]:
+def cache_key(
+    *,
+    input_value: Any,
+    provider: str,
+    model: str,
+    prompt_version: str,
+    config_hash: str,
+    generation_config: dict[str, Any] | None = None,
+) -> tuple[str, dict[str, str]]:
     identity = {
         "input_hash": canonical_hash(input_value),
         "provider": provider,
@@ -75,6 +118,8 @@ def cache_key(*, input_value: Any, provider: str, model: str, prompt_version: st
         "prompt_version": prompt_version,
         "config_hash": config_hash,
     }
+    if generation_config is not None:
+        identity["generation_config_hash"] = canonical_hash(generation_config)
     return canonical_hash(identity), identity
 
 
@@ -107,8 +152,22 @@ class CachedEvaluationProvider(AIProvider):
         self, text: str, *, model: str, prompt: str, prompt_version: str,
         available_keywords: Sequence[str] | None = None, limit: int = 5,
     ) -> list[str]:
-        input_value = {"text": text, "prompt": prompt, "available_keywords": list(available_keywords or []), "limit": limit}
-        key, identity = cache_key(input_value=input_value, provider=self.provider_name, model=model, prompt_version=prompt_version, config_hash=self.config_hash)
+        generation_config = self.wrapped.keyword_cache_config()
+        input_value = {
+            "text": text,
+            "prompt": prompt,
+            "available_keywords": list(available_keywords or []),
+            "limit": limit,
+            "generation_config": generation_config,
+        }
+        key, identity = cache_key(
+            input_value=input_value,
+            provider=self.provider_name,
+            model=model,
+            prompt_version=prompt_version,
+            config_hash=self.config_hash,
+            generation_config=generation_config,
+        )
         cached = self._read("keywords", key)
         if cached:
             return list(cached["value"])
@@ -135,10 +194,12 @@ class CachedEvaluationProvider(AIProvider):
     def generate_with_usage(
         self, messages: Sequence[dict[str, str]], *, model: str, temperature: float = 0.0,
     ) -> ProviderGenerationResult:
-        input_value = {"messages": list(messages), "temperature": temperature}
+        generation_config = self.wrapped.generation_cache_config(temperature=temperature)
+        input_value = {"messages": list(messages), "generation_config": generation_config}
         key, identity = cache_key(
             input_value=input_value, provider=self.provider_name, model=model,
             prompt_version=GENERATION_PROMPT_VERSION, config_hash=self.config_hash,
+            generation_config=generation_config,
         )
         cached = self._read("generation", key)
         if cached:
@@ -176,7 +237,13 @@ def load_pricing(path: Path | None, model: str) -> tuple[dict[str, float] | None
 def estimate_evaluation(
     *, query_input_path: Path, corpus_fixture_path: Path, max_cases: int | None,
     provider: str, pricing_config: Path | None,
+    generation_model: str | None = None,
+    embedding_provider: str | None = None,
+    embedding_model: str | None = None,
 ) -> dict[str, Any]:
+    generation_model = generation_model or generation_model_for_provider(provider)
+    embedding_provider = embedding_provider or embedding_provider_for_provider(provider)
+    embedding_model = embedding_model or embedding_model_for_provider(provider)
     queries = load_query_inputs(query_input_path)
     documents, _, _ = load_corpus_fixture(corpus_fixture_path)
     selected = queries[:max_cases] if max_cases is not None else queries
@@ -186,7 +253,7 @@ def estimate_evaluation(
     query_tokens = sum(max(1, (len(item.query_text) + 3) // 4) for item in selected)
     estimated_input = query_tokens + len(selected) * min(corpus_tokens, 4096)
     estimated_output = len(selected) * 512
-    pricing, pricing_status = load_pricing(pricing_config, GENERATION_MODEL)
+    pricing, pricing_status = load_pricing(pricing_config, generation_model)
     projected_cost = None
     if pricing:
         projected_cost = round(
@@ -194,10 +261,18 @@ def estimate_evaluation(
             + estimated_output / 1_000_000 * pricing["output_per_million"],
             8,
         )
-    config = ReadinessConfig(provider=provider)
+    config = ReadinessConfig(
+        provider=canonical_provider_name(provider),
+        generation_model=generation_model,
+        embedding_provider=embedding_provider,
+        embedding_model=embedding_model,
+    )
     return {
         "status": READINESS_STATUS,
-        "provider": provider,
+        "provider": canonical_provider_name(provider),
+        "generation_model": generation_model,
+        "embedding_provider": embedding_provider,
+        "embedding_model": embedding_model,
         "network_called": False,
         "case_count": len(selected),
         "available_case_count": len(queries),
@@ -341,16 +416,21 @@ def _scale_scope(scale_manifest_path: Path) -> dict[str, Any]:
     }
 
 
-def _load_e1_pricing(path: Path | None) -> tuple[dict[str, float] | None, str, str | None]:
+def _load_e1_pricing(
+    path: Path | None,
+    *,
+    generation_model: str,
+    embedding_model: str,
+) -> tuple[dict[str, float] | None, str, str | None]:
     if path is None:
         return None, "NO_LOCAL_PRICING_CONFIG", None
     payload = _read_json(path)
-    generation = payload.get(GENERATION_MODEL)
-    embedding = payload.get(EMBEDDING_MODEL)
+    generation = payload.get(generation_model)
+    embedding = payload.get(embedding_model)
     if not isinstance(generation, dict) or not {"input_per_million", "output_per_million"} <= set(generation):
-        raise ValueError(f"Local pricing configuration has no complete entry for {GENERATION_MODEL}")
+        raise ValueError(f"Local pricing configuration has no complete entry for {generation_model}")
     if not isinstance(embedding, dict) or "input_per_million" not in embedding:
-        raise ValueError(f"Local pricing configuration has no input price for {EMBEDDING_MODEL}")
+        raise ValueError(f"Local pricing configuration has no input price for {embedding_model}")
     return {
         "generation_input_per_million": float(generation["input_per_million"]),
         "generation_output_per_million": float(generation["output_per_million"]),
@@ -456,16 +536,28 @@ def estimate_full_e1(
     repeats: int, modes: Sequence[str] = E1_MODES, include_scale_subset: bool = False,
     scale_manifest_path: Path | None = None, pricing_config: Path | None = None,
     average_provider_latency_ms: float | None = None,
+    provider: str = "openai",
+    generation_model: str | None = None,
+    embedding_provider: str | None = None,
+    embedding_model: str | None = None,
 ) -> dict[str, Any]:
     """Estimate the planned full E1 entirely from local, pre-freeze inputs."""
 
+    provider = canonical_provider_name(provider)
+    generation_model = generation_model or generation_model_for_provider(provider)
+    embedding_provider = embedding_provider or embedding_provider_for_provider(provider)
+    embedding_model = embedding_model or embedding_model_for_provider(provider)
     selected_modes = tuple(modes)
     unknown_modes = sorted(set(selected_modes) - set(E1_MODES))
     if unknown_modes:
         raise ValueError(f"Unsupported E1 modes: {', '.join(unknown_modes)}")
     if average_provider_latency_ms is not None and average_provider_latency_ms < 0:
         raise ValueError("average_provider_latency_ms cannot be negative")
-    pricing, pricing_status, pricing_sha256 = _load_e1_pricing(pricing_config)
+    pricing, pricing_status, pricing_sha256 = _load_e1_pricing(
+        pricing_config,
+        generation_model=generation_model,
+        embedding_model=embedding_model,
+    )
     base_scope = _pre_freeze_scope(
         dataset_manifest_path=dataset_manifest_path,
         gold_queries_path=gold_queries_path,
@@ -501,7 +593,12 @@ def estimate_full_e1(
     combined_cost = None
     if base["projected_cost"] is not None:
         combined_cost = round(base["projected_cost"] + (scale["projected_cost"] if scale else 0.0), 8)
-    config = ReadinessConfig(provider="openai")
+    config = ReadinessConfig(
+        provider=provider,
+        generation_model=generation_model,
+        embedding_provider=embedding_provider,
+        embedding_model=embedding_model,
+    )
     return {
         "schema_version": E1_ESTIMATE_SCHEMA_VERSION,
         "status": READINESS_STATUS,
@@ -509,7 +606,10 @@ def estimate_full_e1(
         "estimate_only": True,
         "network_called": False,
         "api_key_read": False,
-        "provider": "openai",
+        "provider": provider,
+        "generation_model": generation_model,
+        "embedding_provider": embedding_provider,
+        "embedding_model": embedding_model,
         "fixed_config": asdict(config) | {"config_hash": config.config_hash},
         "source_scope": base_scope,
         "base_e1": base,

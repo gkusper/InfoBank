@@ -8,7 +8,14 @@ import chromadb
 from openai import OpenAI
 from dotenv import load_dotenv
 
-from ai_provider import AIProvider, canonical_provider_name, create_provider, embedding_dimensions
+from ai_provider import (
+    AIProvider,
+    ANTHROPIC_DEFAULT_MODEL,
+    canonical_embedding_provider_name,
+    canonical_provider_name,
+    create_provider,
+    embedding_dimensions,
+)
 
 BACKEND_DIR = Path(__file__).resolve().parent
 ENV_PATH = BACKEND_DIR / ".env"
@@ -24,11 +31,37 @@ def resolve_backend_runtime_path(configured: str | Path | None, *, default_name:
         path = BACKEND_DIR / path
     return path.resolve()
 
-MODEL_NAME = os.getenv("AI_GENERATION_MODEL", "gpt-4o-mini")
-KEYWORD_MODEL = os.getenv("AI_KEYWORD_MODEL", MODEL_NAME)
-EMBEDDING_MODEL = os.getenv("AI_EMBEDDING_MODEL", "text-embedding-3-small")
-AI_PROVIDER_NAME = os.getenv("AI_PROVIDER", "openai")
-EMBEDDING_DIMENSIONS = embedding_dimensions(AI_PROVIDER_NAME, EMBEDDING_MODEL)
+AI_PROVIDER_NAME = canonical_provider_name(os.getenv("AI_PROVIDER", "openai"))
+OPENAI_CHAT_MODEL = os.getenv("OPENAI_CHAT_MODEL", os.getenv("AI_GENERATION_MODEL", "gpt-4o-mini"))
+ANTHROPIC_MODEL = os.getenv("ANTHROPIC_MODEL", ANTHROPIC_DEFAULT_MODEL)
+
+
+def _default_llm_model(provider_name: str) -> str:
+    provider = canonical_provider_name(provider_name)
+    if provider == "anthropic":
+        return ANTHROPIC_MODEL
+    if provider == "openai":
+        return OPENAI_CHAT_MODEL
+    return os.getenv("AI_GENERATION_MODEL", OPENAI_CHAT_MODEL)
+
+
+def _default_keyword_model(provider_name: str) -> str:
+    provider = canonical_provider_name(provider_name)
+    if provider == "anthropic":
+        return ANTHROPIC_MODEL
+    return os.getenv("AI_KEYWORD_MODEL", "").strip() or _default_llm_model(provider)
+
+
+MODEL_NAME = _default_llm_model(AI_PROVIDER_NAME)
+KEYWORD_MODEL = _default_keyword_model(AI_PROVIDER_NAME)
+EMBEDDING_PROVIDER_NAME = canonical_embedding_provider_name(os.getenv("EMBEDDING_PROVIDER", "openai"))
+OPENAI_EMBEDDING_MODEL = os.getenv("OPENAI_EMBEDDING_MODEL", os.getenv("AI_EMBEDDING_MODEL", "text-embedding-3-small"))
+EMBEDDING_MODEL = (
+    OPENAI_EMBEDDING_MODEL
+    if EMBEDDING_PROVIDER_NAME == "openai"
+    else os.getenv("AI_EMBEDDING_MODEL", OPENAI_EMBEDDING_MODEL)
+)
+EMBEDDING_DIMENSIONS = embedding_dimensions(EMBEDDING_PROVIDER_NAME, EMBEDDING_MODEL)
 CHROMA_PERSIST_PATH = resolve_backend_runtime_path(os.getenv("CHROMA_PERSIST_DIR"), default_name="chroma_data")
 CHROMA_PERSIST_DIR = str(CHROMA_PERSIST_PATH)
 
@@ -40,7 +73,7 @@ def build_vector_collection_manifest(provider_name: str, model: str, dimensions:
         raise ValueError("Embedding dimensions must be positive")
     identity = {
         "schema_version": VECTOR_COLLECTION_SCHEMA_VERSION,
-        "provider": canonical_provider_name(provider_name),
+        "provider": canonical_embedding_provider_name(provider_name),
         "embedding_model": model,
         "dimensions": dimensions,
     }
@@ -53,7 +86,7 @@ def build_vector_collection_manifest(provider_name: str, model: str, dimensions:
 
 
 VECTOR_COLLECTION_MANIFEST = build_vector_collection_manifest(
-    AI_PROVIDER_NAME,
+    EMBEDDING_PROVIDER_NAME,
     EMBEDDING_MODEL,
     EMBEDDING_DIMENSIONS,
 )
@@ -83,6 +116,8 @@ collection = get_or_create_vector_collection(chroma_client, VECTOR_COLLECTION_MA
 _openai_client = None
 _ai_provider: AIProvider | None = None
 _ai_provider_name: str | None = None
+_embedding_provider: AIProvider | None = None
+_embedding_provider_name: str | None = None
 
 
 def get_openai_client() -> OpenAI:
@@ -90,7 +125,11 @@ def get_openai_client() -> OpenAI:
     if _openai_client is None:
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
-            raise RuntimeError("OPENAI_API_KEY is required for OpenAI-backed document ingestion, retrieval, and generation.")
+            raise RuntimeError(
+                "OPENAI_API_KEY is required for OpenAI-backed document/query embeddings "
+                "and for OpenAI LLM operations. When AI_PROVIDER=anthropic, "
+                "OPENAI_API_KEY is still normally required because EMBEDDING_PROVIDER=openai."
+            )
         _openai_client = OpenAI(api_key=api_key)
     return _openai_client
 
@@ -105,23 +144,57 @@ openai_client = LazyOpenAIClient()
 
 def get_ai_provider() -> AIProvider:
     global _ai_provider, _ai_provider_name
-    configured = os.getenv("AI_PROVIDER", AI_PROVIDER_NAME).strip().lower()
+    configured = canonical_provider_name(os.getenv("AI_PROVIDER", "openai"))
     if _ai_provider is None or _ai_provider_name != configured:
         _ai_provider = create_provider(configured, openai_client_factory=get_openai_client)
         _ai_provider_name = configured
     return _ai_provider
 
 
+def get_embedding_provider() -> AIProvider:
+    global _embedding_provider, _embedding_provider_name
+    configured = canonical_embedding_provider_name(os.getenv("EMBEDDING_PROVIDER", "openai"))
+    if _embedding_provider is None or _embedding_provider_name != configured:
+        _embedding_provider = create_provider(configured, openai_client_factory=get_openai_client)
+        _embedding_provider_name = configured
+    return _embedding_provider
+
+
 def reset_ai_provider() -> None:
-    global _ai_provider, _ai_provider_name
+    global _ai_provider, _ai_provider_name, _embedding_provider, _embedding_provider_name
     _ai_provider = None
     _ai_provider_name = None
+    _embedding_provider = None
+    _embedding_provider_name = None
 
 
 def provider_manifest(*, operation: str, model: str) -> dict[str, Any]:
-    manifest = get_ai_provider().manifest(model)
+    provider = get_embedding_provider() if operation == "embedding" else get_ai_provider()
+    manifest = provider.manifest(model)
     manifest["operation"] = operation
     return manifest
+
+
+def effective_provider_configuration() -> dict[str, Any]:
+    llm_provider = get_ai_provider()
+    embedding_provider = get_embedding_provider()
+    payload = {
+        "llm_provider": llm_provider.provider_name,
+        "llm_model": MODEL_NAME,
+        "keyword_model": KEYWORD_MODEL,
+        "embedding_provider": embedding_provider.provider_name,
+        "embedding_model": EMBEDDING_MODEL,
+        "llm_manifest": llm_provider.manifest(MODEL_NAME),
+        "keyword_manifest": llm_provider.manifest(KEYWORD_MODEL),
+        "embedding_manifest": embedding_provider.manifest(EMBEDDING_MODEL),
+        "hybrid_configuration": llm_provider.provider_name != embedding_provider.provider_name,
+    }
+    if payload["hybrid_configuration"]:
+        payload["hybrid_note"] = (
+            "Claude is used only for chat/text generation; OpenAI embeddings remain configured "
+            "for Chroma vector compatibility."
+        )
+    return payload
 
 
 def vector_store_manifest() -> dict[str, str | int]:
@@ -172,7 +245,7 @@ def extract_provider_keywords_with_trace(
 
 
 def embed_texts(texts: Sequence[str], *, model: str = EMBEDDING_MODEL) -> list[list[float]]:
-    provider = get_ai_provider()
+    provider = get_embedding_provider()
     expected_dimensions = embedding_dimensions(provider.provider_name, model)
     vectors = provider.embed(list(texts), model=model)
     if len(vectors) != len(texts):
@@ -202,6 +275,15 @@ def generate_answer(
     temperature: float = 0.0,
 ) -> str:
     return get_ai_provider().generate(messages, model=model, temperature=temperature)
+
+
+def generate_answer_with_usage(
+    messages: Sequence[dict[str, str]],
+    *,
+    model: str = MODEL_NAME,
+    temperature: float = 0.0,
+):
+    return get_ai_provider().generate_with_usage(messages, model=model, temperature=temperature)
 
 def chunk_text(text: str, chunk_size: int = 1000, overlap: int = 200) -> List[str]:
     if chunk_size <= 0:

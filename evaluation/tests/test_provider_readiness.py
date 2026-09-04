@@ -5,7 +5,7 @@ from pathlib import Path
 
 import pytest
 
-from ai_provider import DeterministicMockProvider
+from ai_provider import AnthropicProvider, DeterministicMockProvider
 from evaluation.actual_pipeline_dataset import build_development_dataset
 from evaluation.provider_readiness import (
     CachedEvaluationProvider,
@@ -24,6 +24,9 @@ def test_openai_requires_explicit_network_approval_and_has_no_fallback() -> None
     with pytest.raises(RuntimeError, match="explicit --allow-network-provider"):
         validate_provider_request("openai", False)
     validate_provider_request("openai", True)
+    with pytest.raises(RuntimeError, match="explicit --allow-network-provider"):
+        validate_provider_request("anthropic", False)
+    validate_provider_request("anthropic", True)
     with pytest.raises(RuntimeError, match="Unsupported evaluation provider"):
         validate_provider_request("implicit-fallback", True)
 
@@ -78,7 +81,61 @@ def test_cache_identity_and_generation_cache_cover_required_fields(tmp_path: Pat
     cache_files = list((tmp_path / "cache/generation").glob("*.json"))
     assert len(cache_files) == 1
     cached = json.loads(cache_files[0].read_text(encoding="utf-8"))
-    assert set(cached["cache_identity"]) == {"input_hash", "provider", "model", "prompt_version", "config_hash"}
+    assert set(cached["cache_identity"]) == {
+        "input_hash",
+        "provider",
+        "model",
+        "prompt_version",
+        "config_hash",
+        "generation_config_hash",
+    }
+
+
+def test_llm_cache_key_separates_provider_model_and_generation_config(tmp_path: Path) -> None:
+    class Messages:
+        @staticmethod
+        def create(**kwargs):
+            del kwargs
+            usage = type("Usage", (), {"input_tokens": 3, "output_tokens": 2})()
+            block = type("TextBlock", (), {"type": "text", "text": "Synthetic answer."})()
+            return type(
+                "Response",
+                (),
+                {"id": "msg_cache", "content": [block], "usage": usage, "stop_reason": "end_turn"},
+            )()
+
+    messages = [{"role": "user", "content": "Question: What?\n\nContext from the document(s):\nSynthetic answer."}]
+    anthropic_config = ReadinessConfig(
+        provider="anthropic",
+        embedding_provider="openai",
+        generation_model="claude-sonnet-5",
+        embedding_model="text-embedding-3-small",
+    )
+    anthropic = CachedEvaluationProvider(
+        AnthropicProvider(
+            client_factory=lambda: type("Client", (), {"messages": Messages()})(),
+            max_tokens=64,
+        ),
+        tmp_path / "cache",
+        anthropic_config.config_hash,
+    )
+    anthropic.generate_with_usage(messages, model="claude-sonnet-5")
+    cache_files = list((tmp_path / "cache/generation").glob("*.json"))
+    assert len(cache_files) == 1
+    cached = json.loads(cache_files[0].read_text(encoding="utf-8"))
+    assert cached["cache_identity"]["provider"] == "anthropic"
+    assert cached["cache_identity"]["model"] == "claude-sonnet-5"
+    assert "generation_config_hash" in cached["cache_identity"]
+
+    openai_key, _ = cache_key(
+        input_value={"messages": messages, "generation_config": {"temperature": 0.0}},
+        provider="openai",
+        model="gpt-4o-mini",
+        prompt_version="actual-pipeline-answer-v1",
+        config_hash=anthropic_config.config_hash,
+        generation_config={"temperature": 0.0},
+    )
+    assert openai_key != cache_files[0].stem
 
 
 def test_real_provider_cli_exposes_required_guards() -> None:

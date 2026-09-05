@@ -1,0 +1,63 @@
+{
+  "diagnostic_only": true,
+  "expected_mode_latency_summaries": {
+    "CFAF": {
+      "count": 102,
+      "p50_ms": 1545.1351,
+      "p95_ms": 1943.7476
+    },
+    "FULL": {
+      "count": 78,
+      "p50_ms": 1518.39775,
+      "p95_ms": 3061.8953
+    }
+  },
+  "external_latency_summaries": {
+    "cfaf_pipeline": {
+      "count": 60,
+      "p50_ms": 1513.81525,
+      "p95_ms": 1762.76
+    },
+    "prompt_only_control": {
+      "count": 60,
+      "p50_ms": 1443.8169,
+      "p95_ms": 2120.566
+    },
+    "standard_rag": {
+      "count": 60,
+      "p50_ms": 1620.86615,
+      "p95_ms": 2146.9324
+    }
+  },
+  "generation_used_latency_summaries": {
+    "generation_skipped": {
+      "count": 0,
+      "p50_ms": 0.0,
+      "p95_ms": 0.0
+    },
+    "generation_used": {
+      "count": 180,
+      "p50_ms": 1539.8647,
+      "p95_ms": 2121.0934
+    }
+  },
+  "latency_summaries": {
+    "cfaf_pipeline": {
+      "count": 60,
+      "p50_ms": 1526.8532500000001,
+      "p95_ms": 1779.655135
+    },
+    "prompt_only_control": {
+      "count": 60,
+      "p50_ms": 1444.8163,
+      "p95_ms": 2146.5956650000003
+    },
+    "standard_rag": {
+      "count": 60,
+      "p50_ms": 1620.93205,
+      "p95_ms": 2180.08535
+    }
+  },
+  "mode_execution_count": 360,
+  "not_publication_ready": true
+}

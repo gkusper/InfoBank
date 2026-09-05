@@ -1,0 +1,367 @@
+{
+  "no_second_retrieval_timing_event_per_case": true,
+  "records": [
+    {
+      "case_id": "HELD3_P1_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        1997.2463
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        654.2756
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_02A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        229.1543
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_02B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        225.9631
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_03A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        265.8532
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_03B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        245.6303
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_04A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        234.8329
+      ]
+    },
+    {
+      "case_id": "HELD3_P1_04B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        226.3491
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        423.55
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        219.6303
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_02A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        206.8185
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_02B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        243.9922
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_03A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        219.3891
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_03B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        225.6742
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_04A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        251.9973
+      ]
+    },
+    {
+      "case_id": "HELD3_P2_04B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        218.2361
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        230.3389
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        231.1346
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_02A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        250.6891
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_02B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        249.2294
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_03A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        245.8716
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_03B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        211.4409
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_04A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        226.4266
+      ]
+    },
+    {
+      "case_id": "HELD3_P3_04B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        220.3221
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        228.9042
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        223.2396
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_02A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        205.7299
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_02B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        308.4857
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_03A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        279.8349
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_03B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        218.1426
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_04A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        230.2442
+      ]
+    },
+    {
+      "case_id": "HELD3_P4_04B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        224.6219
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_01A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        265.3133
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_01B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        209.1522
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_02A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        218.7533
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_02B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        220.0893
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_03A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        257.4721
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_03B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        267.4312
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_04A",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        212.9216
+      ]
+    },
+    {
+      "case_id": "HELD3_P5_04B",
+      "record_count": 9,
+      "retrieval_snapshot_count": 1,
+      "shared_retrieval_measured_once": true,
+      "shared_retrieval_ms_values": [
+        425.0939
+      ]
+    }
+  ],
+  "schema_version": "wolala-shared-retrieval-latency-verification-v1",
+  "shared_retrieval_latency_reused": true
+}

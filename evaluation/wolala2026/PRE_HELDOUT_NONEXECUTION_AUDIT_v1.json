@@ -1,0 +1,30 @@
+{
+  "audit_passed": true,
+  "audit_scope": {
+    "excluded_frozen_dataset_paths": [
+      "evaluation/wolala2026/data/heldout_pilot_v1/cases.jsonl",
+      "evaluation/wolala2026/data/heldout_pilot_v1/gold.jsonl",
+      "evaluation/wolala2026/data/heldout_pilot_v1/manifest.json",
+      "evaluation/wolala2026/data/heldout_pilot_v1/provenance.csv"
+    ],
+    "searched_execution_artifact_paths": [
+      "evaluation/wolala2026/development_run/",
+      "evaluation/wolala2026/development_run_real_api_v1/",
+      "evaluation/wolala2026/readiness_baseline_manifest.json",
+      "evaluation/wolala2026/data/heldout_pilot_v1/manifest.json"
+    ]
+  },
+  "audit_timestamp_utc": "2026-08-18T11:25:41Z",
+  "heldout_output_artifacts_found": false,
+  "heldout_run_directory_present": false,
+  "notes": [
+    "HELD_* identifiers exist in the frozen heldout_pilot_v1 dataset and gold files by design.",
+    "No HELD_* identifiers were found in development run output artifacts.",
+    "No manifest with heldout_mode_execution_count greater than zero was found.",
+    "No heldout_run_real_api_v1 output directory was present before this audit."
+  ],
+  "prior_heldout_embedding_calls": 0,
+  "prior_heldout_generation_calls": 0,
+  "prior_heldout_mode_execution_count": 0,
+  "schema_version": "wolala-pre-heldout-nonexecution-audit-v1"
+}

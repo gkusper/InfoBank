@@ -1,0 +1,122 @@
+{
+  "capability_checks": {
+    "enough_sanitized_evidence_for_publication_scale": false,
+    "latency_ready_run_records": true,
+    "paired_source_existence_leakage_cases": true,
+    "positive_metadata_request_cases": true,
+    "prompt_only_baseline_configuration": true,
+    "public_internal_reason_labels": true,
+    "structured_cfaf_output_gold_labels": true
+  },
+  "entries": [
+    {
+      "case_count": 400,
+      "case_ids_unique": true,
+      "checks": {
+        "paired_source_existence_leakage_cases": false,
+        "positive_metadata_request_cases": false,
+        "public_internal_reason_labels": false,
+        "structured_cfaf_output_gold_labels": false
+      },
+      "checksum_or_version_identifier": "612809710b7eabebe2335eacb6402da093ef16c2c7a93f442a7caa3bd34af77e",
+      "fixture_used_by_smoke_suite": false,
+      "gold_fields_outside_generator_visible_content": true,
+      "licence_or_reference": "Repository LICENSE plus evaluation/fixtures/README.md synthetic data policy.",
+      "missing_required_wolala_fields": [
+        "query",
+        "requested_content",
+        "requested_granularity",
+        "requested_action",
+        "evidence_units",
+        "access_modes",
+        "expected_evidential_roles",
+        "expected_evidence_states",
+        "expected_permitted_output",
+        "expected_top_level_mode",
+        "expected_cfaf_realization",
+        "expected_public_reason_class",
+        "expected_internal_reason_class",
+        "source_existence_visibility",
+        "gold_answer"
+      ],
+      "path": "C:/Users/EKKE/Documents/Codex/2026-08-17/files-mentioned-by-the-user-you/work/InfoBank/evaluation/fixtures/document_rag_v3.yaml",
+      "scenario_families": [
+        "D1_full",
+        "D2_metadata",
+        "D3_aggregate",
+        "D4_deny",
+        "D5_mixed_contextual"
+      ],
+      "schema_contains_all_required_wolala_fields": false,
+      "source_provenance": "Deterministically generated synthetic D1-D5 document-RAG fixture.",
+      "status": "PARTIAL",
+      "train_development_test_separation_documented": false
+    },
+    {
+      "case_count": 340,
+      "case_ids_unique": true,
+      "checks": {
+        "paired_source_existence_leakage_cases": false,
+        "positive_metadata_request_cases": false,
+        "public_internal_reason_labels": false,
+        "structured_cfaf_output_gold_labels": false
+      },
+      "checksum_or_version_identifier": "2549d898006234df8a1e9584ee17c9500406620681ec827ac64ef8720ce4bf65",
+      "fixture_used_by_smoke_suite": false,
+      "gold_checksum": "cb538ff90024d21b3f2338449f9e7d89a916f83de623e9195f8d33a093b0a54b",
+      "gold_fields_outside_generator_visible_content": true,
+      "gold_path": "C:/Users/EKKE/Documents/Codex/2026-08-17/files-mentioned-by-the-user-you/work/InfoBank/data/benchmarks/evidence_unit_v2_holdout/gold.jsonl",
+      "licence_or_reference": "data/benchmarks/evidence_unit_v2_holdout/LICENSE_DATA.md and SOURCE_PROVENANCE.md.",
+      "missing_required_wolala_fields": [
+        "requested_content",
+        "requested_granularity",
+        "requested_action",
+        "access_modes",
+        "expected_evidential_roles",
+        "expected_evidence_states",
+        "expected_permitted_output",
+        "expected_top_level_mode",
+        "expected_cfaf_realization",
+        "expected_public_reason_class",
+        "expected_internal_reason_class",
+        "source_existence_visibility",
+        "protected_markers",
+        "gold_answer"
+      ],
+      "path": "C:/Users/EKKE/Documents/Codex/2026-08-17/files-mentioned-by-the-user-you/work/InfoBank/data/benchmarks/evidence_unit_v2_holdout/cases.jsonl",
+      "schema_contains_all_required_wolala_fields": false,
+      "source_provenance": "Pseudonymized MailEx-derived and controlled synthetic D6-D8 action-reconstruction holdout.",
+      "status": "PARTIAL",
+      "train_development_test_separation_documented": false
+    },
+    {
+      "case_count": 13,
+      "case_ids_unique": true,
+      "checks": {
+        "paired_source_existence_leakage_cases": true,
+        "positive_metadata_request_cases": true,
+        "public_internal_reason_labels": true,
+        "structured_cfaf_output_gold_labels": true
+      },
+      "checksum_or_version_identifier": "304bed52aee2f942e0638e6165c8b7f84f9584e14725670a6fac4fa31fb6d7b5",
+      "fixture_used_by_smoke_suite": true,
+      "gold_fields_outside_generator_visible_content": true,
+      "licence_or_reference": "Repository LICENSE; no personal, health, or confidential real-world data.",
+      "missing_required_wolala_fields": [],
+      "path": "C:/Users/EKKE/Documents/Codex/2026-08-17/files-mentioned-by-the-user-you/work/InfoBank/evaluation/wolala2026/smoke_config.yaml",
+      "schema_contains_all_required_wolala_fields": true,
+      "source_provenance": "Deterministic synthetic WoLaLa smoke fixtures created for branch preparation.",
+      "status": "READY",
+      "train_development_test_separation_documented": true
+    }
+  ],
+  "missing_for_publication_scale": [
+    "A larger WoLaLa-specific held-out case set with all required structured CFAF labels.",
+    "Documented train/development/test split for the WoLaLa case set.",
+    "Prompt-only baseline execution records beyond adapter smoke checks.",
+    "Latency records from repeated cold/warm runs separated by FULL/CFAF and generation-used/skipped.",
+    "Publication-scale sanitized evidence with explicit licence/provenance per WoLaLa case."
+  ],
+  "overall_status": "PARTIAL - MISSING_DATA_OR_COMPONENTS",
+  "schema_version": "wolala2026-data-inventory-v1"
+}

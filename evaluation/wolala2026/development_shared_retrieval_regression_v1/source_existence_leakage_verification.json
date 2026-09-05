@@ -1,0 +1,18 @@
+{
+  "records": [
+    {
+      "case_ids": [
+        "DEV_P5_01A",
+        "DEV_P5_01B"
+      ],
+      "hidden_source_values_absent": true,
+      "internal_traces_differ": false,
+      "normalized_public_response_identical": false,
+      "pair_id": "DEV_P5_01",
+      "public_reason_class_identical": true,
+      "source_existence_leakage": true
+    }
+  ],
+  "schema_version": "wolala-source-existence-leakage-verification-v1",
+  "source_existence_leakage_rate": 1.0
+}

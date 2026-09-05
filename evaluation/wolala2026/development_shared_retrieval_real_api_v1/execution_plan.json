@@ -1,0 +1,35 @@
+{
+  "allow_real_api": true,
+  "case_ids": [
+    "DEV_P2_01A",
+    "DEV_P2_01B",
+    "DEV_P5_01A",
+    "DEV_P5_01B"
+  ],
+  "dataset": "development_integration_v1",
+  "development_cases": 4,
+  "heldout_mode_executions": 0,
+  "maximum_embedding_calls": 8,
+  "maximum_generation_calls": 40,
+  "maximum_total_external_calls": 44,
+  "mode_count": 3,
+  "modes": [
+    "standard_rag",
+    "prompt_only_control",
+    "cfaf_pipeline"
+  ],
+  "not_a_heldout_result": true,
+  "not_publication_ready": true,
+  "planned_external_requests_without_retries_maximum": 40,
+  "planned_generation_requests_maximum": 36,
+  "planned_logical_embedding_requests": 4,
+  "planned_mode_executions": 36,
+  "planned_retrieval_snapshot_count": 4,
+  "planned_snapshot_reuse_count": 36,
+  "planned_unique_embedding_requests": 4,
+  "repetitions": 3,
+  "retrieval_computed_once_per_case": true,
+  "retrieval_reused_across_modes": true,
+  "retrieval_reused_across_repetitions": true,
+  "schema_version": "wolala-real-api-execution-plan-v1"
+}

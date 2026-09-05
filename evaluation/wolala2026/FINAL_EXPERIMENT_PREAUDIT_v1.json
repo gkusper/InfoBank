@@ -1,0 +1,45 @@
+{
+  "audit_passed": true,
+  "audit_timestamp": "2026-08-22T18:05:00Z",
+  "audited_branch": "wolala2026",
+  "branch_status_report_present_in_public_starting_commit": false,
+  "branch_status_report_note": "WOLALA2026_BRANCH_STATUS_AND_PAPER_COMPLETION_REPORT_v1.md was not present in the fresh public-branch checkout at starting SHA 0a3c247b0167ef18b93feea93171d4ddb6d3a487. The current preaudit therefore relies on the public branch blocker, nonexecution audits, preheldout attempt artifacts, run manifests, and result directories.",
+  "development_result_directories_present": [
+    "evaluation/wolala2026/development_run",
+    "evaluation/wolala2026/development_run_real_api_v1"
+  ],
+  "d1_d8_base_commit": "5bb2cc742e105cc3238b022130126947c04bcd35",
+  "d1_d8_base_is_ancestor": true,
+  "heldout_output_directories_present_before_v2": [],
+  "heldout_v1_attempt1_blocker_artifact": "evaluation/wolala2026/HELDOUT_ATTEMPT1_EXECUTION_BLOCKER_v1.json",
+  "heldout_v1_attempt1_blocker_class": "FROZEN_RUNNER_PROTOCOL_V2_EXECUTION_PLAN_GUARD_INCONSISTENCY",
+  "heldout_v1_attempt1_embedding_calls": 0,
+  "heldout_v1_attempt1_external_api_calls": 0,
+  "heldout_v1_attempt1_generation_calls": 0,
+  "heldout_v1_attempt1_mode_executions": 0,
+  "heldout_v1_attempt1_provider_initialized": false,
+  "heldout_v1_attempt1_raw_outputs": 0,
+  "heldout_v1_attempt1_retrieval_executed": false,
+  "heldout_v1_attempt1_status": "STOPPED_BEFORE_HELDOUT_MODEL_EXECUTION",
+  "historical_tags_verified": [
+    "wolala2026-heldout-protocol-v2-freeze",
+    "wolala2026-heldout-attempt1-authorized",
+    "wolala2026-heldout-attempt1-blocked"
+  ],
+  "no_heldout_model_output_or_retrieval_result_found": true,
+  "preheldout_attempt1_artifacts": [
+    "evaluation/wolala2026/preheldout_attempt1/execution_plan.json",
+    "evaluation/wolala2026/preheldout_attempt1/HELDOUT_RUN_AUTHORIZATION_v1.json",
+    "evaluation/wolala2026/preheldout_attempt1/PLAN_VALIDATION_REPORT.md",
+    "evaluation/wolala2026/preheldout_attempt1/PRE_RUN_FREEZE_MANIFEST.json"
+  ],
+  "preheldout_nonexecution_audit_files": [
+    "evaluation/wolala2026/PRE_HELDOUT_NONEXECUTION_AUDIT_v1.json",
+    "evaluation/wolala2026/PRE_HELDOUT_NONEXECUTION_AUDIT_v2.json",
+    "evaluation/wolala2026/PRE_HELDOUT_NONEXECUTION_AUDIT_v3.json"
+  ],
+  "remote_branch_sha_at_start": "0a3c247b0167ef18b93feea93171d4ddb6d3a487",
+  "schema_version": "wolala-final-experiment-preaudit-v1",
+  "starting_commit": "0a3c247b0167ef18b93feea93171d4ddb6d3a487",
+  "working_tree_state_at_start": "clean"
+}

@@ -1,0 +1,4 @@
+case_count,cfaf_realization_accuracy,false_cfaf_rate,generator_exposure_rate,mode_name,model_call_count,protected_content_leakage_rate,public_reason_class_accuracy,request_fulfilment_accuracy,safe_next_step_correctness,top_level_mode_accuracy,validation_fallback_correctness
+120,1.0,0.0,0.0,cfaf_pipeline,120,0.0,1.0,1.0,0.9,1.0,1.0
+120,0.4,0.0,0.5,prompt_only_control,120,0.2,0.4,0.11666666666666667,0.4,0.4166666666666667,1.0
+120,0.4,0.0,0.5,standard_rag,120,0.2,0.4,0.1,0.4,0.4,1.0

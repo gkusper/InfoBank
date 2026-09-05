@@ -1,0 +1,458 @@
+{
+  "all_cfaf_contexts_filtered": true,
+  "generator_exposure_rate": 0.0,
+  "protected_content_leakage_rate": 0.0,
+  "records": [
+    {
+      "case_id": "DEV_P1_01A",
+      "context_hash": "a71762fd9437ead05460c1c9eec368caa9cd8fed61f49fa6a653403ccc853637",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P1_01A",
+      "context_hash": "a71762fd9437ead05460c1c9eec368caa9cd8fed61f49fa6a653403ccc853637",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P1_01A",
+      "context_hash": "a71762fd9437ead05460c1c9eec368caa9cd8fed61f49fa6a653403ccc853637",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P1_01B",
+      "context_hash": "df0bf8bac86632130d5f04e77129ec740b1feb5a6da3082f86cb5e1d7caedbef",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P1_01B",
+      "context_hash": "df0bf8bac86632130d5f04e77129ec740b1feb5a6da3082f86cb5e1d7caedbef",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P1_01B",
+      "context_hash": "df0bf8bac86632130d5f04e77129ec740b1feb5a6da3082f86cb5e1d7caedbef",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P2_01A",
+      "context_hash": "bc66dae2bd09b02b26ce0262c9e0f34f436653816f71052e391d022a092c56d8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P2_01A",
+      "context_hash": "bc66dae2bd09b02b26ce0262c9e0f34f436653816f71052e391d022a092c56d8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P2_01A",
+      "context_hash": "bc66dae2bd09b02b26ce0262c9e0f34f436653816f71052e391d022a092c56d8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P2_01B",
+      "context_hash": "deea92ac097eef2bb15336da9ff44567518ef4c6d615a57b42b016c353d473cf",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P2_01B",
+      "context_hash": "deea92ac097eef2bb15336da9ff44567518ef4c6d615a57b42b016c353d473cf",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P2_01B",
+      "context_hash": "deea92ac097eef2bb15336da9ff44567518ef4c6d615a57b42b016c353d473cf",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P3_01A",
+      "context_hash": "8340caeab6be80f98d440eb9284645f289745056cfdac28ec3b1a4d989984d84",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P3_01A",
+      "context_hash": "8340caeab6be80f98d440eb9284645f289745056cfdac28ec3b1a4d989984d84",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P3_01A",
+      "context_hash": "8340caeab6be80f98d440eb9284645f289745056cfdac28ec3b1a4d989984d84",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P3_01B",
+      "context_hash": "ca5b7f60967d1de21dfec1cdebcc69ebbee2d6e5f47d0cf759f999ee6c779019",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P3_01B",
+      "context_hash": "ca5b7f60967d1de21dfec1cdebcc69ebbee2d6e5f47d0cf759f999ee6c779019",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P3_01B",
+      "context_hash": "ca5b7f60967d1de21dfec1cdebcc69ebbee2d6e5f47d0cf759f999ee6c779019",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P4_01A",
+      "context_hash": "4ae0c242f95959d34fd8b94b5e1b85cdbff1a0e040eca87456b609dd8f9e77fe",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P4_01A",
+      "context_hash": "4ae0c242f95959d34fd8b94b5e1b85cdbff1a0e040eca87456b609dd8f9e77fe",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P4_01A",
+      "context_hash": "4ae0c242f95959d34fd8b94b5e1b85cdbff1a0e040eca87456b609dd8f9e77fe",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P4_01B",
+      "context_hash": "b3e5b97ff07f1460d68d7b513e17fc4d2a77424922d3cbbec5749346ecbe2fc4",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P4_01B",
+      "context_hash": "b3e5b97ff07f1460d68d7b513e17fc4d2a77424922d3cbbec5749346ecbe2fc4",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P4_01B",
+      "context_hash": "b3e5b97ff07f1460d68d7b513e17fc4d2a77424922d3cbbec5749346ecbe2fc4",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P5_01A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P5_01A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P5_01A",
+      "context_hash": "686944537c4410ba7df9d6f1332c72208f60691a1e4661a8c41202c9b1a08cd8",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P5_01B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P5_01B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    },
+    {
+      "case_id": "DEV_P5_01B",
+      "context_hash": "e4a11c24b4114ff72ba798059ade2e311522f3c9deecda42e25e51fc9e5107de",
+      "generator_exposure": false,
+      "protected_markers": [],
+      "public_response_contains_protected_marker": false,
+      "public_response_protected_values": [],
+      "sanitized_context_summary": {
+        "container": "dict",
+        "top_level_keys": [
+          "generator_prompt",
+          "pipeline_generator_context"
+        ]
+      }
+    }
+  ],
+  "schema_version": "wolala-generator-context-exposure-verification-v1"
+}

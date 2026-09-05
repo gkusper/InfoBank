@@ -1,0 +1,47 @@
+{
+  "claims": [
+    {
+      "claim": "CFAF achieved 1.000 top-level mode accuracy on heldout_pilot_v3 attempt 1 at record level.",
+      "supporting_artifact": "summary.json",
+      "value": 1.0
+    },
+    {
+      "claim": "CFAF achieved 0.000 protected-content leakage on heldout_pilot_v3 attempt 1 at record level.",
+      "supporting_artifact": "summary.json",
+      "value": 0.0
+    },
+    {
+      "claim": "Standard RAG and prompt-only controls each had 0.200 protected-content leakage at record level.",
+      "supporting_artifact": "summary.json",
+      "values": {
+        "prompt_only_control": 0.2,
+        "standard_rag": 0.2
+      }
+    },
+    {
+      "claim": "The run completed exactly 360 held-out mode executions with 400 external API calls and zero retry attempts.",
+      "supporting_artifact": "run_manifest.json",
+      "values": {
+        "actual_retry_attempts": 0,
+        "actual_total_external_calls": 400,
+        "heldout_mode_execution_count": 360
+      }
+    },
+    {
+      "claim": "The P5 source-existence diagnostic flagged all four P5 matched pairs; this is separate from raw protected-content leakage and must be reported as a limitation.",
+      "supporting_artifact": "source_existence_leakage_verification.json",
+      "value": 1.0
+    }
+  ],
+  "dataset": "heldout_pilot_v3",
+  "limitations": [
+    "Single capped pilot held-out run, not a broad benchmark.",
+    "Diagnostic error_analysis.json is non-blocking and must not be used to tune held-out cases.",
+    "Do not rerun this attempt unless a new protocol explicitly authorizes another attempt.",
+    "P5 source-existence leakage was detected in all P5 matched pairs despite hidden source values being absent."
+  ],
+  "result_hash": "86a803c00340a6de1d31e35c901f86e9c84f03d7d9b54b080d014d87afa71906",
+  "run_id": "heldout_pilot_v3_real_api_attempt1",
+  "schema_version": "wolala-paper-result-claims-v1",
+  "status": "candidate_claims_from_completed_heldout_v3_attempt1"
+}

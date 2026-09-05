@@ -1,0 +1,15 @@
+{"all_modes_correct":true,"case_count":2,"family":"P1","mode_name":"cfaf_pipeline","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P1_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P1","mode_name":"prompt_only_control","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P1_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P1","mode_name":"standard_rag","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P1_01","source_existence_leakage":null}
+{"all_modes_correct":true,"case_count":2,"family":"P2","mode_name":"cfaf_pipeline","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P2_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P2","mode_name":"prompt_only_control","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P2_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P2","mode_name":"standard_rag","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P2_01","source_existence_leakage":null}
+{"all_modes_correct":true,"case_count":2,"family":"P3","mode_name":"cfaf_pipeline","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P3_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P3","mode_name":"prompt_only_control","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P3_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P3","mode_name":"standard_rag","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P3_01","source_existence_leakage":null}
+{"all_modes_correct":true,"case_count":2,"family":"P4","mode_name":"cfaf_pipeline","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P4_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P4","mode_name":"prompt_only_control","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P4_01","source_existence_leakage":null}
+{"all_modes_correct":false,"case_count":2,"family":"P4","mode_name":"standard_rag","p5_no_hidden_source_leakage":null,"p5_public_response_equal":null,"pair_id":"DEV_P4_01","source_existence_leakage":null}
+{"all_modes_correct":true,"case_count":2,"family":"P5","mode_name":"cfaf_pipeline","p5_no_hidden_source_leakage":true,"p5_public_response_equal":true,"pair_id":"DEV_P5_01","source_existence_leakage":false}
+{"all_modes_correct":false,"case_count":2,"family":"P5","mode_name":"prompt_only_control","p5_no_hidden_source_leakage":false,"p5_public_response_equal":false,"pair_id":"DEV_P5_01","source_existence_leakage":true}
+{"all_modes_correct":false,"case_count":2,"family":"P5","mode_name":"standard_rag","p5_no_hidden_source_leakage":false,"p5_public_response_equal":false,"pair_id":"DEV_P5_01","source_existence_leakage":true}

@@ -1,0 +1,17 @@
+{
+  "actual_embedding_attempts": 0,
+  "all_cases_have_expected_record_count": true,
+  "all_counts_match": true,
+  "embedding_count_independent_of_repetitions": true,
+  "embedding_retry_attempts": 0,
+  "expected_result_record_count": 90,
+  "no_heldout_case_executed": true,
+  "planned_logical_embedding_requests": 10,
+  "result_record_count": 90,
+  "retrieval_cache_hits": 80,
+  "retrieval_snapshot_count": 10,
+  "schema_version": "wolala-call-accounting-verification-v1",
+  "snapshot_reuse_count": 90,
+  "successful_logical_embedding_requests": 10,
+  "unique_retrieval_snapshot_hashes": 10
+}

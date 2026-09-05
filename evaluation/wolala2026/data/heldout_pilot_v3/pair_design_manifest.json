@@ -1,0 +1,535 @@
+{
+  "dataset_name": "heldout_pilot_v3",
+  "family_pair_count": {
+    "P1": 4,
+    "P2": 4,
+    "P3": 4,
+    "P4": 4,
+    "P5": 4
+  },
+  "fixed_seed": 20261017,
+  "pair_count": 20,
+  "pairs": [
+    {
+      "case_ids": [
+        "HELD3_P1_01A",
+        "HELD3_P1_01B"
+      ],
+      "design_intent": "primary evidence versus contextual-only evidence",
+      "family": "P1",
+      "gold_difference": {
+        "HELD3_P1_01A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P1_01B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P1_01",
+      "runtime_difference": "variant A has current primary evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P1_02A",
+        "HELD3_P1_02B"
+      ],
+      "design_intent": "primary evidence versus contextual-only evidence",
+      "family": "P1",
+      "gold_difference": {
+        "HELD3_P1_02A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P1_02B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P1_02",
+      "runtime_difference": "variant A has current primary evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P1_03A",
+        "HELD3_P1_03B"
+      ],
+      "design_intent": "primary evidence versus contextual-only evidence",
+      "family": "P1",
+      "gold_difference": {
+        "HELD3_P1_03A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P1_03B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P1_03",
+      "runtime_difference": "variant A has current primary evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P1_04A",
+        "HELD3_P1_04B"
+      ],
+      "design_intent": "primary evidence versus contextual-only evidence",
+      "family": "P1",
+      "gold_difference": {
+        "HELD3_P1_04A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P1_04B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P1_04",
+      "runtime_difference": "variant A has current primary evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P2_01A",
+        "HELD3_P2_01B"
+      ],
+      "design_intent": "aggregate-allowed answer versus individual-detail restriction",
+      "family": "P2",
+      "gold_difference": {
+        "HELD3_P2_01A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P2_01B": {
+          "expected_cfaf_realization": "RESTRICT_GRANULARITY",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P2_01",
+      "runtime_difference": "both variants use aggregate-only evidence; queries request different granularity",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P2_02A",
+        "HELD3_P2_02B"
+      ],
+      "design_intent": "aggregate-allowed answer versus individual-detail restriction",
+      "family": "P2",
+      "gold_difference": {
+        "HELD3_P2_02A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P2_02B": {
+          "expected_cfaf_realization": "RESTRICT_GRANULARITY",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P2_02",
+      "runtime_difference": "both variants use aggregate-only evidence; queries request different granularity",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P2_03A",
+        "HELD3_P2_03B"
+      ],
+      "design_intent": "aggregate-allowed answer versus individual-detail restriction",
+      "family": "P2",
+      "gold_difference": {
+        "HELD3_P2_03A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P2_03B": {
+          "expected_cfaf_realization": "RESTRICT_GRANULARITY",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P2_03",
+      "runtime_difference": "both variants use aggregate-only evidence; queries request different granularity",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P2_04A",
+        "HELD3_P2_04B"
+      ],
+      "design_intent": "aggregate-allowed answer versus individual-detail restriction",
+      "family": "P2",
+      "gold_difference": {
+        "HELD3_P2_04A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P2_04B": {
+          "expected_cfaf_realization": "RESTRICT_GRANULARITY",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P2_04",
+      "runtime_difference": "both variants use aggregate-only evidence; queries request different granularity",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P3_01A",
+        "HELD3_P3_01B"
+      ],
+      "design_intent": "metadata-allowed answer versus body-content restriction",
+      "family": "P3",
+      "gold_difference": {
+        "HELD3_P3_01A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P3_01B": {
+          "expected_cfaf_realization": "RESTRICT_CONTENT",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P3_01",
+      "runtime_difference": "both variants use metadata-only evidence; queries request different content",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P3_02A",
+        "HELD3_P3_02B"
+      ],
+      "design_intent": "metadata-allowed answer versus body-content restriction",
+      "family": "P3",
+      "gold_difference": {
+        "HELD3_P3_02A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P3_02B": {
+          "expected_cfaf_realization": "RESTRICT_CONTENT",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P3_02",
+      "runtime_difference": "both variants use metadata-only evidence; queries request different content",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P3_03A",
+        "HELD3_P3_03B"
+      ],
+      "design_intent": "metadata-allowed answer versus body-content restriction",
+      "family": "P3",
+      "gold_difference": {
+        "HELD3_P3_03A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P3_03B": {
+          "expected_cfaf_realization": "RESTRICT_CONTENT",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P3_03",
+      "runtime_difference": "both variants use metadata-only evidence; queries request different content",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P3_04A",
+        "HELD3_P3_04B"
+      ],
+      "design_intent": "metadata-allowed answer versus body-content restriction",
+      "family": "P3",
+      "gold_difference": {
+        "HELD3_P3_04A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P3_04B": {
+          "expected_cfaf_realization": "RESTRICT_CONTENT",
+          "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P3_04",
+      "runtime_difference": "both variants use metadata-only evidence; queries request different content",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P4_01A",
+        "HELD3_P4_01B"
+      ],
+      "design_intent": "primary action evidence versus contextual-only action mention",
+      "family": "P4",
+      "gold_difference": {
+        "HELD3_P4_01A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P4_01B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P4_01",
+      "runtime_difference": "variant A has current primary action evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P4_02A",
+        "HELD3_P4_02B"
+      ],
+      "design_intent": "primary action evidence versus contextual-only action mention",
+      "family": "P4",
+      "gold_difference": {
+        "HELD3_P4_02A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P4_02B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P4_02",
+      "runtime_difference": "variant A has current primary action evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P4_03A",
+        "HELD3_P4_03B"
+      ],
+      "design_intent": "primary action evidence versus contextual-only action mention",
+      "family": "P4",
+      "gold_difference": {
+        "HELD3_P4_03A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P4_03B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P4_03",
+      "runtime_difference": "variant A has current primary action evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P4_04A",
+        "HELD3_P4_04B"
+      ],
+      "design_intent": "primary action evidence versus contextual-only action mention",
+      "family": "P4",
+      "gold_difference": {
+        "HELD3_P4_04A": {
+          "expected_cfaf_realization": null,
+          "expected_public_reason_class": null,
+          "expected_top_level_mode": "FULL"
+        },
+        "HELD3_P4_04B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P4_04",
+      "runtime_difference": "variant A has current primary action evidence; variant B has only contextual evidence",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_01A",
+        "HELD3_P5_01B"
+      ],
+      "design_intent": "no source versus inaccessible internal-only source with identical public obligation",
+      "family": "P5",
+      "gold_difference": {
+        "HELD3_P5_01A": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        },
+        "HELD3_P5_01B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P5_01",
+      "runtime_difference": "variant A has no source; variant B has an internal-only denied source",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_02A",
+        "HELD3_P5_02B"
+      ],
+      "design_intent": "no source versus inaccessible internal-only source with identical public obligation",
+      "family": "P5",
+      "gold_difference": {
+        "HELD3_P5_02A": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        },
+        "HELD3_P5_02B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P5_02",
+      "runtime_difference": "variant A has no source; variant B has an internal-only denied source",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_03A",
+        "HELD3_P5_03B"
+      ],
+      "design_intent": "no source versus inaccessible internal-only source with identical public obligation",
+      "family": "P5",
+      "gold_difference": {
+        "HELD3_P5_03A": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        },
+        "HELD3_P5_03B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P5_03",
+      "runtime_difference": "variant A has no source; variant B has an internal-only denied source",
+      "variants": [
+        "A",
+        "B"
+      ]
+    },
+    {
+      "case_ids": [
+        "HELD3_P5_04A",
+        "HELD3_P5_04B"
+      ],
+      "design_intent": "no source versus inaccessible internal-only source with identical public obligation",
+      "family": "P5",
+      "gold_difference": {
+        "HELD3_P5_04A": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        },
+        "HELD3_P5_04B": {
+          "expected_cfaf_realization": "ABSTAIN",
+          "expected_public_reason_class": "EVIDENTIAL",
+          "expected_top_level_mode": "CFAF"
+        }
+      },
+      "pair_id": "H3PAIR_P5_04",
+      "runtime_difference": "variant A has no source; variant B has an internal-only denied source",
+      "variants": [
+        "A",
+        "B"
+      ]
+    }
+  ],
+  "schema_version": "wolala-heldout-v3-pair-design-v1"
+}

@@ -1,0 +1,139 @@
+{
+  "dataset": "heldout_pilot_v3",
+  "file_count_excluding_self": 26,
+  "files": [
+    {
+      "bytes": 248118,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/adapter_integrity_verification.json",
+      "sha256": "ee98d6709ffaa746bb07c129495ac40416fa91357c48a53b471fca82a54eaf73"
+    },
+    {
+      "bytes": 615,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/call_accounting_verification.json",
+      "sha256": "1ba55af2fad841aa56db461f7dae5fb65f39edce490aafee0345841c4799f91f"
+    },
+    {
+      "bytes": 234338,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/case_scores.jsonl",
+      "sha256": "0040ab46c9eab90263c9a6f7c41156b4c5056b5a3db6b890d764433457529a27"
+    },
+    {
+      "bytes": 1821,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/checksums.sha256",
+      "sha256": "86f05cd31c59a8e672a808a6d1689dd65d4b5bca476adaefe4af3f9548d6d31c"
+    },
+    {
+      "bytes": 173476,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/error_analysis.json",
+      "sha256": "96824545b34445327b2333f0461cfb67452c1a486080bc0006c6f48f8942f917"
+    },
+    {
+      "bytes": 0,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/errors.jsonl",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "bytes": 1930,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/execution_plan.json",
+      "sha256": "7d9490f6a29488721e14b72d7eb8dfb3dde5d005a8cf49cae8e951fb82472cda"
+    },
+    {
+      "bytes": 60456,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/generator_context_exposure_verification.json",
+      "sha256": "0943ec91b678da1ceaef9fed1862cd72fa18d392b89228a8d18ae7d1f1cf5642"
+    },
+    {
+      "bytes": 5423,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/HELDOUT_RUN_REPORT_v1.md",
+      "sha256": "09ae18443693e8a09e5ed4b5ba44e152ec2a82e41432e6f193f2205352fc63c3"
+    },
+    {
+      "bytes": 1369,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/latency_diagnostics.json",
+      "sha256": "bb9096694e2b89412aff68725b57bfb2e15fe9a8837ad8dc99e36b44641af0e0"
+    },
+    {
+      "bytes": 9235,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/latency_verification.json",
+      "sha256": "0f9b6e0c178c4b56e0bac55d09d925e0cce063c651dd1a256f150ffa9d9df2a9"
+    },
+    {
+      "bytes": 12620,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/pair_scores.jsonl",
+      "sha256": "06b09057b8223c183fca7b0bcaf264157b1a5ae8f52a7ef6a06bd81947778aab"
+    },
+    {
+      "bytes": 2011,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/PAPER_RESULT_CLAIMS_v1.json",
+      "sha256": "4d0b03bc8c4c0038efa2dfd2bb088f63ebba95b88acff7e0120086c48e039b12"
+    },
+    {
+      "bytes": 18595,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/POST_HELDOUT_ANALYSIS_v1.json",
+      "sha256": "0871574732a9b1a03bf047c8782e87b7ca067aedbb930c64e6ee52120f03c070"
+    },
+    {
+      "bytes": 1167,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/POST_HELDOUT_VALIDATION_v1.json",
+      "sha256": "1d9864236bc65d07e30d55529467b43d9f500d381c6e53fd2a45dde821b591d1"
+    },
+    {
+      "bytes": 5335,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/RAW_HELDOUT_FREEZE_MANIFEST.json",
+      "sha256": "2333346bb56938adbd1ce7bc18bcd5acb903e19660ce05aa0751f45f22fd0fe6"
+    },
+    {
+      "bytes": 1165159,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/raw_results.jsonl",
+      "sha256": "03fc2f8c072946f5e699e886b2bbf35495ebd928519423a56ebea64316526195"
+    },
+    {
+      "bytes": 717,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/README.md",
+      "sha256": "c97658cf6bb20ebb7dae0030bc4ab7b4d95f5bd5c69dde6604202d31d359cf32"
+    },
+    {
+      "bytes": 47800,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/retrieval_snapshots.jsonl",
+      "sha256": "bcbeb5c029546247dbd7e006de963fcd2637093b75994354a0bb84b7c36eecbf"
+    },
+    {
+      "bytes": 4484,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/run_manifest.json",
+      "sha256": "b3d2b40d97996e30fe55c1f145309bbc3a5a15c675212e8b04522ac945eeb5ce"
+    },
+    {
+      "bytes": 47800,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/shared_retrieval_snapshots.jsonl",
+      "sha256": "bcbeb5c029546247dbd7e006de963fcd2637093b75994354a0bb84b7c36eecbf"
+    },
+    {
+      "bytes": 31428,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/shared_retrieval_verification.json",
+      "sha256": "0a087cc2ba6ee9e63fb3ca0dcdf64dbba7d9463167d8ec24c29c0f3ac71e12bb"
+    },
+    {
+      "bytes": 1551,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/source_existence_leakage_verification.json",
+      "sha256": "cbef5205de4f808eee34d69cbb511ef726c241b8a6b0988c26cfa4935b3e3c2b"
+    },
+    {
+      "bytes": 489,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/summary.csv",
+      "sha256": "84c220cc124451a96b5a13ef8d6d04f90efbd542fcf76bcde8fa96d3d11d9378"
+    },
+    {
+      "bytes": 5127,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/summary.json",
+      "sha256": "e9fb12b13a0ae781a79ff4c1bbbc138aa07551d5f3a514a95abfca52f87b92e3"
+    },
+    {
+      "bytes": 254,
+      "path": "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/summary_table.tex",
+      "sha256": "e4ed4cee44d0c6e3aef8b59638b35db2351ee130eb5735e1e0270cc0e65244b2"
+    }
+  ],
+  "run_attempt": 1,
+  "run_id": "heldout_pilot_v3_real_api_attempt1",
+  "schema_version": "wolala-heldout-v3-artifact-manifest-v1"
+}

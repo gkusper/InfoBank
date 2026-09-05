@@ -1,0 +1,141 @@
+{
+  "actual_external_model_provider_calls_in_this_task_before_authorization_commit": 0,
+  "authorization_tag_to_create": "wolala2026-heldout-attempt1-authorized",
+  "branch": "wolala2026",
+  "checksum_gate_passed": true,
+  "checksum_matches": {
+    "cfaf_generator_v1": true,
+    "execution_spec": true,
+    "execution_spec_module": true,
+    "heldout_dataset": true,
+    "latency_analysis_module": true,
+    "latency_definition": true,
+    "parser": true,
+    "prompt_only_v1": true,
+    "protocol_v2": true,
+    "provider_wrapper": true,
+    "retry_policy_module": true,
+    "run_manifest_schema": true,
+    "runner": true,
+    "scorer": true,
+    "statistical_analysis_module": true,
+    "statistical_plan": true
+  },
+  "checksums": {
+    "cfaf_generator_v1": "0f6d54a1c9f5ccf3f0b4a1559cdb18c4dcd4a68f0c5f22895a440f50e45ba765",
+    "execution_spec": "d170b43dc8426bb923588a19712546920be0f16004ef4a257fa0d6a0b4436344",
+    "execution_spec_module": "0f07ab6f5a02d678063980bd5126f0a5a03bc2cce03481a3724bc68f649b2069",
+    "heldout_dataset": "b86ddfa2a3db79a5d9e3e31b57000f1619f790040a6d9d814970ea2d1f54031b",
+    "latency_analysis_module": "76af2eafaf82e60377bf2151a11ba7d2f82562c1fb064961d2ae9fec1c9ac160",
+    "latency_definition": "4c0c87f6267ab18f68677479439d4347d8449f36ed850e87d7d94b89e02b02a7",
+    "parser": "d11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9",
+    "prompt_only_v1": "77d2d8ff8042f94fd7381580d6034deb19827d3502e06bf67a96b87103fb0af6",
+    "protocol_v2": "34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba",
+    "provider_wrapper": "f25ef1896b0e8f53138ba09a52940b98734b1152806bc1d76b2c1bbee3386f08",
+    "retry_policy_module": "1faac809f583a3bc435474151331b71a5cb96069791d4d8af583ad0efb0e6ad8",
+    "run_manifest_schema": "44fd517cbd5510dd60aec3cf876bdce7c62159c9961065bcf7d986e993520c4f",
+    "runner": "eca6d35592585ad81f67a3f8ea74ab1ca34efc42ca94e3faaca0ecbd210bd95a",
+    "scorer": "5c8349ce5b690cff29b6f2948f6e01fa38eb15f921cdd76a7bbc121d1f86c0a2",
+    "statistical_analysis_module": "bcdd676aba0e73fe3f336dee77e3e7c95148ad9304720c01ec363be6670dd0e0",
+    "statistical_plan": "2639906b515589ba3fe15487567cc53aaf875823909eb077a2bd06f8ee149b1e"
+  },
+  "current_head": "182f9d6c256526701ead65901fed0e90e2ff5e6a",
+  "dependency_versions": {
+    "PyYAML": "6.0.3",
+    "SQLAlchemy": "2.0.52",
+    "chromadb": "not-installed",
+    "openai": "not-installed",
+    "pydantic": "2.13.4"
+  },
+  "expected_checksums": {
+    "cfaf_generator_v1": "0f6d54a1c9f5ccf3f0b4a1559cdb18c4dcd4a68f0c5f22895a440f50e45ba765",
+    "execution_spec": "d170b43dc8426bb923588a19712546920be0f16004ef4a257fa0d6a0b4436344",
+    "execution_spec_module": "0f07ab6f5a02d678063980bd5126f0a5a03bc2cce03481a3724bc68f649b2069",
+    "heldout_dataset": "b86ddfa2a3db79a5d9e3e31b57000f1619f790040a6d9d814970ea2d1f54031b",
+    "latency_analysis_module": "76af2eafaf82e60377bf2151a11ba7d2f82562c1fb064961d2ae9fec1c9ac160",
+    "latency_definition": "4c0c87f6267ab18f68677479439d4347d8449f36ed850e87d7d94b89e02b02a7",
+    "parser": "d11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9",
+    "prompt_only_v1": "77d2d8ff8042f94fd7381580d6034deb19827d3502e06bf67a96b87103fb0af6",
+    "protocol_v2": "34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba",
+    "provider_wrapper": "f25ef1896b0e8f53138ba09a52940b98734b1152806bc1d76b2c1bbee3386f08",
+    "retry_policy_module": "1faac809f583a3bc435474151331b71a5cb96069791d4d8af583ad0efb0e6ad8",
+    "run_manifest_schema": "44fd517cbd5510dd60aec3cf876bdce7c62159c9961065bcf7d986e993520c4f",
+    "runner": "eca6d35592585ad81f67a3f8ea74ab1ca34efc42ca94e3faaca0ecbd210bd95a",
+    "scorer": "5c8349ce5b690cff29b6f2948f6e01fa38eb15f921cdd76a7bbc121d1f86c0a2",
+    "statistical_analysis_module": "bcdd676aba0e73fe3f336dee77e3e7c95148ad9304720c01ec363be6670dd0e0",
+    "statistical_plan": "2639906b515589ba3fe15487567cc53aaf875823909eb077a2bd06f8ee149b1e"
+  },
+  "external_api_calls_so_far": 0,
+  "freeze_commit": "182f9d6c256526701ead65901fed0e90e2ff5e6a",
+  "freeze_tag": "wolala2026-heldout-protocol-v2-freeze",
+  "full_d1_d8_run_executed": false,
+  "git_starting_state": {
+    "branch": "wolala2026",
+    "d1_d8_base_commit": "5bb2cc742e105cc3238b022130126947c04bcd35",
+    "d1_d8_base_is_ancestor": true,
+    "fetch_origin_tags": "BLOCKED_BY_LOCAL_GIT_ACL: git fetch origin --tags failed opening .git/FETCH_HEAD; remote verified with git -c http.sslBackend=openssl ls-remote and fetch --no-write-fetch-head.",
+    "head": "182f9d6c256526701ead65901fed0e90e2ff5e6a",
+    "local_freeze_tag_target": "182f9d6c256526701ead65901fed0e90e2ff5e6a",
+    "log_1_oneline": "182f9d6 Freeze complete WoLaLa held-out protocol v2",
+    "remote_attempt1_authorized_tag_present_before_commit": false,
+    "remote_state": [
+      "182f9d6c256526701ead65901fed0e90e2ff5e6a\trefs/heads/wolala2026",
+      "036e5afb9e102dba513122ba63d69e5c7e88b417\trefs/tags/wolala2026-heldout-protocol-v2-freeze",
+      "182f9d6c256526701ead65901fed0e90e2ff5e6a\trefs/tags/wolala2026-heldout-protocol-v2-freeze^{}"
+    ],
+    "tracking_branch": "NO_UPSTREAM"
+  },
+  "heldout_dataset_manifest": {
+    "case_count": 40,
+    "dataset_checksum": "b86ddfa2a3db79a5d9e3e31b57000f1619f790040a6d9d814970ea2d1f54031b",
+    "dataset_name": "heldout_pilot_v1",
+    "families": {
+      "P1": 8,
+      "P2": 8,
+      "P3": 8,
+      "P4": 8,
+      "P5": 8
+    },
+    "heldout_mode_execution_count": 0,
+    "pair_count": 20
+  },
+  "heldout_mode_executions_in_this_task_before_authorization_commit": 0,
+  "heldout_output_dir": "evaluation/wolala2026/heldout_run_real_api_v1",
+  "heldout_output_dir_empty_or_absent": true,
+  "heldout_output_dir_exists": false,
+  "model_availability_external_check": "not_performed_pre_authorization_to_preserve_external_api_calls_so_far_0",
+  "openai_api_key_present": true,
+  "operating_system": "Windows-11-10.0.26200-SP0",
+  "plan_only_result": {
+    "checksum": "307d858a797afa1f66d4513857b601e5c6bb18d762209c20113c247c060cb07b",
+    "external_api_calls_in_plan_only": 0,
+    "heldout_model_execution_count": 0,
+    "path": "evaluation/wolala2026/preheldout_attempt1/execution_plan.json",
+    "planned_external_requests_without_retries_maximum": 400,
+    "planned_generation_requests_maximum": 360,
+    "planned_mode_executions": 360,
+    "planned_unique_embedding_requests": 40,
+    "validation_status": "PASS"
+  },
+  "preheldout_artifact_checksums": {
+    "PRE_HELDOUT_NONEXECUTION_AUDIT_v3.json": "10e3d36100b26abad7b75fde0e8ecf528511dbf5bbb7baa1a5b563e02e7bb893",
+    "preheldout_attempt1/HELDOUT_RUN_AUTHORIZATION_v1.json": "9f69cf037d7f7404aa950a83f8298a626f345b09e3532b260ef8239b9a384acb",
+    "preheldout_attempt1/PLAN_VALIDATION_REPORT.md": "d6436e77d6aee4259b2933b4eead902f5fd38e60b206449c69a1bd5703992718",
+    "preheldout_attempt1/execution_plan.json": "307d858a797afa1f66d4513857b601e5c6bb18d762209c20113c247c060cb07b"
+  },
+  "preheldout_nonexecution_audit_passed": true,
+  "python_version": "3.12.13 (main, Aug  7 2026, 02:26:41) [MSC v.1944 64 bit (AMD64)]",
+  "schema_version": "wolala-pre-run-freeze-manifest-v1",
+  "test_results": {
+    "python -m unittest discover -s evaluation/tests -p \"test_wolala*.py\" -v": {
+      "status": "PASS",
+      "tests": 42
+    },
+    "python -m unittest evaluation.tests.test_harness evaluation.tests.test_d1_d8_evidence_loader_and_action_logic -v": {
+      "status": "PASS",
+      "tests": 24
+    }
+  },
+  "utc_timestamp": "2026-08-22T14:48:58Z",
+  "wolala_manuscript_modified": false
+}

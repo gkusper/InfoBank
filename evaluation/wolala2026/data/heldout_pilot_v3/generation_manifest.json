@@ -1,0 +1,62 @@
+{
+  "case_count": 40,
+  "case_hash": "a4a9dc2d9f839c7f0a9ac868986d4d6415cec10f94e4be6b5395d373012cd536",
+  "dataset_name": "heldout_pilot_v3",
+  "deterministic_local_generation": true,
+  "external_api_calls": 0,
+  "family_counts": {
+    "P1": 8,
+    "P2": 8,
+    "P3": 8,
+    "P4": 8,
+    "P5": 8
+  },
+  "fixed_seed": 20261017,
+  "generation_timestamp_utc": "2026-10-17T00:00:00Z",
+  "generator_version": "evaluation.wolala2026.generate_heldout_v3.v1",
+  "generator_visible_gold_hint_scan": {
+    "generator_visible_gold_hint_count": 0,
+    "generator_visible_gold_hint_hits": [],
+    "scanner_version": "generator-visible-exact-term-v1",
+    "terms": [
+      "expected_top_level_mode",
+      "expected_fulfilment_status",
+      "expected_cfaf_realization",
+      "expected_public_reason_class",
+      "expected_internal_reason_class",
+      "expected_next_step_codes",
+      "expected_permitted_output",
+      "canonical_answer_markers",
+      "forbidden_disclosures",
+      "protected_markers",
+      "gold_answer",
+      "FULL",
+      "CFAF",
+      "ABSTAIN",
+      "RESTRICT_CONTENT",
+      "RESTRICT_GRANULARITY",
+      "GOVERNANCE_PRIVACY",
+      "EVIDENTIAL",
+      "PRIMARY",
+      "CONTEXTUAL",
+      "DENY",
+      "AGGREGATE_ONLY",
+      "METADATA_ONLY"
+    ]
+  },
+  "gold_hash": "886d7661859f4dee7fb567fc857f09149a81ee86799ed8c30db8b4846c07cac6",
+  "gold_record_count": 40,
+  "llm_generation_used": false,
+  "model_execution_count": 0,
+  "overlap_audit_hash": "780fe222858de631a8428b55193f7fc13c500b1b145cd927d5ab1918d8fa2c59",
+  "pair_count": 20,
+  "pair_design_hash": "6fc7ef76eba75a68080a78062a074bf5513fe516a01adf2cb2b72c831c77b97c",
+  "personal_data_check": {
+    "contains_medical_or_health_data": false,
+    "contains_personal_information": false,
+    "privacy_safe": true,
+    "synthetic_only": true
+  },
+  "provenance_hash": "36f972d76270ba441d3c01fb15bfe87f60cefc2a56e96bff632445837bc5a0ef",
+  "schema_version": "wolala-heldout-v3-generation-manifest-v1"
+}

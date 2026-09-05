@@ -1,0 +1,3539 @@
+{
+  "baselines_free_of_gold_or_external_cfaf_labels": true,
+  "cfaf_uses_filtered_pipeline_context": true,
+  "records": [
+    {
+      "case_id": "HELD2_P1_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_03a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_03a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_03b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_03b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_04a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_04a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_04b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_04b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_01a-email",
+          "cand-held2_p4_01a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_01a-email",
+          "cand-held2_p4_01a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 2,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_01b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_01b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_02a-email",
+          "cand-held2_p4_02a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_02a-email",
+          "cand-held2_p4_02a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 2,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_02b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_02b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_03a-email",
+          "cand-held2_p4_03a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_03a-email",
+          "cand-held2_p4_03a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 2,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_03b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_03b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_04a-email",
+          "cand-held2_p4_04a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_04a-email",
+          "cand-held2_p4_04a-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 2,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_04b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p4_04b-browser"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P4_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_01b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_01b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_02b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_02b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_03b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_03b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_04b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p5_04b-internal"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P5_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 0,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_01b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_02b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_03b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04a-brief"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p1_04b-context"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P1_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_01b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_02b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_03b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_03B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04a-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p2_04b-aggregate"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P2_04B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_01b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_01B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02a-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02A",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "mode_name": "standard_rag",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "standard_rag",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": false
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "mode_name": "prompt_only_control",
+      "pass": true,
+      "profile": {
+        "candidate_ids": [
+          "cand-held2_p3_02b-metadata"
+        ],
+        "contains_cfaf_response_contract": false,
+        "contains_expected_mode": false,
+        "contains_external_cfaf_decision": false,
+        "contains_gold_reason": false,
+        "contains_internal_trace": false,
+        "contains_permitted_output_object": false,
+        "contains_query": true,
+        "contains_source_role_gate_result": false,
+        "mode_name": "prompt_only_control",
+        "receives_raw_retrieved_candidates": true,
+        "uses_prompt_only_v1": true
+      }
+    },
+    {
+      "case_id": "HELD2_P3_02B",
+      "mode_name": "cfaf_pipeline",
+      "pass": true,
+      "profile": {
+        "allowed_evidence_view_count": 1,
+        "contains_authoritative_access_labels": true,
+        "contains_cfaf_response_contract": true,
+        "contains_claim_relative_evidence_labels": true,
+        "contains_deterministic_mode_selection": true,
+        "contains_internal_trace": false,
+        "contains_permitted_output_computation": true,
+        "generator_receives_filtered_evidence_only": true,
+        "mode_name": "cfaf_pipeline",
+        "uses_eight_stage_pipeline_state": true
+      }
+    }
+  ],
+  "schema_version": "wolala-adapter-integrity-verification-v1"
+}

@@ -10,7 +10,6 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from sqlalchemy.orm import Session
-import chromadb
 
 from .backend import ensure_backend_path
 from .clean_state import check_clean_state
@@ -256,6 +255,8 @@ def main(argv: list[str] | None = None) -> int:
     validate_fixture(fixture)
     ensure_backend_path()
     from database import SessionLocal
+
+    import chromadb
 
     chroma_path = os.getenv("CHROMA_PERSIST_DIR")
     if not chroma_path:

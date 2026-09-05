@@ -4,8 +4,6 @@ import json
 import re
 from pathlib import Path
 from typing import Any, List, Sequence
-import chromadb
-from openai import OpenAI
 from dotenv import load_dotenv
 
 from ai_provider import (
@@ -110,9 +108,8 @@ def get_or_create_vector_collection(client, manifest: dict[str, str | int]):
         )
     return selected
 
-chroma_client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
-collection = get_or_create_vector_collection(chroma_client, VECTOR_COLLECTION_MANIFEST)
-
+_chroma_client = None
+_collection = None
 _openai_client = None
 _ai_provider: AIProvider | None = None
 _ai_provider_name: str | None = None
@@ -120,9 +117,29 @@ _embedding_provider: AIProvider | None = None
 _embedding_provider_name: str | None = None
 
 
-def get_openai_client() -> OpenAI:
+def get_chroma_collection() -> Any:
+    global _chroma_client, _collection
+    if _collection is None:
+        import chromadb
+
+        _chroma_client = chromadb.PersistentClient(path=CHROMA_PERSIST_DIR)
+        _collection = get_or_create_vector_collection(_chroma_client, VECTOR_COLLECTION_MANIFEST)
+    return _collection
+
+
+class LazyChromaCollection:
+    def __getattr__(self, name):
+        return getattr(get_chroma_collection(), name)
+
+
+collection = LazyChromaCollection()
+
+
+def get_openai_client() -> Any:
     global _openai_client
     if _openai_client is None:
+        from openai import OpenAI
+
         api_key = os.getenv("OPENAI_API_KEY")
         if not api_key:
             raise RuntimeError(

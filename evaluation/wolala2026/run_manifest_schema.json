@@ -1,0 +1,124 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "properties": {
+    "actual_embedding_attempts": {
+      "type": "integer"
+    },
+    "actual_provider_attempts": {
+      "type": "integer"
+    },
+    "actual_retry_attempts": {
+      "type": "integer"
+    },
+    "embedding_retry_attempts": {
+      "type": "integer"
+    },
+    "execution_spec_checksum": {
+      "type": "string"
+    },
+    "external_warmup_calls": {
+      "type": "integer"
+    },
+    "invalidation_class": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "latency_definition_checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "max_retries_per_logical_request": {
+      "type": "integer"
+    },
+    "max_total_retry_attempts": {
+      "type": "integer"
+    },
+    "planned_external_requests_without_retries_maximum": {
+      "type": "integer"
+    },
+    "planned_logical_embedding_requests": {
+      "type": "integer"
+    },
+    "planned_logical_generation_requests_maximum": {
+      "type": "integer"
+    },
+    "protocol_v2_checksum": {
+      "type": "string"
+    },
+    "result_record_count": {
+      "type": "integer"
+    },
+    "retrieval_cache_hits": {
+      "type": "integer"
+    },
+    "retrieval_snapshot_count": {
+      "type": "integer"
+    },
+    "retry_events": {
+      "type": "array"
+    },
+    "run_attempt": {
+      "type": "integer"
+    },
+    "snapshot_reuse_count": {
+      "type": "integer"
+    },
+    "statistical_plan_checksum": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "successful_logical_embedding_requests": {
+      "type": "integer"
+    },
+    "unique_retrieval_snapshot_hashes": {
+      "type": "integer"
+    }
+  },
+  "required": [
+    "run_id",
+    "run_type",
+    "development_or_heldout",
+    "git_commit",
+    "git_branch",
+    "dataset_name",
+    "dataset_checksum",
+    "protocol_version",
+    "protocol_checksum",
+    "prompt_versions",
+    "prompt_checksums",
+    "provider",
+    "embedding_model",
+    "generator_model",
+    "temperature",
+    "top_k",
+    "max_output_tokens",
+    "random_seed",
+    "operating_system",
+    "python_version",
+    "dependency_versions",
+    "start_time_utc",
+    "end_time_utc",
+    "case_ids",
+    "modes",
+    "repetitions",
+    "max_mode_executions",
+    "max_embedding_calls",
+    "max_generation_calls",
+    "max_total_external_calls",
+    "actual_embedding_calls",
+    "actual_generation_calls",
+    "actual_total_external_calls",
+    "cold_or_warm_state",
+    "cache_configuration",
+    "errors",
+    "completion_status"
+  ],
+  "title": "WoLaLa 2026 Pilot Run Manifest",
+  "type": "object"
+}

@@ -1,0 +1,77 @@
+{
+  "actual_embedding_calls": 10,
+  "actual_generation_calls": 30,
+  "actual_total_external_calls": 40,
+  "allow_real_api": true,
+  "cache_configuration": {
+    "external_cache": "not-used",
+    "retrieval_cache": "shared-once-per-case"
+  },
+  "case_ids": [
+    "DEV_P1_01A",
+    "DEV_P1_01B",
+    "DEV_P2_01A",
+    "DEV_P2_01B",
+    "DEV_P3_01A",
+    "DEV_P3_01B",
+    "DEV_P4_01A",
+    "DEV_P4_01B",
+    "DEV_P5_01A",
+    "DEV_P5_01B"
+  ],
+  "cold_or_warm_state": "cold-real-api-process",
+  "completion_status": "COMPLETED",
+  "dataset_checksum": "df847ef72fa28e55277f153989add2cf94b06471f1ff068cae4bbf15cc95f0f4",
+  "dataset_name": "development_integration_v1",
+  "dependency_versions": {
+    "PyYAML": "not-installed",
+    "SQLAlchemy": "not-installed",
+    "chromadb": "not-installed",
+    "openai": "not-installed",
+    "pydantic": "2.13.4"
+  },
+  "development_or_heldout": "development",
+  "embedding_model": "text-embedding-3-small",
+  "end_time_utc": "2026-08-18T06:06:40Z",
+  "errors": [],
+  "generator_model": "gpt-4o-mini",
+  "git_branch": "wolala2026",
+  "git_commit": "cb62b2778c154125623a0c68b0a9d8f069cd7623",
+  "git_working_tree_status": "M evaluation/wolala2026/adapters.py\n M evaluation/wolala2026/example_internal_trace.json\n M evaluation/wolala2026/run_pilot.py\n M evaluation/wolala2026/smoke_results.json\n?? evaluation/tests/test_wolala_real_api_phase3.py\n?? evaluation/wolala2026/development_run_real_api_v1/\n?? evaluation/wolala2026/real_api.py",
+  "heldout_approval_supplied": false,
+  "heldout_mode_execution_count": 0,
+  "max_embedding_calls": 10,
+  "max_generation_calls": 30,
+  "max_mode_executions": 30,
+  "max_output_tokens": 160,
+  "max_total_external_calls": 40,
+  "mock_or_stub_used": false,
+  "mode_execution_count": 30,
+  "modes": [
+    "standard_rag",
+    "prompt_only_control",
+    "cfaf_pipeline"
+  ],
+  "operating_system": "Windows-11-10.0.26200-SP0",
+  "prompt_checksums": {
+    "cfaf_generator_v1": "0f6d54a1c9f5ccf3f0b4a1559cdb18c4dcd4a68f0c5f22895a440f50e45ba765",
+    "prompt_only_v1": "77d2d8ff8042f94fd7381580d6034deb19827d3502e06bf67a96b87103fb0af6"
+  },
+  "prompt_versions": {
+    "cfaf_generator": "cfaf_generator_v1",
+    "prompt_only": "prompt_only_v1"
+  },
+  "protocol_checksum": "91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e",
+  "protocol_version": "WOLALA2026_PILOT_PROTOCOL_v1",
+  "provider": "openai",
+  "python_version": "3.12.13 (main, Aug  7 2026, 02:26:41) [MSC v.1944 64 bit (AMD64)]",
+  "random_seed": 20260818,
+  "real_api": true,
+  "repetitions": 1,
+  "retry_count": 0,
+  "run_id": "development_integration_v1_real_api_v1",
+  "run_type": "real_api_development_integration",
+  "start_time_utc": "2026-08-18T06:05:48Z",
+  "temperature": 0,
+  "top_k": 4
+}

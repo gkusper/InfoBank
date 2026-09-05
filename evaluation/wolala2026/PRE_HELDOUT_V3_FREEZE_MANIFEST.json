@@ -1,0 +1,119 @@
+{
+  "audit_artifacts": {
+    "execution_spec_v4": "evaluation/wolala2026/HELDOUT_EXECUTION_SPEC_v4.json",
+    "final_heldout_v3_preaudit": "evaluation/wolala2026/FINAL_HELDOUT_V3_PREAUDIT.json",
+    "preheldout_plan_validation_report": "evaluation/wolala2026/preheldout_v3_attempt1/PLAN_VALIDATION_REPORT.md",
+    "protocol_v4": "evaluation/wolala2026/WOLALA2026_PILOT_PROTOCOL_v4.md",
+    "retired_heldout_dataset_registry": "evaluation/wolala2026/RETIRED_HELDOUT_DATASET_REGISTRY_v1.json"
+  },
+  "authorization_created_in_freeze_phase": false,
+  "branch": "wolala2026",
+  "checksums": {
+    "adapters": "d11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9",
+    "cfaf_generator_prompt": "0f6d54a1c9f5ccf3f0b4a1559cdb18c4dcd4a68f0c5f22895a440f50e45ba765",
+    "execution_plan_v3_attempt1": "7d9490f6a29488721e14b72d7eb8dfb3dde5d005a8cf49cae8e951fb82472cda",
+    "execution_spec_module": "d62908213683979b2b3eb93a865f7e75bcc7ca92f35f75d8cca767a86adc63d5",
+    "execution_spec_v4": "7b62e01302bf46cd1029742d9f87b048b734b50fc499bc06fe3e02870d127fba",
+    "final_heldout_v3_preaudit": "6414d65c13cfab6b7d455a23eda2880825cb06cc0e9c812f7b1213eee5d58b15",
+    "heldout_dataset": "d73fc26e9f622db2bf396b4f1cb21ddc2f9b49c41e1e357c32294bff9976f197",
+    "heldout_v3_cases": "ead302c8a8e18a9e1a77ee3fe53bba0cfa7968fc010e3629e986fb74f422399e",
+    "heldout_v3_generation_manifest": "1b55d46f55f7e26b6755ee888d1ae1c9666c79d3e5447850ef9b8f8bca2f6ac7",
+    "heldout_v3_generator": "484afebf7ded99228657e6d032ee99194abc4bf61040b6babf081b280a156dc2",
+    "heldout_v3_gold": "837d1223628130608280b15996c5b644d76fc2be9c1d72fbcdcef674d3361112",
+    "heldout_v3_overlap_audit": "37efa2c0a6563003be137bdf2c213dfa479b118ee24098cdc764f24aca52997a",
+    "heldout_v3_pair_design_manifest": "b298aa671e36f0e32bb05084f39d05ee4f463f96d25bd304d92bc6e5dad676a3",
+    "latency_analysis_module": "76af2eafaf82e60377bf2151a11ba7d2f82562c1fb064961d2ae9fec1c9ac160",
+    "latency_definition": "4c0c87f6267ab18f68677479439d4347d8449f36ed850e87d7d94b89e02b02a7",
+    "parser": "d11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9",
+    "pilot_data_module": "342d0eab91b7208968edc20fa86a13d8b201bf4bf29a7d4798f50cf20eba187c",
+    "plan_validation_report_v3_attempt1": "6f3951b951b9d26edc33ebe57557f61d779dc86c52bcfab27bd0d9d6113e2405",
+    "prompt_only_prompt": "77d2d8ff8042f94fd7381580d6034deb19827d3502e06bf67a96b87103fb0af6",
+    "protocol_v1": "91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e",
+    "protocol_v2": "34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba",
+    "protocol_v3": "36e4f06e2381811058c291de5e6692e5b027ed02e846ab00f094a9d63784239a",
+    "protocol_v4": "f56f4e6645b6ba16b87a5c1880196635a93d17a95a549cb0bf354972e17f8cf7",
+    "provider_wrapper": "f25ef1896b0e8f53138ba09a52940b98734b1152806bc1d76b2c1bbee3386f08",
+    "retired_heldout_dataset_registry": "4da5d3eae805a125be2f2083c4293bfbe8b118844465b2adfd57a9dbb57c769b",
+    "retrieval": "77a712af26215581359260f92caa492bf63c5fea0d43787d67dbcc7a9aa04513",
+    "retry_policy_module": "1faac809f583a3bc435474151331b71a5cb96069791d4d8af583ad0efb0e6ad8",
+    "runner": "19a9fde78d9b17db610b4c7dd1be58179fabb6aacdcbf301c20181179a1a21e4",
+    "scorer": "5c8349ce5b690cff29b6f2948f6e01fa38eb15f921cdd76a7bbc121d1f86c0a2",
+    "statistical_analysis_module": "bcdd676aba0e73fe3f336dee77e3e7c95148ad9304720c01ec363be6670dd0e0",
+    "statistical_plan": "2639906b515589ba3fe15487567cc53aaf875823909eb077a2bd06f8ee149b1e"
+  },
+  "dataset": {
+    "case_count": 40,
+    "case_prefix": "HELD3_",
+    "dataset_checksum": "d73fc26e9f622db2bf396b4f1cb21ddc2f9b49c41e1e357c32294bff9976f197",
+    "dataset_name": "heldout_pilot_v3",
+    "external_api_calls_in_generation": 0,
+    "fixed_seed": 20261017,
+    "generator_visible_gold_hint_count": 0,
+    "pair_count": 20,
+    "pair_prefix": "H3PAIR_"
+  },
+  "execution_caps": {
+    "external_warmup_calls": 0,
+    "max_embedding_calls": 60,
+    "max_generation_calls": 380,
+    "max_mode_executions": 360,
+    "max_retries_per_logical_request": 1,
+    "max_total_external_calls": 420,
+    "max_total_retry_attempts": 20,
+    "planned_external_requests_without_retries_maximum": 400,
+    "planned_generation_requests_maximum": 360,
+    "planned_mode_executions": 360,
+    "planned_unique_embedding_requests": 40,
+    "repetitions": 3
+  },
+  "freeze_commit_placeholder": "TO_BE_FILLED_AFTER_COMMIT",
+  "heldout_mode_executions_in_freeze_phase": 0,
+  "no_external_api_calls_performed_in_freeze_task": true,
+  "plan_only": {
+    "external_api_calls": 0,
+    "heldout_embedding_calls": 0,
+    "heldout_generation_calls": 0,
+    "heldout_model_execution_count": 0,
+    "no_retrieval_embedding_adapter_generation_or_scoring_performed": true,
+    "path": "evaluation/wolala2026/preheldout_v3_attempt1/execution_plan.json"
+  },
+  "preaudit_passed": true,
+  "provider_configuration": {
+    "embedding_model": "text-embedding-3-small",
+    "generator_model": "gpt-4o-mini",
+    "max_output_tokens": 160,
+    "provider": "openai",
+    "temperature": 0,
+    "top_k": 4
+  },
+  "retired_registry_summary": {
+    "active_heldout_dataset": "heldout_pilot_v3",
+    "retired_datasets_execution_blocked_in_code": true
+  },
+  "schema_version": "wolala-pre-heldout-v3-freeze-manifest-v1",
+  "shared_retrieval_repair": {
+    "fetch_head_write_required": false,
+    "local_tag_is_ancestor_of_head": true,
+    "local_tag_peeled": "4989de65eea6390623e284e6919bcb4c460b74ac",
+    "remote_branch": "refs/heads/wolala2026",
+    "remote_branch_sha": "4989de65eea6390623e284e6919bcb4c460b74ac",
+    "remote_tag": "refs/tags/wolala2026-shared-retrieval-fix-v1",
+    "remote_tag_object": "4e807d68bf3bc74d20e54ef96f7f4602027ad800",
+    "remote_tag_peeled": "4989de65eea6390623e284e6919bcb4c460b74ac",
+    "remote_verification_method": "git ls-remote with http.sslBackend=openssl"
+  },
+  "starting_commit": "4989de65eea6390623e284e6919bcb4c460b74ac",
+  "tests": {
+    "external_api_calls": 0,
+    "focused_v3": {
+      "command": "python -m unittest evaluation.tests.test_wolala_final_experiment_v3 -v",
+      "result": "PASS",
+      "tests_run": 13
+    },
+    "wolala": {
+      "command": "python -m unittest discover -s evaluation/tests -p \"test_wolala*.py\" -v",
+      "result": "PASS",
+      "tests_run": 78
+    }
+  }
+}

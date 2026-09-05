@@ -1,0 +1,11 @@
+case_id,provenance_id,origin_type,source_dataset,licence,transformation_method,source_text_newly_generated,contains_personal_information,checksum
+DEV_P1_01A,prov-dev_p1_01a,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,571f12d3cdce23081ea355e1a06ef5c94a5604542f1364556019bcac0d1f6aa7
+DEV_P1_01B,prov-dev_p1_01b,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,2efaa8b6ac0b2f21fda9fec154d11d2e985890e61b9752009284ec4f73e6f069
+DEV_P2_01A,prov-dev_p2_01a,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,e568837bddcbd35625246ec00847bf36d94cf7cabf8b7ba650897652c8f98201
+DEV_P2_01B,prov-dev_p2_01b,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,308140d5ed5c231cb54d0a45d2eaee6c7680f3dd3a629a5aa7a9aca464664bde
+DEV_P3_01A,prov-dev_p3_01a,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,565eb7ad5047d73baa9fdc01c760eb827979aba3f1a459137a62cce3c123c6de
+DEV_P3_01B,prov-dev_p3_01b,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,5dd1795996253dcef14f4ab1a2c6bf564a7d6641b0f16d1e702f2dddb45d8f64
+DEV_P4_01A,prov-dev_p4_01a,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,eee477689d96dea79dc9f10484103e3a951dcdc4b1bde95d836a5c9d0de8a805
+DEV_P4_01B,prov-dev_p4_01b,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,15db8c9618291e955bad0a8e1b05975d9c81d5f27566ed4624c9a54ff31d84a6
+DEV_P5_01A,prov-dev_p5_01a,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,9cdc425d176d9adbae623b517a8b056e0ac768c4e1809b85442a4cad2a2b4010
+DEV_P5_01B,prov-dev_p5_01b,synthetic,none,Repository LICENSE; synthetic WoLaLa pilot fixture.,newly generated deterministic synthetic template,True,False,d6af88cf7e5509769b7ca92cc12fa3b9b5abc891a3292b05104ed516b69452b6

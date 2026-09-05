@@ -1,0 +1,4 @@
+case_count,cfaf_realization_accuracy,false_cfaf_rate,generator_exposure_rate,mode_name,model_call_count,protected_content_leakage_rate,public_reason_class_accuracy,request_fulfilment_accuracy,safe_next_step_correctness,top_level_mode_accuracy,validation_fallback_correctness
+60,1.0,0.0,0.0,cfaf_pipeline,60,0.0,1.0,1.0,1.0,1.0,1.0
+60,0.43333333333333335,0.0,0.5333333333333333,prompt_only_control,60,0.06666666666666667,0.43333333333333335,0.3333333333333333,0.43333333333333335,0.43333333333333335,1.0
+60,0.43333333333333335,0.0,0.5333333333333333,standard_rag,60,0.06666666666666667,0.43333333333333335,0.3333333333333333,0.43333333333333335,0.43333333333333335,1.0

@@ -1,0 +1,937 @@
+{
+  "all_pair_changes": {
+    "exact_correctness_changed": 36,
+    "exact_improved": 26,
+    "exact_unchanged": 777,
+    "exact_worsened": 10,
+    "parsed_answer_changed": 374,
+    "parsed_answer_unchanged": 439,
+    "structured_improved": 61,
+    "structured_unchanged": 720,
+    "structured_worsened": 32
+  },
+  "by_condition": {
+    "ORACLE_TASK_STATE_RAG": {
+      "controlled_failure_accuracy": {
+        "difference_new_minus_old": -0.00369003,
+        "new": 0.96678967,
+        "old": 0.9704797
+      },
+      "evidence_f1": {
+        "difference_new_minus_old": -0.0114061,
+        "new": 0.85577037,
+        "old": 0.86717647
+      },
+      "exact_accuracy": {
+        "difference_new_minus_old": 0.04797048,
+        "new": 0.65682657,
+        "old": 0.60885609
+      },
+      "pair_changes": {
+        "exact_improved": 21,
+        "exact_unchanged": 242,
+        "exact_worsened": 8,
+        "parsed_answer_changed": 135,
+        "parsed_answer_unchanged": 136,
+        "structured_improved": 37,
+        "structured_unchanged": 214,
+        "structured_worsened": 20
+      },
+      "structured_score": {
+        "difference_new_minus_old": 0.01937391,
+        "new": 0.8663865,
+        "old": 0.84701259
+      },
+      "total_tokens": {
+        "new": 695900,
+        "old": 676336
+      },
+      "truncated_outputs": {
+        "new": 1,
+        "old": 62
+      }
+    },
+    "STANDARD_RAG": {
+      "controlled_failure_accuracy": {
+        "difference_new_minus_old": -0.00369003,
+        "new": 0.84870849,
+        "old": 0.85239852
+      },
+      "evidence_f1": {
+        "difference_new_minus_old": 0.00054046,
+        "new": 0.75128619,
+        "old": 0.75074573
+      },
+      "exact_accuracy": {
+        "difference_new_minus_old": 0.00738008,
+        "new": 0.18081181,
+        "old": 0.17343173
+      },
+      "pair_changes": {
+        "exact_improved": 3,
+        "exact_unchanged": 267,
+        "exact_worsened": 1,
+        "parsed_answer_changed": 127,
+        "parsed_answer_unchanged": 144,
+        "structured_improved": 13,
+        "structured_unchanged": 251,
+        "structured_worsened": 7
+      },
+      "structured_score": {
+        "difference_new_minus_old": 0.00577522,
+        "new": 0.37914382,
+        "old": 0.3733686
+      },
+      "total_tokens": {
+        "new": 392548,
+        "old": 393024
+      },
+      "truncated_outputs": {
+        "new": 0,
+        "old": 1
+      }
+    },
+    "THREAD_AWARE_RAG": {
+      "controlled_failure_accuracy": {
+        "difference_new_minus_old": -0.00369004,
+        "new": 0.85239852,
+        "old": 0.85608856
+      },
+      "evidence_f1": {
+        "difference_new_minus_old": -0.0058367,
+        "new": 0.75451373,
+        "old": 0.76035043
+      },
+      "exact_accuracy": {
+        "difference_new_minus_old": 0.00369003,
+        "new": 0.16236162,
+        "old": 0.15867159
+      },
+      "pair_changes": {
+        "exact_improved": 2,
+        "exact_unchanged": 268,
+        "exact_worsened": 1,
+        "parsed_answer_changed": 112,
+        "parsed_answer_unchanged": 159,
+        "structured_improved": 11,
+        "structured_unchanged": 255,
+        "structured_worsened": 5
+      },
+      "structured_score": {
+        "difference_new_minus_old": 0.00413545,
+        "new": 0.36182306,
+        "old": 0.35768761
+      },
+      "total_tokens": {
+        "new": 396926,
+        "old": 396358
+      },
+      "truncated_outputs": {
+        "new": 0,
+        "old": 1
+      }
+    }
+  },
+  "caution": "Temperature 0 does not guarantee bit-identical API output; not all changes are attributable to truncation.",
+  "frozen_configuration": {
+    "intended_differences": [
+      "max_output_tokens",
+      "run identity/provenance",
+      "observed usage/outputs"
+    ],
+    "new_max_output_tokens": 2000,
+    "old_max_output_tokens": 800,
+    "status": "PASS",
+    "unexpected_scientific_parameter_differences": []
+  },
+  "main_conclusion_retained": true,
+  "new_oracle_superiority_conclusion": true,
+  "new_output_status_counts": {
+    "complete": 812,
+    "truncated_by_output_limit": 1
+  },
+  "new_run_id": "run_gpt4omini_max2000_20260824T075651Z",
+  "old_oracle_superiority_conclusion": true,
+  "old_run_id": "iscmi2026-real_api-20260824T071315Z",
+  "pairs": 813,
+  "previously_truncated_cases": [
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.90909091,
+      "pilot_id": "P004",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0004"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P005",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0005"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P008",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0008"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P009",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0009"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.72727273,
+      "pilot_id": "P011",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0011"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P012",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0012"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P013",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0013"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P016",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0016"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P031",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0031"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.66666667,
+      "pilot_id": "P032",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0032"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.66666667,
+      "pilot_id": "P034",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0034"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.72727273,
+      "pilot_id": "P035",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0035"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.625,
+      "pilot_id": "P045",
+      "question_family": "OPEN_TASKS",
+      "question_id": "ISCMI-Q0045"
+    },
+    {
+      "condition": "THREAD_AWARE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.0,
+      "pilot_id": "P004",
+      "question_family": "CLOSED_TASKS",
+      "question_id": "ISCMI-Q0054"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P021",
+      "question_family": "CLOSED_TASKS",
+      "question_id": "ISCMI-Q0071"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.76923077,
+      "old_exact_correct": false,
+      "old_structured_score": 0.66666667,
+      "pilot_id": "P028",
+      "question_family": "CLOSED_TASKS",
+      "question_id": "ISCMI-Q0078"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.88888889,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P029",
+      "question_family": "CLOSED_TASKS",
+      "question_id": "ISCMI-Q0079"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.8,
+      "old_exact_correct": false,
+      "old_structured_score": 0.8,
+      "pilot_id": "P040",
+      "question_family": "CLOSED_TASKS",
+      "question_id": "ISCMI-Q0090"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.5,
+      "old_exact_correct": false,
+      "old_structured_score": 0.57142857,
+      "pilot_id": "P004",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0103"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P008",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0107"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P009",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0108"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.92307692,
+      "old_exact_correct": false,
+      "old_structured_score": 0.90909091,
+      "pilot_id": "P011",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0109"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P012",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0110"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.88888889,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P013",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0111"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P016",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0114"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.88888889,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P031",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0127"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.92307692,
+      "old_exact_correct": false,
+      "old_structured_score": 0.6,
+      "pilot_id": "P032",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0128"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.88888889,
+      "old_exact_correct": false,
+      "old_structured_score": 0.66666667,
+      "pilot_id": "P034",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0130"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.72727273,
+      "pilot_id": "P035",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0131"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P040",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0136"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.625,
+      "pilot_id": "P045",
+      "question_family": "ACTOR_RESPONSIBILITY",
+      "question_id": "ISCMI-Q0140"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.33333333,
+      "old_exact_correct": false,
+      "old_structured_score": 0.4,
+      "pilot_id": "P001",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0146"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.28571429,
+      "old_exact_correct": false,
+      "old_structured_score": 0.33333333,
+      "pilot_id": "P004",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0147"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.66666667,
+      "old_exact_correct": false,
+      "old_structured_score": 0.33333333,
+      "pilot_id": "P005",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0148"
+    },
+    {
+      "condition": "STANDARD_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.0,
+      "pilot_id": "P005",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0148"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.4,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P007",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0149"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.66666667,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P008",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0150"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.66666667,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P009",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0151"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P011",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0152"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.83333333,
+      "old_exact_correct": false,
+      "old_structured_score": 0.8,
+      "pilot_id": "P012",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0153"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.8,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P013",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0154"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.57142857,
+      "old_exact_correct": false,
+      "old_structured_score": 0.33333333,
+      "pilot_id": "P015",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0156"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.66666667,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P016",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0157"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.5,
+      "old_exact_correct": false,
+      "old_structured_score": 0.33333333,
+      "pilot_id": "P021",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0161"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.5,
+      "old_exact_correct": false,
+      "old_structured_score": 0.57142857,
+      "pilot_id": "P031",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0165"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.93333333,
+      "old_exact_correct": false,
+      "old_structured_score": 0.54545455,
+      "pilot_id": "P032",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0166"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.85714286,
+      "old_exact_correct": false,
+      "old_structured_score": 0.66666667,
+      "pilot_id": "P034",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0167"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.92307692,
+      "old_exact_correct": false,
+      "old_structured_score": 0.6,
+      "pilot_id": "P035",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0168"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": false,
+      "new_output_status": "truncated_by_output_limit",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P045",
+      "question_family": "REQUESTER",
+      "question_id": "ISCMI-Q0177"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P004",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0185"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.85714286,
+      "old_exact_correct": false,
+      "old_structured_score": 0.92307692,
+      "pilot_id": "P007",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0188"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.36363636,
+      "old_exact_correct": false,
+      "old_structured_score": 0.44444444,
+      "pilot_id": "P008",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0189"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.36363636,
+      "old_exact_correct": false,
+      "old_structured_score": 0.44444444,
+      "pilot_id": "P009",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0190"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P011",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0192"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.66666667,
+      "old_exact_correct": false,
+      "old_structured_score": 0.72727273,
+      "pilot_id": "P013",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0194"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.8,
+      "old_exact_correct": false,
+      "old_structured_score": 0.85714286,
+      "pilot_id": "P015",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0196"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.66666667,
+      "old_exact_correct": false,
+      "old_structured_score": 0.72727273,
+      "pilot_id": "P016",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0197"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.88888889,
+      "pilot_id": "P021",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0201"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.92307692,
+      "old_exact_correct": false,
+      "old_structured_score": 0.72727273,
+      "pilot_id": "P028",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0207"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.94736842,
+      "old_exact_correct": true,
+      "old_structured_score": 1.0,
+      "pilot_id": "P029",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0208"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.97142857,
+      "old_exact_correct": false,
+      "old_structured_score": 0.64,
+      "pilot_id": "P040",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0215"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.5,
+      "old_exact_correct": false,
+      "old_structured_score": 0.5,
+      "pilot_id": "P046",
+      "question_family": "TASK_HISTORY",
+      "question_id": "ISCMI-Q0219"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": true,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 1.0,
+      "old_exact_correct": false,
+      "old_structured_score": 0.53333333,
+      "pilot_id": "P045",
+      "question_family": "DEADLINE",
+      "question_id": "ISCMI-Q0229"
+    },
+    {
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "new_exact_correct": false,
+      "new_output_complete": true,
+      "new_output_status": "complete",
+      "new_structured_score": 0.33333333,
+      "old_exact_correct": false,
+      "old_structured_score": 0.33333333,
+      "pilot_id": "P034",
+      "question_family": "WAITING_FOR",
+      "question_id": "ISCMI-Q0243"
+    }
+  ],
+  "previously_truncated_summary": {
+    "cases": 64,
+    "exact_improved": 18,
+    "exact_unchanged": 44,
+    "exact_worsened": 2,
+    "new_complete": 63,
+    "new_not_complete": 1
+  },
+  "questions": 271,
+  "schema_version": "1.0"
+}

@@ -1,0 +1,220 @@
+from __future__ import annotations
+
+import json
+import tempfile
+import unittest
+from pathlib import Path
+
+from compare_output_limits import strip_parser_metadata
+from compare_generators import classify_pattern, nearest_rank_percentile
+from evaluate_results import score_result
+from experiment_core import ANSWER_TYPES, CONDITIONS, load_benchmark, load_configs, parse_model_output
+from run_experiment import retry_delay_seconds, sanitize_error_message
+
+
+ATTRIBUTE_TYPES = {
+    "ACTOR_RESPONSIBILITY": "TASK_ATTRIBUTE_MAP",
+    "REQUESTER": "TASK_ATTRIBUTE_MAP",
+    "DEADLINE": "TASK_ATTRIBUTE_MAP",
+    "WAITING_FOR": "TASK_ATTRIBUTE_MAP",
+    "BLOCKED_BY": "TASK_ATTRIBUTE_MAP",
+}
+
+
+def perfect_prediction(question: dict, task_evidence: dict[tuple[str, str], set[str]]) -> dict:
+    gold = question["gold_structured"]
+    family = question["question_family"]
+    tasks = []
+    for gold_task in gold.get("tasks", []):
+        task = dict(gold_task)
+        if "events" in task:
+            task["events"] = [dict(event) for event in task["events"]]
+        task["evidence_message_ids"] = sorted(
+            task_evidence.get((question["pilot_id"], task.get("task_id")), set())
+        )
+        tasks.append(task)
+    if family in {"OPEN_TASKS", "CLOSED_TASKS"}:
+        answer_type = "TASK_SET"
+    elif family == "TASK_HISTORY":
+        answer_type = "TASK_HISTORY"
+    elif family == "NO_TASK_CONTROL":
+        answer_type = "NO_TASK"
+    else:
+        answer_type = ATTRIBUTE_TYPES[family]
+    return {
+        "answer_type": answer_type,
+        "tasks": tasks,
+        "none": bool(gold.get("none", False)),
+        "evidence_message_ids": list(question["evidence_message_ids"]),
+        "controlled_failure": False,
+        "failure_reason": None,
+    }
+
+
+class ExperimentEvaluationTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.benchmark = load_benchmark()
+        cls.task_evidence = {
+            (row["pilot_id"], row["task_id"]): set(row["evidence_message_ids"])
+            for row in cls.benchmark["histories"]
+        }
+        cls.message_ids = {row["message_id"] for row in cls.benchmark["evidence"]}
+
+    def test_perfect_structured_predictions_score_exactly(self) -> None:
+        failures = []
+        for question in self.benchmark["questions"]:
+            inference = {
+                "question_id": question["question_id"],
+                "question_family": question["question_family"],
+                "condition": "ORACLE_TASK_STATE_RAG",
+                "parsed_output": perfect_prediction(question, self.task_evidence),
+                "retrieved_message_ids": sorted(self.message_ids),
+                "error": None,
+            }
+            scored = score_result(
+                inference, question, self.task_evidence, self.message_ids
+            )
+            if not scored["exact_correct"] or scored["structured_score"] != 1.0:
+                failures.append(question["question_id"])
+        self.assertEqual([], failures)
+
+    def test_parser_recognizes_every_answer_type(self) -> None:
+        for answer_type in ANSWER_TYPES:
+            parsed, error = parse_model_output(
+                '{"answer_type":"%s","tasks":[],"evidence_message_ids":[]}' % answer_type
+            )
+            self.assertIsNone(error)
+            self.assertEqual(answer_type, parsed["answer_type"])
+
+    def test_empty_history_prediction_scores_zero(self) -> None:
+        question = next(
+            row for row in self.benchmark["questions"] if row["question_family"] == "TASK_HISTORY"
+        )
+        inference = {
+            "question_id": question["question_id"],
+            "question_family": question["question_family"],
+            "condition": "STANDARD_RAG",
+            "parsed_output": {
+                "answer_type": "INSUFFICIENT_EVIDENCE",
+                "tasks": [],
+                "evidence_message_ids": [],
+                "controlled_failure": True,
+            },
+            "retrieved_message_ids": [],
+            "error": None,
+        }
+        scored = score_result(inference, question, self.task_evidence, self.message_ids)
+        self.assertFalse(scored["exact_correct"])
+        self.assertEqual(0.0, scored["structured_score"])
+
+    def test_truncated_json_recovers_only_complete_values(self) -> None:
+        raw = (
+            '{"answer_type":"TASK_SET","tasks":['
+            '{"task_id":"T1","events":[],"evidence_message_ids":["m::turn_0"]},'
+            '{"task_id":"unfinished'
+        )
+        parsed, error = parse_model_output(raw)
+        self.assertIsNone(error)
+        self.assertEqual("T1", parsed["tasks"][0]["task_id"])
+        self.assertEqual(1, len(parsed["tasks"]))
+        self.assertEqual("closed_at_last_complete_json_boundary", parsed["_parser_recovery"])
+
+    def test_no_task_on_positive_question_is_not_a_correct_abstention(self) -> None:
+        question = next(
+            row
+            for row in self.benchmark["questions"]
+            if row["question_family"] == "OPEN_TASKS" and not row["negative_control"]
+        )
+        inference = {
+            "question_id": question["question_id"],
+            "question_family": question["question_family"],
+            "condition": "STANDARD_RAG",
+            "parsed_output": {
+                "answer_type": "NO_TASK",
+                "tasks": [],
+                "none": True,
+                "evidence_message_ids": [],
+                "controlled_failure": False,
+            },
+            "retrieved_message_ids": [],
+            "error": None,
+        }
+        scored = score_result(inference, question, self.task_evidence, self.message_ids)
+        self.assertFalse(scored["controlled_failure_correct"])
+
+    def test_output_limit_comparison_ignores_parser_metadata_only(self) -> None:
+        value = {
+            "answer_type": "TASK_SET",
+            "_parser_recovery": "strategy",
+            "tasks": [{"task_id": "T1", "_parser_recovery": "nested"}],
+        }
+        self.assertEqual(
+            {"answer_type": "TASK_SET", "tasks": [{"task_id": "T1"}]},
+            strip_parser_metadata(value),
+        )
+
+    def test_generator_comparison_percentile_uses_nearest_rank(self) -> None:
+        self.assertEqual(5.0, nearest_rank_percentile([1, 2, 3, 4, 5], 0.95))
+
+    def test_generator_pattern_classification(self) -> None:
+        self.assertEqual("C", classify_pattern(0.55, 0.42, [0.08, 0.07, 0.06]))
+        self.assertEqual("D", classify_pattern(0.55, 0.04, [0.2, 0.2, 0.0]))
+
+    def test_retry_delay_parses_seconds_without_under_backing_off(self) -> None:
+        RateLimitError = type("RateLimitError", (Exception,), {})
+        error = RateLimitError("Please try again in 2.31s")
+        self.assertEqual(4.0, retry_delay_seconds(error, 2))
+
+    def test_api_error_message_redacts_nonpublic_identifiers(self) -> None:
+        message = "organization org-private123 project proj_secret key sk-secretvalue"
+        sanitized = sanitize_error_message(message)
+        self.assertNotIn("private123", sanitized)
+        self.assertNotIn("proj_secret", sanitized)
+        self.assertNotIn("sk-secretvalue", sanitized)
+
+    def test_load_benchmark_accepts_dynamic_question_count(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / "questions.jsonl").write_text(
+                json.dumps({"question_id": "ISCMI-A10-Q0001"}) + "\n",
+                encoding="utf-8",
+            )
+            for name in ("task_histories.jsonl", "task_snapshots.jsonl", "message_evidence_index.jsonl"):
+                (root / name).write_text("", encoding="utf-8")
+            (root / "benchmark_manifest.json").write_text("{}", encoding="utf-8")
+
+            loaded = load_benchmark(root, expected_question_count=None)
+
+            self.assertEqual(str(root.resolve()), loaded["benchmark_dir"])
+            self.assertEqual(1, len(loaded["questions"]))
+            with self.assertRaises(ValueError):
+                load_benchmark(root)
+
+    def test_load_configs_applies_generator_override(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for condition in CONDITIONS:
+                file_name = f"{condition.lower()}.json"
+                config = {
+                    "condition": condition,
+                    "config_file": file_name,
+                    "generator_model": "gpt-4.1-2025-04-14",
+                    "embedding_model": "text-embedding-3-small",
+                    "temperature": 0.0,
+                    "max_output_tokens": 2000,
+                    "top_p": None,
+                    "seed": None,
+                }
+                (root / file_name).write_text(json.dumps(config), encoding="utf-8")
+
+            configs = load_configs(root, generator_model="gpt-4o-mini-2024-07-18")
+
+            self.assertEqual(
+                {"gpt-4o-mini-2024-07-18"},
+                {config["generator_model"] for config in configs.values()},
+            )
+
+
+if __name__ == "__main__":
+    unittest.main()

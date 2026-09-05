@@ -1,0 +1,24 @@
+{
+  "benchmark_id": "evidence_unit_v2_holdout",
+  "case_count": 340,
+  "closure_type_counts": {
+    "cancelled": 30,
+    "completed": 40,
+    "superseded": 30
+  },
+  "d8_natural_synthetic_counts": {
+    "synthetic": 100
+  },
+  "excluded_v1_thread_count": 12,
+  "nonclosing_natural_synthetic_counts": {
+    "natural": 39,
+    "synthetic": 1
+  },
+  "scenario_counts": {
+    "D6": 100,
+    "D7": 100,
+    "D8": 100,
+    "D8_NONCLOSING": 40
+  },
+  "selected_thread_count": 136
+}

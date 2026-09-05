@@ -1,0 +1,59 @@
+{
+  "by_mode": {
+    "governance_only_rag": {
+      "embedding_calls": 0,
+      "errors": 0,
+      "generation_calls": 1200,
+      "generation_skipped": 800,
+      "input_tokens": 375480,
+      "output_tokens": 26191,
+      "record_count": 2000,
+      "retries": 0,
+      "total_tokens": 401671
+    },
+    "role_aware_action_reconstruction": {
+      "embedding_calls": 0,
+      "errors": 0,
+      "generation_calls": 0,
+      "generation_skipped": 0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "record_count": 1020,
+      "retries": 0,
+      "total_tokens": 0
+    },
+    "role_aware_rag": {
+      "embedding_calls": 0,
+      "errors": 0,
+      "generation_calls": 490,
+      "generation_skipped": 1510,
+      "input_tokens": 663515,
+      "output_tokens": 10447,
+      "record_count": 2000,
+      "retries": 0,
+      "total_tokens": 673962
+    },
+    "standard_rag": {
+      "embedding_calls": 0,
+      "errors": 0,
+      "generation_calls": 2000,
+      "generation_skipped": 0,
+      "input_tokens": 520490,
+      "output_tokens": 45050,
+      "record_count": 2000,
+      "retries": 2,
+      "total_tokens": 565540
+    }
+  },
+  "totals": {
+    "embedding_calls": 0,
+    "errors": 0,
+    "generation_calls": 3690,
+    "generation_skipped": 2310,
+    "input_tokens": 1559485,
+    "output_tokens": 81688,
+    "record_count": 7020,
+    "retries": 2,
+    "total_tokens": 1641173
+  }
+}

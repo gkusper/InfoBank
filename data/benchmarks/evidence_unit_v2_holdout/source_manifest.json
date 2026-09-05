@@ -1,0 +1,182 @@
+{
+  "benchmark_id": "evidence_unit_v2_holdout",
+  "candidate_counts": {
+    "nonclosing_candidates": 49,
+    "request_candidates_after_thread_and_action_dedup": 327,
+    "selected_nonclosing_cases": 40,
+    "selected_triplet_seeds": 100
+  },
+  "created_date": "2026-08-17",
+  "dataset_download_url": "https://drive.google.com/file/d/1a336g4-wlEwsVbXLPB9wPQnBDRE933mb/view",
+  "download_date": "2026-08-17",
+  "downloaded_archive_file": "data/external/mailex/mailex_dataset_download",
+  "downloaded_archive_sha256": "dda3ce5da5ffc3452dd9e5a58cd69e19e68bd655eafe1deec48e87204f6c37b4",
+  "mail_ex_observed_statistics": {
+    "argument_names": {
+      "Amend_Action_Data": [
+        "Action Date",
+        "Action Description",
+        "Action Members",
+        "Action Time"
+      ],
+      "Amend_Data": [
+        "Amend Date",
+        "Amend Members",
+        "Amend Time",
+        "Data Value",
+        "Data idString"
+      ],
+      "Amend_Meeting_Data": [
+        "Amend Members",
+        "Meeting Agenda",
+        "Meeting Date",
+        "Meeting Location",
+        "Meeting Members",
+        "Meeting Name",
+        "Meeting Time"
+      ],
+      "Deliver_Action_Data": [
+        "Action Date",
+        "Action Description",
+        "Action Members",
+        "Action Time",
+        "Deliver Date",
+        "Deliver Members"
+      ],
+      "Deliver_Data": [
+        "Data Owner",
+        "Data Type",
+        "Data Value",
+        "Data idString",
+        "Deliver Date",
+        "Deliver Members",
+        "Deliver Time",
+        "Deliver members"
+      ],
+      "Deliver_Meeting_Data": [
+        "Deliver Members",
+        "Meeting Agenda",
+        "Meeting Date",
+        "Meeting Location",
+        "Meeting Members",
+        "Meeting Name",
+        "Meeting Time"
+      ],
+      "O": [],
+      "Request_Action": [
+        "Action Date",
+        "Action Description",
+        "Action Members",
+        "Action Time",
+        "Request Members"
+      ],
+      "Request_Action_Data": [
+        "Action Date",
+        "Action Description",
+        "Action Members",
+        "Action Time",
+        "Request Members"
+      ],
+      "Request_Data": [
+        "Data Owner",
+        "Data Type",
+        "Data Value",
+        "Data idString",
+        "Request Date",
+        "Request Members",
+        "Request Time",
+        "Request members"
+      ],
+      "Request_Meeting": [
+        "Meeting Agenda",
+        "Meeting Date",
+        "Meeting Location",
+        "Meeting Members",
+        "Meeting Name",
+        "Meeting Time",
+        "Request Members",
+        "Request Time"
+      ],
+      "Request_Meeting_Data": [
+        "Meeting Agenda",
+        "Meeting Date",
+        "Meeting Location",
+        "Meeting Members",
+        "Meeting Name",
+        "Meeting Time",
+        "Request Members"
+      ]
+    },
+    "candidate_threads_with_request_and_later_action_related_messages": 411,
+    "data_root": "data\\external\\mailex\\extracted\\data",
+    "deliver_action_data_events": 1604,
+    "event_counts": {
+      "Amend_Action_Data": 3,
+      "Amend_Data": 193,
+      "Amend_Meeting_Data": 55,
+      "Deliver_Action_Data": 3195,
+      "Deliver_Data": 1820,
+      "Deliver_Meeting_Data": 487,
+      "O": 776,
+      "Request_Action": 1376,
+      "Request_Action_Data": 233,
+      "Request_Data": 721,
+      "Request_Meeting": 259,
+      "Request_Meeting_Data": 50
+    },
+    "event_type_names": [
+      "Amend_Action_Data",
+      "Amend_Data",
+      "Amend_Meeting_Data",
+      "Deliver_Action_Data",
+      "Deliver_Data",
+      "Deliver_Meeting_Data",
+      "O",
+      "Request_Action",
+      "Request_Action_Data",
+      "Request_Data",
+      "Request_Meeting",
+      "Request_Meeting_Data"
+    ],
+    "request_action_events": 1048,
+    "request_action_with_action_description_members_date": 90,
+    "split_thread_counts": {
+      "dev": 150,
+      "test": 150,
+      "train": 1200
+    },
+    "thread_lengths": {
+      "avg": 2.624,
+      "max": 11,
+      "min": 2
+    },
+    "total_email_turns": 3936,
+    "total_threads": 1500
+  },
+  "privacy_transformations": [
+    "Only action-related excerpts or controlled synthetic messages are redistributed.",
+    "D7 browser/search records are deterministic synthetic counterfactuals.",
+    "Synthetic D8 closure and non-closing records are marked in gold/statistics and do not alter source MailEx threads."
+  ],
+  "source_dataset": "MailEx",
+  "source_exclusion_manifest": {
+    "excluded_benchmark": "data\\benchmarks\\evidence_unit_v1",
+    "excluded_thread_count": 12,
+    "excluded_threads": [
+      "blair-l_inbox32",
+      "blair-l_inbox57",
+      "blair-l_inbox_284",
+      "derrick-j_inbox_233",
+      "heard-m_inbox_master_netting291",
+      "jones-t_inbox894",
+      "lokey-t_inbox_814",
+      "martin-t_inbox_144",
+      "mclaughlin-e_inbox166",
+      "mclaughlin-e_inbox34",
+      "mims-thurston-p_inbox105",
+      "mims-thurston-p_inbox348"
+    ]
+  },
+  "source_repository_commit": "57507a458ce157378300d982914d7528448a381d",
+  "source_repository_url": "https://github.com/salokr/Email-Event-Extraction"
+}

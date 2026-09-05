@@ -73,6 +73,28 @@ outdated, normal API operations return a generic
 `DATABASE_MIGRATION_REQUIRED` response while `/docs`, `/openapi.json`, and
 `/api/health/schema` remain available.
 
+## Research evaluation status
+
+The repository contains the earlier development-pilot evaluation harness, the
+large-scale frozen D1-D8 evaluation protocol, the ISCMI 2026 MailEx benchmark
+work, the WoLaLa 2026 CFAF held-out materials, and the InfoCom 2026 S1-S6
+publication/cross-generator workstream. The large-scale D1-D8 materials add
+`document_rag_v3`, `evidence_unit_v2_holdout`, corrected scorers,
+preregistration, statistical analysis, and a resume-capable runner.
+
+See:
+
+- [Evaluation status](docs/evaluation/STATUS.md)
+- [Independent reproduction guide](docs/evaluation/INDEPENDENT_REPRODUCTION.md)
+- [Functional validation summary](docs/evaluation/FUNCTIONAL_VALIDATION.md)
+- [Paper-ready reproduction section](docs/evaluation/PAPER_REPRODUCTION_SECTION.md)
+- [Large-scale reproduction section](docs/evaluation/LARGE_SCALE_REPRODUCTION_SECTION.md)
+- [MailEx D1-D8 preparation report](docs/mailex_d1_d8_preparation_report.md)
+- [Evaluation harness README](evaluation/README.md)
+- [Fixture README](evaluation/fixtures/README.md)
+- [EvidenceUnit v1 benchmark README](data/benchmarks/evidence_unit_v1/README.md)
+- [EvidenceUnit v2 holdout README](data/benchmarks/evidence_unit_v2_holdout/README.md)
+
 ## Deterministic demos and quality gates
 
 ```powershell
@@ -91,16 +113,13 @@ the exact reproducible command is in `docs/REPRODUCTION.md`.
 For a guarded one-case Claude actual-pipeline smoke, use
 `scripts\run_real_provider_evaluation.py` with `--provider anthropic`,
 `--allow-network-provider`, `--max-cases 1`, and explicit task-owned output,
-cache, Chroma, source-storage, query, corpus, and gold paths. The full
-cross-generator S1-S6 experiment has intentionally not been run by this branch;
-`--full-experiment-preflight` is network-free and `--confirm-full-experiment`
-currently refuses execution until a prepared-corpus query-only reuse mode
-exists.
+cache, Chroma, source-storage, query, corpus, and gold paths. Full S1-S6
+cross-generator experiments should use the prepared-corpus query-only path and
+the hard preflight checks before `--confirm-full-experiment`.
 
-`main` is the protected integration/release baseline. The current
-`feature/infocom-cd-gates` branch contains reviewer and evaluation hardening and
-must be reviewed before integration. Final E1, dataset/code/config freeze,
-release branch, merge, tag, pull request, and release are **not authorized**.
+`main` is the protected integration/release baseline. Publication/evaluation
+artifacts should remain frozen, tagged, and manually reviewed before release
+claims are made from them.
 
 See `docs/USER_MANUAL.md`, `docs/DEVELOPER_GUIDE.md`,
 `docs/ADMIN_OPERATIONS.md`, and `docs/DATASET_AND_EVALUATION.md`. Project code

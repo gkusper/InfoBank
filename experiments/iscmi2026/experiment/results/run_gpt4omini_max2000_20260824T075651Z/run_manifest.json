@@ -1,0 +1,102 @@
+{
+  "completed_timestamp_utc": "2026-08-24T08:22:20Z",
+  "condition_manifests": [
+    {
+      "benchmark_manifest_hash": "f7667b98c40fce8455befc4454d8f1505f4b5b5e09b6a741764f769ac83b7176",
+      "chunking": "complete chronological corrected email thread plus one compact oracle record per human-derived task",
+      "condition": "ORACLE_TASK_STATE_RAG",
+      "config_sha256": "4b16c9b8c1bf983cd42dd15d7d417de964038a144ba8a3aa47eb411c132b975b",
+      "embedding_model": "text-embedding-3-small",
+      "generator_model": "gpt-4o-mini",
+      "max_output_tokens": 2000,
+      "question_count": 271,
+      "retrieval_top_k": 6,
+      "seed": null,
+      "similarity_metric": "cosine similarity",
+      "task_representation_mode": "human-derived oracle task histories and final snapshots with source references",
+      "temperature": 0.0,
+      "thread_scope": "current benchmark conversation; chronological emails plus all oracle task records for that thread",
+      "top_p": null
+    },
+    {
+      "benchmark_manifest_hash": "f7667b98c40fce8455befc4454d8f1505f4b5b5e09b6a741764f769ac83b7176",
+      "chunking": "one corrected original email message per retrieval unit",
+      "condition": "STANDARD_RAG",
+      "config_sha256": "ae48666fb2d6bef58b49b6a42b241a2f47409c3075ff6505d8b4c306b0204c14",
+      "embedding_model": "text-embedding-3-small",
+      "generator_model": "gpt-4o-mini",
+      "max_output_tokens": 2000,
+      "question_count": 271,
+      "retrieval_top_k": 6,
+      "seed": null,
+      "similarity_metric": "cosine similarity",
+      "task_representation_mode": "none; original email evidence only",
+      "temperature": 0.0,
+      "thread_scope": "current benchmark conversation; semantic top-k messages only",
+      "top_p": null
+    },
+    {
+      "benchmark_manifest_hash": "f7667b98c40fce8455befc4454d8f1505f4b5b5e09b6a741764f769ac83b7176",
+      "chunking": "one corrected original email message per semantic seed; deterministic full-thread chronological expansion",
+      "condition": "THREAD_AWARE_RAG",
+      "config_sha256": "b5cafc132e0740c28cf93d9e2f711901f34946019e5e2562af4bc5c7b299ac5e",
+      "embedding_model": "text-embedding-3-small",
+      "generator_model": "gpt-4o-mini",
+      "max_output_tokens": 2000,
+      "question_count": 271,
+      "retrieval_top_k": 6,
+      "seed": null,
+      "similarity_metric": "cosine similarity",
+      "task_representation_mode": "none; original email evidence and deterministic thread structure only",
+      "temperature": 0.0,
+      "thread_scope": "current benchmark conversation; semantic seeds expanded to all messages in chronological order",
+      "top_p": null
+    }
+  ],
+  "condition_question_pairs": 813,
+  "conditions": [
+    "STANDARD_RAG",
+    "THREAD_AWARE_RAG",
+    "ORACLE_TASK_STATE_RAG"
+  ],
+  "corrected_packet": {
+    "aggregate_sha256": "af4e9296f750560e91226c69b09354aeb7710bbe3367837ce40c76ad91ebbda9",
+    "path": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-23\\a-feladat-most-kiz-r-lag\\work\\mailex_pilot_external_packet",
+    "raw_content_committed": false
+  },
+  "embedding_model": "text-embedding-3-small",
+  "embedding_usage": {
+    "embedding_calls": 5,
+    "generation_calls": 0,
+    "input_tokens": 41093,
+    "output_tokens": 0,
+    "retries": 0,
+    "total_tokens": 41093
+  },
+  "environment": {
+    "openai": "1.59.9",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "python": "3.12.13"
+  },
+  "expected_condition_question_pairs": 813,
+  "full_benchmark_question_count": 271,
+  "generator_model": "gpt-4o-mini",
+  "git_commit": "045c7d707c87d71e3c05c0dbf9d8e8587ad2b098",
+  "gold_joined_during_inference": false,
+  "max_output_tokens": 2000,
+  "max_parallel_generations": 6,
+  "observed_generator_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "oracle_interpretation": "Oracle task-state representation only; automatic task-state extraction is not evaluated.",
+  "output_file": "C:\\Users\\EKKE\\Documents\\Codex\\2026-08-23\\a-feladat-most-kiz-r-lag\\work\\InfoBank\\experiments\\iscmi2026\\experiment\\results\\run_gpt4omini_max2000_20260824T075651Z\\inference_results.jsonl",
+  "prompt_sha256": "ac5b7622cc9c33fd20e7e5a2b6f8c277c9a2bfb8be0b87922811728739ea2be5",
+  "question_count": 271,
+  "question_ids_sha256": "e82d1efd77ce38e6a7049bdf78a764b19175a30f0a37466f0f8c1f8311315a58",
+  "run_id": "run_gpt4omini_max2000_20260824T075651Z",
+  "run_mode": "real_api",
+  "schema_version": "1.0",
+  "status": "complete",
+  "temperature": 0.0,
+  "timestamp_utc": "2026-08-24T08:11:57Z"
+}

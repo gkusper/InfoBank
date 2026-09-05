@@ -1,0 +1,1520 @@
+{
+  "conditions": [
+    "STANDARD_RAG",
+    "THREAD_AWARE_RAG",
+    "ORACLE_TASK_STATE_RAG"
+  ],
+  "costs": {
+    "gpt-4.1-2025-04-14": {
+      "embedding_cost_usd": 0.000822,
+      "generator_input_tokens": 1175860,
+      "generator_output_tokens": 346622,
+      "input_cost_usd": 2.35172,
+      "output_cost_usd": 2.772976,
+      "price_access_date": "2026-08-24",
+      "prices_per_million_tokens": {
+        "embedding_input": 0.02,
+        "generator_input": 2.0,
+        "generator_output": 8.0
+      },
+      "shared_embedding_input_tokens": 41093,
+      "total_estimated_cost_usd": 5.125518
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "embedding_cost_usd": 0.000822,
+      "generator_input_tokens": 1175848,
+      "generator_output_tokens": 309526,
+      "input_cost_usd": 0.176377,
+      "output_cost_usd": 0.185716,
+      "price_access_date": "2026-08-24",
+      "prices_per_million_tokens": {
+        "embedding_input": 0.02,
+        "generator_input": 0.15,
+        "generator_output": 0.6
+      },
+      "shared_embedding_input_tokens": 41093,
+      "total_estimated_cost_usd": 0.362915
+    }
+  },
+  "family_results": {
+    "gpt-4.1-2025-04-14": {
+      "ORACLE_TASK_STATE_RAG": {
+        "ACTOR_RESPONSIBILITY": {
+          "api_calls": 45,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.83548057,
+          "evidence_precision": 0.76789852,
+          "evidence_recall": 1.0,
+          "exact_accuracy": 0.95555556,
+          "input_tokens": 88916,
+          "mean_latency_seconds": 25.63941207,
+          "mean_structured_score": 0.99506173,
+          "median_latency_seconds": 11.456498,
+          "output_status_counts": {
+            "complete": 45
+          },
+          "output_tokens": 28552,
+          "p95_latency_seconds": 96.278508,
+          "parser_recoveries": 0,
+          "questions": 45,
+          "tokens_per_question": 2610.4,
+          "total_tokens": 117468,
+          "unrecoverable_responses": 0
+        },
+        "CLOSED_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.84,
+          "evidence_f1": 0.81560318,
+          "evidence_precision": 0.77528571,
+          "evidence_recall": 0.89766667,
+          "exact_accuracy": 0.84,
+          "input_tokens": 97108,
+          "mean_latency_seconds": 17.18939672,
+          "mean_structured_score": 0.84,
+          "median_latency_seconds": 9.493901,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 21508,
+          "p95_latency_seconds": 56.936939,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 2372.32,
+          "total_tokens": 118616,
+          "unrecoverable_responses": 0
+        },
+        "OPEN_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.96,
+          "evidence_f1": 0.88933333,
+          "evidence_precision": 0.85474359,
+          "evidence_recall": 0.98,
+          "exact_accuracy": 0.94,
+          "input_tokens": 97058,
+          "mean_latency_seconds": 24.43500412,
+          "mean_structured_score": 0.956,
+          "median_latency_seconds": 7.97361,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 34576,
+          "p95_latency_seconds": 129.515108,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 2632.68,
+          "total_tokens": 131634,
+          "unrecoverable_responses": 0
+        },
+        "REQUESTER": {
+          "api_calls": 36,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.67253487,
+          "evidence_precision": 0.56787919,
+          "evidence_recall": 0.99444444,
+          "exact_accuracy": 0.66666667,
+          "input_tokens": 73753,
+          "mean_latency_seconds": 24.53457589,
+          "mean_structured_score": 0.90672878,
+          "median_latency_seconds": 10.009353,
+          "output_status_counts": {
+            "complete": 35,
+            "truncated_by_output_limit": 1
+          },
+          "output_tokens": 24592,
+          "p95_latency_seconds": 182.587073,
+          "parser_recoveries": 1,
+          "questions": 36,
+          "tokens_per_question": 2731.8056,
+          "total_tokens": 98345,
+          "unrecoverable_responses": 0
+        },
+        "TASK_HISTORY": {
+          "api_calls": 42,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.92569917,
+          "evidence_precision": 0.87976191,
+          "evidence_recall": 1.0,
+          "exact_accuracy": 0.69047619,
+          "input_tokens": 84287,
+          "mean_latency_seconds": 281.82567455,
+          "mean_structured_score": 0.91742036,
+          "median_latency_seconds": 12.3927115,
+          "output_status_counts": {
+            "complete": 42
+          },
+          "output_tokens": 24688,
+          "p95_latency_seconds": 2703.180165,
+          "parser_recoveries": 0,
+          "questions": 42,
+          "tokens_per_question": 2594.6429,
+          "total_tokens": 108975,
+          "unrecoverable_responses": 0
+        }
+      },
+      "STANDARD_RAG": {
+        "ACTOR_RESPONSIBILITY": {
+          "api_calls": 45,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.62190476,
+          "evidence_precision": 0.80518519,
+          "evidence_recall": 0.56666667,
+          "exact_accuracy": 0.02222222,
+          "input_tokens": 52398,
+          "mean_latency_seconds": 5.68626833,
+          "mean_structured_score": 0.15541446,
+          "median_latency_seconds": 5.367733,
+          "output_status_counts": {
+            "complete": 45
+          },
+          "output_tokens": 13723,
+          "p95_latency_seconds": 10.804092,
+          "parser_recoveries": 0,
+          "questions": 45,
+          "tokens_per_question": 1469.3556,
+          "total_tokens": 66121,
+          "unrecoverable_responses": 0
+        },
+        "CLOSED_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.68,
+          "evidence_f1": 0.73446398,
+          "evidence_precision": 0.80666667,
+          "evidence_recall": 0.71788095,
+          "exact_accuracy": 0.2,
+          "input_tokens": 57538,
+          "mean_latency_seconds": 6.57950706,
+          "mean_structured_score": 0.42663492,
+          "median_latency_seconds": 6.118162,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 21317,
+          "p95_latency_seconds": 12.141605,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1577.1,
+          "total_tokens": 78855,
+          "unrecoverable_responses": 0
+        },
+        "OPEN_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.92,
+          "evidence_f1": 0.76706716,
+          "evidence_precision": 0.84433333,
+          "evidence_recall": 0.79583333,
+          "exact_accuracy": 0.18,
+          "input_tokens": 57517,
+          "mean_latency_seconds": 6.11987428,
+          "mean_structured_score": 0.56732756,
+          "median_latency_seconds": 4.811675,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 21640,
+          "p95_latency_seconds": 13.23313,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1583.14,
+          "total_tokens": 79157,
+          "unrecoverable_responses": 0
+        },
+        "REQUESTER": {
+          "api_calls": 36,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.55753968,
+          "evidence_precision": 0.69444444,
+          "evidence_recall": 0.51203704,
+          "exact_accuracy": 0.08333333,
+          "input_tokens": 41863,
+          "mean_latency_seconds": 5.00831383,
+          "mean_structured_score": 0.14358466,
+          "median_latency_seconds": 4.4631265,
+          "output_status_counts": {
+            "complete": 36
+          },
+          "output_tokens": 11057,
+          "p95_latency_seconds": 9.986423,
+          "parser_recoveries": 0,
+          "questions": 36,
+          "tokens_per_question": 1470.0,
+          "total_tokens": 52920,
+          "unrecoverable_responses": 0
+        },
+        "TASK_HISTORY": {
+          "api_calls": 42,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.85113379,
+          "evidence_precision": 0.85039683,
+          "evidence_recall": 0.89280045,
+          "exact_accuracy": 0.0952381,
+          "input_tokens": 49165,
+          "mean_latency_seconds": 69.63887276,
+          "mean_structured_score": 0.51125284,
+          "median_latency_seconds": 5.701276,
+          "output_status_counts": {
+            "complete": 42
+          },
+          "output_tokens": 18096,
+          "p95_latency_seconds": 17.092138,
+          "parser_recoveries": 0,
+          "questions": 42,
+          "tokens_per_question": 1601.4524,
+          "total_tokens": 67261,
+          "unrecoverable_responses": 0
+        }
+      },
+      "THREAD_AWARE_RAG": {
+        "ACTOR_RESPONSIBILITY": {
+          "api_calls": 45,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.64846561,
+          "evidence_precision": 0.82592593,
+          "evidence_recall": 0.57037037,
+          "exact_accuracy": 0.06666667,
+          "input_tokens": 53030,
+          "mean_latency_seconds": 5.38929731,
+          "mean_structured_score": 0.1724515,
+          "median_latency_seconds": 4.830755,
+          "output_status_counts": {
+            "complete": 45
+          },
+          "output_tokens": 13704,
+          "p95_latency_seconds": 11.098967,
+          "parser_recoveries": 0,
+          "questions": 45,
+          "tokens_per_question": 1482.9778,
+          "total_tokens": 66734,
+          "unrecoverable_responses": 0
+        },
+        "CLOSED_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.68,
+          "evidence_f1": 0.79045022,
+          "evidence_precision": 0.81333333,
+          "evidence_recall": 0.81509524,
+          "exact_accuracy": 0.2,
+          "input_tokens": 58483,
+          "mean_latency_seconds": 7.03543984,
+          "mean_structured_score": 0.47637229,
+          "median_latency_seconds": 6.920293,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 24327,
+          "p95_latency_seconds": 12.956157,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1656.2,
+          "total_tokens": 82810,
+          "unrecoverable_responses": 0
+        },
+        "OPEN_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.9,
+          "evidence_f1": 0.77160318,
+          "evidence_precision": 0.86135714,
+          "evidence_recall": 0.7925,
+          "exact_accuracy": 0.18,
+          "input_tokens": 58433,
+          "mean_latency_seconds": 5.82353348,
+          "mean_structured_score": 0.56714807,
+          "median_latency_seconds": 4.9785725,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 21245,
+          "p95_latency_seconds": 14.496638,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1593.56,
+          "total_tokens": 79678,
+          "unrecoverable_responses": 0
+        },
+        "REQUESTER": {
+          "api_calls": 36,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.53981482,
+          "evidence_precision": 0.67592593,
+          "evidence_recall": 0.49675926,
+          "exact_accuracy": 0.05555556,
+          "input_tokens": 42346,
+          "mean_latency_seconds": 4.95880339,
+          "mean_structured_score": 0.15515873,
+          "median_latency_seconds": 4.3286145,
+          "output_status_counts": {
+            "complete": 36
+          },
+          "output_tokens": 11315,
+          "p95_latency_seconds": 10.840465,
+          "parser_recoveries": 0,
+          "questions": 36,
+          "tokens_per_question": 1490.5833,
+          "total_tokens": 53661,
+          "unrecoverable_responses": 0
+        },
+        "TASK_HISTORY": {
+          "api_calls": 42,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.88125618,
+          "evidence_precision": 0.86190476,
+          "evidence_recall": 0.93469388,
+          "exact_accuracy": 0.11904762,
+          "input_tokens": 50070,
+          "mean_latency_seconds": 69.46040036,
+          "mean_structured_score": 0.52494331,
+          "median_latency_seconds": 4.656141,
+          "output_status_counts": {
+            "complete": 42
+          },
+          "output_tokens": 19731,
+          "p95_latency_seconds": 13.797108,
+          "parser_recoveries": 0,
+          "questions": 42,
+          "tokens_per_question": 1661.9286,
+          "total_tokens": 69801,
+          "unrecoverable_responses": 0
+        }
+      }
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "ORACLE_TASK_STATE_RAG": {
+        "ACTOR_RESPONSIBILITY": {
+          "api_calls": 45,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.95142857,
+          "evidence_precision": 0.92962963,
+          "evidence_recall": 1.0,
+          "exact_accuracy": 0.75555556,
+          "input_tokens": 88916,
+          "mean_latency_seconds": 7.6214286,
+          "mean_structured_score": 0.95241894,
+          "median_latency_seconds": 6.166168,
+          "output_status_counts": {
+            "complete": 45
+          },
+          "output_tokens": 29208,
+          "p95_latency_seconds": 14.211202,
+          "parser_recoveries": 0,
+          "questions": 45,
+          "tokens_per_question": 2624.9778,
+          "total_tokens": 118124,
+          "unrecoverable_responses": 0
+        },
+        "CLOSED_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.96,
+          "evidence_f1": 0.86077778,
+          "evidence_precision": 0.84266667,
+          "evidence_recall": 0.92166667,
+          "exact_accuracy": 0.84,
+          "input_tokens": 97108,
+          "mean_latency_seconds": 4.38310282,
+          "mean_structured_score": 0.92582906,
+          "median_latency_seconds": 3.6866045,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 17792,
+          "p95_latency_seconds": 11.804311,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 2298.0,
+          "total_tokens": 114900,
+          "unrecoverable_responses": 0
+        },
+        "OPEN_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.90933333,
+          "evidence_precision": 0.87,
+          "evidence_recall": 0.98,
+          "exact_accuracy": 0.98,
+          "input_tokens": 97058,
+          "mean_latency_seconds": 7.28367908,
+          "mean_structured_score": 0.996,
+          "median_latency_seconds": 7.1856085,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 32086,
+          "p95_latency_seconds": 14.478519,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 2582.88,
+          "total_tokens": 129144,
+          "unrecoverable_responses": 0
+        },
+        "REQUESTER": {
+          "api_calls": 36,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.74941078,
+          "evidence_precision": 0.64560185,
+          "evidence_recall": 1.0,
+          "exact_accuracy": 0.30555556,
+          "input_tokens": 73753,
+          "mean_latency_seconds": 9.50534142,
+          "mean_structured_score": 0.76314103,
+          "median_latency_seconds": 8.6463735,
+          "output_status_counts": {
+            "complete": 35,
+            "truncated_by_output_limit": 1
+          },
+          "output_tokens": 30524,
+          "p95_latency_seconds": 16.297741,
+          "parser_recoveries": 1,
+          "questions": 36,
+          "tokens_per_question": 2896.5833,
+          "total_tokens": 104277,
+          "unrecoverable_responses": 0
+        },
+        "TASK_HISTORY": {
+          "api_calls": 42,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.90302489,
+          "evidence_precision": 0.84739229,
+          "evidence_recall": 1.0,
+          "exact_accuracy": 0.26190476,
+          "input_tokens": 84287,
+          "mean_latency_seconds": 7.81678188,
+          "mean_structured_score": 0.78414348,
+          "median_latency_seconds": 7.027315,
+          "output_status_counts": {
+            "complete": 42
+          },
+          "output_tokens": 31394,
+          "p95_latency_seconds": 13.569839,
+          "parser_recoveries": 0,
+          "questions": 42,
+          "tokens_per_question": 2754.3095,
+          "total_tokens": 115681,
+          "unrecoverable_responses": 0
+        }
+      },
+      "STANDARD_RAG": {
+        "ACTOR_RESPONSIBILITY": {
+          "api_calls": 45,
+          "controlled_failure_accuracy": 0.71111111,
+          "evidence_f1": 0.72772487,
+          "evidence_precision": 0.70539683,
+          "evidence_recall": 0.87222222,
+          "exact_accuracy": 0.0,
+          "input_tokens": 52398,
+          "mean_latency_seconds": 3.09688084,
+          "mean_structured_score": 0.09218855,
+          "median_latency_seconds": 2.996103,
+          "output_status_counts": {
+            "complete": 45
+          },
+          "output_tokens": 10840,
+          "p95_latency_seconds": 5.359389,
+          "parser_recoveries": 0,
+          "questions": 45,
+          "tokens_per_question": 1405.2889,
+          "total_tokens": 63238,
+          "unrecoverable_responses": 0
+        },
+        "CLOSED_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.64,
+          "evidence_f1": 0.81756133,
+          "evidence_precision": 0.77266667,
+          "evidence_recall": 0.95159524,
+          "exact_accuracy": 0.3,
+          "input_tokens": 57526,
+          "mean_latency_seconds": 3.34175388,
+          "mean_structured_score": 0.47466667,
+          "median_latency_seconds": 3.334268,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 13401,
+          "p95_latency_seconds": 6.520638,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1418.54,
+          "total_tokens": 70927,
+          "unrecoverable_responses": 0
+        },
+        "OPEN_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.96,
+          "evidence_f1": 0.75742857,
+          "evidence_precision": 0.733,
+          "evidence_recall": 0.87,
+          "exact_accuracy": 0.14,
+          "input_tokens": 57517,
+          "mean_latency_seconds": 4.10990808,
+          "mean_structured_score": 0.49613564,
+          "median_latency_seconds": 3.4869855,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 15948,
+          "p95_latency_seconds": 8.315056,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1469.3,
+          "total_tokens": 73465,
+          "unrecoverable_responses": 0
+        },
+        "REQUESTER": {
+          "api_calls": 36,
+          "controlled_failure_accuracy": 0.97222222,
+          "evidence_f1": 0.69390332,
+          "evidence_precision": 0.61851852,
+          "evidence_recall": 0.94537037,
+          "exact_accuracy": 0.02777778,
+          "input_tokens": 41863,
+          "mean_latency_seconds": 3.87211083,
+          "mean_structured_score": 0.21388889,
+          "median_latency_seconds": 3.90196,
+          "output_status_counts": {
+            "complete": 36
+          },
+          "output_tokens": 12742,
+          "p95_latency_seconds": 5.910729,
+          "parser_recoveries": 0,
+          "questions": 36,
+          "tokens_per_question": 1516.8056,
+          "total_tokens": 54605,
+          "unrecoverable_responses": 0
+        },
+        "TASK_HISTORY": {
+          "api_calls": 42,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.85314368,
+          "evidence_precision": 0.80436508,
+          "evidence_recall": 0.94657029,
+          "exact_accuracy": 0.11904762,
+          "input_tokens": 49165,
+          "mean_latency_seconds": 4.22081393,
+          "mean_structured_score": 0.47998514,
+          "median_latency_seconds": 4.1196125,
+          "output_status_counts": {
+            "complete": 42
+          },
+          "output_tokens": 15130,
+          "p95_latency_seconds": 5.408427,
+          "parser_recoveries": 0,
+          "questions": 42,
+          "tokens_per_question": 1530.8333,
+          "total_tokens": 64295,
+          "unrecoverable_responses": 0
+        }
+      },
+      "THREAD_AWARE_RAG": {
+        "ACTOR_RESPONSIBILITY": {
+          "api_calls": 45,
+          "controlled_failure_accuracy": 0.75555556,
+          "evidence_f1": 0.72368607,
+          "evidence_precision": 0.67873016,
+          "evidence_recall": 0.87037037,
+          "exact_accuracy": 0.0,
+          "input_tokens": 53030,
+          "mean_latency_seconds": 3.27706391,
+          "mean_structured_score": 0.06224146,
+          "median_latency_seconds": 2.988773,
+          "output_status_counts": {
+            "complete": 45
+          },
+          "output_tokens": 11839,
+          "p95_latency_seconds": 6.646154,
+          "parser_recoveries": 0,
+          "questions": 45,
+          "tokens_per_question": 1441.5333,
+          "total_tokens": 64869,
+          "unrecoverable_responses": 0
+        },
+        "CLOSED_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.68,
+          "evidence_f1": 0.78486292,
+          "evidence_precision": 0.75559524,
+          "evidence_recall": 0.91916667,
+          "exact_accuracy": 0.32,
+          "input_tokens": 58483,
+          "mean_latency_seconds": 3.4050086,
+          "mean_structured_score": 0.48038095,
+          "median_latency_seconds": 3.2291055,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 13290,
+          "p95_latency_seconds": 6.352512,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1435.46,
+          "total_tokens": 71773,
+          "unrecoverable_responses": 0
+        },
+        "OPEN_TASKS": {
+          "api_calls": 50,
+          "controlled_failure_accuracy": 0.94,
+          "evidence_f1": 0.76492064,
+          "evidence_precision": 0.72421429,
+          "evidence_recall": 0.89,
+          "exact_accuracy": 0.08,
+          "input_tokens": 58433,
+          "mean_latency_seconds": 3.94319988,
+          "mean_structured_score": 0.46230536,
+          "median_latency_seconds": 3.563079,
+          "output_status_counts": {
+            "complete": 50
+          },
+          "output_tokens": 15510,
+          "p95_latency_seconds": 7.550795,
+          "parser_recoveries": 0,
+          "questions": 50,
+          "tokens_per_question": 1478.86,
+          "total_tokens": 73943,
+          "unrecoverable_responses": 0
+        },
+        "REQUESTER": {
+          "api_calls": 36,
+          "controlled_failure_accuracy": 0.91666667,
+          "evidence_f1": 0.65104618,
+          "evidence_precision": 0.57017196,
+          "evidence_recall": 0.86111111,
+          "exact_accuracy": 0.0,
+          "input_tokens": 42346,
+          "mean_latency_seconds": 3.69264619,
+          "mean_structured_score": 0.14675926,
+          "median_latency_seconds": 3.0753985,
+          "output_status_counts": {
+            "complete": 36
+          },
+          "output_tokens": 10918,
+          "p95_latency_seconds": 6.578603,
+          "parser_recoveries": 0,
+          "questions": 36,
+          "tokens_per_question": 1479.5556,
+          "total_tokens": 53264,
+          "unrecoverable_responses": 0
+        },
+        "TASK_HISTORY": {
+          "api_calls": 42,
+          "controlled_failure_accuracy": 1.0,
+          "evidence_f1": 0.86648603,
+          "evidence_precision": 0.79750567,
+          "evidence_recall": 0.99404762,
+          "exact_accuracy": 0.07142857,
+          "input_tokens": 50070,
+          "mean_latency_seconds": 4.55640274,
+          "mean_structured_score": 0.49132224,
+          "median_latency_seconds": 4.1048595,
+          "output_status_counts": {
+            "complete": 42
+          },
+          "output_tokens": 16434,
+          "p95_latency_seconds": 7.331018,
+          "parser_recoveries": 0,
+          "questions": 42,
+          "tokens_per_question": 1583.4286,
+          "total_tokens": 66504,
+          "unrecoverable_responses": 0
+        }
+      }
+    }
+  },
+  "frozen_protocol": {
+    "intended_difference": {
+      "field": "generator_model",
+      "new": "gpt-4.1-2025-04-14",
+      "old": "gpt-4o-mini-2024-07-18"
+    },
+    "status": "PASS",
+    "unexpected_scientific_parameter_differences": []
+  },
+  "history_results": {
+    "gpt-4.1-2025-04-14": {
+      "ORACLE_TASK_STATE_RAG": {
+        "api_calls": 42,
+        "controlled_failure_accuracy": 1.0,
+        "evidence_f1": 0.92569917,
+        "evidence_precision": 0.87976191,
+        "evidence_recall": 1.0,
+        "exact_accuracy": 0.69047619,
+        "input_tokens": 84287,
+        "mean_latency_seconds": 281.82567455,
+        "mean_structured_score": 0.91742036,
+        "median_latency_seconds": 12.3927115,
+        "output_status_counts": {
+          "complete": 42
+        },
+        "output_tokens": 24688,
+        "p95_latency_seconds": 2703.180165,
+        "parser_recoveries": 0,
+        "questions": 42,
+        "tokens_per_question": 2594.6429,
+        "total_tokens": 108975,
+        "unrecoverable_responses": 0
+      },
+      "STANDARD_RAG": {
+        "api_calls": 42,
+        "controlled_failure_accuracy": 1.0,
+        "evidence_f1": 0.85113379,
+        "evidence_precision": 0.85039683,
+        "evidence_recall": 0.89280045,
+        "exact_accuracy": 0.0952381,
+        "input_tokens": 49165,
+        "mean_latency_seconds": 69.63887276,
+        "mean_structured_score": 0.51125284,
+        "median_latency_seconds": 5.701276,
+        "output_status_counts": {
+          "complete": 42
+        },
+        "output_tokens": 18096,
+        "p95_latency_seconds": 17.092138,
+        "parser_recoveries": 0,
+        "questions": 42,
+        "tokens_per_question": 1601.4524,
+        "total_tokens": 67261,
+        "unrecoverable_responses": 0
+      },
+      "THREAD_AWARE_RAG": {
+        "api_calls": 42,
+        "controlled_failure_accuracy": 1.0,
+        "evidence_f1": 0.88125618,
+        "evidence_precision": 0.86190476,
+        "evidence_recall": 0.93469388,
+        "exact_accuracy": 0.11904762,
+        "input_tokens": 50070,
+        "mean_latency_seconds": 69.46040036,
+        "mean_structured_score": 0.52494331,
+        "median_latency_seconds": 4.656141,
+        "output_status_counts": {
+          "complete": 42
+        },
+        "output_tokens": 19731,
+        "p95_latency_seconds": 13.797108,
+        "parser_recoveries": 0,
+        "questions": 42,
+        "tokens_per_question": 1661.9286,
+        "total_tokens": 69801,
+        "unrecoverable_responses": 0
+      }
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "ORACLE_TASK_STATE_RAG": {
+        "api_calls": 42,
+        "controlled_failure_accuracy": 1.0,
+        "evidence_f1": 0.90302489,
+        "evidence_precision": 0.84739229,
+        "evidence_recall": 1.0,
+        "exact_accuracy": 0.26190476,
+        "input_tokens": 84287,
+        "mean_latency_seconds": 7.81678188,
+        "mean_structured_score": 0.78414348,
+        "median_latency_seconds": 7.027315,
+        "output_status_counts": {
+          "complete": 42
+        },
+        "output_tokens": 31394,
+        "p95_latency_seconds": 13.569839,
+        "parser_recoveries": 0,
+        "questions": 42,
+        "tokens_per_question": 2754.3095,
+        "total_tokens": 115681,
+        "unrecoverable_responses": 0
+      },
+      "STANDARD_RAG": {
+        "api_calls": 42,
+        "controlled_failure_accuracy": 1.0,
+        "evidence_f1": 0.85314368,
+        "evidence_precision": 0.80436508,
+        "evidence_recall": 0.94657029,
+        "exact_accuracy": 0.11904762,
+        "input_tokens": 49165,
+        "mean_latency_seconds": 4.22081393,
+        "mean_structured_score": 0.47998514,
+        "median_latency_seconds": 4.1196125,
+        "output_status_counts": {
+          "complete": 42
+        },
+        "output_tokens": 15130,
+        "p95_latency_seconds": 5.408427,
+        "parser_recoveries": 0,
+        "questions": 42,
+        "tokens_per_question": 1530.8333,
+        "total_tokens": 64295,
+        "unrecoverable_responses": 0
+      },
+      "THREAD_AWARE_RAG": {
+        "api_calls": 42,
+        "controlled_failure_accuracy": 1.0,
+        "evidence_f1": 0.86648603,
+        "evidence_precision": 0.79750567,
+        "evidence_recall": 0.99404762,
+        "exact_accuracy": 0.07142857,
+        "input_tokens": 50070,
+        "mean_latency_seconds": 4.55640274,
+        "mean_structured_score": 0.49132224,
+        "median_latency_seconds": 4.1048595,
+        "output_status_counts": {
+          "complete": 42
+        },
+        "output_tokens": 16434,
+        "p95_latency_seconds": 7.331018,
+        "parser_recoveries": 0,
+        "questions": 42,
+        "tokens_per_question": 1583.4286,
+        "total_tokens": 66504,
+        "unrecoverable_responses": 0
+      }
+    }
+  },
+  "limitations": [
+    "Temperature 0 does not guarantee bit-identical service output.",
+    "Different models may use different tokenization and response lengths.",
+    "Oracle task state is human-derived; automatic extraction is not evaluated."
+  ],
+  "new_run_id": "run_gpt41_2025_04_14_max2000_20260824T103500Z",
+  "new_run_pairwise_statistics": [
+    {
+      "absolute_exact_difference_left_minus_right": -0.00896861,
+      "absolute_structured_difference_left_minus_right": -0.01899654,
+      "left_condition": "STANDARD_RAG",
+      "left_exact_accuracy": 0.12107623,
+      "left_structured_score": 0.37369256,
+      "left_wins": 5,
+      "mcnemar_holm_p_value": 1.0,
+      "mcnemar_p_value": 0.7744140625,
+      "primary_family_test": "True",
+      "questions": 223,
+      "rank_biserial_effect_left_minus_right": -0.15824916,
+      "right_condition": "THREAD_AWARE_RAG",
+      "right_exact_accuracy": 0.13004484,
+      "right_structured_score": 0.3926891,
+      "right_wins": 7,
+      "scope": "PRIMARY_OVERALL",
+      "small_sample_test_suppressed": "False",
+      "ties": 211,
+      "wilcoxon_holm_p_value": 1.0,
+      "wilcoxon_n_nonzero": 54,
+      "wilcoxon_p_value": 0.31332734103021687
+    },
+    {
+      "absolute_exact_difference_left_minus_right": -0.02380952,
+      "absolute_structured_difference_left_minus_right": -0.01369047,
+      "left_condition": "STANDARD_RAG",
+      "left_exact_accuracy": 0.0952381,
+      "left_structured_score": 0.51125284,
+      "left_wins": 1,
+      "mcnemar_holm_p_value": 1.0,
+      "mcnemar_p_value": 1.0,
+      "primary_family_test": "True",
+      "questions": 42,
+      "rank_biserial_effect_left_minus_right": -0.06190476,
+      "right_condition": "THREAD_AWARE_RAG",
+      "right_exact_accuracy": 0.11904762,
+      "right_structured_score": 0.52494331,
+      "right_wins": 2,
+      "scope": "TASK_HISTORY",
+      "small_sample_test_suppressed": "False",
+      "ties": 39,
+      "wilcoxon_holm_p_value": 1.0,
+      "wilcoxon_n_nonzero": 20,
+      "wilcoxon_p_value": 0.8225779304211256
+    },
+    {
+      "absolute_exact_difference_left_minus_right": -0.69955157,
+      "absolute_structured_difference_left_minus_right": -0.52996412,
+      "left_condition": "THREAD_AWARE_RAG",
+      "left_exact_accuracy": 0.13004484,
+      "left_structured_score": 0.3926891,
+      "left_wins": 2,
+      "mcnemar_holm_p_value": 2.9966028693599167e-43,
+      "mcnemar_p_value": 1.7627075702117157e-44,
+      "primary_family_test": "True",
+      "questions": 223,
+      "rank_biserial_effect_left_minus_right": -0.99807842,
+      "right_condition": "ORACLE_TASK_STATE_RAG",
+      "right_exact_accuracy": 0.82959641,
+      "right_structured_score": 0.92265322,
+      "right_wins": 158,
+      "scope": "PRIMARY_OVERALL",
+      "small_sample_test_suppressed": "False",
+      "ties": 63,
+      "wilcoxon_holm_p_value": 6.775154478117258e-31,
+      "wilcoxon_n_nonzero": 182,
+      "wilcoxon_p_value": 3.985384987127799e-32
+    },
+    {
+      "absolute_exact_difference_left_minus_right": -0.57142857,
+      "absolute_structured_difference_left_minus_right": -0.39247705,
+      "left_condition": "THREAD_AWARE_RAG",
+      "left_exact_accuracy": 0.11904762,
+      "left_structured_score": 0.52494331,
+      "left_wins": 2,
+      "mcnemar_holm_p_value": 2.1226704120635986e-05,
+      "mcnemar_p_value": 3.032386302947998e-06,
+      "primary_family_test": "True",
+      "questions": 42,
+      "rank_biserial_effect_left_minus_right": -0.97948718,
+      "right_condition": "ORACLE_TASK_STATE_RAG",
+      "right_exact_accuracy": 0.69047619,
+      "right_structured_score": 0.91742036,
+      "right_wins": 26,
+      "scope": "TASK_HISTORY",
+      "small_sample_test_suppressed": "False",
+      "ties": 14,
+      "wilcoxon_holm_p_value": 1.0799641223104385e-06,
+      "wilcoxon_n_nonzero": 39,
+      "wilcoxon_p_value": 9.817855657367622e-08
+    },
+    {
+      "absolute_exact_difference_left_minus_right": -0.70852018,
+      "absolute_structured_difference_left_minus_right": -0.54896066,
+      "left_condition": "STANDARD_RAG",
+      "left_exact_accuracy": 0.12107623,
+      "left_structured_score": 0.37369256,
+      "left_wins": 1,
+      "mcnemar_holm_p_value": 3.9657841304817577e-45,
+      "mcnemar_p_value": 2.2032134058231987e-46,
+      "primary_family_test": "True",
+      "questions": 223,
+      "rank_biserial_effect_left_minus_right": -0.9987213,
+      "right_condition": "ORACLE_TASK_STATE_RAG",
+      "right_exact_accuracy": 0.82959641,
+      "right_structured_score": 0.92265322,
+      "right_wins": 159,
+      "scope": "PRIMARY_OVERALL",
+      "small_sample_test_suppressed": "False",
+      "ties": 63,
+      "wilcoxon_holm_p_value": 1.8890493867436166e-31,
+      "wilcoxon_n_nonzero": 185,
+      "wilcoxon_p_value": 1.0494718815242314e-32
+    },
+    {
+      "absolute_exact_difference_left_minus_right": -0.59523809,
+      "absolute_structured_difference_left_minus_right": -0.40616752,
+      "left_condition": "STANDARD_RAG",
+      "left_exact_accuracy": 0.0952381,
+      "left_structured_score": 0.51125284,
+      "left_wins": 1,
+      "mcnemar_holm_p_value": 4.172325134277344e-06,
+      "mcnemar_p_value": 4.172325134277344e-07,
+      "primary_family_test": "True",
+      "questions": 42,
+      "rank_biserial_effect_left_minus_right": -0.98333333,
+      "right_condition": "ORACLE_TASK_STATE_RAG",
+      "right_exact_accuracy": 0.69047619,
+      "right_structured_score": 0.91742036,
+      "right_wins": 26,
+      "scope": "TASK_HISTORY",
+      "small_sample_test_suppressed": "False",
+      "ties": 15,
+      "wilcoxon_holm_p_value": 1.0616945089081154e-06,
+      "wilcoxon_n_nonzero": 39,
+      "wilcoxon_p_value": 8.847454240900961e-08
+    }
+  ],
+  "no_task_control_results": {
+    "gpt-4.1-2025-04-14": {
+      "ORACLE_TASK_STATE_RAG": {
+        "api_calls": 19,
+        "controlled_failure_accuracy": 0.84210526,
+        "evidence_f1": 0.86842105,
+        "evidence_precision": 0.85964912,
+        "evidence_recall": 0.89473684,
+        "exact_accuracy": 0.84210526,
+        "input_tokens": 37370,
+        "mean_latency_seconds": 22.60768532,
+        "mean_structured_score": 0.84210526,
+        "median_latency_seconds": 9.697817,
+        "output_status_counts": {
+          "complete": 19
+        },
+        "output_tokens": 2189,
+        "p95_latency_seconds": 141.322828,
+        "parser_recoveries": 0,
+        "questions": 19,
+        "tokens_per_question": 2082.0526,
+        "total_tokens": 39559,
+        "unrecoverable_responses": 0
+      },
+      "STANDARD_RAG": {
+        "api_calls": 19,
+        "controlled_failure_accuracy": 0.73684211,
+        "evidence_f1": 0.87719298,
+        "evidence_precision": 0.86842105,
+        "evidence_recall": 0.89473684,
+        "exact_accuracy": 0.73684211,
+        "input_tokens": 23460,
+        "mean_latency_seconds": 5.06814326,
+        "mean_structured_score": 0.73684211,
+        "median_latency_seconds": 3.747098,
+        "output_status_counts": {
+          "complete": 19
+        },
+        "output_tokens": 1890,
+        "p95_latency_seconds": 17.59094,
+        "parser_recoveries": 0,
+        "questions": 19,
+        "tokens_per_question": 1334.2105,
+        "total_tokens": 25350,
+        "unrecoverable_responses": 0
+      },
+      "THREAD_AWARE_RAG": {
+        "api_calls": 19,
+        "controlled_failure_accuracy": 0.73684211,
+        "evidence_f1": 1.0,
+        "evidence_precision": 1.0,
+        "evidence_recall": 1.0,
+        "exact_accuracy": 0.73684211,
+        "input_tokens": 23864,
+        "mean_latency_seconds": 5.65433879,
+        "mean_structured_score": 0.73684211,
+        "median_latency_seconds": 3.379136,
+        "output_status_counts": {
+          "complete": 19
+        },
+        "output_tokens": 1915,
+        "p95_latency_seconds": 27.556642,
+        "parser_recoveries": 0,
+        "questions": 19,
+        "tokens_per_question": 1356.7895,
+        "total_tokens": 25779,
+        "unrecoverable_responses": 0
+      }
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "ORACLE_TASK_STATE_RAG": {
+        "api_calls": 19,
+        "controlled_failure_accuracy": 0.63157895,
+        "evidence_f1": 0.57894737,
+        "evidence_precision": 0.55263158,
+        "evidence_recall": 0.63157895,
+        "exact_accuracy": 0.63157895,
+        "input_tokens": 37370,
+        "mean_latency_seconds": 1.98481563,
+        "mean_structured_score": 0.63157895,
+        "median_latency_seconds": 1.328791,
+        "output_status_counts": {
+          "complete": 19
+        },
+        "output_tokens": 2573,
+        "p95_latency_seconds": 5.803552,
+        "parser_recoveries": 0,
+        "questions": 19,
+        "tokens_per_question": 2102.2632,
+        "total_tokens": 39943,
+        "unrecoverable_responses": 0
+      },
+      "STANDARD_RAG": {
+        "api_calls": 19,
+        "controlled_failure_accuracy": 0.94736842,
+        "evidence_f1": 0.68872181,
+        "evidence_precision": 0.62280702,
+        "evidence_recall": 0.89473684,
+        "exact_accuracy": 0.94736842,
+        "input_tokens": 23460,
+        "mean_latency_seconds": 1.662868,
+        "mean_structured_score": 0.94736842,
+        "median_latency_seconds": 1.475622,
+        "output_status_counts": {
+          "complete": 19
+        },
+        "output_tokens": 1521,
+        "p95_latency_seconds": 2.858438,
+        "parser_recoveries": 0,
+        "questions": 19,
+        "tokens_per_question": 1314.7895,
+        "total_tokens": 24981,
+        "unrecoverable_responses": 0
+      },
+      "THREAD_AWARE_RAG": {
+        "api_calls": 19,
+        "controlled_failure_accuracy": 0.94736842,
+        "evidence_f1": 0.9122807,
+        "evidence_precision": 0.89473684,
+        "evidence_recall": 0.94736842,
+        "exact_accuracy": 0.94736842,
+        "input_tokens": 23864,
+        "mean_latency_seconds": 1.45856416,
+        "mean_structured_score": 0.94736842,
+        "median_latency_seconds": 1.163888,
+        "output_status_counts": {
+          "complete": 19
+        },
+        "output_tokens": 1320,
+        "p95_latency_seconds": 3.908249,
+        "parser_recoveries": 0,
+        "questions": 19,
+        "tokens_per_question": 1325.4737,
+        "total_tokens": 25184,
+        "unrecoverable_responses": 0
+      }
+    }
+  },
+  "old_run_id": "run_gpt4omini_max2000_20260824T075651Z",
+  "oracle_advantage_substantial": true,
+  "output_completeness": {
+    "gpt-4.1-2025-04-14": {
+      "api_calls": 813,
+      "controlled_failure_accuracy": 0.92127921,
+      "evidence_f1": 0.77239192,
+      "evidence_precision": 0.8043985,
+      "evidence_recall": 0.81947959,
+      "exact_accuracy": 0.38868389,
+      "input_tokens": 1175860,
+      "mean_latency_seconds": 31.42410495,
+      "mean_structured_score": 0.56125863,
+      "median_latency_seconds": 5.876821,
+      "output_status_counts": {
+        "complete": 812,
+        "truncated_by_output_limit": 1
+      },
+      "output_tokens": 346622,
+      "p95_latency_seconds": 43.73227,
+      "parser_recoveries": 1,
+      "questions": 813,
+      "tokens_per_question": 1872.6716,
+      "total_tokens": 1522482,
+      "unrecoverable_responses": 0
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "api_calls": 813,
+      "controlled_failure_accuracy": 0.88929889,
+      "evidence_f1": 0.7871901,
+      "evidence_precision": 0.73918321,
+      "evidence_recall": 0.92690945,
+      "exact_accuracy": 0.33333333,
+      "input_tokens": 1175848,
+      "mean_latency_seconds": 4.55334583,
+      "mean_structured_score": 0.53578446,
+      "median_latency_seconds": 3.814201,
+      "output_status_counts": {
+        "complete": 812,
+        "truncated_by_output_limit": 1
+      },
+      "output_tokens": 309526,
+      "p95_latency_seconds": 10.896768,
+      "parser_recoveries": 1,
+      "questions": 813,
+      "tokens_per_question": 1827.0283,
+      "total_tokens": 1485374,
+      "unrecoverable_responses": 0
+    }
+  },
+  "pairs_per_run": 813,
+  "pattern": {
+    "interpretation": "STANDARD and THREAD_AWARE remain similar and both remain well below ORACLE under both generators.",
+    "label": "A"
+  },
+  "primary_structured_condition_gains_new_minus_old": {
+    "ORACLE_TASK_STATE_RAG": 0.02867381,
+    "STANDARD_RAG": 0.01249087,
+    "THREAD_AWARE_RAG": 0.05253642
+  },
+  "questions": 271,
+  "results": {
+    "gpt-4.1-2025-04-14": {
+      "ORACLE_TASK_STATE_RAG": {
+        "overall": {
+          "api_calls": 271,
+          "controlled_failure_accuracy": 0.95202952,
+          "evidence_f1": 0.82852144,
+          "evidence_precision": 0.77229321,
+          "evidence_recall": 0.96562116,
+          "exact_accuracy": 0.8302583,
+          "input_tokens": 540262,
+          "mean_latency_seconds": 63.12891597,
+          "mean_structured_score": 0.9142128,
+          "median_latency_seconds": 10.01124,
+          "output_status_counts": {
+            "complete": 270,
+            "truncated_by_output_limit": 1
+          },
+          "output_tokens": 148659,
+          "p95_latency_seconds": 129.515108,
+          "parser_recoveries": 1,
+          "questions": 271,
+          "tokens_per_question": 2542.1439,
+          "total_tokens": 688921,
+          "unrecoverable_responses": 0
+        },
+        "primary": {
+          "api_calls": 223,
+          "controlled_failure_accuracy": 0.95515695,
+          "evidence_f1": 0.83378507,
+          "evidence_precision": 0.77780515,
+          "evidence_recall": 0.97167414,
+          "exact_accuracy": 0.82959641,
+          "input_tokens": 441122,
+          "mean_latency_seconds": 71.54671143,
+          "mean_structured_score": 0.92265322,
+          "median_latency_seconds": 10.343852,
+          "output_status_counts": {
+            "complete": 222,
+            "truncated_by_output_limit": 1
+          },
+          "output_tokens": 133916,
+          "p95_latency_seconds": 129.515108,
+          "parser_recoveries": 1,
+          "questions": 223,
+          "tokens_per_question": 2578.6457,
+          "total_tokens": 575038,
+          "unrecoverable_responses": 0
+        }
+      },
+      "STANDARD_RAG": {
+        "overall": {
+          "api_calls": 271,
+          "controlled_failure_accuracy": 0.90774908,
+          "evidence_f1": 0.72867821,
+          "evidence_precision": 0.8096556,
+          "evidence_recall": 0.73075031,
+          "exact_accuracy": 0.16605166,
+          "input_tokens": 315594,
+          "mean_latency_seconds": 15.58655146,
+          "mean_structured_score": 0.37724517,
+          "median_latency_seconds": 5.149586,
+          "output_status_counts": {
+            "complete": 271
+          },
+          "output_tokens": 96668,
+          "p95_latency_seconds": 12.406249,
+          "parser_recoveries": 0,
+          "questions": 271,
+          "tokens_per_question": 1521.262,
+          "total_tokens": 412262,
+          "unrecoverable_responses": 0
+        },
+        "primary": {
+          "api_calls": 223,
+          "controlled_failure_accuracy": 0.9103139,
+          "evidence_f1": 0.71247228,
+          "evidence_precision": 0.80493274,
+          "evidence_recall": 0.70455904,
+          "exact_accuracy": 0.12107623,
+          "input_tokens": 258481,
+          "mean_latency_seconds": 17.91920671,
+          "mean_structured_score": 0.37369256,
+          "median_latency_seconds": 5.367733,
+          "output_status_counts": {
+            "complete": 223
+          },
+          "output_tokens": 85833,
+          "p95_latency_seconds": 12.406249,
+          "parser_recoveries": 0,
+          "questions": 223,
+          "tokens_per_question": 1544.009,
+          "total_tokens": 344314,
+          "unrecoverable_responses": 0
+        }
+      },
+      "THREAD_AWARE_RAG": {
+        "overall": {
+          "api_calls": 271,
+          "controlled_failure_accuracy": 0.90405904,
+          "evidence_f1": 0.75997611,
+          "evidence_precision": 0.83124671,
+          "evidence_recall": 0.7620673,
+          "exact_accuracy": 0.1697417,
+          "input_tokens": 320004,
+          "mean_latency_seconds": 15.55684744,
+          "mean_structured_score": 0.39231791,
+          "median_latency_seconds": 4.509262,
+          "output_status_counts": {
+            "complete": 271
+          },
+          "output_tokens": 101295,
+          "p95_latency_seconds": 13.323844,
+          "parser_recoveries": 0,
+          "questions": 271,
+          "tokens_per_question": 1554.6089,
+          "total_tokens": 421299,
+          "unrecoverable_responses": 0
+        },
+        "primary": {
+          "api_calls": 223,
+          "controlled_failure_accuracy": 0.9058296,
+          "evidence_f1": 0.73421397,
+          "evidence_precision": 0.81360773,
+          "evidence_recall": 0.73177984,
+          "exact_accuracy": 0.13004484,
+          "input_tokens": 262362,
+          "mean_latency_seconds": 17.85345642,
+          "mean_structured_score": 0.3926891,
+          "median_latency_seconds": 4.872684,
+          "output_status_counts": {
+            "complete": 223
+          },
+          "output_tokens": 90322,
+          "p95_latency_seconds": 13.323844,
+          "parser_recoveries": 0,
+          "questions": 223,
+          "tokens_per_question": 1581.5426,
+          "total_tokens": 352684,
+          "unrecoverable_responses": 0
+        }
+      }
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "ORACLE_TASK_STATE_RAG": {
+        "overall": {
+          "api_calls": 271,
+          "controlled_failure_accuracy": 0.96678967,
+          "evidence_f1": 0.85577037,
+          "evidence_precision": 0.81137322,
+          "evidence_recall": 0.95602706,
+          "exact_accuracy": 0.65682657,
+          "input_tokens": 540262,
+          "mean_latency_seconds": 6.57005628,
+          "mean_structured_score": 0.8663865,
+          "median_latency_seconds": 5.888662,
+          "output_status_counts": {
+            "complete": 270,
+            "truncated_by_output_limit": 1
+          },
+          "output_tokens": 155638,
+          "p95_latency_seconds": 13.862343,
+          "parser_recoveries": 1,
+          "questions": 271,
+          "tokens_per_question": 2567.8967,
+          "total_tokens": 695900,
+          "unrecoverable_responses": 0
+        },
+        "primary": {
+          "api_calls": 223,
+          "controlled_failure_accuracy": 0.99103139,
+          "evidence_f1": 0.87993576,
+          "evidence_precision": 0.83542067,
+          "evidence_recall": 0.97795217,
+          "exact_accuracy": 0.65919283,
+          "input_tokens": 441122,
+          "mean_latency_seconds": 7.16054041,
+          "mean_structured_score": 0.89397941,
+          "median_latency_seconds": 6.347995,
+          "output_status_counts": {
+            "complete": 222,
+            "truncated_by_output_limit": 1
+          },
+          "output_tokens": 141004,
+          "p95_latency_seconds": 14.211202,
+          "parser_recoveries": 1,
+          "questions": 223,
+          "tokens_per_question": 2610.4305,
+          "total_tokens": 582126,
+          "unrecoverable_responses": 0
+        }
+      },
+      "STANDARD_RAG": {
+        "overall": {
+          "api_calls": 271,
+          "controlled_failure_accuracy": 0.84870849,
+          "evidence_f1": 0.75128619,
+          "evidence_precision": 0.70421718,
+          "evidence_recall": 0.91495344,
+          "exact_accuracy": 0.18081181,
+          "input_tokens": 315582,
+          "mean_latency_seconds": 3.54043069,
+          "mean_structured_score": 0.37914382,
+          "median_latency_seconds": 3.460274,
+          "output_status_counts": {
+            "complete": 271
+          },
+          "output_tokens": 76966,
+          "p95_latency_seconds": 6.24016,
+          "parser_recoveries": 0,
+          "questions": 271,
+          "tokens_per_question": 1448.5166,
+          "total_tokens": 392548,
+          "unrecoverable_responses": 0
+        },
+        "primary": {
+          "api_calls": 223,
+          "controlled_failure_accuracy": 0.84753363,
+          "evidence_f1": 0.7726891,
+          "evidence_precision": 0.73128337,
+          "evidence_recall": 0.91533205,
+          "exact_accuracy": 0.12556054,
+          "input_tokens": 258469,
+          "mean_latency_seconds": 3.71575296,
+          "mean_structured_score": 0.36120169,
+          "median_latency_seconds": 3.595964,
+          "output_status_counts": {
+            "complete": 223
+          },
+          "output_tokens": 68061,
+          "p95_latency_seconds": 6.520638,
+          "parser_recoveries": 0,
+          "questions": 223,
+          "tokens_per_question": 1464.2601,
+          "total_tokens": 326530,
+          "unrecoverable_responses": 0
+        }
+      },
+      "THREAD_AWARE_RAG": {
+        "overall": {
+          "api_calls": 271,
+          "controlled_failure_accuracy": 0.85239852,
+          "evidence_f1": 0.75451373,
+          "evidence_precision": 0.70195923,
+          "evidence_recall": 0.90974785,
+          "exact_accuracy": 0.16236162,
+          "input_tokens": 320004,
+          "mean_latency_seconds": 3.54955053,
+          "mean_structured_score": 0.36182306,
+          "median_latency_seconds": 3.322552,
+          "output_status_counts": {
+            "complete": 271
+          },
+          "output_tokens": 76922,
+          "p95_latency_seconds": 6.688673,
+          "parser_recoveries": 0,
+          "questions": 271,
+          "tokens_per_question": 1464.6716,
+          "total_tokens": 396926,
+          "unrecoverable_responses": 0
+        },
+        "primary": {
+          "api_calls": 223,
+          "controlled_failure_accuracy": 0.85201794,
+          "evidence_f1": 0.76181671,
+          "evidence_precision": 0.7110079,
+          "evidence_recall": 0.90751121,
+          "exact_accuracy": 0.10313901,
+          "input_tokens": 262362,
+          "mean_latency_seconds": 3.76315013,
+          "mean_structured_score": 0.34015268,
+          "median_latency_seconds": 3.457097,
+          "output_status_counts": {
+            "complete": 223
+          },
+          "output_tokens": 67991,
+          "p95_latency_seconds": 6.742022,
+          "parser_recoveries": 0,
+          "questions": 223,
+          "tokens_per_question": 1481.4036,
+          "total_tokens": 330353,
+          "unrecoverable_responses": 0
+        }
+      }
+    }
+  },
+  "schema_version": "1.0",
+  "task_state_uplift": {
+    "gpt-4.1-2025-04-14": {
+      "primary_exact": {
+        "oracle_minus_standard": 0.70852018,
+        "oracle_minus_thread_aware": 0.69955157
+      },
+      "primary_structured": {
+        "oracle_minus_standard": 0.54896066,
+        "oracle_minus_thread_aware": 0.52996412
+      }
+    },
+    "gpt-4o-mini-2024-07-18": {
+      "primary_exact": {
+        "oracle_minus_standard": 0.53363229,
+        "oracle_minus_thread_aware": 0.55605382
+      },
+      "primary_structured": {
+        "oracle_minus_standard": 0.53277772,
+        "oracle_minus_thread_aware": 0.55382673
+      }
+    }
+  }
+}

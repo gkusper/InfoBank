@@ -157,6 +157,12 @@ def test_real_provider_cli_exposes_required_guards() -> None:
         assert flag in source
 
 
+def test_real_provider_cli_defaults_to_openai_when_provider_is_omitted() -> None:
+    source = (Path(__file__).parents[2] / "scripts/run_real_provider_evaluation.py").read_text(encoding="utf-8")
+
+    assert 'parser.add_argument("--provider", choices=["deterministic-mock", "openai", "anthropic"], default="openai")' in source
+
+
 def _write_cli_fixture(tmp_path: Path, query_count: int) -> tuple[Path, Path, Path]:
     query_input = tmp_path / "query_inputs.jsonl"
     query_input.write_text(

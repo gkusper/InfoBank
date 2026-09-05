@@ -209,7 +209,7 @@ def full_experiment_preflight_plan(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--provider", choices=["deterministic-mock", "openai", "anthropic"], default="deterministic-mock")
+    parser.add_argument("--provider", choices=["deterministic-mock", "openai", "anthropic"], default="openai")
     parser.add_argument("--allow-network-provider", action="store_true")
     parser.add_argument("--max-cases", type=int)
     parser.add_argument("--estimate-only", "--estimated-cost-only", dest="estimate_only", action="store_true")

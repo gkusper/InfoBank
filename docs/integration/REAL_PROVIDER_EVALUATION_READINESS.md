@@ -6,12 +6,12 @@ This gate records the 2026-09-04 Anthropic Claude readiness work for the
 prepared OpenAI-embedded corpus. A full 630-record Claude experiment was not
 run. The only real provider work was the bounded contract smoke, a two-case C3
 smoke, and a six-case/30-record readiness pilot. The implementation does not
-call a network provider by default and never falls back from a requested
-OpenAI or Anthropic run to a mock.
+execute a network provider without `--allow-network-provider` and never falls
+back from a requested OpenAI or Anthropic run to a mock.
 
 ## Fixed configuration
 
-- provider must be explicitly `openai` or `anthropic`;
+- provider defaults to `openai` when omitted; set `--provider anthropic` for Claude;
 - OpenAI generation model default: `gpt-4o-mini`;
 - Anthropic generation model default: `claude-haiku-4-5-20251001`;
 - embedding provider: `openai`;

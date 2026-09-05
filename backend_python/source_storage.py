@@ -15,6 +15,33 @@ BACKEND_DIR = Path(__file__).resolve().parent
 DEFAULT_SOURCE_STORAGE_DIR = BACKEND_DIR / "runtime" / "source_storage"
 
 
+def _windows_api_path(path: Path) -> str | Path:
+    if os.name != "nt":
+        return path
+    resolved = str(path.resolve())
+    if resolved.startswith("\\\\?\\"):
+        return resolved
+    if resolved.startswith("\\\\"):
+        return "\\\\?\\UNC\\" + resolved.lstrip("\\")
+    return "\\\\?\\" + resolved
+
+
+def _path_exists(path: Path) -> bool:
+    return os.path.exists(_windows_api_path(path))
+
+
+def _make_dirs(path: Path, *, exist_ok: bool) -> None:
+    os.makedirs(_windows_api_path(path), exist_ok=exist_ok)
+
+
+def _replace(source: Path, destination: Path) -> None:
+    os.replace(_windows_api_path(source), _windows_api_path(destination))
+
+
+def _remove_tree(path: Path) -> None:
+    shutil.rmtree(_windows_api_path(path))
+
+
 @dataclass(frozen=True)
 class StoredSource:
     relative_path: str
@@ -62,21 +89,25 @@ class SourceStorage:
             raise ValueError("Source content must not be empty")
         relative = self.relative_path(document_id)
         destination = self.resolve(relative)
-        destination.parent.mkdir(parents=True, exist_ok=False)
+        _make_dirs(destination.parent, exist_ok=False)
         temporary_path: Path | None = None
         try:
-            descriptor, temporary_name = tempfile.mkstemp(prefix="source-", suffix=".tmp", dir=destination.parent)
+            descriptor, temporary_name = tempfile.mkstemp(
+                prefix="source-",
+                suffix=".tmp",
+                dir=_windows_api_path(destination.parent),
+            )
             temporary_path = Path(temporary_name)
             with os.fdopen(descriptor, "wb") as handle:
                 handle.write(content)
                 handle.flush()
                 os.fsync(handle.fileno())
-            if destination.exists():
+            if _path_exists(destination):
                 raise FileExistsError(f"Source already exists for document {document_id}")
-            os.replace(temporary_path, destination)
+            _replace(temporary_path, destination)
             temporary_path = None
         except Exception:
-            if temporary_path and temporary_path.exists():
+            if temporary_path and _path_exists(temporary_path):
                 temporary_path.unlink()
             if destination.parent.exists() and not any(destination.parent.iterdir()):
                 destination.parent.rmdir()
@@ -114,8 +145,8 @@ class SourceStorage:
         document_dir = path.parent
         if document_dir.name != canonical or document_dir.parent != self.root:
             raise ValueError("Source path does not belong to document namespace")
-        if document_dir.exists():
-            shutil.rmtree(document_dir)
+        if _path_exists(document_dir):
+            _remove_tree(document_dir)
 
     def stage_remove(self, document_id: str, relative_path: str | Path) -> Path | None:
         canonical = self.validate_document_id(document_id)
@@ -123,12 +154,12 @@ class SourceStorage:
         document_dir = path.parent
         if document_dir.name != canonical or document_dir.parent != self.root:
             raise ValueError("Source path does not belong to document namespace")
-        if not document_dir.exists():
+        if not _path_exists(document_dir):
             return None
         trash_root = self.root / ".trash"
-        trash_root.mkdir(parents=True, exist_ok=True)
+        _make_dirs(trash_root, exist_ok=True)
         staged = trash_root / f"{canonical}-{uuid.uuid4()}"
-        os.replace(document_dir, staged)
+        _replace(document_dir, staged)
         return staged
 
     def _validate_staged(self, document_id: str, staged: Path) -> Path:
@@ -148,15 +179,15 @@ class SourceStorage:
             return
         staged = self._validate_staged(document_id, staged)
         destination = self.root / self.validate_document_id(document_id)
-        if destination.exists():
+        if _path_exists(destination):
             raise FileExistsError("Cannot restore staged source over an existing document source")
-        os.replace(staged, destination)
+        _replace(staged, destination)
 
     def purge_staged(self, document_id: str, staged: Path | None) -> None:
         if staged:
             staged = self._validate_staged(document_id, staged)
-            if staged.exists():
-                shutil.rmtree(staged)
+            if _path_exists(staged):
+                _remove_tree(staged)
 
     def purge_document_trash(self, document_id: str) -> int:
         canonical = self.validate_document_id(document_id)
@@ -167,6 +198,6 @@ class SourceStorage:
         for candidate in trash_root.glob(f"{canonical}-*"):
             validated = self._validate_staged(canonical, candidate)
             if validated.is_dir():
-                shutil.rmtree(validated)
+                _remove_tree(validated)
                 removed += 1
         return removed

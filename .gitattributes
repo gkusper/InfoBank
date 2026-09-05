@@ -1,5 +1,13 @@
 *.pdf binary
 *.zip binary
+evaluation/wolala2026/**/*.jsonl text eol=lf
+evaluation/wolala2026/**/*.py text eol=lf
+evaluation/wolala2026/**/*.txt text eol=lf
+evaluation/wolala2026/WOLALA2026_LATENCY_DEFINITION_v1.md text eol=lf
+evaluation/wolala2026/WOLALA2026_PILOT_PROTOCOL_v1.md text eol=lf
+evaluation/wolala2026/WOLALA2026_PILOT_PROTOCOL_v2.md text eol=lf
+evaluation/wolala2026/WOLALA2026_PILOT_PROTOCOL_v3.md text eol=lf
+evaluation/wolala2026/WOLALA2026_STATISTICAL_ANALYSIS_PLAN_v1.md text eol=lf
 artifacts/s1s2_freeze_working_tree.patch whitespace=-blank-at-eol,-blank-at-eof
 artifacts/s3_s6_freeze/s3_s6_freeze_working_tree.patch whitespace=-blank-at-eol,-blank-at-eof
 artifacts/s1s2_freeze/S1_S2_JOURNAL_BENCHMARK_V2/docs/integration/*.md whitespace=-blank-at-eof

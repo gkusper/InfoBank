@@ -13,6 +13,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 import shutil
 import uuid
@@ -62,17 +63,57 @@ STOP_KEYWORDS = {
 ANSWER_OUTPUT_CLASSES = {"FULL_ANSWER", "CONSTRAINED_ANSWER", "AGGREGATE_RESULT"}
 
 
+def _windows_api_path(path: Path) -> str | Path:
+    if os.name != "nt":
+        return path
+    resolved = str(path.resolve())
+    if resolved.startswith("\\\\?\\"):
+        return resolved
+    if resolved.startswith("\\\\"):
+        return "\\\\?\\UNC\\" + resolved.lstrip("\\")
+    return "\\\\?\\" + resolved
+
+
+def _path_is_file(path: Path) -> bool:
+    return os.path.isfile(_windows_api_path(path))
+
+
+def _make_dirs(path: Path) -> None:
+    os.makedirs(_windows_api_path(path), exist_ok=True)
+
+
+def _read_bytes(path: Path) -> bytes:
+    with open(_windows_api_path(path), "rb") as handle:
+        return handle.read()
+
+
+def _read_text(path: Path) -> str:
+    with open(_windows_api_path(path), "r", encoding="utf-8") as handle:
+        return handle.read()
+
+
+def _write_text(path: Path, content: str) -> None:
+    _make_dirs(path.parent)
+    with open(_windows_api_path(path), "w", encoding="utf-8") as handle:
+        handle.write(content)
+
+
+def _copy_file(source: Path, destination: Path) -> None:
+    _make_dirs(destination.parent)
+    shutil.copyfile(_windows_api_path(source), _windows_api_path(destination))
+
+
 def stable_document_id(package_identity: str, scenario_id: str, source_id: str) -> str:
     identity = f"infobank:external-scenario:{package_identity}:{scenario_id}:{source_id}"
     return str(uuid.uuid5(uuid.NAMESPACE_URL, identity))
 
 
 def sha256_file(path: str | Path) -> str:
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    return hashlib.sha256(_read_bytes(Path(path))).hexdigest()
 
 
 def _read_json(path: Path) -> dict[str, Any]:
-    value = json.loads(path.read_text(encoding="utf-8"))
+    value = json.loads(_read_text(path))
     if not isinstance(value, dict):
         raise ValueError(f"Expected JSON object: {path}")
     return value
@@ -80,7 +121,7 @@ def _read_json(path: Path) -> dict[str, Any]:
 
 def _read_jsonl(path: Path) -> list[dict[str, Any]]:
     rows: list[dict[str, Any]] = []
-    for line in path.read_text(encoding="utf-8").splitlines():
+    for line in _read_text(path).splitlines():
         if line.strip():
             value = json.loads(line)
             if not isinstance(value, dict):
@@ -92,7 +133,7 @@ def _read_jsonl(path: Path) -> list[dict[str, Any]]:
 def _checksum_file_path(package_root: Path) -> Path:
     for name in ("SHA256SUMS.txt", "PACKAGE_SHA256SUMS.txt"):
         path = package_root / name
-        if path.is_file():
+        if _path_is_file(path):
             return path
     raise FileNotFoundError("Package checksum file is missing")
 
@@ -100,7 +141,7 @@ def _checksum_file_path(package_root: Path) -> Path:
 def _parse_sha256sums(package_root: Path) -> dict[str, str]:
     checksum_path = _checksum_file_path(package_root)
     checksums: dict[str, str] = {}
-    for line_number, line in enumerate(checksum_path.read_text(encoding="utf-8").splitlines(), start=1):
+    for line_number, line in enumerate(_read_text(checksum_path).splitlines(), start=1):
         if not line.strip():
             continue
         parts = line.split(maxsplit=1)
@@ -129,7 +170,7 @@ def verify_package_checksums(package_root: str | Path) -> dict[str, Any]:
     mismatched: list[str] = []
     for relative, digest in expected.items():
         path = root / relative
-        if not path.is_file():
+        if not _path_is_file(path):
             missing.append(relative)
             continue
         if sha256_file(path) != digest:
@@ -168,7 +209,7 @@ def _primary_scenario_entries(
     scenario_ids: tuple[str, ...] | None = None,
 ) -> tuple[dict[str, Any], ...]:
     index_path = package_root / "scenario_pack_index.json"
-    if index_path.is_file():
+    if _path_is_file(index_path):
         index = _read_json(index_path)
         raw_entries = index.get("primary_scenarios")
         if isinstance(raw_entries, list):
@@ -212,7 +253,7 @@ def _scenario_pack_from_entry(package_root: Path, entry: Mapping[str, Any]) -> d
 
 def _source_manifest_filename_map(scenario_dir: Path) -> dict[str, str]:
     path = scenario_dir / "source_documents_manifest.json"
-    if not path.is_file():
+    if not _path_is_file(path):
         return {}
     value = _read_json(path)
     rows = value.get("documents")
@@ -320,7 +361,7 @@ def resolve_source_pdf(
     source_id = str(source["source_id"])
     source_root = Path(scenario_dir) / "source_documents"
     exact = source_root / f"{source_id}.pdf"
-    if exact.is_file():
+    if _path_is_file(exact):
         return exact
     scenario_id = Path(scenario_dir).name
     mapped = _source_map_lookup(source_filename_map or {}, scenario_id, source_id)
@@ -331,7 +372,7 @@ def resolve_source_pdf(
             candidate.relative_to(source_root_resolved)
         except ValueError as exc:
             raise ValueError(f"Source map path escapes source_documents for {source_id}") from exc
-        if candidate.is_file():
+        if _path_is_file(candidate):
             return candidate
         raise FileNotFoundError(f"Mapped source PDF does not exist for {source_id}: {mapped}")
     raise FileNotFoundError(
@@ -342,7 +383,7 @@ def resolve_source_pdf(
 def _pdf_pages(path: Path) -> tuple[str, ...]:
     import fitz
 
-    pdf = fitz.open(path)
+    pdf = fitz.open(_windows_api_path(path))
     try:
         pages = tuple((page.get_text("text") or "") for page in pdf)
     finally:
@@ -743,7 +784,7 @@ def write_external_scenario_actual_inputs(
     destination = Path(output_dir).resolve()
     if destination.exists() and any(destination.iterdir()):
         raise FileExistsError(f"Refusing to mix external scenario output: {destination}")
-    destination.mkdir(parents=True, exist_ok=True)
+    _make_dirs(destination)
 
     verification = verify_external_scenario_package(
         root,
@@ -782,8 +823,7 @@ def write_external_scenario_actual_inputs(
             digest = sha256_file(pdf_path)
             pages = _pdf_pages(pdf_path)
             target_pdf = destination / "source_documents" / scenario_id / pdf_path.name
-            target_pdf.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(pdf_path, target_pdf)
+            _copy_file(pdf_path, target_pdf)
             source_id = str(source["source_id"])
             document_id = document_ids_by_source_id[source_id]
             access = _fixture_access(str(source["permission"]))
@@ -848,7 +888,7 @@ def write_external_scenario_actual_inputs(
         "policy_fixtures": [item.to_dict() for item in fixtures],
     }
     corpus_path = destination / "corpus_fixture.json"
-    corpus_path.write_text(json.dumps(corpus, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    _write_text(corpus_path, json.dumps(corpus, ensure_ascii=False, sort_keys=True, indent=2) + "\n")
     manifest = {
         "status": "READY_FOR_ACTUAL_PIPELINE",
         "builder_version": EXTERNAL_CORPUS_BUILDER_VERSION,
@@ -868,9 +908,9 @@ def write_external_scenario_actual_inputs(
         "corpus_fixture_sha256": sha256_file(corpus_path),
         "verification": verification,
     }
-    (destination / "binding_manifest.json").write_text(
+    _write_text(
+        destination / "binding_manifest.json",
         json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
     )
     return manifest
 
@@ -888,7 +928,7 @@ def write_external_primary_contract_actual_inputs(
     destination = Path(output_dir).resolve()
     if destination.exists() and any(destination.iterdir()):
         raise FileExistsError(f"Refusing to mix external scenario output: {destination}")
-    destination.mkdir(parents=True, exist_ok=True)
+    _make_dirs(destination)
 
     verification = verify_external_primary_contract_package(
         root,
@@ -924,8 +964,7 @@ def write_external_primary_contract_actual_inputs(
             digest = sha256_file(pdf_path)
             pages = _pdf_pages(pdf_path)
             target_pdf = destination / "source_documents" / scenario_id / pdf_path.name
-            target_pdf.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(pdf_path, target_pdf)
+            _copy_file(pdf_path, target_pdf)
             source_id = str(source["source_id"])
             document_id = document_ids_by_source_id[source_id]
             relative_pdf = target_pdf.relative_to(destination).as_posix()
@@ -1000,7 +1039,7 @@ def write_external_primary_contract_actual_inputs(
         "policy_fixtures": [item.to_dict() for item in fixtures],
     }
     corpus_path = destination / "corpus_fixture.json"
-    corpus_path.write_text(json.dumps(corpus, ensure_ascii=False, sort_keys=True, indent=2) + "\n", encoding="utf-8")
+    _write_text(corpus_path, json.dumps(corpus, ensure_ascii=False, sort_keys=True, indent=2) + "\n")
     manifest = {
         "status": "READY_FOR_ACTUAL_PIPELINE",
         "builder_version": PRIMARY_CONTRACT_CORPUS_BUILDER_VERSION,
@@ -1024,8 +1063,8 @@ def write_external_primary_contract_actual_inputs(
         "corpus_fixture_sha256": sha256_file(corpus_path),
         "verification": verification,
     }
-    (destination / "binding_manifest.json").write_text(
+    _write_text(
+        destination / "binding_manifest.json",
         json.dumps(manifest, ensure_ascii=False, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
     )
     return manifest

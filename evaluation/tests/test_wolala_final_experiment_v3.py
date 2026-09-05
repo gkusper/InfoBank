@@ -138,12 +138,15 @@ class WolalaFinalExperimentV3Tests(unittest.TestCase):
 
     def test_preheldout_attempt1_plan_artifacts_are_plan_only(self) -> None:
         plan = read_json(PREHELDOUT_DIR / "execution_plan.json")
+        authorization = read_json(PREHELDOUT_DIR / "HELDOUT_RUN_AUTHORIZATION.json")
         self.assertEqual(plan["dataset"], HELDOUT_DATASET_V3)
         self.assertEqual(plan["heldout_model_execution_count"], 0)
         self.assertEqual(plan["heldout_embedding_calls"], 0)
         self.assertEqual(plan["heldout_generation_calls"], 0)
         self.assertEqual(plan["external_api_calls_in_plan_only"], 0)
-        self.assertFalse((PREHELDOUT_DIR / "HELDOUT_RUN_AUTHORIZATION.json").exists())
+        self.assertEqual(authorization["authorization_status"], "AUTHORIZED_NOT_STARTED")
+        self.assertEqual(authorization["dataset"], HELDOUT_DATASET_V3)
+        self.assertEqual(authorization["external_api_calls_before_authorized_run"], 0)
         self.assertFalse((PREHELDOUT_DIR / "raw_results.jsonl").exists())
 
     def test_execution_requires_authorization_before_api_key_check(self) -> None:

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -15,6 +16,39 @@ from evaluation.external_scenario_corpus import (
 from evaluation.scenario_pack import write_scenario_pack_projection
 
 
+def _windows_api_path(path: Path) -> str | Path:
+    if os.name != "nt":
+        return path
+    resolved = str(path.resolve())
+    if resolved.startswith("\\\\?\\"):
+        return resolved
+    if resolved.startswith("\\\\"):
+        return "\\\\?\\UNC\\" + resolved.lstrip("\\")
+    return "\\\\?\\" + resolved
+
+
+def _read_bytes(path: Path) -> bytes:
+    with open(_windows_api_path(path), "rb") as handle:
+        return handle.read()
+
+
+def _read_text(path: Path) -> str:
+    with open(_windows_api_path(path), "r", encoding="utf-8") as handle:
+        return handle.read()
+
+
+def _write_bytes(path: Path, content: bytes) -> None:
+    os.makedirs(_windows_api_path(path.parent), exist_ok=True)
+    with open(_windows_api_path(path), "wb") as handle:
+        handle.write(content)
+
+
+def _write_text(path: Path, content: str) -> None:
+    os.makedirs(_windows_api_path(path.parent), exist_ok=True)
+    with open(_windows_api_path(path), "w", encoding="utf-8") as handle:
+        handle.write(content)
+
+
 def _write_pdf(path: Path, pages: list[str]) -> None:
     import fitz
 
@@ -22,11 +56,10 @@ def _write_pdf(path: Path, pages: list[str]) -> None:
     for text in pages:
         page = pdf.new_page(width=595, height=842)
         page.insert_textbox(fitz.Rect(72, 72, 523, 770), text, fontsize=11, fontname="helv")
-    path.parent.mkdir(parents=True, exist_ok=True)
     try:
-        path.write_bytes(pdf.tobytes(garbage=4, deflate=True, no_new_id=True))
+        _write_bytes(path, pdf.tobytes(garbage=4, deflate=True, no_new_id=True))
     except TypeError:
-        path.write_bytes(pdf.tobytes(garbage=4, deflate=True))
+        _write_bytes(path, pdf.tobytes(garbage=4, deflate=True))
     finally:
         pdf.close()
 
@@ -70,9 +103,9 @@ def _write_test_package(root: Path, scenario_id: str = "TEST_SCENARIO_01") -> No
     scenario_root = root / "scenario_packs" / scenario_id
     _write_pdf(scenario_root / "source_documents" / "device-manual.pdf", ["Connect the external source."])
     scenario_root.mkdir(parents=True, exist_ok=True)
-    (scenario_root / "scenario_pack.json").write_text(
+    _write_text(
+        scenario_root / "scenario_pack.json",
         json.dumps(pack, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
     )
     write_scenario_pack_projection(pack, root / "projections" / scenario_id)
     manifest = {
@@ -81,23 +114,23 @@ def _write_test_package(root: Path, scenario_id: str = "TEST_SCENARIO_01") -> No
         "scenario_question_counts": {scenario_id: 1},
         "files": [],
     }
-    (root / "PACKAGE_MANIFEST.json").write_text(
+    _write_text(
+        root / "PACKAGE_MANIFEST.json",
         json.dumps(manifest, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
     )
     checksums = []
     for path in sorted(item for item in root.rglob("*") if item.is_file() and item.name != "SHA256SUMS.txt"):
         relative = path.relative_to(root).as_posix()
-        checksums.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {relative}\n")
-    (root / "SHA256SUMS.txt").write_text("".join(checksums), encoding="utf-8")
+        checksums.append(f"{hashlib.sha256(_read_bytes(path)).hexdigest()}  {relative}\n")
+    _write_text(root / "SHA256SUMS.txt", "".join(checksums))
 
 
 def _write_checksums(root: Path, filename: str) -> None:
     checksums = []
     for path in sorted(item for item in root.rglob("*") if item.is_file() and item.name != filename):
         relative = path.relative_to(root).as_posix()
-        checksums.append(f"{hashlib.sha256(path.read_bytes()).hexdigest()}  {relative}\n")
-    (root / filename).write_text("".join(checksums), encoding="utf-8")
+        checksums.append(f"{hashlib.sha256(_read_bytes(path)).hexdigest()}  {relative}\n")
+    _write_text(root / filename, "".join(checksums))
 
 
 def _write_primary_contract_package(root: Path) -> None:
@@ -110,11 +143,12 @@ def _write_primary_contract_package(root: Path) -> None:
     pack["queries"][0]["reference_citations"] = []
     scenario_root = root / "independent_evaluation_packs" / scenario_id
     _write_pdf(scenario_root / "source_documents" / "metric-data.pdf", ["Private contributor metric is 17.5 units."])
-    (scenario_root / "scenario_pack.json").write_text(
+    _write_text(
+        scenario_root / "scenario_pack.json",
         json.dumps(pack, sort_keys=True, indent=2) + "\n",
-        encoding="utf-8",
     )
-    (scenario_root / "source_documents_manifest.json").write_text(
+    _write_text(
+        scenario_root / "source_documents_manifest.json",
         json.dumps(
             {
                 "scenario_id": scenario_id,
@@ -124,7 +158,7 @@ def _write_primary_contract_package(root: Path) -> None:
                         "source_id": "manual-source",
                         "filename": "metric-data.pdf",
                         "page_count": 1,
-                        "sha256": hashlib.sha256((scenario_root / "source_documents" / "metric-data.pdf").read_bytes()).hexdigest(),
+                        "sha256": hashlib.sha256(_read_bytes(scenario_root / "source_documents" / "metric-data.pdf")).hexdigest(),
                         "reused_from": None,
                     }
                 ],
@@ -133,7 +167,6 @@ def _write_primary_contract_package(root: Path) -> None:
             indent=2,
         )
         + "\n",
-        encoding="utf-8",
     )
     primary = root / "evaluation_contracts" / "primary"
     runtime_rows = [
@@ -214,17 +247,18 @@ def _write_primary_contract_package(root: Path) -> None:
     primary.mkdir(parents=True, exist_ok=True)
     (primary / "runtime").mkdir()
     (primary / "scorer").mkdir()
-    (primary / "runtime" / "query_inputs.jsonl").write_text(
+    _write_text(
+        primary / "runtime" / "query_inputs.jsonl",
         "".join(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n" for row in runtime_rows),
-        encoding="utf-8",
     )
-    (primary / "scorer" / "gold_annotations.jsonl").write_text(
+    _write_text(
+        primary / "scorer" / "gold_annotations.jsonl",
         "".join(json.dumps(row, sort_keys=True, separators=(",", ":")) + "\n" for row in reference_rows),
-        encoding="utf-8",
     )
-    (primary / "policy_fixtures.json").write_text(json.dumps(policy_fixtures, sort_keys=True, indent=2) + "\n", encoding="utf-8")
-    (primary / "retrieval_contracts.json").write_text(json.dumps(retrieval, sort_keys=True, indent=2) + "\n", encoding="utf-8")
-    (primary / "contract_manifest.json").write_text(
+    _write_text(primary / "policy_fixtures.json", json.dumps(policy_fixtures, sort_keys=True, indent=2) + "\n")
+    _write_text(primary / "retrieval_contracts.json", json.dumps(retrieval, sort_keys=True, indent=2) + "\n")
+    _write_text(
+        primary / "contract_manifest.json",
         json.dumps(
             {
                 "status": "AUTHOR_REVIEWED_CANDIDATE_NOT_FROZEN",
@@ -239,9 +273,9 @@ def _write_primary_contract_package(root: Path) -> None:
             indent=2,
         )
         + "\n",
-        encoding="utf-8",
     )
-    (root / "scenario_pack_index.json").write_text(
+    _write_text(
+        root / "scenario_pack_index.json",
         json.dumps(
             {
                 "dataset_version": "contract-candidate-v1",
@@ -254,7 +288,7 @@ def _write_primary_contract_package(root: Path) -> None:
                         "manifest_path": f"independent_evaluation_packs/{scenario_id}/scenario_pack.json",
                         "query_count": 1,
                         "source_count": 1,
-                        "sha256": hashlib.sha256((scenario_root / "scenario_pack.json").read_bytes()).hexdigest(),
+                        "sha256": hashlib.sha256(_read_bytes(scenario_root / "scenario_pack.json")).hexdigest(),
                     }
                 ],
             },
@@ -262,9 +296,9 @@ def _write_primary_contract_package(root: Path) -> None:
             indent=2,
         )
         + "\n",
-        encoding="utf-8",
     )
-    (root / "PACKAGE_MANIFEST.json").write_text(
+    _write_text(
+        root / "PACKAGE_MANIFEST.json",
         json.dumps(
             {
                 "package_identity": "contract-package",
@@ -278,7 +312,6 @@ def _write_primary_contract_package(root: Path) -> None:
             indent=2,
         )
         + "\n",
-        encoding="utf-8",
     )
     _write_checksums(root, "PACKAGE_SHA256SUMS.txt")
 
@@ -311,15 +344,15 @@ def test_external_scenario_package_binding_writes_gold_blind_runtime(tmp_path: P
     )
     assert manifest["status"] == "READY_FOR_ACTUAL_PIPELINE"
     assert manifest["query_count"] == manifest["gold_count"] == 1
-    corpus = json.loads((output / "corpus_fixture.json").read_text(encoding="utf-8"))
+    corpus = json.loads(_read_text(output / "corpus_fixture.json"))
     document = corpus["documents"][0]
     assert document["document_id"] == manifest["source_bindings"][0]["document_id"]
     assert document["source_pdf_path"] == "source_documents/TEST_SCENARIO_01/device-manual.pdf"
     assert len(document["source_pdf_sha256"]) == 64
-    runtime_text = (output / "query_inputs.jsonl").read_text(encoding="utf-8")
+    runtime_text = _read_text(output / "query_inputs.jsonl")
     assert "reference_answer" not in runtime_text
     assert "required_sources" not in runtime_text
-    gold_text = (output / "gold_annotations.jsonl").read_text(encoding="utf-8")
+    gold_text = _read_text(output / "gold_annotations.jsonl")
     assert "required_sources" in gold_text
     gold = json.loads(gold_text.splitlines()[0])
     assert gold["required_sources"] == [document["document_id"]]
@@ -350,19 +383,19 @@ def test_primary_contract_binding_preserves_case_policy_and_gold_blind_runtime(t
     assert manifest["status"] == "READY_FOR_ACTUAL_PIPELINE"
     assert manifest["query_count"] == manifest["reference_annotation_count"] == 1
     assert manifest["document_count"] == manifest["policy_fixture_count"] == 1
-    corpus = json.loads((output / "corpus_fixture.json").read_text(encoding="utf-8"))
+    corpus = json.loads(_read_text(output / "corpus_fixture.json"))
     document = corpus["documents"][0]
     fixture = corpus["policy_fixtures"][0]
     assert document["source_pdf_path"] == "source_documents/PRIMARY_CONTRACT_SCENARIO/metric-data.pdf"
     assert fixture["access_by_document"] == {document["document_id"]: "Aggregate"}
     assert fixture["aggregate_k"] == 2
     assert fixture["prohibited_markers"] == ["private-token"]
-    runtime_text = (output / "query_inputs.jsonl").read_text(encoding="utf-8")
+    runtime_text = _read_text(output / "query_inputs.jsonl")
     assert all(
         field not in runtime_text
         for field in ("reference_answer", "required_sources", "author_decision_id", "factual_atoms")
     )
-    reference = json.loads((output / "gold_annotations.jsonl").read_text(encoding="utf-8").splitlines()[0])
+    reference = json.loads(_read_text(output / "gold_annotations.jsonl").splitlines()[0])
     assert reference["required_sources"] == [document["document_id"]]
     assert reference["gold_document_ids"] == [document["document_id"]]
     assert reference["metadata"]["logical_source_id_map"] == {"manual-source": document["document_id"]}

@@ -54,6 +54,15 @@ def test_staged_removal_can_be_restored_or_purged(tmp_path: Path) -> None:
     assert not storage.exists(stored.relative_path)
 
 
+def test_staged_purge_handles_long_storage_paths(tmp_path: Path) -> None:
+    long_segment = "nested-" + ("a" * 40)
+    storage = SourceStorage(tmp_path / long_segment / "sources")
+    stored = storage.save(DOCUMENT_ID, b"%PDF synthetic")
+    staged = storage.stage_remove(DOCUMENT_ID, stored.relative_path)
+    storage.purge_staged(DOCUMENT_ID, staged)
+    assert staged and not staged.exists()
+
+
 def test_document_namespace_must_be_canonical_uuid(tmp_path: Path) -> None:
     storage = SourceStorage(tmp_path / "sources")
     with pytest.raises(ValueError):

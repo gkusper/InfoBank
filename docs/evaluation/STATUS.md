@@ -85,9 +85,9 @@ $env:OPENAI_API_KEY = "<set outside the repository>"
 Expected measured records for a complete final run:
 
 ```text
-D1-D5: 400 x 3 x 5 = 6000
+D1-D5: 400 x 4 x 5 = 8000
 D6-D8: 340 x 3 = 1020
-Total: 7020
+Total: 9020
 ```
 
 ## Corrected D1-D5 Metrics

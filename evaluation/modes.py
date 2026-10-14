@@ -5,10 +5,12 @@ from dataclasses import dataclass
 from typing import Any, Callable, Protocol
 
 from .backend import ensure_backend_path
+
 from .prompts import (
     build_governance_prompt,
     build_role_aware_prompt,
     build_standard_prompt,
+    build_token_budget_ablated_prompt,
     format_raw_candidate_blocks,
 )
 from .schemas import (
@@ -18,6 +20,7 @@ from .schemas import (
     MODE_GOVERNANCE,
     MODE_ROLE_AWARE,
     MODE_STANDARD,
+    MODE_ABLATED,
     RetrievedCandidate,
     SharedRetrievalResult,
     base_result_fields,
@@ -637,4 +640,59 @@ def _role_aware_result(
         protected_content_disclosed=None,
         api_usage=api_usage,
         error=error,
+    )
+
+def run_token_budget_ablated_rag(
+    *,
+    run_id: str,
+    case_id: str,
+    repetition: int,
+    git_commit: str | None,
+    retrieval: SharedRetrievalResult,
+    generation_config: GenerationConfig,
+    generator: Generator,
+    user_id: str,
+    db: Any | None = None,
+    policy_context: dict[str, Any] | None = None,
+    services: BackendServices | None = None,
+) -> EvaluationResult:
+    services = services or load_backend_services()
+    governance_context = _resolve_governance_context(
+        db=db, user_id=user_id, retrieval=retrieval, policy_context=policy_context, services=services
+    )
+    sources, context_blocks, redacted_chunk_ids = _build_role_aware_sources(
+        retrieval=retrieval, governance_context=governance_context, services=services
+    )
+    role_summary = services.summarize_source_roles(sources)
+    relevance_level_summary = services.summarize_relevance_levels(sources)
+    evidence_check = services.check_rag_evidence(sources, retrieval.query_profile, governance_context)
+    output_gate = services.select_rag_output_mode(
+        question=retrieval.question,
+        sources=sources,
+        query_profile=retrieval.query_profile,
+        governance=governance_context,
+        context_blocks_available=bool(context_blocks),
+        aggregate_request=services.is_aggregate_statistics_question(retrieval.question),
+    )
+    
+    system_prompt, user_prompt = build_token_budget_ablated_prompt(
+        question=retrieval.question, query_profile=retrieval.query_profile, governance_context=governance_context,
+        role_summary=role_summary, relevance_level_summary=relevance_level_summary, evidence_check=evidence_check,
+        output_gate=output_gate, context_blocks=context_blocks,
+    )
+    
+    generation, error = _safe_generate(generator, system_prompt, user_prompt, generation_config)
+    fields = base_result_fields(
+        run_id=run_id, case_id=case_id, mode=MODE_ABLATED, repetition=repetition, 
+        git_commit=git_commit, retrieval=retrieval, generation_config=generation_config
+    )
+    
+    return EvaluationResult(
+        **fields, generator_context_blocks=context_blocks, system_prompt=system_prompt, user_prompt=user_prompt,
+        answer=generation.answer if generation else None, output_mode="full_answer" if generation and not error else None,
+        use_decisions=governance_context.get("use_decisions"), source_roles=None, source_role_summary=role_summary,
+        relevance_level_summary=relevance_level_summary, evidence_decision=None, evidence_check=evidence_check,
+        controlled_failure_status=None, controlled_failure_reason=None, controlled_failure=None,
+        withheld_document_ids=[], redacted_chunk_ids=redacted_chunk_ids, protected_content_disclosed=None,
+        api_usage=generation.api_usage if generation else _error_usage(error), error=error
     )

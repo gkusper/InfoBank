@@ -11,6 +11,7 @@ from typing import Any
 MODE_STANDARD = "standard_rag"
 MODE_GOVERNANCE = "governance_only_rag"
 MODE_ROLE_AWARE = "role_aware_rag"
+MODE_ABLATED = "token_budget_ablated_rag"
 
 
 @dataclass

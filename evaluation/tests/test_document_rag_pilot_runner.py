@@ -29,7 +29,7 @@ class DocumentRagPilotRunnerTests(unittest.TestCase):
         )
 
     def test_b_expected_result_count(self) -> None:
-        self.assertEqual(pilot.expected_result_count(pilot.APPROVED_PILOT_CASE_IDS, 1), 21)
+        self.assertEqual(pilot.expected_result_count(pilot.APPROVED_PILOT_CASE_IDS, 1), 28)
 
     def test_c_real_api_is_opt_in(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -78,7 +78,7 @@ class DocumentRagPilotRunnerTests(unittest.TestCase):
             records = self._read_jsonl(run_dir / "results.jsonl")
         for case_id in pilot.APPROVED_PILOT_CASE_IDS:
             case_records = [record for record in records if record["case_id"] == case_id]
-            self.assertEqual(len(case_records), 3)
+            self.assertEqual(len(case_records), 4)
             baseline = case_records[0]
             for record in case_records[1:]:
                 self.assertEqual(record["query_embedding_identifier"], baseline["query_embedding_identifier"])
@@ -91,7 +91,7 @@ class DocumentRagPilotRunnerTests(unittest.TestCase):
     def test_i_artifact_creation(self) -> None:
         with tempfile.TemporaryDirectory() as tmpdir:
             run_dir = self._run_mock_pilot(tmpdir)
-            self.assertEqual(len(self._read_jsonl(run_dir / "results.jsonl")), 21)
+            self.assertEqual(len(self._read_jsonl(run_dir / "results.jsonl")), 28)
             self.assertEqual(len(self._read_jsonl(run_dir / "shared_retrieval.jsonl")), 7)
             for name in [
                 "run_manifest.json",

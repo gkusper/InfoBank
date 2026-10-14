@@ -1,0 +1,20 @@
+{
+    "currency": "USD",
+    "pricing_source": "OpenAI API Pricing",
+    "price_check_date": "2026-10-09",
+    "models":{
+        "gpt-4o-mini": {
+            "input_usd_per_1m": 0.15,
+            "cached_input_usd_per_1m": 0.075,
+            "output_usd_per_1m": 0.60
+        },
+        "gpt-4.1": {
+            "input_usd_per_1m": 2.00,
+            "cached_input_usd_per_1m": 0.50,
+            "output_usd_per_1m": 8.00
+        },
+        "text-embedding-3-small": {
+            "input_usd_per_1m": 0.02
+        }
+    }
+}

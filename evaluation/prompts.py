@@ -87,4 +87,31 @@ def build_role_aware_prompt(
         f"Output mode gate:\n{json.dumps(output_gate, ensure_ascii=False, sort_keys=True)}\n\n"
         f"Retrieved passages:\n{chr(10).join(context_blocks)}"
     )
+
+    return system_prompt, user_prompt
+
+######
+def build_token_budget_ablated_prompt( 
+    *,
+    question: str,
+    query_profile: dict[str, Any],
+    governance_context: dict[str, Any],
+    role_summary: dict[str, Any],
+    relevance_level_summary: dict[str, Any],
+    evidence_check: dict[str, Any],
+    output_gate: dict[str, Any],
+    context_blocks: list[str],
+) -> tuple[str, str]:
+    # Use STANDARD constraints (dumb baseline), but feed it ALL the tokens
+    system_prompt = f"{COMMON_TASK_INSTRUCTION} {STANDARD_CONSTRAINTS}"
+    user_prompt = (
+        f"Question:\n{question}\n\n"
+        f"Query profile:\n{json.dumps(query_profile, ensure_ascii=False, sort_keys=True)}\n\n"
+        f"Governance:\n{json.dumps(governance_context, ensure_ascii=False, sort_keys=True)}\n\n"
+        f"Source role summary:\n{json.dumps(role_summary, ensure_ascii=False, sort_keys=True)}\n\n"
+        f"Relevance level summary:\n{json.dumps(relevance_level_summary, ensure_ascii=False, sort_keys=True)}\n\n"
+        f"Evidence check:\n{json.dumps(evidence_check, ensure_ascii=False, sort_keys=True)}\n\n"
+        f"Output mode gate:\n{json.dumps(output_gate, ensure_ascii=False, sort_keys=True)}\n\n"
+        f"Retrieved passages:\n{chr(10).join(context_blocks)}"
+    )
     return system_prompt, user_prompt

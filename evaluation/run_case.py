@@ -8,6 +8,7 @@ from .modes import (
     run_governance_only_rag,
     run_role_aware_rag,
     run_standard_rag,
+    run_token_budget_ablated_rag,
 )
 from .schemas import (
     EvaluationResult,
@@ -15,6 +16,7 @@ from .schemas import (
     MODE_GOVERNANCE,
     MODE_ROLE_AWARE,
     MODE_STANDARD,
+    MODE_ABLATED,
     SharedRetrievalResult,
     write_jsonl_record,
 )
@@ -29,18 +31,20 @@ MODE_ALIASES = {
     "role-aware": MODE_ROLE_AWARE,
     "role_aware": MODE_ROLE_AWARE,
     "role_aware_rag": MODE_ROLE_AWARE,
+    "ablated": MODE_ABLATED,
+    "token_budget_ablated_rag": MODE_ABLATED,
 }
 
 
 def normalize_modes(modes: list[str] | str | None) -> list[str]:
     if modes is None:
-        return [MODE_STANDARD, MODE_GOVERNANCE, MODE_ROLE_AWARE]
+        return [MODE_STANDARD, MODE_GOVERNANCE, MODE_ROLE_AWARE, MODE_ABLATED]
     if isinstance(modes, str):
         modes = [part.strip() for part in modes.split(",") if part.strip()]
     normalized = []
     for mode in modes:
         value = MODE_ALIASES.get(mode, mode)
-        if value not in {MODE_STANDARD, MODE_GOVERNANCE, MODE_ROLE_AWARE}:
+        if value not in {MODE_STANDARD, MODE_GOVERNANCE, MODE_ROLE_AWARE, MODE_ABLATED}:
             raise ValueError(f"Unknown evaluation mode: {mode}")
         normalized.append(value)
     return normalized
@@ -78,6 +82,20 @@ def run_case(
                 )
             elif mode == MODE_GOVERNANCE:
                 result = run_governance_only_rag(
+                    run_id=run_id,
+                    case_id=case_id,
+                    repetition=repetition,
+                    git_commit=git_commit,
+                    retrieval=retrieval,
+                    generation_config=generation_config,
+                    generator=generator,
+                    user_id=user_id,
+                    db=db,
+                    policy_context=policy_context,
+                    services=services,
+                )
+            elif mode == MODE_ABLATED:
+                result = run_token_budget_ablated_rag(
                     run_id=run_id,
                     case_id=case_id,
                     repetition=repetition,

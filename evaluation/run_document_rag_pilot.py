@@ -26,6 +26,7 @@ from .backend import BACKEND_DIR, REPO_ROOT, ensure_backend_path
 from .clean_state import CleanStateError, check_clean_state
 from .fixture_schema import EvaluationFixture, FixtureCase, load_fixture
 from .generate_fixture_documents import generate_documents
+from .calculate_costs import inject_cost_into_record, save_cost_summary
 from .load_fixtures import (
     MockEmbeddingProvider,
     build_id_mappings,
@@ -43,6 +44,7 @@ from .schemas import (
     MODE_GOVERNANCE,
     MODE_ROLE_AWARE,
     MODE_STANDARD,
+    MODE_ABLATED,
     SharedRetrievalResult,
 )
 from .usage_logging import empty_usage, merge_usage, usage_from_openai_response
@@ -58,7 +60,7 @@ APPROVED_PILOT_CASE_IDS = [
     "MIXED_PRIMARY_01",
     "CONTEXT_ONLY_01",
 ]
-PILOT_MODES = [MODE_STANDARD, MODE_GOVERNANCE, MODE_ROLE_AWARE]
+PILOT_MODES = [MODE_STANDARD, MODE_GOVERNANCE, MODE_ROLE_AWARE, MODE_ABLATED]
 DEFAULT_FIXTURE_PATH = REPO_ROOT / "evaluation" / "fixtures" / "document_rag_v1.yaml"
 DEFAULT_RESULTS_DIR = REPO_ROOT / "evaluation" / "results"
 DEFAULT_ENV_FILE = BACKEND_DIR / ".env.eval"
@@ -570,6 +572,7 @@ def _run_document_rag_pilot(config: PilotConfig, *, run_id: str, run_dir: Path) 
             ):
                 current_mode = result.mode
                 record = result.to_dict()
+                record = inject_cost_into_record(record)
                 append_jsonl(results_path, record)
                 all_records.append(record)
                 if record.get("error"):
@@ -607,6 +610,7 @@ def _run_document_rag_pilot(config: PilotConfig, *, run_id: str, run_dir: Path) 
         )
         write_json(run_dir / "run_manifest.json", run_manifest)
         write_json(run_dir / "run_manifest.json", run_manifest | {"artifact_hashes": artifact_hashes(run_dir)})
+        save_cost_summary(all_records, run_dir)
         return {
             "run_id": run_id,
             "run_dir": str(run_dir),

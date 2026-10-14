@@ -9,6 +9,7 @@ behavior.
 - `standard_rag`: uses the shared raw retrieved passages as a conventional RAG baseline. It bypasses InfoBank governance, source-role labeling, evidence checks, controlled failure, and role-aware redaction.
 - `governance_only_rag`: uses the same retrieved passages, then applies only Full, Aggregate, Metadata, and Deny access decisions before generation.
 - `role_aware_rag`: uses the same retrieved passages, then applies the existing production governance, source-role profiling, evidence checks, controlled-failure gates, and role-aware context blocks.
+- `token_budget_ablated_rag`: evaluates the baseline under an matched token budget by supplying the complete Oracle JSON task-state representation but enforcing conventional standard RAG constraints, isolating task-state reasoning from token volume.
 
 ## Shared Retrieval
 
@@ -193,9 +194,9 @@ $env:OPENAI_API_KEY = "<set outside the repository>"
 Expected measured records:
 
 ```text
-D1-D5: 400 cases x 3 modes x 5 repetitions = 6000
+D1-D5: 400 cases x 4 modes x 5 repetitions = 8000
 D6-D8: 340 cases x 3 clean repetitions = 1020
-Total: 7020
+Total: 9020
 ```
 
 The runner supports `-CheckOnly`, `-BuildBenchmarks`, `-ValidateBenchmarks`,

@@ -21,6 +21,7 @@ from .backend import BACKEND_DIR, REPO_ROOT, ensure_backend_path
 from .clean_state import check_clean_state
 from .fixture_schema import EvaluationFixture, FixtureCase, load_fixture
 from .generate_fixture_documents import generate_documents
+from .calculate_costs import inject_cost_into_record, save_cost_summary 
 from .large_scale_analysis import (
     document_case_aggregates,
     document_scenario_metrics,
@@ -42,7 +43,7 @@ from .large_scale_analysis import (
 from .load_evidence_fixtures import cleanup_case, configure_database_from_env_file, load_benchmark, load_case, parse_timestamp
 from .load_fixtures import build_id_mappings, load_fixture_data, policy_context_for_case, selected_document_aliases
 from .manifest import git_info, package_versions
-from .modes import run_governance_only_rag, run_role_aware_rag, run_standard_rag
+from .modes import run_governance_only_rag, run_role_aware_rag, run_standard_rag, run_token_budget_ablated_rag
 from .run_document_rag_pilot import (
     EMBEDDING_MODEL,
     GENERATOR_MODEL,
@@ -67,7 +68,7 @@ from .run_document_rag_pilot import (
     tracked_status,
 )
 from .run_suite import mock_role_aware_services
-from .schemas import GenerationConfig, MODE_GOVERNANCE, MODE_ROLE_AWARE, MODE_STANDARD, RetrievedCandidate, SharedRetrievalResult
+from .schemas import GenerationConfig, MODE_GOVERNANCE, MODE_ROLE_AWARE, MODE_STANDARD, MODE_ABLATED,  RetrievedCandidate, SharedRetrievalResult
 from .score_document_results import score_results as score_document_results
 from .score_evidence_unit_results import score_results as score_evidence_results
 from .validate_fixtures import validate_fixture
@@ -368,6 +369,20 @@ def run_one_document_mode(
             policy_context=policy_context,
             services=services,
         )
+    elif mode == MODE_ABLATED:
+        result = run_token_budget_ablated_rag(
+            run_id=run_id,
+            case_id=case_id,
+            repetition=repetition,
+            git_commit=git_commit,
+            retrieval=retrieval,
+            generation_config=generation_config,
+            generator=generator,
+            user_id=user_id,
+            db=db,
+            policy_context=policy_context,
+            services=services,
+        )
     else:
         raise ValueError(f"Unknown document mode: {mode}")
     return result.to_dict()
@@ -473,6 +488,7 @@ def run_document_phase(
     retrieval_by_case = {record["case_id"]: record for record in retrieval_records}
     expected = expected_result_count(case_ids, repetitions)
     if len(successful_keys) == expected:
+        save_cost_summary(completed_records, run_dir)
         return {"status": "SKIPPED_COMPLETE", "record_count": len(completed_records), "expected_record_count": expected}
 
     config = DocumentPilotConfig(
@@ -583,6 +599,9 @@ def run_document_phase(
                     policy_context=policy_context,
                     services=services,
                 )
+
+                record = inject_cost_into_record(record)
+
                 if record.get("error"):
                     raise PilotError(
                         str(record["error"]),
@@ -625,6 +644,9 @@ def run_document_phase(
             "api_usage": api_usage,
             "artifact_hashes": artifact_hashes(phase_dir),
         })
+
+        save_cost_summary(records, run_dir)
+
         if len(measured_records) != expected:
             raise PilotError(
                 f"Expected {expected} successful document records, found {len(measured_records)}.",
@@ -898,7 +920,7 @@ def score_and_report(
 def finalization_decision(document_records: int, evidence_records: int, execution_mode: str) -> str:
     if execution_mode != "real-api":
         return "NOT READY - MOCK OR PARTIAL EXECUTION"
-    if document_records != 6000 or evidence_records != 1020:
+    if document_records != 8000 or evidence_records != 1020:
         return "NOT READY - BLOCKING RECORD COUNT GAP"
     return "READY WITH LISTED EDITORIAL LIMITATIONS"
 
@@ -1139,7 +1161,7 @@ def write_initial_manifests(run_dir: Path, *, env_file: Path, document_fixture: 
         "generator_model": GENERATOR_MODEL,
         "temperature": TEMPERATURE,
         "max_output_tokens": 160,
-        "expected_counts": {"document_records": 400 * 3 * args.document_repetitions, "evidence_records": 340 * args.evidence_repetitions},
+        "expected_counts": {"document_records": 400 * 4 * args.document_repetitions, "evidence_records": 340 * args.evidence_repetitions},
         "openai_key_visible": bool(os.environ.get("OPENAI_API_KEY")),
         "credentials_serialized": False,
     }

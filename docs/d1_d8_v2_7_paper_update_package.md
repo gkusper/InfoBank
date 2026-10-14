@@ -2,11 +2,11 @@
 
 ## Abstract Result Paragraph
 
-We evaluated InfoBank on a frozen D1-D8 benchmark with 400 D1-D5 document-RAG cases and 340 D6-D8 EvidenceUnit cases, producing 7020 measured records in the recorded real-API run. D1-D5 compared standard RAG, governance-only RAG, and role-aware RAG under shared retrieval; D6-D8 evaluated the production action-reconstruction path on a held-out MailEx-derived benchmark. The run status is `READY WITH LISTED EDITORIAL LIMITATIONS`; numerical claims should be taken from `paper_numbers.json` and the adjacent LaTeX tables.
+We evaluated InfoBank on a frozen D1-D8 benchmark with 400 D1-D5 document-RAG cases and 340 D6-D8 EvidenceUnit cases, producing 9020 measured records in the recorded run. D1-D5 compared standard RAG, governance-only RAG, and role-aware RAG under shared retrieval; D6-D8 evaluated the production action-reconstruction path on a held-out MailEx-derived benchmark. The run status is `READY WITH LISTED EDITORIAL LIMITATIONS`; numerical claims should be inserted from `paper_numbers.json` after confirming the final real-API run.
 
 ## Evaluation Section Replacement
 
-The final evaluation used a preregistered, frozen benchmark protocol. The document-RAG benchmark contains 400 synthetic cases arranged as matched D1/D2/D4 triplets, D3 aggregate pairs, and D5 mixed/contextual pairs. Each case was evaluated under three RAG configurations with five repetitions, using shared top-4 retrieval candidates across modes. The EvidenceUnit benchmark contains 340 held-out MailEx-derived or controlled synthetic cases covering open actions, browser-only counterfactuals, closures, and non-closing controls, evaluated across three clean database runs.
+The final evaluation used a preregistered, frozen benchmark protocol. The document-RAG benchmark contains 400 synthetic cases arranged as matched D1/D2/D4 triplets, D3 aggregate pairs, and D5 mixed/contextual pairs. Each case was evaluated under four RAG configurations with five repetitions, using shared top-4 retrieval candidates across modes. The EvidenceUnit benchmark contains 340 held-out MailEx-derived or controlled synthetic cases covering open actions, browser-only counterfactuals, closures, and non-closing controls, evaluated across three clean database runs.
 
 ## Metrics Subsection Replacement
 
@@ -14,11 +14,12 @@ Permitted-answer accuracy is the proportion of correct answers among answer-perm
 
 ## Results Subsection Replacement
 
-Use the final numerical results from `evaluation/publication_results/d1_d8_large_scale_v1/paper_numbers.json` and the LaTeX tables in the adjacent `tables/` directory.
+Insert the final numerical results from `evaluation/publication_results/d1_d8_large_scale_v1/paper_numbers.json` and the LaTeX tables in the adjacent `tables/` directory.
 
 ## Threats-to-Validity Replacement
 
 The evaluation remains limited by synthetic D1-D5 construction, synthetic browser-only D7 cases, a synthetic subset of D8 closures where unambiguous natural closures were not available, one provider/model configuration, and a MailEx/Enron-derived e-mail domain. The benchmark is frozen after development but was not externally administered.
+As noted during peer review, the benchmark size (50 threads, 195 messages) remains modest and serves primarily as an action-oriented proof-of-concept; future evaluations must expand scale across broader corporate corpora.
 
 ## Conclusion Update
 
@@ -68,10 +69,10 @@ An earlier 53-record development pilot was used only for implementation diagnost
       "permitted_answer_correct_rate": 0.96875,
       "prohibited_disclosure_rate": {
         "denominator": 1200,
-        "numerator": 136,
-        "rate": 0.113333
+        "numerator": 131,
+        "rate": 0.109167
       },
-      "protected_marker_disclosure_rate": 0.113333,
+      "protected_marker_disclosure_rate": 0.109167,
       "record_count": 2000,
       "retrieval_target_recall_at_4": {
         "denominator": 1800,
@@ -80,8 +81,8 @@ An earlier 53-record development pilot was used only for implementation diagnost
       },
       "safe_withholding_rate": {
         "denominator": 1200,
-        "numerator": 1064,
-        "rate": 0.886667
+        "numerator": 1069,
+        "rate": 0.890833
       },
       "source_role_conformance": {
         "denominator": 2000,
@@ -92,8 +93,8 @@ An earlier 53-record development pilot was used only for implementation diagnost
     "role_aware_rag": {
       "behavioral_conformance_rate": {
         "denominator": 2000,
-        "numerator": 1681,
-        "rate": 0.8405
+        "numerator": 1682,
+        "rate": 0.841
       },
       "controlled_failure_correctness": {
         "denominator": 2000,
@@ -114,10 +115,10 @@ An earlier 53-record development pilot was used only for implementation diagnost
       },
       "permitted_answer_accuracy": {
         "denominator": 800,
-        "numerator": 481,
-        "rate": 0.60125
+        "numerator": 482,
+        "rate": 0.6025
       },
-      "permitted_answer_correct_rate": 0.60125,
+      "permitted_answer_correct_rate": 0.6025,
       "prohibited_disclosure_rate": {
         "denominator": 1200,
         "numerator": 0,
@@ -144,8 +145,8 @@ An earlier 53-record development pilot was used only for implementation diagnost
     "standard_rag": {
       "behavioral_conformance_rate": {
         "denominator": 2000,
-        "numerator": 581,
-        "rate": 0.2905
+        "numerator": 584,
+        "rate": 0.292
       },
       "controlled_failure_correctness": {
         "denominator": 2000,
@@ -166,16 +167,16 @@ An earlier 53-record development pilot was used only for implementation diagnost
       },
       "permitted_answer_accuracy": {
         "denominator": 800,
-        "numerator": 756,
-        "rate": 0.945
+        "numerator": 757,
+        "rate": 0.94625
       },
-      "permitted_answer_correct_rate": 0.945,
+      "permitted_answer_correct_rate": 0.94625,
       "prohibited_disclosure_rate": {
         "denominator": 1200,
-        "numerator": 1102,
-        "rate": 0.918333
+        "numerator": 1107,
+        "rate": 0.9225
       },
-      "protected_marker_disclosure_rate": 0.918333,
+      "protected_marker_disclosure_rate": 0.9225,
       "record_count": 2000,
       "retrieval_target_recall_at_4": {
         "denominator": 1800,
@@ -184,8 +185,60 @@ An earlier 53-record development pilot was used only for implementation diagnost
       },
       "safe_withholding_rate": {
         "denominator": 1200,
-        "numerator": 98,
-        "rate": 0.081667
+        "numerator": 93,
+        "rate": 0.0775
+      },
+      "source_role_conformance": {
+        "denominator": 2000,
+        "numerator": 0,
+        "rate": 0.0
+      }
+    },
+    "token_budget_ablated_rag": {
+      "behavioral_conformance_rate": {
+        "denominator": 2000,
+        "numerator": 561,
+        "rate": 0.2805
+      },
+      "controlled_failure_correctness": {
+        "denominator": 2000,
+        "numerator": 800,
+        "rate": 0.4
+      },
+      "exact_output_class_conformance": {
+        "denominator": 2000,
+        "numerator": 600,
+        "rate": 0.3
+      },
+      "generation_calls": 2000,
+      "generation_skipped_count": 0,
+      "generator_exposure_rate": {
+        "denominator": 1200,
+        "numerator": 200,
+        "rate": 0.166667
+      },
+      "permitted_answer_accuracy": {
+        "denominator": 800,
+        "numerator": 761,
+        "rate": 0.95125
+      },
+      "permitted_answer_correct_rate": 0.95125,
+      "prohibited_disclosure_rate": {
+        "denominator": 1200,
+        "numerator": 17,
+        "rate": 0.014167
+      },
+      "protected_marker_disclosure_rate": 0.014167,
+      "record_count": 2000,
+      "retrieval_target_recall_at_4": {
+        "denominator": 1800,
+        "numerator": 1800,
+        "rate": 1.0
+      },
+      "safe_withholding_rate": {
+        "denominator": 1200,
+        "numerator": 1183,
+        "rate": 0.985833
       },
       "source_role_conformance": {
         "denominator": 2000,
@@ -238,9 +291,9 @@ An earlier 53-record development pilot was used only for implementation diagnost
     }
   },
   "record_counts": {
-    "document_records": 6000,
+    "document_records": 8000,
     "evidence_records": 1020,
-    "total_records": 7020
+    "total_records": 9020
   },
   "source": "evaluation/results large-scale combined_metrics.json"
 }

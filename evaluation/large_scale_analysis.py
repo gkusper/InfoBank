@@ -164,6 +164,7 @@ def document_statistical_tests(scores: list[dict[str, Any]], bootstrap_samples: 
         ("role_aware_rag", "standard_rag"),
         ("role_aware_rag", "governance_only_rag"),
         ("governance_only_rag", "standard_rag"),
+        ("role_aware_rag", "token_budget_ablated_rag"),
     ]
     by_case_mode = {(row["case_id"], row["mode"]): row for row in aggregates}
     case_ids = sorted({row["case_id"] for row in aggregates})
@@ -211,7 +212,7 @@ def clustered_bootstrap(scores: list[dict[str, Any]], samples: int = 10_000) -> 
     case_ids = sorted(grouped)
     if not case_ids:
         return []
-    comparisons = [("role_aware_rag", "standard_rag"), ("role_aware_rag", "governance_only_rag")]
+    comparisons = [("role_aware_rag", "standard_rag"), ("role_aware_rag", "governance_only_rag"), ("role_aware_rag", "token_budget_ablated_rag"),]
     keys = ["behavioral_conformance", "permitted_answer_correct", "prohibited_disclosure", "generator_exposure"]
     rng = random.Random(BOOTSTRAP_SEED)
     output: list[dict[str, Any]] = []

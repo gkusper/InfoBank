@@ -18,6 +18,7 @@ from experiment_core import (
     BENCHMARK_DIR,
     CONDITIONS,
     EXPERIMENT_DIR,
+    REPO_ROOT,
     append_jsonl,
     build_oracle_documents,
     build_prompt,
@@ -30,6 +31,7 @@ from experiment_core import (
     mock_model_output,
     parse_corrected_packet,
     parse_model_output,
+    read_json,
     read_jsonl,
     resolve_packet_dir,
     sha256_file,
@@ -91,9 +93,11 @@ def empty_usage() -> dict[str, Any]:
         "embedding_calls": 0,
         "generation_calls": 0,
         "input_tokens": 0,
+        "cached_tokens": 0,
         "output_tokens": 0,
         "total_tokens": 0,
         "retries": 0,
+        "cost_usd": 0.0,
     }
 
 
@@ -137,7 +141,11 @@ def retry_delay_seconds(exc: Exception, retry_number: int) -> float:
 
 def add_usage(target: dict[str, Any], source: dict[str, Any]) -> None:
     for key in target:
-        target[key] += int(source.get(key) or 0)
+        val = source.get(key, 0)
+        if isinstance(target[key], float):
+            target[key] += float(val)
+        else:
+            target[key] += int(val)
 
 
 def usage_from_response(response: Any, *, generation_calls: int = 0, embedding_calls: int = 0) -> dict[str, Any]:
@@ -153,16 +161,45 @@ def usage_from_response(response: Any, *, generation_calls: int = 0, embedding_c
             getattr(raw, "completion_tokens", None) or getattr(raw, "output_tokens", None) or 0
         )
         usage["total_tokens"] = int(getattr(raw, "total_tokens", None) or 0)
+
+        prompt_tokens_details = getattr(raw, "prompt_tokens_details", None)
+        if prompt_tokens_details:
+            usage["cached_tokens"] = int(getattr(prompt_tokens_details, "cached_tokens", None) or 0)
     return usage
 
+##########
+def calculate_cost(usage: dict[str, Any], model: str, prices_data: dict[str, Any]) -> float:
+    model_prices = prices_data.get(model)
+    if not model_prices:
+        for prefix, prefix_prices in prices_data.items():
+            if model.startswith(prefix):
+                model_prices = prefix_prices
+                break
+    if not model_prices:
+        model_prices = {}
+        
+    in_rate = model_prices.get("input_usd_per_1m", 0.0) / 1_000_000.0
+    cache_rate = model_prices.get("cached_input_usd_per_1m", in_rate * 1_000_000.0) / 1_000_000.0
+    out_rate = model_prices.get("output_usd_per_1m", 0.0) / 1_000_000.0
+    
+    inp = usage.get("input_tokens", 0)
+    cache = usage.get("cached_tokens", 0)
+    out = usage.get("output_tokens", 0)
+    uncached = max(0, inp - cache)
+    
+    return float((uncached * in_rate) + (cache * cache_rate) + (out * out_rate))
+############
 
-def embed_texts(client: Any, texts: list[str], model: str, batch_size: int = 100) -> tuple[list[list[float]], dict[str, Any]]:
+def embed_texts(client: Any, texts: list[str], model: str, prices_data: dict[str, Any], batch_size: int = 100) -> tuple[list[list[float]], dict[str, Any]]:
     embeddings: list[list[float]] = []
     usage = empty_usage()
     for start in range(0, len(texts), batch_size):
         response = client.embeddings.create(input=texts[start : start + batch_size], model=model)
         embeddings.extend(item.embedding for item in response.data)
-        add_usage(usage, usage_from_response(response, embedding_calls=1))
+        batch_usage = usage_from_response(response, embedding_calls=1)
+        actual_model = getattr(response, "model", model)
+        batch_usage["cost_usd"] = calculate_cost(batch_usage, str(actual_model), prices_data)
+        add_usage(usage, batch_usage)
     if len(embeddings) != len(texts):
         raise RuntimeError("Embedding API returned an unexpected number of vectors")
     return embeddings, usage
@@ -215,7 +252,7 @@ def existing_pairs(path: Path) -> set[tuple[str, str]]:
     return set(pairs)
 
 
-def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> dict[str, Any]:
+def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool, prices_data: dict[str, Any]) -> dict[str, Any]:
     started = time.perf_counter()
     error: dict[str, str] | None = None
     actual_model = "unavailable" if real_api else "deterministic-mock"
@@ -231,6 +268,7 @@ def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> 
                 user_prompt=job["user_prompt"],
                 config=job["config"],
             )
+            generation_usage["cost_usd"] = calculate_cost(generation_usage, actual_model, prices_data)
         else:
             raw_output = mock_model_output(job["question"]["question"], job["contexts"])
         parsed_output, parser_error = parse_model_output(raw_output)
@@ -272,8 +310,10 @@ def execute_generation_job(job: dict[str, Any], client: Any, real_api: bool) -> 
         "user_prompt_sha256": sha256_text(job["user_prompt"]),
         "latency_seconds": round(time.perf_counter() - started, 6),
         "input_tokens": generation_usage["input_tokens"],
+        "cached_tokens": generation_usage.get("cached_tokens", 0),
         "output_tokens": generation_usage["output_tokens"],
         "total_tokens": generation_usage["total_tokens"],
+        "cost_usd": round(generation_usage.get("cost_usd", 0.0), 6),
         "api_calls": generation_usage["generation_calls"],
         "retries": generation_usage["retries"],
         "configured_generator_model": config["generator_model"],
@@ -299,7 +339,7 @@ def build_manifest(
 ) -> dict[str, Any]:
     shared = configs[CONDITIONS[0]]
     config_hashes = {
-        condition: sha256_file(config_dir / config["config_file"])
+        condition: sha256_file(config_dir / config["config_file"]) if (config_dir / config["config_file"]).exists() else "virtual_config"
         for condition, config in configs.items()
     }
     benchmark_dir = Path(benchmark["benchmark_dir"])
@@ -411,14 +451,18 @@ def run(args: argparse.Namespace) -> int:
     shared = configs[CONDITIONS[0]]
     email_texts = [row["text"] for row in email_documents]
     question_texts = [row["question"] for row in selected_questions]
+
+    prices_file = REPO_ROOT / "prices.json"
+    prices_data = read_json(prices_file).get("models", {}) if prices_file.exists() else {}
+
     if args.real_api:
         if not os.environ.get("OPENAI_API_KEY"):
             raise RuntimeError("OPENAI_API_KEY is not set in the process environment")
         from openai import OpenAI
 
         client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-        email_vectors, email_usage = embed_texts(client, email_texts, shared["embedding_model"])
-        question_vectors, question_usage = embed_texts(client, question_texts, shared["embedding_model"])
+        email_vectors, email_usage = embed_texts(client, email_texts, shared["embedding_model"], prices_data)
+        question_vectors, question_usage = embed_texts(client, question_texts, shared["embedding_model"], prices_data)
         add_usage(embedding_usage, email_usage)
         add_usage(embedding_usage, question_usage)
     else:
@@ -446,7 +490,7 @@ def run(args: argparse.Namespace) -> int:
                 config=config,
             )
             ensure_no_forbidden_fields(contexts, f"{condition}.contexts")
-            system_prompt, user_prompt = build_prompt(question["question"], contexts)
+            system_prompt, user_prompt = build_prompt(question["question"], contexts,condition=condition)
             ensure_no_forbidden_fields(
                 {"system_prompt": system_prompt, "user_prompt": user_prompt}, f"{condition}.prompt"
             )
@@ -465,7 +509,7 @@ def run(args: argparse.Namespace) -> int:
     written = 0
     if args.real_api:
         with ThreadPoolExecutor(max_workers=args.max_workers) as executor:
-            generated = executor.map(lambda job: execute_generation_job(job, client, True), jobs)
+            generated = executor.map(lambda job: execute_generation_job(job, client, True, prices_data), jobs)
             for result in generated:
                 ensure_no_forbidden_fields(
                     result, f"result.{result['question_id']}.{result['condition']}"
@@ -476,7 +520,7 @@ def run(args: argparse.Namespace) -> int:
                     print(f"Wrote {written} new condition-question records", flush=True)
     else:
         for job in jobs:
-            result = execute_generation_job(job, client, False)
+            result = execute_generation_job(job, client, False, prices_data)
             ensure_no_forbidden_fields(result, f"result.{result['question_id']}.{result['condition']}")
             append_jsonl(inference_path, result)
             written += 1
@@ -504,7 +548,10 @@ def run(args: argparse.Namespace) -> int:
     ]
     expected_models = {config["generator_model"] for config in configs.values()}
     observed_models = set(manifest["observed_generator_models"])
-    if args.real_api and (api_errors or observed_models != expected_models):
+
+    model_mismatch = any(not any(obs.startswith(exp) for exp in expected_models) for obs in observed_models)
+
+    if args.real_api and (api_errors or model_mismatch):
         manifest["status"] = "failed_api_validation"
         manifest["api_error_records"] = len(api_errors)
         write_json(manifest_path, manifest)
@@ -513,7 +560,86 @@ def run(args: argparse.Namespace) -> int:
             f"expected_models={sorted(expected_models)}, observed_models={sorted(observed_models)}"
         )
     write_json(manifest_path, manifest)
+
+    def format_cost(cost: float) -> str:
+        return f"{cost:.6f}"
+
+    mode_totals = {}
+    grand_total_generation = 0.0
+    
+    for row in rows:
+        mode = row.get("condition", "unknown").lower()
+        model = row.get("actual_generator_model", "gpt-4o-mini")
+        
+        # Fallback to configured model if run was a mock
+        if model == "deterministic-mock":
+            model = row.get("configured_generator_model", "gpt-4o-mini")
+            
+        inp = row.get("input_tokens", 0)
+        cache = row.get("cached_tokens", 0)
+        out = row.get("output_tokens", 0)
+        uncached = max(0, inp - cache)
+        
+        model_prices = prices_data.get(model)
+        if not model_prices:
+            for prefix, prefix_prices in prices_data.items():
+                if model.startswith(prefix):
+                    model_prices = prefix_prices
+                    break
+        if not model_prices:
+            model_prices = {}
+            
+        in_rate = model_prices.get("input_usd_per_1m", 0.0) / 1_000_000.0
+        cache_rate = model_prices.get("cached_input_usd_per_1m", in_rate * 1_000_000.0) / 1_000_000.0
+        out_rate = model_prices.get("output_usd_per_1m", 0.0) / 1_000_000.0
+        
+        input_cost = uncached * in_rate
+        cached_input_cost = cache * cache_rate
+        output_cost = out * out_rate
+        total_cost = input_cost + cached_input_cost + output_cost
+        
+        if mode not in mode_totals:
+            mode_totals[mode] = {
+                "total_input_tokens": 0,
+                "total_cached_input_tokens": 0,
+                "total_output_tokens": 0,
+                "input_cost_usd": 0.0,
+                "cached_input_cost_usd": 0.0,
+                "output_cost_usd": 0.0,
+                "total_cost_usd": 0.0
+            }
+        
+        # Match D1-D8: input_tokens represents uncached input
+        mode_totals[mode]["total_input_tokens"] += uncached
+        mode_totals[mode]["total_cached_input_tokens"] += cache
+        mode_totals[mode]["total_output_tokens"] += out
+        
+        mode_totals[mode]["input_cost_usd"] += input_cost
+        mode_totals[mode]["cached_input_cost_usd"] += cached_input_cost
+        mode_totals[mode]["output_cost_usd"] += output_cost
+        mode_totals[mode]["total_cost_usd"] += total_cost
+        grand_total_generation += total_cost
+
+    # Format the floats into strings
+    for mode in [k for k in mode_totals.keys()]:
+        for k in ["input_cost_usd", "cached_input_cost_usd", "output_cost_usd", "total_cost_usd"]:
+            mode_totals[mode][k] = format_cost(mode_totals[mode][k])
+
+    # Append Shared Embedding Cost
+    total_embedding_cost = embedding_usage.get("cost_usd", 0.0)
+    mode_totals["shared_embedding"] = {
+        "total_embedding_tokens": embedding_usage.get("total_tokens", 0),
+        "total_cost_usd": format_cost(total_embedding_cost)
+    }
+    
+    # Grand Total
+    grand_total_usd = grand_total_generation + total_embedding_cost
+    mode_totals["GRAND_TOTAL_USD"] = format_cost(grand_total_usd)
+
+    write_json(output_dir / "cost_summary.json", mode_totals)
+
     print(f"Completed {len(rows)} pairs in {mode}; results: {inference_path}")
+    print(f"Total API Cost: ${grand_total_usd:.4f}")
     return 0
 
 

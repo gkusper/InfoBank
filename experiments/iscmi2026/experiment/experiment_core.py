@@ -14,7 +14,7 @@ EXPERIMENT_DIR = Path(__file__).resolve().parent
 REPO_ROOT = EXPERIMENT_DIR.parents[2]
 BENCHMARK_DIR = REPO_ROOT / "experiments" / "iscmi2026" / "benchmark"
 DEFAULT_PACKET_DIR = REPO_ROOT.parent / "mailex_pilot_external_packet"
-CONDITIONS = ("STANDARD_RAG", "THREAD_AWARE_RAG", "ORACLE_TASK_STATE_RAG")
+CONDITIONS = ("STANDARD_RAG", "THREAD_AWARE_RAG", "ORACLE_TASK_STATE_RAG","TOKEN_BUDGET_ABLATED_RAG")
 ANSWER_TYPES = {
     "TASK_SET",
     "TASK_ATTRIBUTE_MAP",
@@ -178,6 +178,12 @@ def load_configs(
         if condition in configs:
             raise ValueError(f"Duplicate condition config: {condition}")
         configs[str(condition)] = config
+
+    if "TOKEN_BUDGET_ABLATED_RAG" not in configs and "ORACLE_TASK_STATE_RAG" in configs:
+            configs["TOKEN_BUDGET_ABLATED_RAG"] = dict(configs["ORACLE_TASK_STATE_RAG"])
+            configs["TOKEN_BUDGET_ABLATED_RAG"]["condition"] = "TOKEN_BUDGET_ABLATED_RAG"
+            configs["TOKEN_BUDGET_ABLATED_RAG"]["config_file"] = "virtual_ablated_config.json"
+
     if set(configs) != set(CONDITIONS):
         raise ValueError(f"Expected configs for {CONDITIONS}, found {tuple(configs)}")
     first = configs[CONDITIONS[0]]
@@ -374,7 +380,7 @@ def inference_question(question: dict[str, Any]) -> dict[str, str]:
     }
 
 
-def build_prompt(question_text: str, context_documents: list[dict[str, Any]]) -> tuple[str, str]:
+def build_prompt(question_text: str, context_documents: list[dict[str, Any]], condition: str = "STANDARD_RAG") -> tuple[str, str]:
     blocks = []
     for index, document in enumerate(context_documents, start=1):
         blocks.append(f"[Knowledge block {index}: {document['document_id']}]\n{document['text']}")
@@ -383,7 +389,17 @@ def build_prompt(question_text: str, context_documents: list[dict[str, Any]]) ->
         "Knowledge blocks:\n"
         + "\n\n---\n\n".join(blocks)
     )
-    return SYSTEM_PROMPT, user_prompt
+
+    system_prompt = SYSTEM_PROMPT
+    if condition == "TOKEN_BUDGET_ABLATED_RAG":
+        system_prompt += (
+            "\n\nNOTE FOR THIS RUN: You must act strictly as a naive baseline model. "
+            "Completely ignore all structured human-derived Oracle task-state "
+            "representations in the provided knowledge blocks. Base your answer strictly "
+            "on the raw text of the original email messages."
+        )
+        
+    return system_prompt, user_prompt
 
 
 def deterministic_mock_embedding(text: str, dimensions: int = 128) -> list[float]:
@@ -446,7 +462,7 @@ def contexts_for_condition(
 
     chronological = sorted(thread_emails, key=lambda row: (row["chronological_rank"], row["message_id"]))
     contexts = chronological
-    if condition == "ORACLE_TASK_STATE_RAG":
+    if condition in {"ORACLE_TASK_STATE_RAG", "TOKEN_BUDGET_ABLATED_RAG"}:
         contexts = chronological + [
             row
             for row in oracle_documents

@@ -1,0 +1,40 @@
+{
+  "focus_diagnostics": [
+    {
+      "A0": "FULL",
+      "B1": "CFAF",
+      "B3": "FULL",
+      "diagnostic": "Previously exposed compound identity/count regression",
+      "fragment_types_compatible": [
+        true,
+        true
+      ],
+      "fragments": [
+        {
+          "end": 15,
+          "provenance": "LLM_ENTITY_PROPOSAL_WITH_EXACT_OFFSETS",
+          "start": 0,
+          "text": "James Rodríguez"
+        },
+        {
+          "end": 65,
+          "provenance": "DETERMINISTIC_NUMERIC_TOKEN_SHAPE",
+          "start": 62,
+          "text": "six"
+        }
+      ],
+      "requirement_count": 2
+    },
+    {
+      "A0": "FULL",
+      "B1": "CFAF",
+      "B3": "FULL",
+      "diagnostic": "Previously exposed historical-priority uncertainty",
+      "soft_qualifier_warning": true
+    }
+  ],
+  "frozen_semantic_fields_unchanged": true,
+  "model_calls": 0,
+  "no_case_specific_runtime_rule": true,
+  "status": "PASS"
+}

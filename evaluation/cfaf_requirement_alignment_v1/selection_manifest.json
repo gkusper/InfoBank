@@ -1,0 +1,19 @@
+{
+  "case_count": 24,
+  "eligible_exposed": 130,
+  "eligible_unseen": 1104,
+  "expected_cfaf": 13,
+  "expected_full": 11,
+  "exposure_ledger_sha256": "0cde044f73a427543c26da0acc8fbafd02b32ffa757c02b077fc010ce8bd4a5d",
+  "gold_annotations_unchanged": true,
+  "infobank": 10,
+  "new_exposures": 0,
+  "refusalbench": 14,
+  "reserved_groups": 30,
+  "runtime_sha256": "8e1a2c75aff41d1966df8e7c9e3cb22556e1825f67029409240365128c740e2a",
+  "scorer_sha256": "003e06f4603cb8114131b19b3081d36b46f99a7644c0f2ae310319dc6e91733c",
+  "selection_policy": "All ten prior InfoBank cases; predeclared round_03 indices 0,1,3,4,5,6,8,9,10,11,12,15,16; paired_regression index5 for historical priority. Selection is evaluator-only, not runtime rules.",
+  "source_registry_sha256": "6ca8595b22fee8532104f1416a857ebe63d802c9f3b0dfc364723c3ff7cfbd43",
+  "students_accessed": false,
+  "untouched_groups": 18
+}

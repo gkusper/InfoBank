@@ -1,0 +1,79 @@
+{
+  "B3_stage5_ms": {
+    "max": 4.6981999184936285,
+    "median": 1.2728000292554498,
+    "n": 24,
+    "sum": 36.8563998490572
+  },
+  "B4_calls": 0,
+  "additional_model_calls_for_RDA": 0,
+  "attempt_cap": 120,
+  "attempts": 110,
+  "by_kind": {
+    "semantic_analysis": {
+      "attempts": 22,
+      "input_tokens": 49955,
+      "latency_ms_sum": 75516.40110020526,
+      "output_tokens": 6879,
+      "successes": 22
+    },
+    "semantic_cfaf": {
+      "attempts": 66,
+      "input_tokens": 67232,
+      "latency_ms_sum": 101923.07179910131,
+      "output_tokens": 3360,
+      "successes": 66
+    },
+    "shared_control": {
+      "attempts": 22,
+      "input_tokens": 23217,
+      "latency_ms_sum": 32625.928599387407,
+      "output_tokens": 1186,
+      "successes": 22
+    }
+  },
+  "deployment_cost_note": "Shared upstream is counted once per hypothetical system, so per-system totals overlap and must not be summed. No USD price assumptions.",
+  "deployment_equivalent": {
+    "A0": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 72365,
+      "latency_ms_sum": 108324.27729992196,
+      "output_tokens": 7999
+    },
+    "B1": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 72367,
+      "latency_ms_sum": 111608.43929974362,
+      "output_tokens": 7999
+    },
+    "B3": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 72365,
+      "latency_ms_sum": 108539.5585000515,
+      "output_tokens": 7999
+    },
+    "shared_control": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 73172,
+      "latency_ms_sum": 108142.32969959266,
+      "output_tokens": 8065
+    }
+  },
+  "embeddings": 0,
+  "experiment_calls_per_case": 4.583333333333333,
+  "input_tokens": 140404,
+  "network_errors": 0,
+  "optional_verifier_calls": 0,
+  "output_tokens": 11425,
+  "retries": 0,
+  "returned_models": {
+    "gpt-4o-mini-2024-07-18": 110
+  },
+  "successes": 110,
+  "summed_api_latency_ms": 210065.40149869397,
+  "timing_caveat": "All arms compute new diagnostics, including A0. Stage 5 timing is not an isolated CPU ablation; cached shared model calls must not be interpreted as deployment latency savings."
+}

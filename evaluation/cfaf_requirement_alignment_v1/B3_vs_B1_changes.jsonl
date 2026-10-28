@@ -1,0 +1,4 @@
+{"B1": "CFAF", "B3": "FULL", "expected_mode": "FULL", "index": 11, "origin": "round_03", "origin_index": 11, "phase": "cached", "reintroduced_incorrect_full": false, "restored_correct_full": true}
+{"B1": "CFAF", "B3": "FULL", "expected_mode": "CFAF", "index": 25, "origin": "paired_regression", "origin_index": 5, "phase": "cached", "reintroduced_incorrect_full": true, "restored_correct_full": false}
+{"B1": "CFAF", "B3": "FULL", "expected_mode": "FULL", "index": 19, "phase": "live", "reintroduced_incorrect_full": false, "restored_correct_full": true}
+{"B1": "CFAF", "B3": "FULL", "expected_mode": "CFAF", "index": 23, "phase": "live", "reintroduced_incorrect_full": true, "restored_correct_full": false}

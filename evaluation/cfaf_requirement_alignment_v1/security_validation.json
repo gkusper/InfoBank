@@ -1,0 +1,42 @@
+{
+  "case_count": 24,
+  "eligible_exposed": 130,
+  "eligible_unseen": 1104,
+  "exposure_ledger_unchanged": true,
+  "failures": [],
+  "invalid_span_references": [],
+  "invalid_upstream_assessments": [
+    {
+      "errors": [
+        "SOURCE_ROLE_COVERAGE_INVALID"
+      ],
+      "index": 22
+    }
+  ],
+  "metadata_only_regression_read": "Inherited metadata-filter test reads only annotation columns with an explicit Arrow schema; reserved/untouched question and context fields are ignored.",
+  "model_payload_does_not_include_private_RDA_or_gold": true,
+  "new_refusalbench_records": 0,
+  "original_model_prompts_unchanged": true,
+  "p5_api_calls": 0,
+  "p5_public_traces_equal": true,
+  "payloads_checked": 110,
+  "prior_files_unchanged": 848,
+  "public_internal_reason": {
+    "class_agreement": 35,
+    "exact_text_agreement": 29,
+    "n": 35,
+    "note": "Canonical P5 public text may differ from internal template while class and realization agree.",
+    "realization_agreement": 35
+  },
+  "public_schema_errors": [],
+  "reserved_groups": 30,
+  "scope_limit": "Exact guards, spans, fixture canaries and trace contracts; no universal natural-language leak or entailment proof.",
+  "shared_assessments_identical": 24,
+  "source_registry_recomputation_errors": [],
+  "source_registry_unchanged": true,
+  "status": "PASS",
+  "students_accessed": false,
+  "untouched_groups": 18,
+  "validated_candidate_fragment_offsets": 23,
+  "validated_query_spans": 26
+}

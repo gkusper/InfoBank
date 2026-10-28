@@ -1,0 +1,83 @@
+{
+  "T3_FULL_denominator": 0,
+  "T3_overrefusal_candidates": 8,
+  "T3_unsupported_FULL_count": 0,
+  "cases": [
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 0,
+      "control_scope_incomplete": true,
+      "flag": "TIME_SCOPE_AND_IRRELEVANT_SUPPORT",
+      "sample_id": "263f7106-41c9-49b1-992e-4c7452aef3a8"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 0,
+      "control_scope_incomplete": null,
+      "flag": "ROLE_COVERAGE_REJECTS_SUPPORTED_CONTENT",
+      "sample_id": "90ca5695-a633-40b8-b3dc-56bbbf208245"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 0,
+      "control_scope_incomplete": true,
+      "flag": "COMPARISON_WITHOUT_MODEL_MAPPING",
+      "sample_id": "45caa113-bbd0-4fbf-8526-37c1fcc8bae5"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 0,
+      "control_scope_incomplete": null,
+      "flag": "ROLE_COVERAGE_AND_SUMMARY_BREVITY",
+      "sample_id": "194cf6ad-e309-4d76-8a70-0f8a972042d2"
+    },
+    {
+      "T3_overrefusal_candidate": false,
+      "control_flagged_unsupported_relation_count": 1,
+      "control_scope_incomplete": true,
+      "flag": "ACCOUNTING_FACT_PROMOTED_TO_RISK_STRATEGY",
+      "sample_id": "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 1,
+      "control_scope_incomplete": true,
+      "flag": "CROSS_SUBJECT_CULTURAL_EXCHANGE",
+      "sample_id": "099f1832-11af-4fb4-bb8c-880baee07986"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 0,
+      "control_scope_incomplete": true,
+      "flag": "FORECAST_ATTRIBUTION_AND_CONDITIONS",
+      "sample_id": "49865de4-d298-41f9-a00f-a4c886147680"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": null,
+      "control_scope_incomplete": true,
+      "flag": "VALID_SCHEMA_MISSED_CATALYSTS_AND_WRONG_CLARIFY",
+      "sample_id": "89967e8d-2dd1-4214-a0f7-cf3588558362"
+    },
+    {
+      "T3_overrefusal_candidate": true,
+      "control_flagged_unsupported_relation_count": 0,
+      "control_scope_incomplete": null,
+      "flag": "ROLE_COVERAGE_REJECTS_DOMAIN_ANSWER",
+      "sample_id": "e10bb772-6c4e-426f-a924-3d3ba0b23515"
+    },
+    {
+      "T3_overrefusal_candidate": false,
+      "control_flagged_unsupported_relation_count": 2,
+      "control_scope_incomplete": true,
+      "flag": "CAUSAL_RELATION_AND_INVALID_SPAN",
+      "sample_id": "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff"
+    }
+  ],
+  "control_FULL_cases_with_flagged_unsupported_relations": 3,
+  "control_flagged_relations": 4,
+  "disputed_control_absence_assertion_cases": 1,
+  "human_review": "PENDING",
+  "no_binary_accuracy_computed": true,
+  "status": "NON_INDEPENDENT_AGENT_REVIEW"
+}

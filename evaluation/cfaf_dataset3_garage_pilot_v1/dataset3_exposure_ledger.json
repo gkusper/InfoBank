@@ -1,0 +1,22 @@
+{
+  "dataset": "Dataset3 original AmazonScience GaRAGe",
+  "development_pilot": true,
+  "exposed": 10,
+  "independent_final_assessment": false,
+  "other_dataset_ledgers_modified": false,
+  "remaining_not_qualitatively_inspected": 2356,
+  "seed": 20261028,
+  "selected_sample_ids": [
+    "263f7106-41c9-49b1-992e-4c7452aef3a8",
+    "90ca5695-a633-40b8-b3dc-56bbbf208245",
+    "45caa113-bbd0-4fbf-8526-37c1fcc8bae5",
+    "194cf6ad-e309-4d76-8a70-0f8a972042d2",
+    "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20",
+    "099f1832-11af-4fb4-bb8c-880baee07986",
+    "49865de4-d298-41f9-a00f-a4c886147680",
+    "89967e8d-2dd1-4214-a0f7-cf3588558362",
+    "e10bb772-6c4e-426f-a924-3d3ba0b23515",
+    "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff"
+  ],
+  "source_commit": "2b7264f5d4e066affbe4b67b7d3b9cffeff98ede"
+}

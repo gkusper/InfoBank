@@ -1,0 +1,75 @@
+{
+  "advanced_targets": [
+    "evaluation/cfaf_dataset3_garage_pilot_v1/test_adapter.py",
+    "evaluation/cfaf_target_claim_alignment_v1/test_target_claim.py",
+    "evaluation/cfaf_requirement_alignment_v1/test_rda.py",
+    "evaluation/cfaf_request_evidence_verification_v1/test_verification.py",
+    "evaluation/refusalbench_iterative_dev_v1/versions/v02/test_version.py",
+    "evaluation/refusalbench_iterative_dev_v1/versions/v01/test_version.py",
+    "evaluation/refusalbench_iterative_dev_v1/test_framework.py",
+    "evaluation/refusalbench_iterative_dev_v1/test_budget_deadline.py",
+    "evaluation/infobank_semantic_integration_v2/test_integration.py",
+    "evaluation/infobank_semantic_regression_v1/test_governed.py",
+    "evaluation/refusalbench_noncontradiction_v1/test_pilot.py",
+    "evaluation/refusalbench_span_fix_v1/test_span_fix.py",
+    "evaluation/refusalbench_semantic_dev/test_semantic.py",
+    "evaluation/refusalbench_semantic_dev/test_experiment.py",
+    "evaluation/refusalbench_pilot/test_refusalbench.py"
+  ],
+  "api_key_removed": true,
+  "archived_timer_rebased_only_in_test_process": true,
+  "exact_git_blob_count": 985,
+  "historical_hashes_run_against_original_unchanged_worktree": true,
+  "historical_sources_modified": false,
+  "known_original_failure": "test_preheldout_attempt1_plan_artifacts_are_plan_only: previously committed HELDOUT_RUN_AUTHORIZATION.json contradicts plan-only assertion",
+  "no_new_reserved_case_content_accessed": true,
+  "protected_current_files_unchanged": 985,
+  "runs": [
+    {
+      "returncode": 0,
+      "seconds": 9.343000000109896,
+      "suite": "current_and_prior"
+    },
+    {
+      "returncode": 1,
+      "seconds": 14.5,
+      "suite": "original_cfaf"
+    },
+    {
+      "returncode": 0,
+      "suite": "historical_worktree_hashes"
+    }
+  ],
+  "xml_summaries": {
+    "adapter_tests.xml": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 30
+    },
+    "historical_hash_tests.xml": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 3
+    },
+    "original_tests.xml": {
+      "errors": 0,
+      "failures": 1,
+      "skipped": 0,
+      "tests": 91
+    },
+    "regression_tests.xml": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 614
+    },
+    "scoring_tests.xml": {
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0,
+      "tests": 6
+    }
+  }
+}

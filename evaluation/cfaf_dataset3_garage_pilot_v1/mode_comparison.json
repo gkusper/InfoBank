@@ -1,0 +1,133 @@
+{
+  "FULL_CFAF_accuracy": null,
+  "T3_A0_gate_disagreements": 0,
+  "distributions": {
+    "A0_gate": {
+      "CFAF": 10
+    },
+    "T3_gate": {
+      "CFAF": 10
+    },
+    "T3_generated": {
+      "CFAF": 10
+    },
+    "control_generated": {
+      "CFAF": 1,
+      "FULL": 9
+    }
+  },
+  "generated_disagreements": 9,
+  "reason": "No original complete-request sufficiency gold. Relevant/answering passage existence is not a defensible binary mapping.",
+  "rows": [
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 0,
+      "sample_id": "263f7106-41c9-49b1-992e-4c7452aef3a8",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 1,
+      "sample_id": "90ca5695-a633-40b8-b3dc-56bbbf208245",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 2,
+      "sample_id": "45caa113-bbd0-4fbf-8526-37c1fcc8bae5",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 3,
+      "sample_id": "194cf6ad-e309-4d76-8a70-0f8a972042d2",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 4,
+      "sample_id": "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 5,
+      "sample_id": "099f1832-11af-4fb4-bb8c-880baee07986",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 6,
+      "sample_id": "49865de4-d298-41f9-a00f-a4c886147680",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "CFAF",
+      "runtime_index": 7,
+      "sample_id": "89967e8d-2dd1-4214-a0f7-cf3588558362",
+      "semantic_valid": true,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 8,
+      "sample_id": "e10bb772-6c4e-426f-a924-3d3ba0b23515",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "A0_gate": "CFAF",
+      "T3_gate": "CFAF",
+      "T3_generated": "CFAF",
+      "context_altered": false,
+      "control_generated": "FULL",
+      "runtime_index": 9,
+      "sample_id": "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    }
+  ]
+}

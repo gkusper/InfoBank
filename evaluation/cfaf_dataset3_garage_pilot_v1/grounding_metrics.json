@@ -1,0 +1,1757 @@
+{
+  "altered_context_cases": 0,
+  "answer_citation_syntax": "[cite_N], [view-NNNN], [view-NNNN:span-NNNN] only; bracketed exact known supplied mapping; no implicit source selection or citations inferred from support spans",
+  "binary_mode_accuracy": null,
+  "cases": [
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "": 3
+          },
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 3,
+          "irrelevant_selected_markers": [
+            "cite_15",
+            "cite_2",
+            "cite_8"
+          ],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_5"
+          ],
+          "precision": 0.0,
+          "recall": 0.0,
+          "selected_count": 3,
+          "selected_markers": [
+            "cite_2",
+            "cite_8",
+            "cite_15"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 0
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "": 3
+          },
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 3,
+          "irrelevant_selected_markers": [
+            "cite_15",
+            "cite_2",
+            "cite_8"
+          ],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_5"
+          ],
+          "precision": 0.0,
+          "recall": 0.0,
+          "selected_count": 3,
+          "selected_markers": [
+            "cite_2",
+            "cite_8",
+            "cite_15"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 0
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "": 3
+          },
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 3,
+          "irrelevant_selected_markers": [
+            "cite_15",
+            "cite_2",
+            "cite_8"
+          ],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_5"
+          ],
+          "precision": 0.0,
+          "recall": 0.0,
+          "selected_count": 3,
+          "selected_markers": [
+            "cite_2",
+            "cite_8",
+            "cite_15"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 0
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_5"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 4,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_5"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "263f7106-41c9-49b1-992e-4c7452aef3a8",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 4
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_1",
+            "cite_3",
+            "cite_4",
+            "cite_12"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 4
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_1",
+            "cite_3",
+            "cite_4",
+            "cite_12"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 4
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_1",
+            "cite_3",
+            "cite_4",
+            "cite_12"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "90ca5695-a633-40b8-b3dc-56bbbf208245",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 4
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_9",
+            "cite_10",
+            "cite_11",
+            "cite_12"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 4
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_9",
+            "cite_10",
+            "cite_11",
+            "cite_12"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 4
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_9",
+            "cite_10",
+            "cite_11",
+            "cite_12"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "45caa113-bbd0-4fbf-8526-37c1fcc8bae5",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2,
+            "RELATED-INFORMATION": 2
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_2",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_1",
+            "cite_3",
+            "cite_12",
+            "cite_15"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2,
+            "RELATED-INFORMATION": 2
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_2",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_1",
+            "cite_3",
+            "cite_12",
+            "cite_15"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2,
+            "RELATED-INFORMATION": 2
+          },
+          "f1": 0.42105263157894735,
+          "fn": 11,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_13",
+            "cite_14",
+            "cite_2",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.26666666666666666,
+          "selected_count": 4,
+          "selected_markers": [
+            "cite_1",
+            "cite_3",
+            "cite_12",
+            "cite_15"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 4
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "194cf6ad-e309-4d76-8a70-0f8a972042d2",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "RELATED-INFORMATION": 1
+          },
+          "f1": 0.125,
+          "fn": 14,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.06666666666666667,
+          "selected_count": 1,
+          "selected_markers": [
+            "cite_7"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 1
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "RELATED-INFORMATION": 1
+          },
+          "f1": 0.125,
+          "fn": 14,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.06666666666666667,
+          "selected_count": 1,
+          "selected_markers": [
+            "cite_7"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 1
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "RELATED-INFORMATION": 1
+          },
+          "f1": 0.125,
+          "fn": 14,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.06666666666666667,
+          "selected_count": 1,
+          "selected_markers": [
+            "cite_7"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 1
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2,
+            "RELATED-INFORMATION": 3
+          },
+          "f1": 0.625,
+          "fn": 6,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_12",
+            "cite_15",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.45454545454545453,
+          "selected_count": 5,
+          "selected_markers": [
+            "cite_2",
+            "cite_3",
+            "cite_5",
+            "cite_13",
+            "cite_14"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 5
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2,
+            "RELATED-INFORMATION": 3
+          },
+          "f1": 0.625,
+          "fn": 6,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_12",
+            "cite_15",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.45454545454545453,
+          "selected_count": 5,
+          "selected_markers": [
+            "cite_2",
+            "cite_3",
+            "cite_5",
+            "cite_13",
+            "cite_14"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 5
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2,
+            "RELATED-INFORMATION": 3
+          },
+          "f1": 0.625,
+          "fn": 6,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_12",
+            "cite_15",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.45454545454545453,
+          "selected_count": 5,
+          "selected_markers": [
+            "cite_2",
+            "cite_3",
+            "cite_5",
+            "cite_13",
+            "cite_14"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 5
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 11,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_5",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 11,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_5",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "099f1832-11af-4fb4-bb8c-880baee07986",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 3
+          },
+          "f1": 0.3333333333333333,
+          "fn": 12,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.2,
+          "selected_count": 3,
+          "selected_markers": [
+            "cite_3",
+            "cite_4",
+            "cite_5"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 3
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 3
+          },
+          "f1": 0.3333333333333333,
+          "fn": 12,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.2,
+          "selected_count": 3,
+          "selected_markers": [
+            "cite_3",
+            "cite_4",
+            "cite_5"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 3
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 3
+          },
+          "f1": 0.3333333333333333,
+          "fn": 12,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.2,
+          "selected_count": 3,
+          "selected_markers": [
+            "cite_3",
+            "cite_4",
+            "cite_5"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 3
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "49865de4-d298-41f9-a00f-a4c886147680",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 13,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 13,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 13,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 13,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 13,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "89967e8d-2dd1-4214-a0f7-cf3588558362",
+      "semantic_valid": true,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2
+          },
+          "f1": 0.23529411764705882,
+          "fn": 13,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.13333333333333333,
+          "selected_count": 2,
+          "selected_markers": [
+            "cite_1",
+            "cite_6"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 2
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2
+          },
+          "f1": 0.23529411764705882,
+          "fn": 13,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.13333333333333333,
+          "selected_count": 2,
+          "selected_markers": [
+            "cite_1",
+            "cite_6"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 2
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "ANSWER-THE-QUESTION": 2
+          },
+          "f1": 0.23529411764705882,
+          "fn": 13,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": 1.0,
+          "recall": 0.13333333333333333,
+          "selected_count": 2,
+          "selected_markers": [
+            "cite_1",
+            "cite_6"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 2
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 15,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1",
+            "cite_10",
+            "cite_11",
+            "cite_12",
+            "cite_13",
+            "cite_14",
+            "cite_15",
+            "cite_2",
+            "cite_3",
+            "cite_4",
+            "cite_5",
+            "cite_6",
+            "cite_7",
+            "cite_8",
+            "cite_9"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "e10bb772-6c4e-426f-a924-3d3ba0b23515",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    },
+    {
+      "metrics": {
+        "analyzer_global_support": {
+          "correctness_distribution": {
+            "UNKNOWN": 1
+          },
+          "f1": 1.0,
+          "fn": 0,
+          "fp": 0,
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [],
+          "precision": 1.0,
+          "recall": 1.0,
+          "selected_count": 1,
+          "selected_markers": [
+            "cite_1"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 1
+        },
+        "analyzer_primary_supports_roles": {
+          "correctness_distribution": {
+            "": 1,
+            "UNKNOWN": 1
+          },
+          "f1": 0.6666666666666666,
+          "fn": 0,
+          "fp": 1,
+          "irrelevant_selected_markers": [
+            "cite_14"
+          ],
+          "missing_relevant_markers": [],
+          "precision": 0.5,
+          "recall": 1.0,
+          "selected_count": 2,
+          "selected_markers": [
+            "cite_1",
+            "cite_14"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 1
+        },
+        "analyzer_requirement_support": {
+          "correctness_distribution": {
+            "": 1,
+            "UNKNOWN": 1
+          },
+          "f1": 0.6666666666666666,
+          "fn": 0,
+          "fp": 1,
+          "irrelevant_selected_markers": [
+            "cite_14"
+          ],
+          "missing_relevant_markers": [],
+          "precision": 0.5,
+          "recall": 1.0,
+          "selected_count": 2,
+          "selected_markers": [
+            "cite_1",
+            "cite_14"
+          ],
+          "selected_unknown_relevance": 0,
+          "tp": 1
+        },
+        "semantic_cfaf_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 1,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        },
+        "shared_control_answer_citations": {
+          "answer_citation_count": 0,
+          "claim_judgement": "Requires non-independent qualitative review and independent human confirmation",
+          "correctness_distribution": {},
+          "f1": 0.0,
+          "fn": 1,
+          "fp": 0,
+          "invalid_citation_count": 0,
+          "invalid_citations": [],
+          "irrelevant_selected_markers": [],
+          "missing_relevant_markers": [
+            "cite_1"
+          ],
+          "precision": null,
+          "recall": 0.0,
+          "selected_count": 0,
+          "selected_markers": [],
+          "selected_unknown_relevance": 0,
+          "tp": 0,
+          "undersupported_FULL": null,
+          "unnecessary_deflection": null,
+          "unsupported_claim_count": null
+        }
+      },
+      "sample_id": "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff",
+      "semantic_valid": false,
+      "status": "COMPLETED"
+    }
+  ],
+  "definition": "Source selection against original evidence_relevant YES/NO. Empty relevance excluded from TP/FP. Unknown precision when no selected known-labelled sources; F1=0 when positives missed. Source recall is not answer completeness. All support-layer results shared between generated systems. Actual answer citations are separate.",
+  "independent_claim_entailment": null,
+  "invalid_answer_citations": {
+    "semantic_cfaf": 0,
+    "shared_control": 0
+  },
+  "layers": {
+    "analyzer_global_support": {
+      "case_count": 10,
+      "fn": 95,
+      "fp": 3,
+      "macro_f1": 0.35817853457172344,
+      "macro_precision": 0.8888888888888888,
+      "macro_precision_defined_cases": 9,
+      "macro_recall": 0.26545454545454544,
+      "micro_f1": 0.3287671232876712,
+      "micro_precision": 0.8888888888888888,
+      "micro_recall": 0.20168067226890757,
+      "tp": 24
+    },
+    "analyzer_primary_supports_roles": {
+      "case_count": 10,
+      "fn": 95,
+      "fp": 4,
+      "macro_f1": 0.32484520123839006,
+      "macro_precision": 0.8333333333333334,
+      "macro_precision_defined_cases": 9,
+      "macro_recall": 0.26545454545454544,
+      "micro_f1": 0.32653061224489793,
+      "micro_precision": 0.8571428571428571,
+      "micro_recall": 0.20168067226890757,
+      "tp": 24
+    },
+    "analyzer_requirement_support": {
+      "case_count": 10,
+      "fn": 95,
+      "fp": 4,
+      "macro_f1": 0.32484520123839006,
+      "macro_precision": 0.8333333333333334,
+      "macro_precision_defined_cases": 9,
+      "macro_recall": 0.26545454545454544,
+      "micro_f1": 0.32653061224489793,
+      "micro_precision": 0.8571428571428571,
+      "micro_recall": 0.20168067226890757,
+      "tp": 24
+    },
+    "semantic_cfaf_answer_citations": {
+      "case_count": 10,
+      "fn": 119,
+      "fp": 0,
+      "macro_f1": 0.0,
+      "macro_precision": null,
+      "macro_precision_defined_cases": 0,
+      "macro_recall": 0.0,
+      "micro_f1": 0.0,
+      "micro_precision": null,
+      "micro_recall": 0.0,
+      "tp": 0
+    },
+    "shared_control_answer_citations": {
+      "case_count": 10,
+      "fn": 119,
+      "fp": 0,
+      "macro_f1": 0.0,
+      "macro_precision": null,
+      "macro_precision_defined_cases": 0,
+      "macro_recall": 0.0,
+      "micro_f1": 0.0,
+      "micro_precision": null,
+      "micro_recall": 0.0,
+      "tp": 0
+    }
+  },
+  "public_unsupported_FULL_T3": {
+    "FULL_denominator": 0,
+    "count": 0,
+    "rate": null,
+    "reason": "No T3 FULL responses; says nothing about ability to answer well-supported requests."
+  },
+  "raw_proposal_warning": "Analyzer support/role metrics include diagnostic proposals from 9 invalid assessments. These are not accepted T3 evidence selections or answer citations. Only 1 assessment is valid; it proposes no global supporting evidence.",
+  "semantic_invalid_cases": 9,
+  "semantic_valid_cases": 1
+}

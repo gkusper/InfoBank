@@ -1,0 +1,252 @@
+[
+  {
+    "evidence_correct_counts": {
+      "": 11,
+      "ANSWER-THE-QUESTION": 2,
+      "OUTDATED": 2
+    },
+    "evidence_relevant_counts": {
+      "NO": 11,
+      "YES": 4
+    },
+    "index_one_based": 2288,
+    "index_zero_based": 2287,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Computers & Electronics",
+      "question_complexity": "Multi-hop",
+      "question_date": "19 January 2025",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "YES",
+      "question_type": "FAST-CHANGING",
+      "question_valid": "YES"
+    },
+    "sample_id": "263f7106-41c9-49b1-992e-4c7452aef3a8"
+  },
+  {
+    "evidence_correct_counts": {
+      "ANSWER-THE-QUESTION": 4,
+      "RELATED-INFORMATION": 10,
+      "UNKNOWN": 1
+    },
+    "evidence_relevant_counts": {
+      "YES": 15
+    },
+    "index_one_based": 187,
+    "index_zero_based": 186,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Science",
+      "question_complexity": "Multi-hop",
+      "question_date": "17 December 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "NO",
+      "question_type": "",
+      "question_valid": "YES"
+    },
+    "sample_id": "90ca5695-a633-40b8-b3dc-56bbbf208245"
+  },
+  {
+    "evidence_correct_counts": {
+      "ANSWER-THE-QUESTION": 11,
+      "RELATED-INFORMATION": 4
+    },
+    "evidence_relevant_counts": {
+      "YES": 15
+    },
+    "index_one_based": 869,
+    "index_zero_based": 868,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Internet & Telecom",
+      "question_complexity": "Comparison",
+      "question_date": "24 December 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "NO",
+      "question_type": "",
+      "question_valid": "YES"
+    },
+    "sample_id": "45caa113-bbd0-4fbf-8526-37c1fcc8bae5"
+  },
+  {
+    "evidence_correct_counts": {
+      "ANSWER-THE-QUESTION": 7,
+      "RELATED-INFORMATION": 8
+    },
+    "evidence_relevant_counts": {
+      "YES": 15
+    },
+    "index_one_based": 154,
+    "index_zero_based": 153,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Jobs & Education",
+      "question_complexity": "Set",
+      "question_date": "17 December 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "NO",
+      "question_type": "",
+      "question_valid": "YES"
+    },
+    "sample_id": "194cf6ad-e309-4d76-8a70-0f8a972042d2"
+  },
+  {
+    "evidence_correct_counts": {
+      "RELATED-INFORMATION": 14,
+      "UNKNOWN": 1
+    },
+    "evidence_relevant_counts": {
+      "YES": 15
+    },
+    "index_one_based": 2045,
+    "index_zero_based": 2044,
+    "original_metadata": {
+      "answer_validate": "",
+      "question_category": "Business & Industrial",
+      "question_complexity": "Comparison",
+      "question_date": "16 January 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "YES",
+      "question_type": "SLOW-CHANGING",
+      "question_valid": "YES"
+    },
+    "sample_id": "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20"
+  },
+  {
+    "evidence_correct_counts": {
+      "": 4,
+      "ANSWER-THE-QUESTION": 5,
+      "RELATED-INFORMATION": 6
+    },
+    "evidence_relevant_counts": {
+      "NO": 4,
+      "YES": 11
+    },
+    "index_one_based": 2215,
+    "index_zero_based": 2214,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Law & Government",
+      "question_complexity": "Post-processing heavy",
+      "question_date": "19 January 2025",
+      "question_false_premise": "NO",
+      "question_popularity": "Torso",
+      "question_seeking": "YES",
+      "question_sensitive": "YES",
+      "question_type": "FAST-CHANGING",
+      "question_valid": "YES"
+    },
+    "sample_id": "099f1832-11af-4fb4-bb8c-880baee07986"
+  },
+  {
+    "evidence_correct_counts": {
+      "ANSWER-THE-QUESTION": 6,
+      "RELATED-INFORMATION": 9
+    },
+    "evidence_relevant_counts": {
+      "YES": 15
+    },
+    "index_one_based": 582,
+    "index_zero_based": 581,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Finance, Business & Industrial",
+      "question_complexity": "Multi-hop",
+      "question_date": "19 December 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Head",
+      "question_seeking": "YES",
+      "question_sensitive": "YES",
+      "question_type": "SLOW-CHANGING",
+      "question_valid": "YES"
+    },
+    "sample_id": "49865de4-d298-41f9-a00f-a4c886147680"
+  },
+  {
+    "evidence_correct_counts": {
+      "": 2,
+      "ANSWER-THE-QUESTION": 6,
+      "OUTDATED": 4,
+      "UNKNOWN": 3
+    },
+    "evidence_relevant_counts": {
+      "NO": 2,
+      "YES": 13
+    },
+    "index_one_based": 1077,
+    "index_zero_based": 1076,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Stock",
+      "question_complexity": "Simple",
+      "question_date": "26 December 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Torso",
+      "question_seeking": "YES",
+      "question_sensitive": "YES",
+      "question_type": "FAST-CHANGING",
+      "question_valid": "YES"
+    },
+    "sample_id": "89967e8d-2dd1-4214-a0f7-cf3588558362"
+  },
+  {
+    "evidence_correct_counts": {
+      "ANSWER-THE-QUESTION": 5,
+      "RELATED-INFORMATION": 6,
+      "UNKNOWN": 4
+    },
+    "evidence_relevant_counts": {
+      "YES": 15
+    },
+    "index_one_based": 30,
+    "index_zero_based": 29,
+    "original_metadata": {
+      "answer_validate": "YES",
+      "question_category": "Science",
+      "question_complexity": "Post-processing heavy",
+      "question_date": "17 December 2024",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "NO",
+      "question_type": "",
+      "question_valid": "YES"
+    },
+    "sample_id": "e10bb772-6c4e-426f-a924-3d3ba0b23515"
+  },
+  {
+    "evidence_correct_counts": {
+      "": 14,
+      "UNKNOWN": 1
+    },
+    "evidence_relevant_counts": {
+      "NO": 14,
+      "YES": 1
+    },
+    "index_one_based": 1882,
+    "index_zero_based": 1881,
+    "original_metadata": {
+      "answer_validate": "",
+      "question_category": "Business & Industrial ",
+      "question_complexity": "Simple w. condition",
+      "question_date": "15 January 2025",
+      "question_false_premise": "NO",
+      "question_popularity": "Tail",
+      "question_seeking": "YES",
+      "question_sensitive": "NO",
+      "question_type": "",
+      "question_valid": "YES"
+    },
+    "sample_id": "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff"
+  }
+]

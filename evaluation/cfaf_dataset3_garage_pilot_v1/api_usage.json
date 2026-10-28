@@ -1,0 +1,55 @@
+{
+  "additional_verifiers": 0,
+  "attempts": 30,
+  "by_kind": {
+    "semantic_analysis": {
+      "attempts": 10,
+      "errors": 0,
+      "finish_reasons": {
+        "stop": 10
+      },
+      "input_tokens": 95584,
+      "max_latency_ms": 10431.635800050572,
+      "mean_latency_ms": 6612.521449988708,
+      "output_tokens": 6160,
+      "successful": 10
+    },
+    "semantic_cfaf": {
+      "attempts": 10,
+      "errors": 0,
+      "finish_reasons": {
+        "stop": 10
+      },
+      "input_tokens": 40285,
+      "max_latency_ms": 1909.4372000545263,
+      "mean_latency_ms": 1600.1904899952933,
+      "output_tokens": 511,
+      "successful": 10
+    },
+    "shared_control": {
+      "attempts": 10,
+      "errors": 0,
+      "finish_reasons": {
+        "stop": 10
+      },
+      "input_tokens": 40634,
+      "max_latency_ms": 5570.925400126725,
+      "mean_latency_ms": 2113.0744999973103,
+      "output_tokens": 602,
+      "successful": 10
+    }
+  },
+  "cap": 60,
+  "dollar_cost": null,
+  "embeddings": 0,
+  "errors": 0,
+  "input_tokens": 176503,
+  "max_latency_ms": 10431.635800050572,
+  "mean_latency_ms": 3441.928813327104,
+  "output_tokens": 7273,
+  "pricing_verified": false,
+  "retries": 0,
+  "shared_upstream_counted_once": true,
+  "successful_calls": 30,
+  "unsettled_attempts": 0
+}

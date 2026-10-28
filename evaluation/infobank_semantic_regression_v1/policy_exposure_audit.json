@@ -1,0 +1,999 @@
+{
+  "DENY_model_exposure": "No content, metadata, original identifiers, denied count or existence signals.",
+  "active_shared_assessment_payload_identity_test": "PASS",
+  "audit": [
+    {
+      "case_id": "HELD3_P1_01A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_01a-brief",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current planning brief states that the routing token to use is R3-P1-01-amber for quiet harbor p1-01.",
+          "source_id": "view-0001",
+          "source_type": "Document",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "ba1f41b5ed59dc9d8b2e9dcfa5621131c814006b5bd140051c20bc1cd0c288ef"
+    },
+    {
+      "case_id": "HELD3_P1_01B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_01b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "A related page about quiet harbor p1-01 was opened during planning, but it does not state a routing token.",
+          "source_id": "view-0001",
+          "source_type": "BrowserHistory",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "e3ce63bfe06d09ee34cf106654418e5f50f5ad06c9b92589289dad4c63508c5d"
+    },
+    {
+      "case_id": "HELD3_P1_02A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_02a-brief",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current planning brief states that the routing token to use is R3-P1-02-amber for mango archive p1-02.",
+          "source_id": "view-0001",
+          "source_type": "Document",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "180d66c6a879c923476cd424d70033fa661c6b567b8e67ef1d59db13aac6c36f"
+    },
+    {
+      "case_id": "HELD3_P1_02B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_02b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "A related page about mango archive p1-02 was opened during planning, but it does not state a routing token.",
+          "source_id": "view-0001",
+          "source_type": "BrowserHistory",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "f43c8b3fb9bb47b03538f9b676e24c76f4675131cff09b38fea493b100d1b9ee"
+    },
+    {
+      "case_id": "HELD3_P1_03A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_03a-brief",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current planning brief states that the routing token to use is R3-P1-03-amber for cedar ledger p1-03.",
+          "source_id": "view-0001",
+          "source_type": "Document",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "e700ce1636db068b21bf228f943f50204a6534636b1a13f00f2b96f6f5d26cf4"
+    },
+    {
+      "case_id": "HELD3_P1_03B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_03b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "A related page about cedar ledger p1-03 was opened during planning, but it does not state a routing token.",
+          "source_id": "view-0001",
+          "source_type": "BrowserHistory",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "9a712d272abfcb87a11de61c39c145d0e18001d185bc5b2f9017967bd97ee963"
+    },
+    {
+      "case_id": "HELD3_P1_04A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_04a-brief",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current planning brief states that the routing token to use is R3-P1-04-amber for violet index p1-04.",
+          "source_id": "view-0001",
+          "source_type": "Document",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "649c7e50ee2c29a5c35d58256395db25b240511a9576ee665af21c0df08b76eb"
+    },
+    {
+      "case_id": "HELD3_P1_04B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p1_04b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "A related page about violet index p1-04 was opened during planning, but it does not state a routing token.",
+          "source_id": "view-0001",
+          "source_type": "BrowserHistory",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "21b7140260d16b9506dcd6c76aaa061a12c3756068fe26501cf83f6b04a09d09"
+    },
+    {
+      "case_id": "HELD3_P2_01A",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_01a-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "11 request tickets were completed for lunar depot p2-01.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "e5df6cdb2c5bfa1d2500c0efa2ea78c830d96a810a08ed3f1f49337171218a8d"
+    },
+    {
+      "case_id": "HELD3_P2_01B",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_01b-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "11 request tickets were completed for lunar depot p2-01.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "32a682de6fb75e4562b440e65b67be533c7d0dfe259317870e01d14b970d5c17"
+    },
+    {
+      "case_id": "HELD3_P2_02A",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_02a-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "12 request tickets were completed for cedar ledger p2-02.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "18c9b42041127ccc1e06d60883aa8028c3cb96337b5e07daff70824c4f21f534"
+    },
+    {
+      "case_id": "HELD3_P2_02B",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_02b-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "12 request tickets were completed for cedar ledger p2-02.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "819305c8a377d8cde97b023c32cdf271ca5a6186814256c04193977b1e2e5a4f"
+    },
+    {
+      "case_id": "HELD3_P2_03A",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_03a-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "13 request tickets were completed for mango archive p2-03.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "e986a8d1a0c00c5929c6a2bfc7223e381859b0f9ac0cd3c285a23fecc9d5c134"
+    },
+    {
+      "case_id": "HELD3_P2_03B",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_03b-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "13 request tickets were completed for mango archive p2-03.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "4c156bf60779ad4b9f18fdb0c07250eec54aa37609a207633139006618edfb82"
+    },
+    {
+      "case_id": "HELD3_P2_04A",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_04a-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "14 request tickets were completed for lunar depot p2-04.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "e5c4c791f6a6873f1e4a73e520560334b0e7dbebc8577ab50bc2f6687e89f1dc"
+    },
+    {
+      "case_id": "HELD3_P2_04B",
+      "internal_policy": [
+        {
+          "access_mode": "AGGREGATE",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p2_04b-aggregate",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-aggregate",
+          "projection": "aggregate",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "14 request tickets were completed for lunar depot p2-04.",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedAggregate",
+          "view_kind": "aggregate"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "fc89f7d8debde9660e203cd9c32488583104c9d3789683c49ef0d259ba63626f"
+    },
+    {
+      "case_id": "HELD3_P3_01A",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_01a-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-11\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "8596bef0132f65266668364502c29ed80180733cfff6990c2222802273f3eaf2"
+    },
+    {
+      "case_id": "HELD3_P3_01B",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_01b-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-11\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "562e00d5e72cd67fcb0184d6d6d0ed1994605031eba048099e84c4fb3125aaab"
+    },
+    {
+      "case_id": "HELD3_P3_02A",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_02a-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-12\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "6f99b238dd46c697719fbba73ccd662671091e28bc96b5d358e0a56df3f2784c"
+    },
+    {
+      "case_id": "HELD3_P3_02B",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_02b-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-12\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "edf4cc6a78abf8207830cf1b8c62ca5c7fb6a2adaeffe2a4b823551de9277502"
+    },
+    {
+      "case_id": "HELD3_P3_03A",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_03a-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-13\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "b274e9c5faebc5294e88a05a227923c2c9b13b63561b24da965ec05ff206854e"
+    },
+    {
+      "case_id": "HELD3_P3_03B",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_03b-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-13\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "15d3db0854f929fc98934682b6ea37549616699f65df3a8a44cebf862e6074bb"
+    },
+    {
+      "case_id": "HELD3_P3_04A",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_04a-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-14\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "8dd02c76fcffbeb81b64a0084c93df88aea13dc9d7ac0ff9788eec0c34eec98e"
+    },
+    {
+      "case_id": "HELD3_P3_04B",
+      "internal_policy": [
+        {
+          "access_mode": "METADATA",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p3_04b-metadata",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-metadata",
+          "projection": "metadata",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "{\"created_at\":\"2027-06-14\",\"file_type\":\"memo\"}",
+          "source_id": "view-0001",
+          "source_type": "AuthorizedMetadata",
+          "view_kind": "metadata"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "f6d324a52f9704641c9276aeaf25a6df22103199e07246aefbd72df9b8b6ed3d"
+    },
+    {
+      "case_id": "HELD3_P4_01A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_01a-action",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current task note records this next action: submit the lunar depot p4-01 checklist by 2027-07-15.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "ed329273426d790cd8a2e3116e46e0b086b5e9992d146ebf1ba027c3ca2763f1"
+    },
+    {
+      "case_id": "HELD3_P4_01B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_01b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The note mentions prior coordination around lunar depot p4-01, but it does not establish the next action.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "1a9a61f3d090dad4b17fcccbaca96425f09005a91a9ab34798cb19f66b4fdf01"
+    },
+    {
+      "case_id": "HELD3_P4_02A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_02a-action",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current task note records this next action: submit the copper trail p4-02 checklist by 2027-07-16.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "8e45e12a931246e8e6b5a4f0f1cbbb9bd7e1522646df1354b43cf59265e15513"
+    },
+    {
+      "case_id": "HELD3_P4_02B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_02b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The note mentions prior coordination around copper trail p4-02, but it does not establish the next action.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "9566045829f60bdea6233ee5cff05fec501337da76a4da4611403ff3ae5d2f87"
+    },
+    {
+      "case_id": "HELD3_P4_03A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_03a-action",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current task note records this next action: submit the lunar depot p4-03 checklist by 2027-07-17.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "f51a623035b3b6643d4ab0471eac30c9f9d56121586d013a212e2f47390184bd"
+    },
+    {
+      "case_id": "HELD3_P4_03B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_03b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The note mentions prior coordination around lunar depot p4-03, but it does not establish the next action.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "60216c1ff0919be070bc47c928726e0802a646ce9d553c763262e798f5f502d4"
+    },
+    {
+      "case_id": "HELD3_P4_04A",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_04a-action",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The current task note records this next action: submit the quiet harbor p4-04 checklist by 2027-07-18.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "433d665299b8ae862e8a52fd09bbfc27f3c3c2ea961a4897f7fad56fe0eb6462"
+    },
+    {
+      "case_id": "HELD3_P4_04B",
+      "internal_policy": [
+        {
+          "access_mode": "FULL",
+          "existence_visibility": "PUBLIC",
+          "included": true,
+          "original_source_id": "h3-src-held3_p4_04b-context",
+          "permitted_source_id": "view-0001",
+          "policy_rule_id": "h3-policy-full",
+          "projection": "content",
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [
+        {
+          "context": "The note mentions prior coordination around quiet harbor p4-04, but it does not establish the next action.",
+          "source_id": "view-0001",
+          "source_type": "TaskNote",
+          "view_kind": "content"
+        }
+      ],
+      "pre_call_projection": "PASS",
+      "request_signature": "f0f9c96af6ef520477c131522a81ed0c7fb532a29125b025948bbd4a0f91c681"
+    },
+    {
+      "case_id": "HELD3_P5_01A",
+      "internal_policy": [],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "6b91c41ee43c4d1ffbbf3ec8126decb1623a526d2dc0e67c389de76121d5e854"
+    },
+    {
+      "case_id": "HELD3_P5_01B",
+      "internal_policy": [
+        {
+          "access_mode": "DENY",
+          "existence_visibility": "INTERNAL_ONLY",
+          "included": false,
+          "original_source_id": "h3-src-held3_p5_01b-hidden",
+          "policy_rule_id": "h3-policy-deny",
+          "projection": null,
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "6b91c41ee43c4d1ffbbf3ec8126decb1623a526d2dc0e67c389de76121d5e854"
+    },
+    {
+      "case_id": "HELD3_P5_02A",
+      "internal_policy": [],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "60025e332630771558654dae1b54a10eb091971b38da4dae26502eeaf8a750bd"
+    },
+    {
+      "case_id": "HELD3_P5_02B",
+      "internal_policy": [
+        {
+          "access_mode": "DENY",
+          "existence_visibility": "INTERNAL_ONLY",
+          "included": false,
+          "original_source_id": "h3-src-held3_p5_02b-hidden",
+          "policy_rule_id": "h3-policy-deny",
+          "projection": null,
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "60025e332630771558654dae1b54a10eb091971b38da4dae26502eeaf8a750bd"
+    },
+    {
+      "case_id": "HELD3_P5_03A",
+      "internal_policy": [],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "fcb10df5eb55efe5b30655c273ce0a6870460006dd793d759a6bc2df616e8768"
+    },
+    {
+      "case_id": "HELD3_P5_03B",
+      "internal_policy": [
+        {
+          "access_mode": "DENY",
+          "existence_visibility": "INTERNAL_ONLY",
+          "included": false,
+          "original_source_id": "h3-src-held3_p5_03b-hidden",
+          "policy_rule_id": "h3-policy-deny",
+          "projection": null,
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "fcb10df5eb55efe5b30655c273ce0a6870460006dd793d759a6bc2df616e8768"
+    },
+    {
+      "case_id": "HELD3_P5_04A",
+      "internal_policy": [],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "f35eef696b44019d1302ce1b9ab56a06bc188ad6bef864fd37ca7062d898104d"
+    },
+    {
+      "case_id": "HELD3_P5_04B",
+      "internal_policy": [
+        {
+          "access_mode": "DENY",
+          "existence_visibility": "INTERNAL_ONLY",
+          "included": false,
+          "original_source_id": "h3-src-held3_p5_04b-hidden",
+          "policy_rule_id": "h3-policy-deny",
+          "projection": null,
+          "purpose_compatibility": "compatible"
+        }
+      ],
+      "oracle_fields_present": false,
+      "permitted_documents": [],
+      "pre_call_projection": "PASS",
+      "request_signature": "f35eef696b44019d1302ce1b9ab56a06bc188ad6bef864fd37ca7062d898104d"
+    }
+  ],
+  "audited_cases": 40,
+  "gold_or_fixture_semantics_in_payload": false,
+  "live_request_audit": {
+    "audited_api_attempts": 96,
+    "deterministic_no_view_case_count": 8,
+    "failures": [],
+    "internal_public_trace_separation": "Public traces are response-only whitelist objects; internal policy traces retain original IDs locally. P5 public objects equal; internal policy traces differ.",
+    "nonempty_public_responses": 80,
+    "p5_pair_checks": [
+      {
+        "no_model_calls": true,
+        "pair_id": "H3PAIR_P5_01",
+        "public_response_and_trace_equal": true
+      },
+      {
+        "no_model_calls": true,
+        "pair_id": "H3PAIR_P5_02",
+        "public_response_and_trace_equal": true
+      },
+      {
+        "no_model_calls": true,
+        "pair_id": "H3PAIR_P5_03",
+        "public_response_and_trace_equal": true
+      },
+      {
+        "no_model_calls": true,
+        "pair_id": "H3PAIR_P5_04",
+        "public_response_and_trace_equal": true
+      }
+    ],
+    "pre_call_guarded_attempts": 96,
+    "prior_attempt_infrastructure_issues": [
+      "attempt1 semantic-role error was overclassified by initial validator",
+      "attempt2 read timeout; remote completion/token usage unknown"
+    ],
+    "prior_files_unchanged": true,
+    "public_leakage_cases": 0,
+    "role_grounding_references_verified": 32,
+    "scope": "Exact fixture marker/source identifiers, strict schema, deterministic reference provenance, public trace equality. General paraphrased disclosure requires manual review.",
+    "status": "PASS",
+    "systematic_generation_schema_failures": 0,
+    "unauthorized_span_count": 0,
+    "validated_support_and_counter_references": 25
+  },
+  "oracle_label_exposure_observed": 0,
+  "public_model_fields": [
+    "query",
+    "documents.source_id (neutral)",
+    "documents.source_type (permitted provenance)",
+    "documents.view_kind",
+    "documents.context (policy projection)",
+    "deterministic span catalogue (analysis)",
+    "inferred semantic assessment (both generators)",
+    "response_contract (CFAF generator only)"
+  ],
+  "raw_restricted_exposure_observed": 0,
+  "status": "PASS"
+}

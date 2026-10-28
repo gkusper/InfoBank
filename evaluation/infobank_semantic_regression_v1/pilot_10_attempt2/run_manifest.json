@@ -1,0 +1,48 @@
+{
+  "actual_api_usage": {
+    "attempts": 4,
+    "completion_tokens": 318,
+    "errors": 1,
+    "kind_counts": {
+      "semantic_analysis": 2,
+      "semantic_cfaf": 1,
+      "shared_control": 1
+    },
+    "prompt_tokens": 2467,
+    "retries": 0,
+    "successful_calls": 3,
+    "summed_call_latency_ms": 50959.05920001678
+  },
+  "analysis_max_tokens": 1500,
+  "attempt_cap": 40,
+  "blocker": "The read operation timed out",
+  "cache_policy": "Full reuses ten identical frozen pilot observations; remaining cases executed once. No independent replication.",
+  "cached_observation_count": 0,
+  "case_ids": [
+    "HELD3_P1_01A",
+    "HELD3_P1_01B",
+    "HELD3_P2_01A",
+    "HELD3_P2_01B",
+    "HELD3_P3_01A",
+    "HELD3_P3_01B",
+    "HELD3_P4_01A",
+    "HELD3_P4_01B",
+    "HELD3_P5_01A",
+    "HELD3_P5_01B"
+  ],
+  "finished_at_utc": "2026-10-28T16:24:32.523583+00:00",
+  "frozen_code_sha256": {
+    "integration_v2.py": "0e71cbdfb8f167553dee8a548c03b1341dbfcbc25d455a6e26ff37cac50bac7d",
+    "policy_projection.py": "09fdedaf8e4f9f85160f1e202a50913b02f859fe93073f49a823b611ce0c46e6",
+    "provider_v2.py": "6726bee11a8efdb7c6c717176b9550b7a9f4970b9c507eea03c1b3d3adcdb63b",
+    "run_experiment_v2.py": "1e957f612b9ad4bd8266ec20143f2856c9b9be8212ee12b22cae2a7f4162bfca"
+  },
+  "generation_max_tokens": 160,
+  "gold_used_by_models": false,
+  "model": "gpt-4o-mini",
+  "phase": "pilot",
+  "repetitions": 1,
+  "started_at_utc": "2026-10-28T16:23:41.530024+00:00",
+  "status": "BLOCKED",
+  "temperature": 0
+}

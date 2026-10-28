@@ -1,0 +1,13 @@
+{
+  "audited_api_attempts": 6,
+  "failures": [
+    "HELD3_P1_01B:ANALYSIS_SCHEMA_OR_REFERENCE_INVALID"
+  ],
+  "p5_pair_checks": [],
+  "pre_call_guarded_attempts": 6,
+  "public_leakage_cases": 0,
+  "scope": "Exact fixture marker/source identifiers, strict schema, deterministic reference provenance, public trace equality. General paraphrased disclosure requires manual review.",
+  "status": "FAIL",
+  "unauthorized_span_count": null,
+  "validated_support_and_counter_references": 2
+}

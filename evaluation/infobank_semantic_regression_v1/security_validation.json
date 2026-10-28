@@ -1,0 +1,42 @@
+{
+  "audited_api_attempts": 96,
+  "deterministic_no_view_case_count": 8,
+  "failures": [],
+  "internal_public_trace_separation": "Public traces are response-only whitelist objects; internal policy traces retain original IDs locally. P5 public objects equal; internal policy traces differ.",
+  "nonempty_public_responses": 80,
+  "p5_pair_checks": [
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_01",
+      "public_response_and_trace_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_02",
+      "public_response_and_trace_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_03",
+      "public_response_and_trace_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_04",
+      "public_response_and_trace_equal": true
+    }
+  ],
+  "pre_call_guarded_attempts": 96,
+  "prior_attempt_infrastructure_issues": [
+    "attempt1 semantic-role error was overclassified by initial validator",
+    "attempt2 read timeout; remote completion/token usage unknown"
+  ],
+  "prior_files_unchanged": true,
+  "public_leakage_cases": 0,
+  "role_grounding_references_verified": 32,
+  "scope": "Exact fixture marker/source identifiers, strict schema, deterministic reference provenance, public trace equality. General paraphrased disclosure requires manual review.",
+  "status": "PASS",
+  "systematic_generation_schema_failures": 0,
+  "unauthorized_span_count": 0,
+  "validated_support_and_counter_references": 25
+}

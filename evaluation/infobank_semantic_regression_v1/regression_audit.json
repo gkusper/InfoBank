@@ -1,0 +1,384 @@
+{
+  "api_calls": 0,
+  "archive_sha256": {
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/HELDOUT_RUN_REPORT_v1.md": "09ae18443693e8a09e5ed4b5ba44e152ec2a82e41432e6f193f2205352fc63c3",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/PAPER_RESULT_CLAIMS_v1.json": "4d0b03bc8c4c0038efa2dfd2bb088f63ebba95b88acff7e0120086c48e039b12",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/POST_HELDOUT_ANALYSIS_v1.json": "0871574732a9b1a03bf047c8782e87b7ca067aedbb930c64e6ee52120f03c070",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/POST_HELDOUT_ARTIFACT_MANIFEST_v1.json": "164ff61c75dbe5276dbd8febfa9cc378edaa83e3095e5c4b92f8570a7e65567b",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/POST_HELDOUT_VALIDATION_v1.json": "1d9864236bc65d07e30d55529467b43d9f500d381c6e53fd2a45dde821b591d1",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/RAW_HELDOUT_FREEZE_MANIFEST.json": "2333346bb56938adbd1ce7bc18bcd5acb903e19660ce05aa0751f45f22fd0fe6",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/README.md": "c97658cf6bb20ebb7dae0030bc4ab7b4d95f5bd5c69dde6604202d31d359cf32",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/adapter_integrity_verification.json": "ee98d6709ffaa746bb07c129495ac40416fa91357c48a53b471fca82a54eaf73",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/call_accounting_verification.json": "1ba55af2fad841aa56db461f7dae5fb65f39edce490aafee0345841c4799f91f",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/case_scores.jsonl": "8a52cc7594994f7860c917568072ee44b4ba70d04c4c5ce84a24306e61399142",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/checksums.sha256": "86f05cd31c59a8e672a808a6d1689dd65d4b5bca476adaefe4af3f9548d6d31c",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/error_analysis.json": "96824545b34445327b2333f0461cfb67452c1a486080bc0006c6f48f8942f917",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/errors.jsonl": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/execution_plan.json": "7d9490f6a29488721e14b72d7eb8dfb3dde5d005a8cf49cae8e951fb82472cda",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/generator_context_exposure_verification.json": "0943ec91b678da1ceaef9fed1862cd72fa18d392b89228a8d18ae7d1f1cf5642",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/latency_diagnostics.json": "bb9096694e2b89412aff68725b57bfb2e15fe9a8837ad8dc99e36b44641af0e0",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/latency_verification.json": "0f9b6e0c178c4b56e0bac55d09d925e0cce063c651dd1a256f150ffa9d9df2a9",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/pair_scores.jsonl": "75a3e9edca590ea69723febe8e04b055f6cec576ba69c94352e47879a9c307cc",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/raw_results.jsonl": "129abb66340a65a995378f2008573dc5811f143b9b0e7ed9f6e105c5ccd6ba87",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/retrieval_snapshots.jsonl": "25e9d4a6c7b8d6bfcf46617b0190acf82c75f567ee6b93d158c07b63e9b9a59e",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/run_manifest.json": "b3d2b40d97996e30fe55c1f145309bbc3a5a15c675212e8b04522ac945eeb5ce",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/shared_retrieval_snapshots.jsonl": "25e9d4a6c7b8d6bfcf46617b0190acf82c75f567ee6b93d158c07b63e9b9a59e",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/shared_retrieval_verification.json": "0a087cc2ba6ee9e63fb3ca0dcdf64dbba7d9463167d8ec24c29c0f3ac71e12bb",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/source_existence_leakage_verification.json": "cbef5205de4f808eee34d69cbb511ef726c241b8a6b0988c26cfa4935b3e3c2b",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/summary.csv": "84c220cc124451a96b5a13ef8d6d04f90efbd542fcf76bcde8fa96d3d11d9378",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/summary.json": "e9fb12b13a0ae781a79ff4c1bbbc138aa07551d5f3a514a95abfca52f87b92e3",
+    "evaluation/wolala2026/heldout_run_real_api_v3_attempt1/summary_table.tex": "e4ed4cee44d0c6e3aef8b59638b35db2351ee130eb5735e1e0270cc0e65244b2"
+  },
+  "cases": 40,
+  "dataset_canonical_case_hash_matches": true,
+  "dataset_canonical_gold_hash_matches": true,
+  "dataset_values_match_original_commit": {
+    "cases.jsonl": {
+      "current_sha256": "8549913c6f0caeefed10b8e07d906382bf22f90eb777018e0d0464dbefdeae43",
+      "manifest_file_sha256": "ead302c8a8e18a9e1a77ee3fe53bba0cfa7968fc010e3629e986fb74f422399e",
+      "original_blob_sha256": "ead302c8a8e18a9e1a77ee3fe53bba0cfa7968fc010e3629e986fb74f422399e",
+      "same_json_values": true
+    },
+    "gold.jsonl": {
+      "current_sha256": "b61904162ebb81a2a61f19709e44457a4052ddb7562566a6a233f3815af0ab6d",
+      "manifest_file_sha256": "837d1223628130608280b15996c5b644d76fc2be9c1d72fbcdcef674d3361112",
+      "original_blob_sha256": "837d1223628130608280b15996c5b644d76fc2be9c1d72fbcdcef674d3361112",
+      "same_json_values": true
+    },
+    "manifest.json": {
+      "current_sha256": "d4210a51bdd5de9efe9069fe9aba3e6c816a5cb28a6d73295da2cfe687938996",
+      "manifest_file_sha256": "8e3e93b514b7eb3e2f82cec2d95312b5f78d60fb792796a329b96da55f381c8f",
+      "original_blob_sha256": "d4210a51bdd5de9efe9069fe9aba3e6c816a5cb28a6d73295da2cfe687938996",
+      "same_json_values": true
+    },
+    "pair_design_manifest.json": {
+      "current_sha256": "b298aa671e36f0e32bb05084f39d05ee4f463f96d25bd304d92bc6e5dad676a3",
+      "manifest_file_sha256": "b298aa671e36f0e32bb05084f39d05ee4f463f96d25bd304d92bc6e5dad676a3",
+      "original_blob_sha256": "b298aa671e36f0e32bb05084f39d05ee4f463f96d25bd304d92bc6e5dad676a3",
+      "same_json_values": true
+    }
+  },
+  "deterministic_checks": [
+    {
+      "case_id": "HELD3_P1_01A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P1_01B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P1_02A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P1_02B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P1_03A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P1_03B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P1_04A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P1_04B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P2_01A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P2_01B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P2_02A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P2_02B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P2_03A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P2_03B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P2_04A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P2_04B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P3_01A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P3_01B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P3_02A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P3_02B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P3_03A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P3_03B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P3_04A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P3_04B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P4_01A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P4_01B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P4_02A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P4_02B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P4_03A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P4_03B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P4_04A",
+      "correct": true,
+      "expected": "FULL",
+      "mode": "FULL"
+    },
+    {
+      "case_id": "HELD3_P4_04B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_01A",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_01B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_02A",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_02B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_03A",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_03B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_04A",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    },
+    {
+      "case_id": "HELD3_P5_04B",
+      "correct": true,
+      "expected": "CFAF",
+      "mode": "CFAF"
+    }
+  ],
+  "final_protected_file_check": {
+    "changed": [],
+    "files": 478,
+    "status": "PASS"
+  },
+  "historical_archived_records": 360,
+  "historical_embedding_calls": 40,
+  "historical_generation_calls": 360,
+  "historical_mode_accuracies": {
+    "cfaf_pipeline": 1.0,
+    "prompt_only_control": 0.4166666666666667,
+    "standard_rag": 0.4
+  },
+  "historical_p5_source_existence_diagnostic": {
+    "records": [
+      {
+        "case_ids": [
+          "HELD3_P5_01A",
+          "HELD3_P5_01B"
+        ],
+        "hidden_source_values_absent": true,
+        "internal_traces_differ": false,
+        "normalized_public_response_identical": false,
+        "pair_id": "H3PAIR_P5_01",
+        "public_reason_class_identical": true,
+        "source_existence_leakage": true
+      },
+      {
+        "case_ids": [
+          "HELD3_P5_02A",
+          "HELD3_P5_02B"
+        ],
+        "hidden_source_values_absent": true,
+        "internal_traces_differ": false,
+        "normalized_public_response_identical": false,
+        "pair_id": "H3PAIR_P5_02",
+        "public_reason_class_identical": true,
+        "source_existence_leakage": true
+      },
+      {
+        "case_ids": [
+          "HELD3_P5_03A",
+          "HELD3_P5_03B"
+        ],
+        "hidden_source_values_absent": true,
+        "internal_traces_differ": false,
+        "normalized_public_response_identical": false,
+        "pair_id": "H3PAIR_P5_03",
+        "public_reason_class_identical": true,
+        "source_existence_leakage": true
+      },
+      {
+        "case_ids": [
+          "HELD3_P5_04A",
+          "HELD3_P5_04B"
+        ],
+        "hidden_source_values_absent": true,
+        "internal_traces_differ": false,
+        "normalized_public_response_identical": false,
+        "pair_id": "H3PAIR_P5_04",
+        "public_reason_class_identical": true,
+        "source_existence_leakage": true
+      }
+    ],
+    "schema_version": "wolala-source-existence-leakage-verification-v1",
+    "source_existence_leakage_rate": 1.0
+  },
+  "historical_real_calls_repeated": false,
+  "known_historical_failures": [
+    "evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only"
+  ],
+  "matched_pairs": 20,
+  "new_governed_tests_passed": 61,
+  "new_regression_failures": [],
+  "new_semantic_span_tests_passed": 70,
+  "note": "The 40 deterministic checks use original fixture labels and are regression checks only, not new semantic inference performance.",
+  "original_fixture_deterministic_correct": 40,
+  "original_regressions_passed": 77,
+  "original_subtests_passed": 13,
+  "phase": "A, completed before governed integration implementation",
+  "previous_files_protected": 478
+}

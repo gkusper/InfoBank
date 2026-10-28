@@ -1,0 +1,61 @@
+{
+  "active_entry_point": "run_experiment_v3.py",
+  "active_semantic_adapter": "integration_v2.py",
+  "actual_unique_api_usage": {
+    "attempts": 103,
+    "automatic_retries": 0,
+    "completion_tokens_known": 11110,
+    "copied_call_records_counted_once": true,
+    "explicit_resumed_analysis_after_timeout": 1,
+    "failed_or_unknown_outcome_attempts": 1,
+    "full_new_attempts": 72,
+    "kind_counts": {
+      "semantic_analysis": 35,
+      "semantic_cfaf": 34,
+      "shared_control": 34
+    },
+    "pilot_attempts_including_aborted_runs": 31,
+    "prompt_tokens_known": 83234,
+    "successful_calls": 102,
+    "summed_call_latency_ms": 251270.5395994708,
+    "unknown_timeout_tokens": true
+  },
+  "analysis_max_tokens": 1500,
+  "branch": "experiment/infobank-semantic-regression-v1",
+  "cache_policy": "Ten pilot observations reused intact in full dataset; no duplicated model calls or independent replication.",
+  "code_unchanged_during_active_pilot_and_full": true,
+  "dataset": "evaluation/wolala2026/data/heldout_pilot_v3",
+  "frozen_code_sha256": {
+    "integration_v2.py": "0e71cbdfb8f167553dee8a548c03b1341dbfcbc25d455a6e26ff37cac50bac7d",
+    "policy_projection.py": "09fdedaf8e4f9f85160f1e202a50913b02f859fe93073f49a823b611ce0c46e6",
+    "provider_v2.py": "6726bee11a8efdb7c6c717176b9550b7a9f4970b9c507eea03c1b3d3adcdb63b",
+    "run_experiment_v3.py": "904ceb6f7157a85f3654da9eccbfc79986b8e97a72ca1024c0c7cefd1855c845"
+  },
+  "full_hard_cap": 150,
+  "full_new_observations": 30,
+  "full_unique_observations": 40,
+  "generation_max_tokens": 160,
+  "gold_scoring_only": true,
+  "interpretation": "Previously exposed development/regression sample, not independent holdout.",
+  "manual_review_status": "Agent inspection only, not independent human review",
+  "model": "gpt-4o-mini",
+  "original_research_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "parent_commit": "7916ae03e29dbf29696bd0467ca70876db752a03",
+  "pilot_hard_cap": 40,
+  "pilot_observations": 10,
+  "post_run_analysis": "post_run_analysis.py; descriptive, after frozen observations; no prompt or runtime changes",
+  "preflight_tests": "59 passed; phase A semantic tests 70 passed; historical CFAF suite 77 passed plus 13 subtests, one previously known failure",
+  "previous_files_preserved": 478,
+  "repetitions": 1,
+  "status": "COMPLETED",
+  "systems": [
+    "semantic_cfaf",
+    "shared_control"
+  ],
+  "temperature": 0,
+  "version_history": [
+    "attempt1: role inconsistency misclassified as schema failure; 2 observations, 6 calls",
+    "attempt2: corrected semantic-error classification, then read timeout; 1 observation, 4 attempts",
+    "v3: resumes one successful observation, completes pilot with 21 new calls; full reuses pilot observations"
+  ]
+}

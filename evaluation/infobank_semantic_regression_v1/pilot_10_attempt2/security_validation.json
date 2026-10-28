@@ -1,0 +1,13 @@
+{
+  "audited_api_attempts": 4,
+  "failures": [
+    "UNBOUND_API_REQUEST"
+  ],
+  "p5_pair_checks": [],
+  "pre_call_guarded_attempts": 4,
+  "public_leakage_cases": 0,
+  "scope": "Exact fixture marker/source identifiers, strict schema, deterministic reference provenance, public trace equality. General paraphrased disclosure requires manual review.",
+  "status": "FAIL",
+  "unauthorized_span_count": 0,
+  "validated_support_and_counter_references": 1
+}

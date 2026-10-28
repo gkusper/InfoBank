@@ -1,0 +1,34 @@
+{
+  "H3PAIR_P1_01": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_01B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": false,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  }
+}

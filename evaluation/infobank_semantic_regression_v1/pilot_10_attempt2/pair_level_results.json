@@ -1,0 +1,24 @@
+{
+  "H3PAIR_P1_01": {
+    "semantic_cfaf": {
+      "both_correct": false,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01A",
+          "expected": "FULL"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": false,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01A",
+          "expected": "FULL"
+        }
+      ]
+    }
+  }
+}

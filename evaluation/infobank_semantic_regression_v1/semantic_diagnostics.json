@@ -1,0 +1,569 @@
+{
+  "inferred_source_roles": [
+    {
+      "case_id": "HELD3_P1_01A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_01B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_02A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_02B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "CONTEXTUAL",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "INCOMPATIBLE_EVIDENCE",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_03A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_03B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_04A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P1_04B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_01A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_01B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "REQUEST_EXCEEDS_PERMITTED_VIEW",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_02A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_02B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_03A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_03B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_04A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "relation_label": "SUPPORTS",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P2_04B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "REQUEST_EXCEEDS_PERMITTED_VIEW",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_01A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "REQUEST_EXCEEDS_PERMITTED_VIEW",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_01B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_02A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "METADATA",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_02B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "CONTEXTUAL",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_03A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_03B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "CONTENT",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_04A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "REQUEST_EXCEEDS_PERMITTED_VIEW",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P3_04B",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "CONTEXTUAL",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_01A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "ACTION",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_01B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_02A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "ACTION",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_02B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_03A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "ACTION",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_03B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_04A",
+      "fixture_role_for_posthoc_comparison": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "issues": [],
+      "relation_label": "SUPPORTS",
+      "request_scope": "ACTION",
+      "role_agrees": true,
+      "source_id": "view-0001"
+    },
+    {
+      "case_id": "HELD3_P4_04B",
+      "fixture_role_for_posthoc_comparison": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "SUPPORT_NOT_PRIMARY"
+      ],
+      "relation_label": "NONE",
+      "request_scope": "INDIVIDUAL",
+      "role_agrees": false,
+      "source_id": "view-0001"
+    }
+  ],
+  "interpretation": "Fixture roles/reasons are used ONLY post hoc as diagnostic references, never runtime inputs. Structural validity does not imply semantic role correctness.",
+  "refusal_reason_class_comparison": {
+    "semantic_cfaf": {
+      "eligible_correct_CFAF_cases": 24,
+      "wrong_cases": [
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_01B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_02B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_03B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_04B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_01B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_02B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_03B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_04B",
+          "expected": "GOVERNANCE_PRIVACY"
+        }
+      ],
+      "wrong_public_reason_class": 8
+    },
+    "shared_control": {
+      "eligible_correct_CFAF_cases": 23,
+      "wrong_cases": [
+        {
+          "actual": "null",
+          "case_id": "HELD3_P1_01B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": null,
+          "case_id": "HELD3_P1_02B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": null,
+          "case_id": "HELD3_P1_04B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P2_01B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P2_02B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P2_03B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P2_04B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P3_01B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P3_02B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P3_03B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "null",
+          "case_id": "HELD3_P3_04B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": null,
+          "case_id": "HELD3_P4_01B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": null,
+          "case_id": "HELD3_P4_02B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": null,
+          "case_id": "HELD3_P4_03B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": null,
+          "case_id": "HELD3_P4_04B",
+          "expected": "EVIDENTIAL"
+        }
+      ],
+      "wrong_public_reason_class": 15
+    }
+  },
+  "role_agreement": {
+    "accuracy": 0.71875,
+    "correct": 23,
+    "total": 32
+  },
+  "role_grounding_references_verified": 32
+}

@@ -1,0 +1,83 @@
+{
+  "actual_unique_attempts": {
+    "attempts": 103,
+    "automatic_retries": 0,
+    "completion_tokens_known": 11110,
+    "copied_call_records_counted_once": true,
+    "explicit_resumed_analysis_after_timeout": 1,
+    "failed_or_unknown_outcome_attempts": 1,
+    "full_new_attempts": 72,
+    "kind_counts": {
+      "semantic_analysis": 35,
+      "semantic_cfaf": 34,
+      "shared_control": 34
+    },
+    "pilot_attempts_including_aborted_runs": 31,
+    "prompt_tokens_known": 83234,
+    "successful_calls": 102,
+    "summed_call_latency_ms": 251270.5395994708,
+    "unknown_timeout_tokens": true
+  },
+  "by_run_new_calls": {
+    "full_40": {
+      "attempts": 72,
+      "cached_call_records": 0,
+      "completion_tokens": 7844,
+      "errors": 0,
+      "kind_counts": {
+        "semantic_analysis": 24,
+        "semantic_cfaf": 24,
+        "shared_control": 24
+      },
+      "prompt_tokens": 58694,
+      "retries": 0,
+      "successful_calls": 72,
+      "summed_call_latency_ms": 143678.59359900467
+    },
+    "pilot_10": {
+      "attempts": 21,
+      "cached_call_records": 3,
+      "completion_tokens": 2326,
+      "errors": 0,
+      "kind_counts": {
+        "semantic_analysis": 7,
+        "semantic_cfaf": 7,
+        "shared_control": 7
+      },
+      "prompt_tokens": 17147,
+      "retries": 0,
+      "successful_calls": 21,
+      "summed_call_latency_ms": 42001.369500532746
+    },
+    "pilot_10_attempt1": {
+      "attempts": 6,
+      "cached_call_records": 0,
+      "completion_tokens": 622,
+      "errors": 0,
+      "kind_counts": {
+        "semantic_analysis": 2,
+        "semantic_cfaf": 2,
+        "shared_control": 2
+      },
+      "prompt_tokens": 4926,
+      "retries": 0,
+      "successful_calls": 6,
+      "summed_call_latency_ms": 14631.517299916595
+    },
+    "pilot_10_attempt2": {
+      "attempts": 4,
+      "cached_call_records": 0,
+      "completion_tokens": 318,
+      "errors": 1,
+      "kind_counts": {
+        "semantic_analysis": 2,
+        "semantic_cfaf": 1,
+        "shared_control": 1
+      },
+      "prompt_tokens": 2467,
+      "retries": 0,
+      "successful_calls": 3,
+      "summed_call_latency_ms": 50959.05920001678
+    }
+  }
+}

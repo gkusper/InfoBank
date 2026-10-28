@@ -1,0 +1,110 @@
+{
+  "actual_new_api_usage": {
+    "attempts": 4,
+    "completion_tokens": 318,
+    "errors": 1,
+    "kind_counts": {
+      "semantic_analysis": 2,
+      "semantic_cfaf": 1,
+      "shared_control": 1
+    },
+    "prompt_tokens": 2467,
+    "retries": 0,
+    "successful_calls": 3,
+    "summed_call_latency_ms": 50959.05920001678
+  },
+  "blocker": "The read operation timed out",
+  "cached_observations": 0,
+  "case_count": 1,
+  "completion_status": "BLOCKED",
+  "frozen_code_unchanged": true,
+  "gold_join": "post-observation-freeze",
+  "independent_holdout": false,
+  "security": {
+    "audited_api_attempts": 4,
+    "failures": [
+      "UNBOUND_API_REQUEST"
+    ],
+    "p5_pair_checks": [],
+    "pre_call_guarded_attempts": 4,
+    "public_leakage_cases": 0,
+    "scope": "Exact fixture marker/source identifiers, strict schema, deterministic reference provenance, public trace equality. General paraphrased disclosure requires manual review.",
+    "status": "FAIL",
+    "unauthorized_span_count": 0,
+    "validated_support_and_counter_references": 1
+  },
+  "systems": {
+    "semantic_cfaf": {
+      "CFAF_recall": null,
+      "FULL_answer_checks": [
+        {
+          "all_gold_numeric_tokens_present": true,
+          "case_id": "HELD3_P1_01A",
+          "copied_semantic_candidate": true,
+          "expected_FULL": true,
+          "manual_answer_correctness_review_required": true
+        }
+      ],
+      "FULL_recall": 1.0,
+      "accuracy": 1.0,
+      "answer_accuracy": "MANUAL_REVIEW_REQUIRED; mode correctness is not answer correctness",
+      "balanced_accuracy": null,
+      "confusion_matrix": {
+        "CFAF_as_CFAF": 0,
+        "CFAF_as_FULL": 0,
+        "FULL_as_CFAF": 0,
+        "FULL_as_FULL": 1
+      },
+      "failure_to_restrict_count": 0,
+      "families": {
+        "P1": {
+          "CFAF_gold": 0,
+          "FULL_gold": 1,
+          "cases": 1,
+          "correct": 1
+        }
+      },
+      "matched_pair_accuracy": 0.0,
+      "matched_pairs": 1,
+      "matched_pairs_correct": 0,
+      "refusal_reason_counts": {},
+      "unnecessary_CFAF_count": 0
+    },
+    "shared_control": {
+      "CFAF_recall": null,
+      "FULL_answer_checks": [
+        {
+          "all_gold_numeric_tokens_present": true,
+          "case_id": "HELD3_P1_01A",
+          "copied_semantic_candidate": false,
+          "expected_FULL": true,
+          "manual_answer_correctness_review_required": true
+        }
+      ],
+      "FULL_recall": 1.0,
+      "accuracy": 1.0,
+      "answer_accuracy": "MANUAL_REVIEW_REQUIRED; mode correctness is not answer correctness",
+      "balanced_accuracy": null,
+      "confusion_matrix": {
+        "CFAF_as_CFAF": 0,
+        "CFAF_as_FULL": 0,
+        "FULL_as_CFAF": 0,
+        "FULL_as_FULL": 1
+      },
+      "failure_to_restrict_count": 0,
+      "families": {
+        "P1": {
+          "CFAF_gold": 0,
+          "FULL_gold": 1,
+          "cases": 1,
+          "correct": 1
+        }
+      },
+      "matched_pair_accuracy": 0.0,
+      "matched_pairs": 1,
+      "matched_pairs_correct": 0,
+      "refusal_reason_counts": {},
+      "unnecessary_CFAF_count": 0
+    }
+  }
+}

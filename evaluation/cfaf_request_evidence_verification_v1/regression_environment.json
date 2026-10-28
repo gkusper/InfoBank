@@ -1,0 +1,9 @@
+{
+  "all_other_historical_tests_run_in_disposable_exact_blob_checkout": true,
+  "api_key_removed": true,
+  "archived_timer_rebased_only_in_test_process": true,
+  "hash_test_reason": "Old snapshots record CRLF working bytes. Exact Git blobs use normalized LF for some files; byte-hash-only tests therefore run against the unchanged original working files.",
+  "historical_source_modified": false,
+  "isolated_suite_returncode": 0,
+  "working_tree_hash_suite_returncode": 0
+}

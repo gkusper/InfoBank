@@ -1,0 +1,47 @@
+{
+  "api_key_removed": true,
+  "disposable_checkout": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\recv-regression-exact",
+  "exact_git_blobs": 789,
+  "runs": [
+    {
+      "elapsed_seconds": 7.733999999938533,
+      "returncode": 1,
+      "suite": "current_and_prior",
+      "targets": [
+        "evaluation/cfaf_request_evidence_verification_v1/test_verification.py",
+        "evaluation/refusalbench_iterative_dev_v1/versions/v02/test_version.py",
+        "evaluation/refusalbench_iterative_dev_v1/versions/v01/test_version.py",
+        "evaluation/refusalbench_iterative_dev_v1/test_framework.py",
+        "evaluation/refusalbench_iterative_dev_v1/test_budget_deadline.py",
+        "evaluation/infobank_semantic_integration_v2/test_integration.py",
+        "evaluation/infobank_semantic_regression_v1/test_governed.py",
+        "evaluation/refusalbench_noncontradiction_v1/test_pilot.py",
+        "evaluation/refusalbench_span_fix_v1/test_span_fix.py",
+        "evaluation/refusalbench_semantic_dev/test_semantic.py",
+        "evaluation/refusalbench_semantic_dev/test_experiment.py",
+        "evaluation/refusalbench_pilot/test_refusalbench.py"
+      ],
+      "xml": "current_and_prior_tests.xml"
+    },
+    {
+      "elapsed_seconds": 14.015000000130385,
+      "returncode": 1,
+      "suite": "historical_cfaf",
+      "targets": [
+        "evaluation\\tests\\test_wolala_final_experiment_v2.py",
+        "evaluation\\tests\\test_wolala_final_experiment_v3.py",
+        "evaluation\\tests\\test_wolala_generator_exposure.py",
+        "evaluation\\tests\\test_wolala_label_propagation.py",
+        "evaluation\\tests\\test_wolala_latency_schema.py",
+        "evaluation\\tests\\test_wolala_pilot_phase2.py",
+        "evaluation\\tests\\test_wolala_pipeline_smoke.py",
+        "evaluation\\tests\\test_wolala_protocol_v2_freeze.py",
+        "evaluation\\tests\\test_wolala_public_trace.py",
+        "evaluation\\tests\\test_wolala_real_api_phase3.py",
+        "evaluation\\tests\\test_wolala_request_relative_mode.py",
+        "evaluation\\tests\\test_wolala_shared_retrieval_repair.py"
+      ],
+      "xml": "historical_cfaf_tests.xml"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "B_stage5_cpu_ms": {
+    "max": 1.366300042718649,
+    "median": 0.5299999611452222,
+    "n": 30,
+    "sum": 15.664800070226192
+  },
+  "attempt_cap": 170,
+  "attempts": 113,
+  "by_kind": {
+    "query_profile": {
+      "attempts": 1,
+      "input_tokens": 393,
+      "latency_ms_sum": 1581.8445000331849,
+      "output_tokens": 65,
+      "successful": 1
+    },
+    "semantic_analysis": {
+      "attempts": 28,
+      "input_tokens": 62193,
+      "latency_ms_sum": 99404.4865006581,
+      "output_tokens": 8516,
+      "successful": 28
+    },
+    "semantic_cfaf": {
+      "attempts": 56,
+      "input_tokens": 55810,
+      "latency_ms_sum": 84487.36990080215,
+      "output_tokens": 2855,
+      "successful": 56
+    },
+    "shared_control": {
+      "attempts": 28,
+      "input_tokens": 28924,
+      "latency_ms_sum": 41298.24469983578,
+      "output_tokens": 1510,
+      "successful": 28
+    }
+  },
+  "by_system_deployment_equivalent": {
+    "A0": {
+      "calls_per_30_cases": 1.9,
+      "deployment_equivalent_calls": 57,
+      "input_tokens": 90490,
+      "note": "Includes shared upstream cost once for this hypothetical deployment; system totals overlap and must not be added.",
+      "output_tokens": 10007,
+      "summed_model_latency_ms": 145555.67270098254
+    },
+    "B": {
+      "calls_per_30_cases": 1.9,
+      "deployment_equivalent_calls": 57,
+      "input_tokens": 90492,
+      "note": "Includes shared upstream cost once for this hypothetical deployment; system totals overlap and must not be added.",
+      "output_tokens": 10010,
+      "summed_model_latency_ms": 140904.35920120217
+    },
+    "shared_control": {
+      "calls_per_30_cases": 1.9,
+      "deployment_equivalent_calls": 57,
+      "input_tokens": 91510,
+      "note": "Includes shared upstream cost once for this hypothetical deployment; system totals overlap and must not be added.",
+      "output_tokens": 10091,
+      "summed_model_latency_ms": 142284.57570052706
+    }
+  },
+  "calls_per_case_experiment": 3.7666666666666666,
+  "cost_unit": "Actual calls/tokens/latency; no unverified USD prices applied",
+  "deterministic_additional_model_calls": 0,
+  "embeddings": 0,
+  "errors": 0,
+  "input_tokens": 147320,
+  "optional_additional_tokens": 0,
+  "optional_cost_per_corrected_decision": null,
+  "optional_triggered_cases": 0,
+  "optional_triggered_requirements": 0,
+  "optional_verifier_calls": 0,
+  "output_tokens": 12946,
+  "phase1_calls": 0,
+  "retries": 0,
+  "returned_models": {
+    "gpt-4o-mini-2024-07-18": 113
+  },
+  "stage5_timing_limit": "A0 also computes disabled checks for diagnostics; these timings are not an isolated incremental CPU ablation. B pipeline time reuses the cached upstream model call.",
+  "stronger_models": 0,
+  "successes": 113,
+  "summed_api_latency_ms": 226771.9456013292
+}

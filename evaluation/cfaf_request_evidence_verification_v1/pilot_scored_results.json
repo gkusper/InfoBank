@@ -1,0 +1,1970 @@
+[
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "FULL",
+    "expected_mode": "FULL",
+    "expected_public_reason_class": null,
+    "family": "P1",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": "H3PAIR_P1_01",
+    "original_id": "HELD3_P1_01A",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 0,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "CFAF",
+    "expected_mode": "CFAF",
+    "expected_public_reason_class": "EVIDENTIAL",
+    "family": "P1",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": "H3PAIR_P1_01",
+    "original_id": "HELD3_P1_01B",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "shared_control": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      }
+    },
+    "runtime_index": 1,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "FULL",
+    "expected_mode": "FULL",
+    "expected_public_reason_class": null,
+    "family": "P2",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": "H3PAIR_P2_01",
+    "original_id": "HELD3_P2_01A",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 2,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "CFAF",
+    "expected_mode": "CFAF",
+    "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+    "family": "P2",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": "H3PAIR_P2_01",
+    "original_id": "HELD3_P2_01B",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "GOVERNANCE_PRIVACY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "GOVERNANCE_PRIVACY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "GOVERNANCE_PRIVACY"
+      },
+      "shared_control": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EVIDENTIAL"
+      }
+    },
+    "runtime_index": 3,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "FULL",
+    "expected_mode": "FULL",
+    "expected_public_reason_class": null,
+    "family": "P3",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": "H3PAIR_P3_01",
+    "original_id": "HELD3_P3_01A",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 4,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "CFAF",
+    "expected_mode": "CFAF",
+    "expected_public_reason_class": "GOVERNANCE_PRIVACY",
+    "family": "P3",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": "H3PAIR_P3_01",
+    "original_id": "HELD3_P3_01B",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "shared_control": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EVIDENTIAL"
+      }
+    },
+    "runtime_index": 5,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "FULL",
+    "expected_mode": "FULL",
+    "expected_public_reason_class": null,
+    "family": "P4",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": "H3PAIR_P4_01",
+    "original_id": "HELD3_P4_01A",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 6,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "CFAF",
+    "expected_mode": "CFAF",
+    "expected_public_reason_class": "EVIDENTIAL",
+    "family": "P4",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": "H3PAIR_P4_01",
+    "original_id": "HELD3_P4_01B",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "EPISTEMIC"
+      },
+      "shared_control": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      }
+    },
+    "runtime_index": 7,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "CFAF",
+    "expected_mode": "CFAF",
+    "expected_public_reason_class": "EVIDENTIAL",
+    "family": "P5",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": "H3PAIR_P5_01",
+    "original_id": "HELD3_P5_01A",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      },
+      "C": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      },
+      "shared_control": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      }
+    },
+    "runtime_index": 8,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "InfoBank-original-40",
+    "expected_label": "CFAF",
+    "expected_mode": "CFAF",
+    "expected_public_reason_class": "EVIDENTIAL",
+    "family": "P5",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": "H3PAIR_P5_01",
+    "original_id": "HELD3_P5_01B",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      },
+      "C": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      },
+      "shared_control": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "EVIDENTIAL"
+      }
+    },
+    "runtime_index": 9,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_claude_7808442793714993461_P-FalsePremise_LOW_a7c3241c_0434",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 10,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_nova_-8359866474144720253_P-GranularityMismatch_LOW_9458bd7e_3620",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 11,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_FALSE_PREMISE_IN_QUERY",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_deepseek_-5061926765893337070_P-FalsePremise_HIGH_1f503fd4_1911",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 12,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_GRANULARITY_MISMATCH",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": null,
+      "A1": null,
+      "A2": null,
+      "B": null,
+      "C": null
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_gpt_-4199405438415986663_P-GranularityMismatch_HIGH_feb7d1e7_3533",
+    "predictions": {
+      "A0": null,
+      "A1": null,
+      "A2": null,
+      "B": null,
+      "C": null,
+      "shared_control": null
+    },
+    "raw_gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 13,
+    "validation_errors": {
+      "A0": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "A1": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "A2": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "B": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "C": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "shared_control": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ]
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_NONFACTUAL_QUERY",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_claude_-1932118074616697613_P-EpistemicMismatch_MEDIUM_e35ccd42_1212",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 14,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_AMBIGUOUS_QUERY",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_claude_-6924600758326460563_P-Ambiguity_MEDIUM_131b0e05_0442",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 15,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_deepseek_8730028009751947933_P-EpistemicMismatch_LOW_41cd427d_2192",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 16,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_INFO_MISSING_IN_CONTEXT",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_deepseek_5533906981191706877_P-MissingInfo_HIGH_c9a7b7b3_1374",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 17,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_gpt_-2382302837416986186_P-FalsePremise_LOW_942a599c_2718",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 18,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_AMBIGUOUS_QUERY",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_nova_8282063117132135457_P-Ambiguity_MEDIUM_fd923d61_3795",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 19,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_NONFACTUAL_QUERY",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_deepseek_7732521529054562311_P-EpistemicMismatch_HIGH_1d3c4b7e_1599",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": true,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 20,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "CFAF",
+      "A2": "FULL",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_nova_6969539427365218166_P-GranularityMismatch_LOW_88dc5570_4480",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "CFAF",
+      "A2": "FULL",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 21,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_gpt_1192279284143194020_P-GranularityMismatch_LOW_8801332e_3122",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 22,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_nova_7610758795954724809_P-EpistemicMismatch_LOW_30b6785f_3756",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 23,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_INFO_MISSING_IN_CONTEXT",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_nova_-3803697286581502044_P-MissingInfo_MEDIUM_29cd91f0_4340",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_AMBIGUOUS_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 24,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_claude_-2522076069840987893_P-Ambiguity_LOW_bc4a4d98_0815",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 25,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_GRANULARITY_MISMATCH",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": null,
+      "A1": null,
+      "A2": null,
+      "B": null,
+      "C": null
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_claude_8350528572960416643_P-GranularityMismatch_HIGH_4ef2a89b_0936",
+    "predictions": {
+      "A0": null,
+      "A1": null,
+      "A2": null,
+      "B": null,
+      "C": null,
+      "shared_control": null
+    },
+    "raw_gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 26,
+    "validation_errors": {
+      "A0": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "A1": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "A2": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "B": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "C": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ],
+      "shared_control": [
+        "INVALID_SEMANTIC_ASSESSMENT"
+      ]
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "REFUSE_FALSE_PREMISE_IN_QUERY",
+    "expected_mode": "CFAF",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_nova_-5519267321423308172_P-FalsePremise_HIGH_6ebd546f_4141",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "CFAF"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_NONFACTUAL_QUERY"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 27,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_deepseek_6608141013475408306_P-GranularityMismatch_LOW_6e0c4d45_2044",
+    "predictions": {
+      "A0": "FULL",
+      "A1": "FULL",
+      "A2": "FULL",
+      "B": "FULL",
+      "C": "FULL",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "C": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 28,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  },
+  {
+    "dataset": "RefusalBench-NQ",
+    "expected_label": "ANSWER_CORRECTLY",
+    "expected_mode": "FULL",
+    "family": "RefusalBench",
+    "gate_predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF"
+    },
+    "matched_pair": null,
+    "original_id": "RB-NQ_deepseek_-4621948696356225060_P-EpistemicMismatch_LOW_801397a1_1406",
+    "predictions": {
+      "A0": "CFAF",
+      "A1": "CFAF",
+      "A2": "CFAF",
+      "B": "CFAF",
+      "C": "CFAF",
+      "shared_control": "FULL"
+    },
+    "reason_scoring": {
+      "A0": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_INFO_MISSING_IN_CONTEXT"
+      },
+      "A1": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "A2": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      },
+      "B": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_INFO_MISSING_IN_CONTEXT"
+      },
+      "C": {
+        "assessable": true,
+        "correct": false,
+        "specific_category": "REFUSE_INFO_MISSING_IN_CONTEXT"
+      },
+      "shared_control": {
+        "assessable": false,
+        "correct": null,
+        "specific_category": null
+      }
+    },
+    "runtime_index": 29,
+    "validation_errors": {
+      "A0": [],
+      "A1": [],
+      "A2": [],
+      "B": [],
+      "C": [],
+      "shared_control": []
+    }
+  }
+]

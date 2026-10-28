@@ -1,0 +1,46 @@
+{
+  "additional_untouched_groups": 18,
+  "all_api_payloads_guarded": 113,
+  "authorization_and_exposure_status": "PASS",
+  "eligible_exposed": 130,
+  "exposure_ledger_unchanged": true,
+  "failures": [],
+  "gold_field_leak_count": 0,
+  "internal_public_reason_exact_agreement": {
+    "assessable": 33,
+    "matching": 29,
+    "nonidentical_text_note": "Four deterministic P5 observations (two cases x A0/B) use the canonical no-support public sentence while the internal template is different; class and realization agree and both public traces remain identical.",
+    "public_text_exact_matching": 29,
+    "realization_matching": 33,
+    "reason_class_matching": 33
+  },
+  "invalid_or_unauthorized_span_references": [],
+  "invalid_upstream_assessments": [
+    {
+      "errors": [
+        "SOURCE_ROLE_COVERAGE_INVALID"
+      ],
+      "runtime_index": 13
+    },
+    {
+      "errors": [
+        "SOURCE_ROLE_COVERAGE_INVALID"
+      ],
+      "runtime_index": 26
+    }
+  ],
+  "new_refusalbench_exposures": 0,
+  "original_passage_and_student_case_files_opened_by_task_preparation": false,
+  "p5_model_calls": 0,
+  "p5_public_traces_equal": true,
+  "protected_prior_files_unchanged": true,
+  "public_schema_errors": [],
+  "public_trace_failures": [],
+  "regression_metadata_read_note": "The inherited metadata-filter regression reads official JSONL with an explicit annotation-only Arrow schema; passage fields are ignored. No reserved or untouched question/context was materialized or inspected.",
+  "reserved_groups": 30,
+  "scope_limit": "Exact payload contracts, source/span provenance, fixture canaries and trace equality; no claim of universal paraphrase-leak detection or semantic correctness.",
+  "semantic_acceptance_status": "QUALIFIED_TWO_INVALID_UPSTREAM_ROLE_COVERAGES",
+  "shared_assessment_identical_cases": 30,
+  "unseen_eligible": 1104,
+  "validated_global_support_counter_reference_occurrences": 17
+}

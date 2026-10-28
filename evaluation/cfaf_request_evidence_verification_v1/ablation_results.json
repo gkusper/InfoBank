@@ -1,0 +1,987 @@
+{
+  "cached": {
+    "case_count": 40,
+    "systems": {
+      "A0": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      },
+      "A1": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.85,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 17,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 5,
+            "ERROR": 0,
+            "FULL": 15
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.15,
+        "full_recall": 0.75,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 5,
+        "unnecessary_refusal_rate": 0.25
+      },
+      "A2": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      },
+      "B": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.85,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 17,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 5,
+            "ERROR": 0,
+            "FULL": 15
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.15,
+        "full_recall": 0.75,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 5,
+        "unnecessary_refusal_rate": 0.25
+      }
+    },
+    "zero_model_calls": true
+  },
+  "changed_decision_causes": {
+    "cached|A1|RECV": 2,
+    "cached|B|RECV": 2,
+    "live|A1|RECV": 1,
+    "live|B|RECV": 1
+  },
+  "coverage_counts": {
+    "cached|COVERED": 20,
+    "cached|NOT_COVERED": 18,
+    "cached|PARTIALLY_COVERED": 2,
+    "cached|UNKNOWN": 1,
+    "live|COVERED": 13,
+    "live|NOT_COVERED": 16,
+    "live|PARTIALLY_COVERED": 1
+  },
+  "interpretation": "Two separate development analyses; overlapping cases are never pooled as independent observations. A1/A2 have gate metrics only; live public generations are A0/B/control and conditionally C.",
+  "live": {
+    "by_dataset": {
+      "InfoBank-original-40": {
+        "A0": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 3,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "A1": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "A2": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "B": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 3,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "C": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 3,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "shared_control": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 4,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        }
+      },
+      "RefusalBench-NQ": {
+        "A0": {
+          "accuracy": 0.7,
+          "balanced_accuracy": 0.7,
+          "cfaf_recall": 0.6,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 2,
+              "FULL": 2
+            },
+            "FULL": {
+              "CFAF": 2,
+              "ERROR": 0,
+              "FULL": 8
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 2,
+          "failure_to_restrict_count": 2,
+          "failure_to_restrict_rate": 0.2,
+          "full_recall": 0.8,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 0,
+          "n": 20,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 1,
+          "unnecessary_refusal_count": 2,
+          "unnecessary_refusal_rate": 0.2
+        },
+        "A1": {
+          "accuracy": 0.65,
+          "balanced_accuracy": 0.6499999999999999,
+          "cfaf_recall": 0.6,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 2,
+              "FULL": 2
+            },
+            "FULL": {
+              "CFAF": 3,
+              "ERROR": 0,
+              "FULL": 7
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 2,
+          "failure_to_restrict_count": 2,
+          "failure_to_restrict_rate": 0.2,
+          "full_recall": 0.7,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 0,
+          "n": 20,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 3,
+          "unnecessary_refusal_rate": 0.3
+        },
+        "A2": {
+          "accuracy": 0.7,
+          "balanced_accuracy": 0.7,
+          "cfaf_recall": 0.6,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 2,
+              "FULL": 2
+            },
+            "FULL": {
+              "CFAF": 2,
+              "ERROR": 0,
+              "FULL": 8
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 2,
+          "failure_to_restrict_count": 2,
+          "failure_to_restrict_rate": 0.2,
+          "full_recall": 0.8,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 0,
+          "n": 20,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 2,
+          "unnecessary_refusal_rate": 0.2
+        },
+        "B": {
+          "accuracy": 0.65,
+          "balanced_accuracy": 0.6499999999999999,
+          "cfaf_recall": 0.6,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 2,
+              "FULL": 2
+            },
+            "FULL": {
+              "CFAF": 3,
+              "ERROR": 0,
+              "FULL": 7
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 2,
+          "failure_to_restrict_count": 2,
+          "failure_to_restrict_rate": 0.2,
+          "full_recall": 0.7,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 0,
+          "n": 20,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 1,
+          "unnecessary_refusal_count": 3,
+          "unnecessary_refusal_rate": 0.3
+        },
+        "C": {
+          "accuracy": 0.65,
+          "balanced_accuracy": 0.6499999999999999,
+          "cfaf_recall": 0.6,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 2,
+              "FULL": 2
+            },
+            "FULL": {
+              "CFAF": 3,
+              "ERROR": 0,
+              "FULL": 7
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 2,
+          "failure_to_restrict_count": 2,
+          "failure_to_restrict_rate": 0.2,
+          "full_recall": 0.7,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 0,
+          "n": 20,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 1,
+          "unnecessary_refusal_count": 3,
+          "unnecessary_refusal_rate": 0.3
+        },
+        "shared_control": {
+          "accuracy": 0.75,
+          "balanced_accuracy": 0.75,
+          "cfaf_recall": 0.6,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 2,
+              "FULL": 2
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 9
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 2,
+          "failure_to_restrict_count": 2,
+          "failure_to_restrict_rate": 0.2,
+          "full_recall": 0.9,
+          "generic_or_uncategorized_refusals": 6,
+          "matched_pairs": 0,
+          "n": 20,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 0,
+          "structured_reason_correct": 0,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.1
+        }
+      }
+    },
+    "case_count": 30,
+    "gate_only": {
+      "A0": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8035714285714286,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 2,
+            "ERROR": 0,
+            "FULL": 12
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.8571428571428571,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 2,
+        "unnecessary_refusal_rate": 0.14285714285714285
+      },
+      "A1": {
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.7678571428571428,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 3,
+            "ERROR": 0,
+            "FULL": 11
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.7857142857142857,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 3,
+        "unnecessary_refusal_rate": 0.21428571428571427
+      },
+      "A2": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8035714285714286,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 2,
+            "ERROR": 0,
+            "FULL": 12
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.8571428571428571,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 2,
+        "unnecessary_refusal_rate": 0.14285714285714285
+      },
+      "B": {
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.7678571428571428,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 3,
+            "ERROR": 0,
+            "FULL": 11
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.7857142857142857,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 3,
+        "unnecessary_refusal_rate": 0.21428571428571427
+      },
+      "C": {
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.7678571428571428,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 3,
+            "ERROR": 0,
+            "FULL": 11
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.7857142857142857,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 3,
+        "unnecessary_refusal_rate": 0.21428571428571427
+      }
+    },
+    "systems": {
+      "A0": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8035714285714286,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 2,
+            "ERROR": 0,
+            "FULL": 12
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.8571428571428571,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 12,
+        "structured_reason_correct": 4,
+        "unnecessary_refusal_count": 2,
+        "unnecessary_refusal_rate": 0.14285714285714285
+      },
+      "A1": {
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.7678571428571428,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 3,
+            "ERROR": 0,
+            "FULL": 11
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.7857142857142857,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 3,
+        "unnecessary_refusal_rate": 0.21428571428571427
+      },
+      "A2": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8035714285714286,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 2,
+            "ERROR": 0,
+            "FULL": 12
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.8571428571428571,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "Not measured in this gate-only ablation; no new public response was generated.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 2,
+        "unnecessary_refusal_rate": 0.14285714285714285
+      },
+      "B": {
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.7678571428571428,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 3,
+            "ERROR": 0,
+            "FULL": 11
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.7857142857142857,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 12,
+        "structured_reason_correct": 4,
+        "unnecessary_refusal_count": 3,
+        "unnecessary_refusal_rate": 0.21428571428571427
+      },
+      "C": {
+        "accuracy": 0.7666666666666667,
+        "balanced_accuracy": 0.7678571428571428,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 3,
+            "ERROR": 0,
+            "FULL": 11
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.7857142857142857,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 12,
+        "structured_reason_correct": 4,
+        "unnecessary_refusal_count": 3,
+        "unnecessary_refusal_rate": 0.21428571428571427
+      },
+      "shared_control": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8392857142857143,
+        "cfaf_recall": 0.75,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 12,
+            "ERROR": 2,
+            "FULL": 2
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 13
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 2,
+        "failure_to_restrict_count": 2,
+        "failure_to_restrict_rate": 0.125,
+        "full_recall": 0.9285714285714286,
+        "generic_or_uncategorized_refusals": 6,
+        "matched_pairs": 5,
+        "n": 30,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 6,
+        "structured_reason_correct": 4,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.07142857142857142
+      }
+    }
+  },
+  "rule_failure_counts": {
+    "cached|RECV-AGGREGATION-OPERATION": 1,
+    "cached|RECV-ANSWER-TYPE": 6,
+    "cached|RECV-INCOMPLETE-REQUIREMENT": 19,
+    "cached|RECV-INVALID-OR-MISSING-SPAN": 17,
+    "cached|RECV-NO-ANSWER": 19,
+    "cached|RECV-QUALIFIER-SEMANTICS-UNRESOLVED": 2,
+    "cached|RECV-REFERENT-UNRESOLVED": 19,
+    "cached|RECV-RELATION-UNSUPPORTED": 17,
+    "cached|RECV-ROLE-NOT-GROUNDED-PRIMARY": 17,
+    "cached|RECV-SUPPORT-MISSING": 17,
+    "cached|RECV-SUPPORT-PARTIAL": 2,
+    "live|RECV-AGGREGATION-OPERATION": 1,
+    "live|RECV-ANSWER-TYPE": 12,
+    "live|RECV-INCOMPLETE-REQUIREMENT": 15,
+    "live|RECV-INVALID-ASSESSMENT": 4,
+    "live|RECV-INVALID-OR-MISSING-SPAN": 14,
+    "live|RECV-NO-ANSWER": 15,
+    "live|RECV-QUALIFIER-SEMANTICS-UNRESOLVED": 1,
+    "live|RECV-REFERENT-UNRESOLVED": 15,
+    "live|RECV-RELATION-UNRESOLVED": 2,
+    "live|RECV-RELATION-UNSUPPORTED": 14,
+    "live|RECV-REQUIREMENT-MAPPING": 2,
+    "live|RECV-ROLE-NOT-GROUNDED-PRIMARY": 15,
+    "live|RECV-SUPPORT-MISSING": 13,
+    "live|RECV-SUPPORT-UNKNOWN": 2
+  },
+  "source_capability_reference_counts": {
+    "cached|UNKNOWN": 29,
+    "live|PERMITTED": 4,
+    "live|UNKNOWN": 12
+  }
+}

@@ -1,0 +1,566 @@
+{
+  "cases": [
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 223,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "794a1dd1f364e2ab681701bbb4fe33d332cb434c902ea4543e0782ac34aa4c37",
+      "runtime_index": 0
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 1592,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "dbf30f42129615e07c13dc26ced878d0902f80531c1c2c54a2cf7d0748071ab7",
+      "runtime_index": 1
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 591,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "722d9d3c2d6fab56d7bfde7bc8c171bf4db7bbc293aa6722872b0aca7183ea2f",
+      "runtime_index": 2
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 1048,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "5255d9fbf225344ca4fd81651974f22bdbd094bfaa4969a1cf1f1cde8da009fb",
+      "runtime_index": 3
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 176,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "a5162ac8226ec29b84003683adf04d40600b5de52ec309a8d1306d05b50ff927",
+      "runtime_index": 4
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 387,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [
+            "Evidence sufficiency / answer generation: contextual review required"
+          ],
+          "correct": false,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [
+            "Evidence sufficiency / answer generation: contextual review required"
+          ],
+          "correct": false,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "e23e39f8982845e3bf69f8661462d6e9846800cf6856b6abe391dfe313749c54",
+      "runtime_index": 5
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 554,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "e37278b1fe8a33f0ff745ea93c7f55908b75763cad5c03987d201ebb3e486638",
+      "runtime_index": 6
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 731,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "979591bb79fc8851997015aba3574cac8b56a81db42c985269096de201603b63",
+      "runtime_index": 7
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 1023,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation"
+          ],
+          "correct": false,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation"
+          ],
+          "correct": false,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "5495f5a4101d13fedf6fcd61383364319d9ee27b31548c6798a0dda9a38d6da1",
+      "runtime_index": 8
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 1243,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [
+            "Evidence sufficiency / answer generation: contextual review required"
+          ],
+          "correct": false,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [
+            "Evidence sufficiency / answer generation: contextual review required"
+          ],
+          "correct": false,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "5dfaa94a619fd442ca623175d7fbe5aa8221af67f89d8507402eba2184eea3e2",
+      "runtime_index": 9
+    },
+    {
+      "analysis_refusal_cause": "NONFACTUAL_REQUEST",
+      "dataset_index": 527,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "NONFACTUAL_REQUEST",
+        "realization": "ABSTAIN",
+        "text": "This is a nonfactual or subjective request that cannot be established from the permitted evidence."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "7f6533a5dc48ae7ce763e807031bd1911174592d433e6f8061b4e926d0c1eba3",
+      "runtime_index": 10
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 1489,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "36d169427c99be995b3f0f7c9510631e6fb961c3839501304afa92e915d32f17",
+      "runtime_index": 11
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 1197,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "192394a603ffa28b1dcbab87476a660f21a61229386fb2fdb5f5a8b5d19a0f55",
+      "runtime_index": 12
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 1346,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "9ab389c10c608be00a1bba87352f5615e9feddff9d67fe8bce1b96a1a5b3c65a",
+      "runtime_index": 13
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 1569,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "96f4b7eb7b9ac8f7f8298aa549b1f290f9314533d67fa9d4b29e462d56d688ef",
+      "runtime_index": 14
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 29,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "5ccd03c09dcb91342ded3f7ef3c1c8912f7020e07fb90b7802c0dc98c3ee6656",
+      "runtime_index": 15
+    },
+    {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "dataset_index": 254,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "AMBIGUOUS_REQUEST",
+        "realization": "CLARIFY",
+        "text": "The query is ambiguous; please specify the intended referent."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "144ed133d4a54b2ee27ec4e7566fa9d6f335c6713010a264ab82a548b810d80b",
+      "runtime_index": 16
+    },
+    {
+      "analysis_refusal_cause": "NONFACTUAL_REQUEST",
+      "dataset_index": 1390,
+      "internal_reason": {
+        "class": "EPISTEMIC",
+        "code": "NONFACTUAL_REQUEST",
+        "realization": "ABSTAIN",
+        "text": "This is a nonfactual or subjective request that cannot be established from the permitted evidence."
+      },
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation",
+            "Incorrect or unrecognized specific refusal reason"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": null,
+          "categories": [
+            "Requested-identity completeness",
+            "Entity/relation interpretation"
+          ],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "c63746b53f6bd94e417526238634c98c45fd27d449147a1094a2f09c0b717d01",
+      "runtime_index": 17
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 678,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "3e04c607a133ce76fa470437127ec32417c3d16c3a849990e9afc52556081100",
+      "runtime_index": 18
+    },
+    {
+      "analysis_refusal_cause": "NONE",
+      "dataset_index": 563,
+      "internal_reason": null,
+      "per_system": {
+        "semantic_cfaf": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        },
+        "shared_control": {
+          "candidate_copied": true,
+          "categories": [],
+          "correct": true,
+          "semantic_grounding_not_proven_by_copy_or_references": true
+        }
+      },
+      "query_profile_resolution": "RESOLVED",
+      "record_hash": "c72215e31e6e689e17405a6a3ffff64c77161bcf4777cb970d32044e95f320fa",
+      "runtime_index": 19
+    }
+  ],
+  "method": "Posthoc mechanistic error flags, not independent semantic ground truth."
+}

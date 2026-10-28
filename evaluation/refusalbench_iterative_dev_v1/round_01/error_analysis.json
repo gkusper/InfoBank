@@ -1,0 +1,1411 @@
+[
+  {
+    "assessment": {
+      "answer_candidate": "A substitute good is a good that can be used in place of another.",
+      "available_granularity": "general concept",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "substitute good"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "What is a substitute good?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document defines a substitute good clearly, supporting the query.",
+      "relations": [
+        "can be used in place of"
+      ],
+      "requested_granularity": "specific good",
+      "requested_information": "a good that can be used in place of another good",
+      "requirement_support": [
+        {
+          "rationale": "The definition in the document directly answers the query.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document provides a clear definition of a substitute good.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 631,
+    "expected": "FULL",
+    "issues": [
+      "GRANULARITY_NOT_SUPPORTED",
+      "REQUEST_SCOPE_UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "another good",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "a01105f5f919e2e72826e52fc9c5add71e70aa09ba8bff56a417bc55763a7c5e",
+    "runtime_index": 0,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "general group",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Traveling Wilburys",
+        "Bob Dylan",
+        "George Harrison",
+        "Jeff Lynne",
+        "Roy Orbison",
+        "Tom Petty",
+        "Dave Stewart"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Identify notable artists in the Traveling Wilburys"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document does not explicitly list the notable artists in the Traveling Wilburys.",
+      "relations": [
+        "member",
+        "producer",
+        "collaborator"
+      ],
+      "requested_granularity": "specific artists",
+      "requested_information": "notable artists in the Traveling Wilburys",
+      "requirement_support": [
+        {
+          "rationale": "The document lacks specific information on the notable artists in the Traveling Wilburys.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003",
+            "view-0001:span-0004"
+          ],
+          "rationale": "The document discusses the Traveling Wilburys but does not specify the notable artists.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 694,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "b36c1f06cc307ac35872a7d4ffb7168edcf10f452ff662bfbbcae14d8525bb11",
+    "runtime_index": 3,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "general group",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Traveling Wilburys",
+        "Bob Dylan",
+        "George Harrison",
+        "Jeff Lynne",
+        "Roy Orbison",
+        "Tom Petty",
+        "Dave Stewart"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Identify notable artists in the Traveling Wilburys"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document does not explicitly list the notable artists in the Traveling Wilburys.",
+      "relations": [
+        "member",
+        "producer",
+        "collaborator"
+      ],
+      "requested_granularity": "specific artists",
+      "requested_information": "notable artists in the Traveling Wilburys",
+      "requirement_support": [
+        {
+          "rationale": "The document lacks specific information on the notable artists in the Traveling Wilburys.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003",
+            "view-0001:span-0004"
+          ],
+          "rationale": "The document discusses the Traveling Wilburys but does not specify the notable artists.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 694,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "b36c1f06cc307ac35872a7d4ffb7168edcf10f452ff662bfbbcae14d8525bb11",
+    "runtime_index": 3,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "The Lord's Prayer is found in the Gospel of Matthew and the Gospel of Luke.",
+      "available_granularity": "general location",
+      "confidence": 0.7,
+      "contradicting_spans": [],
+      "entities": [
+        "Lord's Prayer",
+        "Gospel of Matthew",
+        "Gospel of Luke"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Find the specific verses for the Lord's Prayer in the Bible."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The documents mention the gospels but do not provide specific verses.",
+      "relations": [
+        "recorded in",
+        "found in"
+      ],
+      "requested_granularity": "specific verses",
+      "requested_information": "location of the Lord's Prayer in the Bible",
+      "requirement_support": [
+        {
+          "rationale": "The document provides general locations but not specific verses.",
+          "requirement_id": "request-1",
+          "support_status": "PARTIAL",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document states the Lord's Prayer is in Matthew and Luke.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "PARTIAL",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1149,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "b24c6e9eb3de76149f39b27cf2d83d38983de4103b3d1a132610235d98af0835",
+    "runtime_index": 4,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "The Lord's Prayer is found in the Gospel of Matthew and the Gospel of Luke.",
+      "available_granularity": "general location",
+      "confidence": 0.7,
+      "contradicting_spans": [],
+      "entities": [
+        "Lord's Prayer",
+        "Gospel of Matthew",
+        "Gospel of Luke"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Find the specific verses for the Lord's Prayer in the Bible."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The documents mention the gospels but do not provide specific verses.",
+      "relations": [
+        "recorded in",
+        "found in"
+      ],
+      "requested_granularity": "specific verses",
+      "requested_information": "location of the Lord's Prayer in the Bible",
+      "requirement_support": [
+        {
+          "rationale": "The document provides general locations but not specific verses.",
+          "requirement_id": "request-1",
+          "support_status": "PARTIAL",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document states the Lord's Prayer is in Matthew and Luke.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "PARTIAL",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1149,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "b24c6e9eb3de76149f39b27cf2d83d38983de4103b3d1a132610235d98af0835",
+    "runtime_index": 4,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "Dmitri Mendeleev and Lothar Meyer independently composed the first working periodic tables in 1869.",
+      "available_granularity": "specific individuals",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Dmitri Mendeleev",
+        "Lothar Meyer"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Dmitri Mendeleev and Lothar Meyer independently created the first working periodic table."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The evidence clearly states both Mendeleev and Meyer created periodic tables in 1869, supporting the query.",
+      "relations": [
+        "composed",
+        "periodic table"
+      ],
+      "requested_granularity": "specific individual",
+      "requested_information": "the first working periodic table",
+      "requirement_support": [
+        {
+          "rationale": "The document provides clear evidence of Mendeleev and Meyer composing the periodic tables.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ],
+          "rationale": "The document explicitly mentions Mendeleev and Meyer as the creators of the periodic tables.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0002",
+        "view-0001:span-0003"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1236,
+    "expected": "CFAF",
+    "issues": [
+      "REQUEST_SCOPE_UNRESOLVED"
+    ],
+    "prediction": "FULL",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "5796a2ee0d676df8818dbd6638c88bea0bcc7657d095f6de80237aee2afac026",
+    "runtime_index": 5,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "null",
+      "available_granularity": "specific actor name",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Scrooge McDuck",
+        "David Tennant"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the voice actor for Scrooge McDuck in the 2019 DuckTales series."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document mentions David Tennant as Scrooge McDuck but does not confirm the 2019 release date.",
+      "relations": [
+        "plays"
+      ],
+      "requested_granularity": "specific actor name",
+      "requested_information": "the actor who plays Scrooge McDuck in DuckTales",
+      "requirement_support": [
+        {
+          "rationale": "The document does not confirm the release year as 2019.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document identifies David Tennant as the voice of Scrooge McDuck.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1408,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "114d417c99c7849caa38834a25d9188aae87275cf639c987325e91c9b688e67d",
+    "runtime_index": 6,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "null",
+      "available_granularity": "specific actor name",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Scrooge McDuck",
+        "David Tennant"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the voice actor for Scrooge McDuck in the 2019 DuckTales series."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document mentions David Tennant as Scrooge McDuck but does not confirm the 2019 release date.",
+      "relations": [
+        "plays"
+      ],
+      "requested_granularity": "specific actor name",
+      "requested_information": "the actor who plays Scrooge McDuck in DuckTales",
+      "requirement_support": [
+        {
+          "rationale": "The document does not confirm the release year as 2019.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document identifies David Tennant as the voice of Scrooge McDuck.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1408,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "114d417c99c7849caa38834a25d9188aae87275cf639c987325e91c9b688e67d",
+    "runtime_index": 6,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "Paul Hogan played Crocodile Dundee.",
+      "available_granularity": "specific actor name",
+      "confidence": 1,
+      "contradicting_spans": [],
+      "entities": [
+        "Crocodile Dundee",
+        "Paul Hogan"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the actor portraying Crocodile Dundee."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document clearly states that Paul Hogan played Crocodile Dundee.",
+      "relations": [
+        "played"
+      ],
+      "requested_granularity": "specific actor name",
+      "requested_information": "actor who played Crocodile Dundee",
+      "requirement_support": [
+        {
+          "rationale": "The document provides the name of the actor who played Crocodile Dundee.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document identifies Paul Hogan as the actor for Crocodile Dundee.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 28,
+    "expected": "FULL",
+    "issues": [
+      "REQUEST_SCOPE_UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "abec95bcfd854c3f93f51876e4a4d23cf83c26de54cb3f424e1d45bb4e03ad02",
+    "runtime_index": 9,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "decade",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "whooping cough",
+        "pertussis vaccine"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "When did vaccination for whooping cough begin?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document states the vaccine became available in the 1940s but does not specify an exact year.",
+      "relations": [
+        "vaccination start date"
+      ],
+      "requested_granularity": "exact date",
+      "requested_information": "start date of whooping cough vaccination",
+      "requirement_support": [
+        {
+          "rationale": "The document provides a general timeframe but lacks a specific start date.",
+          "requirement_id": "request-1",
+          "support_status": "PARTIAL",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document mentions the availability of the pertussis vaccine in the 1940s.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "PARTIAL",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": [
+        "granularity_gap"
+      ]
+    },
+    "dataset_index": 828,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "whooping cough, the '100-day cough",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+    "runtime_index": 12,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "decade",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "whooping cough",
+        "pertussis vaccine"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "When did vaccination for whooping cough begin?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document states the vaccine became available in the 1940s but does not specify an exact year.",
+      "relations": [
+        "vaccination start date"
+      ],
+      "requested_granularity": "exact date",
+      "requested_information": "start date of whooping cough vaccination",
+      "requirement_support": [
+        {
+          "rationale": "The document provides a general timeframe but lacks a specific start date.",
+          "requirement_id": "request-1",
+          "support_status": "PARTIAL",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document mentions the availability of the pertussis vaccine in the 1940s.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "PARTIAL",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": [
+        "granularity_gap"
+      ]
+    },
+    "dataset_index": 828,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "whooping cough, the '100-day cough",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+    "runtime_index": 12,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "none",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Nolan Sisters",
+        "I'm In the Mood for Dancing"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Inquiry about the reason for the cessation of writing the song"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "No information provided about why the Nolan Sisters stopped writing the song.",
+      "relations": [
+        "stop writing"
+      ],
+      "requested_granularity": "specific reason",
+      "requested_information": "Reason for the Nolan Sisters stopping writing 'I'm In the Mood for Dancing'",
+      "requirement_support": [
+        {
+          "rationale": "The document does not provide any information regarding the reason for stopping writing the song.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document does not address the cessation of writing the song.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1041,
+    "expected": "CFAF",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": null,
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "Dancing",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "0409145933a7d8ff5ef5b5466ddbee32e5a06a9205f079ba2a4e2f9c19eedb4f",
+    "runtime_index": 13,
+    "system": "shared_control",
+    "validation_errors": [
+      "CFAF_CANNOT_CLAIM_FULL_STATUS"
+    ]
+  },
+  {
+    "assessment": {
+      "answer_candidate": "Santa Claus is based on Sinterklaas and Saint Nicholas, with influences from the Germanic god Wodan.",
+      "available_granularity": "character origins",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Santa Claus",
+        "Sinterklaas",
+        "Saint Nicholas",
+        "Wodan"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Santa Claus is based on Sinterklaas and Saint Nicholas, with influences from Wodan."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The origins of Santa Claus are clearly outlined in the document.",
+      "relations": [
+        "based on",
+        "influenced by"
+      ],
+      "requested_granularity": "character origins",
+      "requested_information": "character of Santa Claus",
+      "requirement_support": [
+        {
+          "rationale": "The document provides sufficient information on the origins of Santa Claus.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002"
+          ],
+          "rationale": "The document discusses the origins of Santa Claus based on Sinterklaas and other influences.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000",
+        "view-0001:span-0001",
+        "view-0001:span-0002"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1234,
+    "expected": "FULL",
+    "issues": [
+      "REQUEST_SCOPE_UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "santa claus based on",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "490d1a133457a00a977541c716d4043b0a4ecc7674e87ec501bffabe9b6f034a",
+    "runtime_index": 14,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "none",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "tablet of the ten commandments"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "location of the tablet discovered in 1920"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "No evidence found regarding the location of the tablet discovered in 1920.",
+      "relations": [
+        "discovered"
+      ],
+      "requested_granularity": "specific location",
+      "requested_information": "location of the tablet of the ten commandments discovered in 1920",
+      "requirement_support": [
+        {
+          "rationale": "The query about the discovery lacks supporting evidence in the provided document.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document discusses the Ark of the Covenant but does not mention any discovery in 1920.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 621,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "the ten commandments discovered in 1920",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+    "runtime_index": 16,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "none",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "tablet of the ten commandments"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "location of the tablet discovered in 1920"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "No evidence found regarding the location of the tablet discovered in 1920.",
+      "relations": [
+        "discovered"
+      ],
+      "requested_granularity": "specific location",
+      "requested_information": "location of the tablet of the ten commandments discovered in 1920",
+      "requirement_support": [
+        {
+          "rationale": "The query about the discovery lacks supporting evidence in the provided document.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document discusses the Ark of the Covenant but does not mention any discovery in 1920.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 621,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": null,
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "the ten commandments discovered in 1920",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+    "runtime_index": 16,
+    "system": "shared_control",
+    "validation_errors": [
+      "CFAF_CANNOT_CLAIM_FULL_STATUS"
+    ]
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "general information about the song",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Jeanie with the Light Brown Hair"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Identify the author of the song Jeanie with the Light Brown Hair."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document does not specify who wrote the song, only that it was written by someone.",
+      "relations": [
+        "written by"
+      ],
+      "requested_granularity": "specific author name",
+      "requested_information": "the author of the text for Jeanie with the Light Brown Hair",
+      "requirement_support": [
+        {
+          "rationale": "The document does not provide the name of the author.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document provides general information about the song but lacks specific authorship details.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 319,
+    "expected": "CFAF",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": null,
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": "jeanie with the light brown hair",
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "0471a5fb79cf3d6605ae51d1dcb8e41797ab5e4fb4c93407483fe3c0340b4bc2",
+    "runtime_index": 17,
+    "system": "shared_control",
+    "validation_errors": [
+      "CFAF_CANNOT_CLAIM_FULL_STATUS"
+    ]
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "unknown",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Los Angeles Dodgers"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Count of World Series wins by the Dodgers"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document mentions World Series titles but does not specify the count.",
+      "relations": [
+        "won",
+        "has"
+      ],
+      "requested_granularity": "exact count",
+      "requested_information": "World Series wins by the Dodgers",
+      "requirement_support": [
+        {
+          "rationale": "The document lacks specific information on the number of World Series wins.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document states the Dodgers have won World Series titles but does not provide a specific number.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1529,
+    "expected": "CFAF",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUIREMENT_UNSUPPORTED:AGGREGATE_COUNT"
+    ],
+    "prediction": null,
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "AGGREGATE_COUNT",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "a8ea811f5976a405d231dd8b852d1e36411fec1b00b0e20447cf7980f7dd814f",
+    "runtime_index": 18,
+    "system": "shared_control",
+    "validation_errors": [
+      "CFAF_CANNOT_CLAIM_FULL_STATUS"
+    ]
+  },
+  {
+    "assessment": {
+      "answer_candidate": "The song 'Humble and Kind' was a major success, winning multiple awards, and was written by Lori McKenna.",
+      "available_granularity": "awards won and writer",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Humble and Kind",
+        "Lori McKenna",
+        "Tim McGraw"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Assessing the major success of the song and identifying its writer."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The song's success is evidenced by multiple awards and chart positions.",
+      "relations": [
+        "written by",
+        "won awards",
+        "certified platinum",
+        "reached number one"
+      ],
+      "requested_granularity": "major success and writer",
+      "requested_information": "success of 'Humble and Kind' and its writer",
+      "requirement_support": [
+        {
+          "rationale": "The document confirms the song's major success and identifies the writer.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001"
+          ],
+          "rationale": "The document details the song's awards and its writer.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000",
+        "view-0001:span-0001"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 550,
+    "expected": "FULL",
+    "issues": [
+      "REQUEST_SCOPE_UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "method": "query_text_only_conservative_grammar",
+      "query_target": null,
+      "requirements": [
+        {
+          "metadata_fields": [],
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "query-profile-v2.1"
+    },
+    "record_hash": "c97a262d9f336dfb9de36025d7f0fded54386688f171b81afa0feb4292cbb192",
+    "runtime_index": 19,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  }
+]

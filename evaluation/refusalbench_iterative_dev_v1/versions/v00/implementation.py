@@ -1,0 +1,4 @@
+from evaluation.infobank_semantic_integration_v2.integration import *
+from evaluation.infobank_semantic_integration_v2.metadata_binding import assert_safe_payload,project_case
+from evaluation.refusalbench_span_fix_v1.contracts import GENERATION_SCHEMA
+VERSION='initial-semantic-integration-v2.1'

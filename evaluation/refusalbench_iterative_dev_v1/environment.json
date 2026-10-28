@@ -1,0 +1,11 @@
+{
+  "api_transport": "Existing urllib OpenAIProvider; no SDK migration",
+  "network_credentials": "Environment only; never recorded",
+  "packages": {
+    "datasets": "5.1.0",
+    "pyarrow": "26.0.0",
+    "pytest": "9.2.0"
+  },
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+}

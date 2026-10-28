@@ -1,0 +1,902 @@
+[
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "general power plants",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Puerto Rico"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "What is the source of electricity for Puerto Rico?"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document mentions PREPA and power plants but does not specify the power sources.",
+      "relations": [
+        "power source"
+      ],
+      "requested_granularity": "specific power source",
+      "requested_information": "power source for Puerto Rico",
+      "requirement_support": [
+        {
+          "rationale": "No specific information on the power source for Puerto Rico is provided.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document provides context about PREPA but lacks specific information on power sources.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 274,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "FACT",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "Puerto Rico",
+      "requirements": [
+        {
+          "answer_kind": "FACT",
+          "metadata_fields": [],
+          "request_text": "what is the power source for Puerto Rico",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "d5d0d89bcc3870bdc48fedd7295bd3fda5807b106173d5da2593c8be9ad08942",
+    "runtime_index": 0,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "general power plants",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Puerto Rico"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "What is the source of electricity for Puerto Rico?"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document mentions PREPA and power plants but does not specify the power sources.",
+      "relations": [
+        "power source"
+      ],
+      "requested_granularity": "specific power source",
+      "requested_information": "power source for Puerto Rico",
+      "requirement_support": [
+        {
+          "rationale": "No specific information on the power source for Puerto Rico is provided.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document provides context about PREPA but lacks specific information on power sources.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 274,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "FACT",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "Puerto Rico",
+      "requirements": [
+        {
+          "answer_kind": "FACT",
+          "metadata_fields": [],
+          "request_text": "what is the power source for Puerto Rico",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "d5d0d89bcc3870bdc48fedd7295bd3fda5807b106173d5da2593c8be9ad08942",
+    "runtime_index": 0,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "The text for Jeanie with the Light Brown Hair was written by Stephen Foster.",
+      "available_granularity": "specific author",
+      "confidence": 1,
+      "contradicting_spans": [],
+      "entities": [
+        "Stephen Foster",
+        "Jane Doe"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the author of the original song",
+        "Identify the author of the modern adaptation"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document clearly states that Stephen Foster wrote the original song.",
+      "relations": [
+        "wrote"
+      ],
+      "requested_granularity": "specific author",
+      "requested_information": "the author of the text for Jeanie with the Light Brown Hair",
+      "requirement_support": [
+        {
+          "rationale": "The document provides a clear attribution of the song to Stephen Foster.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document attributes the song to Stephen Foster.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1200,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "jeanie with the light brown hair",
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who wrote the text for jeanie with the light brown hair",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "10c460df8fb823cfb23f1eb31340d7b7fe16aa6863dc95be9ba6eedc65959b80",
+    "runtime_index": 1,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "The text for Jeanie with the Light Brown Hair was written by Stephen Foster.",
+      "available_granularity": "specific author",
+      "confidence": 1,
+      "contradicting_spans": [],
+      "entities": [
+        "Stephen Foster",
+        "Jane Doe"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the author of the original song",
+        "Identify the author of the modern adaptation"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document clearly states that Stephen Foster wrote the original song.",
+      "relations": [
+        "wrote"
+      ],
+      "requested_granularity": "specific author",
+      "requested_information": "the author of the text for Jeanie with the Light Brown Hair",
+      "requirement_support": [
+        {
+          "rationale": "The document provides a clear attribution of the song to Stephen Foster.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document attributes the song to Stephen Foster.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1200,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "jeanie with the light brown hair",
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who wrote the text for jeanie with the light brown hair",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "10c460df8fb823cfb23f1eb31340d7b7fe16aa6863dc95be9ba6eedc65959b80",
+    "runtime_index": 1,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "Jimmy Matthews took a hat-trick in both innings of a single test match on 28 May 1912.",
+      "available_granularity": "specific bowler's name",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "bowler",
+        "hat-trick",
+        "innings",
+        "test match"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify a bowler who achieved a hat-trick in both innings of a single test match."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "AMBIGUOUS",
+      "rationale": "The document specifies Jimmy Matthews achieved this feat in a test match.",
+      "relations": [
+        "took",
+        "in"
+      ],
+      "requested_granularity": "specific bowler's name",
+      "requested_information": "bowler to take hattrick in both innings in a single test match",
+      "requirement_support": [
+        {
+          "rationale": "The document provides a clear answer to the query.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document directly states the bowler and the event.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1089,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "REQUEST_SCOPE_UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "UNRESOLVED",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "UNRESOLVED",
+          "metadata_fields": [],
+          "request_text": "bowler to take hattrick in both innings in a single test match",
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "984330b6e80d7acfe4ab84c4c56c64668be7b976ca43893a850b284a8cfb120d",
+    "runtime_index": 6,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "Diary of a Wimpy Kid: Dog Days was filmed in Vancouver, Coquitlam, and Richmond, BC; The Long Haul was filmed in Atlanta, Georgia.",
+      "available_granularity": "specific filming locations",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Diary of a Wimpy Kid: Dog Days",
+        "Diary of a Wimpy Kid: The Long Haul",
+        "Vancouver",
+        "Coquitlam, BC",
+        "Richmond, BC",
+        "Atlanta, Georgia",
+        "Stone Mountain Park",
+        "White Water Atlanta",
+        "Marietta, Georgia",
+        "Duluth, Georgia"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "locations for both films in the series"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The query specifies filming locations, which are clearly supported by the documents.",
+      "relations": [
+        "filmed at",
+        "location of"
+      ],
+      "requested_granularity": "specific filming locations",
+      "requested_information": "locations where Diary of a Wimpy Kid was filmed",
+      "requirement_support": [
+        {
+          "rationale": "The document contains specific locations where both films were filmed.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ],
+          "rationale": "The document provides detailed filming locations for both films.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000",
+        "view-0001:span-0001",
+        "view-0001:span-0002",
+        "view-0001:span-0003"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 60,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "LOCATION",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "a wimpy kid filmed",
+      "requirements": [
+        {
+          "answer_kind": "LOCATION",
+          "metadata_fields": [],
+          "request_text": "where was this diary of a wimpy kid filmed",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "c8460616efd34eda5b929e0ea62c7f9e31765b88a54eb3436b931b23e68090ce",
+    "runtime_index": 7,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": "Diary of a Wimpy Kid: Dog Days was filmed in Vancouver, Coquitlam, and Richmond, BC; The Long Haul was filmed in Atlanta, Georgia.",
+      "available_granularity": "specific filming locations",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Diary of a Wimpy Kid: Dog Days",
+        "Diary of a Wimpy Kid: The Long Haul",
+        "Vancouver",
+        "Coquitlam, BC",
+        "Richmond, BC",
+        "Atlanta, Georgia",
+        "Stone Mountain Park",
+        "White Water Atlanta",
+        "Marietta, Georgia",
+        "Duluth, Georgia"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "locations for both films in the series"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The query specifies filming locations, which are clearly supported by the documents.",
+      "relations": [
+        "filmed at",
+        "location of"
+      ],
+      "requested_granularity": "specific filming locations",
+      "requested_information": "locations where Diary of a Wimpy Kid was filmed",
+      "requirement_support": [
+        {
+          "rationale": "The document contains specific locations where both films were filmed.",
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ],
+          "rationale": "The document provides detailed filming locations for both films.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000",
+        "view-0001:span-0001",
+        "view-0001:span-0002",
+        "view-0001:span-0003"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 60,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "LOCATION",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "a wimpy kid filmed",
+      "requirements": [
+        {
+          "answer_kind": "LOCATION",
+          "metadata_fields": [],
+          "request_text": "where was this diary of a wimpy kid filmed",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "c8460616efd34eda5b929e0ea62c7f9e31765b88a54eb3436b931b23e68090ce",
+    "runtime_index": 7,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "specific actor's name",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Alex Cross",
+        "Morgan Freeman"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the actor who played Alex Cross in the 2005 film version of Along Came a Spider."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "NONFACTUAL",
+      "rationale": "The document does not provide information about the 2005 edition of Along Came a Spider.",
+      "relations": [
+        "portrayed by"
+      ],
+      "requested_granularity": "specific actor's name",
+      "requested_information": "identity of the actor who played Alex Cross in the 2005 edition of Along Came a Spider",
+      "requirement_support": [
+        {
+          "rationale": "No evidence found regarding the actor for the 2005 edition.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document only mentions Morgan Freeman's portrayal in earlier films, not the 2005 edition.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1007,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "NONFACTUAL_REQUEST",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "along came a spider",
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who played alex cross in the 2005 edition of along came a spider",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "da6af9021602ed450790858bc9a36e4048a9a361ef15af2c9342088207857052",
+    "runtime_index": 14,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "specific actor's name",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "Alex Cross",
+        "Morgan Freeman"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the actor who played Alex Cross in the 2005 film version of Along Came a Spider."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "NONFACTUAL",
+      "rationale": "The document does not provide information about the 2005 edition of Along Came a Spider.",
+      "relations": [
+        "portrayed by"
+      ],
+      "requested_granularity": "specific actor's name",
+      "requested_information": "identity of the actor who played Alex Cross in the 2005 edition of Along Came a Spider",
+      "requirement_support": [
+        {
+          "rationale": "No evidence found regarding the actor for the 2005 edition.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document only mentions Morgan Freeman's portrayal in earlier films, not the 2005 edition.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1007,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "NONFACTUAL_REQUEST",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "along came a spider",
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who played alex cross in the 2005 edition of along came a spider",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "da6af9021602ed450790858bc9a36e4048a9a361ef15af2c9342088207857052",
+    "runtime_index": 14,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "historical influence",
+      "confidence": 0.7,
+      "contradicting_spans": [],
+      "entities": [
+        "Santa Claus",
+        "Saint Nicholas",
+        "Sinterklaas",
+        "John Pintard",
+        "Alexander Anderson"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Santa Claus as a character based on Saint Nicholas",
+        "Santa Claus as a character influenced by Sinterklaas folklore"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "NONFACTUAL",
+      "rationale": "The query lacks specific evidence linking Santa Claus directly to a historical figure.",
+      "relations": [
+        "based on",
+        "revive",
+        "patron Saint of",
+        "starting a tradition"
+      ],
+      "requested_granularity": "specific historical figure",
+      "requested_information": "Is the character of Santa Claus based on a specific historical figure?",
+      "requirement_support": [
+        {
+          "rationale": "No evidence directly supports the query about Santa Claus being based on a specific historical figure.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001"
+          ],
+          "rationale": "The document discusses the origins of Santa Claus but does not confirm a specific historical figure.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1078,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NONFACTUAL_REQUEST",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "UNRESOLVED",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "Santa Claus based on a specific historical figure",
+      "requirements": [
+        {
+          "answer_kind": "UNRESOLVED",
+          "metadata_fields": [],
+          "request_text": "Is the character of Santa Claus based on a specific historical figure?",
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "41761274a52e4da39f8a79223b393b7cee2549679cd53886036580b25d25341c",
+    "runtime_index": 15,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "answer_candidate": null,
+      "available_granularity": "historical influence",
+      "confidence": 0.7,
+      "contradicting_spans": [],
+      "entities": [
+        "Santa Claus",
+        "Saint Nicholas",
+        "Sinterklaas",
+        "John Pintard",
+        "Alexander Anderson"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "Santa Claus as a character based on Saint Nicholas",
+        "Santa Claus as a character influenced by Sinterklaas folklore"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "NONFACTUAL",
+      "rationale": "The query lacks specific evidence linking Santa Claus directly to a historical figure.",
+      "relations": [
+        "based on",
+        "revive",
+        "patron Saint of",
+        "starting a tradition"
+      ],
+      "requested_granularity": "specific historical figure",
+      "requested_information": "Is the character of Santa Claus based on a specific historical figure?",
+      "requirement_support": [
+        {
+          "rationale": "No evidence directly supports the query about Santa Claus being based on a specific historical figure.",
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001"
+          ],
+          "rationale": "The document discusses the origins of Santa Claus but does not confirm a specific historical figure.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1078,
+    "expected": "FULL",
+    "issues": [
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NONFACTUAL_REQUEST",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_SCOPE_UNRESOLVED",
+      "REQUIREMENT_UNSUPPORTED:UNRESOLVED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "UNRESOLVED",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "Santa Claus based on a specific historical figure",
+      "requirements": [
+        {
+          "answer_kind": "UNRESOLVED",
+          "metadata_fields": [],
+          "request_text": "Is the character of Santa Claus based on a specific historical figure?",
+          "request_type": "UNRESOLVED",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "UNRESOLVED",
+      "version": "iterative-query-v1"
+    },
+    "record_hash": "41761274a52e4da39f8a79223b393b7cee2549679cd53886036580b25d25341c",
+    "runtime_index": 15,
+    "system": "shared_control",
+    "validation_errors": []
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "completed_rounds": 3,
+  "elapsed_seconds_at_report": 2265.005150999874,
+  "final_inclusive_end_time": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\outputs\\refusalbench_iterative_dev_v1_completion.json",
+  "hard_deadline_at_utc": "2026-10-28T19:49:27+00:00",
+  "paired_cases": 20,
+  "report_prepared_at_utc": "2026-10-28T19:27:12.001881+00:00",
+  "task_started_at_utc": "2026-10-28T18:49:27+00:00",
+  "time_limit_exceeded": false,
+  "unfinished_live_rounds": []
+}

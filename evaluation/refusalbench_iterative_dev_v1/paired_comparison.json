@@ -1,0 +1,343 @@
+{
+  "baseline": "round_01 v00",
+  "final": "paired_regression v02",
+  "identical_inputs": true,
+  "interpretation": "Same already-exposed twenty inputs; single-run observational version comparison, not an inferential significance test or isolated component ablation.",
+  "records": [
+    {
+      "dataset_index": 631,
+      "record_hash": "a01105f5f919e2e72826e52fc9c5add71e70aa09ba8bff56a417bc55763a7c5e",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_incorrect"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 251,
+      "record_hash": "3371b2528ab2d0247d5c12ad97c8110382604b8db23a4ce1043bed2522296fde",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 1320,
+      "record_hash": "1fdfd8e30114564b28b64c4a90c7b37479b07a1f58b68088dd4a7696bbe8afd4",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 694,
+      "record_hash": "b36c1f06cc307ac35872a7d4ffb7168edcf10f452ff662bfbbcae14d8525bb11",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        }
+      }
+    },
+    {
+      "dataset_index": 1149,
+      "record_hash": "b24c6e9eb3de76149f39b27cf2d83d38983de4103b3d1a132610235d98af0835",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        }
+      }
+    },
+    {
+      "dataset_index": 1236,
+      "record_hash": "5796a2ee0d676df8818dbd6638c88bea0bcc7657d095f6de80237aee2afac026",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "regressed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_incorrect"
+        }
+      }
+    },
+    {
+      "dataset_index": 1408,
+      "record_hash": "114d417c99c7849caa38834a25d9188aae87275cf639c987325e91c9b688e67d",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        }
+      }
+    },
+    {
+      "dataset_index": 135,
+      "record_hash": "08c5e731c82951c458c904799558683960034590f4f5b7d6d07ed54012c400b1",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 1112,
+      "record_hash": "20a0dd6385fb803c9bac883a30e7770aee14562781d40a553bd5ae82fb3d5fab",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "regressed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "regressed"
+        }
+      }
+    },
+    {
+      "dataset_index": 28,
+      "record_hash": "abec95bcfd854c3f93f51876e4a4d23cf83c26de54cb3f424e1d45bb4e03ad02",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 1477,
+      "record_hash": "57f57f7a892abe953eda916a2b53b66de88885a4848413d904b07b4badb1b125",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 848,
+      "record_hash": "befa23ff9bf25b0ba12a31bce4e47f1a2dc3586f80b767f195dd76ed34f0a039",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 828,
+      "record_hash": "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_incorrect"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_incorrect"
+        }
+      }
+    },
+    {
+      "dataset_index": 1041,
+      "record_hash": "0409145933a7d8ff5ef5b5466ddbee32e5a06a9205f079ba2a4e2f9c19eedb4f",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": null,
+          "transition": "fixed"
+        }
+      }
+    },
+    {
+      "dataset_index": 1234,
+      "record_hash": "490d1a133457a00a977541c716d4043b0a4ecc7674e87ec501bffabe9b6f034a",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 312,
+      "record_hash": "a7086ebad8c79250dfd480ef74fa6f501176b210389b6495a7ced93212454bb8",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        }
+      }
+    },
+    {
+      "dataset_index": 621,
+      "record_hash": "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_incorrect"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": null,
+          "transition": "both_incorrect"
+        }
+      }
+    },
+    {
+      "dataset_index": 319,
+      "record_hash": "0471a5fb79cf3d6605ae51d1dcb8e41797ab5e4fb4c93407483fe3c0340b4bc2",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": null,
+          "transition": "fixed"
+        }
+      }
+    },
+    {
+      "dataset_index": 1529,
+      "record_hash": "a8ea811f5976a405d231dd8b852d1e36411fec1b00b0e20447cf7980f7dd814f",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "CFAF",
+          "before": "CFAF",
+          "transition": "both_correct"
+        },
+        "shared_control": {
+          "after": "CFAF",
+          "before": null,
+          "transition": "fixed"
+        }
+      }
+    },
+    {
+      "dataset_index": 550,
+      "record_hash": "c97a262d9f336dfb9de36025d7f0fded54386688f171b81afa0feb4292cbb192",
+      "systems": {
+        "semantic_cfaf": {
+          "after": "FULL",
+          "before": "CFAF",
+          "transition": "fixed"
+        },
+        "shared_control": {
+          "after": "FULL",
+          "before": "FULL",
+          "transition": "both_correct"
+        }
+      }
+    }
+  ],
+  "scoring_source_identical": true,
+  "transitions": {
+    "semantic_cfaf": {
+      "both_correct": 9,
+      "both_incorrect": 3,
+      "fixed": 6,
+      "regressed": 2
+    },
+    "shared_control": {
+      "both_correct": 10,
+      "both_incorrect": 3,
+      "fixed": 6,
+      "regressed": 1
+    }
+  }
+}

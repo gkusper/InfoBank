@@ -1,0 +1,10 @@
+{
+  "task_started_at_utc": "2026-10-28T18:49:27+00:00",
+  "monotonic_start": 1208330.353849,
+  "captured_at_utc": "2026-10-28T18:50:09.364151+00:00",
+  "clock_method": "Cross-process time.monotonic on this Windows host; anchor includes initial repository/attachment read.",
+  "prioritize_report_after_seconds": 3000,
+  "stop_new_api_after_seconds": 3300,
+  "hard_deadline_after_seconds": 3600,
+  "hard_deadline_at_utc": "2026-10-28T19:49:27+00:00"
+}

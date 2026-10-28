@@ -1,0 +1,2605 @@
+{
+  "allowed_development_source_groups": [
+    "-1176280233636154422",
+    "-1373652773107850061",
+    "-1602885085222027775",
+    "-1650946015201779846",
+    "-1932118074616697613",
+    "-204697481439605710",
+    "-2382302837416986186",
+    "-2522076069840987893",
+    "-3170493396531530980",
+    "-3420681886890852721",
+    "-353209775069332597",
+    "-3655952387338820756",
+    "-3803697286581502044",
+    "-4199405438415986663",
+    "-4481086743458136206",
+    "-458159261891926107",
+    "-4621948696356225060",
+    "-4879672631592131847",
+    "-5061926765893337070",
+    "-5083423407995797659",
+    "-5519267321423308172",
+    "-6737486169677690795",
+    "-6924600758326460563",
+    "-7941948650465895222",
+    "-8359866474144720253",
+    "-9097447514182117784",
+    "-918571312056093750",
+    "1023450971555923009",
+    "1192279284143194020",
+    "1653574612763270615",
+    "1803248910342766083",
+    "2202689210581594515",
+    "2642993931001870696",
+    "3105345941697760419",
+    "3368186292408394314",
+    "4344803622779505142",
+    "4433669964771756966",
+    "4925057086725798331",
+    "5533906981191706877",
+    "5560309333336506479",
+    "5911119091653953181",
+    "6144099837933283715",
+    "6608141013475408306",
+    "6969539427365218166",
+    "7363398765815807969",
+    "7402184777947527945",
+    "7610758795954724809",
+    "7732521529054562311",
+    "7808442793714993461",
+    "8282063117132135457",
+    "8350528572960416643",
+    "8730028009751947933"
+  ],
+  "cumulative_exposed_eligible_records": 130,
+  "dataset_revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "eligible_records": 1234,
+  "entries": [
+    {
+      "dataset_index": 7,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-1176280233636154422_P-Ambiguity_HIGH_5d07a713_0182",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "769a5634060483eed86621819e36ea257cb542c98a0a016a292855e9a1bb37fc",
+      "source_group_hash": "670f6e4495bcf174bb461adf4d81abe655205030786b2414af4a55229ea32123",
+      "source_id": "-1176280233636154422"
+    },
+    {
+      "dataset_index": 199,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-1650946015201779846_P-FalsePremise_HIGH_82e2a465_0162",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "652de6bbc1542586136c7132fe6ddca033135d08e878d96ae2960800858e4b14",
+      "source_group_hash": "2cc67111a55fea178d275f043c0b60d7ea2452aeb64ff18334163119601d3aef",
+      "source_id": "-1650946015201779846"
+    },
+    {
+      "dataset_index": 279,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-1932118074616697613_P-GranularityMismatch_LOW_9ee7fafe_1209",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "1e698d6446d2cc38af0d29308b1de3f45542ceb39e7353f0bc8637b059be459d",
+      "source_group_hash": "e1fa5d79a91d6dec19c35d4ea377b0323ded1519397e63313919a377665b6cbd",
+      "source_id": "-1932118074616697613"
+    },
+    {
+      "dataset_index": 3,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-2382302837416986186_P-Ambiguity_HIGH_0dbd6c95_0483",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "cedef6c47896118b12ddac7a1174cc3c035b31f20f52e82071d532576616ed05",
+      "source_group_hash": "5d17e57ac0aadd68d1dc1298c4f52a1e8f6f59f5b1114ad7c2a2510f6f82a82c",
+      "source_id": "-2382302837416986186"
+    },
+    {
+      "dataset_index": 228,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-2382302837416986186_P-FalsePremise_LOW_93d6c7cd_0487",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "8ad71f73628e03f0101a93d076ec71163a6cb6d451e132a7af0a7fce93e0d3f4",
+      "source_group_hash": "5d17e57ac0aadd68d1dc1298c4f52a1e8f6f59f5b1114ad7c2a2510f6f82a82c",
+      "source_id": "-2382302837416986186"
+    },
+    {
+      "dataset_index": 59,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-3170493396531530980_P-Ambiguity_MEDIUM_32a8d10b_0909",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "84f273c22c56d342599e463c1cc6ace64a7652c1c755f165f2a43235f5208130",
+      "source_group_hash": "4e16e2921724cd0810f6c51ba9094f779e63a3c5c459d47d2b48b584eff7a41f",
+      "source_id": "-3170493396531530980"
+    },
+    {
+      "dataset_index": 134,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-3170493396531530980_P-EpistemicMismatch_HIGH_b8c2425f_0923",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "77fcd67854f848535aa0e18a14dd9a16b576a72183cd99c5060c67299edaebe3",
+      "source_group_hash": "4e16e2921724cd0810f6c51ba9094f779e63a3c5c459d47d2b48b584eff7a41f",
+      "source_id": "-3170493396531530980"
+    },
+    {
+      "dataset_index": 360,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-3170493396531530980_P-MissingInfo_LOW_ab95e851_0913",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "73bd5d07f816cb6ed8d050b54c86de54231a387e68972c624f753a07ff86c857",
+      "source_group_hash": "4e16e2921724cd0810f6c51ba9094f779e63a3c5c459d47d2b48b584eff7a41f",
+      "source_id": "-3170493396531530980"
+    },
+    {
+      "dataset_index": 217,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-3655952387338820756_P-FalsePremise_LOW_acb69f06_0635",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "488b1f05e13fa63e28e767babf8d0f8398e10a875eacfca0ffeaa85ab3f370d1",
+      "source_group_hash": "46e3c9af69f3468a54d61b84b3344100219d5f83cef933157f434d02fe3380a5",
+      "source_id": "-3655952387338820756"
+    },
+    {
+      "dataset_index": 46,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-4199405438415986663_P-Ambiguity_MEDIUM_8f35a931_1328",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "5d73d8e18bf3ef357250200f5f5f5ca04b1034cf02a7e1addade4a03d7d99ef9",
+      "source_group_hash": "fc43fa4028a21525f883e96089cb0d29383676fd0623e68d3e08514f79c88602",
+      "source_id": "-4199405438415986663"
+    },
+    {
+      "dataset_index": 18,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-4481086743458136206_P-Ambiguity_HIGH_67c49d98_0520",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "2d342e62d008de161fbb4af1d71cec94d622f674b004d91c1a88232de2e3a95e",
+      "source_group_hash": "c310a1334ae382b2e99bc51e47b13b2c7459aa554b338be878bd463a2e520cc0",
+      "source_id": "-4481086743458136206"
+    },
+    {
+      "dataset_index": 4,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-6924600758326460563_P-Ambiguity_HIGH_3d9b445d_0443",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "a1000da23db8ccc146bf617cfc90a4f27afbe0789d88d9fc144e2cfcfbd54bf2",
+      "source_group_hash": "0cddb77171877f819cf7d8c7c45c3d714f1e8dbfcabac37de3b3fe268eba6895",
+      "source_id": "-6924600758326460563"
+    },
+    {
+      "dataset_index": 5,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-7941948650465895222_P-Ambiguity_HIGH_cc6cb691_0416",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "2804ed7833fc778a1fb9327fbdbd50c59156efcc1e9ded087055ad2e7f9996c4",
+      "source_group_hash": "a0bca584e638a463f81404fef9f87c0ba4d6f958aef867ebafef1272f1cb6c71",
+      "source_id": "-7941948650465895222"
+    },
+    {
+      "dataset_index": 2,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_-8359866474144720253_P-Ambiguity_HIGH_8b8037bb_0073",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "caea53e538e7fb0b7b881c2bb3188bf4cadfc7bc836099884a68724c3b893cb7",
+      "source_group_hash": "2f30ece2d11682a40f853e9e777154f3707292394ce1fc704ead09720d8c5b1a",
+      "source_id": "-8359866474144720253"
+    },
+    {
+      "dataset_index": 8,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_1023450971555923009_P-Ambiguity_HIGH_d5734c53_0967",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "54b360ff3bbebbc35b996e05ce1a2aaf38f382e437155f2d3a4d351e58c766ac",
+      "source_group_hash": "f8a65bd0d1d457429789a971b4e63b3b1ea476fbc4e41dd75f0c75445837cd23",
+      "source_id": "1023450971555923009"
+    },
+    {
+      "dataset_index": 9,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_1803248910342766083_P-Ambiguity_HIGH_6a5fbb53_0168",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "ab779eeefb4e66d3a00516c4c1fe082545f076567ff6d7ef1792868252a226e9",
+      "source_group_hash": "325730505979e34d3d5512b621682edaeb9aab175fcbb8f77af43fa54b83b6c0",
+      "source_id": "1803248910342766083"
+    },
+    {
+      "dataset_index": 368,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_2202689210581594515_P-MissingInfo_MEDIUM_6b09b371_0300",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "76ead05ca1e93e61c81b65bdc96b530b5358bd6e1974c0b7f3b1c08161a76cf0",
+      "source_group_hash": "8b58750f2fcb8f3b960e7240952eb956e31b1b3fadf23a08821b92e59e7c994c",
+      "source_id": "2202689210581594515"
+    },
+    {
+      "dataset_index": 333,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_4344803622779505142_P-MissingInfo_HIGH_a6ab7141_0382",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "b7fdb1f31784aa7453a8a47cc5ae0f90d239409bb526b8ff9c0e8a2ba32fade1",
+      "source_group_hash": "158f8a8f47526c6cc05d52c4408296151beb721b25b8017222261def1e395ba6",
+      "source_id": "4344803622779505142"
+    },
+    {
+      "dataset_index": 224,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_4433669964771756966_P-FalsePremise_LOW_ac551133_1029",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "ccce67e41479a81210e03af77c81c09f77138d9f163fe45d89d3db574190c5d0",
+      "source_group_hash": "ebdc838454baf9428beaed6c6802ac1b21708f4c21e5161a83aa75fbfbede165",
+      "source_id": "4433669964771756966"
+    },
+    {
+      "dataset_index": 0,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_4925057086725798331_P-Ambiguity_HIGH_bd0591c4_1145",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "c21f54890272e27f29a3befa2f721f02d5cc07bd3c881b3f6f6c866912858647",
+      "source_group_hash": "47e5440ff6ed6812e720b79bbf661b86832cc9a7c4b55b1dc0dc736df71dea82",
+      "source_id": "4925057086725798331"
+    },
+    {
+      "dataset_index": 49,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_4925057086725798331_P-Ambiguity_MEDIUM_4bc92460_1144",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "7be15bfd188a2029cf1bfa8574d054d5402cc971d757e71d4d50dbab1747719a",
+      "source_group_hash": "47e5440ff6ed6812e720b79bbf661b86832cc9a7c4b55b1dc0dc736df71dea82",
+      "source_id": "4925057086725798331"
+    },
+    {
+      "dataset_index": 137,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_5533906981191706877_P-EpistemicMismatch_HIGH_5b9826f3_0019",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "da1b8ff8b8fe1b18fe337fdc41f937ee57d735e116550ddd8cc42d93667c320c",
+      "source_group_hash": "63d07c714f1c6acd57fdce94120b557e1dd4cef5a20aef361c387b82155b61ab",
+      "source_id": "5533906981191706877"
+    },
+    {
+      "dataset_index": 1,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_5911119091653953181_P-Ambiguity_HIGH_a7ae85a6_0196",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "ee0a43590bebf0958ed42dfc2e5d8cc68d527d3f8f1e2b1d8cb034f997e913ba",
+      "source_group_hash": "bef747989cb40c3090cbd97371a62db61d3fe90c73b892a1bd2c9ebafda7fe4b",
+      "source_id": "5911119091653953181"
+    },
+    {
+      "dataset_index": 198,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_6608141013475408306_P-FalsePremise_HIGH_419670b7_1072",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "c337f8e5260deaea11b74edf152abd64bda659959c770e1c23289b4abb410ab7",
+      "source_group_hash": "c46a5b1bb00de58429568117979f238a7a0816cc5028ef2daa934185bc2ae08e",
+      "source_id": "6608141013475408306"
+    },
+    {
+      "dataset_index": 189,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_6969539427365218166_P-FalsePremise_HIGH_de32f5b4_1223",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "2c200a9178f482ed7409b583429761ec8f2fdb1c8a5414cab2660e5ab752f025",
+      "source_group_hash": "6ab71b7aad309e8bc0bca55724d868667df151964ce375064447b952745451a2",
+      "source_id": "6969539427365218166"
+    },
+    {
+      "dataset_index": 77,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_7363398765815807969_P-Contradiction_HIGH_52be72c2_0284",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "c6bb18ef2ea2a4bd87457f253978abf80183b1c92674de9aacbd6593b77a9322",
+      "source_group_hash": "ed14c23f592b45650df98ec8abc9d971c7b0cc0308f0a5e2fa12bb290addeedf",
+      "source_id": "7363398765815807969"
+    },
+    {
+      "dataset_index": 6,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_7610758795954724809_P-Ambiguity_HIGH_0b0c28ef_0240",
+      "origins": [
+        "evaluation/refusalbench_pilot/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_pilot/dataset_provenance.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_pilot/dataset_provenance.json"
+      ],
+      "record_hash": "5b2bd86b603de147c60a4f750c8ce69ff37ee47a2cc5233426e1ba1322c34802",
+      "source_group_hash": "712477111b824e7bfde4a83b15027cdb245fbcafb27ffb5a13d06b2cbe1a0926",
+      "source_id": "7610758795954724809"
+    },
+    {
+      "dataset_index": 302,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_claude_8730028009751947933_P-GranularityMismatch_MEDIUM_6388cfeb_1299",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "c051bc375b561823c757d66cee4025098e8e788e95053687545766783f8911f6",
+      "source_group_hash": "7012e5e57d295301f777610fee65654ab9779d3fe918fd3a4c76a0601cfe55bd",
+      "source_id": "8730028009751947933"
+    },
+    {
+      "dataset_index": 727,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-1602885085222027775_P-MissingInfo_HIGH_ebf5b4c3_1535",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "a726cea63d7c63f614a27a5d78c4bd32e111cbbd7a11e13c34c21c6d8e4ebaf2",
+      "source_group_hash": "28ff2512dbcb04095e53b0539e1ba591dda4947b6d57e12dc3d035a27ad68af2",
+      "source_id": "-1602885085222027775"
+    },
+    {
+      "dataset_index": 759,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-1932118074616697613_P-MissingInfo_LOW_1c51d1cc_2138",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "151801b983ab42bd6fdacf4cbb4d661f67bac3c889333bcd199ad2a939bbf363",
+      "source_group_hash": "e1fa5d79a91d6dec19c35d4ea377b0323ded1519397e63313919a377665b6cbd",
+      "source_id": "-1932118074616697613"
+    },
+    {
+      "dataset_index": 715,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-3420681886890852721_P-GranularityMismatch_MEDIUM_c8a666b7_1994",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "9801acdf17ca51bfb117aebfbd4fe2b1d3fe0d3eb43e784bf2d9276057a3bfcc",
+      "source_group_hash": "593d2f7555acb2ca2fc38b7582b56dc9620f7195c8685863beda74c85243d187",
+      "source_id": "-3420681886890852721"
+    },
+    {
+      "dataset_index": 680,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-4621948696356225060_P-GranularityMismatch_LOW_40ebb780_1403",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "e7c63d3a77d5b11a81670fe3ad46cb87f9862e078fa8542a882ca0ad072a4813",
+      "source_group_hash": "61c9cbd7539e1932dccf55ceaa8941b1a5e91fbeadb605348deebe9f79faddde",
+      "source_id": "-4621948696356225060"
+    },
+    {
+      "dataset_index": 476,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-4879672631592131847_P-Contradiction_HIGH_3fa7b010_1789",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "a01ebf60ae1d052ae3235804c83db9c51ca1e7ae8bc97ceb5cb0b74eddd8bc04",
+      "source_group_hash": "a1500bb4cdf963794c8b8126362b1ecc9a4ce0d82b71d869c0702271b2b5e598",
+      "source_id": "-4879672631592131847"
+    },
+    {
+      "dataset_index": 747,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-4879672631592131847_P-MissingInfo_LOW_b5eda8fb_1790",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "ec61d231e18943d991537160d8db1f47ca37cf9f1dd3a05a96f2d32fafffd97e",
+      "source_group_hash": "a1500bb4cdf963794c8b8126362b1ecc9a4ce0d82b71d869c0702271b2b5e598",
+      "source_id": "-4879672631592131847"
+    },
+    {
+      "dataset_index": 455,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-5519267321423308172_P-Ambiguity_MEDIUM_7fa332ca_1854",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "4685a79e428f63bbc03677dd328b0d96c6bf971d2ad853355d42294e9c3fa163",
+      "source_group_hash": "585e817c5b601533b179777708549aa3758cd9f1e693bda138d97153a4681764",
+      "source_id": "-5519267321423308172"
+    },
+    {
+      "dataset_index": 768,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_-5519267321423308172_P-MissingInfo_MEDIUM_d21a3af8_1859",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "fb92a406947b1ed16272ae750f5db0ee9db8dee984004d2d2fb40af1b4ce7871",
+      "source_group_hash": "585e817c5b601533b179777708549aa3758cd9f1e693bda138d97153a4681764",
+      "source_id": "-5519267321423308172"
+    },
+    {
+      "dataset_index": 682,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_2202689210581594515_P-GranularityMismatch_LOW_13279f91_1570",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "5ecd76e1dedd64e89675eeeddea2fe6277b91c2e2d19c9f9c0793aea2cacbad5",
+      "source_group_hash": "8b58750f2fcb8f3b960e7240952eb956e31b1b3fadf23a08821b92e59e7c994c",
+      "source_id": "2202689210581594515"
+    },
+    {
+      "dataset_index": 667,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_3105345941697760419_P-GranularityMismatch_HIGH_be6088ed_1743",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "d9170a3ebc51842d3868bf80d1b489671506628c9ba040d82c108109d650e66b",
+      "source_group_hash": "db66479616fe9ec5fef4df4fe5061addf6a4611ced869a28eed8787bde7d2308",
+      "source_id": "3105345941697760419"
+    },
+    {
+      "dataset_index": 691,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_4344803622779505142_P-GranularityMismatch_LOW_3cba8a1b_1616",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "4e13cf7356a4bd671cb18a01cfe3566019df1ea7f33f3de2e9b16219fdbc2fe4",
+      "source_group_hash": "158f8a8f47526c6cc05d52c4408296151beb721b25b8017222261def1e395ba6",
+      "source_id": "4344803622779505142"
+    },
+    {
+      "dataset_index": 647,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_5533906981191706877_P-FalsePremise_MEDIUM_73c9718b_1375",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "91d38bc2331ac87867166f277708d3fbfa3ca88dca23d9c070852d3e2a722004",
+      "source_group_hash": "63d07c714f1c6acd57fdce94120b557e1dd4cef5a20aef361c387b82155b61ab",
+      "source_id": "5533906981191706877"
+    },
+    {
+      "dataset_index": 639,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_5560309333336506479_P-FalsePremise_MEDIUM_27936d3e_1669",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "651c4fe8123ae7d402c46f81dfaf5c4573af043b30a1a60d4ae035184698293c",
+      "source_group_hash": "9087cf504fa73eb7c52518a029485637c89e26adf5d3264f69f096e277860f50",
+      "source_id": "5560309333336506479"
+    },
+    {
+      "dataset_index": 693,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_6144099837933283715_P-GranularityMismatch_LOW_1b0bebf4_1391",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "f32b9ccaf8796c95064894e5b8471bdbfd855319efc4c356c90e7c790b6bd0f0",
+      "source_group_hash": "1b2fe5b0f8fa331f85ce5a136c108d94bbd035cff5b946598d3d412d1b7f5179",
+      "source_id": "6144099837933283715"
+    },
+    {
+      "dataset_index": 468,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_deepseek_8730028009751947933_P-Contradiction_HIGH_24f29ef2_2187",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "dd8d5b4eb0504ff4e174b56f36c016ffbd486ea40d40bd03cfe18b792ca7ba2b",
+      "source_group_hash": "7012e5e57d295301f777610fee65654ab9779d3fe918fd3a4c76a0601cfe55bd",
+      "source_id": "8730028009751947933"
+    },
+    {
+      "dataset_index": 1142,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-1176280233636154422_P-MissingInfo_LOW_819fadb5_2423",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "40d514316c3c4856dc31d5570ac228e930b12a8c8d0f76fb286e9e03f06bab4f",
+      "source_group_hash": "670f6e4495bcf174bb461adf4d81abe655205030786b2414af4a55229ea32123",
+      "source_id": "-1176280233636154422"
+    },
+    {
+      "dataset_index": 871,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-1373652773107850061_P-Contradiction_HIGH_5d836c06_3170",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "bf145e4e43d8f786fb4e6f00db8480cdac79ae578c716e4bffa2d566122fbaf2",
+      "source_group_hash": "932eba002778d33441f91d185365ac3a3a5d4ee0a8d7845579e60b7afde934d9",
+      "source_id": "-1373652773107850061"
+    },
+    {
+      "dataset_index": 997,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-2522076069840987893_P-FalsePremise_HIGH_b3aa19dc_3044",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "a5824e47d0759c5bec01b8316b01656fb7cbece6375d946c56b0dcf5caae3a7b",
+      "source_group_hash": "2b5793f6a837f7fb1d1d1d6ffaa732e83a4f676959dcb1dd639dfc70cc88308e",
+      "source_id": "-2522076069840987893"
+    },
+    {
+      "dataset_index": 1008,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-2522076069840987893_P-FalsePremise_LOW_61ce264c_3042",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "27191739c633760bf943b5933dd6d6b77598be07aca96ae8e4dc3e4779abeab1",
+      "source_group_hash": "2b5793f6a837f7fb1d1d1d6ffaa732e83a4f676959dcb1dd639dfc70cc88308e",
+      "source_id": "-2522076069840987893"
+    },
+    {
+      "dataset_index": 937,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-3420681886890852721_P-EpistemicMismatch_HIGH_b9d989eb_3208",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "f5335cbe3136fcfa7c1842bb0a9b6ad712419e1cad194d09291c4fa86bbea20a",
+      "source_group_hash": "593d2f7555acb2ca2fc38b7582b56dc9620f7195c8685863beda74c85243d187",
+      "source_id": "-3420681886890852721"
+    },
+    {
+      "dataset_index": 843,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-353209775069332597_P-Ambiguity_MEDIUM_05ad5cc9_2997",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "731a7ea7570243d8ba8d35444ee26265805be7cecb7596de671edd620751d8c9",
+      "source_group_hash": "ab4b006d3f4228385fd67b0c5cdeeee9ac1db9ddddef72acac46b24409a2a8e9",
+      "source_id": "-353209775069332597"
+    },
+    {
+      "dataset_index": 935,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-353209775069332597_P-EpistemicMismatch_HIGH_7f6fcc89_3008",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "08063e46816bfefa541dceb15b62ed8544d58f5e22fab36aa878d70d9eb2e94c",
+      "source_group_hash": "ab4b006d3f4228385fd67b0c5cdeeee9ac1db9ddddef72acac46b24409a2a8e9",
+      "source_id": "-353209775069332597"
+    },
+    {
+      "dataset_index": 1065,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-3655952387338820756_P-GranularityMismatch_HIGH_9cb4ef3d_2869",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "c21ff6b0650e5b87be3655162df2340b748e86ee2224839b3a20d442f2bd80e5",
+      "source_group_hash": "46e3c9af69f3468a54d61b84b3344100219d5f83cef933157f434d02fe3380a5",
+      "source_id": "-3655952387338820756"
+    },
+    {
+      "dataset_index": 865,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-3803697286581502044_P-Contradiction_HIGH_e0e33754_3252",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "dfe0d60f4d6e6334d8183d129c83335558fe0b91a98f4adfdf3b727d69ec4713",
+      "source_group_hash": "fad6f2103650a361574f8f9c2316d629c308f4c6609d57e756f15fbd7e47ec0e",
+      "source_id": "-3803697286581502044"
+    },
+    {
+      "dataset_index": 1152,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-4481086743458136206_P-MissingInfo_LOW_683700c1_2755",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "fa3c38c664329b70c3818bb1f534f90e8a22474b4f9f1a8182ffadcb6220de67",
+      "source_group_hash": "c310a1334ae382b2e99bc51e47b13b2c7459aa554b338be878bd463a2e520cc0",
+      "source_id": "-4481086743458136206"
+    },
+    {
+      "dataset_index": 1125,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-458159261891926107_P-MissingInfo_HIGH_388a38ba_2837",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "47e0f6aefc7e9ca820e8584b2a12a31f80e38afc76ba68514dacba9b2631548c",
+      "source_group_hash": "132b251dfa1949ca3b0e5857cbf2e25f7e95fd43e6ada9e30b04e8f13264135f",
+      "source_id": "-458159261891926107"
+    },
+    {
+      "dataset_index": 1128,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-4621948696356225060_P-MissingInfo_HIGH_e18263b2_2296",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "106c8ccf5329f3186c3ad18eec55ee9429d57085d6d8260b711855e109574f4c",
+      "source_group_hash": "61c9cbd7539e1932dccf55ceaa8941b1a5e91fbeadb605348deebe9f79faddde",
+      "source_id": "-4621948696356225060"
+    },
+    {
+      "dataset_index": 836,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-5061926765893337070_P-Ambiguity_MEDIUM_d8316601_3062",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "1387a1ba344b08e7b4ecf1a1f89dd970069e0bf0c18c3466b2c544700c4eff35",
+      "source_group_hash": "acdf316a9a8e380e80a75d7b2ea514abea144d676e06f5973a794f76b2f577e1",
+      "source_id": "-5061926765893337070"
+    },
+    {
+      "dataset_index": 990,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_-918571312056093750_P-FalsePremise_HIGH_d5103b78_3506",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "5d7d6e410a4861b7f38db046f14bbc6883ffce59c3f80a852ac8d7dbb32eff28",
+      "source_group_hash": "a0800ac7e9b8b9c14a98558626ee869d81a721a00bacd800e22bc9dec2fd88fa",
+      "source_id": "-918571312056093750"
+    },
+    {
+      "dataset_index": 1051,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_1192279284143194020_P-GranularityMismatch_HIGH_ea2bac27_3124",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "d81a28359cf858c0e6a1b49598e27d9998f7a052c2f8ecefad750ec86064c78e",
+      "source_group_hash": "c1a969818581351f399c73bfe6be064cdb8b9465a54b00914ad785fba0a17d97",
+      "source_id": "1192279284143194020"
+    },
+    {
+      "dataset_index": 979,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_1653574612763270615_P-EpistemicMismatch_MEDIUM_db211d9c_3549",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "3a1efc878535080dde958b0a987601b7078987d906a378dc06e4c35d68d00bf3",
+      "source_group_hash": "0c214acfa4f3835287f11a2daf8ffd499da2afc0aa0e8e05072dbd8b2fafe1a4",
+      "source_id": "1653574612763270615"
+    },
+    {
+      "dataset_index": 925,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_6144099837933283715_P-EpistemicMismatch_HIGH_070dfbaa_2292",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "13f555f49f956f3dd1c62a7c4ecbf840e91f1b734ac031b0cbe3a268f53eef94",
+      "source_group_hash": "1b2fe5b0f8fa331f85ce5a136c108d94bbd035cff5b946598d3d412d1b7f5179",
+      "source_id": "6144099837933283715"
+    },
+    {
+      "dataset_index": 910,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_7808442793714993461_P-Contradiction_MEDIUM_1ccc24fd_2660",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "7e89eafb8ca584360cf74c3862210a96bd819a8718586a3e7f36639e765bc742",
+      "source_group_hash": "d8b15605c412f0ebe4e2eb085435cf709f6e38dfe21fcc80e2cc536c9633ca8e",
+      "source_id": "7808442793714993461"
+    },
+    {
+      "dataset_index": 847,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_8282063117132135457_P-Ambiguity_MEDIUM_1cb1afe9_2543",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "697661cfae62e2b6da0ba65dbf43366506df344f5c5dccd6e64ea8374a47882e",
+      "source_group_hash": "695319449a926007dc884bbd4e7bc02dc97d575a893764bf4cd68d3106714128",
+      "source_id": "8282063117132135457"
+    },
+    {
+      "dataset_index": 873,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_gpt_8282063117132135457_P-Contradiction_LOW_4851f33a_2544",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "4a5cad09376e1dc5bbd9c65bedc92d5499ff03d2f9489fae841cfd7f4eb25c0b",
+      "source_group_hash": "695319449a926007dc884bbd4e7bc02dc97d575a893764bf4cd68d3106714128",
+      "source_id": "8282063117132135457"
+    },
+    {
+      "dataset_index": 1375,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-204697481439605710_P-EpistemicMismatch_MEDIUM_05f868be_4323",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "6f845ee8291433d55191953962a3c466b25a32ee73d671f10baf7516d69e38d7",
+      "source_group_hash": "c7a848af9cbd6751b90f821a77981945f041f263224b8039d58e25a75a84f2d5",
+      "source_id": "-204697481439605710"
+    },
+    {
+      "dataset_index": 1495,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-204697481439605710_P-GranularityMismatch_MEDIUM_454fbe6f_4321",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "f95fadaef8ed5678728575a7ac3899a3f251a23be2d3889a2482cfc35f1e787d",
+      "source_group_hash": "c7a848af9cbd6751b90f821a77981945f041f263224b8039d58e25a75a84f2d5",
+      "source_id": "-204697481439605710"
+    },
+    {
+      "dataset_index": 1260,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-2522076069840987893_P-Contradiction_HIGH_5a493bd5_4174",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "aad448a674bfbb223a9dbbbd1031ae48f2f9374c44e5742f49bbb10c910c85a2",
+      "source_group_hash": "2b5793f6a837f7fb1d1d1d6ffaa732e83a4f676959dcb1dd639dfc70cc88308e",
+      "source_id": "-2522076069840987893"
+    },
+    {
+      "dataset_index": 1452,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-4199405438415986663_P-GranularityMismatch_HIGH_d4204ca4_4555",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "02aea551cb5ff7d8ac11a4f49bda0c9a979e54650a0e76d2f4ebe9175512d2b8",
+      "source_group_hash": "fc43fa4028a21525f883e96089cb0d29383676fd0623e68d3e08514f79c88602",
+      "source_id": "-4199405438415986663"
+    },
+    {
+      "dataset_index": 1350,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-5083423407995797659_P-EpistemicMismatch_LOW_156e5d84_4169",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "5a1043de445ee2774221d0158715b43f2ea02b4806f518f467e3cd4880e8c271",
+      "source_group_hash": "20001ecbdcbcaa6ff258f3b9a303a10aaaba1fbb0cfaececa9eaf3654e5d442b",
+      "source_id": "-5083423407995797659"
+    },
+    {
+      "dataset_index": 1594,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-5083423407995797659_P-MissingInfo_HIGH_c61bb12a_4163",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "cf54133638ac12a44a001a2a80e9d9350dbce12ac89ef21830a0b988576e6389",
+      "source_group_hash": "20001ecbdcbcaa6ff258f3b9a303a10aaaba1fbb0cfaececa9eaf3654e5d442b",
+      "source_id": "-5083423407995797659"
+    },
+    {
+      "dataset_index": 1483,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-6737486169677690795_P-GranularityMismatch_LOW_adc746b2_4310",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "661ad4a5061d01868cc20129368b6c7445b4fd973b412a883412a45a01d33ff1",
+      "source_group_hash": "88929af592f55c6f6ea7a34907ca4a90fc6f6e5fe88deac932ed4696514380cb",
+      "source_id": "-6737486169677690795"
+    },
+    {
+      "dataset_index": 1501,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-6737486169677690795_P-GranularityMismatch_MEDIUM_f95b19e2_4311",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "7997bbd0b0f6a41a0bc0afd291459abd0ce09c96dbce253cbf07a65cbc2033d9",
+      "source_group_hash": "88929af592f55c6f6ea7a34907ca4a90fc6f6e5fe88deac932ed4696514380cb",
+      "source_id": "-6737486169677690795"
+    },
+    {
+      "dataset_index": 1422,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-9097447514182117784_P-FalsePremise_LOW_7b400606_4103",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "43ca0f36a6f8966b645de47c98728f74b8bc218e21125cdde25a06e6da67e698",
+      "source_group_hash": "2da7d9dafa9a9046b604bac48d79292b5f7bec25dbed7c877a37a3924d2d5065",
+      "source_id": "-9097447514182117784"
+    },
+    {
+      "dataset_index": 1589,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_-918571312056093750_P-EpistemicMismatch_HIGH_20b18f2f_4539",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "e93d544da092fc1b0ce3394b13cc09f1e7e62209b741e319f2ae3ed5717b5d1d",
+      "source_group_hash": "a0800ac7e9b8b9c14a98558626ee869d81a721a00bacd800e22bc9dec2fd88fa",
+      "source_id": "-918571312056093750"
+    },
+    {
+      "dataset_index": 1371,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_1192279284143194020_P-EpistemicMismatch_MEDIUM_e793e512_4239",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "8e2f6ebfa5de0e0748ed2372fa05903e4f791d9d6b74d4c997e6f924a291fa73",
+      "source_group_hash": "c1a969818581351f399c73bfe6be064cdb8b9465a54b00914ad785fba0a17d97",
+      "source_id": "1192279284143194020"
+    },
+    {
+      "dataset_index": 1590,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_2642993931001870696_P-GranularityMismatch_HIGH_b37b7189_3984",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "b37c1c3cab550ea71bbaf020cd840498e561a6a2b70625e0d0f0692d54faed92",
+      "source_group_hash": "2267cb933404a6c7cbafa721612a3d76d706525c45853ba1cd36ab879ded7f87",
+      "source_id": "2642993931001870696"
+    },
+    {
+      "dataset_index": 1447,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_3368186292408394314_P-FalsePremise_MEDIUM_c8359c47_4413",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "9d6f38643f13b85ba4df2624c410c2ba30900a5d6e4b67c57288a3b787548c64",
+      "source_group_hash": "233092f9e572e54baab74db063c6ad2bdaa1f26a90ff1ee548c833fdc2647f96",
+      "source_id": "3368186292408394314"
+    },
+    {
+      "dataset_index": 1356,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_5560309333336506479_P-EpistemicMismatch_LOW_c4bf9d0c_3916",
+      "origins": [
+        "evaluation/refusalbench_span_fix_v1/cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_span_fix_v1/selection_manifest.json"
+      ],
+      "record_hash": "e55ac67631deff134fdc5b651a19a5a87af384a124b58424c3c006bda1d1de69",
+      "source_group_hash": "9087cf504fa73eb7c52518a029485637c89e26adf5d3264f69f096e277860f50",
+      "source_id": "5560309333336506479"
+    },
+    {
+      "dataset_index": 1439,
+      "eligible": false,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_5560309333336506479_P-FalsePremise_MEDIUM_335f06fd_3913",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "73fe4a517f06f62e9ae808ac3dc4e793a6f87e697381c8b4ded6abc60e6fa7eb",
+      "source_group_hash": "9087cf504fa73eb7c52518a029485637c89e26adf5d3264f69f096e277860f50",
+      "source_id": "5560309333336506479"
+    },
+    {
+      "dataset_index": 1206,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_7363398765815807969_P-Ambiguity_HIGH_6ef40407_3773",
+      "origins": [
+        "evaluation/refusalbench_noncontradiction_v1/selected_cases.jsonl",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json"
+      ],
+      "record_hash": "46f3c0ae927edfe379e14ab7ac8fb06cfb3389bd58467a5c7cfb8ab48d3c367e",
+      "source_group_hash": "ed14c23f592b45650df98ec8abc9d971c7b0cc0308f0a5e2fa12bb290addeedf",
+      "source_id": "7363398765815807969"
+    },
+    {
+      "dataset_index": 1427,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_7402184777947527945_P-FalsePremise_LOW_7f4a0596_3736",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "22b75a8235c7830f3231f6d418e7719417d96b7b366ee93a2d50c63d4617fd1a",
+      "source_group_hash": "bee99491553510ddf4422fceeadd9f57cd59b6658b6855d0f8c386887b2b13c1",
+      "source_id": "7402184777947527945"
+    },
+    {
+      "dataset_index": 1537,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_7732521529054562311_P-MissingInfo_HIGH_e1c406d1_3821",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "eb6d405b0dbe85608388e62f77fe4c0a9c638bed1212194a012d151618fc1d1b",
+      "source_group_hash": "dc2df9fe055f2142d6b28699960343199a06ee66a975f985814773390d9bee4e",
+      "source_id": "7732521529054562311"
+    },
+    {
+      "dataset_index": 1416,
+      "eligible": true,
+      "first_exposure": "prior_experiment",
+      "id": "RB-NQ_nova_8350528572960416643_P-FalsePremise_LOW_ff4feeaa_4258",
+      "origins": [
+        "evaluation/refusalbench_semantic_dev/development_cases.jsonl",
+        "experiment/cfaf-span-ref-fix-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-integration-v2:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/infobank-semantic-regression-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-iterative-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-noncontradiction-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json",
+        "experiment/refusalbench-semantic-dev-v1:evaluation/refusalbench_semantic_dev/selection_manifest.json"
+      ],
+      "record_hash": "3613975bbe0e2a11490d5539dd792145f9839dacd13cd7bfd5a827bf040d17f6",
+      "source_group_hash": "de1a00e0fd2eedd955e432ec8ce16a2778e6d6dd0c8b3b0a73e37592dc92d955",
+      "source_id": "8350528572960416643"
+    },
+    {
+      "dataset_index": 631,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_deepseek_6144099837933283715_P-FalsePremise_LOW_a63831bd_1390",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "a01105f5f919e2e72826e52fc9c5add71e70aa09ba8bff56a417bc55763a7c5e",
+      "source_group_hash": "1b2fe5b0f8fa331f85ce5a136c108d94bbd035cff5b946598d3d412d1b7f5179",
+      "source_id": "6144099837933283715"
+    },
+    {
+      "dataset_index": 251,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_claude_-7941948650465895222_P-FalsePremise_MEDIUM_05176e22_0424",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "3371b2528ab2d0247d5c12ad97c8110382604b8db23a4ce1043bed2522296fde",
+      "source_group_hash": "a0bca584e638a463f81404fef9f87c0ba4d6f958aef867ebafef1272f1cb6c71",
+      "source_id": "-7941948650465895222"
+    },
+    {
+      "dataset_index": 1320,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_nova_-1176280233636154422_P-EpistemicMismatch_HIGH_8501b633_3706",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "1fdfd8e30114564b28b64c4a90c7b37479b07a1f58b68088dd4a7696bbe8afd4",
+      "source_group_hash": "670f6e4495bcf174bb461adf4d81abe655205030786b2414af4a55229ea32123",
+      "source_id": "-1176280233636154422"
+    },
+    {
+      "dataset_index": 694,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_deepseek_-2382302837416986186_P-GranularityMismatch_LOW_62feb06a_1677",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "b36c1f06cc307ac35872a7d4ffb7168edcf10f452ff662bfbbcae14d8525bb11",
+      "source_group_hash": "5d17e57ac0aadd68d1dc1298c4f52a1e8f6f59f5b1114ad7c2a2510f6f82a82c",
+      "source_id": "-2382302837416986186"
+    },
+    {
+      "dataset_index": 1149,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_gpt_-4621948696356225060_P-MissingInfo_LOW_3dc1d37a_2294",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "b24c6e9eb3de76149f39b27cf2d83d38983de4103b3d1a132610235d98af0835",
+      "source_group_hash": "61c9cbd7539e1932dccf55ceaa8941b1a5e91fbeadb605348deebe9f79faddde",
+      "source_id": "-4621948696356225060"
+    },
+    {
+      "dataset_index": 1236,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_nova_1023450971555923009_P-Ambiguity_MEDIUM_7d995cd8_4282",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "5796a2ee0d676df8818dbd6638c88bea0bcc7657d095f6de80237aee2afac026",
+      "source_group_hash": "f8a65bd0d1d457429789a971b4e63b3b1ea476fbc4e41dd75f0c75445837cd23",
+      "source_id": "1023450971555923009"
+    },
+    {
+      "dataset_index": 1408,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_nova_-6737486169677690795_P-FalsePremise_LOW_def73b25_4309",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "114d417c99c7849caa38834a25d9188aae87275cf639c987325e91c9b688e67d",
+      "source_group_hash": "88929af592f55c6f6ea7a34907ca4a90fc6f6e5fe88deac932ed4696514380cb",
+      "source_id": "-6737486169677690795"
+    },
+    {
+      "dataset_index": 135,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_claude_7808442793714993461_P-EpistemicMismatch_HIGH_ff235058_0440",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "08c5e731c82951c458c904799558683960034590f4f5b7d6d07ed54012c400b1",
+      "source_group_hash": "d8b15605c412f0ebe4e2eb085435cf709f6e38dfe21fcc80e2cc536c9633ca8e",
+      "source_id": "7808442793714993461"
+    },
+    {
+      "dataset_index": 1112,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_gpt_-6924600758326460563_P-GranularityMismatch_MEDIUM_bfee04e4_2678",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "20a0dd6385fb803c9bac883a30e7770aee14562781d40a553bd5ae82fb3d5fab",
+      "source_group_hash": "0cddb77171877f819cf7d8c7c45c3d714f1e8dbfcabac37de3b3fe268eba6895",
+      "source_id": "-6924600758326460563"
+    },
+    {
+      "dataset_index": 28,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_claude_-4879672631592131847_P-Ambiguity_LOW_608d189d_0643",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "abec95bcfd854c3f93f51876e4a4d23cf83c26de54cb3f424e1d45bb4e03ad02",
+      "source_group_hash": "a1500bb4cdf963794c8b8126362b1ecc9a4ce0d82b71d869c0702271b2b5e598",
+      "source_id": "-4879672631592131847"
+    },
+    {
+      "dataset_index": 1477,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_nova_-1932118074616697613_P-GranularityMismatch_LOW_2d6287bb_4469",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "57f57f7a892abe953eda916a2b53b66de88885a4848413d904b07b4badb1b125",
+      "source_group_hash": "e1fa5d79a91d6dec19c35d4ea377b0323ded1519397e63313919a377665b6cbd",
+      "source_id": "-1932118074616697613"
+    },
+    {
+      "dataset_index": 848,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_gpt_7732521529054562311_P-Ambiguity_MEDIUM_bb58e7d4_2574",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "befa23ff9bf25b0ba12a31bce4e47f1a2dc3586f80b767f195dd76ed34f0a039",
+      "source_group_hash": "dc2df9fe055f2142d6b28699960343199a06ee66a975f985814773390d9bee4e",
+      "source_id": "7732521529054562311"
+    },
+    {
+      "dataset_index": 828,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_gpt_-5083423407995797659_P-Ambiguity_LOW_17520953_3023",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+      "source_group_hash": "20001ecbdcbcaa6ff258f3b9a303a10aaaba1fbb0cfaececa9eaf3654e5d442b",
+      "source_id": "-5083423407995797659"
+    },
+    {
+      "dataset_index": 1041,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_gpt_-204697481439605710_P-FalsePremise_MEDIUM_04178582_3229",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "0409145933a7d8ff5ef5b5466ddbee32e5a06a9205f079ba2a4e2f9c19eedb4f",
+      "source_group_hash": "c7a848af9cbd6751b90f821a77981945f041f263224b8039d58e25a75a84f2d5",
+      "source_id": "-204697481439605710"
+    },
+    {
+      "dataset_index": 1234,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_nova_-353209775069332597_P-Ambiguity_LOW_1baaf6bc_4144",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "490d1a133457a00a977541c716d4043b0a4ecc7674e87ec501bffabe9b6f034a",
+      "source_group_hash": "ab4b006d3f4228385fd67b0c5cdeeee9ac1db9ddddef72acac46b24409a2a8e9",
+      "source_id": "-353209775069332597"
+    },
+    {
+      "dataset_index": 312,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_claude_6608141013475408306_P-GranularityMismatch_MEDIUM_ff498a26_1074",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "a7086ebad8c79250dfd480ef74fa6f501176b210389b6495a7ced93212454bb8",
+      "source_group_hash": "c46a5b1bb00de58429568117979f238a7a0816cc5028ef2daa934185bc2ae08e",
+      "source_id": "6608141013475408306"
+    },
+    {
+      "dataset_index": 621,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_deepseek_-4481086743458136206_P-FalsePremise_LOW_d611f4da_1704",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+      "source_group_hash": "c310a1334ae382b2e99bc51e47b13b2c7459aa554b338be878bd463a2e520cc0",
+      "source_id": "-4481086743458136206"
+    },
+    {
+      "dataset_index": 319,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_claude_7402184777947527945_P-MissingInfo_HIGH_74bc9b92_0230",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "0471a5fb79cf3d6605ae51d1dcb8e41797ab5e4fb4c93407483fe3c0340b4bc2",
+      "source_group_hash": "bee99491553510ddf4422fceeadd9f57cd59b6658b6855d0f8c386887b2b13c1",
+      "source_id": "7402184777947527945"
+    },
+    {
+      "dataset_index": 1529,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_nova_-3803697286581502044_P-MissingInfo_HIGH_29cd91f0_4341",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "a8ea811f5976a405d231dd8b852d1e36411fec1b00b0e20447cf7980f7dd814f",
+      "source_group_hash": "fad6f2103650a361574f8f9c2316d629c308f4c6609d57e756f15fbd7e47ec0e",
+      "source_id": "-3803697286581502044"
+    },
+    {
+      "dataset_index": 550,
+      "eligible": true,
+      "first_exposure": "round_01",
+      "id": "RB-NQ_deepseek_-3170493396531530980_P-EpistemicMismatch_LOW_527f3825_1950",
+      "origins": [
+        "round_01/selection_manifest.json"
+      ],
+      "record_hash": "c97a262d9f336dfb9de36025d7f0fded54386688f171b81afa0feb4292cbb192",
+      "source_group_hash": "4e16e2921724cd0810f6c51ba9094f779e63a3c5c459d47d2b48b584eff7a41f",
+      "source_id": "-3170493396531530980"
+    },
+    {
+      "dataset_index": 274,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_claude_-918571312056093750_P-GranularityMismatch_LOW_a04d0028_1309",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "d5d0d89bcc3870bdc48fedd7295bd3fda5807b106173d5da2593c8be9ad08942",
+      "source_group_hash": "a0800ac7e9b8b9c14a98558626ee869d81a721a00bacd800e22bc9dec2fd88fa",
+      "source_id": "-918571312056093750"
+    },
+    {
+      "dataset_index": 1200,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_nova_7402184777947527945_P-Ambiguity_HIGH_0bbb96e1_3731",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "10c460df8fb823cfb23f1eb31340d7b7fe16aa6863dc95be9ba6eedc65959b80",
+      "source_group_hash": "bee99491553510ddf4422fceeadd9f57cd59b6658b6855d0f8c386887b2b13c1",
+      "source_id": "7402184777947527945"
+    },
+    {
+      "dataset_index": 964,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_-4621948696356225060_P-EpistemicMismatch_MEDIUM_88870fb2_2301",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "627aea4a93000f8562b644bc110888e6f596ddd691f56f2c828b0cc8240eb59a",
+      "source_group_hash": "61c9cbd7539e1932dccf55ceaa8941b1a5e91fbeadb605348deebe9f79faddde",
+      "source_id": "-4621948696356225060"
+    },
+    {
+      "dataset_index": 982,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_-5061926765893337070_P-FalsePremise_HIGH_306da358_3071",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "a13650b061a18f3e2c728e4e9b89e92ee12b14e22cf1416dde1bbc801bf8a289",
+      "source_group_hash": "acdf316a9a8e380e80a75d7b2ea514abea144d676e06f5973a794f76b2f577e1",
+      "source_id": "-5061926765893337070"
+    },
+    {
+      "dataset_index": 1344,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_nova_1023450971555923009_P-EpistemicMismatch_LOW_1c64328d_4293",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "4b350ed96dd3636a2b0f21638a85578aa30a0a1f770bf8e24ebacd20364625ce",
+      "source_group_hash": "f8a65bd0d1d457429789a971b4e63b3b1ea476fbc4e41dd75f0c75445837cd23",
+      "source_id": "1023450971555923009"
+    },
+    {
+      "dataset_index": 339,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_claude_2642993931001870696_P-MissingInfo_HIGH_bf645558_0563",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "a87e469abc142b0f681a1a7fecdecaf2d2a2a647ea8470a639345f0148c22615",
+      "source_group_hash": "2267cb933404a6c7cbafa721612a3d76d706525c45853ba1cd36ab879ded7f87",
+      "source_id": "2642993931001870696"
+    },
+    {
+      "dataset_index": 1089,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_8350528572960416643_P-GranularityMismatch_LOW_cd5fc8b9_3150",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "984330b6e80d7acfe4ab84c4c56c64668be7b976ca43893a850b284a8cfb120d",
+      "source_group_hash": "de1a00e0fd2eedd955e432ec8ce16a2778e6d6dd0c8b3b0a73e37592dc92d955",
+      "source_id": "8350528572960416643"
+    },
+    {
+      "dataset_index": 60,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_claude_1192279284143194020_P-Ambiguity_MEDIUM_0966cd40_0897",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "c8460616efd34eda5b929e0ea62c7f9e31765b88a54eb3436b931b23e68090ce",
+      "source_group_hash": "c1a969818581351f399c73bfe6be064cdb8b9465a54b00914ad785fba0a17d97",
+      "source_id": "1192279284143194020"
+    },
+    {
+      "dataset_index": 1500,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_nova_-5083423407995797659_P-GranularityMismatch_MEDIUM_4fd5c117_4167",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "68189b95b7895abdef9683450668518d4945ba303fbb3f1aa54d11035081b8f0",
+      "source_group_hash": "20001ecbdcbcaa6ff258f3b9a303a10aaaba1fbb0cfaececa9eaf3654e5d442b",
+      "source_id": "-5083423407995797659"
+    },
+    {
+      "dataset_index": 1493,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_nova_5560309333336506479_P-GranularityMismatch_LOW_6b2292c9_3914",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "fb6a983906882268dab0c7aa2a3ab4b667e3418487ae92300dab9f1f07b90ff4",
+      "source_group_hash": "9087cf504fa73eb7c52518a029485637c89e26adf5d3264f69f096e277860f50",
+      "source_id": "5560309333336506479"
+    },
+    {
+      "dataset_index": 396,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_claude_-1602885085222027775_P-Ambiguity_LOW_b1830c04_0254",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "ebfe3ac4142b9fc53b31d8b82c40f8308c47bb2dfba77297a3687ced3caffb69",
+      "source_group_hash": "28ff2512dbcb04095e53b0539e1ba591dda4947b6d57e12dc3d035a27ad68af2",
+      "source_id": "-1602885085222027775"
+    },
+    {
+      "dataset_index": 995,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_-3420681886890852721_P-FalsePremise_HIGH_67955082_3203",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "2990d8f41cf35559a22f9abc602bb542177527f14d023a0341bb6dc2b20f9a4f",
+      "source_group_hash": "593d2f7555acb2ca2fc38b7582b56dc9620f7195c8685863beda74c85243d187",
+      "source_id": "-3420681886890852721"
+    },
+    {
+      "dataset_index": 1076,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_1803248910342766083_P-GranularityMismatch_LOW_fd388fee_2415",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "69ea6e4ac2dd46acd9947d078834518ed5e2994ff7ab62b7184db433e1e6ad30",
+      "source_group_hash": "325730505979e34d3d5512b621682edaeb9aab175fcbb8f77af43fa54b83b6c0",
+      "source_id": "1803248910342766083"
+    },
+    {
+      "dataset_index": 363,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_claude_4925057086725798331_P-MissingInfo_MEDIUM_51b3d551_1150",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "d89b1e7899e8525fe910e82e19c9acad488a0dc0590e7765707d88419db595da",
+      "source_group_hash": "47e5440ff6ed6812e720b79bbf661b86832cc9a7c4b55b1dc0dc736df71dea82",
+      "source_id": "4925057086725798331"
+    },
+    {
+      "dataset_index": 1007,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_-1373652773107850061_P-FalsePremise_LOW_9ec3c5fc_3173",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "da6af9021602ed450790858bc9a36e4048a9a361ef15af2c9342088207857052",
+      "source_group_hash": "932eba002778d33441f91d185365ac3a3a5d4ee0a8d7845579e60b7afde934d9",
+      "source_id": "-1373652773107850061"
+    },
+    {
+      "dataset_index": 1078,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_-353209775069332597_P-GranularityMismatch_LOW_2f13d447_3003",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "41761274a52e4da39f8a79223b393b7cee2549679cd53886036580b25d25341c",
+      "source_group_hash": "ab4b006d3f4228385fd67b0c5cdeeee9ac1db9ddddef72acac46b24409a2a8e9",
+      "source_id": "-353209775069332597"
+    },
+    {
+      "dataset_index": 393,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_claude_-7941948650465895222_P-EpistemicMismatch_HIGH_6818c679_0428",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "4cfc52f7f9f63a7e3beb9e603f2e60993b13a6cc6d1e763d853b62380d0f1cef",
+      "source_group_hash": "a0bca584e638a463f81404fef9f87c0ba4d6f958aef867ebafef1272f1cb6c71",
+      "source_id": "-7941948650465895222"
+    },
+    {
+      "dataset_index": 1496,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_nova_6144099837933283715_P-GranularityMismatch_MEDIUM_48b72c4e_3597",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "9928de4b83913ac968dd23579198bf2d3fcf18c781ac681cac94587bb38a83bb",
+      "source_group_hash": "1b2fe5b0f8fa331f85ce5a136c108d94bbd035cff5b946598d3d412d1b7f5179",
+      "source_id": "6144099837933283715"
+    },
+    {
+      "dataset_index": 1546,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_nova_-3655952387338820756_P-MissingInfo_LOW_ee3b9e73_4039",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "f2e46a1da64ede850009fabef5cb1e6aa271d9632bfc20947eedf73c6f5a6e96",
+      "source_group_hash": "46e3c9af69f3468a54d61b84b3344100219d5f83cef933157f434d02fe3380a5",
+      "source_id": "-3655952387338820756"
+    },
+    {
+      "dataset_index": 1190,
+      "eligible": true,
+      "first_exposure": "round_02",
+      "id": "RB-NQ_gpt_-6737486169677690795_P-FalsePremise_LOW_b48c6879_3215",
+      "origins": [
+        "round_02/selection_manifest.json"
+      ],
+      "record_hash": "7403c02a2c35b98b8a8371b417bf0f7b944039b9d6954d46bf903d328080876e",
+      "source_group_hash": "88929af592f55c6f6ea7a34907ca4a90fc6f6e5fe88deac932ed4696514380cb",
+      "source_id": "-6737486169677690795"
+    },
+    {
+      "dataset_index": 223,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_claude_7808442793714993461_P-FalsePremise_LOW_a7c3241c_0434",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "794a1dd1f364e2ab681701bbb4fe33d332cb434c902ea4543e0782ac34aa4c37",
+      "source_group_hash": "d8b15605c412f0ebe4e2eb085435cf709f6e38dfe21fcc80e2cc536c9633ca8e",
+      "source_id": "7808442793714993461"
+    },
+    {
+      "dataset_index": 1592,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_nova_-8359866474144720253_P-GranularityMismatch_LOW_9458bd7e_3620",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "dbf30f42129615e07c13dc26ced878d0902f80531c1c2c54a2cf7d0748071ab7",
+      "source_group_hash": "2f30ece2d11682a40f853e9e777154f3707292394ce1fc704ead09720d8c5b1a",
+      "source_id": "-8359866474144720253"
+    },
+    {
+      "dataset_index": 591,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_deepseek_-5061926765893337070_P-FalsePremise_HIGH_1f503fd4_1911",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "722d9d3c2d6fab56d7bfde7bc8c171bf4db7bbc293aa6722872b0aca7183ea2f",
+      "source_group_hash": "acdf316a9a8e380e80a75d7b2ea514abea144d676e06f5973a794f76b2f577e1",
+      "source_id": "-5061926765893337070"
+    },
+    {
+      "dataset_index": 1048,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_gpt_-4199405438415986663_P-GranularityMismatch_HIGH_feb7d1e7_3533",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "5255d9fbf225344ca4fd81651974f22bdbd094bfaa4969a1cf1f1cde8da009fb",
+      "source_group_hash": "fc43fa4028a21525f883e96089cb0d29383676fd0623e68d3e08514f79c88602",
+      "source_id": "-4199405438415986663"
+    },
+    {
+      "dataset_index": 176,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_claude_-1932118074616697613_P-EpistemicMismatch_MEDIUM_e35ccd42_1212",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "a5162ac8226ec29b84003683adf04d40600b5de52ec309a8d1306d05b50ff927",
+      "source_group_hash": "e1fa5d79a91d6dec19c35d4ea377b0323ded1519397e63313919a377665b6cbd",
+      "source_id": "-1932118074616697613"
+    },
+    {
+      "dataset_index": 387,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_claude_-6924600758326460563_P-Ambiguity_MEDIUM_131b0e05_0442",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "e23e39f8982845e3bf69f8661462d6e9846800cf6856b6abe391dfe313749c54",
+      "source_group_hash": "0cddb77171877f819cf7d8c7c45c3d714f1e8dbfcabac37de3b3fe268eba6895",
+      "source_id": "-6924600758326460563"
+    },
+    {
+      "dataset_index": 554,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_deepseek_8730028009751947933_P-EpistemicMismatch_LOW_41cd427d_2192",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "e37278b1fe8a33f0ff745ea93c7f55908b75763cad5c03987d201ebb3e486638",
+      "source_group_hash": "7012e5e57d295301f777610fee65654ab9779d3fe918fd3a4c76a0601cfe55bd",
+      "source_id": "8730028009751947933"
+    },
+    {
+      "dataset_index": 731,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_deepseek_5533906981191706877_P-MissingInfo_HIGH_c9a7b7b3_1374",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "979591bb79fc8851997015aba3574cac8b56a81db42c985269096de201603b63",
+      "source_group_hash": "63d07c714f1c6acd57fdce94120b557e1dd4cef5a20aef361c387b82155b61ab",
+      "source_id": "5533906981191706877"
+    },
+    {
+      "dataset_index": 1023,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_gpt_-2382302837416986186_P-FalsePremise_LOW_942a599c_2718",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "5495f5a4101d13fedf6fcd61383364319d9ee27b31548c6798a0dda9a38d6da1",
+      "source_group_hash": "5d17e57ac0aadd68d1dc1298c4f52a1e8f6f59f5b1114ad7c2a2510f6f82a82c",
+      "source_id": "-2382302837416986186"
+    },
+    {
+      "dataset_index": 1243,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_nova_8282063117132135457_P-Ambiguity_MEDIUM_fd923d61_3795",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "5dfaa94a619fd442ca623175d7fbe5aa8221af67f89d8507402eba2184eea3e2",
+      "source_group_hash": "695319449a926007dc884bbd4e7bc02dc97d575a893764bf4cd68d3106714128",
+      "source_id": "8282063117132135457"
+    },
+    {
+      "dataset_index": 527,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_deepseek_7732521529054562311_P-EpistemicMismatch_HIGH_1d3c4b7e_1599",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "7f6533a5dc48ae7ce763e807031bd1911174592d433e6f8061b4e926d0c1eba3",
+      "source_group_hash": "dc2df9fe055f2142d6b28699960343199a06ee66a975f985814773390d9bee4e",
+      "source_id": "7732521529054562311"
+    },
+    {
+      "dataset_index": 1489,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_nova_6969539427365218166_P-GranularityMismatch_LOW_88dc5570_4480",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "36d169427c99be995b3f0f7c9510631e6fb961c3839501304afa92e915d32f17",
+      "source_group_hash": "6ab71b7aad309e8bc0bca55724d868667df151964ce375064447b952745451a2",
+      "source_id": "6969539427365218166"
+    },
+    {
+      "dataset_index": 1197,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_gpt_1192279284143194020_P-GranularityMismatch_LOW_8801332e_3122",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "192394a603ffa28b1dcbab87476a660f21a61229386fb2fdb5f5a8b5d19a0f55",
+      "source_group_hash": "c1a969818581351f399c73bfe6be064cdb8b9465a54b00914ad785fba0a17d97",
+      "source_id": "1192279284143194020"
+    },
+    {
+      "dataset_index": 1346,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_nova_7610758795954724809_P-EpistemicMismatch_LOW_30b6785f_3756",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "9ab389c10c608be00a1bba87352f5615e9feddff9d67fe8bce1b96a1a5b3c65a",
+      "source_group_hash": "712477111b824e7bfde4a83b15027cdb245fbcafb27ffb5a13d06b2cbe1a0926",
+      "source_id": "7610758795954724809"
+    },
+    {
+      "dataset_index": 1569,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_nova_-3803697286581502044_P-MissingInfo_MEDIUM_29cd91f0_4340",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "96f4b7eb7b9ac8f7f8298aa549b1f290f9314533d67fa9d4b29e462d56d688ef",
+      "source_group_hash": "fad6f2103650a361574f8f9c2316d629c308f4c6609d57e756f15fbd7e47ec0e",
+      "source_id": "-3803697286581502044"
+    },
+    {
+      "dataset_index": 29,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_claude_-2522076069840987893_P-Ambiguity_LOW_bc4a4d98_0815",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "5ccd03c09dcb91342ded3f7ef3c1c8912f7020e07fb90b7802c0dc98c3ee6656",
+      "source_group_hash": "2b5793f6a837f7fb1d1d1d6ffaa732e83a4f676959dcb1dd639dfc70cc88308e",
+      "source_id": "-2522076069840987893"
+    },
+    {
+      "dataset_index": 254,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_claude_8350528572960416643_P-GranularityMismatch_HIGH_4ef2a89b_0936",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "144ed133d4a54b2ee27ec4e7566fa9d6f335c6713010a264ab82a548b810d80b",
+      "source_group_hash": "de1a00e0fd2eedd955e432ec8ce16a2778e6d6dd0c8b3b0a73e37592dc92d955",
+      "source_id": "8350528572960416643"
+    },
+    {
+      "dataset_index": 1390,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_nova_-5519267321423308172_P-FalsePremise_HIGH_6ebd546f_4141",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "c63746b53f6bd94e417526238634c98c45fd27d449147a1094a2f09c0b717d01",
+      "source_group_hash": "585e817c5b601533b179777708549aa3758cd9f1e693bda138d97153a4681764",
+      "source_id": "-5519267321423308172"
+    },
+    {
+      "dataset_index": 678,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_deepseek_6608141013475408306_P-GranularityMismatch_LOW_6e0c4d45_2044",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "3e04c607a133ce76fa470437127ec32417c3d16c3a849990e9afc52556081100",
+      "source_group_hash": "c46a5b1bb00de58429568117979f238a7a0816cc5028ef2daa934185bc2ae08e",
+      "source_id": "6608141013475408306"
+    },
+    {
+      "dataset_index": 563,
+      "eligible": true,
+      "first_exposure": "round_03",
+      "id": "RB-NQ_deepseek_-4621948696356225060_P-EpistemicMismatch_LOW_801397a1_1406",
+      "origins": [
+        "round_03/selection_manifest.json"
+      ],
+      "record_hash": "c72215e31e6e689e17405a6a3ffff64c77161bcf4777cb970d32044e95f320fa",
+      "source_group_hash": "61c9cbd7539e1932dccf55ceaa8941b1a5e91fbeadb605348deebe9f79faddde",
+      "source_id": "-4621948696356225060"
+    }
+  ],
+  "last_audit": {
+    "at": {
+      "at_utc": "2026-10-28T19:19:30.056334+00:00",
+      "elapsed_seconds": 1803.0521509998944,
+      "new_api_allowed": true,
+      "remaining_seconds": 1796.9478490001056,
+      "report_priority": false
+    },
+    "budget_status": "PASS",
+    "eligible_exposure_recomputed_from_original_ids": 130,
+    "new_unique_ids_recomputed": 60,
+    "paired_new_exposure": 0
+  },
+  "last_updated": {
+    "at_utc": "2026-10-28T19:09:28.159513+00:00",
+    "elapsed_seconds": 1201.161150999833,
+    "new_api_allowed": true,
+    "remaining_seconds": 2398.838849000167,
+    "report_priority": false
+  },
+  "manifest_inventory": [
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_pilot/dataset_provenance.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_pilot/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_pilot/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/selection_manifest.json",
+      "record_ids_found": 42
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/cfaf-span-ref-fix-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_pilot/dataset_provenance.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_pilot/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_pilot/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_semantic_dev/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_semantic_dev/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_semantic_dev/selection_manifest.json",
+      "record_ids_found": 42
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_span_fix_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_span_fix_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-integration-v2",
+      "manifest": "evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_pilot/dataset_provenance.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_pilot/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_pilot/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/selection_manifest.json",
+      "record_ids_found": 42
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/infobank-semantic-regression-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+      "record_ids_found": 20
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_pilot/dataset_provenance.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_pilot/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_pilot/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/selection_manifest.json",
+      "record_ids_found": 42
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-iterative-dev-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/filtered_selection_manifest.json",
+      "record_ids_found": 20
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_noncontradiction_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_pilot/dataset_provenance.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_pilot/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_pilot/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/selection_manifest.json",
+      "record_ids_found": 42
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-noncontradiction-v1",
+      "manifest": "evaluation/refusalbench_span_fix_v1/selection_manifest.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/refusalbench-semantic-dev-v1",
+      "manifest": "evaluation/refusalbench_pilot/dataset_provenance.json",
+      "record_ids_found": 10
+    },
+    {
+      "branch": "experiment/refusalbench-semantic-dev-v1",
+      "manifest": "evaluation/refusalbench_pilot/generation_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-semantic-dev-v1",
+      "manifest": "evaluation/refusalbench_pilot/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-semantic-dev-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/experiment_manifest.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-semantic-dev-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/prerun_protocol.json",
+      "record_ids_found": 0
+    },
+    {
+      "branch": "experiment/refusalbench-semantic-dev-v1",
+      "manifest": "evaluation/refusalbench_semantic_dev/selection_manifest.json",
+      "record_ids_found": 42
+    }
+  ],
+  "maximum_exposed_eligible_records": 617,
+  "newly_exposed_unique_eligible_records": 60,
+  "official_source_sha256": "d1bddaec4fdb7e0e2e7bf9a520ef104c3758800fc16769ac6e34baef0d90d1ed",
+  "original_records": 1600,
+  "prior_exposed_unique_eligible_records": 70,
+  "prior_unique_exposed_records_all_categories": 82,
+  "reconstruction_status": "RECONCILED_ALL_AVAILABLE_BRANCH_MANIFESTS_AND_SELECTED_CASE_ARTIFACTS",
+  "record_exposure_definition": "Conservative: every earlier selected record counts, including failed/unexecuted selections; new IDs are charged before text materialization. Metadata-only filtering does not expose text.",
+  "reexposure_events": [
+    {
+      "baseline": "round_01",
+      "directory": "paired_regression",
+      "new_unique_exposure": 0,
+      "record_hashes": [
+        "a01105f5f919e2e72826e52fc9c5add71e70aa09ba8bff56a417bc55763a7c5e",
+        "3371b2528ab2d0247d5c12ad97c8110382604b8db23a4ce1043bed2522296fde",
+        "1fdfd8e30114564b28b64c4a90c7b37479b07a1f58b68088dd4a7696bbe8afd4",
+        "b36c1f06cc307ac35872a7d4ffb7168edcf10f452ff662bfbbcae14d8525bb11",
+        "b24c6e9eb3de76149f39b27cf2d83d38983de4103b3d1a132610235d98af0835",
+        "5796a2ee0d676df8818dbd6638c88bea0bcc7657d095f6de80237aee2afac026",
+        "114d417c99c7849caa38834a25d9188aae87275cf639c987325e91c9b688e67d",
+        "08c5e731c82951c458c904799558683960034590f4f5b7d6d07ed54012c400b1",
+        "20a0dd6385fb803c9bac883a30e7770aee14562781d40a553bd5ae82fb3d5fab",
+        "abec95bcfd854c3f93f51876e4a4d23cf83c26de54cb3f424e1d45bb4e03ad02",
+        "57f57f7a892abe953eda916a2b53b66de88885a4848413d904b07b4badb1b125",
+        "befa23ff9bf25b0ba12a31bce4e47f1a2dc3586f80b767f195dd76ed34f0a039",
+        "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+        "0409145933a7d8ff5ef5b5466ddbee32e5a06a9205f079ba2a4e2f9c19eedb4f",
+        "490d1a133457a00a977541c716d4043b0a4ecc7674e87ec501bffabe9b6f034a",
+        "a7086ebad8c79250dfd480ef74fa6f501176b210389b6495a7ced93212454bb8",
+        "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+        "0471a5fb79cf3d6605ae51d1dcb8e41797ab5e4fb4c93407483fe3c0340b4bc2",
+        "a8ea811f5976a405d231dd8b852d1e36411fec1b00b0e20447cf7980f7dd814f",
+        "c97a262d9f336dfb9de36025d7f0fded54386688f171b81afa0feb4292cbb192"
+      ],
+      "records": 20,
+      "time": {
+        "at_utc": "2026-10-28T19:12:55.479255+00:00",
+        "elapsed_seconds": 1408.4741509999149,
+        "new_api_allowed": true,
+        "remaining_seconds": 2191.5108489999548,
+        "report_priority": false
+      }
+    }
+  ],
+  "remaining_unseen_eligible_records": 1104,
+  "reserved_source_groups": [
+    "-1367137361753059601",
+    "-2060506905455252030",
+    "-2321556715412254267",
+    "-3563945110717053326",
+    "-3908725222525421557",
+    "-3933162766009466595",
+    "-4283464153717448291",
+    "-5299749370232228058",
+    "-6651263409055988535",
+    "-6992125597790283273",
+    "-8199145431277346508",
+    "-8366545547296627039",
+    "-8377790186896289772",
+    "-8631190913794477985",
+    "-896127746191949637",
+    "-8964430330382911432",
+    "1626619710468103467",
+    "199896377614951764",
+    "2125482171201889012",
+    "3022939638183417538",
+    "307455002465526783",
+    "3312666837228082099",
+    "3616632103136384232",
+    "4075061692712596480",
+    "4941105400369114094",
+    "5173446072294307095",
+    "5874093358022821909",
+    "6243386362552941358",
+    "6605227747829720945",
+    "700604097171850168"
+  ],
+  "rounds": [
+    {
+      "charged_before_text_materialization": true,
+      "new_records": 20,
+      "round": 1,
+      "seed": 20261028,
+      "selection_manifest_sha256": "b6a783562f1f737d2e0c7915eabc943a9f250f79596b06516def91caa1c2f4c6"
+    },
+    {
+      "charged_before_text_materialization": true,
+      "new_records": 20,
+      "round": 2,
+      "seed": 20261029,
+      "selection_manifest_sha256": "b481644a0477015a807b3ea27ffc0ff49f7eabb633166e1bb950761e5dbd2afc"
+    },
+    {
+      "charged_before_text_materialization": true,
+      "new_records": 20,
+      "round": 3,
+      "seed": 20261030,
+      "selection_manifest_sha256": "7340e6e5705b2477fc54a8297c5c1ede41eddc143f0f0a59e4cc7dd58e9ca747"
+    }
+  ],
+  "untouched_source_groups": [
+    "-1206653570097564556",
+    "-4173780285858774112",
+    "-5004457603684974952",
+    "-7066978684275822190",
+    "-7729388021714760854",
+    "-9169976182548289414",
+    "1122605495295045742",
+    "1725103917763203519",
+    "3370121445039290406",
+    "3581703127157842174",
+    "4359809240674669371",
+    "5482109430613356344",
+    "7439208340888264395",
+    "7493304116642628789",
+    "8299743299185740312",
+    "8624898251093284247",
+    "867176429412490099",
+    "8816667823188176068"
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "blocker": null,
+  "completed_cases": 20,
+  "end_time": {
+    "at_utc": "2026-10-28T19:15:25.871666+00:00",
+    "elapsed_seconds": 1558.8801509998739,
+    "new_api_allowed": true,
+    "remaining_seconds": 2041.1198490001261,
+    "report_priority": false
+  },
+  "failures": [],
+  "frozen_source_unchanged": true,
+  "wall_clock_ms": 149997.22029990517
+}

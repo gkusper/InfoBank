@@ -1,0 +1,50 @@
+{
+  "attempts": 243,
+  "automatic_retries": 0,
+  "by_kind_detail": {
+    "query_profile": {
+      "calls": 3,
+      "input_tokens": 1215,
+      "latency_mean_ms": 1426.4794332751383,
+      "latency_sum_ms": 4279.438299825415,
+      "output_tokens": 219
+    },
+    "semantic_analysis": {
+      "calls": 80,
+      "input_tokens": 159185,
+      "latency_mean_ms": 3628.1616212480003,
+      "latency_sum_ms": 290252.92969984,
+      "output_tokens": 24286
+    },
+    "semantic_cfaf": {
+      "calls": 80,
+      "input_tokens": 80409,
+      "latency_mean_ms": 1711.5339475072687,
+      "latency_sum_ms": 136922.7158005815,
+      "output_tokens": 4148
+    },
+    "shared_control": {
+      "calls": 80,
+      "input_tokens": 82244,
+      "latency_mean_ms": 1546.1662437359337,
+      "latency_sum_ms": 123693.2994988747,
+      "output_tokens": 5014
+    }
+  },
+  "client_api_latency_sum_ms": 555148.3832991216,
+  "embeddings": 0,
+  "failed_attempts": 0,
+  "hard_cap": 360,
+  "input_tokens": 323053,
+  "kind_counts": {
+    "query_profile": 3,
+    "semantic_analysis": 80,
+    "semantic_cfaf": 80,
+    "shared_control": 80
+  },
+  "output_tokens": 33667,
+  "query_only_fallback_calls": 3,
+  "requests_after_55_minutes": 0,
+  "shared_main_analysis_calls": 80,
+  "successes": 243
+}

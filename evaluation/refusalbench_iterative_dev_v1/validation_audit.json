@@ -1,0 +1,82 @@
+{
+  "additional_untouched_source_groups_preserved": 18,
+  "api_usage": {
+    "attempts": 243,
+    "automatic_retries": 0,
+    "client_api_latency_sum_ms": 555148.3832991216,
+    "embeddings": 0,
+    "failed_attempts": 0,
+    "hard_cap": 360,
+    "input_tokens": 323053,
+    "kind_counts": {
+      "query_profile": 3,
+      "semantic_analysis": 80,
+      "semantic_cfaf": 80,
+      "shared_control": 80
+    },
+    "output_tokens": 33667,
+    "query_only_fallback_calls": 3,
+    "requests_after_55_minutes": 0,
+    "shared_main_analysis_calls": 80,
+    "successes": 243
+  },
+  "audited_api_requests": 243,
+  "completed_at": {
+    "at_utc": "2026-10-28T19:19:30.053334+00:00",
+    "elapsed_seconds": 1803.0521509998944,
+    "new_api_allowed": true,
+    "remaining_seconds": 1796.9478490001056,
+    "report_priority": false
+  },
+  "cumulative_eligible_exposure": 130,
+  "eligible_remaining_unseen": 1104,
+  "exposure_ceiling": 617,
+  "gold_annotation_input_exposures_observed": 0,
+  "interpretation": "PASS covers mechanical safeguards and input isolation. Output factual completeness and semantic correctness require separate review and can fail.",
+  "invalid_references": 0,
+  "official_dataset_unchanged": true,
+  "paired_cases_completed": 20,
+  "previous_files_changed": [],
+  "previous_files_protected": 621,
+  "recorded_case_observations": 80,
+  "reserved_source_groups_preserved": 30,
+  "rounds_completed": 3,
+  "shared_assessment_equality_cases": 80,
+  "status": "PASS_INPUT_POLICY_EXPOSURE_AND_REFERENCE_CHECKS",
+  "tests": {
+    "final_acceptance_tests.xml": {
+      "failures": [],
+      "testcases": 268
+    },
+    "framework_tests.xml": {
+      "failures": [],
+      "testcases": 108
+    },
+    "historical_tests.xml": {
+      "failures": [
+        "test_preheldout_attempt1_plan_artifacts_are_plan_only"
+      ],
+      "testcases": 78
+    },
+    "v01_tests.xml": {
+      "failures": [],
+      "testcases": 111
+    },
+    "v02_tests.xml": {
+      "failures": [],
+      "testcases": 170
+    }
+  },
+  "unique_new_record_ids": 60,
+  "verified_reference_occurrences": {
+    "requirement_support": 56,
+    "source_role": 109,
+    "supporting_spans": 62
+  },
+  "versions": {
+    "paired_regression": "v02",
+    "round_01": "v00",
+    "round_02": "v01",
+    "round_03": "v02"
+  }
+}

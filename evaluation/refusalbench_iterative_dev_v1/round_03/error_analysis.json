@@ -1,0 +1,518 @@
+[
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "The death penalty was reinstated in Oregon in 1984.",
+      "available_granularity": "exact date",
+      "confidence": 0.95,
+      "contradicting_spans": [],
+      "entities": [
+        "Oregon"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "When was the death penalty reinstated in Oregon?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The reinstatement date of the death penalty in Oregon is clearly stated in the document.",
+      "relations": [
+        "reinstated"
+      ],
+      "requested_granularity": "exact date",
+      "requested_information": "date of reinstatement of the death penalty in Oregon",
+      "requirement_support": [
+        {
+          "answer_form": "DATE_TIME",
+          "complete_answer": true,
+          "identity_identified": false,
+          "rationale": "The document provides a clear date for the reinstatement of the death penalty in Oregon.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0001"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0001"
+          ],
+          "rationale": "The document explicitly states the reinstatement year.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0001"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 387,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "DATE_TIME",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "DATE_TIME",
+          "metadata_fields": [],
+          "request_text": "when was it reinstated in oregon",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "e23e39f8982845e3bf69f8661462d6e9846800cf6856b6abe391dfe313749c54",
+    "runtime_index": 5,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "The death penalty was reinstated in Oregon in 1984.",
+      "available_granularity": "exact date",
+      "confidence": 0.95,
+      "contradicting_spans": [],
+      "entities": [
+        "Oregon"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "When was the death penalty reinstated in Oregon?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The reinstatement date of the death penalty in Oregon is clearly stated in the document.",
+      "relations": [
+        "reinstated"
+      ],
+      "requested_granularity": "exact date",
+      "requested_information": "date of reinstatement of the death penalty in Oregon",
+      "requirement_support": [
+        {
+          "answer_form": "DATE_TIME",
+          "complete_answer": true,
+          "identity_identified": false,
+          "rationale": "The document provides a clear date for the reinstatement of the death penalty in Oregon.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0001"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0001"
+          ],
+          "rationale": "The document explicitly states the reinstatement year.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0001"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 387,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "DATE_TIME",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "DATE_TIME",
+          "metadata_fields": [],
+          "request_text": "when was it reinstated in oregon",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "e23e39f8982845e3bf69f8661462d6e9846800cf6856b6abe391dfe313749c54",
+    "runtime_index": 5,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "answer_candidate": null,
+      "available_granularity": "specific artists",
+      "confidence": 0.5,
+      "contradicting_spans": [],
+      "entities": [
+        "Traveling Wilburys",
+        "Bob Dylan",
+        "George Harrison",
+        "Jeff Lynne",
+        "Roy Orbison",
+        "Tom Petty"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the members of the Traveling Wilburys",
+        "Determine if the Traveling Wilburys won a Grammy for Best New Artist"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "UNKNOWN",
+      "rationale": "The document does not specify the members of the Traveling Wilburys or their Grammy status.",
+      "relations": [
+        "members of",
+        "won Grammy for Best New Artist"
+      ],
+      "requested_granularity": "specific artists",
+      "requested_information": "artists in the Traveling Wilburys",
+      "requirement_support": [
+        {
+          "answer_form": "LIST",
+          "complete_answer": false,
+          "identity_identified": true,
+          "rationale": "The document does not provide the names of the artists in the Traveling Wilburys or their Grammy win.",
+          "referent_resolved": false,
+          "relation_and_qualifiers_supported": false,
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003",
+            "view-0001:span-0004"
+          ],
+          "rationale": "The document discusses the Traveling Wilburys but does not list the members or their awards.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1023,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "ESSENTIAL_INFORMATION_MISSING",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_INCOMPLETE",
+      "REQUEST_RELATION_UNSUPPORTED",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP",
+      "SEMANTIC_UNCERTAIN"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "Best New Artist",
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who are the artists in the traveling wilburys, the band that won the Grammy for Best New Artist?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "5495f5a4101d13fedf6fcd61383364319d9ee27b31548c6798a0dda9a38d6da1",
+    "runtime_index": 8,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "answer_candidate": null,
+      "available_granularity": "specific artists",
+      "confidence": 0.5,
+      "contradicting_spans": [],
+      "entities": [
+        "Traveling Wilburys",
+        "Bob Dylan",
+        "George Harrison",
+        "Jeff Lynne",
+        "Roy Orbison",
+        "Tom Petty"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Identify the members of the Traveling Wilburys",
+        "Determine if the Traveling Wilburys won a Grammy for Best New Artist"
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "UNKNOWN",
+      "rationale": "The document does not specify the members of the Traveling Wilburys or their Grammy status.",
+      "relations": [
+        "members of",
+        "won Grammy for Best New Artist"
+      ],
+      "requested_granularity": "specific artists",
+      "requested_information": "artists in the Traveling Wilburys",
+      "requirement_support": [
+        {
+          "answer_form": "LIST",
+          "complete_answer": false,
+          "identity_identified": true,
+          "rationale": "The document does not provide the names of the artists in the Traveling Wilburys or their Grammy win.",
+          "referent_resolved": false,
+          "relation_and_qualifiers_supported": false,
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000",
+            "view-0001:span-0001",
+            "view-0001:span-0002",
+            "view-0001:span-0003",
+            "view-0001:span-0004"
+          ],
+          "rationale": "The document discusses the Traveling Wilburys but does not list the members or their awards.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 1023,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "ESSENTIAL_INFORMATION_MISSING",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_INCOMPLETE",
+      "REQUEST_RELATION_UNSUPPORTED",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP",
+      "SEMANTIC_UNCERTAIN"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "Best New Artist",
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who are the artists in the traveling wilburys, the band that won the Grammy for Best New Artist?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "5495f5a4101d13fedf6fcd61383364319d9ee27b31548c6798a0dda9a38d6da1",
+    "runtime_index": 8,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "Brant Daugherty plays Noel Kahn in Pretty Little Liars.",
+      "available_granularity": "specific character role",
+      "confidence": 1,
+      "contradicting_spans": [],
+      "entities": [
+        "Brant Daugherty",
+        "Noel Kahn",
+        "Mike"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Brant Daugherty plays Noel Kahn in Pretty Little Liars",
+        "Brant Daugherty also appears as Mike in Pretty Little Liars"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document clearly states Brant Daugherty's role as Noel Kahn.",
+      "relations": [
+        "plays"
+      ],
+      "requested_granularity": "specific character role",
+      "requested_information": "Brant Daugherty's character in Pretty Little Liars",
+      "requirement_support": [
+        {
+          "answer_form": "NAMED_ENTITY",
+          "complete_answer": true,
+          "identity_identified": true,
+          "rationale": "The document specifies the character Brant Daugherty plays.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document provides direct information about Brant Daugherty's role.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1243,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who does brant daugherty play in pretty little liars",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "5dfaa94a619fd442ca623175d7fbe5aa8221af67f89d8507402eba2184eea3e2",
+    "runtime_index": 9,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "Brant Daugherty plays Noel Kahn in Pretty Little Liars.",
+      "available_granularity": "specific character role",
+      "confidence": 1,
+      "contradicting_spans": [],
+      "entities": [
+        "Brant Daugherty",
+        "Noel Kahn",
+        "Mike"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Brant Daugherty plays Noel Kahn in Pretty Little Liars",
+        "Brant Daugherty also appears as Mike in Pretty Little Liars"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document clearly states Brant Daugherty's role as Noel Kahn.",
+      "relations": [
+        "plays"
+      ],
+      "requested_granularity": "specific character role",
+      "requested_information": "Brant Daugherty's character in Pretty Little Liars",
+      "requirement_support": [
+        {
+          "answer_form": "NAMED_ENTITY",
+          "complete_answer": true,
+          "identity_identified": true,
+          "rationale": "The document specifies the character Brant Daugherty plays.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document provides direct information about Brant Daugherty's role.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1243,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who does brant daugherty play in pretty little liars",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "5dfaa94a619fd442ca623175d7fbe5aa8221af67f89d8507402eba2184eea3e2",
+    "runtime_index": 9,
+    "system": "shared_control",
+    "validation_errors": []
+  }
+]

@@ -1,0 +1,787 @@
+[
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "A substitute good is a good that can be used in place of another.",
+      "available_granularity": "definition of substitute good",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "substitute good"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "What is a substitute good?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The definition of a substitute good directly answers the query about what can replace another good.",
+      "relations": [
+        "can be used in place of"
+      ],
+      "requested_granularity": "specific example of a substitute good",
+      "requested_information": "a good that can be used in place of another good",
+      "requirement_support": [
+        {
+          "answer_form": "DEFINITION",
+          "complete_answer": true,
+          "identity_identified": true,
+          "rationale": "The definition provided answers the question about substitute goods.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document defines a substitute good.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 631,
+    "expected": "FULL",
+    "issues": [
+      "GRANULARITY_NOT_SUPPORTED"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "FACT",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "another good",
+      "requirements": [
+        {
+          "answer_kind": "FACT",
+          "metadata_fields": [],
+          "request_text": "In the second edition, what is a good that can be used in place of another good?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "a01105f5f919e2e72826e52fc9c5add71e70aa09ba8bff56a417bc55763a7c5e",
+    "runtime_index": 0,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "Dmitri Mendeleev and Lothar Meyer independently composed the first working periodic tables in 1869.",
+      "available_granularity": "specific individuals",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Dmitri Mendeleev",
+        "Lothar Meyer"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Dmitri Mendeleev and Lothar Meyer both created the first working periodic table."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The evidence clearly states both Mendeleev and Meyer created periodic tables in 1869, supporting the query.",
+      "relations": [
+        "composed",
+        "independently"
+      ],
+      "requested_granularity": "specific individual",
+      "requested_information": "first working periodic table",
+      "requirement_support": [
+        {
+          "answer_form": "NAMED_ENTITY",
+          "complete_answer": true,
+          "identity_identified": true,
+          "rationale": "The document provides clear evidence of who created the first working periodic table.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ],
+          "rationale": "The document explicitly mentions Mendeleev and Meyer as the creators of the periodic table.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0002",
+        "view-0001:span-0003"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1236,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who came up with the first working periodic table",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "5796a2ee0d676df8818dbd6638c88bea0bcc7657d095f6de80237aee2afac026",
+    "runtime_index": 5,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "Dmitri Mendeleev and Lothar Meyer independently composed the first working periodic tables in 1869.",
+      "available_granularity": "specific individuals",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "Dmitri Mendeleev",
+        "Lothar Meyer"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Dmitri Mendeleev and Lothar Meyer both created the first working periodic table."
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The evidence clearly states both Mendeleev and Meyer created periodic tables in 1869, supporting the query.",
+      "relations": [
+        "composed",
+        "independently"
+      ],
+      "requested_granularity": "specific individual",
+      "requested_information": "first working periodic table",
+      "requirement_support": [
+        {
+          "answer_form": "NAMED_ENTITY",
+          "complete_answer": true,
+          "identity_identified": true,
+          "rationale": "The document provides clear evidence of who created the first working periodic table.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0002",
+            "view-0001:span-0003"
+          ],
+          "rationale": "The document explicitly mentions Mendeleev and Meyer as the creators of the periodic table.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0002",
+        "view-0001:span-0003"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1236,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "NAMED_IDENTITY",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": null,
+      "requirements": [
+        {
+          "answer_kind": "NAMED_IDENTITY",
+          "metadata_fields": [],
+          "request_text": "who came up with the first working periodic table",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "5796a2ee0d676df8818dbd6638c88bea0bcc7657d095f6de80237aee2afac026",
+    "runtime_index": 5,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "The trend shows that several states abolished the death penalty, but many reinstated it later, indicating fluctuating support over the century.",
+      "available_granularity": "overall trend",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "death penalty",
+        "Arizona",
+        "Oregon",
+        "Minnesota",
+        "Vermont",
+        "Iowa",
+        "West Virginia",
+        "North Dakota",
+        "Hawaii",
+        "Alaska",
+        "Puerto Rico",
+        "District of Columbia",
+        "Michigan"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Trend of reinstatement of the death penalty in the US over the last 100 years"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The evidence shows a pattern of abolition followed by reinstatement in various states.",
+      "relations": [
+        "abolished",
+        "reinstated",
+        "prohibited"
+      ],
+      "requested_granularity": "overall trend",
+      "requested_information": "overall trend in the reinstatement of the death penalty in the United States over the past century",
+      "requirement_support": [
+        {
+          "answer_form": "EXPLANATION",
+          "complete_answer": true,
+          "identity_identified": false,
+          "rationale": "The span provides a clear trend of abolition and reinstatement of the death penalty.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0001"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0001"
+          ],
+          "rationale": "Details on states abolishing and reinstating the death penalty.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0001"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1112,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "FACT",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "the death penalty in the United States over the past century",
+      "requirements": [
+        {
+          "answer_kind": "FACT",
+          "metadata_fields": [],
+          "request_text": "What is the overall trend in the reinstatement of the death penalty in the United States over the past century?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "20a0dd6385fb803c9bac883a30e7770aee14562781d40a553bd5ae82fb3d5fab",
+    "runtime_index": 8,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "NONE",
+      "answer_candidate": "The trend shows that several states abolished the death penalty, but many reinstated it later, indicating fluctuating support over the century.",
+      "available_granularity": "overall trend",
+      "confidence": 0.9,
+      "contradicting_spans": [],
+      "entities": [
+        "death penalty",
+        "Arizona",
+        "Oregon",
+        "Minnesota",
+        "Vermont",
+        "Iowa",
+        "West Virginia",
+        "North Dakota",
+        "Hawaii",
+        "Alaska",
+        "Puerto Rico",
+        "District of Columbia",
+        "Michigan"
+      ],
+      "granularity_matches": true,
+      "interpretations": [
+        "Trend of reinstatement of the death penalty in the US over the last 100 years"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The evidence shows a pattern of abolition followed by reinstatement in various states.",
+      "relations": [
+        "abolished",
+        "reinstated",
+        "prohibited"
+      ],
+      "requested_granularity": "overall trend",
+      "requested_information": "overall trend in the reinstatement of the death penalty in the United States over the past century",
+      "requirement_support": [
+        {
+          "answer_form": "EXPLANATION",
+          "complete_answer": true,
+          "identity_identified": false,
+          "rationale": "The span provides a clear trend of abolition and reinstatement of the death penalty.",
+          "referent_resolved": true,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "SUFFICIENT",
+          "supporting_span_ids": [
+            "view-0001:span-0001"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0001"
+          ],
+          "rationale": "Details on states abolishing and reinstating the death penalty.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "SUFFICIENT",
+      "supporting_spans": [
+        "view-0001:span-0001"
+      ],
+      "uncertainty_causes": []
+    },
+    "dataset_index": 1112,
+    "expected": "CFAF",
+    "issues": [],
+    "prediction": "FULL",
+    "query_profile": {
+      "answer_kind": "FACT",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "the death penalty in the United States over the past century",
+      "requirements": [
+        {
+          "answer_kind": "FACT",
+          "metadata_fields": [],
+          "request_text": "What is the overall trend in the reinstatement of the death penalty in the United States over the past century?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "20a0dd6385fb803c9bac883a30e7770aee14562781d40a553bd5ae82fb3d5fab",
+    "runtime_index": 8,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "answer_candidate": null,
+      "available_granularity": "decade",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "whooping cough",
+        "pertussis vaccine"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "When did vaccination for whooping cough begin?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document states the vaccine became available in the 1940s, but does not specify an exact start date.",
+      "relations": [
+        "start date"
+      ],
+      "requested_granularity": "exact date",
+      "requested_information": "start date of whooping cough vaccination",
+      "requirement_support": [
+        {
+          "answer_form": "DATE_TIME",
+          "complete_answer": false,
+          "identity_identified": false,
+          "rationale": "The document provides a decade but not an exact date.",
+          "referent_resolved": false,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "PARTIAL",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document mentions the pertussis vaccine became available in the 1940s.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "PARTIAL",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": [
+        "granularity_gap"
+      ]
+    },
+    "dataset_index": 828,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "REQUEST_INCOMPLETE",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "DATE_TIME",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "whooping cough, the '100-day cough",
+      "requirements": [
+        {
+          "answer_kind": "DATE_TIME",
+          "metadata_fields": [],
+          "request_text": "when did they start vaccinating for whooping cough, the '100-day cough'?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+    "runtime_index": 12,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "answer_candidate": null,
+      "available_granularity": "decade",
+      "confidence": 0.8,
+      "contradicting_spans": [],
+      "entities": [
+        "whooping cough",
+        "pertussis vaccine"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "When did vaccination for whooping cough begin?"
+      ],
+      "premise_status": "SUPPORTED",
+      "query_status": "SPECIFIED",
+      "rationale": "The document states the vaccine became available in the 1940s, but does not specify an exact start date.",
+      "relations": [
+        "start date"
+      ],
+      "requested_granularity": "exact date",
+      "requested_information": "start date of whooping cough vaccination",
+      "requirement_support": [
+        {
+          "answer_form": "DATE_TIME",
+          "complete_answer": false,
+          "identity_identified": false,
+          "rationale": "The document provides a decade but not an exact date.",
+          "referent_resolved": false,
+          "relation_and_qualifiers_supported": true,
+          "requirement_id": "request-1",
+          "support_status": "PARTIAL",
+          "supporting_span_ids": [
+            "view-0001:span-0000"
+          ]
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document mentions the pertussis vaccine became available in the 1940s.",
+          "relation_label": "SUPPORTS",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "PARTIAL",
+      "supporting_spans": [
+        "view-0001:span-0000"
+      ],
+      "uncertainty_causes": [
+        "granularity_gap"
+      ]
+    },
+    "dataset_index": 828,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "REQUEST_INCOMPLETE",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "DATE_TIME",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "whooping cough, the '100-day cough",
+      "requirements": [
+        {
+          "answer_kind": "DATE_TIME",
+          "metadata_fields": [],
+          "request_text": "when did they start vaccinating for whooping cough, the '100-day cough'?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "103b67edf036f79a9a24bae7638fa486e76383a2d32373537c78c4e39f280867",
+    "runtime_index": 12,
+    "system": "shared_control",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "answer_candidate": null,
+      "available_granularity": "UNKNOWN",
+      "confidence": 0.5,
+      "contradicting_spans": [],
+      "entities": [
+        "tablet of the ten commandments"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "The question asks for a specific location related to the discovery of the tablet in 1920."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "NONFACTUAL",
+      "rationale": "No evidence found regarding the discovery of the tablet in 1920.",
+      "relations": [],
+      "requested_granularity": "LOCATION",
+      "requested_information": "tablet of the ten commandments discovered in 1920",
+      "requirement_support": [
+        {
+          "answer_form": "LOCATION",
+          "complete_answer": false,
+          "identity_identified": false,
+          "rationale": "No information about the location of the tablet's discovery in 1920 is provided.",
+          "referent_resolved": false,
+          "relation_and_qualifiers_supported": false,
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document discusses the Ark of the Covenant but does not mention a discovery in 1920.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 621,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NONFACTUAL_REQUEST",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_INCOMPLETE",
+      "REQUEST_RELATION_UNSUPPORTED",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP",
+      "SEMANTIC_UNCERTAIN"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "LOCATION",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "the ten commandments discovered in 1920",
+      "requirements": [
+        {
+          "answer_kind": "LOCATION",
+          "metadata_fields": [],
+          "request_text": "Where is the tablet of the ten commandments discovered in 1920?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+    "runtime_index": 16,
+    "system": "semantic_cfaf",
+    "validation_errors": []
+  },
+  {
+    "assessment": {
+      "analysis_refusal_cause": "MISSING_EVIDENCE",
+      "answer_candidate": null,
+      "available_granularity": "UNKNOWN",
+      "confidence": 0.5,
+      "contradicting_spans": [],
+      "entities": [
+        "tablet of the ten commandments"
+      ],
+      "granularity_matches": false,
+      "interpretations": [
+        "The question asks for a specific location related to the discovery of the tablet in 1920."
+      ],
+      "premise_status": "UNESTABLISHED",
+      "query_status": "NONFACTUAL",
+      "rationale": "No evidence found regarding the discovery of the tablet in 1920.",
+      "relations": [],
+      "requested_granularity": "LOCATION",
+      "requested_information": "tablet of the ten commandments discovered in 1920",
+      "requirement_support": [
+        {
+          "answer_form": "LOCATION",
+          "complete_answer": false,
+          "identity_identified": false,
+          "rationale": "No information about the location of the tablet's discovery in 1920 is provided.",
+          "referent_resolved": false,
+          "relation_and_qualifiers_supported": false,
+          "requirement_id": "request-1",
+          "support_status": "MISSING",
+          "supporting_span_ids": []
+        }
+      ],
+      "source_assessments": [
+        {
+          "grounding_span_ids": [
+            "view-0001:span-0000"
+          ],
+          "rationale": "The document discusses the Ark of the Covenant but does not mention a discovery in 1920.",
+          "relation_label": "NONE",
+          "role": "PRIMARY",
+          "source_id": "view-0001"
+        }
+      ],
+      "support_status": "MISSING",
+      "supporting_spans": [],
+      "uncertainty_causes": [
+        "evidence_missing"
+      ]
+    },
+    "dataset_index": 621,
+    "expected": "FULL",
+    "issues": [
+      "AMBIGUOUS_REFERENCE",
+      "ESSENTIAL_INFORMATION_MISSING",
+      "GRANULARITY_NOT_SUPPORTED",
+      "NONFACTUAL_REQUEST",
+      "NO_GROUNDED_ANSWER_CANDIDATE",
+      "NO_VERIFIED_SUPPORT_SPANS",
+      "REQUEST_INCOMPLETE",
+      "REQUEST_RELATION_UNSUPPORTED",
+      "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP",
+      "SEMANTIC_UNCERTAIN"
+    ],
+    "prediction": "CFAF",
+    "query_profile": {
+      "answer_kind": "LOCATION",
+      "method": "query_only_factual_patterns_with_preserved_governance_types",
+      "query_target": "the ten commandments discovered in 1920",
+      "requirements": [
+        {
+          "answer_kind": "LOCATION",
+          "metadata_fields": [],
+          "request_text": "Where is the tablet of the ten commandments discovered in 1920?",
+          "request_type": "FACT_LOOKUP",
+          "requirement_id": "request-1"
+        }
+      ],
+      "resolution": "RESOLVED",
+      "version": "iterative-query-v2"
+    },
+    "record_hash": "ea60c4a27c0aeb79cc34eab4af0f35de9069165f9b6bfa9467ecce54d0ccfd41",
+    "runtime_index": 16,
+    "system": "shared_control",
+    "validation_errors": []
+  }
+]

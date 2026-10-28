@@ -1,0 +1,17 @@
+{
+  "attempts": 60,
+  "by_kind": {
+    "semantic_analysis": 20,
+    "semantic_cfaf": 20,
+    "shared_control": 20
+  },
+  "errors": 0,
+  "input_tokens": 73824,
+  "latency_sum_ms": 138243.27379884198,
+  "model_versions": {
+    "gpt-4o-mini-2024-07-18": 60
+  },
+  "output_tokens": 7983,
+  "retries": 0,
+  "successes": 60
+}

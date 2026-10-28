@@ -1,0 +1,377 @@
+{
+  "available_development_groups": 60,
+  "category_counts": {
+    "ANSWER_CORRECTLY": 6,
+    "REFUSE_AMBIGUOUS_QUERY": 6,
+    "REFUSE_CONTRADICTORY_CONTEXT": 6,
+    "REFUSE_FALSE_PREMISE_IN_QUERY": 6,
+    "REFUSE_GRANULARITY_MISMATCH": 6,
+    "REFUSE_INFO_MISSING_IN_CONTEXT": 6,
+    "REFUSE_NONFACTUAL_QUERY": 6
+  },
+  "dataset": "aashiqmuhamed/RefusalBench-NQ",
+  "development_cases_sha256": "089841a661942d793286a7209d02b44ac6a9175931322ac8b1967ceb52940a5c",
+  "eligible_groups_per_category": {
+    "ANSWER_CORRECTLY": 60,
+    "REFUSE_AMBIGUOUS_QUERY": 46,
+    "REFUSE_CONTRADICTORY_CONTEXT": 53,
+    "REFUSE_FALSE_PREMISE_IN_QUERY": 50,
+    "REFUSE_GRANULARITY_MISMATCH": 52,
+    "REFUSE_INFO_MISSING_IN_CONTEXT": 51,
+    "REFUSE_NONFACTUAL_QUERY": 53
+  },
+  "excluded_source_groups": 10,
+  "previous_pilot_cases_sha256": "079bf26f98ca718487f71114e7935137042b3722324df7aa36691d5003454c8a",
+  "quotas_feasible_without_relaxation": true,
+  "records": [
+    {
+      "dataset_index": 455,
+      "expected_rag_behavior": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_deepseek_-5519267321423308172_P-Ambiguity_MEDIUM_7fa332ca_1854",
+      "runtime_index": 0,
+      "source_id": "-5519267321423308172"
+    },
+    {
+      "dataset_index": 1501,
+      "expected_rag_behavior": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_nova_-6737486169677690795_P-GranularityMismatch_MEDIUM_f95b19e2_4311",
+      "runtime_index": 1,
+      "source_id": "-6737486169677690795"
+    },
+    {
+      "dataset_index": 1128,
+      "expected_rag_behavior": "REFUSE_INFO_MISSING_IN_CONTEXT",
+      "id": "RB-NQ_gpt_-4621948696356225060_P-MissingInfo_HIGH_e18263b2_2296",
+      "runtime_index": 2,
+      "source_id": "-4621948696356225060"
+    },
+    {
+      "dataset_index": 198,
+      "expected_rag_behavior": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_claude_6608141013475408306_P-FalsePremise_HIGH_419670b7_1072",
+      "runtime_index": 3,
+      "source_id": "6608141013475408306"
+    },
+    {
+      "dataset_index": 224,
+      "expected_rag_behavior": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_claude_4433669964771756966_P-FalsePremise_LOW_ac551133_1029",
+      "runtime_index": 4,
+      "source_id": "4433669964771756966"
+    },
+    {
+      "dataset_index": 727,
+      "expected_rag_behavior": "REFUSE_INFO_MISSING_IN_CONTEXT",
+      "id": "RB-NQ_deepseek_-1602885085222027775_P-MissingInfo_HIGH_ebf5b4c3_1535",
+      "runtime_index": 5,
+      "source_id": "-1602885085222027775"
+    },
+    {
+      "dataset_index": 647,
+      "expected_rag_behavior": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_deepseek_5533906981191706877_P-FalsePremise_MEDIUM_73c9718b_1375",
+      "runtime_index": 6,
+      "source_id": "5533906981191706877"
+    },
+    {
+      "dataset_index": 871,
+      "expected_rag_behavior": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_gpt_-1373652773107850061_P-Contradiction_HIGH_5d836c06_3170",
+      "runtime_index": 7,
+      "source_id": "-1373652773107850061"
+    },
+    {
+      "dataset_index": 1051,
+      "expected_rag_behavior": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_gpt_1192279284143194020_P-GranularityMismatch_HIGH_ea2bac27_3124",
+      "runtime_index": 8,
+      "source_id": "1192279284143194020"
+    },
+    {
+      "dataset_index": 1416,
+      "expected_rag_behavior": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_nova_8350528572960416643_P-FalsePremise_LOW_ff4feeaa_4258",
+      "runtime_index": 9,
+      "source_id": "8350528572960416643"
+    },
+    {
+      "dataset_index": 368,
+      "expected_rag_behavior": "REFUSE_INFO_MISSING_IN_CONTEXT",
+      "id": "RB-NQ_claude_2202689210581594515_P-MissingInfo_MEDIUM_6b09b371_0300",
+      "runtime_index": 10,
+      "source_id": "2202689210581594515"
+    },
+    {
+      "dataset_index": 847,
+      "expected_rag_behavior": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_gpt_8282063117132135457_P-Ambiguity_MEDIUM_1cb1afe9_2543",
+      "runtime_index": 11,
+      "source_id": "8282063117132135457"
+    },
+    {
+      "dataset_index": 46,
+      "expected_rag_behavior": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_claude_-4199405438415986663_P-Ambiguity_MEDIUM_8f35a931_1328",
+      "runtime_index": 12,
+      "source_id": "-4199405438415986663"
+    },
+    {
+      "dataset_index": 134,
+      "expected_rag_behavior": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_claude_-3170493396531530980_P-EpistemicMismatch_HIGH_b8c2425f_0923",
+      "runtime_index": 13,
+      "source_id": "-3170493396531530980"
+    },
+    {
+      "dataset_index": 1065,
+      "expected_rag_behavior": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_gpt_-3655952387338820756_P-GranularityMismatch_HIGH_9cb4ef3d_2869",
+      "runtime_index": 14,
+      "source_id": "-3655952387338820756"
+    },
+    {
+      "dataset_index": 937,
+      "expected_rag_behavior": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_gpt_-3420681886890852721_P-EpistemicMismatch_HIGH_b9d989eb_3208",
+      "runtime_index": 15,
+      "source_id": "-3420681886890852721"
+    },
+    {
+      "dataset_index": 302,
+      "expected_rag_behavior": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_claude_8730028009751947933_P-GranularityMismatch_MEDIUM_6388cfeb_1299",
+      "runtime_index": 16,
+      "source_id": "8730028009751947933"
+    },
+    {
+      "dataset_index": 1590,
+      "expected_rag_behavior": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_nova_2642993931001870696_P-GranularityMismatch_HIGH_b37b7189_3984",
+      "runtime_index": 17,
+      "source_id": "2642993931001870696"
+    },
+    {
+      "dataset_index": 1589,
+      "expected_rag_behavior": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_nova_-918571312056093750_P-EpistemicMismatch_HIGH_20b18f2f_4539",
+      "runtime_index": 18,
+      "source_id": "-918571312056093750"
+    },
+    {
+      "dataset_index": 836,
+      "expected_rag_behavior": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_gpt_-5061926765893337070_P-Ambiguity_MEDIUM_d8316601_3062",
+      "runtime_index": 19,
+      "source_id": "-5061926765893337070"
+    },
+    {
+      "dataset_index": 77,
+      "expected_rag_behavior": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_claude_7363398765815807969_P-Contradiction_HIGH_52be72c2_0284",
+      "runtime_index": 20,
+      "source_id": "7363398765815807969"
+    },
+    {
+      "dataset_index": 667,
+      "expected_rag_behavior": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_deepseek_3105345941697760419_P-GranularityMismatch_HIGH_be6088ed_1743",
+      "runtime_index": 21,
+      "source_id": "3105345941697760419"
+    },
+    {
+      "dataset_index": 1447,
+      "expected_rag_behavior": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_nova_3368186292408394314_P-FalsePremise_MEDIUM_c8359c47_4413",
+      "runtime_index": 22,
+      "source_id": "3368186292408394314"
+    },
+    {
+      "dataset_index": 1427,
+      "expected_rag_behavior": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_nova_7402184777947527945_P-FalsePremise_LOW_7f4a0596_3736",
+      "runtime_index": 23,
+      "source_id": "7402184777947527945"
+    },
+    {
+      "dataset_index": 199,
+      "expected_rag_behavior": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_claude_-1650946015201779846_P-FalsePremise_HIGH_82e2a465_0162",
+      "runtime_index": 24,
+      "source_id": "-1650946015201779846"
+    },
+    {
+      "dataset_index": 979,
+      "expected_rag_behavior": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_gpt_1653574612763270615_P-EpistemicMismatch_MEDIUM_db211d9c_3549",
+      "runtime_index": 25,
+      "source_id": "1653574612763270615"
+    },
+    {
+      "dataset_index": 189,
+      "expected_rag_behavior": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_claude_6969539427365218166_P-FalsePremise_HIGH_de32f5b4_1223",
+      "runtime_index": 26,
+      "source_id": "6969539427365218166"
+    },
+    {
+      "dataset_index": 1537,
+      "expected_rag_behavior": "REFUSE_INFO_MISSING_IN_CONTEXT",
+      "id": "RB-NQ_nova_7732521529054562311_P-MissingInfo_HIGH_e1c406d1_3821",
+      "runtime_index": 27,
+      "source_id": "7732521529054562311"
+    },
+    {
+      "dataset_index": 1260,
+      "expected_rag_behavior": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_nova_-2522076069840987893_P-Contradiction_HIGH_5a493bd5_4174",
+      "runtime_index": 28,
+      "source_id": "-2522076069840987893"
+    },
+    {
+      "dataset_index": 1439,
+      "expected_rag_behavior": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_nova_5560309333336506479_P-FalsePremise_MEDIUM_335f06fd_3913",
+      "runtime_index": 29,
+      "source_id": "5560309333336506479"
+    },
+    {
+      "dataset_index": 865,
+      "expected_rag_behavior": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_gpt_-3803697286581502044_P-Contradiction_HIGH_e0e33754_3252",
+      "runtime_index": 30,
+      "source_id": "-3803697286581502044"
+    },
+    {
+      "dataset_index": 1125,
+      "expected_rag_behavior": "REFUSE_INFO_MISSING_IN_CONTEXT",
+      "id": "RB-NQ_gpt_-458159261891926107_P-MissingInfo_HIGH_388a38ba_2837",
+      "runtime_index": 31,
+      "source_id": "-458159261891926107"
+    },
+    {
+      "dataset_index": 843,
+      "expected_rag_behavior": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_gpt_-353209775069332597_P-Ambiguity_MEDIUM_05ad5cc9_2997",
+      "runtime_index": 32,
+      "source_id": "-353209775069332597"
+    },
+    {
+      "dataset_index": 1375,
+      "expected_rag_behavior": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_nova_-204697481439605710_P-EpistemicMismatch_MEDIUM_05f868be_4323",
+      "runtime_index": 33,
+      "source_id": "-204697481439605710"
+    },
+    {
+      "dataset_index": 279,
+      "expected_rag_behavior": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_claude_-1932118074616697613_P-GranularityMismatch_LOW_9ee7fafe_1209",
+      "runtime_index": 34,
+      "source_id": "-1932118074616697613"
+    },
+    {
+      "dataset_index": 910,
+      "expected_rag_behavior": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_gpt_7808442793714993461_P-Contradiction_MEDIUM_1ccc24fd_2660",
+      "runtime_index": 35,
+      "source_id": "7808442793714993461"
+    },
+    {
+      "dataset_index": 1422,
+      "expected_rag_behavior": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_nova_-9097447514182117784_P-FalsePremise_LOW_7b400606_4103",
+      "runtime_index": 36,
+      "source_id": "-9097447514182117784"
+    },
+    {
+      "dataset_index": 925,
+      "expected_rag_behavior": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_gpt_6144099837933283715_P-EpistemicMismatch_HIGH_070dfbaa_2292",
+      "runtime_index": 37,
+      "source_id": "6144099837933283715"
+    },
+    {
+      "dataset_index": 1594,
+      "expected_rag_behavior": "REFUSE_INFO_MISSING_IN_CONTEXT",
+      "id": "RB-NQ_nova_-5083423407995797659_P-MissingInfo_HIGH_c61bb12a_4163",
+      "runtime_index": 38,
+      "source_id": "-5083423407995797659"
+    },
+    {
+      "dataset_index": 476,
+      "expected_rag_behavior": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_deepseek_-4879672631592131847_P-Contradiction_HIGH_3fa7b010_1789",
+      "runtime_index": 39,
+      "source_id": "-4879672631592131847"
+    },
+    {
+      "dataset_index": 691,
+      "expected_rag_behavior": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_deepseek_4344803622779505142_P-GranularityMismatch_LOW_3cba8a1b_1616",
+      "runtime_index": 40,
+      "source_id": "4344803622779505142"
+    },
+    {
+      "dataset_index": 18,
+      "expected_rag_behavior": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_claude_-4481086743458136206_P-Ambiguity_HIGH_67c49d98_0520",
+      "runtime_index": 41,
+      "source_id": "-4481086743458136206"
+    }
+  ],
+  "repository_base_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "reserved_source_groups": 30,
+  "revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "runtime_inputs_sha256": "5d9af084b296685290f36ab5eb73c1b7b0b6a99abf4a34d31402cb33c4299f48",
+  "seed": 20261028,
+  "selected_dataset_indices": [
+    455,
+    1501,
+    1128,
+    198,
+    224,
+    727,
+    647,
+    871,
+    1051,
+    1416,
+    368,
+    847,
+    46,
+    134,
+    1065,
+    937,
+    302,
+    1590,
+    1589,
+    836,
+    77,
+    667,
+    1447,
+    1427,
+    199,
+    979,
+    189,
+    1537,
+    1260,
+    1439,
+    865,
+    1125,
+    843,
+    1375,
+    279,
+    910,
+    1422,
+    925,
+    1594,
+    476,
+    691,
+    18
+  ],
+  "selected_records": 42,
+  "selected_source_groups": 42,
+  "selection_algorithm": "metadata-only fixed holdout reservation, randomized category-slot/source-group augmenting-path matching, then seeded record choice and order shuffle",
+  "split": "test",
+  "split_records": 1600,
+  "total_source_groups": 100
+}

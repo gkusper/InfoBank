@@ -1,0 +1,37 @@
+{
+  "acceptance_condition_5_fully_satisfied": false,
+  "all_original_regressions_pass": false,
+  "base_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "exact_repository_blob_bytes_used": true,
+  "exploratory_run_policy": "Proceed only if synthetic acceptance passes and exact baseline failure set is unchanged. Report the pre-existing failure explicitly; do not claim all original tests passed.",
+  "no_new_regression_failures": true,
+  "preexisting_failure_explanation": "The committed preheldout_v3_attempt1 authorization artifact conflicts with an old plan-only test asserting its absence. No frozen artifact is removed to make this pass.",
+  "runs": {
+    "baseline": {
+      "exit_code": 1,
+      "failure_count": 1,
+      "failures": [
+        {
+          "message": "AssertionError: True is not false",
+          "test": "evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only",
+          "type": "failure"
+        }
+      ],
+      "passed": 90,
+      "tests": 91
+    },
+    "extended": {
+      "exit_code": 1,
+      "failure_count": 1,
+      "failures": [
+        {
+          "message": "AssertionError: True is not false",
+          "test": "evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only",
+          "type": "failure"
+        }
+      ],
+      "passed": 90,
+      "tests": 91
+    }
+  }
+}

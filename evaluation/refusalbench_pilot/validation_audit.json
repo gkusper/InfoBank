@@ -1,0 +1,61 @@
+{
+  "actual_embedding_calls": 0,
+  "actual_primary_generation_calls": 30,
+  "actual_upstream_classifier_calls": 0,
+  "all_checks_passed": true,
+  "checks": {
+    "all_20_baseline_outbound_queries_exact": true,
+    "all_30_api_events_success": true,
+    "all_30_outbound_contexts_exact": true,
+    "all_30_outputs_have_post_generation_reviews": true,
+    "all_30_raw_outputs_valid_and_unrepaired": true,
+    "all_original_expected_labels_unmodified": true,
+    "all_outputs_finished_without_truncation": true,
+    "all_preexisting_tracked_files_unchanged": true,
+    "api_key_not_present_in_delivered_files": true,
+    "cases_checksum_matches": true,
+    "exact_model_temperature_output_limit": true,
+    "exact_selection_count": true,
+    "exactly_30_unique_primary_requests": true,
+    "final_test_report_has_no_errors_or_failures": true,
+    "frozen_python_and_runtime_hashes_unchanged": true,
+    "no_forbidden_fields_in_outbound_payloads": true,
+    "no_metadata_encoding_original_ids_in_prompts": true,
+    "no_original_tracked_git_diff": true,
+    "no_raw_generation_responses_changed_by_scoring": true,
+    "report_has_all_original_ids": true,
+    "runtime_checksum_matches": true,
+    "runtime_matches_original_records": true,
+    "runtime_only_two_allowed_fields": true,
+    "summary_calls_tokens_and_accuracy_consistent": true,
+    "ten_deterministic_audits_separate_zero_api_calls": true
+  },
+  "expected_labels": {
+    "REFUSE_AMBIGUOUS_QUERY": 10
+  },
+  "known_existing_limitations": [
+    "CFAF realization does not receive the query; the eight-stage system input does.",
+    "UNKNOWN role is an absence of semantic inference and causes blanket abstention.",
+    "Generic CFAF refusal has no measurable original reason category or factual answer.",
+    "Context support reviews are unblinded report-author annotations, not independent human judgements."
+  ],
+  "original_tracked_files_verified": 381,
+  "regression_test_side_effects_restored": [
+    "evaluation/wolala2026/data_inventory.json",
+    "evaluation/wolala2026/example_internal_trace.json",
+    "evaluation/wolala2026/smoke_results.json"
+  ],
+  "source_and_runtime_frozen_before_first_call": true,
+  "test_report_testsuite_attributes": [
+    {
+      "errors": "0",
+      "failures": "0",
+      "hostname": "KusperGabor-RRF",
+      "name": "pytest",
+      "skipped": "0",
+      "tests": "61",
+      "time": "0.861",
+      "timestamp": "2026-10-28T10:25:36.927384+01:00"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+Added files relative to InfoBank repository root. No original tracked files modified or deleted.
+
+evaluation/refusalbench_pilot/CHANGED_FILES.txt
+evaluation/refusalbench_pilot/README.md
+evaluation/refusalbench_pilot/REPORT.md
+evaluation/refusalbench_pilot/adapter.py
+evaluation/refusalbench_pilot/api_events.jsonl
+evaluation/refusalbench_pilot/api_requests.jsonl
+evaluation/refusalbench_pilot/cases.jsonl
+evaluation/refusalbench_pilot/checksums.sha256
+evaluation/refusalbench_pilot/dataset_provenance.json
+evaluation/refusalbench_pilot/deterministic_audit.jsonl
+evaluation/refusalbench_pilot/generation_manifest.json
+evaluation/refusalbench_pilot/generation_results.jsonl
+evaluation/refusalbench_pilot/original_tracked_sha256.json
+evaluation/refusalbench_pilot/prerun_protocol.json
+evaluation/refusalbench_pilot/requirements.lock.txt
+evaluation/refusalbench_pilot/response_reviews.jsonl
+evaluation/refusalbench_pilot/results.jsonl
+evaluation/refusalbench_pilot/run_experiment.py
+evaluation/refusalbench_pilot/runtime_inputs.jsonl
+evaluation/refusalbench_pilot/scoring.py
+evaluation/refusalbench_pilot/summary.json
+evaluation/refusalbench_pilot/test_refusalbench.py
+evaluation/refusalbench_pilot/test_results.xml
+evaluation/refusalbench_pilot/validation_audit.json

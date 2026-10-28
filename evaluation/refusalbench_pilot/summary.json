@@ -1,0 +1,182 @@
+{
+  "actual_api_blocker": null,
+  "actual_generation_api_attempts": 30,
+  "cases_selected": 10,
+  "cases_sha256": "079bf26f98ca718487f71114e7935137042b3722324df7aa36691d5003454c8a",
+  "dataset_revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "expected_label_distribution": {
+    "REFUSE_AMBIGUOUS_QUERY": 10
+  },
+  "indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "interpretation_procedure": "strict-declared-json-v1",
+  "modified_original_tracked_files": [],
+  "post_generation_code_changes": [],
+  "repository_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "statistical_inference_performed": false,
+  "systems": {
+    "cfaf_pipeline": {
+      "actual_classifier_api_calls": 0,
+      "actual_embedding_api_calls": 0,
+      "actual_generation_api_attempts": 10,
+      "attempted_cases": 10,
+      "binary_accuracy": 1.0,
+      "binary_accuracy_denominator": 10,
+      "confusion_matrix": {
+        "CFAF->CFAF": 10
+      },
+      "context_support_counts": {},
+      "context_support_reviewed": 0,
+      "correct_binary_classifications": 10,
+      "correct_specific_reason_coverage_of_expected_refusals": 0.0,
+      "errors_by_expected_category": {},
+      "expected_refusal_cases": 10,
+      "full_answer_review_coverage": null,
+      "input_tokens": 4702,
+      "interpretable_cases": 10,
+      "latency_ms": {
+        "max": 2302.2459000349045,
+        "mean": 1885.3573699947447,
+        "median": 1823.0596999637783,
+        "min": 1608.4657001774758,
+        "n": 10
+      },
+      "not_executed": 0,
+      "output_interpretation_errors": 0,
+      "output_tokens": 774,
+      "predicted_modes": {
+        "CFAF": 10
+      },
+      "retries": 0,
+      "reviewed_full_answers": 0,
+      "runtime_errors": 0,
+      "scheduled_cases": 10,
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "success_and_correct_fraction_of_scheduled": 1.0,
+      "successful_cases": 10,
+      "token_usage_known_cases": 10,
+      "unnecessary_refusal_opportunities": 0,
+      "unnecessary_refusal_rate": null,
+      "unnecessary_refusals": 0,
+      "unsupported_full_answers": 0
+    },
+    "prompt_only_control": {
+      "actual_classifier_api_calls": 0,
+      "actual_embedding_api_calls": 0,
+      "actual_generation_api_attempts": 10,
+      "attempted_cases": 10,
+      "binary_accuracy": 0.0,
+      "binary_accuracy_denominator": 10,
+      "confusion_matrix": {
+        "CFAF->FULL": 10
+      },
+      "context_support_counts": {
+        "False": 2,
+        "True": 8
+      },
+      "context_support_reviewed": 10,
+      "correct_binary_classifications": 0,
+      "correct_specific_reason_coverage_of_expected_refusals": 0.0,
+      "errors_by_expected_category": {
+        "REFUSE_AMBIGUOUS_QUERY": 10
+      },
+      "expected_refusal_cases": 10,
+      "full_answer_review_coverage": 1.0,
+      "input_tokens": 4353,
+      "interpretable_cases": 10,
+      "latency_ms": {
+        "max": 2752.636499935761,
+        "mean": 1722.010360029526,
+        "median": 1631.3004499534145,
+        "min": 1275.6422001402825,
+        "n": 10
+      },
+      "not_executed": 0,
+      "output_interpretation_errors": 0,
+      "output_tokens": 702,
+      "predicted_modes": {
+        "FULL": 10
+      },
+      "retries": 0,
+      "reviewed_full_answers": 10,
+      "runtime_errors": 0,
+      "scheduled_cases": 10,
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "success_and_correct_fraction_of_scheduled": 0.0,
+      "successful_cases": 10,
+      "token_usage_known_cases": 10,
+      "unnecessary_refusal_opportunities": 0,
+      "unnecessary_refusal_rate": null,
+      "unnecessary_refusals": 0,
+      "unsupported_full_answers": 2
+    },
+    "standard_rag": {
+      "actual_classifier_api_calls": 0,
+      "actual_embedding_api_calls": 0,
+      "actual_generation_api_attempts": 10,
+      "attempted_cases": 10,
+      "binary_accuracy": 0.0,
+      "binary_accuracy_denominator": 10,
+      "confusion_matrix": {
+        "CFAF->FULL": 10
+      },
+      "context_support_counts": {
+        "False": 3,
+        "True": 7
+      },
+      "context_support_reviewed": 10,
+      "correct_binary_classifications": 0,
+      "correct_specific_reason_coverage_of_expected_refusals": 0.0,
+      "errors_by_expected_category": {
+        "REFUSE_AMBIGUOUS_QUERY": 10
+      },
+      "expected_refusal_cases": 10,
+      "full_answer_review_coverage": 1.0,
+      "input_tokens": 3693,
+      "interpretable_cases": 10,
+      "latency_ms": {
+        "max": 2783.316400134936,
+        "mean": 1726.914620003663,
+        "median": 1687.430499936454,
+        "min": 1249.5045000687242,
+        "n": 10
+      },
+      "not_executed": 0,
+      "output_interpretation_errors": 0,
+      "output_tokens": 663,
+      "predicted_modes": {
+        "FULL": 10
+      },
+      "retries": 0,
+      "reviewed_full_answers": 10,
+      "runtime_errors": 0,
+      "scheduled_cases": 10,
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "success_and_correct_fraction_of_scheduled": 0.0,
+      "successful_cases": 10,
+      "token_usage_known_cases": 10,
+      "unnecessary_refusal_opportunities": 0,
+      "unnecessary_refusal_rate": null,
+      "unnecessary_refusals": 0,
+      "unsupported_full_answers": 3
+    }
+  },
+  "unique_cases_with_any_successful_real_execution": 10,
+  "validity_limit": "Conservative UNKNOWN-role integration pilot; not an independent semantic CFAF benchmark validation."
+}

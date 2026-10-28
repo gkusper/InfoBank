@@ -1,0 +1,49 @@
+{
+  "cases_sha256": "079bf26f98ca718487f71114e7935137042b3722324df7aa36691d5003454c8a",
+  "checksum_serialization": "JSONL, sorted keys, ensure_ascii=True, separators=(',', ':'), UTF-8, LF after every record",
+  "dataset": "aashiqmuhamed/RefusalBench-NQ",
+  "dataset_fingerprint": "beb22f4809f5f1dd",
+  "experimental_branch": "experiment/refusalbench-nq-pilot",
+  "original_ids": [
+    "RB-NQ_claude_4925057086725798331_P-Ambiguity_HIGH_bd0591c4_1145",
+    "RB-NQ_claude_5911119091653953181_P-Ambiguity_HIGH_a7ae85a6_0196",
+    "RB-NQ_claude_-8359866474144720253_P-Ambiguity_HIGH_8b8037bb_0073",
+    "RB-NQ_claude_-2382302837416986186_P-Ambiguity_HIGH_0dbd6c95_0483",
+    "RB-NQ_claude_-6924600758326460563_P-Ambiguity_HIGH_3d9b445d_0443",
+    "RB-NQ_claude_-7941948650465895222_P-Ambiguity_HIGH_cc6cb691_0416",
+    "RB-NQ_claude_7610758795954724809_P-Ambiguity_HIGH_0b0c28ef_0240",
+    "RB-NQ_claude_-1176280233636154422_P-Ambiguity_HIGH_5d07a713_0182",
+    "RB-NQ_claude_1023450971555923009_P-Ambiguity_HIGH_d5734c53_0967",
+    "RB-NQ_claude_1803248910342766083_P-Ambiguity_HIGH_6a5fbb53_0168"
+  ],
+  "prepared_at_utc": "2026-10-28T09:24:28.630348+00:00",
+  "protected_source_sha256": {
+    "backend_python/controlled_failure.py": "1889142523cacf79e3455ec2c3fedd838388460ed832c8faa0bad50fd1b6450c",
+    "backend_python/relevance.py": "f2de380b6297d0b8b49cabfc7a5f63317a178ba11e108bccd6cef9b2a10799f2",
+    "evaluation/wolala2026/adapters.py": "31fa045a64cfcfbb99f9700c068db3872adab88b0bb0a2f96db3efe320964a20",
+    "evaluation/wolala2026/pipeline.py": "c0ebb6c1b68a880353ad0cdd2cedcef7f91d0d975c2b24dcc2b8c045661d21e6",
+    "evaluation/wolala2026/prompts/cfaf_generator_v1.txt": "5dda46e8d6ed9261696d5d3bb119f9cc788e8283754fe3a4d629768e888575a7",
+    "evaluation/wolala2026/prompts/prompt_only_v1.txt": "eee7bee18480bdfdb0eeddcf38b9cfa948dad7a8bf73cc69d47a7c87f768a892",
+    "evaluation/wolala2026/real_api.py": "d485486e9086874b38b8ddac92ee42f422b85ae351d81faf0be487f9f6db0ab0",
+    "evaluation/wolala2026/run_pilot.py": "c6d48171f80f881d968633b74d63c4d6e6dd7a8235aefe3b6929d9a3302a64f4"
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "repository_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "runtime_inputs_sha256": "0046300c2a81a1f7f1880d5f2ee44a7c53909e93844795fb4ff74bd71d287339",
+  "selected_indices": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9
+  ],
+  "selection": "load_dataset(dataset, split='test', revision=revision).select(range(10))",
+  "split": "test",
+  "split_size": 1600
+}

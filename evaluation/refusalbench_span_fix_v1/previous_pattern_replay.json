@@ -1,0 +1,47 @@
+[
+  {
+    "previous_case_index": 12,
+    "previous_failure_pattern": "invented ellipsis",
+    "catalogue_spans": 2,
+    "all_character_offsets_covered": true,
+    "all_extractions_exact": true,
+    "model_calls": 0,
+    "previous_predictions_or_scores_recomputed": false
+  },
+  {
+    "previous_case_index": 23,
+    "previous_failure_pattern": "added quotation mark",
+    "catalogue_spans": 1,
+    "all_character_offsets_covered": true,
+    "all_extractions_exact": true,
+    "model_calls": 0,
+    "previous_predictions_or_scores_recomputed": false
+  },
+  {
+    "previous_case_index": 30,
+    "previous_failure_pattern": "changed capitalization",
+    "catalogue_spans": 2,
+    "all_character_offsets_covered": true,
+    "all_extractions_exact": true,
+    "model_calls": 0,
+    "previous_predictions_or_scores_recomputed": false
+  },
+  {
+    "previous_case_index": 36,
+    "previous_failure_pattern": "modified punctuation",
+    "catalogue_spans": 1,
+    "all_character_offsets_covered": true,
+    "all_extractions_exact": true,
+    "model_calls": 0,
+    "previous_predictions_or_scores_recomputed": false
+  },
+  {
+    "previous_case_index": 39,
+    "previous_failure_pattern": "removed Markdown emphasis",
+    "catalogue_spans": 1,
+    "all_character_offsets_covered": true,
+    "all_extractions_exact": true,
+    "model_calls": 0,
+    "previous_predictions_or_scores_recomputed": false
+  }
+]

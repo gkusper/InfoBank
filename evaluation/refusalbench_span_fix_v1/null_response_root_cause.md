@@ -1,0 +1,11 @@
+# Null-response root cause
+
+The old run has 35 JSON `answer: null` values among 42 shared-control outputs. These values already occur inside the raw API message's JSON content. All 42 messages are valid returned JSON strings and finish with `stop`; this is not a transport-level null message, truncation, parser data loss or an adapter dropping a refusal.
+
+The outbound generation setting was `response_format: {"type":"json_object"}` on all 42 calls. It guaranteed JSON syntax, not a typed response schema. The shared prompt requested fields and asked for an explanation but never specified that `answer` must be a nonempty string on abstention. Its semantic input legitimately used `answer_candidate: null` to mean no prepared factual answer; every one of the 35 null public answers received that null candidate. Non-null outputs were the seven FULL cases. This is consistent with the model using absence of a factual candidate as absence of public answer text. Internal model causation is not observable; the precise confirmed defect is the missing/enforced public response contract and insufficient prompt distinction between semantic candidate and public explanation.
+
+The parser preserved the API output. The scorer consistently rejected null under the intended public-text contract; it was not wrongly rejecting a representation explicitly authorized by that contract. Accepting null after seeing results would retroactively change the experiment. No old output, annotation or score is rewritten.
+
+The new pilot uses a shared strict JSON Schema for every generated system: `answer` is a string; `top_level_mode` is FULL or CFAF; all six fields are required and extra fields prohibited. Explicit common instructions require nonempty user-visible text for FULL and CFAF and explain that a null semantic candidate must never be copied into the public answer. A local validator also rejects whitespace/empty text. The shared control remains free to choose FULL/CFAF. Raw violations remain errors; no replacement text is injected after generation.
+
+The new live outcome is recorded separately in REPORT.md and summary.json. Schema validity does not prove that a refusal reason or factual answer is correct.

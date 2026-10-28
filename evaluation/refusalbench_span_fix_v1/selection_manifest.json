@@ -1,0 +1,99 @@
+{
+  "cases_sha256": "54fe025c056a65686d327e0c27892fa6a925e1e83a93894ae157df3e9f2fb0a2",
+  "counts": {
+    "ANSWER_CORRECTLY": 5,
+    "REFUSE_AMBIGUOUS_QUERY": 1,
+    "REFUSE_CONTRADICTORY_CONTEXT": 1,
+    "REFUSE_FALSE_PREMISE_IN_QUERY": 1,
+    "REFUSE_GRANULARITY_MISMATCH": 1,
+    "REFUSE_NONFACTUAL_QUERY": 1
+  },
+  "dataset_revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "distinct_groups": 10,
+  "records": [
+    {
+      "dataset_index": 990,
+      "expected_label": "REFUSE_FALSE_PREMISE_IN_QUERY",
+      "id": "RB-NQ_gpt_-918571312056093750_P-FalsePremise_HIGH_d5103b78_3506",
+      "index": 0,
+      "reused_record": false,
+      "source_id": "-918571312056093750"
+    },
+    {
+      "dataset_index": 217,
+      "expected_label": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_claude_-3655952387338820756_P-FalsePremise_LOW_acb69f06_0635",
+      "index": 1,
+      "reused_record": false,
+      "source_id": "-3655952387338820756"
+    },
+    {
+      "dataset_index": 1008,
+      "expected_label": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_gpt_-2522076069840987893_P-FalsePremise_LOW_61ce264c_3042",
+      "index": 2,
+      "reused_record": false,
+      "source_id": "-2522076069840987893"
+    },
+    {
+      "dataset_index": 682,
+      "expected_label": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_deepseek_2202689210581594515_P-GranularityMismatch_LOW_13279f91_1570",
+      "index": 3,
+      "reused_record": false,
+      "source_id": "2202689210581594515"
+    },
+    {
+      "dataset_index": 137,
+      "expected_label": "REFUSE_NONFACTUAL_QUERY",
+      "id": "RB-NQ_claude_5533906981191706877_P-EpistemicMismatch_HIGH_5b9826f3_0019",
+      "index": 4,
+      "reused_record": false,
+      "source_id": "5533906981191706877"
+    },
+    {
+      "dataset_index": 1495,
+      "expected_label": "REFUSE_GRANULARITY_MISMATCH",
+      "id": "RB-NQ_nova_-204697481439605710_P-GranularityMismatch_MEDIUM_454fbe6f_4321",
+      "index": 5,
+      "reused_record": false,
+      "source_id": "-204697481439605710"
+    },
+    {
+      "dataset_index": 1356,
+      "expected_label": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_nova_5560309333336506479_P-EpistemicMismatch_LOW_c4bf9d0c_3916",
+      "index": 6,
+      "reused_record": false,
+      "source_id": "5560309333336506479"
+    },
+    {
+      "dataset_index": 59,
+      "expected_label": "REFUSE_AMBIGUOUS_QUERY",
+      "id": "RB-NQ_claude_-3170493396531530980_P-Ambiguity_MEDIUM_32a8d10b_0909",
+      "index": 7,
+      "reused_record": false,
+      "source_id": "-3170493396531530980"
+    },
+    {
+      "dataset_index": 468,
+      "expected_label": "REFUSE_CONTRADICTORY_CONTEXT",
+      "id": "RB-NQ_deepseek_8730028009751947933_P-Contradiction_HIGH_24f29ef2_2187",
+      "index": 8,
+      "reused_record": false,
+      "source_id": "8730028009751947933"
+    },
+    {
+      "dataset_index": 873,
+      "expected_label": "ANSWER_CORRECTLY",
+      "id": "RB-NQ_gpt_8282063117132135457_P-Contradiction_LOW_4851f33a_2544",
+      "index": 9,
+      "reused_record": false,
+      "source_id": "8282063117132135457"
+    }
+  ],
+  "reused_records": 0,
+  "runtime_sha256": "910f6a68808240117b38e655af24e36cd2c82c0eefa16828329a997aefe2ac4c",
+  "seed": 20261028,
+  "source_group_policy": "Only previous 42 development groups; no reserved or extra untouched group text selected"
+}

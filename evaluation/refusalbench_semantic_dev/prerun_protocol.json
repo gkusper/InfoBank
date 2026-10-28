@@ -1,0 +1,90 @@
+{
+  "additional_validation_api_calls": 0,
+  "cases": 42,
+  "diagnostic_run_caveat": "Strict acceptance condition 5 is unmet if the original suite is not fully green; proceed only as explicitly documented development diagnostics with unchanged baseline failures.",
+  "embedding_calls": 0,
+  "frozen_at_utc": "2026-10-28T13:26:12.734202+00:00",
+  "frozen_prompts_file_sha256": "92d5ed2e136db7cb600ec72c4d2e1ac3f2643680f8b9c72f7ff6606de9fead3f",
+  "generation_max_output_tokens": 160,
+  "hard_api_attempt_cap": 225,
+  "max_retries": 0,
+  "model": "gpt-4o-mini",
+  "no_new_regression_failures": true,
+  "original_regression_suite_fully_green": false,
+  "planned_api_attempts": 210,
+  "planned_generation_calls": 168,
+  "planned_semantic_calls": 42,
+  "preexisting_regression_failures": [
+    {
+      "message": "AssertionError: True is not false",
+      "test": "evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only",
+      "type": "failure"
+    }
+  ],
+  "prompt_sha256": {
+    "cfaf_semantic": "de77f0ca703c1aac0fe1388be69fd43d2daf8f4f826179511195af3ac0a60316",
+    "prompt_only_control": "ec0c586b26b3aa28a76474af5f0fd6c9bf9fc91073916c769aad4d16c762d852",
+    "semantic_analysis": "d4f792dca32e6d9def87d01b89f12f58cdc079c88c026f882d2529efb8bf130d",
+    "semantic_prompt_control": "d7e7e57ec3f9abef0c35896b69e524c2df2eb4ef31b68ec399adb84d46f2615b",
+    "standard_rag": "2b9870b0c8541f4e2ac6f235d59681df3848016745e13efcfbac38f3ca740e8a"
+  },
+  "regression_comparison_sha256": "7c645d23d899fc1b071719c31995ffc9faaa5c0c2ea8507ba5334d5106638b07",
+  "repetitions": 1,
+  "response_support": "benchmark behavior labels are not answer-support gold; exact quote occurrence is mechanical only; unassessed support remains null",
+  "runtime_inputs_sha256": "5d9af084b296685290f36ab5eb73c1b7b0b6a99abf4a34d31402cb33c4299f48",
+  "scoring": "strict raw JSON mode; failed analysis/parser/validation is ERROR, never credited as fallback CFAF; all 42 scheduled cases in accuracy denominator",
+  "semantic_analysis_max_output_tokens": 1500,
+  "semantic_analysis_shared_per_case": 1,
+  "source_sha256": {
+    "evaluation/refusalbench_semantic_dev/api_budget.py": "58e98bedc965cde3031ae67fd78400a095f51e6267bc25d22c62353634370850",
+    "evaluation/refusalbench_semantic_dev/run_experiment.py": "e45470e85b38b8cdf74450709f2ab8c1e593c514a0a33a765a0d67259c6d4e40",
+    "evaluation/refusalbench_semantic_dev/sample_development_cases.py": "ad6882344d329c413a62ae1f80832fda9a148b0592f414fab23cb9579bc6985b",
+    "evaluation/refusalbench_semantic_dev/scoring.py": "a0d4eac3d6187b7501d35c009ade359892319af651c2a8abc2961768c1a12270",
+    "evaluation/refusalbench_semantic_dev/semantic_adapter.py": "cbef311f9a3fb93a369787f4ba93aa1a07874314e1f990458a0a2499031928dd",
+    "evaluation/refusalbench_semantic_dev/test_experiment.py": "90e8e6d32ed36035f7e5582b6438aafda8ca47b97b0184175ece34a4abcabc0a",
+    "evaluation/refusalbench_semantic_dev/test_semantic.py": "a24cd40d0d0c0106a07225dcf35d15d0c22ceb2e397be1d2e2549322bb2b8400",
+    "evaluation/refusalbench_semantic_dev/verify_regressions.py": "75fc1d19f1306d665522ba704c182cb7e46619961b9be9b11faa6081fa1d509a",
+    "evaluation/wolala2026/__init__.py": "a85bea193439ca9fd5e6e7d9f9f4d5d74ad5bcfd4b55a5a445c9d0e8afcb861b",
+    "evaluation/wolala2026/adapters.py": "31fa045a64cfcfbb99f9700c068db3872adab88b0bb0a2f96db3efe320964a20",
+    "evaluation/wolala2026/analyze_heldout.py": "8fe36566002836e0693646c841c45ebaa2d2423ecd41e72c529cabb306532a7b",
+    "evaluation/wolala2026/common.py": "cc0c1f6f311a4be1d6dfff902debdeded7d5774ee1bc31e980d0989749dc662f",
+    "evaluation/wolala2026/data_readiness.py": "35efba5eda43881f4a487b32cf64576d44ba803a1552b1a139ace5c8abad614d",
+    "evaluation/wolala2026/execution_spec.py": "845e70ff20b97d2d8e9ab90bf96561cf33995412d50a581f84a206b050a61ce4",
+    "evaluation/wolala2026/generate_heldout_v3.py": "f95b4ca43f5aa57cff48ba23f6c4dc12333cf31151a14cc2244b39e91462ab80",
+    "evaluation/wolala2026/labels.py": "ab46b364e06e2aa01c9c1cb3874ca7830e12e86ccf639e6107051ee0a24d0f78",
+    "evaluation/wolala2026/latency_analysis.py": "0447a376acd0c10d2eb6e258c51105c9075ec0ccce5829a4e6b6b3d90266e099",
+    "evaluation/wolala2026/pilot_data.py": "54e1b842cbc4016cc0f7d1ae67712dac7c85f211e3afb0489ba228d6e76ecebe",
+    "evaluation/wolala2026/pipeline.py": "c0ebb6c1b68a880353ad0cdd2cedcef7f91d0d975c2b24dcc2b8c045661d21e6",
+    "evaluation/wolala2026/prepare_heldout_v3_freeze.py": "229c9a532cf2c9c6d5e2e7dfa4b1859a9c4a07f5ca03fc1344b38a34f110eac1",
+    "evaluation/wolala2026/prompts/cfaf_generator_v1.txt": "5dda46e8d6ed9261696d5d3bb119f9cc788e8283754fe3a4d629768e888575a7",
+    "evaluation/wolala2026/prompts/prompt_only_v1.txt": "eee7bee18480bdfdb0eeddcf38b9cfa948dad7a8bf73cc69d47a7c87f768a892",
+    "evaluation/wolala2026/real_api.py": "d485486e9086874b38b8ddac92ee42f422b85ae351d81faf0be487f9f6db0ab0",
+    "evaluation/wolala2026/retrieval.py": "89180194fb2a05d28885867c8eae47537926be0639e18ab079fd62d094c12b39",
+    "evaluation/wolala2026/retry_policy.py": "4bbad26535ed34d4c6c50a2d5ae5f78876da76b7ccd01834323c569e675b5abe",
+    "evaluation/wolala2026/run_manifest.py": "806db1610c390a0558e6843800f323aa1d7b010146fec9ae33d56bfe9f1db3da",
+    "evaluation/wolala2026/run_pilot.py": "c6d48171f80f881d968633b74d63c4d6e6dd7a8235aefe3b6929d9a3302a64f4",
+    "evaluation/wolala2026/run_smoke.py": "568baa63c7739fcd4773d87dd9c2030e45dbd8df2c2239975c7f7caf84bc0c8a",
+    "evaluation/wolala2026/score_pilot.py": "ffe8aa67da3341a71cf0b37bdeeab59d8a30eef564aa6084566fbda815cb9a28",
+    "evaluation/wolala2026/semantic_evidence.py": "9b4eba92e26d14ba09caf53f74e1558f70e9970809b80ae6d31c2679c0aa011d",
+    "evaluation/wolala2026/yaml_util.py": "c9046317eb3c62ab1dae70b599effcc94135a04e15f7abdab87cc3519963491c"
+  },
+  "systems": [
+    "standard_rag",
+    "prompt_only_control",
+    "cfaf_semantic",
+    "semantic_prompt_control"
+  ],
+  "temperature": 0,
+  "tests": [
+    {
+      "file": "acceptance_tests.xml",
+      "sha256": "7df90d266bbb6d3c378aac77cc5131b9329c18508f7353b75e498021b6773423",
+      "tests": 43
+    },
+    {
+      "file": "regression_tests.xml",
+      "sha256": "091572a495cc7463f282cd6a8b2df1ee7734e8dfa45f1a1129de5c44f985ac97",
+      "tests": 91
+    }
+  ]
+}

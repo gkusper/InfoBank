@@ -1,0 +1,69 @@
+{
+  "all_full_realizations_copy_candidate": true,
+  "cfaf_including_analysis_mean_ms": 4838.156780926511,
+  "evidence_role_counts": {
+    "CONTEXTUAL": 1,
+    "PRIMARY": 7,
+    "UNKNOWN": 34
+  },
+  "independent_human_adjudication_available": false,
+  "mode_selection_rule_violations": [],
+  "output_contract_validation_counts": {
+    "PASS": 42
+  },
+  "premise_status_counts": {
+    "NOT_APPLICABLE": 4,
+    "SUPPORTED": 7,
+    "UNESTABLISHED": 31
+  },
+  "query_status_counts": {
+    "NONFACTUAL": 4,
+    "SPECIFIED": 33,
+    "UNKNOWN": 5
+  },
+  "quote_validation_failures": [
+    {
+      "errors": [
+        "INVALID_SUPPORTING_SPANS_QUOTE"
+      ],
+      "index": 12
+    },
+    {
+      "errors": [
+        "INVALID_SUPPORTING_SPANS_QUOTE"
+      ],
+      "index": 23
+    },
+    {
+      "errors": [
+        "INVALID_SUPPORTING_SPANS_QUOTE"
+      ],
+      "index": 30
+    },
+    {
+      "errors": [
+        "INVALID_SUPPORTING_SPANS_QUOTE"
+      ],
+      "index": 36
+    },
+    {
+      "errors": [
+        "INVALID_SUPPORTING_SPANS_QUOTE"
+      ],
+      "index": 39
+    }
+  ],
+  "raw_shared_assessment_mode_agreement": {
+    "agree": 42,
+    "n": 42,
+    "post_generation_diagnostic": true,
+    "primary_scoring_unchanged": true
+  },
+  "semantic_analysis_mean_ms": 2610.9978571268066,
+  "shared_control_including_analysis_mean_ms": 4488.130171406305,
+  "support_status_counts": {
+    "MISSING": 30,
+    "SUFFICIENT": 7,
+    "UNKNOWN": 5
+  }
+}

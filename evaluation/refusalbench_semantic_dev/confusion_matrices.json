@@ -1,0 +1,74 @@
+{
+  "always_cfaf": {
+    "CFAF": {
+      "CFAF": 36,
+      "ERROR": 0,
+      "FULL": 0
+    },
+    "FULL": {
+      "CFAF": 6,
+      "ERROR": 0,
+      "FULL": 0
+    }
+  },
+  "always_full": {
+    "CFAF": {
+      "CFAF": 0,
+      "ERROR": 0,
+      "FULL": 36
+    },
+    "FULL": {
+      "CFAF": 0,
+      "ERROR": 0,
+      "FULL": 6
+    }
+  },
+  "cfaf_semantic": {
+    "CFAF": {
+      "CFAF": 27,
+      "ERROR": 3,
+      "FULL": 6
+    },
+    "FULL": {
+      "CFAF": 3,
+      "ERROR": 2,
+      "FULL": 1
+    }
+  },
+  "prompt_only_control": {
+    "CFAF": {
+      "CFAF": 0,
+      "ERROR": 8,
+      "FULL": 28
+    },
+    "FULL": {
+      "CFAF": 0,
+      "ERROR": 0,
+      "FULL": 6
+    }
+  },
+  "semantic_prompt_control": {
+    "CFAF": {
+      "CFAF": 0,
+      "ERROR": 30,
+      "FULL": 6
+    },
+    "FULL": {
+      "CFAF": 0,
+      "ERROR": 5,
+      "FULL": 1
+    }
+  },
+  "standard_rag": {
+    "CFAF": {
+      "CFAF": 0,
+      "ERROR": 1,
+      "FULL": 35
+    },
+    "FULL": {
+      "CFAF": 0,
+      "ERROR": 0,
+      "FULL": 6
+    }
+  }
+}

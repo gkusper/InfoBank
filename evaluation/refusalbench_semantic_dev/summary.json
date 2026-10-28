@@ -1,0 +1,710 @@
+{
+  "actual_generation_attempts": 168,
+  "actual_semantic_analysis_attempts": 42,
+  "actual_total_api_attempts": 210,
+  "assessment_prompt_control_incremental_calls": 42,
+  "cases": 42,
+  "dataset_revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "distinct_source_groups": 42,
+  "expected_category_counts": {
+    "ANSWER_CORRECTLY": 6,
+    "REFUSE_AMBIGUOUS_QUERY": 6,
+    "REFUSE_CONTRADICTORY_CONTEXT": 6,
+    "REFUSE_FALSE_PREMISE_IN_QUERY": 6,
+    "REFUSE_GRANULARITY_MISMATCH": 6,
+    "REFUSE_INFO_MISSING_IN_CONTEXT": 6,
+    "REFUSE_NONFACTUAL_QUERY": 6
+  },
+  "experiment_type": "development; not independent final validation",
+  "holdout_text_inspected": false,
+  "independent_human_response_review_available": false,
+  "inferential_significance_claims": false,
+  "modified_predevelopment_files": [],
+  "protected_predevelopment_files_verified": 405,
+  "reserved_holdout_records": 455,
+  "reserved_holdout_source_groups": 30,
+  "seed": 20261028,
+  "semantic_analysis_input_tokens": 32307,
+  "semantic_analysis_invalid_cases": 5,
+  "semantic_analysis_output_tokens": 6968,
+  "semantic_analysis_valid_cases": 37,
+  "support_gold_available": false,
+  "systems": {
+    "always_cfaf": {
+      "accuracy": 0.8571428571428571,
+      "automatic_exact_extractive_full_answers": 0,
+      "balanced_accuracy": 0.5,
+      "cfaf_precision": 0.8571428571428571,
+      "cfaf_recall": 1.0,
+      "confusion_matrix": {
+        "CFAF": {
+          "CFAF": 36,
+          "ERROR": 0,
+          "FULL": 0
+        },
+        "FULL": {
+          "CFAF": 6,
+          "ERROR": 0,
+          "FULL": 0
+        }
+      },
+      "correctly_grounded_complete_full_responses_observed": 0,
+      "execution_status_counts": {
+        "REFERENCE": 42
+      },
+      "failure_to_restrict_count": 0,
+      "failure_to_restrict_rate": 0.0,
+      "full_precision": null,
+      "full_recall": 0.0,
+      "full_response_support_unmeasurable_or_unreviewed": 0,
+      "generated_full_responses": 0,
+      "generation_api_attempts": 0,
+      "generation_latency_ms": null,
+      "generic_abstentions_without_specific_category": 0,
+      "incremental_generation_input_tokens": 0,
+      "incremental_generation_output_tokens": 0,
+      "independently_reviewed_full_responses": 0,
+      "mode_prose_agreement": {},
+      "n": 42,
+      "parser_or_runtime_or_validation_errors": 0,
+      "per_category": {
+        "ANSWER_CORRECTLY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_AMBIGUOUS_QUERY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_CONTRADICTORY_CONTEXT": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_FALSE_PREMISE_IN_QUERY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_GRANULARITY_MISMATCH": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_INFO_MISSING_IN_CONTEXT": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_NONFACTUAL_QUERY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        }
+      },
+      "reason_justification_correctness": "UNMEASURABLE_FROM_BEHAVIOR_LABEL_ALONE",
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "unnecessary_refusal_count": 6,
+      "unnecessary_refusal_rate": 1.0,
+      "unsupported_full_responses_observed": 0
+    },
+    "always_full": {
+      "accuracy": 0.14285714285714285,
+      "automatic_exact_extractive_full_answers": 0,
+      "balanced_accuracy": 0.5,
+      "cfaf_precision": null,
+      "cfaf_recall": 0.0,
+      "confusion_matrix": {
+        "CFAF": {
+          "CFAF": 0,
+          "ERROR": 0,
+          "FULL": 36
+        },
+        "FULL": {
+          "CFAF": 0,
+          "ERROR": 0,
+          "FULL": 6
+        }
+      },
+      "correctly_grounded_complete_full_responses_observed": 0,
+      "execution_status_counts": {
+        "REFERENCE": 42
+      },
+      "failure_to_restrict_count": 36,
+      "failure_to_restrict_rate": 1.0,
+      "full_precision": 0.14285714285714285,
+      "full_recall": 1.0,
+      "full_response_support_unmeasurable_or_unreviewed": 0,
+      "generated_full_responses": 0,
+      "generation_api_attempts": 0,
+      "generation_latency_ms": null,
+      "generic_abstentions_without_specific_category": 0,
+      "incremental_generation_input_tokens": 0,
+      "incremental_generation_output_tokens": 0,
+      "independently_reviewed_full_responses": 0,
+      "mode_prose_agreement": {},
+      "n": 42,
+      "parser_or_runtime_or_validation_errors": 0,
+      "per_category": {
+        "ANSWER_CORRECTLY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_AMBIGUOUS_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_CONTRADICTORY_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_FALSE_PREMISE_IN_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_GRANULARITY_MISMATCH": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_INFO_MISSING_IN_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_NONFACTUAL_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        }
+      },
+      "reason_justification_correctness": "UNMEASURABLE_FROM_BEHAVIOR_LABEL_ALONE",
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "unnecessary_refusal_count": 0,
+      "unnecessary_refusal_rate": 0.0,
+      "unsupported_full_responses_observed": 0
+    },
+    "cfaf_semantic": {
+      "accuracy": 0.6666666666666666,
+      "automatic_exact_extractive_full_answers": 0,
+      "balanced_accuracy": 0.4583333333333333,
+      "cfaf_precision": 0.9,
+      "cfaf_recall": 0.75,
+      "confusion_matrix": {
+        "CFAF": {
+          "CFAF": 27,
+          "ERROR": 3,
+          "FULL": 6
+        },
+        "FULL": {
+          "CFAF": 3,
+          "ERROR": 2,
+          "FULL": 1
+        }
+      },
+      "correctly_grounded_complete_full_responses_observed": 1,
+      "execution_status_counts": {
+        "ANALYSIS_FAILURE": 5,
+        "SUCCESS": 37
+      },
+      "failure_to_restrict_count": 6,
+      "failure_to_restrict_rate": 0.16666666666666666,
+      "full_precision": 0.14285714285714285,
+      "full_recall": 0.16666666666666666,
+      "full_response_support_unmeasurable_or_unreviewed": 0,
+      "generated_full_responses": 7,
+      "generation_api_attempts": 42,
+      "generation_latency_ms": {
+        "max": 8591.869600117207,
+        "mean": 2227.158923799704,
+        "median": 2016.7729000095278,
+        "min": 1598.7335001118481,
+        "n": 42
+      },
+      "generic_abstentions_without_specific_category": 1,
+      "incremental_generation_input_tokens": 12594,
+      "incremental_generation_output_tokens": 3469,
+      "independently_reviewed_full_responses": 7,
+      "mode_prose_agreement": {
+        "True": 42
+      },
+      "n": 42,
+      "parser_or_runtime_or_validation_errors": 5,
+      "per_category": {
+        "ANSWER_CORRECTLY": {
+          "accuracy": 0.16666666666666666,
+          "correct": 1,
+          "n": 6,
+          "predictions": {
+            "CFAF": 3,
+            "ERROR": 2,
+            "FULL": 1
+          }
+        },
+        "REFUSE_AMBIGUOUS_QUERY": {
+          "accuracy": 0.5,
+          "correct": 3,
+          "n": 6,
+          "predictions": {
+            "CFAF": 3,
+            "ERROR": 1,
+            "FULL": 2
+          }
+        },
+        "REFUSE_CONTRADICTORY_CONTEXT": {
+          "accuracy": 0.16666666666666666,
+          "correct": 1,
+          "n": 6,
+          "predictions": {
+            "CFAF": 1,
+            "ERROR": 2,
+            "FULL": 3
+          }
+        },
+        "REFUSE_FALSE_PREMISE_IN_QUERY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_GRANULARITY_MISMATCH": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        },
+        "REFUSE_INFO_MISSING_IN_CONTEXT": {
+          "accuracy": 0.8333333333333334,
+          "correct": 5,
+          "n": 6,
+          "predictions": {
+            "CFAF": 5,
+            "FULL": 1
+          }
+        },
+        "REFUSE_NONFACTUAL_QUERY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "CFAF": 6
+          }
+        }
+      },
+      "reason_justification_correctness": "UNMEASURABLE_FROM_BEHAVIOR_LABEL_ALONE",
+      "specific_refusal_reason_accuracy": 0.2692307692307692,
+      "specific_refusal_reason_correct": 7,
+      "specific_refusal_reason_predictions": 26,
+      "unnecessary_refusal_count": 3,
+      "unnecessary_refusal_rate": 0.5,
+      "unsupported_full_responses_observed": 2
+    },
+    "prompt_only_control": {
+      "accuracy": 0.14285714285714285,
+      "automatic_exact_extractive_full_answers": 1,
+      "balanced_accuracy": 0.5,
+      "cfaf_precision": null,
+      "cfaf_recall": 0.0,
+      "confusion_matrix": {
+        "CFAF": {
+          "CFAF": 0,
+          "ERROR": 8,
+          "FULL": 28
+        },
+        "FULL": {
+          "CFAF": 0,
+          "ERROR": 0,
+          "FULL": 6
+        }
+      },
+      "correctly_grounded_complete_full_responses_observed": 4,
+      "execution_status_counts": {
+        "SUCCESS": 42
+      },
+      "failure_to_restrict_count": 28,
+      "failure_to_restrict_rate": 0.7777777777777778,
+      "full_precision": 0.17647058823529413,
+      "full_recall": 1.0,
+      "full_response_support_unmeasurable_or_unreviewed": 6,
+      "generated_full_responses": 34,
+      "generation_api_attempts": 42,
+      "generation_latency_ms": {
+        "max": 4405.92180006206,
+        "mean": 1830.6618952303238,
+        "median": 1762.3440000461414,
+        "min": 1358.869899995625,
+        "n": 42
+      },
+      "generic_abstentions_without_specific_category": 0,
+      "incremental_generation_input_tokens": 17631,
+      "incremental_generation_output_tokens": 3117,
+      "independently_reviewed_full_responses": 34,
+      "mode_prose_agreement": {
+        "False": 8,
+        "None": 8,
+        "True": 26
+      },
+      "n": 42,
+      "parser_or_runtime_or_validation_errors": 8,
+      "per_category": {
+        "ANSWER_CORRECTLY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_AMBIGUOUS_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_CONTRADICTORY_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_FALSE_PREMISE_IN_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 1,
+            "FULL": 5
+          }
+        },
+        "REFUSE_GRANULARITY_MISMATCH": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 4,
+            "FULL": 2
+          }
+        },
+        "REFUSE_INFO_MISSING_IN_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 1,
+            "FULL": 5
+          }
+        },
+        "REFUSE_NONFACTUAL_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 2,
+            "FULL": 4
+          }
+        }
+      },
+      "reason_justification_correctness": "UNMEASURABLE_FROM_BEHAVIOR_LABEL_ALONE",
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "unnecessary_refusal_count": 0,
+      "unnecessary_refusal_rate": 0.0,
+      "unsupported_full_responses_observed": 14
+    },
+    "semantic_prompt_control": {
+      "accuracy": 0.023809523809523808,
+      "automatic_exact_extractive_full_answers": 2,
+      "balanced_accuracy": 0.08333333333333333,
+      "cfaf_precision": null,
+      "cfaf_recall": 0.0,
+      "confusion_matrix": {
+        "CFAF": {
+          "CFAF": 0,
+          "ERROR": 30,
+          "FULL": 6
+        },
+        "FULL": {
+          "CFAF": 0,
+          "ERROR": 5,
+          "FULL": 1
+        }
+      },
+      "correctly_grounded_complete_full_responses_observed": 1,
+      "execution_status_counts": {
+        "ANALYSIS_FAILURE": 5,
+        "PARSER_FAILURE": 30,
+        "SUCCESS": 7
+      },
+      "failure_to_restrict_count": 6,
+      "failure_to_restrict_rate": 0.16666666666666666,
+      "full_precision": 0.14285714285714285,
+      "full_recall": 0.16666666666666666,
+      "full_response_support_unmeasurable_or_unreviewed": 0,
+      "generated_full_responses": 7,
+      "generation_api_attempts": 42,
+      "generation_latency_ms": {
+        "max": 7685.99749985151,
+        "mean": 1877.1323142794981,
+        "median": 1703.6618000129238,
+        "min": 1275.5076999310404,
+        "n": 42
+      },
+      "generic_abstentions_without_specific_category": 0,
+      "incremental_generation_input_tokens": 21359,
+      "incremental_generation_output_tokens": 3187,
+      "independently_reviewed_full_responses": 7,
+      "mode_prose_agreement": {
+        "None": 35,
+        "True": 7
+      },
+      "n": 42,
+      "parser_or_runtime_or_validation_errors": 35,
+      "per_category": {
+        "ANSWER_CORRECTLY": {
+          "accuracy": 0.16666666666666666,
+          "correct": 1,
+          "n": 6,
+          "predictions": {
+            "ERROR": 5,
+            "FULL": 1
+          }
+        },
+        "REFUSE_AMBIGUOUS_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 4,
+            "FULL": 2
+          }
+        },
+        "REFUSE_CONTRADICTORY_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 3,
+            "FULL": 3
+          }
+        },
+        "REFUSE_FALSE_PREMISE_IN_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 6
+          }
+        },
+        "REFUSE_GRANULARITY_MISMATCH": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 6
+          }
+        },
+        "REFUSE_INFO_MISSING_IN_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 5,
+            "FULL": 1
+          }
+        },
+        "REFUSE_NONFACTUAL_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 6
+          }
+        }
+      },
+      "reason_justification_correctness": "UNMEASURABLE_FROM_BEHAVIOR_LABEL_ALONE",
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "unnecessary_refusal_count": 0,
+      "unnecessary_refusal_rate": 0.0,
+      "unsupported_full_responses_observed": 2
+    },
+    "standard_rag": {
+      "accuracy": 0.14285714285714285,
+      "automatic_exact_extractive_full_answers": 4,
+      "balanced_accuracy": 0.5,
+      "cfaf_precision": null,
+      "cfaf_recall": 0.0,
+      "confusion_matrix": {
+        "CFAF": {
+          "CFAF": 0,
+          "ERROR": 1,
+          "FULL": 35
+        },
+        "FULL": {
+          "CFAF": 0,
+          "ERROR": 0,
+          "FULL": 6
+        }
+      },
+      "correctly_grounded_complete_full_responses_observed": 4,
+      "execution_status_counts": {
+        "SUCCESS": 42
+      },
+      "failure_to_restrict_count": 35,
+      "failure_to_restrict_rate": 0.9722222222222222,
+      "full_precision": 0.14634146341463414,
+      "full_recall": 1.0,
+      "full_response_support_unmeasurable_or_unreviewed": 5,
+      "generated_full_responses": 41,
+      "generation_api_attempts": 42,
+      "generation_latency_ms": {
+        "max": 3002.9045999981463,
+        "mean": 1857.232238088424,
+        "median": 1744.1924499580637,
+        "min": 1237.241999944672,
+        "n": 42
+      },
+      "generic_abstentions_without_specific_category": 0,
+      "incremental_generation_input_tokens": 14859,
+      "incremental_generation_output_tokens": 3193,
+      "independently_reviewed_full_responses": 41,
+      "mode_prose_agreement": {
+        "False": 7,
+        "None": 1,
+        "True": 34
+      },
+      "n": 42,
+      "parser_or_runtime_or_validation_errors": 1,
+      "per_category": {
+        "ANSWER_CORRECTLY": {
+          "accuracy": 1.0,
+          "correct": 6,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_AMBIGUOUS_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_CONTRADICTORY_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_FALSE_PREMISE_IN_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_GRANULARITY_MISMATCH": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "ERROR": 1,
+            "FULL": 5
+          }
+        },
+        "REFUSE_INFO_MISSING_IN_CONTEXT": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        },
+        "REFUSE_NONFACTUAL_QUERY": {
+          "accuracy": 0.0,
+          "correct": 0,
+          "n": 6,
+          "predictions": {
+            "FULL": 6
+          }
+        }
+      },
+      "reason_justification_correctness": "UNMEASURABLE_FROM_BEHAVIOR_LABEL_ALONE",
+      "specific_refusal_reason_accuracy": null,
+      "specific_refusal_reason_correct": 0,
+      "specific_refusal_reason_predictions": 0,
+      "unnecessary_refusal_count": 0,
+      "unnecessary_refusal_rate": 0.0,
+      "unsupported_full_responses_observed": 19
+    }
+  },
+  "total_api_input_tokens": 98750,
+  "total_api_output_tokens": 19934
+}

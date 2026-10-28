@@ -1,0 +1,6 @@
+family,cases,original_fixture_CFAF_correct,semantic_v1_CFAF_correct,semantic_v2_CFAF_correct,shared_control_v2_correct
+P1,8,8/8 historical,8/8,8/8,8/8
+P2,8,8/8 historical,4/8,8/8,8/8
+P3,8,8/8 historical,4/8,8/8,8/8
+P4,8,8/8 historical,8/8,8/8,8/8
+P5,8,8/8 historical,8/8,8/8,8/8

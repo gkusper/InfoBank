@@ -1,0 +1,56 @@
+{
+  "analysis_shared_once_per_case": true,
+  "by_run": {
+    "full_40": {
+      "attempts": 96,
+      "completion_tokens": 11683,
+      "errors": 0,
+      "kind_counts": {
+        "semantic_analysis": 32,
+        "semantic_cfaf": 32,
+        "shared_control": 32
+      },
+      "prompt_tokens": 96740,
+      "retries": 0,
+      "successful_calls": 96,
+      "summed_call_latency_ms": 192473.7211014144
+    },
+    "pilot_10": {
+      "attempts": 24,
+      "completion_tokens": 2916,
+      "errors": 0,
+      "kind_counts": {
+        "semantic_analysis": 8,
+        "semantic_cfaf": 8,
+        "shared_control": 8
+      },
+      "prompt_tokens": 24179,
+      "retries": 0,
+      "successful_calls": 24,
+      "summed_call_latency_ms": 52308.32779989578
+    }
+  },
+  "deterministic_no_model_cases_by_run": {
+    "full_40": 8,
+    "pilot_10": 2
+  },
+  "embeddings": 0,
+  "full_run_observations_cached": 0,
+  "total_actual": {
+    "attempts": 120,
+    "automatic_retries": 0,
+    "completion_tokens": 14599,
+    "errors": 0,
+    "kind_counts": {
+      "semantic_analysis": 40,
+      "semantic_cfaf": 40,
+      "shared_control": 40
+    },
+    "model_versions": {
+      "gpt-4o-mini-2024-07-18": 120
+    },
+    "prompt_tokens": 120919,
+    "successful_calls": 120,
+    "summed_call_latency_ms": 244782.0489013102
+  }
+}

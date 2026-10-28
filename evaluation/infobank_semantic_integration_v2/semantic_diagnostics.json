@@ -1,0 +1,1277 @@
+{
+  "FULL_answer_fact_reviews": [
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-01-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-01-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-02-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-02-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-03-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-03-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-04-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P1_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "R3-P1-04-amber"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "11"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "11"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "12"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "12"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "13"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "13"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "14"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P2_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "14"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-11"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-11"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-12"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-12"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-13"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-13"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-14"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P3_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "memo",
+        "2027-06-14"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the lunar depot p4-01 checklist by 2027-07-15"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_01A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the lunar depot p4-01 checklist by 2027-07-15"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the copper trail p4-02 checklist by 2027-07-16"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_02A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the copper trail p4-02 checklist by 2027-07-16"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the lunar depot p4-03 checklist by 2027-07-17"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_03A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the lunar depot p4-03 checklist by 2027-07-17"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the quiet harbor p4-04 checklist by 2027-07-18"
+      ],
+      "simple_fact_coverage": true,
+      "system": "semantic_cfaf"
+    },
+    {
+      "candidate_copied": true,
+      "case_id": "HELD3_P4_04A",
+      "gold_mode": "FULL",
+      "human_review_required": true,
+      "independent_human_review": false,
+      "request_fulfilment": "SIMPLE_FACTS_PRESENT",
+      "required_permitted_facts": [
+        "submit the quiet harbor p4-04 checklist by 2027-07-18"
+      ],
+      "simple_fact_coverage": true,
+      "system": "shared_control"
+    }
+  ],
+  "binding_status_counts": {
+    "TRUSTED_QUERY_TARGET": 28,
+    "UNRESOLVED": 4
+  },
+  "explanation_correctness": {
+    "semantic_cfaf": {
+      "cause_diagnostics": [
+        {
+          "case_id": "HELD3_P1_01B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P1_02B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P1_03B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P1_04B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P2_01B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P2_02B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P2_03B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P2_04B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P3_01B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P3_02B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P3_03B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P3_04B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "GOVERNANCE_PRIVACY",
+          "reason_class_correct": true,
+          "reason_text": "The permitted evidence view does not authorize the requested detail."
+        },
+        {
+          "case_id": "HELD3_P4_01B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P4_02B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P4_03B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P4_04B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_01A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_01B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_02A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_02B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_03A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_03B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_04A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_04B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        }
+      ],
+      "correct_CFAF": 24,
+      "reason_class_correct": 24,
+      "wrong_reason_cases": []
+    },
+    "shared_control": {
+      "cause_diagnostics": [
+        {
+          "case_id": "HELD3_P1_01B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document indicates that there is no routing token for quiet harbor p1-01."
+        },
+        {
+          "case_id": "HELD3_P1_02B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document does not mention any routing token for mango archive p1-02."
+        },
+        {
+          "case_id": "HELD3_P1_03B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": null,
+          "reason_class_correct": false,
+          "reason_text": "The document regarding cedar ledger p1-03 does not mention any routing token. Therefore, there is no specific routing token to use for this ledger."
+        },
+        {
+          "case_id": "HELD3_P1_04B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document does not provide a routing token for violet index p1-04."
+        },
+        {
+          "case_id": "HELD3_P2_01B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The document does not provide specific details about individual tickets, including which ticket for lunar depot p2-01 took six days. It only states that 11 request tickets were completed for that depot."
+        },
+        {
+          "case_id": "HELD3_P2_02B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The document does not provide information on which individual ticket for cedar ledger p2-02 took six days. It only states that 12 request tickets were completed without details on individual ticket durations."
+        },
+        {
+          "case_id": "HELD3_P2_03B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "No specific ticket details are provided in the document regarding which individual ticket for mango archive p2-03 took six days. The document only states that 13 request tickets were completed for mango archive p2-03, without further breakdown of individual ticket durations."
+        },
+        {
+          "case_id": "HELD3_P2_04B",
+          "expected_cause": "GOVERNANCE_GRANULARITY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The document does not provide information on individual ticket durations for lunar depot p2-04, hence I cannot identify which specific ticket took six days."
+        },
+        {
+          "case_id": "HELD3_P3_01B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The body text for opal ferry p3-01 is not available in the provided document, which only contains metadata."
+        },
+        {
+          "case_id": "HELD3_P3_02B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The requested body text for mango archive p3-02 is not available as the document only contains metadata."
+        },
+        {
+          "case_id": "HELD3_P3_03B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The body text for lunar depot p3-03 is not available in the provided document; it only contains metadata."
+        },
+        {
+          "case_id": "HELD3_P3_04B",
+          "expected_cause": "GOVERNANCE_BODY_RESTRICTION",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": false,
+          "reason_text": "The requested body text for 'opal ferry p3-04' is not available in the provided document, which only contains metadata."
+        },
+        {
+          "case_id": "HELD3_P4_01B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document does not establish any next action for lunar depot p4-01."
+        },
+        {
+          "case_id": "HELD3_P4_02B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document does not establish any next action for copper trail p4-02."
+        },
+        {
+          "case_id": "HELD3_P4_03B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document does not provide a recorded next action for lunar depot p4-03."
+        },
+        {
+          "case_id": "HELD3_P4_04B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The document does not provide a recorded next action for quiet harbor p4-04."
+        },
+        {
+          "case_id": "HELD3_P5_01A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_01B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_02A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_02B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_03A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_03B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_04A",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        },
+        {
+          "case_id": "HELD3_P5_04B",
+          "expected_cause": "INSUFFICIENT_PERMITTED_EVIDENCE",
+          "fine_grained_text_cause": "REQUIRES_HUMAN_REVIEW",
+          "public_reason_class": "EVIDENTIAL",
+          "reason_class_correct": true,
+          "reason_text": "The currently usable evidence does not support the requested content."
+        }
+      ],
+      "correct_CFAF": 24,
+      "reason_class_correct": 15,
+      "wrong_reason_cases": [
+        {
+          "actual": null,
+          "case_id": "HELD3_P1_03B",
+          "expected": "EVIDENTIAL"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_01B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_02B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_03B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P2_04B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_01B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_02B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_03B",
+          "expected": "GOVERNANCE_PRIVACY"
+        },
+        {
+          "actual": "EVIDENTIAL",
+          "case_id": "HELD3_P3_04B",
+          "expected": "GOVERNANCE_PRIVACY"
+        }
+      ]
+    }
+  },
+  "independent_human_review": false,
+  "interpretation": "Gold/fixture roles and expected profile types are used only post hoc. Simple fact checks and reason-class matching do not establish full linguistic correctness.",
+  "query_profile_diagnostics": [
+    {
+      "actual": [
+        "AGGREGATE_COUNT"
+      ],
+      "case_id": "HELD3_P2_01A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "AGGREGATE_COUNT"
+    },
+    {
+      "actual": [
+        "INDIVIDUAL_RECORD"
+      ],
+      "case_id": "HELD3_P2_01B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "INDIVIDUAL_RECORD"
+    },
+    {
+      "actual": [
+        "AGGREGATE_COUNT"
+      ],
+      "case_id": "HELD3_P2_02A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "AGGREGATE_COUNT"
+    },
+    {
+      "actual": [
+        "INDIVIDUAL_RECORD"
+      ],
+      "case_id": "HELD3_P2_02B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "INDIVIDUAL_RECORD"
+    },
+    {
+      "actual": [
+        "AGGREGATE_COUNT"
+      ],
+      "case_id": "HELD3_P2_03A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "AGGREGATE_COUNT"
+    },
+    {
+      "actual": [
+        "INDIVIDUAL_RECORD"
+      ],
+      "case_id": "HELD3_P2_03B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "INDIVIDUAL_RECORD"
+    },
+    {
+      "actual": [
+        "AGGREGATE_COUNT"
+      ],
+      "case_id": "HELD3_P2_04A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "AGGREGATE_COUNT"
+    },
+    {
+      "actual": [
+        "INDIVIDUAL_RECORD"
+      ],
+      "case_id": "HELD3_P2_04B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "INDIVIDUAL_RECORD"
+    },
+    {
+      "actual": [
+        "METADATA_LOOKUP"
+      ],
+      "case_id": "HELD3_P3_01A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "METADATA_LOOKUP"
+    },
+    {
+      "actual": [
+        "DOCUMENT_CONTENT"
+      ],
+      "case_id": "HELD3_P3_01B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "DOCUMENT_CONTENT"
+    },
+    {
+      "actual": [
+        "METADATA_LOOKUP"
+      ],
+      "case_id": "HELD3_P3_02A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "METADATA_LOOKUP"
+    },
+    {
+      "actual": [
+        "DOCUMENT_CONTENT"
+      ],
+      "case_id": "HELD3_P3_02B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "DOCUMENT_CONTENT"
+    },
+    {
+      "actual": [
+        "METADATA_LOOKUP"
+      ],
+      "case_id": "HELD3_P3_03A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "METADATA_LOOKUP"
+    },
+    {
+      "actual": [
+        "DOCUMENT_CONTENT"
+      ],
+      "case_id": "HELD3_P3_03B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "DOCUMENT_CONTENT"
+    },
+    {
+      "actual": [
+        "METADATA_LOOKUP"
+      ],
+      "case_id": "HELD3_P3_04A",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "METADATA_LOOKUP"
+    },
+    {
+      "actual": [
+        "DOCUMENT_CONTENT"
+      ],
+      "case_id": "HELD3_P3_04B",
+      "correct": true,
+      "expected_from_posthoc_constructed_intent": "DOCUMENT_CONTENT"
+    }
+  ],
+  "role_agreement": {
+    "correct": 24,
+    "total": 32
+  },
+  "role_diagnostics": [
+    {
+      "agrees": true,
+      "case_id": "HELD3_P1_01A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P1_01B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P1_02A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P1_02B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P1_03A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P1_03B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P1_04A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P1_04B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_01A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_01B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_02A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_02B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_03A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_03B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_04A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P2_04B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_01A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_01B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_02A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_02B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_03A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_03B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_04A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P3_04B",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P4_01A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P4_01B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P4_02A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P4_02B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P4_03A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P4_03B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": true,
+      "case_id": "HELD3_P4_04A",
+      "fixture_role_used_only_posthoc": "PRIMARY",
+      "inferred_role": "PRIMARY",
+      "relation_label": "SUPPORTS",
+      "source_id": "view-0001"
+    },
+    {
+      "agrees": false,
+      "case_id": "HELD3_P4_04B",
+      "fixture_role_used_only_posthoc": "CONTEXTUAL",
+      "inferred_role": "PRIMARY",
+      "relation_label": "NONE",
+      "source_id": "view-0001"
+    }
+  ],
+  "verified_reference_occurrences": {
+    "requirement_support": 16,
+    "source_role": 32,
+    "supporting_spans": 24
+  }
+}

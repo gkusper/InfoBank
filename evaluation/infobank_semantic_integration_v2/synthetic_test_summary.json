@@ -1,0 +1,509 @@
+{
+  "cases": 30,
+  "external_api_calls": 0,
+  "independent_validation": false,
+  "mode_correct": 30,
+  "profile_correct": 30,
+  "results": [
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-01",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-02",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "UNRESOLVED",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-03",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "UNRESOLVED",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-04",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "UNRESOLVED",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-05",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-06",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-07",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-08",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-09",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-10",
+      "expected_mode": "FULL",
+      "group": "NEW_AGGREGATE",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "UNRESOLVED",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-11",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-12",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-13",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-14",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-15",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-16",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-17",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-18",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-19",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "FULL",
+      "case_id": "constructed-20",
+      "expected_mode": "FULL",
+      "group": "NEW_METADATA",
+      "issues": [],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-21",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-22",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "ESSENTIAL_INFORMATION_MISSING",
+        "GRANULARITY_NOT_SUPPORTED",
+        "NO_GROUNDED_ANSWER_CANDIDATE",
+        "NO_VERIFIED_SUPPORT_SPANS",
+        "REQUIREMENT_UNSUPPORTED:AGGREGATE_AVERAGE"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-23",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-24",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "REQUESTED_METADATA_MISSING"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-25",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "METADATA_TARGET_UNRESOLVED"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "UNRESOLVED",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-26",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "METADATA_TARGET_UNRESOLVED"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "AMBIGUOUS",
+          "source_id": "view-0001"
+        },
+        {
+          "binding_status": "AMBIGUOUS",
+          "source_id": "view-0002"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-27",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "TRUSTED_QUERY_TARGET",
+          "source_id": "view-0001"
+        }
+      ]
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-28",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "NO_PERMITTED_EVIDENCE"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": []
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-29",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "NO_PERMITTED_EVIDENCE"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": []
+    },
+    {
+      "actual_mode": "CFAF",
+      "case_id": "constructed-30",
+      "expected_mode": "CFAF",
+      "group": "NEW_NEGATIVE",
+      "issues": [
+        "REQUEST_EXCEEDS_PERMITTED_VIEW",
+        "REQUEST_SCOPE_UNRESOLVED"
+      ],
+      "mode_correct": true,
+      "no_external_calls": true,
+      "profile_correct": true,
+      "view_bindings": [
+        {
+          "binding_status": "UNRESOLVED",
+          "source_id": "view-0001"
+        }
+      ]
+    }
+  ],
+  "semantic_inference": "Not measured: controlled schema-valid upstream semantic test double; actual query profiler, binding, projection, spans, selector and response validation execute."
+}

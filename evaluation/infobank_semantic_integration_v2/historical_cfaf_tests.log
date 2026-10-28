@@ -1,0 +1,2363 @@
+.FF.F.F.FF..F..F..F.F..F................F........F...FF.... [ 75%]
+.FF....FFEFEFEFEFEFEFEFFEFF                                              [100%]
+=================================== ERRORS ====================================
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t11_shared_retrieval_latency_is_reused _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpqr9aje0d'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D145B20>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpqr9aje0d'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpqr9aje0d'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpqr9aje0d'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t12_no_heldout_execution_in_repair_tests _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp0oimzeqe'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D146AC0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp0oimzeqe'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp0oimzeqe'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp0oimzeqe'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t1_retrieval_once_per_case_across_repetitions _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpm_z6qnur'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D1476A0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpm_z6qnur'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpm_z6qnur'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpm_z6qnur'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t2_snapshot_hash_stability _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp166d8prh'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D147F60>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp166d8prh'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp166d8prh'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp166d8prh'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t3_repetition_count_does_not_affect_embedding_count _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmplep_7nkn'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D1471A0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmplep_7nkn'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmplep_7nkn'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmplep_7nkn'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t4_mode_count_does_not_affect_embedding_count _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp5syox1le'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D218400>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp5syox1le'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp5syox1le'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp5syox1le'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t5_exact_embedding_cap_succeeds _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpisg7hwal'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D219120>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpisg7hwal'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpisg7hwal'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpisg7hwal'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ ERROR at teardown of WolalaSharedRetrievalRepairTests.test_t7_retry_accounting _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpq161cwrf'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D219940>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpq161cwrf'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpq161cwrf'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpq161cwrf'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+================================== FAILURES ===================================
+_ WolalaFinalExperimentV2Tests.test_checksum_caps_and_nonempty_output_dir_fail_closed _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp9ivn1nm2'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CCAA520>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp9ivn1nm2'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_checksum_caps_and_nonempty_output_dir_fail_closed>
+
+    def test_checksum_caps_and_nonempty_output_dir_fail_closed(self) -> None:
+        bad = dict(self.spec)
+        bad["checksums"] = dict(self.spec["checksums"], heldout_dataset="bad")
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v2.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp9ivn1nm2'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp9ivn1nm2'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+___ WolalaFinalExperimentV2Tests.test_development_path_rejects_heldout_flag ___
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpvshae9k4'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CFFF6A0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpvshae9k4'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_development_path_rejects_heldout_flag>
+
+    def test_development_path_rejects_heldout_flag(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v2.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpvshae9k4'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpvshae9k4'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaFinalExperimentV2Tests.test_heldout_v1_is_retired_and_cannot_execute __
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpsgghjo2t'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CFE8180>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpsgghjo2t'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_heldout_v1_is_retired_and_cannot_execute>
+
+    def test_heldout_v1_is_retired_and_cannot_execute(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v2.py:90: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpsgghjo2t'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpsgghjo2t'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaFinalExperimentV2Tests.test_heldout_v2_is_retired_and_execution_fails_closed _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4ti30zku'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CFE8EA0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4ti30zku'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_heldout_v2_is_retired_and_execution_fails_closed>
+
+    def test_heldout_v2_is_retired_and_execution_fails_closed(self) -> None:
+        self.assertEqual(RETIRED_HELDOUT_DATASETS[HELDOUT_DATASET_V2], "RETIRED_AFTER_SCIENTIFIC_INTEGRITY_FAILURE")
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v2.py:114: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4ti30zku'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4ti30zku'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+__ WolalaFinalExperimentV2Tests.test_plan_only_makes_no_api_call_or_outputs ___
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_plan_only_makes_no_api_call_or_outputs>
+
+    def test_plan_only_makes_no_api_call_or_outputs(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+>           manifest = run_pilot(
+                dataset=HELDOUT_DATASET_V2,
+                modes=self.spec["modes"],
+                repetitions=3,
+                output_dir=tmp,
+                max_mode_executions=360,
+                max_embedding_calls=60,
+                max_generation_calls=380,
+                max_total_external_calls=420,
+                plan_only=True,
+                execution_spec=SPEC_V3_PATH,
+            )
+
+evaluation\tests\test_wolala_final_experiment_v2.py:196: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:58: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpz6q1y3h_/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpz6q1y3h_\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpz6q1y3h_'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CFE98A0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpz6q1y3h_'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_plan_only_makes_no_api_call_or_outputs>
+
+    def test_plan_only_makes_no_api_call_or_outputs(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v2.py:195: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpz6q1y3h_'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpz6q1y3h_'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaFinalExperimentV2Tests.test_scorer_parser_statistics_and_latency_checksums_are_frozen _
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_scorer_parser_statistics_and_latency_checksums_are_frozen>
+
+    def test_scorer_parser_statistics_and_latency_checksums_are_frozen(self) -> None:
+        checksums = self.spec["checksums"]
+>       self.assertEqual(checksums["parser"], sha256_file(ROOT / "adapters.py"))
+E       AssertionError: 'd11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9' != '31fa045a64cfcfbb99f9700c068db3872adab88b0bb0a2f96db3efe320964a20'
+E       - d11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9
+E       + 31fa045a64cfcfbb99f9700c068db3872adab88b0bb0a2f96db3efe320964a20
+
+evaluation\tests\test_wolala_final_experiment_v2.py:242: AssertionError
+_ WolalaFinalExperimentV3Tests.test_execution_requires_authorization_before_api_key_check _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp_s4vy6us'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CCAA160>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp_s4vy6us'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_execution_requires_authorization_before_api_key_check>
+
+    def test_execution_requires_authorization_before_api_key_check(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v3.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp_s4vy6us'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp_s4vy6us'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaFinalExperimentV3Tests.test_nonempty_output_directory_fails_before_execution _
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_nonempty_output_directory_fails_before_execution>
+
+    def test_nonempty_output_directory_fails_before_execution(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+>           Path(tmp, "already-there.txt").write_text("not empty\n", encoding="utf-8")
+
+evaluation\tests\test_wolala_final_experiment_v3.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmp1f10zktw/already-there.txt')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp1f10zktw\\already-there.txt'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp1f10zktw'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CFEAAC0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp1f10zktw'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_nonempty_output_directory_fails_before_execution>
+
+    def test_nonempty_output_directory_fails_before_execution(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v3.py:169: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp1f10zktw'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp1f10zktw'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaFinalExperimentV3Tests.test_plan_only_outputs_no_raw_results_or_api_calls _
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_plan_only_outputs_no_raw_results_or_api_calls>
+
+    def test_plan_only_outputs_no_raw_results_or_api_calls(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+>           manifest = run_pilot(
+                dataset=HELDOUT_DATASET_V3,
+                modes=ALL_MODES,
+                repetitions=3,
+                output_dir=tmp,
+                max_mode_executions=360,
+                max_embedding_calls=60,
+                max_generation_calls=380,
+                max_total_external_calls=420,
+                plan_only=True,
+                execution_spec=SPEC_V4_PATH,
+            )
+
+evaluation\tests\test_wolala_final_experiment_v3.py:117: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:58: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmps7czbvrn/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps7czbvrn\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps7czbvrn'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0CFE9080>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps7czbvrn'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_plan_only_outputs_no_raw_results_or_api_calls>
+
+    def test_plan_only_outputs_no_raw_results_or_api_calls(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_final_experiment_v3.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps7czbvrn'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps7czbvrn'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaFinalExperimentV3Tests.test_preheldout_attempt1_plan_artifacts_are_plan_only _
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_preheldout_attempt1_plan_artifacts_are_plan_only>
+
+    def test_preheldout_attempt1_plan_artifacts_are_plan_only(self) -> None:
+        plan = read_json(PREHELDOUT_DIR / "execution_plan.json")
+        self.assertEqual(plan["dataset"], HELDOUT_DATASET_V3)
+        self.assertEqual(plan["heldout_model_execution_count"], 0)
+        self.assertEqual(plan["heldout_embedding_calls"], 0)
+        self.assertEqual(plan["heldout_generation_calls"], 0)
+        self.assertEqual(plan["external_api_calls_in_plan_only"], 0)
+>       self.assertFalse((PREHELDOUT_DIR / "HELDOUT_RUN_AUTHORIZATION.json").exists())
+E       AssertionError: True is not false
+
+evaluation\tests\test_wolala_final_experiment_v3.py:146: AssertionError
+_____ WolalaFinalExperimentV3Tests.test_spec_checksums_match_frozen_files _____
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_spec_checksums_match_frozen_files>
+
+    def test_spec_checksums_match_frozen_files(self) -> None:
+        checksums = self.spec["checksums"]
+        self.assertEqual(checksums["heldout_dataset"], self.manifest["dataset_checksum"])
+        self.assertEqual(checksums["protocol_v4"], sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v4.md"))
+>       self.assertEqual(checksums["runner"], sha256_file(ROOT / "run_pilot.py"))
+E       AssertionError: '19a9fde78d9b17db610b4c7dd1be58179fabb6aacdcbf301c20181179a1a21e4' != 'c6d48171f80f881d968633b74d63c4d6e6dd7a8235aefe3b6929d9a3302a64f4'
+E       - 19a9fde78d9b17db610b4c7dd1be58179fabb6aacdcbf301c20181179a1a21e4
+E       + c6d48171f80f881d968633b74d63c4d6e6dd7a8235aefe3b6929d9a3302a64f4
+
+evaluation\tests\test_wolala_final_experiment_v3.py:210: AssertionError
+____ WolalaPilotPhase2Tests.test_protocol_and_dataset_checksums_are_stable ____
+
+self = <evaluation.tests.test_wolala_pilot_phase2.WolalaPilotPhase2Tests testMethod=test_protocol_and_dataset_checksums_are_stable>
+
+    def test_protocol_and_dataset_checksums_are_stable(self) -> None:
+>       self.assertEqual(self.baseline["protocol_checksum"], sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v1.md"))
+E       AssertionError: '91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e' != '9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206'
+E       - 91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e
+E       + 9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206
+
+evaluation\tests\test_wolala_pilot_phase2.py:58: AssertionError
+_ WolalaProtocolV2FreezeTests.test_heldout_plan_only_validates_without_execution_or_authorization_flags _
+
+self = <evaluation.tests.test_wolala_protocol_v2_freeze.WolalaProtocolV2FreezeTests testMethod=test_heldout_plan_only_validates_without_execution_or_authorization_flags>
+
+    def test_heldout_plan_only_validates_without_execution_or_authorization_flags(self) -> None:
+        spec = load_execution_spec(SPEC_PATH)
+        with tempfile.TemporaryDirectory() as tmp:
+>           manifest = run_pilot(
+                dataset=HELDOUT_DATASET,
+                modes=spec["modes"],
+                repetitions=3,
+                output_dir=tmp,
+                max_mode_executions=360,
+                max_embedding_calls=60,
+                max_generation_calls=380,
+                max_total_external_calls=420,
+                plan_only=True,
+                execution_spec=SPEC_PATH,
+            )
+
+evaluation\tests\test_wolala_protocol_v2_freeze.py:127: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:58: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpdi1qpuwx/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpdi1qpuwx\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpdi1qpuwx'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D0AFE20>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpdi1qpuwx'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_protocol_v2_freeze.WolalaProtocolV2FreezeTests testMethod=test_heldout_plan_only_validates_without_execution_or_authorization_flags>
+
+    def test_heldout_plan_only_validates_without_execution_or_authorization_flags(self) -> None:
+        spec = load_execution_spec(SPEC_PATH)
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_protocol_v2_freeze.py:126: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpdi1qpuwx'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpdi1qpuwx'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_______ WolalaProtocolV2FreezeTests.test_protocol_v1_checksum_unchanged _______
+
+self = <evaluation.tests.test_wolala_protocol_v2_freeze.WolalaProtocolV2FreezeTests testMethod=test_protocol_v1_checksum_unchanged>
+
+    def test_protocol_v1_checksum_unchanged(self) -> None:
+>       self.assertEqual(sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v1.md"), "91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e")
+E       AssertionError: '9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206' != '91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e'
+E       - 9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206
+E       + 91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e
+
+evaluation\tests\test_wolala_protocol_v2_freeze.py:35: AssertionError
+_ WolalaProtocolV2FreezeTests.test_protocol_v2_required_sections_and_checksums _
+
+self = <evaluation.tests.test_wolala_protocol_v2_freeze.WolalaProtocolV2FreezeTests testMethod=test_protocol_v2_required_sections_and_checksums>
+
+    def test_protocol_v2_required_sections_and_checksums(self) -> None:
+        text = PROTOCOL_V2.read_text(encoding="utf-8")
+        for phrase in [
+            "Frozen Provider And Model Configuration",
+            "Frozen Execution Counts",
+            "Frozen Hard Caps",
+            "Warm-Up Policy",
+            "Retry Policy",
+            "Invalid-Run Policy",
+            "Rerun Policy",
+            "Statistical Analysis Plan",
+            "Latency Definition",
+            "Held-Out Authorization And Execution Lock",
+        ]:
+            self.assertIn(phrase, text)
+        spec = load_execution_spec(SPEC_PATH)
+>       self.assertEqual(spec["checksums"]["protocol_v2"], sha256_file(PROTOCOL_V2))
+E       AssertionError: '34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba' != '347759bd00f162a36d486bcea52718f6ffb20eb253733418ee70bb4b54fe5b05'
+E       - 34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba
+E       + 347759bd00f162a36d486bcea52718f6ffb20eb253733418ee70bb4b54fe5b05
+
+evaluation\tests\test_wolala_protocol_v2_freeze.py:53: AssertionError
+_ WolalaRealApiPhase3Tests.test_injected_real_api_provider_records_caps_and_verifications _
+
+self = <evaluation.tests.test_wolala_real_api_phase3.WolalaRealApiPhase3Tests testMethod=test_injected_real_api_provider_records_caps_and_verifications>
+
+    def test_injected_real_api_provider_records_caps_and_verifications(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+>           manifest = run_pilot(
+                dataset=DEV_DATASET,
+                modes=["standard_rag", "prompt_only_control", "cfaf_pipeline"],
+                repetitions=1,
+                output_dir=tmp,
+                max_mode_executions=30,
+                max_embedding_calls=10,
+                max_generation_calls=30,
+                max_total_external_calls=40,
+                allow_real_api=True,
+                provider=FakeRealApiProvider(),
+            )
+
+evaluation\tests\test_wolala_real_api_phase3.py:84: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmp4azrhimb/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4azrhimb\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4azrhimb'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D144180>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4azrhimb'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_real_api_phase3.WolalaRealApiPhase3Tests testMethod=test_injected_real_api_provider_records_caps_and_verifications>
+
+    def test_injected_real_api_provider_records_caps_and_verifications(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_real_api_phase3.py:83: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4azrhimb'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp4azrhimb'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+____ WolalaRealApiPhase3Tests.test_plan_only_writes_exact_development_plan ____
+
+self = <evaluation.tests.test_wolala_real_api_phase3.WolalaRealApiPhase3Tests testMethod=test_plan_only_writes_exact_development_plan>
+
+    def test_plan_only_writes_exact_development_plan(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+>           manifest = run_pilot(
+                dataset=DEV_DATASET,
+                modes=["standard_rag", "prompt_only_control", "cfaf_pipeline"],
+                repetitions=1,
+                output_dir=tmp,
+                max_mode_executions=30,
+                max_embedding_calls=10,
+                max_generation_calls=30,
+                max_total_external_calls=40,
+                plan_only=True,
+            )
+
+evaluation\tests\test_wolala_real_api_phase3.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpls5k0vhp/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpls5k0vhp\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpls5k0vhp'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D146A20>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpls5k0vhp'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_real_api_phase3.WolalaRealApiPhase3Tests testMethod=test_plan_only_writes_exact_development_plan>
+
+    def test_plan_only_writes_exact_development_plan(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_real_api_phase3.py:60: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpls5k0vhp'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpls5k0vhp'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t10_plan_only_and_runtime_accounting_agree _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t10_plan_only_and_runtime_accounting_agree>
+
+    def test_t10_plan_only_and_runtime_accounting_agree(self) -> None:
+        case_ids = [case["case_id"] for case in DEV_CASES[:5]]
+        with tempfile.TemporaryDirectory() as plan_tmp, tempfile.TemporaryDirectory() as run_tmp:
+>           plan_manifest = run_pilot(
+                dataset=DEV_DATASET,
+                case_ids=case_ids,
+                modes=ALL_MODES,
+                repetitions=3,
+                output_dir=plan_tmp,
+                max_mode_executions=45,
+                max_embedding_calls=5,
+                max_generation_calls=45,
+                max_total_external_calls=50,
+                allow_real_api=True,
+                provider=RecordingProvider(),
+                plan_only=True,
+            )
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:214: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpj8y0jb75/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpj8y0jb75\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpx9_5w_8x'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D145C60>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpx9_5w_8x'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t10_plan_only_and_runtime_accounting_agree>
+
+    def test_t10_plan_only_and_runtime_accounting_agree(self) -> None:
+        case_ids = [case["case_id"] for case in DEV_CASES[:5]]
+>       with tempfile.TemporaryDirectory() as plan_tmp, tempfile.TemporaryDirectory() as run_tmp:
+                                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpx9_5w_8x'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpx9_5w_8x'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpj8y0jb75'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D1451C0>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpj8y0jb75'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t10_plan_only_and_runtime_accounting_agree>
+
+    def test_t10_plan_only_and_runtime_accounting_agree(self) -> None:
+        case_ids = [case["case_id"] for case in DEV_CASES[:5]]
+>       with tempfile.TemporaryDirectory() as plan_tmp, tempfile.TemporaryDirectory() as run_tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:213: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpj8y0jb75'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpj8y0jb75'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t11_shared_retrieval_latency_is_reused _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t11_shared_retrieval_latency_is_reused>
+
+    def test_t11_shared_retrieval_latency_is_reused(self) -> None:
+        provider = RecordingProvider()
+>       _, output = self._run_fake(case_count=5, repetitions=3, modes=ALL_MODES, provider=provider)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:248: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpqr9aje0d/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpqr9aje0d\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t12_no_heldout_execution_in_repair_tests _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t12_no_heldout_execution_in_repair_tests>
+
+    def test_t12_no_heldout_execution_in_repair_tests(self) -> None:
+        provider = RecordingProvider()
+>       _, output = self._run_fake(case_count=5, repetitions=3, modes=ALL_MODES, provider=provider)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:256: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmp0oimzeqe/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp0oimzeqe\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t1_retrieval_once_per_case_across_repetitions _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t1_retrieval_once_per_case_across_repetitions>
+
+    def test_t1_retrieval_once_per_case_across_repetitions(self) -> None:
+        provider = RecordingProvider()
+>       manifest, output = self._run_fake(case_count=5, repetitions=3, modes=ALL_MODES, provider=provider)
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:80: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpm_z6qnur/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpm_z6qnur\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+______ WolalaSharedRetrievalRepairTests.test_t2_snapshot_hash_stability _______
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t2_snapshot_hash_stability>
+
+    def test_t2_snapshot_hash_stability(self) -> None:
+        provider = RecordingProvider()
+>       _, output = self._run_fake(case_count=5, repetitions=3, modes=ALL_MODES, provider=provider)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:94: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmp166d8prh/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp166d8prh\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t3_repetition_count_does_not_affect_embedding_count _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t3_repetition_count_does_not_affect_embedding_count>
+
+    def test_t3_repetition_count_does_not_affect_embedding_count(self) -> None:
+        for repetitions in [1, 2, 3, 5]:
+            provider = RecordingProvider()
+>           manifest, _ = self._run_fake(case_count=5, repetitions=repetitions, modes=ALL_MODES, provider=provider)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:107: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmplep_7nkn/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmplep_7nkn\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t4_mode_count_does_not_affect_embedding_count _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t4_mode_count_does_not_affect_embedding_count>
+
+    def test_t4_mode_count_does_not_affect_embedding_count(self) -> None:
+        mode_sets = [ALL_MODES[:1], ALL_MODES[:2], ALL_MODES]
+        for modes in mode_sets:
+            provider = RecordingProvider()
+>           manifest, _ = self._run_fake(case_count=5, repetitions=3, modes=modes, provider=provider)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:116: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmp5syox1le/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp5syox1le\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+____ WolalaSharedRetrievalRepairTests.test_t5_exact_embedding_cap_succeeds ____
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t5_exact_embedding_cap_succeeds>
+
+    def test_t5_exact_embedding_cap_succeeds(self) -> None:
+        provider = RecordingProvider()
+>       manifest, _ = self._run_fake(case_count=10, repetitions=1, modes=ALL_MODES, provider=provider, max_embedding_calls=10)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpisg7hwal/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpisg7hwal\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t6_insufficient_embedding_cap_fails_before_provider_use _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp96006htt'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D147920>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp96006htt'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t6_insufficient_embedding_cap_fails_before_provider_use>
+
+    def test_t6_insufficient_embedding_cap_fails_before_provider_use(self) -> None:
+        provider = RecordingProvider()
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:129: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp96006htt'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmp96006htt'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+__________ WolalaSharedRetrievalRepairTests.test_t7_retry_accounting __________
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t7_retry_accounting>
+
+    def test_t7_retry_accounting(self) -> None:
+        provider = RecordingProvider(fail_first_embedding_retryably=True)
+>       manifest, output = self._run_fake(
+            case_count=1,
+            repetitions=1,
+            modes=["standard_rag"],
+            provider=provider,
+            max_embedding_calls=2,
+            max_generation_calls=1,
+            max_total_external_calls=3,
+            max_total_retry_attempts=1,
+            max_retries_per_logical_request=1,
+        )
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:150: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\tests\test_wolala_shared_retrieval_repair.py:282: in _run_fake
+    manifest = run_pilot(
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpq161cwrf/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpq161cwrf\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t8_existing_one_repetition_behavior_remains_unchanged _
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t8_existing_one_repetition_behavior_remains_unchanged>
+
+    def test_t8_existing_one_repetition_behavior_remains_unchanged(self) -> None:
+        with tempfile.TemporaryDirectory() as tmp:
+>           manifest = run_pilot(
+                dataset=DEV_DATASET,
+                modes=ALL_MODES,
+                repetitions=1,
+                output_dir=tmp,
+                max_mode_executions=30,
+                max_embedding_calls=10,
+                max_generation_calls=30,
+                max_total_external_calls=40,
+            )
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:171: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+evaluation\wolala2026\run_pilot.py:138: in run_pilot
+    write_json(out / "execution_plan.json", plan)
+evaluation\wolala2026\common.py:42: in write_json
+    Path(path).write_text(json.dumps(json_safe(value), ensure_ascii=True, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1047: in write_text
+    with self.open(mode='w', encoding=encoding, errors=errors, newline=newline) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/EKKE/AppData/Local/Packages/sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}/AC/Temp/tmpeekc_96d/execution_plan.json')
+mode = 'w', buffering = -1, encoding = 'utf-8', errors = None, newline = None
+
+    def open(self, mode='r', buffering=-1, encoding=None,
+             errors=None, newline=None):
+        """
+        Open the file pointed to by this path and return a file object, as
+        the built-in open() function does.
+        """
+        if "b" not in mode:
+            encoding = io.text_encoding(encoding)
+>       return io.open(self, mode, buffering, encoding, errors, newline)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       PermissionError: [Errno 13] Permission denied: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpeekc_96d\\execution_plan.json'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\pathlib.py:1013: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpeekc_96d'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D218860>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpeekc_96d'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t8_existing_one_repetition_behavior_remains_unchanged>
+
+    def test_t8_existing_one_repetition_behavior_remains_unchanged(self) -> None:
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:170: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpeekc_96d'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmpeekc_96d'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+_ WolalaSharedRetrievalRepairTests.test_t9_retired_heldout_pilot_v2_is_blocked _
+
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps04a6jrv'
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x0000021C0D21A340>
+
+    def _rmtree_unsafe(path, onexc):
+        def onerror(err):
+            onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps04a6jrv'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:637: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+self = <evaluation.tests.test_wolala_shared_retrieval_repair.WolalaSharedRetrievalRepairTests testMethod=test_t9_retired_heldout_pilot_v2_is_blocked>
+
+    def test_t9_retired_heldout_pilot_v2_is_blocked(self) -> None:
+        provider = RecordingProvider()
+>       with tempfile.TemporaryDirectory() as tmp:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\tests\test_wolala_shared_retrieval_repair.py:191: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:950: in __exit__
+    self.cleanup()
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:954: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:934: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:781: in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\shutil.py:639: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:906: in onexc
+    _resetperms(path)
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:286: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps04a6jrv'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+            func(path, *args, follow_symlinks=False)
+        elif _os.name == 'nt' or not _os.path.islink(path):
+>           func(path, *args)
+E           PermissionError: [WinError 5] A hozzáférés megtagadva: 'C:\\Users\\EKKE\\AppData\\Local\\Packages\\sandbox.{65afcc03-30be-41ea-abd5-6a4920a44dd6}\\AC\\Temp\\tmps04a6jrv'
+
+C:\Users\EKKE\.cache\codex-runtimes\codex-primary-runtime\dependencies\python\Lib\tempfile.py:277: PermissionError
+=========================== short test summary info ===========================
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_checksum_caps_and_nonempty_output_dir_fail_closed
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_development_path_rejects_heldout_flag
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_heldout_v1_is_retired_and_cannot_execute
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_heldout_v2_is_retired_and_execution_fails_closed
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_plan_only_makes_no_api_call_or_outputs
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_scorer_parser_statistics_and_latency_checksums_are_frozen
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_execution_requires_authorization_before_api_key_check
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_nonempty_output_directory_fails_before_execution
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_plan_only_outputs_no_raw_results_or_api_calls
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_spec_checksums_match_frozen_files
+FAILED evaluation/tests/test_wolala_pilot_phase2.py::WolalaPilotPhase2Tests::test_protocol_and_dataset_checksums_are_stable
+FAILED evaluation/tests/test_wolala_protocol_v2_freeze.py::WolalaProtocolV2FreezeTests::test_heldout_plan_only_validates_without_execution_or_authorization_flags
+FAILED evaluation/tests/test_wolala_protocol_v2_freeze.py::WolalaProtocolV2FreezeTests::test_protocol_v1_checksum_unchanged
+FAILED evaluation/tests/test_wolala_protocol_v2_freeze.py::WolalaProtocolV2FreezeTests::test_protocol_v2_required_sections_and_checksums
+FAILED evaluation/tests/test_wolala_real_api_phase3.py::WolalaRealApiPhase3Tests::test_injected_real_api_provider_records_caps_and_verifications
+FAILED evaluation/tests/test_wolala_real_api_phase3.py::WolalaRealApiPhase3Tests::test_plan_only_writes_exact_development_plan
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t10_plan_only_and_runtime_accounting_agree
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t11_shared_retrieval_latency_is_reused
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t12_no_heldout_execution_in_repair_tests
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t1_retrieval_once_per_case_across_repetitions
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t2_snapshot_hash_stability
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t3_repetition_count_does_not_affect_embedding_count
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t4_mode_count_does_not_affect_embedding_count
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t5_exact_embedding_cap_succeeds
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t6_insufficient_embedding_cap_fails_before_provider_use
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t7_retry_accounting
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t8_existing_one_repetition_behavior_remains_unchanged
+FAILED evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t9_retired_heldout_pilot_v2_is_blocked
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t11_shared_retrieval_latency_is_reused
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t12_no_heldout_execution_in_repair_tests
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t1_retrieval_once_per_case_across_repetitions
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t2_snapshot_hash_stability
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t3_repetition_count_does_not_affect_embedding_count
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t4_mode_count_does_not_affect_embedding_count
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t5_exact_embedding_cap_succeeds
+ERROR evaluation/tests/test_wolala_shared_retrieval_repair.py::WolalaSharedRetrievalRepairTests::test_t7_retry_accounting
+29 failed, 49 passed, 8 errors, 13 subtests passed in 15.10s

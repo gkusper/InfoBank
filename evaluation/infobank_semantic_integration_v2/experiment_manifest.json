@@ -1,0 +1,74 @@
+{
+  "active_frozen_code_unchanged": true,
+  "actual_api_usage": {
+    "attempts": 120,
+    "automatic_retries": 0,
+    "completion_tokens": 14599,
+    "errors": 0,
+    "kind_counts": {
+      "semantic_analysis": 40,
+      "semantic_cfaf": 40,
+      "shared_control": 40
+    },
+    "model_versions": {
+      "gpt-4o-mini-2024-07-18": 120
+    },
+    "prompt_tokens": 120919,
+    "successful_calls": 120,
+    "summed_call_latency_ms": 244782.0489013102
+  },
+  "analysis_max_tokens": 1500,
+  "branch": "experiment/infobank-semantic-integration-v2",
+  "dataset": "Original exposed forty cases, internal development/regression, not independent validation",
+  "frozen_code_sha256": {
+    "integration.py": "449872e34beb81375bf2a1edb41a185885a30a7a0c9abe74516d86de347a7c57",
+    "metadata_binding.py": "8e15728b41d97e41d1b411a8e430192f5c0bcb5fe4394b1015a282f310136540",
+    "provider.py": "a91e789c06dcfe87bbbaa78f16e784ffe6f71a65631ca4edac8df2e790ab2b17",
+    "query_profile.py": "10eb0528969b94a83691c1bf6348e10fc43566106ff319241fc87faeac71fc74",
+    "run_experiment.py": "e824bf01284eabf0c4f036b608353596f5d09a7ec0fc26b6f2ddbf55e2a92b6e"
+  },
+  "full_attempt_cap": 150,
+  "full_cases": 40,
+  "full_observation_policy": "Forty fresh observations under same frozen version, no pilot or v1 reuse.",
+  "generation_max_tokens": 160,
+  "gold_use": "Scorer only after observations are frozen",
+  "independent_validation": false,
+  "model": "gpt-4o-mini",
+  "new_synthetic_functional_passed": 30,
+  "observed_mode_accuracy_difference_between_systems": 0,
+  "parent_commit": "5a95abe933cda134ff4f1be0e82614df6934d987",
+  "pilot_attempt_cap": 40,
+  "pilot_cases": 10,
+  "posthoc_analysis_scope": "Descriptive role, explanation-class and simple-fact diagnostics; no primary rescoring or output repair.",
+  "posthoc_analysis_sha256": "4a681c70770d5965b0b409b811a1de088a7a424f7beffc120694c2229cea8e37",
+  "postrun_new_tests_passed": 63,
+  "preflight": "PASS except one documented historical failure",
+  "previous_files_preserved": 536,
+  "remaining_semantic_role_issue": {
+    "PRIMARY_NONE_assignments": 16,
+    "cases": [
+      "HELD3_P1_01B",
+      "HELD3_P1_02B",
+      "HELD3_P1_03B",
+      "HELD3_P1_04B",
+      "HELD3_P2_01B",
+      "HELD3_P2_02B",
+      "HELD3_P2_03B",
+      "HELD3_P2_04B",
+      "HELD3_P3_01B",
+      "HELD3_P3_02B",
+      "HELD3_P3_03B",
+      "HELD3_P3_04B",
+      "HELD3_P4_01B",
+      "HELD3_P4_02B",
+      "HELD3_P4_03B",
+      "HELD3_P4_04B"
+    ],
+    "fixture_role_disagreements": 8
+  },
+  "repetitions": 1,
+  "status": "COMPLETED",
+  "synthetic": "Thirty new construction-rule scenarios with controlled semantic inputs and zero API calls",
+  "temperature": 0,
+  "version": "semantic-integration-v2.1"
+}

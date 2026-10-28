@@ -1,0 +1,64 @@
+{
+  "audited_api_attempts": 96,
+  "audited_attempts_by_phase": {
+    "full": 96,
+    "pilot": 24
+  },
+  "external_api_failures": 0,
+  "failures": [],
+  "fine_grained_semantic_leakage": "Not automatically measurable beyond exact forbidden markers, private identifiers/titles and P5 equality.",
+  "forbidden_model_input_exposures": 0,
+  "invalid_bindings": 0,
+  "live_shared_assessment_equality": {
+    "analyzed_case_observations": 40,
+    "runs": [
+      "pilot_10",
+      "full_40"
+    ],
+    "status": "PASS"
+  },
+  "p5_pair_checks": [
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_01",
+      "public_response_and_trace_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_02",
+      "public_response_and_trace_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_03",
+      "public_response_and_trace_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_04",
+      "public_response_and_trace_equal": true
+    }
+  ],
+  "pilot_security_status": "PASS",
+  "pre_call_guarded_attempts": 96,
+  "pre_existing_files_unchanged": 536,
+  "protected_content_leakage_observed": 0,
+  "public_internal_trace_separation": "Public trace is response-only whitelist; private catalogue and policy snapshots are internal only.",
+  "public_leakage_cases": 0,
+  "public_response_schema_failures": 0,
+  "reference_occurrences_by_type": {
+    "requirement_support": 16,
+    "source_role": 32,
+    "supporting_spans": 24
+  },
+  "scope": "Exact fixture marker/source identifiers, strict schema, deterministic reference provenance, public trace equality. General paraphrased disclosure requires manual review.",
+  "source_existence_leakage_observed": 0,
+  "status": "PASS",
+  "total_live_attempts": 120,
+  "unauthorized_span_count": 0,
+  "validated_support_and_counter_references": 24,
+  "view_binding_status_counts": {
+    "TRUSTED_QUERY_TARGET": 28,
+    "UNRESOLVED": 4
+  }
+}

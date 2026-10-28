@@ -1,0 +1,42 @@
+{
+  "api_calls": 0,
+  "changed_previous_files": [],
+  "final_protected_file_check": {
+    "changed": [],
+    "files": 536,
+    "status": "PASS"
+  },
+  "historical_passed": 77,
+  "historical_real_calls_repeated": false,
+  "historical_subtests_passed": 13,
+  "initial_diagnostic_issues": [
+    "Windows sandbox TEMP permission errors: fixed by workspace TEMP",
+    "git archive applied newline conversion: rerun current HEAD using exact git cat-file blobs"
+  ],
+  "new_passed": 61,
+  "new_security_or_structural_failures": [],
+  "postrun_new_passed": 63,
+  "protected_previous_files": 536,
+  "semantic_prior_passed": 131,
+  "status": "PASS_WITH_KNOWN_HISTORICAL_FAILURE",
+  "synthetic_functional_passed": 30,
+  "tests": {
+    "historical_cfaf_exact_blob_tests.xml": {
+      "failures": [
+        {
+          "class": "evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests",
+          "name": "test_preheldout_attempt1_plan_artifacts_are_plan_only"
+        }
+      ],
+      "testcases": 78
+    },
+    "new_test_results.xml": {
+      "failures": [],
+      "testcases": 61
+    },
+    "prior_semantic_tests.xml": {
+      "failures": [],
+      "testcases": 131
+    }
+  }
+}

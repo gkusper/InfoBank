@@ -1,0 +1,642 @@
+{
+  "H3PAIR_P1_01": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_01B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_01B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P1_02": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_02B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_02B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P1_03": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_03B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_03B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P1_04": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_04B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P1_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P1_04B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P2_01": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_01B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_01B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P2_02": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_02B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_02B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P2_03": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_03B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_03B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P2_04": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_04B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P2_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P2_04B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P3_01": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_01B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_01B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P3_02": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_02B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_02B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P3_03": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_03B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_03B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P3_04": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_04B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P3_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P3_04B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P4_01": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_01B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_01A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_01B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P4_02": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_02B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_02A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_02B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P4_03": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_03B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_03A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_03B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P4_04": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_04B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "FULL",
+          "case_id": "HELD3_P4_04A",
+          "expected": "FULL"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P4_04B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P5_01": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_01A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_01B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_01A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_01B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P5_02": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_02A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_02B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_02A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_02B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P5_03": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_03A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_03B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_03A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_03B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  },
+  "H3PAIR_P5_04": {
+    "semantic_cfaf": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_04A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_04B",
+          "expected": "CFAF"
+        }
+      ]
+    },
+    "shared_control": {
+      "both_correct": true,
+      "cases": [
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_04A",
+          "expected": "CFAF"
+        },
+        {
+          "actual": "CFAF",
+          "case_id": "HELD3_P5_04B",
+          "expected": "CFAF"
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "actual_api_usage": {
+    "actual_attempts": 60,
+    "by_kind": {
+      "semantic_analysis": {
+        "calls": 20,
+        "input_tokens": 31752,
+        "latency_max_ms": 7401.173500111327,
+        "latency_mean_ms": 3634.0659050038084,
+        "latency_min_ms": 2852.6890000794083,
+        "latency_sum_ms": 72681.31810007617,
+        "output_tokens": 5353
+      },
+      "semantic_cfaf": {
+        "calls": 20,
+        "input_tokens": 18745,
+        "latency_max_ms": 2536.4272000733763,
+        "latency_mean_ms": 1604.864064999856,
+        "latency_min_ms": 1131.5440000034869,
+        "latency_sum_ms": 32097.28129999712,
+        "output_tokens": 1016
+      },
+      "shared_control": {
+        "calls": 20,
+        "input_tokens": 18469,
+        "latency_max_ms": 2182.0425000041723,
+        "latency_mean_ms": 1629.383169976063,
+        "latency_min_ms": 1157.988099846989,
+        "latency_sum_ms": 32587.66339952126,
+        "output_tokens": 1361
+      }
+    },
+    "embeddings": 0,
+    "errors": 0,
+    "input_tokens": 68966,
+    "kind_counts": {
+      "semantic_analysis": 20,
+      "semantic_cfaf": 20,
+      "shared_control": 20
+    },
+    "legacy_summary_latency_warning": "Per-system metrics generation_latency_ms contains the shared case duration (analysis plus both generations), not marginal system generation latency. Use by_kind API timings for operational comparison.",
+    "model_versions": {
+      "gpt-4o-mini-2024-07-18": 60
+    },
+    "output_tokens": 7730,
+    "retries": 0,
+    "shared_analysis_double_counted": false,
+    "successes": 60,
+    "summed_call_latency_ms": 137366.26279959455,
+    "worker_wall_clock_ms": 141267.09760003723
+  },
+  "analysis_max_tokens": 1500,
+  "branch": "experiment/refusalbench-noncontradiction-v1",
+  "code_sha256": {
+    "evaluation/infobank_semantic_integration_v2/integration.py": "449872e34beb81375bf2a1edb41a185885a30a7a0c9abe74516d86de347a7c57",
+    "evaluation/infobank_semantic_integration_v2/metadata_binding.py": "8e15728b41d97e41d1b411a8e430192f5c0bcb5fe4394b1015a282f310136540",
+    "evaluation/infobank_semantic_integration_v2/provider.py": "a91e789c06dcfe87bbbaa78f16e784ffe6f71a65631ca4edac8df2e790ab2b17",
+    "evaluation/infobank_semantic_integration_v2/query_profile.py": "10eb0528969b94a83691c1bf6348e10fc43566106ff319241fc87faeac71fc74",
+    "evaluation/refusalbench_span_fix_v1/contracts.py": "c2b6c58ff425c5f2fe1ca486ed5685d33fdccefe1c579402716628f3e17d4dbc",
+    "evaluation/refusalbench_span_fix_v1/span_references.py": "d4874c7e1ffb16d8bc35fbdecc748c9e412237d7fedb368080d50937c822e219",
+    "evaluation/wolala2026/pipeline.py": "c0ebb6c1b68a880353ad0cdd2cedcef7f91d0d975c2b24dcc2b8c045661d21e6",
+    "evaluation/wolala2026/semantic_evidence.py": "9b4eba92e26d14ba09caf53f74e1558f70e9970809b80ae6d31c2679c0aa011d",
+    "execute.py": "e69bd845411e24fedf438d21ae1240eb10fad9f471dc8b085b6eb843affa72c1",
+    "public_adapter.py": "ce917f0e79326f67bfefb38ac763b58fea85ae951fb521b24e7cad31c96af818",
+    "score.py": "456c179ac7bd372f3c5e3c29607fb206048afd4a0545f24266a64eac9a931956",
+    "test_pilot.py": "86a0dc030bc72d7f466978fd29de742d59421103b7dda0c6ae35abff612d2fc2"
+  },
+  "dataset_revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "frozen_code_unchanged": true,
+  "generation_max_tokens": 160,
+  "generation_status": "COMPLETED",
+  "gold_data_flow": "Preparation and scoring separate processes; execution reads only authorized two-field runtime rows",
+  "hard_api_attempt_cap": 75,
+  "implementation": "semantic-integration-v2.1 unchanged",
+  "model": "gpt-4o-mini",
+  "official_source_unchanged": true,
+  "original_dataset_sha256": "d1bddaec4fdb7e0e2e7bf9a520ef104c3758800fc16769ac6e34baef0d90d1ed",
+  "parent_commit": "b00fb8d98c177760d8d76cbf99779a4092a1e1be",
+  "planned_api_calls": 60,
+  "posthoc_review_scope": "Unblinded non-independent report-author agent review, separate from frozen primary scoring; no labels or predictions edited",
+  "posthoc_review_sha256": "17afd7a420bac7868c3438e4fad202bce4182d80d3dfa942d4094a49455a5232",
+  "preflight": "227 functional tests pass; historical 77+13 subtests pass with one known failure",
+  "preflight_utility_sha256": "0236947864f8fae359e5d86715a8e47b5ea24951aab643d3742f51a623a4f6ad",
+  "preparation_code_sha256": "f51156178f369cb34faad51fda1f9868862d8f4f447ffcfd533a8f314482e10b",
+  "preparation_sha256": {
+    "filtered_selection_manifest.json": "49839cef235f92bac0a18162ef5c71af85ceac267176930e802edb7f6da41770",
+    "filtering_report.json": "082ad126acf5ba9091873904cfd58c06721b95942bc2433928739420211edcf6",
+    "selected_cases.jsonl": "42a3aa1710c497a5afebc263050389aa088a4b79294047b71f4896d19aba2029"
+  },
+  "previous_files_preserved": 584,
+  "repetitions": 1,
+  "report_code_sha256": "9928649112510b11a59a00288f1c1648e9202f58751cf641a4bc5df32629ffea",
+  "results_sha256": "6d356d098fd7204b917b057d4c5f763f32ff7efa2187c1566f1f220896199848",
+  "seed": 20261028,
+  "selection": "20 new record IDs, 20 distinct eligible development groups, 10 FULL + 10 CFAF",
+  "source_group_boundary": "52 previously exposed development groups; excludes 30 reserved and 18 untouched groups",
+  "status": "COMPLETED",
+  "temperature": 0,
+  "version": "refusalbench-noncontradiction-v1"
+}

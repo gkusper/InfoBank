@@ -1,0 +1,50 @@
+{
+  "actual_attempts": 60,
+  "by_kind": {
+    "semantic_analysis": {
+      "calls": 20,
+      "input_tokens": 31752,
+      "latency_max_ms": 7401.173500111327,
+      "latency_mean_ms": 3634.0659050038084,
+      "latency_min_ms": 2852.6890000794083,
+      "latency_sum_ms": 72681.31810007617,
+      "output_tokens": 5353
+    },
+    "semantic_cfaf": {
+      "calls": 20,
+      "input_tokens": 18745,
+      "latency_max_ms": 2536.4272000733763,
+      "latency_mean_ms": 1604.864064999856,
+      "latency_min_ms": 1131.5440000034869,
+      "latency_sum_ms": 32097.28129999712,
+      "output_tokens": 1016
+    },
+    "shared_control": {
+      "calls": 20,
+      "input_tokens": 18469,
+      "latency_max_ms": 2182.0425000041723,
+      "latency_mean_ms": 1629.383169976063,
+      "latency_min_ms": 1157.988099846989,
+      "latency_sum_ms": 32587.66339952126,
+      "output_tokens": 1361
+    }
+  },
+  "embeddings": 0,
+  "errors": 0,
+  "input_tokens": 68966,
+  "kind_counts": {
+    "semantic_analysis": 20,
+    "semantic_cfaf": 20,
+    "shared_control": 20
+  },
+  "legacy_summary_latency_warning": "Per-system metrics generation_latency_ms contains the shared case duration (analysis plus both generations), not marginal system generation latency. Use by_kind API timings for operational comparison.",
+  "model_versions": {
+    "gpt-4o-mini-2024-07-18": 60
+  },
+  "output_tokens": 7730,
+  "retries": 0,
+  "shared_analysis_double_counted": false,
+  "successes": 60,
+  "summed_call_latency_ms": 137366.26279959455,
+  "worker_wall_clock_ms": 141267.09760003723
+}

@@ -1,0 +1,88 @@
+{
+  "purpose": "No original IDs, labels or reserved metadata are exposed to execution.",
+  "row_count": 20,
+  "rows": [
+    {
+      "input_sha256": "adbd0d0c5c2457f7d1e991820c0fed44db87c57233c8718958b24d3f28926c35",
+      "runtime_index": 0
+    },
+    {
+      "input_sha256": "53d16972fec1bb28d10cfb9e3337ce8296a42e8c7efbd09c24055a4071dccf1b",
+      "runtime_index": 1
+    },
+    {
+      "input_sha256": "38c24a345f91a399390674a27d02b7bff6990ecf0b3e38feec66b6497abfdaf1",
+      "runtime_index": 2
+    },
+    {
+      "input_sha256": "b8d565a754e0cb781d909b93c13b1d4e658a70d8e8a0300f4d799957f5444262",
+      "runtime_index": 3
+    },
+    {
+      "input_sha256": "e5e0bfbf8824ac3f812a85a2339c1e7b8d2f02b3c9f0f92c48f903540ac77921",
+      "runtime_index": 4
+    },
+    {
+      "input_sha256": "9c9dd8843824bc3e4036617d7a1a9fd9c8652304bcc867a134d3886805bea2c3",
+      "runtime_index": 5
+    },
+    {
+      "input_sha256": "5bed6f53b8b1ee91631783ce0da0e6987fa8f35281eca9f89abcfdc6c64516c7",
+      "runtime_index": 6
+    },
+    {
+      "input_sha256": "43f6e3e76fed7c93b9c42a416d441a45d3c6a52eaa9d6dcb7381573a87718bee",
+      "runtime_index": 7
+    },
+    {
+      "input_sha256": "f972c068720a597a7bda46c813009ad37e94f53fd3bf2328860a44c3c93df81b",
+      "runtime_index": 8
+    },
+    {
+      "input_sha256": "a8da516451b02da535575aeca0b2b2d53ceb1540751b8b3aa6421e98b78c9f84",
+      "runtime_index": 9
+    },
+    {
+      "input_sha256": "1edd2dabf13c595cd829407ea7ccfac39547ab7680a775e3f198e8eda186773a",
+      "runtime_index": 10
+    },
+    {
+      "input_sha256": "c775943678e78b9fa1fb72a388c489010da15b3d246af7f6afbd223ddba188eb",
+      "runtime_index": 11
+    },
+    {
+      "input_sha256": "180985b0e54f17fde13e433a080cedfc07b932b67caf5b9a242dbe36237933e4",
+      "runtime_index": 12
+    },
+    {
+      "input_sha256": "533fc2e3de98df93d2bdebc19c3c275073ba5e70664114609c01952b2ae14ce1",
+      "runtime_index": 13
+    },
+    {
+      "input_sha256": "1ce7e22db13e4c9fd7d6624dedca106c88833a7dda3ba908de2f8a6ac7ac46ad",
+      "runtime_index": 14
+    },
+    {
+      "input_sha256": "2683d51b89f2845fd61867e7c6a5482ed72a4ebc2c18af62e3bc97e5685ed776",
+      "runtime_index": 15
+    },
+    {
+      "input_sha256": "f08ba360f1db66fc957feb0f99a16dba85e4e368a8903673b716ab37962c68cc",
+      "runtime_index": 16
+    },
+    {
+      "input_sha256": "552319746d592d467c9e08b0a2872b635f7ed3acf08a2c94fe35bcc039d902f4",
+      "runtime_index": 17
+    },
+    {
+      "input_sha256": "82e92065edf4182ba5bc7035fd62d9956bdcec7135f68490f6c58d2857420992",
+      "runtime_index": 18
+    },
+    {
+      "input_sha256": "3daf144a82fe6c57d5c99514eef9fe5a0a74318b440a8be80f32798d8e4d239d",
+      "runtime_index": 19
+    }
+  ],
+  "runtime_sha256": "8b9424bdf5912fe5495087316268924a99b177927a3d34060f5d80637bc4ce4e",
+  "selection_approved": true
+}

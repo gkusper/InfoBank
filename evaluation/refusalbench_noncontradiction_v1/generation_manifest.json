@@ -1,0 +1,13 @@
+{
+  "actual_api_attempts": 60,
+  "blocker": null,
+  "code_unchanged": true,
+  "failures": [],
+  "finished_at_utc": "2026-10-28T18:19:36.243312+00:00",
+  "hard_attempt_cap": 75,
+  "no_auto_retries": true,
+  "runtime_unchanged": true,
+  "status": "COMPLETED",
+  "wall_clock_ms": 141267.09760003723,
+  "worker_cases_recorded": 20
+}

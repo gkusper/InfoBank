@@ -1,0 +1,34 @@
+{
+  "analysis_max_tokens": 1500,
+  "code_sha256": {
+    "evaluation/infobank_semantic_integration_v2/integration.py": "449872e34beb81375bf2a1edb41a185885a30a7a0c9abe74516d86de347a7c57",
+    "evaluation/infobank_semantic_integration_v2/metadata_binding.py": "8e15728b41d97e41d1b411a8e430192f5c0bcb5fe4394b1015a282f310136540",
+    "evaluation/infobank_semantic_integration_v2/provider.py": "a91e789c06dcfe87bbbaa78f16e784ffe6f71a65631ca4edac8df2e790ab2b17",
+    "evaluation/infobank_semantic_integration_v2/query_profile.py": "10eb0528969b94a83691c1bf6348e10fc43566106ff319241fc87faeac71fc74",
+    "evaluation/refusalbench_span_fix_v1/contracts.py": "c2b6c58ff425c5f2fe1ca486ed5685d33fdccefe1c579402716628f3e17d4dbc",
+    "evaluation/refusalbench_span_fix_v1/span_references.py": "d4874c7e1ffb16d8bc35fbdecc748c9e412237d7fedb368080d50937c822e219",
+    "evaluation/wolala2026/pipeline.py": "c0ebb6c1b68a880353ad0cdd2cedcef7f91d0d975c2b24dcc2b8c045661d21e6",
+    "evaluation/wolala2026/semantic_evidence.py": "9b4eba92e26d14ba09caf53f74e1558f70e9970809b80ae6d31c2679c0aa011d",
+    "execute.py": "e69bd845411e24fedf438d21ae1240eb10fad9f471dc8b085b6eb843affa72c1",
+    "public_adapter.py": "ce917f0e79326f67bfefb38ac763b58fea85ae951fb521b24e7cad31c96af818",
+    "score.py": "456c179ac7bd372f3c5e3c29607fb206048afd4a0545f24266a64eac9a931956",
+    "test_pilot.py": "86a0dc030bc72d7f466978fd29de742d59421103b7dda0c6ae35abff612d2fc2"
+  },
+  "counterfactual_constant_systems": "Zero-cost reference predictions only",
+  "data_flow": "Worker reads runtime_inputs and runtime_authorization only; no selection/gold/preparation imports or reads.",
+  "frozen_at_utc": "2026-10-28T18:17:14.535957+00:00",
+  "generation_max_tokens": 160,
+  "hard_attempt_cap": 75,
+  "implementation": "Finalized semantic-integration-v2.1 imported unchanged. No query-classifier or contradiction tuning.",
+  "model": "gpt-4o-mini",
+  "planned_calls": 60,
+  "repetitions": 1,
+  "runtime_authorization_sha256": "711d5760dfb124381a06f3a39e3b774241e2451afeaabf9fcefcc57755585f98",
+  "runtime_sha256": "8b9424bdf5912fe5495087316268924a99b177927a3d34060f5d80637bc4ce4e",
+  "systems": [
+    "semantic_cfaf",
+    "shared_control"
+  ],
+  "temperature": 0,
+  "version": "refusalbench-noncontradiction-v1"
+}

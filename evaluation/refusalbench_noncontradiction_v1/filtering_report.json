@@ -1,0 +1,60 @@
+{
+  "A_B_overlap": 236,
+  "A_only": 89,
+  "B_only": 41,
+  "additional_untouched_groups": 18,
+  "already_exposed_development_groups": 52,
+  "dataset": "aashiqmuhamed/RefusalBench-NQ",
+  "eligible_CFAF": 795,
+  "eligible_FULL": 439,
+  "eligible_counts_by_original_behavior": {
+    "ANSWER_CORRECTLY": 439,
+    "REFUSE_AMBIGUOUS_QUERY": 140,
+    "REFUSE_FALSE_PREMISE_IN_QUERY": 104,
+    "REFUSE_GRANULARITY_MISMATCH": 184,
+    "REFUSE_INFO_MISSING_IN_CONTEXT": 184,
+    "REFUSE_NONFACTUAL_QUERY": 183
+  },
+  "eligible_records": 1234,
+  "eligible_unused_development_counts": {
+    "ANSWER_CORRECTLY": 238,
+    "REFUSE_AMBIGUOUS_QUERY": 61,
+    "REFUSE_FALSE_PREMISE_IN_QUERY": 49,
+    "REFUSE_GRANULARITY_MISMATCH": 99,
+    "REFUSE_INFO_MISSING_IN_CONTEXT": 98,
+    "REFUSE_NONFACTUAL_QUERY": 86
+  },
+  "eligible_unused_development_records": 631,
+  "filter_A_exact_rule": "(?i)\\bcontradiction\\b in implementation_reasoning",
+  "filter_A_excluded": 325,
+  "filter_B_exact_rule": "expected_rag_behavior == REFUSE_CONTRADICTORY_CONTEXT OR perturbation_class == P-Contradiction",
+  "filter_B_excluded": 277,
+  "filtering_scope": "Global annotation-only preparation. No reserved/untouched query/context/answer text materialized, emitted or executed.",
+  "original_file": "C:\\Users\\EKKE\\Documents\\Codex\\work\\rb-hf\\hub\\datasets--aashiqmuhamed--RefusalBench-NQ\\snapshots\\b3684f805563e6ce465e7e9b055b840a48f519c2\\refusalbench-nq.jsonl",
+  "original_file_sha256": "d1bddaec4fdb7e0e2e7bf9a520ef104c3758800fc16769ac6e34baef0d90d1ed",
+  "original_records": 1600,
+  "prior_executed_record_ids": 62,
+  "related_word_audit_only": {
+    "conflict": {
+      "eligible_records": 1,
+      "occurrences": 25,
+      "records": 25
+    },
+    "contradictions": {
+      "eligible_records": 0,
+      "occurrences": 0,
+      "records": 0
+    },
+    "contradictory": {
+      "eligible_records": 21,
+      "occurrences": 150,
+      "records": 119
+    }
+  },
+  "reserved_holdout_groups": 30,
+  "revision": "b3684f805563e6ce465e7e9b055b840a48f519c2",
+  "source_groups_after": 100,
+  "source_groups_before": 100,
+  "split": "test",
+  "total_excluded_union": 366
+}

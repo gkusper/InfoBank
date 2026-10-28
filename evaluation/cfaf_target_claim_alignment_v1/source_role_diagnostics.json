@@ -1,0 +1,89 @@
+{
+  "effective_role_agreement": 6,
+  "independent_semantic_gold": false,
+  "model_role_agreement": 6,
+  "reference_count": 8,
+  "relation_agreement": 4,
+  "rows": [
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "SUPPORTS",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "PRIMARY",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 0,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "NONE",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "CONTEXTUAL",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 1,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "SUPPORTS",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "PRIMARY",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 2,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "NONE",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "PRIMARY",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 3,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "SUPPORTS",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "PRIMARY",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 4,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "NONE",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "PRIMARY",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 5,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "SUPPORTS",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "PRIMARY",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 6,
+      "source_id": "view-0001"
+    },
+    {
+      "effective_role": "PRIMARY",
+      "model_relation": "NONE",
+      "model_role": "PRIMARY",
+      "reference_relation": "SUPPORTS",
+      "reference_role": "CONTEXTUAL",
+      "reference_scope": "Original exposed synthetic construction labels; no independent claim gold",
+      "runtime_index": 7,
+      "source_id": "view-0001"
+    }
+  ]
+}

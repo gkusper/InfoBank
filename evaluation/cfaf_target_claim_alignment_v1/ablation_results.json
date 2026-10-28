@@ -1,0 +1,1068 @@
+{
+  "T4": "NOT_EXECUTED",
+  "cached": {
+    "model_calls": 0,
+    "n": 40,
+    "systems": {
+      "A0": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      },
+      "B3": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      },
+      "T1": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      },
+      "T2": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      },
+      "T3": {
+        "accuracy": 0.8,
+        "balanced_accuracy": 0.8,
+        "cfaf_recall": 0.8,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 16,
+            "ERROR": 0,
+            "FULL": 4
+          },
+          "FULL": {
+            "CFAF": 4,
+            "ERROR": 0,
+            "FULL": 16
+          }
+        },
+        "contrasting_pairs": 0,
+        "correct_contrasting_pairs": 0,
+        "correct_matched_pairs": 0,
+        "correct_p5_pairs": 0,
+        "errors": 0,
+        "failure_to_restrict_count": 4,
+        "failure_to_restrict_rate": 0.2,
+        "full_recall": 0.8,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 0,
+        "n": 40,
+        "p5_nondisclosure_pairs": 0,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 4,
+        "unnecessary_refusal_rate": 0.2
+      }
+    }
+  },
+  "causal_interpretation": "T1-T3 are shadow-only. Type correction is separately recorded, does not alter model payloads or gate authority. No accuracy effect is attributed to lexical diagnostics or target binding. Cached/live samples overlap and are not pooled as independent observations.",
+  "changed_gate_decisions": 0,
+  "correct_FULL_lost_T3_vs_B3": 0,
+  "incorrect_FULL_prevented_T3_vs_B3": 0,
+  "live": {
+    "by_dataset": {
+      "InfoBank-original-40": {
+        "A0": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 4,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "B3": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "No separate live public response was generated for this gate-only configuration.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "T1": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "No separate live public response was generated for this gate-only configuration.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "T2": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "No separate live public response was generated for this gate-only configuration.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "T3": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 4,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        },
+        "shared_control": {
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "cfaf_recall": 1.0,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 6,
+              "ERROR": 0,
+              "FULL": 0
+            },
+            "FULL": {
+              "CFAF": 0,
+              "ERROR": 0,
+              "FULL": 4
+            }
+          },
+          "contrasting_pairs": 4,
+          "correct_contrasting_pairs": 4,
+          "correct_matched_pairs": 5,
+          "correct_p5_pairs": 1,
+          "errors": 0,
+          "failure_to_restrict_count": 0,
+          "failure_to_restrict_rate": 0.0,
+          "full_recall": 1.0,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 5,
+          "n": 10,
+          "p5_nondisclosure_pairs": 1,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 6,
+          "structured_reason_correct": 4,
+          "unnecessary_refusal_count": 0,
+          "unnecessary_refusal_rate": 0.0
+        }
+      },
+      "RefusalBench-NQ": {
+        "A0": {
+          "accuracy": 0.7142857142857143,
+          "balanced_accuracy": 0.7142857142857142,
+          "cfaf_recall": 0.5714285714285714,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 4,
+              "ERROR": 0,
+              "FULL": 3
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 6
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 0,
+          "failure_to_restrict_count": 3,
+          "failure_to_restrict_rate": 0.42857142857142855,
+          "full_recall": 0.8571428571428571,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 0,
+          "n": 14,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 4,
+          "structured_reason_correct": 1,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.14285714285714285
+        },
+        "B3": {
+          "accuracy": 0.7142857142857143,
+          "balanced_accuracy": 0.7142857142857142,
+          "cfaf_recall": 0.5714285714285714,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 4,
+              "ERROR": 0,
+              "FULL": 3
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 6
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 0,
+          "failure_to_restrict_count": 3,
+          "failure_to_restrict_rate": 0.42857142857142855,
+          "full_recall": 0.8571428571428571,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 0,
+          "n": 14,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "No separate live public response was generated for this gate-only configuration.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.14285714285714285
+        },
+        "T1": {
+          "accuracy": 0.7142857142857143,
+          "balanced_accuracy": 0.7142857142857142,
+          "cfaf_recall": 0.5714285714285714,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 4,
+              "ERROR": 0,
+              "FULL": 3
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 6
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 0,
+          "failure_to_restrict_count": 3,
+          "failure_to_restrict_rate": 0.42857142857142855,
+          "full_recall": 0.8571428571428571,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 0,
+          "n": 14,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "No separate live public response was generated for this gate-only configuration.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.14285714285714285
+        },
+        "T2": {
+          "accuracy": 0.7142857142857143,
+          "balanced_accuracy": 0.7142857142857142,
+          "cfaf_recall": 0.5714285714285714,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 4,
+              "ERROR": 0,
+              "FULL": 3
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 6
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 0,
+          "failure_to_restrict_count": 3,
+          "failure_to_restrict_rate": 0.42857142857142855,
+          "full_recall": 0.8571428571428571,
+          "generic_or_uncategorized_refusals": null,
+          "matched_pairs": 0,
+          "n": 14,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "No separate live public response was generated for this gate-only configuration.",
+          "structured_reason_assessable": null,
+          "structured_reason_correct": null,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.14285714285714285
+        },
+        "T3": {
+          "accuracy": 0.7142857142857143,
+          "balanced_accuracy": 0.7142857142857142,
+          "cfaf_recall": 0.5714285714285714,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 4,
+              "ERROR": 0,
+              "FULL": 3
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 6
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 0,
+          "failure_to_restrict_count": 3,
+          "failure_to_restrict_rate": 0.42857142857142855,
+          "full_recall": 0.8571428571428571,
+          "generic_or_uncategorized_refusals": 0,
+          "matched_pairs": 0,
+          "n": 14,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 4,
+          "structured_reason_correct": 1,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.14285714285714285
+        },
+        "shared_control": {
+          "accuracy": 0.7142857142857143,
+          "balanced_accuracy": 0.7142857142857142,
+          "cfaf_recall": 0.5714285714285714,
+          "confusion": {
+            "CFAF": {
+              "CFAF": 4,
+              "ERROR": 0,
+              "FULL": 3
+            },
+            "FULL": {
+              "CFAF": 1,
+              "ERROR": 0,
+              "FULL": 6
+            }
+          },
+          "contrasting_pairs": 0,
+          "correct_contrasting_pairs": 0,
+          "correct_matched_pairs": 0,
+          "correct_p5_pairs": 0,
+          "errors": 0,
+          "failure_to_restrict_count": 3,
+          "failure_to_restrict_rate": 0.42857142857142855,
+          "full_recall": 0.8571428571428571,
+          "generic_or_uncategorized_refusals": 4,
+          "matched_pairs": 0,
+          "n": 14,
+          "p5_nondisclosure_pairs": 0,
+          "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+          "structured_reason_assessable": 0,
+          "structured_reason_correct": 0,
+          "unnecessary_refusal_count": 1,
+          "unnecessary_refusal_rate": 0.14285714285714285
+        }
+      }
+    },
+    "gate_only": {
+      "A0": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "B3": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "T1": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "T2": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "T3": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 0,
+        "structured_reason_correct": 0,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      }
+    },
+    "n": 24,
+    "systems": {
+      "A0": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 10,
+        "structured_reason_correct": 5,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "B3": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "T1": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "T2": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": null,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "No separate live public response was generated for this gate-only configuration.",
+        "structured_reason_assessable": null,
+        "structured_reason_correct": null,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "T3": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 0,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 10,
+        "structured_reason_correct": 5,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      },
+      "shared_control": {
+        "accuracy": 0.8333333333333334,
+        "balanced_accuracy": 0.8391608391608392,
+        "cfaf_recall": 0.7692307692307693,
+        "confusion": {
+          "CFAF": {
+            "CFAF": 10,
+            "ERROR": 0,
+            "FULL": 3
+          },
+          "FULL": {
+            "CFAF": 1,
+            "ERROR": 0,
+            "FULL": 10
+          }
+        },
+        "contrasting_pairs": 4,
+        "correct_contrasting_pairs": 4,
+        "correct_matched_pairs": 5,
+        "correct_p5_pairs": 1,
+        "errors": 0,
+        "failure_to_restrict_count": 3,
+        "failure_to_restrict_rate": 0.23076923076923078,
+        "full_recall": 0.9090909090909091,
+        "generic_or_uncategorized_refusals": 4,
+        "matched_pairs": 5,
+        "n": 24,
+        "p5_nondisclosure_pairs": 1,
+        "reason_note": "RB category proxy is lexical; InfoBank class uses original construction labels. Neither proves explanation entailment.",
+        "structured_reason_assessable": 6,
+        "structured_reason_correct": 4,
+        "unnecessary_refusal_count": 1,
+        "unnecessary_refusal_rate": 0.09090909090909091
+      }
+    }
+  },
+  "target_claim_metrics": {
+    "cached": {
+      "all_requirements_have_claim_record": true,
+      "ambiguous_rate_applicable": 0.0,
+      "authority_counts": {
+        "LLM_SEMANTIC_ASSESSMENT": 25,
+        "UNRESOLVED": 17
+      },
+      "case_count": 40,
+      "claim_record_count": 42,
+      "correct_FULL_with_any_diagnostic": 8,
+      "label_incompatible_FULL_cases": 4,
+      "label_incompatible_FULL_with_any_diagnostic": 2,
+      "label_incompatible_FULL_with_new_lexical_relation_or_numeric_alert": 0,
+      "newly_resolved_vs_existing_binding_indices": [],
+      "no_longer_resolved_vs_existing_binding_indices": [],
+      "relation_status_counts": {
+        "SUPPORTED_BY_ASSESSMENT": 25,
+        "UNRESOLVED": 17
+      },
+      "resolved_rate_all_cases": 0.0,
+      "resolved_rate_applicable": 0.0,
+      "scoped_reference_occurrences": 30,
+      "semantic_alignment_correctness": "NOT_INDEPENDENTLY_ANNOTATED; token/reference linkage is not entailment",
+      "target_states": {
+        "NOT_APPLICABLE": 16,
+        "UNRESOLVED": 24
+      },
+      "trusted_metadata_candidate_matches": 0,
+      "type_representation_changes": [],
+      "uncertainty_counts": {
+        "CANDIDATE_FRAGMENT_UNRESOLVED": 28,
+        "LEXICAL_RELATION_ANCHOR_MISSING": 3,
+        "NO_SCOPED_SUPPORTING_SPANS": 17,
+        "QUALIFIER_ENTAILMENT_UNRESOLVED": 2,
+        "ROLE_RELATION_ANCHOR_MISSING": 1,
+        "SUBJECT_VALUE_ASSOCIATION_REQUIRES_SEMANTICS": 1
+      }
+    },
+    "live": {
+      "all_requirements_have_claim_record": true,
+      "ambiguous_rate_applicable": 0.0,
+      "authority_counts": {
+        "LLM_SEMANTIC_ASSESSMENT": 13,
+        "TRUSTED_STRUCTURED_SOURCE": 2,
+        "UNRESOLVED": 11
+      },
+      "case_count": 24,
+      "claim_record_count": 26,
+      "correct_FULL_with_any_diagnostic": 5,
+      "label_incompatible_FULL_cases": 3,
+      "label_incompatible_FULL_with_any_diagnostic": 2,
+      "label_incompatible_FULL_with_new_lexical_relation_or_numeric_alert": 0,
+      "newly_resolved_vs_existing_binding_indices": [],
+      "no_longer_resolved_vs_existing_binding_indices": [],
+      "relation_status_counts": {
+        "STRUCTURED_FIELD_MATCH": 2,
+        "SUPPORTED_BY_ASSESSMENT": 13,
+        "UNRESOLVED": 11
+      },
+      "resolved_rate_all_cases": 0.2916666666666667,
+      "resolved_rate_applicable": 0.3888888888888889,
+      "scoped_reference_occurrences": 17,
+      "semantic_alignment_correctness": "NOT_INDEPENDENTLY_ANNOTATED; token/reference linkage is not entailment",
+      "target_states": {
+        "NOT_APPLICABLE": 6,
+        "RESOLVED": 7,
+        "UNRESOLVED": 11
+      },
+      "trusted_metadata_candidate_matches": 2,
+      "type_representation_changes": [
+        {
+          "access_class": "METADATA",
+          "after": "DATE_TIME",
+          "attribute": "created_at",
+          "before": "METADATA",
+          "index": 4,
+          "requirement_id": "request-2"
+        }
+      ],
+      "uncertainty_counts": {
+        "CANDIDATE_FRAGMENT_UNRESOLVED": 16,
+        "LEXICAL_RELATION_ANCHOR_MISSING": 1,
+        "NO_SCOPED_SUPPORTING_SPANS": 10,
+        "NUMERIC_TOKEN_NOT_IN_SCOPED_EVIDENCE": 1,
+        "QUALIFIER_ENTAILMENT_UNRESOLVED": 1,
+        "SUBJECT_VALUE_ASSOCIATION_REQUIRES_SEMANTICS": 1
+      }
+    }
+  }
+}

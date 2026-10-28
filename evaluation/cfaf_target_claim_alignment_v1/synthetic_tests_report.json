@@ -1,0 +1,143 @@
+{
+  "aggregation_smoke": {
+    "below_threshold_indistinguishable_from_empty": true,
+    "cases": [
+      {
+        "expected": 3,
+        "operation": "count",
+        "pass": true,
+        "result": {
+          "answer": "Governed aggregate count: 3.",
+          "citations": [],
+          "generator_context": {
+            "operation": "count",
+            "value": 3.0
+          },
+          "public_trace": {
+            "aggregate_available": true
+          },
+          "status": "AVAILABLE"
+        }
+      },
+      {
+        "expected": 94,
+        "operation": "sum",
+        "pass": true,
+        "result": {
+          "answer": "Governed aggregate sum: 94.",
+          "citations": [],
+          "generator_context": {
+            "operation": "sum",
+            "value": 94.0
+          },
+          "public_trace": {
+            "aggregate_available": true
+          },
+          "status": "AVAILABLE"
+        }
+      },
+      {
+        "expected": 31.333333,
+        "operation": "mean",
+        "pass": true,
+        "result": {
+          "answer": "Governed aggregate mean: 31.3333.",
+          "citations": [],
+          "generator_context": {
+            "operation": "mean",
+            "value": 31.333333
+          },
+          "public_trace": {
+            "aggregate_available": true
+          },
+          "status": "AVAILABLE"
+        }
+      }
+    ],
+    "model_calls": 0,
+    "raw_values_or_identifiers_sent_to_generator": false,
+    "scope": "Structured authorized synthetic contributions only; separate from RefusalBench accuracy"
+  },
+  "controlled_test_cases": 65,
+  "main_backend_test_files": "Inspected; selected pure algorithms covered by local controlled tests. Full SQLAlchemy/router integration suites not imported or executed.",
+  "new_fictional_entities_and_values": true,
+  "not_independent_validation": true,
+  "original_metadata_expectations": {
+    "additional_value_checks": 7,
+    "additional_value_checks_passed": 7,
+    "model_calls": 0,
+    "old_schema_expectations_unchanged": true,
+    "original_cases": 17,
+    "original_expectations_sha256": "bdb89255689752f24ce8f8dc2f73176007fcdf3b43b988aa8d4084b5e37ebd4c",
+    "original_expectations_source": "evaluation\\cfaf_requirement_alignment_v1\\synthetic_decomposition_cases.jsonl",
+    "original_type_sequences_correct": 17
+  },
+  "status": "PASS",
+  "test_names": [
+    "test_unique_document_declared_alias",
+    "test_single_retrieved_item_without_anchor_not_resolved",
+    "test_two_similar_titles_ambiguous",
+    "test_same_title_different_objects_ambiguous",
+    "test_object_cluster_multiple_documents_and_owned_type",
+    "test_two_owned_objects_same_type_require_clarification",
+    "test_owned_type_requires_authoritative_ownership",
+    "test_trusted_edition_resolution[Read the vesper dossier edition 2.-2-False]",
+    "test_trusted_edition_resolution[Read the vesper dossier previous edition.-1-True]",
+    "test_previous_version_not_guessed_without_ordering",
+    "test_context_mention_is_not_trusted_catalogue_binding",
+    "test_explicit_authorized_identifier",
+    "test_denied_source_excluded_from_catalogue",
+    "test_limited_views_can_bind_without_body_disclosure[METADATA]",
+    "test_limited_views_can_bind_without_body_disclosure[AGGREGATE]",
+    "test_unresolved_pronoun",
+    "test_target_public_summary_has_no_private_fields_or_counts",
+    "test_unauthorized_or_stale_binding_rejected",
+    "test_llm_style_catalogue_dictionary_not_authority",
+    "test_metadata_file_type_and_date_separately_typed",
+    "test_trusted_metadata_value_binding_and_precision",
+    "test_invalid_metadata_date_not_accepted_by_iso_shape",
+    "test_date_in_free_text_not_authoritative_metadata",
+    "test_missing_metadata_attribute_preserves_unknown",
+    "test_query_number_not_source_evidence",
+    "test_unsupported_date_and_predicate_are_shadow_diagnostics",
+    "test_main_relation_anchor_reuse_does_not_imply_entailment",
+    "test_correct_typed_count_relation_binding",
+    "test_wrong_numeric_value_detected_from_trusted_field",
+    "test_wrong_structured_subject_detected",
+    "test_forged_structured_fact_rejected_even_with_hash",
+    "test_correct_multipart_fragments_and_unproven_association",
+    "test_missing_second_fragment_not_proven_complete",
+    "test_qualifier_is_not_proved_by_occurrence[first]",
+    "test_qualifier_is_not_proved_by_occurrence[only]",
+    "test_qualifier_is_not_proved_by_occurrence[unique]",
+    "test_structured_aggregate_reuse[count-3.0]",
+    "test_structured_aggregate_reuse[sum-84.0]",
+    "test_structured_aggregate_reuse[mean-28.0]",
+    "test_below_threshold_and_denied_values_non_disclosing",
+    "test_aggregate_requires_typed_numeric_input[True]",
+    "test_aggregate_requires_typed_numeric_input[31]",
+    "test_aggregate_requires_typed_numeric_input[nan]",
+    "test_shadow_pipeline_architecture_and_no_new_gate[A0]",
+    "test_shadow_pipeline_architecture_and_no_new_gate[B3]",
+    "test_shadow_pipeline_architecture_and_no_new_gate[T1]",
+    "test_shadow_pipeline_architecture_and_no_new_gate[T2]",
+    "test_shadow_pipeline_architecture_and_no_new_gate[T3]",
+    "test_no_private_body_reaches_model[DENY]",
+    "test_no_private_body_reaches_model[METADATA]",
+    "test_no_private_body_reaches_model[AGGREGATE]",
+    "test_p5_hidden_and_absent_indistinguishable",
+    "test_invalid_span_and_high_confidence_do_not_promote_full",
+    "test_model_dictionary_cannot_claim_resolved_authority",
+    "test_mutated_native_target_attestation_rejected",
+    "test_actor_role_claim_uses_trusted_field_not_cast_cooccurrence",
+    "test_count_average_mismatch_kept_separate",
+    "test_source_role_registry_still_distinguishes_visit_obligation_invoice_payment",
+    "test_counterevidence_never_removed_by_minimal_span_recommendation",
+    "test_original_mode_selector_and_prompts_unchanged",
+    "test_no_gold_in_new_model_payloads",
+    "test_exact_reused_function_source_hashes",
+    "test_current_task_clock_and_45_55_minute_cutoffs",
+    "test_durable_attempt_cap_is_120",
+    "test_metadata_year_precision_derived_from_trusted_timestamp"
+  ]
+}

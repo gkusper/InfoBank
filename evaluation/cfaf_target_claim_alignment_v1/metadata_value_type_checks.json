@@ -1,0 +1,51 @@
+[
+  {
+    "actual": true,
+    "expected": true,
+    "pass": true,
+    "value": "2044-02-29",
+    "value_type": "DATE_TIME"
+  },
+  {
+    "actual": false,
+    "expected": false,
+    "pass": true,
+    "value": "2043-02-29",
+    "value_type": "DATE_TIME"
+  },
+  {
+    "actual": true,
+    "expected": true,
+    "pass": true,
+    "value": "2047-04-23T12:30:00+00:00",
+    "value_type": "DATE_TIME"
+  },
+  {
+    "actual": false,
+    "expected": false,
+    "pass": true,
+    "value": "not a date",
+    "value_type": "DATE_TIME"
+  },
+  {
+    "actual": true,
+    "expected": true,
+    "pass": true,
+    "value": "ODT",
+    "value_type": "STRING"
+  },
+  {
+    "actual": false,
+    "expected": false,
+    "pass": true,
+    "value": "True",
+    "value_type": "COUNT"
+  },
+  {
+    "actual": false,
+    "expected": false,
+    "pass": true,
+    "value": "inf",
+    "value_type": "NUMBER"
+  }
+]

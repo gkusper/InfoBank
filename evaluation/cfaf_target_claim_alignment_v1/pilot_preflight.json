@@ -1,0 +1,270 @@
+{
+  "model_calls": 0,
+  "rows": [
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 0,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 1,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 2,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 3,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 4,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 5,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 6,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 7,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 8,
+      "semantic_valid": null
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 9,
+      "semantic_valid": null
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 10,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 11,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 12,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 13,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 14,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 15,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 16,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 17,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 18,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 19,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 20,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 21,
+      "semantic_valid": true
+    },
+    {
+      "predictions": {
+        "A0": "CFAF",
+        "B3": "CFAF",
+        "T1": "CFAF",
+        "T2": "CFAF",
+        "T3": "CFAF"
+      },
+      "runtime_index": 22,
+      "semantic_valid": false
+    },
+    {
+      "predictions": {
+        "A0": "FULL",
+        "B3": "FULL",
+        "T1": "FULL",
+        "T2": "FULL",
+        "T3": "FULL"
+      },
+      "runtime_index": 23,
+      "semantic_valid": true
+    }
+  ],
+  "status": "PASS"
+}

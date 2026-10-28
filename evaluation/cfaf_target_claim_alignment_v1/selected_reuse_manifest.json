@@ -1,0 +1,146 @@
+{
+  "namespace_adaptation": "Only stdlib imports and three relevance policy-label constants supplied for aggregate_core; complete backend modules not imported.",
+  "selected_units": [
+    {
+      "destination": "vendor/relation_anchors.py",
+      "end_line": 162,
+      "names": [
+        "_CLAIM_RELATION_PATTERNS"
+      ],
+      "original_path": "backend_python/relevance.py",
+      "selected_source_sha256": "1420b2f5db83d38f670a7140f22a2521d7e338b4c76a2bf0fec579fb3919dc6c",
+      "start_line": 126
+    },
+    {
+      "destination": "vendor/relation_anchors.py",
+      "end_line": 174,
+      "names": [
+        "_pattern_hits"
+      ],
+      "original_path": "backend_python/relevance.py",
+      "selected_source_sha256": "24e4899b97cfea0579a0dba6691fa1d7d7c1eec45f5ad3022a3ee502f51705a8",
+      "start_line": 169
+    },
+    {
+      "destination": "vendor/relation_anchors.py",
+      "end_line": 180,
+      "names": [
+        "claim_relation_signals"
+      ],
+      "original_path": "backend_python/relevance.py",
+      "selected_source_sha256": "1b7667511ea173a0332f2aff84e98d1d95ac94e40da185ae0089ea930c33ff8c",
+      "start_line": 177
+    },
+    {
+      "destination": "vendor/query_anchors.py",
+      "end_line": 193,
+      "names": [
+        "_keyword_tokens"
+      ],
+      "original_path": "backend_python/ai_provider.py",
+      "selected_source_sha256": "3ffe9180656893e92b039a324621ba4ab1b9a2b2f93b610293c9c0f85a7110a4",
+      "start_line": 190
+    },
+    {
+      "destination": "vendor/query_anchors.py",
+      "end_line": 232,
+      "names": [
+        "deterministic_allowed_keyword_matches"
+      ],
+      "original_path": "backend_python/ai_provider.py",
+      "selected_source_sha256": "f151522c6180876c7c7e7f3d397ff5d954e9a6c6ec6a493cbf6ed4ae4abe4b8a",
+      "start_line": 196
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 21,
+      "names": [
+        "AGGREGATE_CONFIG_VERSION"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "1434035e2cbc5a6a91dfc5965c2778990ecc565879cb29b887c2ce2f8e4e11a3",
+      "start_line": 21
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 22,
+      "names": [
+        "AGGREGATE_RESULT"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "a9facfd82ce4b2ddf6f4e4ae7c7fccba60ffd17699c087d6533fe84fd5fb5663",
+      "start_line": 22
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 23,
+      "names": [
+        "REFUSE_AGGREGATION_THRESHOLD"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "efb2307b82ac26e79498b316f84e70781f971877c130464694f6359c6faad0f6",
+      "start_line": 23
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 24,
+      "names": [
+        "REASON_THRESHOLD_MET"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "29e91f1a5c35fc34282369781ce066cbd8f5178f55b9e1189fb971a1bfa52d4f",
+      "start_line": 24
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 25,
+      "names": [
+        "REASON_THRESHOLD_NOT_MET"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "b55f457262a722870086d12c29da5cbca02236e6076742ba56b2517cfa88c214",
+      "start_line": 25
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 44,
+      "names": [
+        "AggregateConfig"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "712f7aad90b29b3f697fc9a6dc4d069752f3a5e1bbbb5240a247efdd13263855",
+      "start_line": 29
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 57,
+      "names": [
+        "AggregateContribution"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "4236c6e3d64df3d374fc9118134089da5cd19b749529a48884c51af115051ca8",
+      "start_line": 47
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 89,
+      "names": [
+        "_public_refusal"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "0df909d922c1e16e50c951b50d53650b5c844a9d47773a1ad27726d23df06477",
+      "start_line": 76
+    },
+    {
+      "destination": "vendor/aggregate_core.py",
+      "end_line": 140,
+      "names": [
+        "execute_aggregate"
+      ],
+      "original_path": "backend_python/aggregate_executor.py",
+      "selected_source_sha256": "63c94fb255602d5f1b14c42d9a4f6a7996421666eec1852b722ef70fadc00a3b",
+      "start_line": 92
+    }
+  ],
+  "source_commit": "8079f29dc3a97273f51b55b2a22f9ff896a2e758"
+}

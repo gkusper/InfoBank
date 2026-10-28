@@ -1,0 +1,84 @@
+........................................................................ [ 12%]
+...................................................F.................... [ 24%]
+........................................................................ [ 37%]
+........................................................................ [ 49%]
+...................F.............F...................................... [ 61%]
+........................................................................ [ 74%]
+.........F.............................................................. [ 86%]
+.F...................................................................... [ 98%]
+.......                                                                  [100%]
+================================== FAILURES ===================================
+_______________________ test_historical_files_immutable _______________________
+
+    def test_historical_files_immutable():
+     from .artifacts import ROOT,REPO,read,sha
+>    s=read(ROOT/'task_state.json');assert all(sha(REPO/n)==h for n,h in s['protected_files'].items())
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    assert False
+E     +  where False = all(<generator object test_historical_files_immutable.<locals>.<genexpr> at 0x000001D815963D30>)
+
+evaluation\cfaf_requirement_alignment_v1\test_rda.py:133: AssertionError
+__________________ test_task_clock_is_monotonic_and_deadline __________________
+
+    def test_task_clock_is_monotonic_and_deadline():
+>    a=elapsed();b=elapsed();assert b>=a;assert ensure('test',1)>0;assert snapshot()['remaining_seconds']<=3600
+                                                ^^^^^^^^^^^^^^^^
+
+evaluation\refusalbench_iterative_dev_v1\test_framework.py:10: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+operation = 'test', expected_seconds = 1, new_api = False
+
+    def ensure(operation,expected_seconds=1,new_api=False):
+     l=limits();used=elapsed()
+>    if used>=l['hard_deadline_after_seconds'] or remaining()<expected_seconds+5:raise DeadlineReached('Hard deadline margin prevents '+operation)
+                                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    evaluation.refusalbench_iterative_dev_v1.deadline.DeadlineReached: Hard deadline margin prevents test
+
+evaluation\refusalbench_iterative_dev_v1\deadline.py:12: DeadlineReached
+____________ test_task_cap_counts_durable_attempts_before_network _____________
+
+tmp_path = WindowsPath('C:/Users/EKKE/Documents/Codex/2026-10-28/files-pasted-by-the-user-codex/work/target-claim-regression-temp/current_and_prior/test_task_cap_counts_durable_a0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001D82C275C70>
+
+    def test_task_cap_counts_durable_attempts_before_network(tmp_path,monkeypatch):
+     monkeypatch.setattr(provider_v2,'ROOT',tmp_path);(tmp_path/'global_api_requests.jsonl').write_text(''.join(json.dumps({'attempt':i})+'\n' for i in range(360)))
+     provider=provider_v2.BoundedProvider.__new__(provider_v2.BoundedProvider)
+>    with pytest.raises(RuntimeError,match='360 attempt'):provider._post_json('/chat/completions',{})
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: Regex pattern did not match.
+E      Expected regex: '360 attempt'
+E      Actual message: 'Hard deadline margin prevents API request'
+
+evaluation\refusalbench_iterative_dev_v1\test_budget_deadline.py:17: AssertionError
+_______________________ test_historical_files_unchanged _______________________
+
+    def test_historical_files_unchanged():
+     protected=json.loads((ROOT/'protected_files.json').read_text())
+     if isinstance(protected,dict) and 'files' in protected:protected=protected['files']
+     assert isinstance(protected,dict)
+>    for name,expected in protected.items():assert hashlib.sha256((ROOT.parents[1]/name).read_bytes()).hexdigest()==expected,name
+                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E    AssertionError: .gitignore
+E    assert 'f3c4645bb5e2...4f514054a7cbb' == '4ef67fe69cbc...84181d29c7440'
+E      
+E      - 4ef67fe69cbc27018ed0a989fe1f683077af4bebef82ec9748e84181d29c7440
+E      + f3c4645bb5e2c223c36544a64f5a6e81a6a8600862e0f0bb3934f514054a7cbb
+
+evaluation\infobank_semantic_regression_v1\test_governed.py:63: AssertionError
+____________________ test_previous_frozen_files_unchanged _____________________
+
+    def test_previous_frozen_files_unchanged():
+     root=Path(__file__).resolve().parents[2];snapshot=json.loads((Path(__file__).parent/'protected_files.json').read_text())
+>    assert all(hashlib.sha256((root/name).read_bytes()).hexdigest()==digest for name,digest in snapshot.items())
+E    assert False
+E     +  where False = all(<generator object test_previous_frozen_files_unchanged.<locals>.<genexpr> at 0x000001D82C22E980>)
+
+evaluation\refusalbench_span_fix_v1\test_span_fix.py:95: AssertionError
+=========================== short test summary info ===========================
+FAILED evaluation/cfaf_requirement_alignment_v1/test_rda.py::test_historical_files_immutable
+FAILED evaluation/refusalbench_iterative_dev_v1/test_framework.py::test_task_clock_is_monotonic_and_deadline
+FAILED evaluation/refusalbench_iterative_dev_v1/test_budget_deadline.py::test_task_cap_counts_durable_attempts_before_network
+FAILED evaluation/infobank_semantic_regression_v1/test_governed.py::test_historical_files_unchanged
+FAILED evaluation/refusalbench_span_fix_v1/test_span_fix.py::test_previous_frozen_files_unchanged
+5 failed, 578 passed in 18.17s

@@ -1,0 +1,84 @@
+{
+  "A0_stage5_cpu_ms": {
+    "max": 3.2601000275462866,
+    "median": 0.9985999204218388,
+    "sum": 30.49949975684285
+  },
+  "T3_minus_A0_paired_stage5_ms": {
+    "median": 2.6426000986248255,
+    "note": "Observed sequential paired stage timings, not an isolated repeated microbenchmark.",
+    "sum": 80.61890001408756
+  },
+  "T3_stage5_cpu_ms": {
+    "max": 15.729899983853102,
+    "median": 3.668299992568791,
+    "n": 24,
+    "sum": 111.11839977093041
+  },
+  "additional_calls_for_target_claim_typing": 0,
+  "attempt_cap": 120,
+  "by_kind": {
+    "semantic_analysis": {
+      "attempts": 22,
+      "input_tokens": 49955,
+      "latency_ms_sum": 75612.44260054082,
+      "output_tokens": 6883,
+      "successes": 22
+    },
+    "semantic_cfaf": {
+      "attempts": 44,
+      "input_tokens": 44802,
+      "latency_ms_sum": 67065.89400069788,
+      "output_tokens": 2208,
+      "successes": 44
+    },
+    "shared_control": {
+      "attempts": 22,
+      "input_tokens": 23224,
+      "latency_ms_sum": 29100.151300197467,
+      "output_tokens": 1191,
+      "successes": 22
+    }
+  },
+  "cost_unit": "Actual calls/tokens/latency; no unverified USD prices. Deployment-equivalent system totals share upstream cost and must not be summed.",
+  "embeddings": 0,
+  "experiment_calls_per_case": 3.6666666666666665,
+  "git_fetch_note": "One successful separately authorized Git transport operation; model API attempts include all OpenAI calls and failures. Git was not used to push or merge.",
+  "git_fetch_operations": 1,
+  "input_tokens": 117981,
+  "model_api_attempts": 88,
+  "network_errors": 0,
+  "output_tokens": 10282,
+  "per_system_deployment_equivalent": {
+    "A0": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 72356,
+      "output_tokens": 7987,
+      "summed_latency_ms": 110267.5705011934
+    },
+    "T3": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 72356,
+      "output_tokens": 7987,
+      "summed_latency_ms": 108023.20870058611
+    },
+    "shared_control": {
+      "calls": 44,
+      "calls_per_case": 1.8333333333333333,
+      "input_tokens": 73179,
+      "output_tokens": 8074,
+      "summed_latency_ms": 104712.59390073828
+    }
+  },
+  "retries": 0,
+  "returned_models": {
+    "gpt-4o-mini-2024-07-18": 88
+  },
+  "second_verifier_calls": 0,
+  "stronger_models": 0,
+  "successes": 88,
+  "summed_model_latency_ms": 171778.48790143616,
+  "timing_caveat": "A0 also computes RDA diagnostics. These per-arm Stage-5 times are descriptive and not a controlled isolated CPU ablation; cached model calls do not imply deployment latency savings."
+}

@@ -1,0 +1,59 @@
+{
+  "below_threshold_indistinguishable_from_empty": true,
+  "cases": [
+    {
+      "expected": 3,
+      "operation": "count",
+      "pass": true,
+      "result": {
+        "answer": "Governed aggregate count: 3.",
+        "citations": [],
+        "generator_context": {
+          "operation": "count",
+          "value": 3.0
+        },
+        "public_trace": {
+          "aggregate_available": true
+        },
+        "status": "AVAILABLE"
+      }
+    },
+    {
+      "expected": 94,
+      "operation": "sum",
+      "pass": true,
+      "result": {
+        "answer": "Governed aggregate sum: 94.",
+        "citations": [],
+        "generator_context": {
+          "operation": "sum",
+          "value": 94.0
+        },
+        "public_trace": {
+          "aggregate_available": true
+        },
+        "status": "AVAILABLE"
+      }
+    },
+    {
+      "expected": 31.333333,
+      "operation": "mean",
+      "pass": true,
+      "result": {
+        "answer": "Governed aggregate mean: 31.3333.",
+        "citations": [],
+        "generator_context": {
+          "operation": "mean",
+          "value": 31.333333
+        },
+        "public_trace": {
+          "aggregate_available": true
+        },
+        "status": "AVAILABLE"
+      }
+    }
+  ],
+  "model_calls": 0,
+  "raw_values_or_identifiers_sent_to_generator": false,
+  "scope": "Structured authorized synthetic contributions only; separate from RefusalBench accuracy"
+}

@@ -1,0 +1,69 @@
+{
+  "files": [
+    {
+      "blob": "7dc198fdbe294a16fe379ecb2cc29bce947e647b",
+      "bytes": 16870,
+      "path": "backend_python/owned_object_context.py",
+      "sha256": "44dbad56716a7785c3ca537c76f7581e0ad211fd901cae45805cf529be33b6de"
+    },
+    {
+      "blob": "378130d525964042b1f458c214f585c7bc0e5b87",
+      "bytes": 10734,
+      "path": "backend_python/tests/test_owned_object_context.py",
+      "sha256": "56f40b98d7fb7086d749a1d0830b9cd43b9af32cceb986a1f05ba2515e207a75"
+    },
+    {
+      "blob": "8239208e415217b635e775c2b52b904d0c05b606",
+      "bytes": 51354,
+      "path": "backend_python/evidence_service.py",
+      "sha256": "f63bd7ae3b7e0bab65a5a03e11faa68aea87e4df1d8971242b137863f8b88e7c"
+    },
+    {
+      "blob": "94c334431274af40b79168f66b77faa9fc664aa8",
+      "bytes": 25648,
+      "path": "backend_python/relevance.py",
+      "sha256": "2b90f94bafd73e2a2bb8de29923701a170a27cf495aca2197d521b5349419741"
+    },
+    {
+      "blob": "6317050d4f31e06922c009917d1f9fc6997e26c5",
+      "bytes": 47967,
+      "path": "backend_python/ai_provider.py",
+      "sha256": "a44ae08cf1f97257e32ef8446256b6b82a53bf20f7fd8a87840f053d4f6d57c6"
+    },
+    {
+      "blob": "b0e56adf2c873a0064eef77097b2f2f27d25a82f",
+      "bytes": 4874,
+      "path": "backend_python/aggregate_executor.py",
+      "sha256": "2debba0b0fb83a929a4e211d28b95ef5a312fc9fdb4571bd4c96ea88fe74d1ce"
+    },
+    {
+      "blob": "0cd9376cc2c3e7b8a9fc339e23e4f6f128572311",
+      "bytes": 9428,
+      "path": "backend_python/tests/test_aggregate_executor.py",
+      "sha256": "b3165f66aec515e82804f2b36841d50ae8273cb42f240f2da87f6aefa3d59cae"
+    },
+    {
+      "blob": "ce73461a2de9c19871d939abcde5790b3ce9aff6",
+      "bytes": 1386,
+      "path": "backend_python/citation_service.py",
+      "sha256": "4da526c86bdb7e40a7e697446152c54684a995a12e1b4b172d44af4297458670"
+    },
+    {
+      "blob": "14874f6c0aaf57f59f6295350cf9c265c9a989e9",
+      "bytes": 8196,
+      "path": "evaluation/human_qa_tools.py",
+      "sha256": "4a097d65bda14e476c5e76030a86e724faae85eec49446243f2594ba2cdcfcfc"
+    },
+    {
+      "blob": "6aa976ac914071c4f097625249643ac14fb80f7e",
+      "bytes": 46304,
+      "path": "evaluation/external_scenario_corpus.py",
+      "sha256": "23d04b7c095b4e0a450e013b6a4e6fbeaf9e11d3685987a76cd3eb127392f668"
+    }
+  ],
+  "inspection_copy": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\target-claim-remote-main",
+  "merged": false,
+  "reference": "refs/remotes/origin/main",
+  "remote": "https://github.com/gkusper/InfoBank.git",
+  "source_commit": "8079f29dc3a97273f51b55b2a22f9ff896a2e758"
+}

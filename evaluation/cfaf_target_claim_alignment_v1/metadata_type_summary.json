@@ -1,0 +1,10 @@
+{
+  "additional_value_checks": 7,
+  "additional_value_checks_passed": 7,
+  "model_calls": 0,
+  "old_schema_expectations_unchanged": true,
+  "original_cases": 17,
+  "original_expectations_sha256": "bdb89255689752f24ce8f8dc2f73176007fcdf3b43b988aa8d4084b5e37ebd4c",
+  "original_expectations_source": "evaluation\\cfaf_requirement_alignment_v1\\synthetic_decomposition_cases.jsonl",
+  "original_type_sequences_correct": 17
+}

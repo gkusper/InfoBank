@@ -1,0 +1,63 @@
+{
+  "changed_prior_files": [],
+  "compatible_suite": {
+    "errors": 0,
+    "failure_names": [],
+    "failures": 0,
+    "skipped": 0,
+    "tests": 584
+  },
+  "current_unit_tests": {
+    "errors": 0,
+    "failure_names": [],
+    "failures": 0,
+    "skipped": 0,
+    "tests": 65
+  },
+  "elapsed_seconds_at_audit": 1631.974443710409,
+  "environment_adjustment": {
+    "all_other_historical_tests_run_in_disposable_exact_blob_checkout": true,
+    "api_key_removed": true,
+    "archived_timer_rebased_only_in_test_process": true,
+    "hash_test_reason": "Old snapshots record CRLF working bytes. Exact Git blobs use normalized LF for some files; byte-hash-only tests therefore run against the unchanged original working files.",
+    "historical_source_modified": false,
+    "isolated_suite_returncode": 0,
+    "working_tree_hash_suite_returncode": 0
+  },
+  "initial_unadjusted_suite": {
+    "errors": 0,
+    "failure_names": [
+      "evaluation.cfaf_requirement_alignment_v1.test_rda::test_historical_files_immutable",
+      "evaluation.refusalbench_iterative_dev_v1.test_framework::test_task_clock_is_monotonic_and_deadline",
+      "evaluation.refusalbench_iterative_dev_v1.test_budget_deadline::test_task_cap_counts_durable_attempts_before_network",
+      "evaluation.infobank_semantic_regression_v1.test_governed::test_historical_files_unchanged",
+      "evaluation.refusalbench_span_fix_v1.test_span_fix::test_previous_frozen_files_unchanged"
+    ],
+    "failures": 5,
+    "skipped": 0,
+    "tests": 583
+  },
+  "known_historical_failure": "test_preheldout_attempt1_plan_artifacts_are_plan_only expects an already committed HELDOUT_RUN_AUTHORIZATION.json to be absent; preserved unchanged.",
+  "main_merged": false,
+  "new_historical_regressions": 0,
+  "original_cfaf_suite": {
+    "errors": 0,
+    "failure_names": [
+      "evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only"
+    ],
+    "failures": 1,
+    "skipped": 0,
+    "tests": 91
+  },
+  "prior_RDA_branch_commit": "d304d3e80a08c2d1c3b20dd96a5e2692c1baab22",
+  "protected_prior_files": 912,
+  "remote_main_reference": "8079f29dc3a97273f51b55b2a22f9ff896a2e758",
+  "wolala2026_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "working_byte_checks": {
+    "errors": 0,
+    "failure_names": [],
+    "failures": 0,
+    "skipped": 0,
+    "tests": 3
+  }
+}

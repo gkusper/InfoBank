@@ -1,0 +1,11 @@
+{
+  "cases": 10,
+  "configurations": [
+    "A1",
+    "A2",
+    "A3"
+  ],
+  "final_sources_reproduce_saved_cached_results": true,
+  "model_calls": 0,
+  "status": "PASS"
+}

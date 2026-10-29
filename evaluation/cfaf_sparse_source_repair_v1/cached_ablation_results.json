@@ -1,0 +1,1421 @@
+{
+  "api_calls": 0,
+  "cached_mode_promotion_is_not_a_new_generated_answer": true,
+  "cases": [
+    {
+      "old_raw_analysis_sha256": "df0ababe12f3dd113aee5da4f825b03af39a7ce64786d2494708f715e46627a8",
+      "runtime_index": 0,
+      "sample_id": "263f7106-41c9-49b1-992e-4c7452aef3a8",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0008:span-0000",
+            "view-0015:span-0000"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 3,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0008:span-0000",
+            "view-0015:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 3,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0008:span-0000",
+            "view-0015:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 3,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0008:span-0000",
+            "view-0015:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 3,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "84e0e2e633382b5c565e559621201f042b5878bd35b38e1405f091b7a9480055",
+      "runtime_index": 1,
+      "sample_id": "90ca5695-a633-40b8-b3dc-56bbbf208245",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [
+            "view-0001:span-0000",
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0012:span-0000"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 4,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0000",
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0012:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0000",
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0012:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0000",
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0012:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "92b27256a1ba8b27038c20f6c9fd4dc8f489479de8b1ac56e81a0528645756d3",
+      "runtime_index": 2,
+      "sample_id": "45caa113-bbd0-4fbf-8526-37c1fcc8bae5",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [
+            "view-0009:span-0000",
+            "view-0009:span-0001",
+            "view-0010:span-0000",
+            "view-0010:span-0001",
+            "view-0011:span-0000",
+            "view-0012:span-0000"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 4,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0009:span-0000",
+            "view-0009:span-0001",
+            "view-0010:span-0000",
+            "view-0010:span-0001",
+            "view-0011:span-0000",
+            "view-0012:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0009:span-0000",
+            "view-0009:span-0001",
+            "view-0010:span-0000",
+            "view-0010:span-0001",
+            "view-0011:span-0000",
+            "view-0012:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0009:span-0000",
+            "view-0009:span-0001",
+            "view-0010:span-0000",
+            "view-0010:span-0001",
+            "view-0011:span-0000",
+            "view-0012:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "5da89cdc11f41528832b6d855c8b159e08e89a487561711e23fb6fde00f63fab",
+      "runtime_index": 3,
+      "sample_id": "194cf6ad-e309-4d76-8a70-0f8a972042d2",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0003:span-0001",
+            "view-0012:span-0001",
+            "view-0015:span-0001"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 4,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0003:span-0001",
+            "view-0012:span-0001",
+            "view-0015:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0003:span-0001",
+            "view-0012:span-0001",
+            "view-0015:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0003:span-0001",
+            "view-0012:span-0001",
+            "view-0015:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 11,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 4,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "959b74c6c2bfb239acf6b804e805ba1e479b8fd734db36d5f193cb3557c57438",
+      "runtime_index": 4,
+      "sample_id": "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 14,
+          "rejected_support_span_ids": [
+            "view-0007:span-0001"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 1,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0007:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 14,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 1,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0007:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 14,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 1,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0007:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 14,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 1,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "c1825bc989f8efcf7f5ad737df52d3033c879dd95d67877c47e6ba27515d9439",
+      "runtime_index": 5,
+      "sample_id": "099f1832-11af-4fb4-bb8c-880baee07986",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 10,
+          "rejected_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0003:span-0000",
+            "view-0005:span-0000",
+            "view-0014:span-0000",
+            "view-0013:span-0001"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 5,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0003:span-0000",
+            "view-0005:span-0000",
+            "view-0014:span-0000",
+            "view-0013:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 10,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 5,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0003:span-0000",
+            "view-0005:span-0000",
+            "view-0014:span-0000",
+            "view-0013:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 10,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 5,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0002:span-0000",
+            "view-0003:span-0000",
+            "view-0005:span-0000",
+            "view-0014:span-0000",
+            "view-0013:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 10,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 5,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "baa9f7363e2af96d85ec6c5f2007d2c66747689663f3fe7a4277a4eb37da29ac",
+      "runtime_index": 6,
+      "sample_id": "49865de4-d298-41f9-a00f-a4c886147680",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0005:span-0000"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 3,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0005:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 3,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0005:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 3,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0003:span-0000",
+            "view-0004:span-0000",
+            "view-0005:span-0000"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 12,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 3,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "60f710fab581179d6aa02a9244b8da64bb0ffcd0c803005dd5fe182443f480d2",
+      "runtime_index": 7,
+      "sample_id": "89967e8d-2dd1-4214-a0f7-cf3588558362",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "AMBIGUOUS_REFERENCE",
+            "ESSENTIAL_INFORMATION_MISSING",
+            "GRANULARITY_NOT_SUPPORTED",
+            "HARD:request-1:HARD_NO_CANDIDATE_OUTPUT",
+            "NO_GROUNDED_ANSWER_CANDIDATE",
+            "NO_VERIFIED_SUPPORT_SPANS",
+            "REQUEST_INCOMPLETE",
+            "REQUEST_RELATION_UNSUPPORTED",
+            "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+          ],
+          "hard_failure_codes": [
+            "HARD_NO_CANDIDATE_OUTPUT"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": "AMBIGUOUS_REQUEST",
+          "reported_public_reason_class": "EPISTEMIC",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": true,
+            "failure_class": "EVIDENTIAL_OR_REQUEST_RELATIVE",
+            "reason": "UNRESOLVED_REFERENT",
+            "status": "VALIDATED_CFAF"
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "AMBIGUOUS_REFERENCE",
+            "ESSENTIAL_INFORMATION_MISSING",
+            "GRANULARITY_NOT_SUPPORTED",
+            "HARD:request-1:HARD_NO_CANDIDATE_OUTPUT",
+            "NO_GROUNDED_ANSWER_CANDIDATE",
+            "NO_VERIFIED_SUPPORT_SPANS",
+            "REQUEST_INCOMPLETE",
+            "REQUEST_RELATION_UNSUPPORTED",
+            "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+          ],
+          "hard_failure_codes": [
+            "HARD_NO_CANDIDATE_OUTPUT"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": "AMBIGUOUS_REQUEST",
+          "reported_public_reason_class": "EPISTEMIC",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": true,
+            "failure_class": "EVIDENTIAL_OR_REQUEST_RELATIVE",
+            "reason": "UNRESOLVED_REFERENT",
+            "status": "VALIDATED_CFAF"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "AMBIGUOUS_REFERENCE",
+            "ESSENTIAL_INFORMATION_MISSING",
+            "GRANULARITY_NOT_SUPPORTED",
+            "HARD:request-1:HARD_NO_CANDIDATE_OUTPUT",
+            "NO_GROUNDED_ANSWER_CANDIDATE",
+            "NO_VERIFIED_SUPPORT_SPANS",
+            "REQUEST_INCOMPLETE",
+            "REQUEST_RELATION_UNSUPPORTED",
+            "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+          ],
+          "hard_failure_codes": [
+            "HARD_NO_CANDIDATE_OUTPUT"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": "AMBIGUOUS_REQUEST",
+          "reported_public_reason_class": "EPISTEMIC",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": true,
+            "failure_class": "EVIDENTIAL_OR_REQUEST_RELATIVE",
+            "reason": "UNRESOLVED_REFERENT",
+            "status": "VALIDATED_CFAF"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "AMBIGUOUS_REFERENCE",
+            "ESSENTIAL_INFORMATION_MISSING",
+            "GRANULARITY_NOT_SUPPORTED",
+            "HARD:request-1:HARD_NO_CANDIDATE_OUTPUT",
+            "NO_GROUNDED_ANSWER_CANDIDATE",
+            "NO_VERIFIED_SUPPORT_SPANS",
+            "REQUEST_INCOMPLETE",
+            "REQUEST_RELATION_UNSUPPORTED",
+            "REQUIREMENT_UNSUPPORTED:FACT_LOOKUP"
+          ],
+          "hard_failure_codes": [
+            "HARD_NO_CANDIDATE_OUTPUT"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": "AMBIGUOUS_REQUEST",
+          "reported_public_reason_class": "EPISTEMIC",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": true,
+            "failure_class": "EVIDENTIAL_OR_REQUEST_RELATIVE",
+            "reason": "UNRESOLVED_REFERENT",
+            "status": "VALIDATED_CFAF"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "c15fda0afc4a4f6b34021d6f1e5d04591adda4ef0ca2e4416f00df70b30ed323",
+      "runtime_index": 8,
+      "sample_id": "e10bb772-6c4e-426f-a924-3d3ba0b23515",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 13,
+          "rejected_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0006:span-0001"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 2,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "SOURCE_ROLE_COVERAGE_INVALID"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "SOURCE_ASSESSMENT_CONTRACT_INVALID",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "SOURCE_ROLE_COVERAGE_INVALID"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0006:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 13,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 2,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0006:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 13,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 2,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0006:span-0001"
+          ],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [],
+          "hard_failure_codes": [],
+          "mode": "FULL",
+          "not_assessed_count": 13,
+          "rejected_support_span_ids": [],
+          "repairs": [],
+          "reported_internal_reason_code": null,
+          "reported_public_reason_class": null,
+          "reported_public_wording_kind": "FULL_CANDIDATE",
+          "reported_role_count": 2,
+          "semantic_valid": true,
+          "source_count": 15,
+          "sufficiency_checks_passed": true,
+          "validation_errors": [],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": null,
+            "reason": "FULFILMENT_ESTABLISHED",
+            "status": "VERIFIED_FULFILMENT"
+          }
+        }
+      }
+    },
+    {
+      "old_raw_analysis_sha256": "ac72e817de738cc1caab171d3133012fe3e92dcbbae82aa3aa25903efcff0f5d",
+      "runtime_index": 9,
+      "sample_id": "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff",
+      "variants": {
+        "A0": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0001:span-0004"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "UNKNOWN_SPAN_ID:view-0001:span-0004"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "INVALID_EVIDENCE_REFERENCE",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "UNKNOWN_SPAN_ID:view-0001:span-0004"
+            ]
+          }
+        },
+        "A1": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0001:span-0004"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "UNKNOWN_SPAN_ID:view-0001:span-0004"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "INVALID_EVIDENCE_REFERENCE",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "UNKNOWN_SPAN_ID:view-0001:span-0004"
+            ]
+          }
+        },
+        "A2": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0001:span-0004"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "SEMANTIC_ASSESSMENT_INVALID",
+          "reported_public_reason_class": "EVIDENTIAL",
+          "reported_public_wording_kind": "LEGACY_EVIDENTIAL_OR_REQUEST_RELATIVE",
+          "reported_role_count": 15,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "UNKNOWN_SPAN_ID:view-0001:span-0004"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "INVALID_EVIDENCE_REFERENCE",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "UNKNOWN_SPAN_ID:view-0001:span-0004"
+            ]
+          }
+        },
+        "A3": {
+          "accepted_support_span_ids": [],
+          "benchmark_gold_used": false,
+          "fulfilment_issues": [
+            "HARD:request-1:HARD_ASSESSMENT_CONTRACT_INVALID",
+            "SEMANTIC_ASSESSMENT_INVALID"
+          ],
+          "hard_failure_codes": [
+            "HARD_ASSESSMENT_CONTRACT_INVALID"
+          ],
+          "mode": "CFAF",
+          "not_assessed_count": 0,
+          "rejected_support_span_ids": [
+            "view-0001:span-0001",
+            "view-0001:span-0004"
+          ],
+          "repairs": [],
+          "reported_internal_reason_code": "INVALID_EVIDENCE_REFERENCE",
+          "reported_public_reason_class": "EPISTEMIC",
+          "reported_public_wording_kind": "OPERATIONAL_NEUTRAL",
+          "reported_role_count": 15,
+          "semantic_valid": false,
+          "source_count": 15,
+          "sufficiency_checks_passed": false,
+          "validation_errors": [
+            "UNKNOWN_SPAN_ID:view-0001:span-0004"
+          ],
+          "verification_outcome": {
+            "credited_evidential_CFAF": false,
+            "failure_class": "OPERATIONAL",
+            "reason": "INVALID_EVIDENCE_REFERENCE",
+            "status": "OPERATIONAL_FAILURE",
+            "validation_errors": [
+              "UNKNOWN_SPAN_ID:view-0001:span-0004"
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "changed_modes_A0_A3": 8,
+  "configurations": {
+    "A0": "Original dense validation with original T3 substantive gate; not the separately named original A0 gate configuration",
+    "A1": "Sparse normalization; legacy public reason presentation",
+    "A2": "A1 plus exact deterministic reference normalization; legacy reason presentation",
+    "A3": "A2 plus distinct operational status and neutral reason presentation"
+  },
+  "elapsed_seconds": 8.113093400141224,
+  "newly_structurally_valid": 8,
+  "phase": "A cached exposed-development replay",
+  "raw_outputs_unchanged": true,
+  "source": "evaluation\\cfaf_dataset3_garage_pilot_v1",
+  "summary": {
+    "A0": {
+      "invalid": 9,
+      "modes": {
+        "CFAF": 10
+      },
+      "not_assessed_sources": 94,
+      "operational_failures": 9,
+      "repaired_references": 0,
+      "valid": 1,
+      "validated_CFAF": 1
+    },
+    "A1": {
+      "invalid": 1,
+      "modes": {
+        "CFAF": 2,
+        "FULL": 8
+      },
+      "not_assessed_sources": 94,
+      "operational_failures": 1,
+      "repaired_references": 0,
+      "valid": 9,
+      "validated_CFAF": 1
+    },
+    "A2": {
+      "invalid": 1,
+      "modes": {
+        "CFAF": 2,
+        "FULL": 8
+      },
+      "not_assessed_sources": 94,
+      "operational_failures": 1,
+      "repaired_references": 0,
+      "valid": 9,
+      "validated_CFAF": 1
+    },
+    "A3": {
+      "invalid": 1,
+      "modes": {
+        "CFAF": 2,
+        "FULL": 8
+      },
+      "not_assessed_sources": 94,
+      "operational_failures": 1,
+      "repaired_references": 0,
+      "valid": 9,
+      "validated_CFAF": 1
+    }
+  }
+}

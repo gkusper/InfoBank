@@ -1,0 +1,16 @@
+{
+  "new_public_categories": [],
+  "old_responses_rejected": [
+    {
+      "new_validator_errors": [
+        "NONCANONICAL_PUBLIC_REASON_CLASS",
+        "CFAF_REASON_AND_REALIZATION_REQUIRED"
+      ],
+      "old_output_unchanged": true,
+      "runtime_index": 7,
+      "system": "shared_control"
+    }
+  ],
+  "raw_originals_unchanged": true,
+  "version": "existing-ReasonClass-v1-strict-validation"
+}

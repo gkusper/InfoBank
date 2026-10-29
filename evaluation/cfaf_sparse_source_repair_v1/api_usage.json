@@ -1,0 +1,58 @@
+{
+  "attempts": 30,
+  "by_kind": {
+    "semantic_analysis": {
+      "attempts": 10,
+      "errors": 0,
+      "finish_reasons": {
+        "stop": 10
+      },
+      "input_tokens": 95584,
+      "max_latency_ms": 9211.072099860758,
+      "mean_latency_ms": 5758.89745997265,
+      "output_tokens": 5299,
+      "successes": 10
+    },
+    "semantic_cfaf": {
+      "attempts": 10,
+      "errors": 0,
+      "finish_reasons": {
+        "stop": 10
+      },
+      "input_tokens": 39309,
+      "max_latency_ms": 1966.2655999418348,
+      "mean_latency_ms": 1451.085350010544,
+      "output_tokens": 552,
+      "successes": 10
+    },
+    "shared_control": {
+      "attempts": 10,
+      "errors": 0,
+      "finish_reasons": {
+        "stop": 10
+      },
+      "input_tokens": 39638,
+      "max_latency_ms": 2706.260900013149,
+      "mean_latency_ms": 1631.5694299759343,
+      "output_tokens": 594,
+      "successes": 10
+    }
+  },
+  "cached_calls": 0,
+  "cap": 75,
+  "case_local_and_deterministic_overhead_ms": 7324.116399868171,
+  "citation_calls": 0,
+  "dollar_cost": null,
+  "embeddings": 0,
+  "errors": 0,
+  "input_tokens": 174531,
+  "max_latency_ms": 9211.072099860758,
+  "mean_latency_ms": 2947.184079986376,
+  "output_tokens": 6445,
+  "overhead_definition": "Case wall time minus sum provider call wall latency; includes local comparisons, guards, parsing, normalization and inventory checks; not pure CPU profiling",
+  "pricing_verified": false,
+  "retries": 0,
+  "second_verifiers": 0,
+  "successful_calls": 30,
+  "unsettled_attempts": 0
+}

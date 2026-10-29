@@ -1,0 +1,16 @@
+{
+  "alias_tests_sha256": "d796512e8a81855af6c3a5b65ad261c76a764deed6c27dc289212f4bfe7bf019",
+  "api_calls": 0,
+  "changes_primary_runtime": false,
+  "configuration": "R1 after primary B; deterministic only",
+  "gold_input": false,
+  "not_independent_evaluation": true,
+  "primary_experiment_manifest_sha256": "f2f102c2d70737264197bd9bdc8d763296d3b317992f70471818c28450b2b5b8",
+  "primary_live_results_sha256": "75583828b3ad1cf0e37475f29527de30c8bf78baea06eeaa5c77a54815f06fd5",
+  "raw_normalized_outputs_ignored": true,
+  "results_sha256": "25d56e83989f92f811949c85ad19e05efa866dfe2c0e6dd4503762bc10754e1d",
+  "source_sha256": {
+    "reference_alias_ablation.py": "9000e0c64201795f35c063bef73375e139c1a9af1698bf75426d0c00bf2de73f",
+    "test_reference_alias.py": "97a96b75c3d5037f99c461ec4a29a89b3ae3565363c12543c98d859d70ef08d9"
+  }
+}

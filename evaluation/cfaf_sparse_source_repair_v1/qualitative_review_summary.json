@@ -1,0 +1,108 @@
+{
+  "cached_promoted_deflective_example_flagged": 1,
+  "cases": [
+    {
+      "finding": "New FULL answers remain generic workflow summaries. The original update-scoped request is not fully addressed, and every selected support passage is originally NO for relevance. The statements have nearby textual support, but the scope match is poor.",
+      "flag": "UPDATE_SCOPE_NOT_ESTABLISHED",
+      "missing": "Recent-update-specific rollout and commercial-agent context.",
+      "sample_id": "263f7106-41c9-49b1-992e-4c7452aef3a8",
+      "scope_concern": true,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "Both new systems give the same short, source-supported explanation. Four selected sources are originally answering-labelled. The omission of further scientific detail does not itself prove an incomplete answer, but long-form adequacy needs a separate rubric.",
+      "flag": "SUPPORTED_CONCISE_ANSWER_PENDING_COMPLETENESS_REVIEW",
+      "missing": "Possible omitted magnetic-field/model-testing detail; essentiality is unadjudicated.",
+      "sample_id": "90ca5695-a633-40b8-b3dc-56bbbf208245",
+      "scope_concern": null,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "Both systems produce a generic benefit list without distinguishing the hosting models or explaining their match to particular organizational needs. Answering-labelled source selection does not establish that this comparative requirement is fulfilled.",
+      "flag": "COMPARATIVE_MAPPING_MISSING",
+      "missing": "Explicit model-by-model correspondence to organizational requirements.",
+      "sample_id": "45caa113-bbd0-4fbf-8526-37c1fcc8bae5",
+      "scope_concern": true,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "The short responses describe genuine multi-source reasoning difficulties from the selected evidence. They omit several reference-answer details. No unsupported factual claim was identified in this review; a broader completeness judgement remains independent work.",
+      "flag": "GROUNDED_SUMMARY_NOT_LONG_FORM_VALIDATION",
+      "missing": "More specific retrieval, intermediate-reasoning and performance limitations, if required by a future rubric.",
+      "sample_id": "194cf6ad-e309-4d76-8a70-0f8a972042d2",
+      "scope_concern": null,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 0
+    },
+    {
+      "cached_candidate_unsupported_claims": 1,
+      "finding": "Primary B withholds FULL because of an unpadded span ID. Both served replies are operational, not successful evidence-insufficiency decisions. The raw control still promotes an accounting rule to a risk-management strategy. Cached A3 and supplemental R1 permit a FULL candidate with the same unsupported strategic relation. Original human grounding deflects; no expected label was used to force this case.",
+      "flag": "TECHNICAL_BLOCK_MASKS_UNSUPPORTED_STRATEGIC_INFERENCE",
+      "missing": "Evidence connecting the accounting treatment to the requested risk-management approach.",
+      "raw_control_unsupported_claims": 1,
+      "sample_id": "13c6bf75-a2e0-4943-a586-d3dc5ca1eb20",
+      "scope_concern": true,
+      "unnecessary_refusal": null,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "New T3 and control both assert cultural exchange as part of the diplomatic-tour positioning. The explicit cultural-exchange passage concerns a musician, while the validated selected sources do not establish that relation for the prime minister. This is one flagged unsupported relation in each served FULL response, despite valid references and complete semantic flags.",
+      "flag": "UNSUPPORTED_CROSS_SUBJECT_RELATION_IN_SERVED_FULL",
+      "missing": "Correct subject-to-activity relation; specific diplomatic/economic objectives.",
+      "raw_control_unsupported_claims": 1,
+      "sample_id": "099f1832-11af-4fb4-bb8c-880baee07986",
+      "scope_concern": true,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 1
+    },
+    {
+      "finding": "The forecast values are found in the selected original answering-labelled evidence and remain described as possible scenarios. Both systems omit source attribution and the condition attached to the high forecast. Neither output is evidence that any forecast was realized.",
+      "flag": "FORECAST_CONDITIONS_AND_ATTRIBUTION_MISSING",
+      "missing": "Forecast attribution, uncertainty and conditional assumptions.",
+      "sample_id": "49865de4-d298-41f9-a00f-a4c886147680",
+      "scope_concern": true,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "The new sparse analysis validly reports zero source roles and zero support: all fifteen inventory entries remain NOT_ASSESSED, not irrelevant. It still misses available candidate catalysts and sets an unsupported unresolved-referent property. T3 therefore gives a questionable clarification. The raw control abstains with a missing realization field; the strict validator replaces that invalid response with neutral operational wording.",
+      "flag": "SEMANTIC_MISSED_SUPPORT_WITH_CONTROL_CONTRACT_FAILURE",
+      "missing": "Assessment of company-specific developments and correct distinction between an explicit company referent and missing factual support.",
+      "sample_id": "89967e8d-2dd1-4214-a0f7-cf3588558362",
+      "scope_concern": true,
+      "unnecessary_refusal": true,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "Both systems provide a concise explanation supported by two answering-labelled passages. Broader scientific detail and independent domain review remain outside this bounded experiment. No unsupported factual assertion was identified in the inspected scope.",
+      "flag": "SUPPORTED_SCIENTIFIC_SUMMARY_PENDING_INDEPENDENT_REVIEW",
+      "missing": "Optional evolution/resummation and physical-mechanism detail pending a completeness rubric.",
+      "sample_id": "e10bb772-6c4e-426f-a924-3d3ba0b23515",
+      "scope_concern": null,
+      "unnecessary_refusal": false,
+      "unsupported_claims": 0
+    },
+    {
+      "finding": "The nonexistent span index remains invalid in cached and fresh runs; R1 cannot invent it. Both primary served responses are neutral operational CFAF. The raw control still converts network representation and support for a startup timetable into a rationale for approving the operator. These two relations are not established by the supplied text. This is not credited as a correct semantic refusal.",
+      "flag": "INVALID_REFERENCE_AND_UNSUPPORTED_CAUSAL_RAW_CONTROL",
+      "missing": "Actual approval rationale, rather than appointment description or support for a schedule.",
+      "raw_control_unsupported_claims": 2,
+      "sample_id": "f1456a9c-65d3-46ff-b5b5-c8d4d98bc0ff",
+      "scope_concern": true,
+      "unnecessary_refusal": null,
+      "unsupported_claims": 0
+    }
+  ],
+  "flagged_served_T3_relation_claims": 1,
+  "human_review": "PENDING",
+  "official_accuracy": null,
+  "primary_T3_questionable_clarifications": 1,
+  "raw_control_FULL_cases_with_flagged_unsupported_relations": 3,
+  "raw_control_flagged_relation_claims": 4,
+  "served_T3_FULL_with_flagged_unsupported_relations": 1,
+  "served_control_FULL_with_flagged_unsupported_relations": 1,
+  "type": "Non-independent agent post-run review, not original gold or independent human labels"
+}

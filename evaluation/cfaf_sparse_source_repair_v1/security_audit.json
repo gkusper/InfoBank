@@ -1,0 +1,252 @@
+{
+  "API_attempts": 30,
+  "P5_metadata_aggregate_DENY_tests_passed": true,
+  "actual_credential_value_scan": "PASS",
+  "all_finish_reasons_stop": true,
+  "all_requests_audited": 30,
+  "all_served_responses_pass_canonical_vocabulary_validator": true,
+  "analysis_payloads_byte_equivalent_to_prior": 10,
+  "audit_utc": "2026-10-29T06:20:30.574177+00:00",
+  "authorized_passages_preserved": 150,
+  "both_generators_same_fresh_semantic_data": true,
+  "cap": 75,
+  "commit_scope": "evaluation/cfaf_sparse_source_repair_v1 only",
+  "control_gate_inventory_private_diagnostics_excluded": true,
+  "embeddings_second_verifiers_retries": 0,
+  "exact_original_questions_full_passages_reference_answers_excluded_from_commit": true,
+  "forbidden_gold_fields_absent": true,
+  "frozen_primary_sources_unchanged": true,
+  "generation_prompts_and_schemas_unchanged": true,
+  "independent_human_review": "PENDING",
+  "model_and_limits_match": true,
+  "new_Dataset1_Dataset2_Dataset3_records_opened": 0,
+  "no_API_errors": true,
+  "no_unverified_claim_citations_rendered": true,
+  "old_selector_eight_stages_unchanged": true,
+  "operational_failure_never_serves_FULL": true,
+  "operational_failure_not_credited_evidential_CFAF": true,
+  "payload_checks": [
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 1,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 0
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 2,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 0
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 3,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 0
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 4,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 1
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 5,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 1
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 6,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 1
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 7,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 2
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 8,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 2
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 9,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 2
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 10,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 3
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 11,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 3
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 12,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 3
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 13,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 4
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 14,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 4
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 15,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 4
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 16,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 5
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 17,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 5
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 18,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 5
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 19,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 6
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 20,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 6
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 21,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 6
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 22,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 7
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 23,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 7
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 24,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 7
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 25,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 8
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 26,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 8
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 27,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 8
+    },
+    {
+      "analysis_matches_prior_payload_exactly": true,
+      "attempt": 28,
+      "kind": "semantic_analysis",
+      "passed": true,
+      "runtime_index": 9
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 29,
+      "kind": "semantic_cfaf",
+      "passed": true,
+      "runtime_index": 9
+    },
+    {
+      "analysis_matches_prior_payload_exactly": null,
+      "attempt": 30,
+      "kind": "shared_control",
+      "passed": true,
+      "runtime_index": 9
+    }
+  ],
+  "precommit_elapsed_seconds": 1298.1037209397182,
+  "previous_pilot_raw_events_hash_matches": true,
+  "protected_files_changed": [],
+  "protected_files_checked": 1029,
+  "raw_artifacts_ignored": true,
+  "reserved_cases_accessed": 0,
+  "same_exact_ten_runtime_rows": true,
+  "sample_id_explicitly_denied_and_absent": true,
+  "selected_identifiers_and_private_source_ids_absent": true,
+  "source_inventory_independent_of_roles": true,
+  "status": "PASS",
+  "supplemental_R1_separate_from_frozen_primary": true
+}

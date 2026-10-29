@@ -1,0 +1,154 @@
+{
+  "cached_comparison_is_causal_live_comparison_is_not_identical_output": true,
+  "clarification_gate_decisions": 1,
+  "independent_human_review": "PENDING",
+  "live_mode_disagreements_served": 0,
+  "modes": {
+    "cached_A3": {
+      "CFAF": 2,
+      "FULL": 8
+    },
+    "new_gate": {
+      "CFAF": 3,
+      "FULL": 7
+    },
+    "new_original_A0_on_sparse": {
+      "CFAF": 3,
+      "FULL": 7
+    },
+    "old_frozen": {
+      "CFAF": 10
+    },
+    "semantic_cfaf_raw": {
+      "CFAF": 3,
+      "FULL": 7
+    },
+    "semantic_cfaf_served": {
+      "CFAF": 3,
+      "FULL": 7
+    },
+    "shared_control_raw": {
+      "CFAF": 1,
+      "FULL": 9
+    },
+    "shared_control_served": {
+      "CFAF": 3,
+      "FULL": 7
+    },
+    "strict_original_on_fresh": {
+      "CFAF": 10
+    }
+  },
+  "official_mode_accuracy": null,
+  "old_vs_live_changed_modes": 7,
+  "old_vs_live_unchanged_modes": 3,
+  "per_system_operational_response_failures": {
+    "semantic_cfaf": 2,
+    "shared_control": 3
+  },
+  "phase": "B exposed-development paired regression; C separate deterministic sidecar",
+  "public_citations": {
+    "semantic_cfaf": {
+      "citationless_FULL": 7,
+      "claim_group_links": 26,
+      "inline": 0,
+      "invalid_inline": 0,
+      "mechanically_valid_unverified_associations": 26,
+      "metric": {
+        "case_count": 10,
+        "fn": 119,
+        "fp": 0,
+        "macro_f1": 0.0,
+        "macro_precision": null,
+        "macro_precision_defined_cases": 0,
+        "macro_recall": 0.0,
+        "micro_f1": 0.0,
+        "micro_precision": null,
+        "micro_recall": 0.0,
+        "tp": 0
+      },
+      "rendered": 0,
+      "verified_claim_citations": 0
+    },
+    "shared_control": {
+      "citationless_FULL": 7,
+      "claim_group_links": 19,
+      "inline": 0,
+      "invalid_inline": 0,
+      "mechanically_valid_unverified_associations": 19,
+      "metric": {
+        "case_count": 10,
+        "fn": 119,
+        "fp": 0,
+        "macro_f1": 0.0,
+        "macro_precision": null,
+        "macro_precision_defined_cases": 0,
+        "macro_recall": 0.0,
+        "micro_f1": 0.0,
+        "micro_precision": null,
+        "micro_recall": 0.0,
+        "tp": 0
+      },
+      "rendered": 0,
+      "verified_claim_citations": 0
+    }
+  },
+  "raw_proposal_grounding": {
+    "case_count": 10,
+    "fn": 97,
+    "fp": 3,
+    "macro_f1": 0.33651186790505677,
+    "macro_precision": 0.875,
+    "macro_precision_defined_cases": 8,
+    "macro_recall": 0.2496969696969697,
+    "micro_f1": 0.3055555555555556,
+    "micro_precision": 0.88,
+    "micro_recall": 0.18487394957983194,
+    "tp": 22
+  },
+  "raw_proposals_are_not_accepted_support": true,
+  "same_fresh_strict_vs_sparse_changed_modes": 7,
+  "strict_original_valid_on_same_fresh_analysis": 0,
+  "structural": {
+    "NOT_ASSESSED_sources": 110,
+    "SOURCE_ROLE_COVERAGE_INVALID": 0,
+    "UNKNOWN_SPAN_ID": 2,
+    "completed": 10,
+    "new_valid": 8,
+    "old_valid": 1,
+    "other_contract_errors": 0,
+    "repaired_references": 0,
+    "selected": 10
+  },
+  "validated_support_grounding": {
+    "case_count": 10,
+    "fn": 98,
+    "fp": 3,
+    "macro_f1": 0.23651186790505674,
+    "macro_precision": 0.8571428571428571,
+    "macro_precision_defined_cases": 7,
+    "macro_recall": 0.1496969696969697,
+    "micro_f1": 0.2937062937062937,
+    "micro_precision": 0.875,
+    "micro_recall": 0.17647058823529413,
+    "tp": 21
+  },
+  "validated_support_grounding_on_valid_assessments_only": {
+    "case_count": 8,
+    "fn": 82,
+    "fp": 3,
+    "macro_f1": 0.29563983488132095,
+    "macro_precision": 0.8571428571428571,
+    "macro_precision_defined_cases": 7,
+    "macro_recall": 0.18712121212121213,
+    "micro_f1": 0.33070866141732286,
+    "micro_precision": 0.875,
+    "micro_recall": 0.20388349514563106,
+    "tp": 21
+  },
+  "verification_outcomes": {
+    "OPERATIONAL_FAILURE": 2,
+    "VALIDATED_CFAF": 1,
+    "VERIFIED_FULFILMENT": 7
+  }
+}

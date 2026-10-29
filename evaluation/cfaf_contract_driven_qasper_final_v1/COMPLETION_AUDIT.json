@@ -1,0 +1,64 @@
+{
+  "C_operational_errors": 8,
+  "base_commit": "bfd80bbfe2ccbb251da46bdc22b791dad5b9341f",
+  "branch": "experiment/cfaf-final-qasper-replacement-v1",
+  "compiled_fragment": true,
+  "elapsed_seconds_at_precommit": 4559.749412536621,
+  "historical_datasets_rerun": false,
+  "historical_worktree_files_unchanged": true,
+  "known_original_failure": "test_preheldout_attempt1_plan_artifacts_are_plan_only: previously committed HELDOUT_RUN_AUTHORIZATION.json contradicts plan-only assertion",
+  "mode_correct": {
+    "A": 63,
+    "B": 63,
+    "C": 54
+  },
+  "new_QASPER_selected_completed": 80,
+  "new_attempts": 241,
+  "no_push_or_merge": true,
+  "original_manuscript_unchanged": true,
+  "postcommit_receipt": "Adjacent output: cfaf_contract_driven_qasper_final_v1_completion.json",
+  "primary_worktree_unchanged": true,
+  "status": "PRECOMMIT_VALIDATED",
+  "test_reports": {
+    "historical_hash_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 3
+      }
+    ],
+    "original_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 91
+      }
+    ],
+    "regression_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 713
+      }
+    ],
+    "scoring_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 4
+      }
+    ],
+    "unit_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 22
+      }
+    ]
+  }
+}

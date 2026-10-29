@@ -1,0 +1,47 @@
+{
+  "UNKNOWN_reason_counts_overlap": {
+    "CONTRADICTORY_BOOLEAN_ANSWERS": 43,
+    "MIXED_UNANSWERABLE_FLAGS": 164,
+    "NO_ORIGINAL_TEXT_EVIDENCE": 30,
+    "ORIGINAL_TEXT_EVIDENCE_UNREPRESENTED": 76,
+    "SOURCE_INTEGRITY_INVALID": 4,
+    "UNAVAILABLE_NONTEXTUAL_EVIDENCE": 212
+  },
+  "class_counts": {
+    "CFAF": 79,
+    "FULL": 854,
+    "UNKNOWN": 518
+  },
+  "distinct_papers": {
+    "ALL": {
+      "CFAF": 62,
+      "FULL": 361
+    },
+    "M": {
+      "CFAF": 59,
+      "FULL": 357
+    },
+    "S": {
+      "CFAF": 3,
+      "FULL": 14
+    }
+  },
+  "gold_scorer_only": true,
+  "invalid_reference_paper_records": 1,
+  "mapping_sha256": "82401caa4d66d2924ac4e69349c9e89faa4dc069333e72854f48e6e714523cbe",
+  "metadata_sha256": "feddc51b3c09e3818f28750ee568f4ba3a97bab59c0a882ef7c565cb1eb4d76f",
+  "questions_with_original_nontextual_evidence_marker": 253,
+  "source_test_sha256": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5",
+  "tier_counts": {
+    "M": {
+      "CFAF": 76,
+      "FULL": 834
+    },
+    "S": {
+      "CFAF": 3,
+      "FULL": 20
+    }
+  },
+  "total_papers": 416,
+  "total_questions": 1451
+}

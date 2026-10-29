@@ -1,0 +1,11 @@
+{
+  "N_selected": 80,
+  "all_hashes_before_API": true,
+  "code_manifest_sha256": "5b8e10b48593b946cc44f34ec2ae52c3f8e12afcef86888320224622d1ddb27e",
+  "eligibility_counts_sha256": "efdb1b01d91f14e2294ac7f9f0f3a8e0e3455759e59985d92fea9da06b20be3f",
+  "public_runtime_metadata_sha256": "4d269f462f9ee63f495d61436456fb7275ec9520a71772e768722b0feeffc13e",
+  "runtime_inputs_sha256": "4561e72d730e0db2650739ac0f5e7d4683ffd207703c171e859ddb739f3c8803",
+  "sample_manifest_sha256": "7980995386cb69d96a97bb8befd0a1893d326a7883877f0133820a79eaf690c3",
+  "selected_originals_sha256": "8a44d512e380e242c7ef0b357482f09afa309acecb7a8b2ebb706280da4bc656",
+  "source_test_sha256": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+}

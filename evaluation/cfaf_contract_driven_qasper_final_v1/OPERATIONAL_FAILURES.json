@@ -1,0 +1,41 @@
+{
+  "C_contract_text_deviation_nonoperational": 1,
+  "C_gate_outcomes": {
+    "OPERATIONAL_FAILURE": 3,
+    "VALIDATED_CFAF": 32,
+    "VERIFIED_FULFILMENT": 45
+  },
+  "C_generation_error_codes": {
+    "CFAF_REASON_AND_REALIZATION_REQUIRED": 5
+  },
+  "C_reference_error_codes": {
+    "UNKNOWN_SPAN_ID": 3
+  },
+  "C_response_failure_reasons": {
+    "GENERATION_CONTRACT_INVALID": 5,
+    "INVALID_EVIDENCE_REFERENCE": 3
+  },
+  "no_operational_refusal_credited": true,
+  "not_executed_indices": [],
+  "systems": {
+    "A": {
+      "failure_count": 0,
+      "status_counts": {
+        "MODEL_SELF_REPORTED_MODE": 80
+      }
+    },
+    "B": {
+      "failure_count": 0,
+      "status_counts": {
+        "VALID_CONTRACT_SELF_REPORTED_MODE": 80
+      }
+    },
+    "C": {
+      "failure_count": 8,
+      "status_counts": {
+        "GENERATED_VALID_CONTRACT": 72,
+        "OPERATIONAL_FAILURE": 8
+      }
+    }
+  }
+}

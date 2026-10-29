@@ -1,0 +1,13 @@
+{
+  "audit_utc": "2026-10-29T12:52:52.569584+00:00",
+  "compiler_message": "The current source compiled successfully with the desktop editor's compiler.",
+  "current_manuscript_or_PDF_written": false,
+  "fragment_sha256": "cac875c644598b81c0f07f8be1b2eb784faeb5425ccfbfe5f3dd0ec60b286c19",
+  "helper_project": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\cfaf-final-qasper-paper-check",
+  "included_file": "results.tex",
+  "main_file": "main.tex",
+  "manuscript_source_sha256": "8f4c1387d41d43e62c3d3e81cd1507036ab4edfd60d19bc563910ed28025dee3",
+  "original_manuscript_unchanged": true,
+  "status": "SUCCESS",
+  "validation_method": "Codex desktop built-in LaTeX compiler"
+}

@@ -1,0 +1,78 @@
+{
+  "downloaded_at_utc": "2026-10-29T11:47:42.200791+00:00",
+  "hf_revision": "fdc9d8214fbab5dd782958601db4d678e6934a54",
+  "downloads": {
+    "qasper-test-and-evaluator-v0.3.tgz": {
+      "url": "https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-test-and-evaluator-v0.3.tgz",
+      "sha256": "72a52a41193e2838b8074f80ac074b94f956b84886c36a61c58a7df4171bdd72",
+      "bytes": 3865061,
+      "headers": {
+        "ETag": "\"91e3efe0f6e2c787ed8b7d366ab85582\"",
+        "Last-Modified": "Fri, 25 Mar 2022 22:06:49 GMT",
+        "Content-Length": "3865061"
+      }
+    },
+    "hf_qasper.py": {
+      "url": "https://huggingface.co/datasets/allenai/qasper/resolve/fdc9d8214fbab5dd782958601db4d678e6934a54/qasper.py",
+      "sha256": "381d623d4992118738c0a17b9c8219136f493eda381125716ab32b814d0b3c0a",
+      "bytes": 5950,
+      "headers": {
+        "ETag": "\"f762fb4d6b56c10e77fde368da74b1bc12f61794\"",
+        "Last-Modified": null,
+        "Content-Length": "5950"
+      }
+    },
+    "hf_README.md": {
+      "url": "https://huggingface.co/datasets/allenai/qasper/resolve/fdc9d8214fbab5dd782958601db4d678e6934a54/README.md",
+      "sha256": "da348d3f8277f8a93ca397941f6a525433e282858b1c0562aed3f667d8e55b05",
+      "bytes": 9639,
+      "headers": {
+        "ETag": "\"81d9b74c7fcea81c566f529dac8e4858978f0952\"",
+        "Last-Modified": null,
+        "Content-Length": "9639"
+      }
+    }
+  },
+  "archive_members": [
+    "qasper-test-v0.3.json",
+    "qasper_evaluator.py",
+    "README-test.md"
+  ],
+  "test_member": {
+    "name": "qasper-test-v0.3.json",
+    "bytes": 18078957,
+    "sha256": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+  },
+  "total_papers": 416,
+  "total_questions": 1451,
+  "paper_keys": [
+    "abstract",
+    "figures_and_tables",
+    "full_text",
+    "qas",
+    "title"
+  ],
+  "qa_keys": [
+    "answers",
+    "nlp_background",
+    "paper_read",
+    "question",
+    "question_id",
+    "question_writer",
+    "search_query",
+    "topic_background"
+  ],
+  "answer_wrapper_keys": [
+    "annotation_id",
+    "answer",
+    "worker_id"
+  ],
+  "answer_fields": [
+    "evidence",
+    "extractive_spans",
+    "free_form_answer",
+    "highlighted_evidence",
+    "unanswerable",
+    "yes_no"
+  ]
+}

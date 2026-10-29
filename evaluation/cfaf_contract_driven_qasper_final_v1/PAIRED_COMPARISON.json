@@ -1,0 +1,70 @@
+{
+  "B_vs_A": {
+    "N": 80,
+    "both_mode_correct_nonoperational": 63,
+    "difference_count": 0,
+    "difference_fraction": 0.0,
+    "left": "B",
+    "left_only": 0,
+    "neither": 17,
+    "right": "A",
+    "right_only": 0
+  },
+  "C_vs_A": {
+    "N": 80,
+    "both_mode_correct_nonoperational": 49,
+    "difference_count": -9,
+    "difference_fraction": -0.1125,
+    "left": "C",
+    "left_only": 5,
+    "neither": 12,
+    "right": "A",
+    "right_only": 14
+  },
+  "C_vs_B": {
+    "N": 80,
+    "both_mode_correct_nonoperational": 49,
+    "difference_count": -9,
+    "difference_fraction": -0.1125,
+    "left": "C",
+    "left_only": 5,
+    "neither": 12,
+    "right": "B",
+    "right_only": 14
+  },
+  "paper_cluster_bootstrap": {
+    "groups": 80,
+    "intervals": {
+      "A": [
+        0.7,
+        0.875
+      ],
+      "B": [
+        0.7,
+        0.875
+      ],
+      "C": [
+        0.575,
+        0.775
+      ]
+    },
+    "method": "Percentile cluster bootstrap, groups resampled jointly for systems; failures retained",
+    "paired_delta_intervals": {
+      "B-A": [
+        0.0,
+        0.0
+      ],
+      "C-A": [
+        -0.21250000000000002,
+        -0.012499999999999956
+      ],
+      "C-B": [
+        -0.21250000000000002,
+        -0.012499999999999956
+      ]
+    },
+    "population_or_significance_claim": false,
+    "replicates": 2000,
+    "seed": 20261029
+  }
+}

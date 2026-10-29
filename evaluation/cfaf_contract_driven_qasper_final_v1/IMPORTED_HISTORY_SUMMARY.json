@@ -1,0 +1,271 @@
+{
+  "dataset1": {
+    "dataset": "Original 40 exposed development",
+    "incomplete": 0,
+    "paired_executions_completed": 40,
+    "planned": 40,
+    "systems": {
+      "A": {
+        "CFAF_gold": 24,
+        "CFAF_recall": 0.6666666666666666,
+        "FULL_gold": 16,
+        "FULL_recall": 1.0,
+        "N_planned": 40,
+        "answer_factual_accuracy": "NOT independently measured; mode and marker agreement do not prove entailment",
+        "balanced_accuracy": 0.8333333333333333,
+        "correct_mode_nonoperational": 32,
+        "failure_to_restrict_observed_FULL": 8,
+        "fulfilment_status_agreement": 0.6,
+        "gold_marker_denominator": 16,
+        "gold_marker_presence_FULL_cases": 0.5,
+        "matched_pair_joint_mode_accuracy": 0.6,
+        "mode_accuracy_cluster_interval95": [
+          0.7,
+          0.9
+        ],
+        "mode_accuracy_nonoperational": 0.8,
+        "nonoperational_confusion": {
+          "CFAF_as_CFAF": 16,
+          "CFAF_as_FULL": 8,
+          "FULL_as_FULL": 16
+        },
+        "observed_mode_confusion": {
+          "CFAF_as_CFAF": 16,
+          "CFAF_as_FULL": 8,
+          "FULL_as_FULL": 16
+        },
+        "observed_modes": {
+          "CFAF": 16,
+          "FULL": 24
+        },
+        "observed_output_mode_agreement": 0.8,
+        "operational_failure_count": 0,
+        "operational_failures": {},
+        "operational_withholding_on_gold_FULL": 0,
+        "policy_violation_count": 0,
+        "reason_class_agreement": 0.6,
+        "reason_class_denominator": 40,
+        "unnecessary_nonoperational_CFAF": 0
+      },
+      "B": {
+        "CFAF_gold": 24,
+        "CFAF_recall": 0.6666666666666666,
+        "FULL_gold": 16,
+        "FULL_recall": 1.0,
+        "N_planned": 40,
+        "answer_factual_accuracy": "NOT independently measured; mode and marker agreement do not prove entailment",
+        "balanced_accuracy": 0.8333333333333333,
+        "correct_mode_nonoperational": 32,
+        "failure_to_restrict_observed_FULL": 8,
+        "fulfilment_status_agreement": 0.6,
+        "gold_marker_denominator": 16,
+        "gold_marker_presence_FULL_cases": 0.5,
+        "matched_pair_joint_mode_accuracy": 0.6,
+        "mode_accuracy_cluster_interval95": [
+          0.7,
+          0.9
+        ],
+        "mode_accuracy_nonoperational": 0.8,
+        "nonoperational_confusion": {
+          "CFAF_as_CFAF": 16,
+          "CFAF_as_FULL": 8,
+          "FULL_as_FULL": 16
+        },
+        "observed_mode_confusion": {
+          "CFAF_as_CFAF": 16,
+          "CFAF_as_FULL": 8,
+          "FULL_as_FULL": 16
+        },
+        "observed_modes": {
+          "CFAF": 16,
+          "FULL": 24
+        },
+        "observed_output_mode_agreement": 0.8,
+        "operational_failure_count": 0,
+        "operational_failures": {},
+        "operational_withholding_on_gold_FULL": 0,
+        "policy_violation_count": 0,
+        "reason_class_agreement": 0.6,
+        "reason_class_denominator": 40,
+        "unnecessary_nonoperational_CFAF": 0
+      },
+      "C": {
+        "CFAF_gold": 24,
+        "CFAF_recall": 1.0,
+        "FULL_gold": 16,
+        "FULL_recall": 1.0,
+        "N_planned": 40,
+        "answer_factual_accuracy": "NOT independently measured; mode and marker agreement do not prove entailment",
+        "balanced_accuracy": 1.0,
+        "correct_mode_nonoperational": 40,
+        "failure_to_restrict_observed_FULL": 0,
+        "fulfilment_status_agreement": 0.8,
+        "gold_marker_denominator": 16,
+        "gold_marker_presence_FULL_cases": 0.3125,
+        "matched_pair_joint_mode_accuracy": 1.0,
+        "mode_accuracy_cluster_interval95": [
+          1.0,
+          1.0
+        ],
+        "mode_accuracy_nonoperational": 1.0,
+        "nonoperational_confusion": {
+          "CFAF_as_CFAF": 24,
+          "FULL_as_FULL": 16
+        },
+        "observed_mode_confusion": {
+          "CFAF_as_CFAF": 24,
+          "FULL_as_FULL": 16
+        },
+        "observed_modes": {
+          "CFAF": 24,
+          "FULL": 16
+        },
+        "observed_output_mode_agreement": 1.0,
+        "operational_failure_count": 0,
+        "operational_failures": {},
+        "operational_withholding_on_gold_FULL": 0,
+        "policy_violation_count": 0,
+        "reason_class_agreement": 0.725,
+        "reason_class_denominator": 40,
+        "unnecessary_nonoperational_CFAF": 0
+      }
+    }
+  },
+  "dataset2": {
+    "dataset": "Fixed40 exposed development fallback; reserved30 untouched",
+    "incomplete": 0,
+    "paired_executions_completed": 40,
+    "planned": 40,
+    "systems": {
+      "A": {
+        "CFAF_gold": 26,
+        "CFAF_recall": 0.7307692307692307,
+        "FULL_gold": 14,
+        "FULL_recall": 0.7857142857142857,
+        "N_planned": 40,
+        "answer_factual_accuracy": "NOT independently measured; mode and marker agreement do not prove entailment",
+        "balanced_accuracy": 0.7582417582417582,
+        "correct_mode_nonoperational": 30,
+        "failure_to_restrict_observed_FULL": 7,
+        "fulfilment_status_agreement": null,
+        "gold_marker_denominator": 0,
+        "gold_marker_presence_FULL_cases": null,
+        "mode_accuracy_cluster_interval95": [
+          0.627906976744186,
+          0.8648648648648649
+        ],
+        "mode_accuracy_nonoperational": 0.75,
+        "nonoperational_confusion": {
+          "CFAF_as_CFAF": 19,
+          "CFAF_as_FULL": 7,
+          "FULL_as_CFAF": 3,
+          "FULL_as_FULL": 11
+        },
+        "observed_mode_confusion": {
+          "CFAF_as_CFAF": 19,
+          "CFAF_as_FULL": 7,
+          "FULL_as_CFAF": 3,
+          "FULL_as_FULL": 11
+        },
+        "observed_modes": {
+          "CFAF": 22,
+          "FULL": 18
+        },
+        "observed_output_mode_agreement": 0.75,
+        "operational_failure_count": 0,
+        "operational_failures": {},
+        "operational_withholding_on_gold_FULL": 0,
+        "policy_violation_count": 0,
+        "reason_class_agreement": null,
+        "reason_class_denominator": 0,
+        "unnecessary_nonoperational_CFAF": 3
+      },
+      "B": {
+        "CFAF_gold": 26,
+        "CFAF_recall": 0.7307692307692307,
+        "FULL_gold": 14,
+        "FULL_recall": 0.7857142857142857,
+        "N_planned": 40,
+        "answer_factual_accuracy": "NOT independently measured; mode and marker agreement do not prove entailment",
+        "balanced_accuracy": 0.7582417582417582,
+        "correct_mode_nonoperational": 30,
+        "failure_to_restrict_observed_FULL": 7,
+        "fulfilment_status_agreement": null,
+        "gold_marker_denominator": 0,
+        "gold_marker_presence_FULL_cases": null,
+        "mode_accuracy_cluster_interval95": [
+          0.627906976744186,
+          0.8648648648648649
+        ],
+        "mode_accuracy_nonoperational": 0.75,
+        "nonoperational_confusion": {
+          "CFAF_as_CFAF": 19,
+          "CFAF_as_FULL": 7,
+          "FULL_as_CFAF": 3,
+          "FULL_as_FULL": 11
+        },
+        "observed_mode_confusion": {
+          "CFAF_as_CFAF": 19,
+          "CFAF_as_FULL": 7,
+          "FULL_as_CFAF": 3,
+          "FULL_as_FULL": 11
+        },
+        "observed_modes": {
+          "CFAF": 22,
+          "FULL": 18
+        },
+        "observed_output_mode_agreement": 0.75,
+        "operational_failure_count": 0,
+        "operational_failures": {},
+        "operational_withholding_on_gold_FULL": 0,
+        "policy_violation_count": 0,
+        "reason_class_agreement": null,
+        "reason_class_denominator": 0,
+        "unnecessary_nonoperational_CFAF": 3
+      },
+      "C": {
+        "CFAF_gold": 26,
+        "CFAF_recall": 0.8076923076923077,
+        "FULL_gold": 14,
+        "FULL_recall": 0.5714285714285714,
+        "N_planned": 40,
+        "answer_factual_accuracy": "NOT independently measured; mode and marker agreement do not prove entailment",
+        "balanced_accuracy": 0.6895604395604396,
+        "correct_mode_nonoperational": 29,
+        "failure_to_restrict_observed_FULL": 5,
+        "fulfilment_status_agreement": null,
+        "gold_marker_denominator": 0,
+        "gold_marker_presence_FULL_cases": null,
+        "mode_accuracy_cluster_interval95": [
+          0.6046511627906976,
+          0.8461538461538461
+        ],
+        "mode_accuracy_nonoperational": 0.725,
+        "nonoperational_confusion": {
+          "CFAF_as_CFAF": 21,
+          "CFAF_as_FULL": 5,
+          "FULL_as_CFAF": 6,
+          "FULL_as_FULL": 8
+        },
+        "observed_mode_confusion": {
+          "CFAF_as_CFAF": 21,
+          "CFAF_as_FULL": 5,
+          "FULL_as_CFAF": 6,
+          "FULL_as_FULL": 8
+        },
+        "observed_modes": {
+          "CFAF": 27,
+          "FULL": 13
+        },
+        "observed_output_mode_agreement": 0.725,
+        "operational_failure_count": 0,
+        "operational_failures": {},
+        "operational_withholding_on_gold_FULL": 0,
+        "policy_violation_count": 0,
+        "reason_class_agreement": null,
+        "reason_class_denominator": 0,
+        "unnecessary_nonoperational_CFAF": 6
+      }
+    }
+  }
+}

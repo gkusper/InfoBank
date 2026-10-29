@@ -1,0 +1,845 @@
+{
+  "N_per_class": 40,
+  "N_selected": 80,
+  "class_counts_eligible_pool": {
+    "CFAF": 76,
+    "FULL": 834
+  },
+  "code_manifest_sha256": "5b8e10b48593b946cc44f34ec2ae52c3f8e12afcef86888320224622d1ddb27e",
+  "dataset": "Dataset3 – QASPER",
+  "distinct_selected_papers": 80,
+  "excluded_prior_dev_papers": [
+    "1707.06806",
+    "1709.05036",
+    "1803.05223",
+    "1804.00720",
+    "1804.07789",
+    "1809.01541",
+    "1811.08603",
+    "1901.10133",
+    "1903.11283",
+    "1906.01040",
+    "1907.01468",
+    "1908.04042",
+    "1909.00512",
+    "1909.03405",
+    "1910.03634",
+    "1910.06592",
+    "1910.12574",
+    "1911.07555",
+    "1912.03627",
+    "2001.03131"
+  ],
+  "globally_distinct_papers_feasible_and_used": true,
+  "primary_pool": "Tier M",
+  "records": [
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1905.07562",
+      "question_id": "71fd0efea1b441d86d9a75255815ba3efe09779b",
+      "runtime_index": 0,
+      "split": "test",
+      "stable_record_sha256": "49a8b4bca35d286585978f59c3f7c9951595703f642cbfb6c5f0db7305a45ce4"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "2002.08902",
+      "question_id": "6683008e0a8c4583058d38e185e2e2e18ac6cf50",
+      "runtime_index": 1,
+      "split": "test",
+      "stable_record_sha256": "b301402fbc957de09a463e8bf144a0949319bb7c36e2043a3ea5775bdba11419"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1910.02677",
+      "question_id": "311f9971d61b91c7d76bba1ad6f038390977a8be",
+      "runtime_index": 2,
+      "split": "test",
+      "stable_record_sha256": "32bff0ee3bb5f232c05b64b02aaa8a0b668d66554099342b3c46dc428476ee18"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1903.00384",
+      "question_id": "2ae66798333b905172e2c0954e9808662ab7f221",
+      "runtime_index": 3,
+      "split": "test",
+      "stable_record_sha256": "5153383670bbe3238256a5a1f024138e7c7902a946a9a35d9622c34885823bdb"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1903.02930",
+      "question_id": "488e3c4fd1103c46e12815d1bf414a0356fb0d0e",
+      "runtime_index": 4,
+      "split": "test",
+      "stable_record_sha256": "cbfaa845218ae85cbcc1be67a5e46b89149fcf558ae56089931f933df35ba94c"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1908.07888",
+      "question_id": "8de0e1fdcca81b49615a6839076f8d42226bf1fe",
+      "runtime_index": 5,
+      "split": "test",
+      "stable_record_sha256": "1b2e0a983e31fb57e2d7551473f1956939ffae16f5b82c92b491ae6a71c870ec"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1909.07873",
+      "question_id": "c589d83565f528b87e355b9280c1e7143a42401d",
+      "runtime_index": 6,
+      "split": "test",
+      "stable_record_sha256": "fb528671de192cf45b183cb7218c712eff3fa34838c3e563c035a645cae3c48b"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1810.02268",
+      "question_id": "cfdd583d01abaca923f5c466bb20e1d4b8c749ff",
+      "runtime_index": 7,
+      "split": "test",
+      "stable_record_sha256": "36693b37e8e43da508dde6ed66e6547e9ee68c392ccb8d424fc564687e79a21d"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1804.00982",
+      "question_id": "5da9e2eef741bd7efccec8e441b8e52e906b2d2d",
+      "runtime_index": 8,
+      "split": "test",
+      "stable_record_sha256": "646a12d09e9e93dedee79e74e9cc0bc190275e4ce8162b933a425037e0c8ca88"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1803.09000",
+      "question_id": "d7799d26fe39302c4aff5b530aa691e8653fffe8",
+      "runtime_index": 9,
+      "split": "test",
+      "stable_record_sha256": "de35a6428a669ee99a157dba1568f86aec5d693ed428648b92ae053920d77348"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1710.11334",
+      "question_id": "9eec16e560f9ccafd7ba6f1e0db742b330b42ba9",
+      "runtime_index": 10,
+      "split": "test",
+      "stable_record_sha256": "6f3b599531edaeb11fa13efabe3a5d4a3208c685844f0f4d09eb2c7cc769eb5a"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1909.04251",
+      "question_id": "a8cc891bb8dccf0d32c1c9cd1699d5ead0eed711",
+      "runtime_index": 11,
+      "split": "test",
+      "stable_record_sha256": "5a59a22afed2f20524e05b69c7ab99c0e0ab90d735ead5d764d6471d20090322"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1808.10006",
+      "question_id": "dce27c49b9bf1919ca545e04663507d83bb42dbe",
+      "runtime_index": 12,
+      "split": "test",
+      "stable_record_sha256": "76eb8bddcacdd1e9e61680d97f470bc382bf05ca28fb21d10b93f2054051710a"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1810.12897",
+      "question_id": "d323f0d65b57b30ae85fb9f24298927a3d1216e9",
+      "runtime_index": 13,
+      "split": "test",
+      "stable_record_sha256": "2c16431865323faed41f0ac71014feceadb6888e7f03cd371b2ccd0254c1a079"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1910.13793",
+      "question_id": "0d9241e904bd2bbf5b9a6ed7b5fc929651d3e28e",
+      "runtime_index": 14,
+      "split": "test",
+      "stable_record_sha256": "a850fa82f2cbd6c62659a86901df93e042bdb4a9b5a328b3aa4290cd12ecbc36"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "2003.11687",
+      "question_id": "2abcff4fdedf9b17f76875cc338ba4ab8d1eccd3",
+      "runtime_index": 15,
+      "split": "test",
+      "stable_record_sha256": "680a3a63a037893fcbbd75e0b8e1b672951666b9f601d5c54540894454c54a04"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1912.08084",
+      "question_id": "56d788af4694c1cd1eebee0b83c585836d1f5f99",
+      "runtime_index": 16,
+      "split": "test",
+      "stable_record_sha256": "89f7d72ba8e98373caaede76d1263e5ac4661cc2076398e32a76d44bce059bbb"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1909.03553",
+      "question_id": "ef6304512652ba56bd13dbe282a5ce1d41a4f171",
+      "runtime_index": 17,
+      "split": "test",
+      "stable_record_sha256": "40e7a78ed250f0cc45f924ea2ea9810314f488c33d44fcaef53496fa50e9ab86"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1801.05617",
+      "question_id": "458e5ed506883bfec6623102ec9f43c071f0616f",
+      "runtime_index": 18,
+      "split": "test",
+      "stable_record_sha256": "31bfef1e666e58b0bb30c3effafbcb235c7be8ed9ea71138d14699c6471208ad"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1603.00957",
+      "question_id": "1d9d7c96c5e826ac06741eb40e89fca6b4b022bd",
+      "runtime_index": 19,
+      "split": "test",
+      "stable_record_sha256": "2083f90345a7f4868518a4ecd4e6d21bc0fb04f3320a8484a939cf7203c8dcbc"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1606.02601",
+      "question_id": "0bc305d6b90f77f835bc4c904b22a4be07f963b2",
+      "runtime_index": 20,
+      "split": "test",
+      "stable_record_sha256": "367dd31f15bc3baf763c6c4886eb5983eb593c8649e788b7a63dff1b05d5682c"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 4,
+      "paper_id": "1909.04387",
+      "question_id": "f64449a21c452bc5395a0f0a49fb49825e6385f4",
+      "runtime_index": 21,
+      "split": "test",
+      "stable_record_sha256": "e087b738f3cb92279ac688cae3bb1449186f0f2a620ec41ed5f9024b585da791"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1612.03762",
+      "question_id": "95af7aaea3ce9dab4cf64e2229ce9b98381dd050",
+      "runtime_index": 22,
+      "split": "test",
+      "stable_record_sha256": "bd4e87d6622bd6f9d4300408ec46e561ad771ca623f9c977b584e09d3c0a9483"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1908.05758",
+      "question_id": "a9eb8039431e2cb885cfcf96eb58c0675b36b3bd",
+      "runtime_index": 23,
+      "split": "test",
+      "stable_record_sha256": "aa77d11b64411a390964a357ade7018ec3e4e0002e62c3b42f7e4be4a3bf1bd7"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1809.03680",
+      "question_id": "5e4eac0b0a73d465d74568c21819acaec557b700",
+      "runtime_index": 24,
+      "split": "test",
+      "stable_record_sha256": "abc2a3ec417b80b9bef2a4acb53562cc9790efbd09cecf95d9ab72645d21b3c6"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1908.11053",
+      "question_id": "804466848f4fa1c552f0d971dce226cd18b9edda",
+      "runtime_index": 25,
+      "split": "test",
+      "stable_record_sha256": "b2cde18c9f04600b6afe09b501771e7e003fbda03cce100b48c525c84ae4f1e1"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1806.03369",
+      "question_id": "38af3f25c36c3725a31304ab96e2c200c55792b4",
+      "runtime_index": 26,
+      "split": "test",
+      "stable_record_sha256": "8b714331e8e0e3d55ebc9a374da83e001b4f6d55d7fa544aa5e40a705fcdb8f2"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1704.08390",
+      "question_id": "7b76b8b69246525a48c0a8ca0c42db3319cd10a5",
+      "runtime_index": 27,
+      "split": "test",
+      "stable_record_sha256": "ff7da139bd05c339377ae9b5bb7ac4b064027ae757c8ba1b18aa03a0b6dadefe"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1708.03312",
+      "question_id": "bab4e8881f4d75e266bce6fbfa4c3bcd3eacf30f",
+      "runtime_index": 28,
+      "split": "test",
+      "stable_record_sha256": "cba14fe7cb4ad8ad063458c17dfc1f79a9304d105061adbe5570f5ee5fc3e7fb"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1905.09439",
+      "question_id": "d3cfbe497a30b750a8de3ea7f2cecf4753a4e1f9",
+      "runtime_index": 29,
+      "split": "test",
+      "stable_record_sha256": "1a51f907a43dfa66fdeb7342ea52218878ff1860940c5fad977fac3376eedd3d"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1910.01160",
+      "question_id": "0a70af6ba334dfd3574991b1dd06f54fc6a700f2",
+      "runtime_index": 30,
+      "split": "test",
+      "stable_record_sha256": "f31c9f2f898d759058450401ba6e405c8ca62d7e0decfa02c8e3dd8a2235fa3a"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1910.01108",
+      "question_id": "48ff9645a506aa2c17810d2654d1f0f0d9e609ee",
+      "runtime_index": 31,
+      "split": "test",
+      "stable_record_sha256": "81f8f686f0594bbef4f7c4957e5849f0ffcc7dcaeb0a147438b14705e0f3bf25"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1907.04072",
+      "question_id": "578add9d3dadf86cd0876d42b03bf0114f83d0e7",
+      "runtime_index": 32,
+      "split": "test",
+      "stable_record_sha256": "7c7211539dd1c154958cc36cd6c3409368f5fb84b33b06aa0cbe3ab8b8a2390d"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1701.03578",
+      "question_id": "6d55e377335815b7ad134d1a2977d231ad34a25b",
+      "runtime_index": 33,
+      "split": "test",
+      "stable_record_sha256": "c5208ffd08fc5d98698374426c655dee23fac3256af61df40cbd1164d8f61ddd"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1712.02555",
+      "question_id": "ed7ce13cd95f7664a5e4fc530dcf72dc3808dced",
+      "runtime_index": 34,
+      "split": "test",
+      "stable_record_sha256": "3539ef5f883264e1ea72410bf5ff673ef957c7a2fd8e2933999de5ff1a7f940e"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1805.09821",
+      "question_id": "f741d32b92630328df30f674af16fbbefcad3f93",
+      "runtime_index": 35,
+      "split": "test",
+      "stable_record_sha256": "39061f246174a993297b221c0c42b5685bf91cf5aa66d3300d2399a4b95f5cf4"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1704.06851",
+      "question_id": "b78bb6fe817c2d4bc69236df998f546e94c3ee21",
+      "runtime_index": 36,
+      "split": "test",
+      "stable_record_sha256": "d600e3156a96413c25c7c25723c6813f814aa16ec4269b3f599690a8582d01fd"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1610.06510",
+      "question_id": "65c7a2b734dab51c4c81f722527424ff33b023f8",
+      "runtime_index": 37,
+      "split": "test",
+      "stable_record_sha256": "99ee1841507dc03ee1a3528902c844bf73da197a2e95209b1187cd219de628c1"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 3,
+      "paper_id": "1912.10162",
+      "question_id": "6cad6f074b0486210ffa4982c8d1632f5aa91d91",
+      "runtime_index": 38,
+      "split": "test",
+      "stable_record_sha256": "bf88c991cf0f6b8517febe47d6a29f55b18259c2634a0ea28685da0805960d81"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "FULL",
+      "original_annotation_count": 2,
+      "paper_id": "1910.09916",
+      "question_id": "708f5f83a3c356b23b27a9175f5c35ac00cdf5db",
+      "runtime_index": 39,
+      "split": "test",
+      "stable_record_sha256": "c9ecf16dd43266228782be80723ff5ab64f70813d5197c36487f74eb68fb99fe"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1706.02427",
+      "question_id": "c21675d8a90bda624d27e5535d1c10f08fcbc16b",
+      "runtime_index": 40,
+      "split": "test",
+      "stable_record_sha256": "cdb194d1d4a0a8da46e4d210a5666616e3097a5eeb59d29438c93d784f84b7f3"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1610.07149",
+      "question_id": "bfcbb47f3c54ee1a459183e04e4c5a41ac9ae83b",
+      "runtime_index": 41,
+      "split": "test",
+      "stable_record_sha256": "fc89514071945a9e1a5373e81579276dd39a11a9a5b7b4dc310163328cea531e"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1907.01339",
+      "question_id": "a913aa14d4e05cc9d658bf6697fe5b2652589b1b",
+      "runtime_index": 42,
+      "split": "test",
+      "stable_record_sha256": "c1c03f262537f5291689d0b52aed737dfc53b52f78ba3d21dd3ff261f93ff8ee"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1903.01411",
+      "question_id": "5138121b9e9bd56962e69bfe49d5df5301cb7745",
+      "runtime_index": 43,
+      "split": "test",
+      "stable_record_sha256": "ec2c49f00ba5be3d84729fe133ba6102ecbe305db5981ba3a45c4ca2c1000ae2"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "2003.13028",
+      "question_id": "3e3d123960e40bcb1618e11999bd2031ccc1d155",
+      "runtime_index": 44,
+      "split": "test",
+      "stable_record_sha256": "2bf553697bb9ebff7999f934bf65ca52e4f833c743d5e978ec0243b5f4d6e722"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1607.00167",
+      "question_id": "dd807195d10c492da2b0da8b2c56b8f7b75db20e",
+      "runtime_index": 45,
+      "split": "test",
+      "stable_record_sha256": "71599a944b8e9307d60ddd08b6d9f9b5426f190d31cbe36b6ede73cc847d6569"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1812.05813",
+      "question_id": "e500948fa01c74e5cb3e6774f66aaa9ad4b3e435",
+      "runtime_index": 46,
+      "split": "test",
+      "stable_record_sha256": "8cd0ecb07bf19a7c6df7499df2cabc7a68dc1295d39f0383db74b2461fcbd630"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1912.00239",
+      "question_id": "fd556a038c36abc88a800d9d4f2cfa0aef6f5aba",
+      "runtime_index": 47,
+      "split": "test",
+      "stable_record_sha256": "45c368b9ff235cb1151c609f4b1af9dca0f5f0bd36c15b3ded0b3c887b22af1d"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1710.11027",
+      "question_id": "7f8fc3c7d59aba80a3e7c839db6892a1fc329210",
+      "runtime_index": 48,
+      "split": "test",
+      "stable_record_sha256": "64b8b5d4ac794284785f849a747979d2d0b6bf33780771a0e5ba5216782c0526"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1709.04491",
+      "question_id": "3fafde90eebc1c00ba6c3fb4c5b984009393ce7f",
+      "runtime_index": 49,
+      "split": "test",
+      "stable_record_sha256": "08a58dfaa1d7eac94604feec291ebfce81ee6ac82fb0ce390419a1df752a66b0"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1906.01010",
+      "question_id": "a926d71e6e58066d279d9f7dc3210cd43f410164",
+      "runtime_index": 50,
+      "split": "test",
+      "stable_record_sha256": "6a8af519b1291f31bf09a122b462add7d623c4fbc5a3b55dce18b60b0f9b9855"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1912.11585",
+      "question_id": "11360385dff0a9d7b8f4b106ba2b7fe15ca90d7c",
+      "runtime_index": 51,
+      "split": "test",
+      "stable_record_sha256": "d8971fd6750ddf165ad4789cee1a1552c2b6cae8b3c7dac66dd236517faf19e0"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1908.10461",
+      "question_id": "347dc2fd6427b39cf2358d43864750044437dff8",
+      "runtime_index": 52,
+      "split": "test",
+      "stable_record_sha256": "aae0b796a886525808b7566d5cae6e3f5b833e1d77527605cf7ed9a8428c025b"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1911.04128",
+      "question_id": "b02a6f59270b8c55fa4df3751bcb66fca2371451",
+      "runtime_index": 53,
+      "split": "test",
+      "stable_record_sha256": "de54ca2e16ad33f7a6e1e9281297abeb05ccd908e3026106b8121c2fba9b3bbd"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1702.02584",
+      "question_id": "4830459e3d1d204e431025ce7e596ef3f8d757d2",
+      "runtime_index": 54,
+      "split": "test",
+      "stable_record_sha256": "62b5a10478c202ca87d88d55150080272081f0e3cf6d29d94697e1a9490d0d6d"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1802.09233",
+      "question_id": "0035b351df63971ec57e36d4bfc6f7594bed41ae",
+      "runtime_index": 55,
+      "split": "test",
+      "stable_record_sha256": "f8e5ff1c1c7c643295ba2d1f3875029f63709dfffcbba9135bd4204cda76f581"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1909.01860",
+      "question_id": "78a0c25b83cdeaeaf0a4781f502105a514b2af0e",
+      "runtime_index": 56,
+      "split": "test",
+      "stable_record_sha256": "9a9d40d0a7176e1f8e901f35955134c1fa04db1134f9fbbd3c0562bd60945163"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "2004.03090",
+      "question_id": "be0b438952048fe6bb91c61ba48e529d784bdcea",
+      "runtime_index": 57,
+      "split": "test",
+      "stable_record_sha256": "3b00453514edcb626011d126d81936ec069e863a7361bd2b5f9817dc5932a364"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1906.04287",
+      "question_id": "d427e9d181434078c78b7ee33a26b269f160f6d2",
+      "runtime_index": 58,
+      "split": "test",
+      "stable_record_sha256": "00773a36fa5bb3f37029ce8a971432c7a949dfac74bbf09484309c052a0a5d3e"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "2002.04745",
+      "question_id": "6073be8b88f0378cd0c4ffcad87e1327bc98b991",
+      "runtime_index": 59,
+      "split": "test",
+      "stable_record_sha256": "d8c29b018a256fabbf21cf38d63c29cace043e20406b9c7134691fd3da055a17"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1909.08357",
+      "question_id": "4beb50ba020f624446ff1ef5bf4adca5ed318b98",
+      "runtime_index": 60,
+      "split": "test",
+      "stable_record_sha256": "0007de0ccbfa1b94534b08f3f736b54268d9aa56ece627f9229696dd8ebe7642"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1908.05925",
+      "question_id": "63279ecb2ba4e51c1225e63b81cb021abc10d0d1",
+      "runtime_index": 61,
+      "split": "test",
+      "stable_record_sha256": "6407bade38d415a19993fbb01b65c73bb56a5adf312c456ec34ad1a7ef7ee0a2"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1908.08917",
+      "question_id": "de346decb1fbca8746b72c78ea9d1208902f5e0a",
+      "runtime_index": 62,
+      "split": "test",
+      "stable_record_sha256": "9a87435a8bb128a63aca3d687af451f873d7b28ee8a3bb3ceb2be5e079b38155"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1703.04357",
+      "question_id": "86de8de906e30bb2224a2f70f6e5cf5e5ad4be72",
+      "runtime_index": 63,
+      "split": "test",
+      "stable_record_sha256": "bd422147b561030bcf7554403f95d0bf2a3c57bfed6078dcde136d556623dd62"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1906.04236",
+      "question_id": "84f9952814d6995bc99bbb3abb372d90ef2f28b4",
+      "runtime_index": 64,
+      "split": "test",
+      "stable_record_sha256": "8254e742a66450b205b79f73cda46d71c621eb6dce3b3bab8980874fb0da819f"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1908.09355",
+      "question_id": "71e1f06daf6310609d00850340e64a846fbe2dfb",
+      "runtime_index": 65,
+      "split": "test",
+      "stable_record_sha256": "725bbaf72e784ac04e960012ffd67c699d32d5002be2a00716daef7288dd9e3a"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1909.06708",
+      "question_id": "a86758696926f2db71f982dc1a4fa4404988544e",
+      "runtime_index": 66,
+      "split": "test",
+      "stable_record_sha256": "33caec988b9de563bf19a25e33715a610f1c3d7fec29c7c3703675ff881869ac"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1907.00168",
+      "question_id": "ab95ca983240ad5289c123a2774f8e0db424f4a1",
+      "runtime_index": 67,
+      "split": "test",
+      "stable_record_sha256": "6abc9215e58a6de614bd63ce1a001605eeb2e1a6d1cf1b0022ca04ee23e55488"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1802.09059",
+      "question_id": "b1d255f181b18f7cf8eb3dd2369a082a2a398b7b",
+      "runtime_index": 68,
+      "split": "test",
+      "stable_record_sha256": "4c032f42e79c49a09bb2e8fdee76df148539abda78c81a101e181a2c75f410a3"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "2003.03728",
+      "question_id": "c626637ed14dee3049b87171ddf326115e59d9ee",
+      "runtime_index": 69,
+      "split": "test",
+      "stable_record_sha256": "c64b8029830269d5407aff9cb8b88547317199505949f925b33bb9e38cd99013"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1908.08788",
+      "question_id": "c8b2fb9e0d5fb9014a25b88d559d93b6dceffbc0",
+      "runtime_index": 70,
+      "split": "test",
+      "stable_record_sha256": "558a78d5f8bf6c67a90038becb18af21216def5a25e8cd0b4ff93751a6610b0c"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1911.01940",
+      "question_id": "946d7c877d363f549f84e9500c852dce70ae5d36",
+      "runtime_index": 71,
+      "split": "test",
+      "stable_record_sha256": "e193c6e9c7d3ad4e0d93612e39bfcd0165a28b6ad80a771f450ebe5832848076"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1902.10246",
+      "question_id": "3e4e415e346a313f5a7c3764fe0f51c11f51b071",
+      "runtime_index": 72,
+      "split": "test",
+      "stable_record_sha256": "60fda46bc32598b231f4b003bb4c7e44588d101fd2339944d81ec0eb08136f83"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1910.09942",
+      "question_id": "58df55002fbcba76b9aeb2181d78378b8c01a827",
+      "runtime_index": 73,
+      "split": "test",
+      "stable_record_sha256": "1e6405130a9e842cb5a2633b7a769c8d75a07cae176eb0fc43eb02cb9a0c32fc"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1804.03839",
+      "question_id": "6c5a64b5150305c584326882d37af5b0e58de2fd",
+      "runtime_index": 74,
+      "split": "test",
+      "stable_record_sha256": "b4f960f0d241d8d8812ba8110ca3df36fb5394a9906748cf6f4c4f511d059704"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 4,
+      "paper_id": "1708.05521",
+      "question_id": "622efbecd9350a0f4487bdff2b8b362ef2541f3c",
+      "runtime_index": 75,
+      "split": "test",
+      "stable_record_sha256": "79b67db3acd4874692d0af6343e85c4d2e56dfdd9b7d1ae656b341abb44fcb9d"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1905.08392",
+      "question_id": "98c8ed9019e43839ffb53a714bc37fbb1c28fe2c",
+      "runtime_index": 76,
+      "split": "test",
+      "stable_record_sha256": "eb85a0624c31dce39ab82435d0aaaade7ede151a35554bc214d069bf7b790dd9"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1911.05652",
+      "question_id": "fa468c31dd0f9095d7cec010f2262eeed565a7d2",
+      "runtime_index": 77,
+      "split": "test",
+      "stable_record_sha256": "9aaf1e6ecff70e4465461dd1356aac8781067861e9618ebe1d87fa25c0e37496"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 2,
+      "paper_id": "1709.09749",
+      "question_id": "ab097db03652b8b38edddc074f23e2adf9278cba",
+      "runtime_index": 78,
+      "split": "test",
+      "stable_record_sha256": "dfc59ebd1dbde0d786b57e4fe60f0f5f8386ecde226dd0f4fcb00cba2b14984a"
+    },
+    {
+      "annotation_tier": "M",
+      "derived_gold_mode": "CFAF",
+      "original_annotation_count": 3,
+      "paper_id": "1908.05731",
+      "question_id": "11dd2913d1517a1d47b367acb29fe9d79a9c95d1",
+      "runtime_index": 79,
+      "split": "test",
+      "stable_record_sha256": "32174bd56a91752bbc9ea98f5e19ef2806a15aa2c2c4918f2525ef24f736194d"
+    }
+  ],
+  "sample_size_reduced": false,
+  "sampling_design": "Preregistered randomized paper-first allocation reserving N other-class papers, then uniform question within paper; question-stratified fallback only if unique allocation infeasible",
+  "seed": 20261029,
+  "selected_after_code_freeze": true,
+  "selected_at_epoch": 1793275767.5307367,
+  "source_test_sha256": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5",
+  "source_version": "0.3",
+  "test_questions_excluded_for_prior_dev_overlap": 0
+}

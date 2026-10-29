@@ -1,0 +1,1174 @@
+{
+  "assessor": "Codex task agent; non-independent, unblinded semantic review",
+  "method": "Compared all 80 questions, A/C outputs, original references and displayed selected evidence windows, with targeted original-paragraph checks. The complete source/trace packet is retained privately; this is not exhaustive independent claim adjudication.",
+  "reviewed_cases": 80,
+  "external_judge_or_independent_review": false,
+  "no_corrected_gold_metric": true,
+  "cases": [
+    {
+      "case": 1,
+      "flags": [
+        "METRIC_DETAIL_OMITTED"
+      ],
+      "note": "A includes an explicit classification accuracy; C describes evaluated abilities but omits the precision/accuracy measures emphasized by the references. Mode agreement does not settle this completeness issue.",
+      "runtime_index": 0,
+      "paper_id": "1905.07562",
+      "question_id": "71fd0efea1b441d86d9a75255815ba3efe09779b",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 2,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify the referenced worst model and retain the reported baseline F1 gap in the shown source.",
+      "runtime_index": 1,
+      "paper_id": "2002.08902",
+      "question_id": "6683008e0a8c4583058d38e185e2e2e18ac6cf50",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 3,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both explain the source/reference comparison and edit-operation scoring consistent with the displayed paper passage.",
+      "runtime_index": 2,
+      "paper_id": "1910.02677",
+      "question_id": "311f9971d61b91c7d76bba1ad6f038390977a8be",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 4,
+      "flags": [
+        "REFERENCE_SCOPE_DISAGREEMENT"
+      ],
+      "note": "Human references differ between user ratings and predictive-error metrics. C gives only model-fit metrics; A mixes platform signals, features and model metrics. No unambiguous complete-answer judgment is made.",
+      "runtime_index": 3,
+      "paper_id": "1903.00384",
+      "question_id": "2ae66798333b905172e2c0954e9808662ab7f221",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 5,
+      "flags": [
+        "REFERENCE_CONSISTENT",
+        "INTERNAL_WINDOW_PARTIAL"
+      ],
+      "note": "Answers match the original feature dimension and sampling interval. The selected window ends before the key numerical feature statement, so its exact ID alone does not establish full support.",
+      "runtime_index": 4,
+      "paper_id": "1903.02930",
+      "question_id": "488e3c4fd1103c46e12815d1bf414a0356fb0d0e",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 6,
+      "flags": [
+        "CORPUS_VS_EVALUATION_SUBSET"
+      ],
+      "note": "Both give the large conversation corpus, while all references focus on the manually rescored annotation subset. These are different scopes; broad dataset wording prevents an automatic factual-error verdict.",
+      "runtime_index": 5,
+      "paper_id": "1908.07888",
+      "question_id": "8de0e1fdcca81b49615a6839076f8d42226bf1fe",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 7,
+      "flags": [
+        "MODEL_IDENTITY_OMITTED"
+      ],
+      "note": "Both say well-trained models rather than naming the specific word-based CNN in the references. Human evidence is retained; the generic answer is incomplete despite FULL.",
+      "runtime_index": 6,
+      "paper_id": "1909.07873",
+      "question_id": "c589d83565f528b87e355b9280c1e7143a42401d",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 8,
+      "flags": [
+        "LIST_COVERAGE_INCOMPLETE"
+      ],
+      "note": "C gives broad model families instead of the requested variants; A is much more detailed but appears to omit one concatenation variant present in human references.",
+      "runtime_index": 7,
+      "paper_id": "1810.02268",
+      "question_id": "cfdd583d01abaca923f5c466bb20e1d4b8c749ff",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 9,
+      "flags": [
+        "UNNECESSARY_CFAF",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "C calls a comparison question ambiguous after reporting missing evidence. A acknowledges baseline comparison; both human answers are affirmative.",
+      "runtime_index": 8,
+      "paper_id": "1804.00982",
+      "question_id": "5da9e2eef741bd7efccec8e441b8e52e906b2d2d",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 10,
+      "flags": [
+        "UNNECESSARY_CFAF",
+        "ANSWER_MODE_TENSION"
+      ],
+      "note": "A withholds while itself naming the two referenced systems, contradicting its claim that they are unspecified. C offers generic ambiguity rather than the available system names.",
+      "runtime_index": 9,
+      "paper_id": "1803.09000",
+      "question_id": "d7799d26fe39302c4aff5b530aa691e8653fffe8",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 11,
+      "flags": [
+        "REFERENCE_CONSISTENT",
+        "AVAILABLE_DETAIL_OMITTED"
+      ],
+      "note": "Both identify the dataset; A preserves train/test sections while C omits that finer split. This is not judged wrong merely for being concise.",
+      "runtime_index": 10,
+      "paper_id": "1710.11334",
+      "question_id": "9eec16e560f9ccafd7ba6f1e0db742b330b42ba9",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 12,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both list the three model families in the human references; no substantive mismatch is identified in this limited review.",
+      "runtime_index": 11,
+      "paper_id": "1909.04251",
+      "question_id": "a8cc891bb8dccf0d32c1c9cd1699d5ead0eed711",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 13,
+      "flags": [
+        "LIST_COVERAGE_QUESTION",
+        "REFERENCE_SCOPE_DISAGREEMENT"
+      ],
+      "note": "C omits the distinct Google NMT correction from a three-method reference and its own selected passage. Another human reference names only tuned reward, so exact completeness remains scope-sensitive.",
+      "runtime_index": 12,
+      "paper_id": "1808.10006",
+      "question_id": "dce27c49b9bf1919ca545e04663507d83bb42dbe",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 14,
+      "flags": [
+        "REFERENCE_CONSISTENT",
+        "INTERNAL_WINDOW_PARTIAL"
+      ],
+      "note": "Both name the referenced dataset, but the displayed selected window starts after the name; full-paper availability and a valid window ID are separate support questions.",
+      "runtime_index": 13,
+      "paper_id": "1810.12897",
+      "question_id": "d323f0d65b57b30ae85fb9f24298927a3d1216e9",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 15,
+      "flags": [
+        "BOOLEAN_ANSWER_DISAGREEMENT",
+        "POTENTIAL_REFERENCE_DOCUMENT_DISCREPANCY"
+      ],
+      "note": "Both answer Yes from the customer-support passage while two original references answer No and another describes conversations. FULL mode consensus hides substantive direction disagreement; no gold change is made.",
+      "runtime_index": 14,
+      "paper_id": "1910.13793",
+      "question_id": "0d9241e904bd2bbf5b9a6ed7b5fc929651d3e28e",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 16,
+      "flags": [
+        "UNNECESSARY_CFAF",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A supplies a release URL and agrees with three affirmative references. C abstains with a generic ambiguity reason although its analysis identifies missing evidence.",
+      "runtime_index": 15,
+      "paper_id": "2003.11687",
+      "question_id": "2abcff4fdedf9b17f76875cc338ba4ab8d1eccd3",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 17,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify the two main trained model families. The more detailed architecture in one reference is not required by exact-string matching.",
+      "runtime_index": 16,
+      "paper_id": "1912.08084",
+      "question_id": "56d788af4694c1cd1eebee0b83c585836d1f5f99",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 18,
+      "flags": [
+        "BEST_VS_EVALUATED_MODELS"
+      ],
+      "note": "Answers include a low-performing science model among state-of-the-art models; the shown source singles out a different best model. Named-model support is weaker than support for the ranking claim.",
+      "runtime_index": 17,
+      "paper_id": "1909.03553",
+      "question_id": "ef6304512652ba56bd13dbe282a5ce1d41a4f171",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 19,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify the two reference baseline families, with source support retained despite a retrieved-subset input.",
+      "runtime_index": 18,
+      "paper_id": "1801.05617",
+      "question_id": "458e5ed506883bfec6623102ec9f43c071f0616f",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 20,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both describe Wikipedia evidence validating knowledge-base answers, consistent with the references and displayed source.",
+      "runtime_index": 19,
+      "paper_id": "1603.00957",
+      "question_id": "1d9d7c96c5e826ac06741eb40e89fca6b4b022bd",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 21,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both preserve cosine-ranked pairs and correlation with human judgments; the displayed source explicitly supports the correlation measure.",
+      "runtime_index": 20,
+      "paper_id": "1606.02601",
+      "question_id": "0bc305d6b90f77f835bc4c904b22a4be07f963b2",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 22,
+      "flags": [
+        "REFERENCE_CONTENT_DISAGREEMENT"
+      ],
+      "note": "Three references concern collected HITs while another gives a much larger quantity. Answers match the explicit HIT/worker statement; annotation content disagreement is retained rather than resolved by mode consensus.",
+      "runtime_index": 21,
+      "paper_id": "1909.04387",
+      "question_id": "f64449a21c452bc5395a0f0a49fb49825e6385f4",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 23,
+      "flags": [
+        "OPERATIONAL_REFERENCE_FAILURE",
+        "RETRIEVAL_EVIDENCE_LOSS"
+      ],
+      "note": "C fails on nonexistent zero-padding variants of span IDs. Three of six human evidence units are omitted, but at least one complete annotation evidence set remains. A agrees with affirmative references; the displayed excerpt alone does not establish all details of testing with real pharmacologists.",
+      "runtime_index": 22,
+      "paper_id": "1612.03762",
+      "question_id": "95af7aaea3ce9dab4cf64e2229ce9b98381dd050",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 24,
+      "flags": [
+        "WRONG_BOOLEAN_INFERENCE",
+        "CFAF_CONTRACT_TEXT_DEVIATION"
+      ],
+      "note": "Both infer nonautomatic construction merely from an auxiliary predictor despite the source describing construction without human supervision and unanimous Yes references. C emits that factual No under CFAF instead of its contracted evidence limitation.",
+      "runtime_index": 23,
+      "paper_id": "1908.05758",
+      "question_id": "a9eb8039431e2cb885cfcf96eb58c0675b36b3bd",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 25,
+      "flags": [
+        "UNNECESSARY_CFAF",
+        "AVAILABLE_SUPPORT_REJECTED"
+      ],
+      "note": "A lists the four reference baselines. C's selected text describes them but its negative relation property leads to abstention; this is not a retrieval omission.",
+      "runtime_index": 24,
+      "paper_id": "1809.03680",
+      "question_id": "5e4eac0b0a73d465d74568c21819acaec557b700",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 26,
+      "flags": [
+        "METHOD_VS_EVALUATION_PROTOCOL",
+        "FILTER_DETAILS_OMITTED"
+      ],
+      "note": "C captures late linking/ranking but omits the concrete error filters. A includes those filters but also presents a synthetic noisy-link evaluation setup as part of recovery; scope should be distinguished.",
+      "runtime_index": 25,
+      "paper_id": "1908.11053",
+      "question_id": "804466848f4fa1c552f0d971dce226cd18b9edda",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 27,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify the two training-data domains; A adds supported hashtag-label construction and C stays concise.",
+      "runtime_index": 26,
+      "paper_id": "1806.03369",
+      "question_id": "38af3f25c36c3725a31304ab96e2c200c55792b4",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 28,
+      "flags": [
+        "DEVELOPMENT_VS_EVALUATION_SCOPE"
+      ],
+      "note": "The best n-gram order differs by subtask and evaluation phase. C preserves one development-stage distinction but not the final-stage qualification described by A; human references themselves emphasize different scopes.",
+      "runtime_index": 27,
+      "paper_id": "1704.08390",
+      "question_id": "7b76b8b69246525a48c0a8ca0c42db3319cd10a5",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 29,
+      "flags": [
+        "STATE_OF_ART_VS_BASELINE_SCOPE"
+      ],
+      "note": "Both add a basic bidirectional model to the three reference state-of-the-art families. Its existence is supported, but calling every compared baseline state of the art is stronger than the shown source.",
+      "runtime_index": 28,
+      "paper_id": "1708.03312",
+      "question_id": "bab4e8881f4d75e266bce6fbfa4c3bcd3eacf30f",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 30,
+      "flags": [
+        "EXPERIMENTED_VS_SELECTED_EMBEDDINGS"
+      ],
+      "note": "A lists all tested embeddings and C the better-performing pair; each aligns with a different original reference. No exact-string failure is assigned.",
+      "runtime_index": 29,
+      "paper_id": "1905.09439",
+      "question_id": "d3cfbe497a30b750a8de3ea7f2cecf4753a4e1f9",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 31,
+      "flags": [
+        "REFERENCE_CONSISTENT",
+        "ADDITIONAL_RELATION_UNVERIFIED"
+      ],
+      "note": "C preserves the main referenced readability finding. A adds feature/causal-connective interpretations not independently established by the displayed finding excerpt.",
+      "runtime_index": 30,
+      "paper_id": "1910.01160",
+      "question_id": "0a70af6ba334dfd3574991b1dd06f54fc6a700f2",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 32,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify the two downstream task/dataset pairs explicitly described by the paper.",
+      "runtime_index": 31,
+      "paper_id": "1910.01108",
+      "question_id": "48ff9645a506aa2c17810d2654d1f0f0d9e609ee",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 33,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify site collection followed by the platform API; A's added collection dates occur in the displayed source.",
+      "runtime_index": 32,
+      "paper_id": "1907.04072",
+      "question_id": "578add9d3dadf86cd0876d42b03bf0114f83d0e7",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 34,
+      "flags": [
+        "MENTIONED_VS_ADOPTED_METRIC"
+      ],
+      "note": "Human references identify cross entropy. Both also list perplexity, although the displayed discussion motivates a different adopted similarity measure; mentioning a metric is not proof it was used for this analysis. Targeted source inspection confirms that the paper rejects perplexity as a good style-similarity measure and adopts cross entropy.",
+      "runtime_index": 33,
+      "paper_id": "1701.03578",
+      "question_id": "6d55e377335815b7ad134d1a2977d231ad34a25b",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 35,
+      "flags": [
+        "OPERATIONAL_GENERATION_FAILURE",
+        "DIFFERENTIABILITY_SCOPE_REVIEW_NEEDED"
+      ],
+      "note": "All references answer Yes, while A questions the global differentiability guarantee. C's generation has an invalid CFAF realization and is operational, not a validated semantic refusal. Independent technical adjudication is needed for the strong everywhere qualifier.",
+      "runtime_index": 34,
+      "paper_id": "1712.02555",
+      "question_id": "ed7ce13cd95f7664a5e4fc530dcf72dc3808dced",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 36,
+      "flags": [
+        "OPERATIONAL_REFERENCE_FAILURE",
+        "A_REFERENCE_CONSISTENT"
+      ],
+      "note": "A supplies the reference baseline families. C fails on nonexistent span formatting; it is not credited as an evidential abstention.",
+      "runtime_index": 35,
+      "paper_id": "1805.09821",
+      "question_id": "f741d32b92630328df30f674af16fbbefcad3f93",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 37,
+      "flags": [
+        "STATISTICAL_TEST_SCOPE_TRANSFER"
+      ],
+      "note": "C attaches a significance threshold from a displayed affect-perception multivariate test to a question about performance with/without affect attributes. A contextualizes perplexity gains. A real p-value is not support for a different comparison.",
+      "runtime_index": 36,
+      "paper_id": "1704.06851",
+      "question_id": "b78bb6fe817c2d4bc69236df998f546e94c3ee21",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 38,
+      "flags": [
+        "REFERENCE_CONSISTENT"
+      ],
+      "note": "Both identify the subword phrase-based translation model and its primary units, consistent with the source and reference variants.",
+      "runtime_index": 37,
+      "paper_id": "1610.06510",
+      "question_id": "65c7a2b734dab51c4c81f722527424ff33b023f8",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 39,
+      "flags": [
+        "REQUESTED_EXTENSION_NOT_IDENTIFIED",
+        "REFERENCE_CONTENT_DISAGREEMENT"
+      ],
+      "note": "Both say additional named-entity classes without naming the facility extension emphasized by two references. Another human answer is generic library background, showing content disagreement despite FULL consensus.",
+      "runtime_index": 38,
+      "paper_id": "1912.10162",
+      "question_id": "6cad6f074b0486210ffa4982c8d1632f5aa91d91",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 40,
+      "flags": [
+        "MODEL_LIST_INCOMPLETE"
+      ],
+      "note": "Targeted source inspection confirms the referenced particular regressors are explicitly listed later in the paper. Both answers give two broad training approaches but omit tested regressor variants, so FULL mode does not establish list completeness.",
+      "runtime_index": 39,
+      "paper_id": "1910.09916",
+      "question_id": "708f5f83a3c356b23b27a9175f5c35ac00cdf5db",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 41,
+      "flags": [
+        "SELECTION_PROTOCOL_INSTEAD_OF_EXTRACTION_METHOD"
+      ],
+      "note": "Both describe page selection/query labeling rather than the HTML parsing or table-extraction procedure requested. Real source statements do not establish the substituted operation.",
+      "runtime_index": 40,
+      "paper_id": "1706.02427",
+      "question_id": "c21675d8a90bda624d27e5535d1c10f08fcbc16b",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 42,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A identifies missing inference-time comparison; C's generic referent clarification does not follow its own missing-evidence diagnosis.",
+      "runtime_index": 41,
+      "paper_id": "1610.07149",
+      "question_id": "bfcbb47f3c54ee1a459183e04e4c5a41ac9ae83b",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 43,
+      "flags": [
+        "TASK_FRAMEWORK_INSTEAD_OF_LABEL_SCHEME"
+      ],
+      "note": "Sequence labeling names the framework but does not establish the concrete tagging/encoding scheme. The original unanswerable label is preserved without treating all topic-consistent prose as a full answer.",
+      "runtime_index": 42,
+      "paper_id": "1907.01339",
+      "question_id": "a913aa14d4e05cc9d658bf6697fe5b2652589b1b",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 44,
+      "flags": [
+        "OPERATIONAL_GENERATION_FAILURE",
+        "A_CFAF_MODE_MATCH"
+      ],
+      "note": "A withholds an unavailable exact performance gain. C's invalid realization is a technical fallback, not a correct evidential refusal.",
+      "runtime_index": 43,
+      "paper_id": "1903.01411",
+      "question_id": "5138121b9e9bd56962e69bfe49d5df5301cb7745",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 45,
+      "flags": [
+        "OPERATIONAL_GENERATION_FAILURE",
+        "A_CFAF_MODE_MATCH"
+      ],
+      "note": "A does not infer language from familiar dataset names without document evidence. C's generator emits an invalid CFAF realization and loses operational credit.",
+      "runtime_index": 44,
+      "paper_id": "2003.13028",
+      "question_id": "3e3d123960e40bcb1618e11999bd2031ccc1d155",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 46,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "The requested count is withheld. C again substitutes a referent-ambiguity explanation for a missing statistic; A's additional collection-date assertion is not independently verified here.",
+      "runtime_index": 45,
+      "paper_id": "1607.00167",
+      "question_id": "dd807195d10c492da2b0da8b2c56b8f7b75db20e",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 47,
+      "flags": [
+        "C_ONLY_CORRECT_MODE",
+        "QUALITATIVE_RELIABILITY_INSTEAD_OF_AGREEMENT_MEASURE"
+      ],
+      "note": "A gives a qualitative reliability inference from expert participation rather than the requested agreement measurement. C restricts the unsupported relation, providing a substantive paired win.",
+      "runtime_index": 46,
+      "paper_id": "1812.05813",
+      "question_id": "e500948fa01c74e5cb3e6774f66aaa9ad4b3e435",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 48,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A explicitly withholds an unreported percentage. C's mode agrees but its ambiguity explanation is not established by the missing-number diagnosis.",
+      "runtime_index": 47,
+      "paper_id": "1912.00239",
+      "question_id": "fd556a038c36abc88a800d9d4f2cfa0aef6f5aba",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 49,
+      "flags": [
+        "C_ONLY_CORRECT_MODE",
+        "CAPABILITY_VS_ACTUAL_EVALUATION"
+      ],
+      "note": "A infers actual multilingual evaluation from possible multilingual support. C correctly withholds the conclusion, although its generic clarification reason is weak.",
+      "runtime_index": 48,
+      "paper_id": "1710.11027",
+      "question_id": "7f8fc3c7d59aba80a3e7c839db6892a1fc329210",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 50,
+      "flags": [
+        "QUALITATIVE_STATEMENT_INSTEAD_OF_NUMERIC_RESULT"
+      ],
+      "note": "Both repeat an abstract's high-accuracy claim rather than provide the requested result. They invent no exact number, but FULL overstates fulfilment.",
+      "runtime_index": 49,
+      "paper_id": "1709.04491",
+      "question_id": "3fafde90eebc1c00ba6c3fb4c5b984009393ce7f",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 51,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "TOOL_CAPACITY_VS_STUDY_POPULATION",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "An available tagger's language capacity does not identify languages actually included in the population. Both withhold; C's reason still confuses missing detail with ambiguity.",
+      "runtime_index": 50,
+      "paper_id": "1906.01010",
+      "question_id": "a926d71e6e58066d279d9f7dc3210cd43f410164",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 52,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "Both mode decisions agree with original unanswerable gold. A explains an unavailable baseline; C requests referent clarification. This limited review is not independent proof of absence.",
+      "runtime_index": 51,
+      "paper_id": "1912.11585",
+      "question_id": "11360385dff0a9d7b8f4b106ba2b7fe15ca90d7c",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 53,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "The exact feature count is not invented. C's explanation is generic ambiguity despite recognizing the missing count.",
+      "runtime_index": 52,
+      "paper_id": "1908.10461",
+      "question_id": "347dc2fd6427b39cf2358d43864750044437dff8",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 54,
+      "flags": [
+        "C_ONLY_CORRECT_MODE",
+        "CORPUS_DESCRIPTION_INSTEAD_OF_SOURCE_IDENTITIES"
+      ],
+      "note": "A's internal-corpus description does not name the requested news sources. C's evidential abstention matches the gold and the scope limitation.",
+      "runtime_index": 53,
+      "paper_id": "1911.04128",
+      "question_id": "b02a6f59270b8c55fa4df3751bcb66fca2371451",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 55,
+      "flags": [
+        "RATIO_INSTEAD_OF_ABSOLUTE_COUNT"
+      ],
+      "note": "A source-supported relative factor does not provide the requested number of speakers without a baseline count. Both mark an incomplete quantitative answer FULL.",
+      "runtime_index": 54,
+      "paper_id": "1702.02584",
+      "question_id": "4830459e3d1d204e431025ce7e596ef3f8d757d2",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 56,
+      "flags": [
+        "GENERAL_BACKGROUND_AS_STUDY_METHOD",
+        "EXTRA_LABEL_CATEGORIES_UNVERIFIED"
+      ],
+      "note": "Both transfer introductory discussion of manually annotated sentiment data into a claim about this dataset's labeling procedure. A adds possible sentiment categories not established by the displayed passage.",
+      "runtime_index": 55,
+      "paper_id": "1802.09233",
+      "question_id": "0035b351df63971ec57e36d4bfc6f7594bed41ae",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 57,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "EPOCHS_NOT_ELAPSED_TIME",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A correctly distinguishes training epochs from training duration. C withholds but asks for a referent rather than stating that time is missing.",
+      "runtime_index": 56,
+      "paper_id": "1909.01860",
+      "question_id": "78a0c25b83cdeaeaf0a4781f502105a514b2af0e",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 58,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "ABSENCE_NOT_NEGATIVE_PROOF",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A states that crowdsourcing is not mentioned instead of asserting it was not used. C's ambiguity reason remains unsupported by its own missing-evidence cause.",
+      "runtime_index": 57,
+      "paper_id": "2004.03090",
+      "question_id": "be0b438952048fe6bb91c61ba48e529d784bdcea",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 59,
+      "flags": [
+        "OPERATIONAL_GENERATION_FAILURE",
+        "A_CFAF_MODE_MATCH"
+      ],
+      "note": "A does not guess dialect identities. C's technical realization failure is kept separate from evidential abstention.",
+      "runtime_index": 58,
+      "paper_id": "1906.04287",
+      "question_id": "d427e9d181434078c78b7ee33a26b269f160f6d2",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 60,
+      "flags": [
+        "APPLICATION_INSTEAD_OF_DEFINITION",
+        "B_ONLY_CORRECT_MODE"
+      ],
+      "note": "C describes an application of the theory to model gradients, not what the theory is. A explicitly recognizes that distinction and abstains. This case uses a retrieved subset, but no label is changed.",
+      "runtime_index": 59,
+      "paper_id": "2002.04745",
+      "question_id": "6073be8b88f0378cd0c4ffcad87e1327bc98b991",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 61,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A states an unavailable evaluated-language list. C reports the same missing-evidence cause but serves a generic clarification.",
+      "runtime_index": 60,
+      "paper_id": "1909.08357",
+      "question_id": "4beb50ba020f624446ff1ef5bf4adca5ed318b98",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 62,
+      "flags": [
+        "B_ONLY_CORRECT_MODE",
+        "APPLICATION_INSTEAD_OF_MECHANISM"
+      ],
+      "note": "C describes a bilingual embedding/alignment application instead of the encoding algorithm. A explicitly separates mention of the method from an explanation of how it works.",
+      "runtime_index": 61,
+      "paper_id": "1908.05925",
+      "question_id": "63279ecb2ba4e51c1225e63b81cb021abc10d0d1",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 63,
+      "flags": [
+        "B_ONLY_CORRECT_MODE",
+        "SUBJECT_NATIONALITY_VS_PUBLICATION_LANGUAGE"
+      ],
+      "note": "C infers a publication language from the Croatian subject/affiliation context; the displayed source does not establish that attribute. A withholds the publication-language claim.",
+      "runtime_index": 62,
+      "paper_id": "1908.08917",
+      "question_id": "de346decb1fbca8746b72c78ea9d1208902f5e0a",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 64,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "The translation-pair count is not invented. C's clarification is not justified merely by the missing number.",
+      "runtime_index": 63,
+      "paper_id": "1703.04357",
+      "question_id": "86de8de906e30bb2224a2f70f6e5cf5e5ad4be72",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 65,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A does not infer the videos' language from the dataset topic; C's missing-evidence analysis again yields ambiguity wording.",
+      "runtime_index": 64,
+      "paper_id": "1906.04236",
+      "question_id": "84f9952814d6995bc99bbb3abb372d90ef2f28b4",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 66,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "Both withhold an unreported GPU count; C gives a generic referent request rather than the stated resource-information limitation.",
+      "runtime_index": 65,
+      "paper_id": "1908.09355",
+      "question_id": "71e1f06daf6310609d00850340e64a846fbe2dfb",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 67,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "UNTESTED_GENERALIZATION_WITHHELD",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A separates evaluation on a specified pair from applicability to untested pairs. C also restricts, with a weaker ambiguity reason.",
+      "runtime_index": 66,
+      "paper_id": "1909.06708",
+      "question_id": "a86758696926f2db71f982dc1a4fa4404988544e",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 68,
+      "flags": [
+        "UNSUPPORTED_ACRONYM_EXPANSION",
+        "ACRONYM_REPETITION_NOT_EXPANSION"
+      ],
+      "note": "A supplies an expansion not established in the shown source. C merely repeats the acronym and workshop context instead of expanding it. No outside expansion is used to repair the benchmark response.",
+      "runtime_index": 67,
+      "paper_id": "1907.00168",
+      "question_id": "ab95ca983240ad5289c123a2774f8e0db424f4a1",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 69,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "CLARIFICATION_POSSIBLY_REASONABLE"
+      ],
+      "note": "The wording about dataset length can be underspecified in unit/scope, so clarification may be reasonable here. The review does not label every clarification wrong merely because missing evidence is also reported.",
+      "runtime_index": 68,
+      "paper_id": "1802.09059",
+      "question_id": "b1d255f181b18f7cf8eb3dd2369a082a2a398b7b",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 70,
+      "flags": [
+        "B_ONLY_CORRECT_MODE",
+        "REQUEST_QUALIFIER_IGNORED",
+        "BASELINE_CFAF_SPECULATION"
+      ],
+      "note": "C gives the general method without addressing the low-overlap condition. A recognizes the missing condition but then adds speculative limitations, showing that a correct CFAF mode does not guarantee fully grounded wording.",
+      "runtime_index": 69,
+      "paper_id": "2003.03728",
+      "question_id": "c626637ed14dee3049b87171ddf326115e59d9ee",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 71,
+      "flags": [
+        "C_ONLY_CORRECT_MODE",
+        "INCOMPATIBLE_COUNT_UNITS"
+      ],
+      "note": "A multiplies tasks by examples per label without establishing the label counts or requested experiment total. C correctly withholds the unsupported aggregate, despite generic ambiguity wording.",
+      "runtime_index": 70,
+      "paper_id": "1908.08788",
+      "question_id": "c8b2fb9e0d5fb9014a25b88d559d93b6dceffbc0",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 72,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "No GPU count is guessed; C's explanation again substitutes referent ambiguity for missing resource detail.",
+      "runtime_index": 71,
+      "paper_id": "1911.01940",
+      "question_id": "946d7c877d363f549f84e9500c852dce70ae5d36",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 73,
+      "flags": [
+        "BENCHMARK_FAMILIARITY_INFERENCE"
+      ],
+      "note": "A explicitly infers language from familiar benchmark/resource names; C states the same language without source qualification. The cited excerpt does not explicitly state the test language, so outside familiarity is not document-grounded proof.",
+      "runtime_index": 72,
+      "paper_id": "1902.10246",
+      "question_id": "3e4e415e346a313f5a7c3764fe0f51c11f51b071",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 74,
+      "flags": [
+        "OPERATIONAL_REFERENCE_FAILURE",
+        "LARGEST_CONTRIBUTOR_ATTRIBUTION_SCOPE"
+      ],
+      "note": "A attributes most speedup to a shared encoder; component-level largest-contribution evidence needs review rather than assuming a whole-model speedup proves that ranking. C fails technically on nonexistent span variants and earns no evidential credit.",
+      "runtime_index": 73,
+      "paper_id": "1910.09942",
+      "question_id": "58df55002fbcba76b9aeb2181d78378b8c01a827",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 75,
+      "flags": [
+        "METHOD_INSTEAD_OF_EVALUATION"
+      ],
+      "note": "Both describe how the bias-detection method operates or its examples instead of an empirical evaluation protocol. The architecture details are real but do not establish that evaluation was performed.",
+      "runtime_index": 74,
+      "paper_id": "1804.03839",
+      "question_id": "6c5a64b5150305c584326882d37af5b0e58de2fd",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 76,
+      "flags": [
+        "C_ONLY_CORRECT_MODE",
+        "OWN_SYSTEM_VS_OTHER_TEAMS"
+      ],
+      "note": "A generalizes the authors' decision not to use lexicons to all top teams. C rejects the unsupported actor-to-action relation and supplies an appropriate evidential limitation.",
+      "runtime_index": 75,
+      "paper_id": "1708.05521",
+      "question_id": "622efbecd9350a0f4487bdff2b8b362ef2541f3c",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 77,
+      "flags": [
+        "BIAS_MENTION_VS_CHARACTERIZATION",
+        "POTENTIAL_LABEL_SCOPE_DISPUTE"
+      ],
+      "note": "The source names reputation bias and a mitigation strategy; answers infer an influence mechanism from that description. Whether this sufficiently answers how is scope-sensitive and flagged for independent review, without deleting the case or changing gold.",
+      "runtime_index": 76,
+      "paper_id": "1905.08392",
+      "question_id": "98c8ed9019e43839ffb53a714bc37fbb1c28fe2c",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 78,
+      "flags": [
+        "OPERATIONAL_GENERATION_FAILURE",
+        "A_CFAF_MODE_MATCH"
+      ],
+      "note": "A withholds an unspecified stop-word set. C's malformed realization is operational, not a successful evidence refusal.",
+      "runtime_index": 77,
+      "paper_id": "1911.05652",
+      "question_id": "fa468c31dd0f9095d7cec010f2262eeed565a7d2",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 79,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "COMPONENTS_NOT_LAYER_COUNT",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "A distinguishes named components from a total layer count. C withholds too but uses unsupported generic ambiguity wording.",
+      "runtime_index": 78,
+      "paper_id": "1709.09749",
+      "question_id": "ab097db03652b8b38edddc074f23e2adf9278cba",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 80,
+      "flags": [
+        "CFAF_MODE_MATCH",
+        "MISSING_VS_AMBIGUITY"
+      ],
+      "note": "Neither model invents a parameter count; C's generic clarification remains weaker than directly stating the missing model-size evidence.",
+      "runtime_index": 79,
+      "paper_id": "1908.05731",
+      "question_id": "11dd2913d1517a1d47b367acb29fe9d79a9c95d1",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    }
+  ],
+  "flag_counts_not_accuracy": {
+    "METRIC_DETAIL_OMITTED": 1,
+    "REFERENCE_CONSISTENT": 15,
+    "REFERENCE_SCOPE_DISAGREEMENT": 2,
+    "INTERNAL_WINDOW_PARTIAL": 2,
+    "CORPUS_VS_EVALUATION_SUBSET": 1,
+    "MODEL_IDENTITY_OMITTED": 1,
+    "LIST_COVERAGE_INCOMPLETE": 1,
+    "UNNECESSARY_CFAF": 4,
+    "MISSING_VS_AMBIGUITY": 18,
+    "ANSWER_MODE_TENSION": 1,
+    "AVAILABLE_DETAIL_OMITTED": 1,
+    "LIST_COVERAGE_QUESTION": 1,
+    "BOOLEAN_ANSWER_DISAGREEMENT": 1,
+    "POTENTIAL_REFERENCE_DOCUMENT_DISCREPANCY": 1,
+    "BEST_VS_EVALUATED_MODELS": 1,
+    "REFERENCE_CONTENT_DISAGREEMENT": 2,
+    "OPERATIONAL_REFERENCE_FAILURE": 3,
+    "RETRIEVAL_EVIDENCE_LOSS": 1,
+    "WRONG_BOOLEAN_INFERENCE": 1,
+    "CFAF_CONTRACT_TEXT_DEVIATION": 1,
+    "AVAILABLE_SUPPORT_REJECTED": 1,
+    "METHOD_VS_EVALUATION_PROTOCOL": 1,
+    "FILTER_DETAILS_OMITTED": 1,
+    "DEVELOPMENT_VS_EVALUATION_SCOPE": 1,
+    "STATE_OF_ART_VS_BASELINE_SCOPE": 1,
+    "EXPERIMENTED_VS_SELECTED_EMBEDDINGS": 1,
+    "ADDITIONAL_RELATION_UNVERIFIED": 1,
+    "MENTIONED_VS_ADOPTED_METRIC": 1,
+    "OPERATIONAL_GENERATION_FAILURE": 5,
+    "DIFFERENTIABILITY_SCOPE_REVIEW_NEEDED": 1,
+    "A_REFERENCE_CONSISTENT": 1,
+    "STATISTICAL_TEST_SCOPE_TRANSFER": 1,
+    "REQUESTED_EXTENSION_NOT_IDENTIFIED": 1,
+    "MODEL_LIST_INCOMPLETE": 1,
+    "SELECTION_PROTOCOL_INSTEAD_OF_EXTRACTION_METHOD": 1,
+    "CFAF_MODE_MATCH": 17,
+    "TASK_FRAMEWORK_INSTEAD_OF_LABEL_SCHEME": 1,
+    "A_CFAF_MODE_MATCH": 4,
+    "C_ONLY_CORRECT_MODE": 5,
+    "QUALITATIVE_RELIABILITY_INSTEAD_OF_AGREEMENT_MEASURE": 1,
+    "CAPABILITY_VS_ACTUAL_EVALUATION": 1,
+    "QUALITATIVE_STATEMENT_INSTEAD_OF_NUMERIC_RESULT": 1,
+    "TOOL_CAPACITY_VS_STUDY_POPULATION": 1,
+    "CORPUS_DESCRIPTION_INSTEAD_OF_SOURCE_IDENTITIES": 1,
+    "RATIO_INSTEAD_OF_ABSOLUTE_COUNT": 1,
+    "GENERAL_BACKGROUND_AS_STUDY_METHOD": 1,
+    "EXTRA_LABEL_CATEGORIES_UNVERIFIED": 1,
+    "EPOCHS_NOT_ELAPSED_TIME": 1,
+    "ABSENCE_NOT_NEGATIVE_PROOF": 1,
+    "APPLICATION_INSTEAD_OF_DEFINITION": 1,
+    "B_ONLY_CORRECT_MODE": 4,
+    "APPLICATION_INSTEAD_OF_MECHANISM": 1,
+    "SUBJECT_NATIONALITY_VS_PUBLICATION_LANGUAGE": 1,
+    "UNTESTED_GENERALIZATION_WITHHELD": 1,
+    "UNSUPPORTED_ACRONYM_EXPANSION": 1,
+    "ACRONYM_REPETITION_NOT_EXPANSION": 1,
+    "CLARIFICATION_POSSIBLY_REASONABLE": 1,
+    "REQUEST_QUALIFIER_IGNORED": 1,
+    "BASELINE_CFAF_SPECULATION": 1,
+    "INCOMPATIBLE_COUNT_UNITS": 1,
+    "BENCHMARK_FAMILIARITY_INFERENCE": 1,
+    "LARGEST_CONTRIBUTOR_ATTRIBUTION_SCOPE": 1,
+    "METHOD_INSTEAD_OF_EVALUATION": 1,
+    "OWN_SYSTEM_VS_OTHER_TEAMS": 1,
+    "BIAS_MENTION_VS_CHARACTERIZATION": 1,
+    "POTENTIAL_LABEL_SCOPE_DISPUTE": 1,
+    "COMPONENTS_NOT_LAYER_COUNT": 1
+  }
+}

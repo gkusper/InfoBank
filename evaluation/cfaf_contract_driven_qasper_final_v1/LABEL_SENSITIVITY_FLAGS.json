@@ -1,0 +1,113 @@
+{
+  "status": "Diagnostic flags only; original labels and headline denominator unchanged",
+  "independent_adjudication": "PENDING",
+  "flagged_case_numbers": [
+    4,
+    13,
+    15,
+    22,
+    35,
+    39,
+    77
+  ],
+  "cases": [
+    {
+      "case": 4,
+      "flags": [
+        "REFERENCE_SCOPE_DISAGREEMENT"
+      ],
+      "note": "Human references differ between user ratings and predictive-error metrics. C gives only model-fit metrics; A mixes platform signals, features and model metrics. No unambiguous complete-answer judgment is made.",
+      "runtime_index": 3,
+      "paper_id": "1903.00384",
+      "question_id": "2ae66798333b905172e2c0954e9808662ab7f221",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 13,
+      "flags": [
+        "LIST_COVERAGE_QUESTION",
+        "REFERENCE_SCOPE_DISAGREEMENT"
+      ],
+      "note": "C omits the distinct Google NMT correction from a three-method reference and its own selected passage. Another human reference names only tuned reward, so exact completeness remains scope-sensitive.",
+      "runtime_index": 12,
+      "paper_id": "1808.10006",
+      "question_id": "dce27c49b9bf1919ca545e04663507d83bb42dbe",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 15,
+      "flags": [
+        "BOOLEAN_ANSWER_DISAGREEMENT",
+        "POTENTIAL_REFERENCE_DOCUMENT_DISCREPANCY"
+      ],
+      "note": "Both answer Yes from the customer-support passage while two original references answer No and another describes conversations. FULL mode consensus hides substantive direction disagreement; no gold change is made.",
+      "runtime_index": 14,
+      "paper_id": "1910.13793",
+      "question_id": "0d9241e904bd2bbf5b9a6ed7b5fc929651d3e28e",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 22,
+      "flags": [
+        "REFERENCE_CONTENT_DISAGREEMENT"
+      ],
+      "note": "Three references concern collected HITs while another gives a much larger quantity. Answers match the explicit HIT/worker statement; annotation content disagreement is retained rather than resolved by mode consensus.",
+      "runtime_index": 21,
+      "paper_id": "1909.04387",
+      "question_id": "f64449a21c452bc5395a0f0a49fb49825e6385f4",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 35,
+      "flags": [
+        "OPERATIONAL_GENERATION_FAILURE",
+        "DIFFERENTIABILITY_SCOPE_REVIEW_NEEDED"
+      ],
+      "note": "All references answer Yes, while A questions the global differentiability guarantee. C's generation has an invalid CFAF realization and is operational, not a validated semantic refusal. Independent technical adjudication is needed for the strong everywhere qualifier.",
+      "runtime_index": 34,
+      "paper_id": "1712.02555",
+      "question_id": "ed7ce13cd95f7664a5e4fc530dcf72dc3808dced",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 39,
+      "flags": [
+        "REQUESTED_EXTENSION_NOT_IDENTIFIED",
+        "REFERENCE_CONTENT_DISAGREEMENT"
+      ],
+      "note": "Both say additional named-entity classes without naming the facility extension emphasized by two references. Another human answer is generic library background, showing content disagreement despite FULL consensus.",
+      "runtime_index": 38,
+      "paper_id": "1912.10162",
+      "question_id": "6cad6f074b0486210ffa4982c8d1632f5aa91d91",
+      "gold_mode": "FULL",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    },
+    {
+      "case": 77,
+      "flags": [
+        "BIAS_MENTION_VS_CHARACTERIZATION",
+        "POTENTIAL_LABEL_SCOPE_DISPUTE"
+      ],
+      "note": "The source names reputation bias and a mitigation strategy; answers infer an influence mechanism from that description. Whether this sufficiently answers how is scope-sensitive and flagged for independent review, without deleting the case or changing gold.",
+      "runtime_index": 76,
+      "paper_id": "1905.08392",
+      "question_id": "98c8ed9019e43839ffb53a714bc37fbb1c28fe2c",
+      "gold_mode": "CFAF",
+      "annotation_tier": "M",
+      "original_gold_or_predictions_changed": false
+    }
+  ],
+  "no_exclusion_or_alternate_accuracy_computed": true,
+  "interpretation": "Flags can concern answer content/scope even when original FULL/CFAF mode consensus is valid; they do not establish mislabeled test questions."
+}

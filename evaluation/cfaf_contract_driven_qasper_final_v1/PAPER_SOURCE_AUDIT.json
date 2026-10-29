@@ -1,0 +1,15 @@
+{
+  "D1_D2_block_verbatim_in_fragment": true,
+  "fragment_sha256": "cac875c644598b81c0f07f8be1b2eb784faeb5425ccfbfe5f3dd0ec60b286c19",
+  "model_results_not_manually_changed": true,
+  "original_manuscript": {
+    "bytes": 69758,
+    "path": "C:\\Users\\EKKE\\Downloads\\CF2AF_v5.9.tex",
+    "read_only": true,
+    "sha256": "8f4c1387d41d43e62c3d3e81cd1507036ab4edfd60d19bc563910ed28025dee3"
+  },
+  "replacement_section_end_before_original_line": 610,
+  "replacement_section_start_original_line": 478,
+  "retained_D1_D2_block_normalized_sha256": "9e04baeb7ccd794f4db93c5f4a1741ca8b09684ef961b36a590d98040165b4b8",
+  "source_manuscript_unchanged": true
+}

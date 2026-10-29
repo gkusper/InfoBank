@@ -17,6 +17,8 @@ def strict_schema(model):
     return to_strict_json_schema(model)
 
 class SDKProvider:
+    output_cap=OUTPUT_CAP
+    def build_payload(self,request,evidence):return payload(request,evidence)
     def __init__(self,client=None,ledger=None,deadline_epoch=None,attempt_cap=100,clock=time.time):
         from openai import OpenAI
         self.client=client or OpenAI(max_retries=0,timeout=45.0,base_url='https://api.openai.com/v1')
@@ -29,9 +31,9 @@ class SDKProvider:
             with self.ledger.open('a',encoding='utf-8') as f:f.write(json.dumps(event,ensure_ascii=False)+'\n');f.flush()
     def invoke(self,request,evidence,model_type,prompt,kind):
         import openai
-        body=payload(request,evidence);schema=strict_schema(model_type)
+        body=self.build_payload(request,evidence);schema=strict_schema(model_type)
         messages=[{'role':'system','content':prompt},{'role':'user','content':json.dumps(body,ensure_ascii=True)}]
-        encoded=json.dumps({'model':MODEL,'temperature':0,'messages':messages,'max_tokens':OUTPUT_CAP,'response_format':{'type':'json_schema','json_schema':{'name':'cfaf_proposal' if kind=='C1' else 'standard_answer','strict':True,'schema':schema}}},sort_keys=True,ensure_ascii=True)
+        encoded=json.dumps({'model':MODEL,'temperature':0,'messages':messages,'max_tokens':self.output_cap,'response_format':{'type':'json_schema','json_schema':{'name':'cfaf_proposal' if kind in {'C1','C2'} else 'standard_answer','strict':True,'schema':schema}}},sort_keys=True,ensure_ascii=True)
         with self.lock:
             persisted=0
             if self.ledger and self.ledger.exists():persisted=sum(json.loads(line).get('event')=='ATTEMPT' for line in self.ledger.read_text(encoding='utf-8').splitlines())

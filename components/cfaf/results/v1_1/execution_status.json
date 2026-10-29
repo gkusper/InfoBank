@@ -1,0 +1,11 @@
+{
+  "B_calls": 0,
+  "SDK_retries": 0,
+  "all_outputs_fresh": true,
+  "attempts": 83,
+  "counterbalanced_C1_C2_order": true,
+  "elapsed_seconds": 3891.1626029014587,
+  "recorded": 30,
+  "recovered_same_experiment_no_retakes": true,
+  "selected": 30
+}

@@ -1,0 +1,112 @@
+{
+  "C2_generic_validation_error_offline_diagnosis": {
+    "detail": "Natural-language text in missing instead of a valid requirement ID.",
+    "index": 3,
+    "method": "Reparse saved compact response with the frozen expand function offline; no new call or output edit.",
+    "subcause": "INVALID_MISSING_REQUIREMENT"
+  },
+  "case_numbering": "JSON indices are zero-based; REPORT uses index+1.",
+  "invalid_accepted_citations": 0,
+  "mechanical_reference_audit_passed": true,
+  "old_failures_fresh_outcomes": {
+    "21": {
+      "C1": "SUCCESS",
+      "C2": "APPLICATION_VALIDATION_ERROR"
+    },
+    "23": {
+      "C1": "APPLICATION_VALIDATION_ERROR",
+      "C2": "SUCCESS"
+    },
+    "25": {
+      "C1": "APPLICATION_VALIDATION_ERROR",
+      "C2": "APPLICATION_VALIDATION_ERROR"
+    }
+  },
+  "old_original_span_failure_indices": [
+    21,
+    23,
+    25
+  ],
+  "systems": {
+    "C1": {
+      "application_structured": 0,
+      "assessed_role_counts_and_NOT_ASSESSED": {
+        "CONTEXTUAL": 1,
+        "IRRELEVANT": 2,
+        "NOT_ASSESSED": 85,
+        "PRIMARY": 34
+      },
+      "cases": [
+        {
+          "failure_code": "CONNECTION_ERROR",
+          "index": 14,
+          "status": "CONNECTION_ERROR"
+        },
+        {
+          "failure_code": "INVALID_SPAN_REFERENCE",
+          "index": 20,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        },
+        {
+          "failure_code": "INVALID_SPAN_REFERENCE",
+          "index": 23,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        },
+        {
+          "failure_code": "INVALID_SPAN_REFERENCE",
+          "index": 25,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        }
+      ],
+      "failures": {
+        "CONNECTION_ERROR": 1,
+        "INVALID_SPAN_REFERENCE": 3
+      },
+      "model_attributed": 28,
+      "public_citations": 28,
+      "semantic_support_independently_verified": false
+    },
+    "C2": {
+      "application_structured": 2,
+      "assessed_role_counts_and_NOT_ASSESSED": {
+        "IRRELEVANT": 2,
+        "NOT_ASSESSED": 85,
+        "PRIMARY": 34
+      },
+      "cases": [
+        {
+          "failure_code": "APPLICATION_VALIDATION_ERROR",
+          "index": 3,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        },
+        {
+          "failure_code": "QUOTE_NOT_FOUND",
+          "index": 12,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        },
+        {
+          "failure_code": "QUOTE_NOT_FOUND",
+          "index": 20,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        },
+        {
+          "failure_code": "QUOTE_NOT_FOUND",
+          "index": 21,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        },
+        {
+          "failure_code": "QUOTE_NOT_FOUND",
+          "index": 25,
+          "status": "APPLICATION_VALIDATION_ERROR"
+        }
+      ],
+      "failures": {
+        "APPLICATION_VALIDATION_ERROR": 1,
+        "QUOTE_NOT_FOUND": 4
+      },
+      "model_attributed": 31,
+      "public_citations": 33,
+      "semantic_support_independently_verified": false
+    }
+  }
+}

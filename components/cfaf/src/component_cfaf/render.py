@@ -1,6 +1,6 @@
 """Deterministic rendering preserves accepted claim text and explicit claim IDs."""
 from .contracts import *
-from .gate import reference
+from .gate import reference,resolve_evidence
 NO_SUPPORT='The currently usable evidence does not support the requested content.'
 RESTRICTED='The request exceeds the currently permitted evidence view.'
 OPERATIONAL='The response could not be validated. Please try again later.'
@@ -13,8 +13,8 @@ class DeterministicRenderer:
             for cid in decision.accepted_claim_ids:
                 claim=claims[cid];texts.append(claim.text)
                 for ref in claim.evidence:
-                    view,span,_=reference(evidence,ref.source_id,ref.span_id);used.add(view.source_id)
-                    citations.append(Citation(claim_id=cid,source_id=view.source_id,span_id=span.span_id,start=span.start,end=span.end,content_sha256=view.content_sha256,labels=['REFERENCE_VALID','APPLICATION_STRUCTURED' if decision.support_origin=='APPLICATION_STRUCTURED' else 'MODEL_ATTRIBUTED','SUPPORT_NOT_INDEPENDENTLY_VERIFIED'],public_metadata=view.public_metadata))
+                    view,span,_=resolve_evidence(evidence,ref);used.add(view.source_id)
+                    citations.append(Citation(claim_id=cid,source_id=view.source_id,span_id=span.span_id,start=span.start,end=span.end,content_sha256=view.content_sha256,quote=ref.quote,labels=['REFERENCE_VALID','APPLICATION_STRUCTURED' if decision.support_origin=='APPLICATION_STRUCTURED' else 'MODEL_ATTRIBUTED','SUPPORT_NOT_INDEPENDENTLY_VERIFIED'],public_metadata=view.public_metadata))
             text='\n'.join(texts)
             examined=[a.source_id for a in proposal.source_assessments if a.source_id not in used]
         else:

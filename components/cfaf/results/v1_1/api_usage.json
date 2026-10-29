@@ -1,0 +1,105 @@
+{
+  "B_extra_calls": 0,
+  "SDK_retries": 0,
+  "all_outputs_fresh": true,
+  "both_reported_common_N": 26,
+  "both_reported_common_reductions_percent": {
+    "input_tokens": 54.85867356364308,
+    "output_tokens": 42.77955271565496,
+    "provider_ms": 34.112784392508644
+  },
+  "both_reported_common_totals": {
+    "C1": {
+      "input_tokens": 97434,
+      "output_tokens": 9390,
+      "provider_ms": 152871.93710007705
+    },
+    "C2": {
+      "input_tokens": 43983,
+      "output_tokens": 5373,
+      "provider_ms": 100723.06280047633
+    }
+  },
+  "cap": 100,
+  "common_generated_cases": 27,
+  "common_generated_totals": {
+    "C1": {
+      "input_tokens": 97434,
+      "output_tokens": 9390,
+      "provider_ms": 210650.50880005583
+    },
+    "C2": {
+      "input_tokens": 44892,
+      "output_tokens": 5494,
+      "provider_ms": 104382.22820032388
+    }
+  },
+  "complete_selected_cases": 30,
+  "failed_request_usage_unknown_not_zero": true,
+  "finish_reasons": {
+    "stop": 82
+  },
+  "global_attempts": 83,
+  "no_NLI_judge_embeddings": true,
+  "settled_attempts": 83,
+  "systems": {
+    "A": {
+      "attempts": 28,
+      "attempts_without_reported_usage": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 72131,
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "output_tokens": 3164,
+      "provider_ms": 98496.99999997392,
+      "provider_statuses": {
+        "SUCCESS": 28
+      },
+      "token_totals_scope": "Reported successful-response usage only; unavailable failed-request token usage is unknown, not zero.",
+      "zero_call_cases": 2
+    },
+    "B": {
+      "attempts": 0,
+      "input_tokens": 0,
+      "models": [],
+      "output_tokens": 0,
+      "provider_ms": 0,
+      "zero_call_cases": 30
+    },
+    "C1": {
+      "attempts": 28,
+      "attempts_without_reported_usage": 1,
+      "cached_input_tokens": 24576,
+      "input_tokens": 99008,
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "output_tokens": 9735,
+      "provider_ms": 216446.29410025664,
+      "provider_statuses": {
+        "CONNECTION_ERROR": 1,
+        "SUCCESS": 27
+      },
+      "token_totals_scope": "Reported successful-response usage only; unavailable failed-request token usage is unknown, not zero.",
+      "zero_call_cases": 2
+    },
+    "C2": {
+      "attempts": 27,
+      "attempts_without_reported_usage": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 44892,
+      "models": [
+        "gpt-4o-mini-2024-07-18"
+      ],
+      "output_tokens": 5494,
+      "provider_ms": 104382.22820032388,
+      "provider_statuses": {
+        "SUCCESS": 27
+      },
+      "token_totals_scope": "Reported successful-response usage only; unavailable failed-request token usage is unknown, not zero.",
+      "zero_call_cases": 3
+    }
+  },
+  "token_savings_including_zero_routes_percent": 43.56445814072932
+}

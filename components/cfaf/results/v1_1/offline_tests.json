@@ -1,0 +1,10 @@
+{
+  "current_package_tests": 86,
+  "historical_compatibility": "691 passed, 3 explicitly not run to avoid opening complete cached source metadata; one original-suite pre-existing failure retained",
+  "new_tests": 32,
+  "no_external_model_calls": true,
+  "original_v1_tests_preserved": 54,
+  "status": "PASS",
+  "synthetic_demo": "OFFLINE_FICTIONAL_DEMO",
+  "v1_snapshot_tests": 54
+}

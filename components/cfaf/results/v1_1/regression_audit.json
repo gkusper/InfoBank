@@ -1,0 +1,21 @@
+{
+  "API_key_removed": true,
+  "advanced_returncode": 0,
+  "archived_timer_rebased_only_in_test_process": true,
+  "exact_committed_source_files": 1229,
+  "known_original_failure": "test_preheldout_attempt1_plan_artifacts_are_plan_only: committed HELDOUT_RUN_AUTHORIZATION.json is preserved",
+  "no_QASPER_or_holdout_or_unused_source_text_opened": true,
+  "original_returncode": 1,
+  "runtime_environments_upgraded": false,
+  "scratch_only_newline_representation_restorations": 347,
+  "three_dataset_metadata_tests_not_run": {
+    "names": [
+      "test_metadata_filter_and_authorized_pool",
+      "test_seed_group_and_holdout_constraints",
+      "test_filtered_records_cannot_be_selected"
+    ],
+    "reason": "These tests load the complete cached RefusalBench JSONL for metadata projection. This task forbids access to unused/protected records; they were explicitly deselected rather than opening that file. No test was altered."
+  },
+  "v1_baseline_returncode": 0,
+  "v1_commit": "ca2e3e111c63fbd67ff8965e5b05f3530a85c8a0"
+}

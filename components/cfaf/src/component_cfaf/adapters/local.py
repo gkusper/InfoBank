@@ -3,7 +3,7 @@ import hashlib,json,re,sqlite3,threading
 from .legacy_projection import project_case
 from ..contracts import *
 
-PROCESSING_VERSION='component-cfaf-view-v1'
+PROCESSING_VERSION='component-cfaf-view-v1.1'
 def digest(value):return hashlib.sha256(value.encode('utf-8')).hexdigest()
 def canonical(value):return json.dumps(value,sort_keys=True,ensure_ascii=False,separators=(',',':'))
 def make_view(source_id,kind,text,public_metadata=None):
@@ -18,10 +18,11 @@ class LegacyGovernance:
     def current(self,authority):return bool(self.is_current(authority))
     def project(self,query,sources,authority):
         if not self.current(authority):raise ValueError('POLICY_REVOKED')
-        raw=[];excluded=[];blocked=[];by_private={s.private_id:s for s in sources}
+        raw=[];excluded=[];blocked=[];decisions={};by_private={s.private_id:s for s in sources}
         if len(by_private)!=len(sources):raise ValueError('DUPLICATE_PRIVATE_SOURCE')
         for s in sources:
             d=self.resolver(s,authority)
+            decisions[s.private_id]=d
             if not isinstance(d,AccessDecision):raise ValueError('AUTHENTICATED_POLICY_RESULT_REQUIRED')
             if d.access=='DENY' or not d.existence_public or not d.compatible or not d.clean:
                 excluded.append({'original_source_id':s.private_id,'included':False,'access_mode':d.access})
@@ -30,7 +31,8 @@ class LegacyGovernance:
         request=project_case({'query':query,'sources':raw})
         included={p['permitted_source_id']:p['original_source_id'] for p in request.internal_policy if p['included']}
         views=[make_view(d['source_id'],d['view_kind'],d['context'],{k:v for k,v in by_private[included[d['source_id']]].public_metadata.items() if k in {'title','url'} and isinstance(v,str)}) for d in request.documents]
-        return views,{'policy':request.internal_policy+excluded,'private_mapping':included,'blocked_values':request.blocked_values+blocked}
+        bindings=[{'source_id':sid,'target_names':decisions[pid].target_names,'catalogue_title':by_private[pid].catalogue_title,'aggregate_spec':decisions[pid].aggregate_spec,'policy_version':authority.policy_version,'revocation_version':authority.revocation_version,'principal':authority.principal,'purpose':authority.purpose} for sid,pid in included.items()]
+        return views,{'structured_bindings':bindings,'policy':request.internal_policy+excluded,'private_mapping':included,'blocked_values':request.blocked_values+blocked}
 
 class ProvidedContextRetriever:
     def retrieve(self,request,permitted):return list(permitted)

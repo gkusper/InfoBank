@@ -6,6 +6,10 @@ class LocalProfiler:
     def profile(self, query, as_of=None):
         pieces=[];start=0
         for match in re.finditer(r'\s+(?:and|és)\s+',query,flags=re.I):
+            quoted=[m.span() for m in re.finditer(r'"[^"]*"|“[^”]*”|‘[^’]*’',query)]
+            if any(start<=match.start()<end for start,end in quoted):continue
+            right=query[match.end():].lstrip()
+            if not re.match(r'(?:who|what|when|where|how|which|ki|mit|mikor|hol|hány)\b',right,re.I):continue
             pieces.append((start,match.start()));start=match.end()
         pieces.append((start,len(query)));requirements=[]
         for start,end in pieces:

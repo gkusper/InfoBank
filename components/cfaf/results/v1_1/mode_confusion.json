@@ -1,0 +1,273 @@
+{
+  "GaRAGe_accuracy": null,
+  "cohorts": {
+    "dataset1": {
+      "native_binary_gold": true,
+      "paired_C2_C1_correctness": {
+        "C1_only": 3,
+        "C2_only": 2,
+        "both": 5
+      },
+      "systems": {
+        "A": {
+          "CFAF_recall": 1.0,
+          "FULL_recall": 1.0,
+          "N_planned": 10,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "confusion": {
+            "CFAF->CFAF": 6,
+            "FULL->FULL": 4
+          },
+          "correct": 10,
+          "failure_to_restrict": 0,
+          "observed_modes": {
+            "CFAF": 6,
+            "FULL": 4
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": 0
+        },
+        "B": {
+          "CFAF_recall": 1.0,
+          "FULL_recall": 1.0,
+          "N_planned": 10,
+          "accuracy": 1.0,
+          "balanced_accuracy": 1.0,
+          "confusion": {
+            "CFAF->CFAF": 6,
+            "FULL->FULL": 4
+          },
+          "correct": 10,
+          "failure_to_restrict": 0,
+          "observed_modes": {
+            "CFAF": 6,
+            "FULL": 4
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": 0
+        },
+        "C1": {
+          "CFAF_recall": 1.0,
+          "FULL_recall": 0.5,
+          "N_planned": 10,
+          "accuracy": 0.8,
+          "balanced_accuracy": 0.75,
+          "confusion": {
+            "CFAF->CFAF": 6,
+            "FULL->CFAF": 2,
+            "FULL->FULL": 2
+          },
+          "correct": 8,
+          "failure_to_restrict": 0,
+          "observed_modes": {
+            "CFAF": 8,
+            "FULL": 2
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": 2
+        },
+        "C2": {
+          "CFAF_recall": 0.5,
+          "FULL_recall": 1.0,
+          "N_planned": 10,
+          "accuracy": 0.7,
+          "balanced_accuracy": 0.75,
+          "confusion": {
+            "CFAF->CFAF": 3,
+            "CFAF->FULL": 2,
+            "CFAF->OPERATIONAL_OR_POLICY": 1,
+            "FULL->FULL": 4
+          },
+          "correct": 7,
+          "failure_to_restrict": 2,
+          "observed_modes": {
+            "CFAF": 4,
+            "FULL": 6
+          },
+          "operational_failures": 1,
+          "policy_violations": 0,
+          "unnecessary_refusal": 0
+        }
+      }
+    },
+    "dataset2": {
+      "native_binary_gold": true,
+      "paired_C2_C1_correctness": {
+        "C1_only": 4,
+        "C2_only": 2,
+        "both": 3,
+        "neither": 1
+      },
+      "systems": {
+        "A": {
+          "CFAF_recall": 0.6,
+          "FULL_recall": 1.0,
+          "N_planned": 10,
+          "accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "confusion": {
+            "CFAF->CFAF": 3,
+            "CFAF->FULL": 2,
+            "FULL->FULL": 5
+          },
+          "correct": 8,
+          "failure_to_restrict": 2,
+          "observed_modes": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": 0
+        },
+        "B": {
+          "CFAF_recall": 0.6,
+          "FULL_recall": 1.0,
+          "N_planned": 10,
+          "accuracy": 0.8,
+          "balanced_accuracy": 0.8,
+          "confusion": {
+            "CFAF->CFAF": 3,
+            "CFAF->FULL": 2,
+            "FULL->FULL": 5
+          },
+          "correct": 8,
+          "failure_to_restrict": 2,
+          "observed_modes": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": 0
+        },
+        "C1": {
+          "CFAF_recall": 0.6,
+          "FULL_recall": 0.8,
+          "N_planned": 10,
+          "accuracy": 0.7,
+          "balanced_accuracy": 0.7,
+          "confusion": {
+            "CFAF->CFAF": 3,
+            "CFAF->FULL": 2,
+            "FULL->FULL": 4,
+            "FULL->OPERATIONAL_OR_POLICY": 1
+          },
+          "correct": 7,
+          "failure_to_restrict": 2,
+          "observed_modes": {
+            "CFAF": 4,
+            "FULL": 6
+          },
+          "operational_failures": 1,
+          "policy_violations": 0,
+          "unnecessary_refusal": 0
+        },
+        "C2": {
+          "CFAF_recall": 0.4,
+          "FULL_recall": 0.6,
+          "N_planned": 10,
+          "accuracy": 0.5,
+          "balanced_accuracy": 0.5,
+          "confusion": {
+            "CFAF->CFAF": 2,
+            "CFAF->FULL": 2,
+            "CFAF->OPERATIONAL_OR_POLICY": 1,
+            "FULL->CFAF": 2,
+            "FULL->FULL": 3
+          },
+          "correct": 5,
+          "failure_to_restrict": 2,
+          "observed_modes": {
+            "CFAF": 5,
+            "FULL": 5
+          },
+          "operational_failures": 1,
+          "policy_violations": 0,
+          "unnecessary_refusal": 2
+        }
+      }
+    },
+    "garage": {
+      "native_binary_gold": false,
+      "paired_C2_C1_correctness": {},
+      "systems": {
+        "A": {
+          "CFAF_recall": null,
+          "FULL_recall": null,
+          "N_planned": 10,
+          "accuracy": null,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "correct": null,
+          "failure_to_restrict": null,
+          "observed_modes": {
+            "FULL": 10
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": null
+        },
+        "B": {
+          "CFAF_recall": null,
+          "FULL_recall": null,
+          "N_planned": 10,
+          "accuracy": null,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "correct": null,
+          "failure_to_restrict": null,
+          "observed_modes": {
+            "FULL": 10
+          },
+          "operational_failures": 0,
+          "policy_violations": 0,
+          "unnecessary_refusal": null
+        },
+        "C1": {
+          "CFAF_recall": null,
+          "FULL_recall": null,
+          "N_planned": 10,
+          "accuracy": null,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "correct": null,
+          "failure_to_restrict": null,
+          "observed_modes": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "operational_failures": 3,
+          "policy_violations": 0,
+          "unnecessary_refusal": null
+        },
+        "C2": {
+          "CFAF_recall": null,
+          "FULL_recall": null,
+          "N_planned": 10,
+          "accuracy": null,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "correct": null,
+          "failure_to_restrict": null,
+          "observed_modes": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "operational_failures": 3,
+          "policy_violations": 0,
+          "unnecessary_refusal": null
+        }
+      }
+    }
+  },
+  "old_vs_fresh_C1_variability": {
+    "comparison": "Historical original C1 modes versus fresh same-config C1; not used as fresh outcomes",
+    "mode_differences": 4
+  },
+  "pooled_accuracy": null
+}

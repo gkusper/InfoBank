@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "component-cfaf"
-version = "0.1.0"
+version = "0.1.1"
 description = "Small contract-driven governed answer pipeline"
 requires-python = ">=3.11"
 license = "CC-BY-NC-4.0"
@@ -18,3 +18,4 @@ where = ["src"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+

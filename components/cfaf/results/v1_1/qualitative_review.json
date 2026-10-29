@@ -1,0 +1,317 @@
+{
+  "answer_quality_axes": {
+    "citations_with_unverified_semantic_support": "31 model-attributed, 2 application-structured; none independently semantically verified",
+    "entity_subject_mismatch": "Specific obligation replaced by general practice in case 25",
+    "missing_qualifiers": "16 (label scope), 27, 28, 30",
+    "request_completeness": "Specific concerns in cases 2, 8, 18, 23, 25",
+    "temporal_geographic_overgeneralization": "Case 20; scenario qualifications matter in 27",
+    "unsupported_assertions": "Counterfactual necessity, broad trend and causal explanations in 19, 20, 28, 30",
+    "valid_citations": "33 C2 public links mechanically revalidated"
+  },
+  "cases": [
+    {
+      "case_number_one_based": 1,
+      "exhaustive_semantic_review": false,
+      "index": 0,
+      "mechanically_valid_public_citations": 1,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 2,
+      "exhaustive_semantic_review": false,
+      "index": 1,
+      "mechanically_valid_public_citations": 1,
+      "note": "A limitation statement is accepted as the requested value.",
+      "observation": "REQUEST_INCOMPLETE",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 3,
+      "exhaustive_semantic_review": false,
+      "index": 2,
+      "mechanically_valid_public_citations": 1,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 4,
+      "exhaustive_semantic_review": false,
+      "index": 3,
+      "mechanically_valid_public_citations": 0,
+      "note": "No substantive answer released; operational fallback is not evidential CFAF success.",
+      "observation": "OPERATIONAL_WITHHELD",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 5,
+      "exhaustive_semantic_review": false,
+      "index": 4,
+      "mechanically_valid_public_citations": 2,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 6,
+      "exhaustive_semantic_review": false,
+      "index": 5,
+      "mechanically_valid_public_citations": 0,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 7,
+      "exhaustive_semantic_review": false,
+      "index": 6,
+      "mechanically_valid_public_citations": 1,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 8,
+      "exhaustive_semantic_review": false,
+      "index": 7,
+      "mechanically_valid_public_citations": 1,
+      "note": "Absence of an action is accepted as complete fulfilment.",
+      "observation": "REQUEST_INCOMPLETE",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 9,
+      "exhaustive_semantic_review": false,
+      "index": 8,
+      "mechanically_valid_public_citations": 0,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 10,
+      "exhaustive_semantic_review": false,
+      "index": 9,
+      "mechanically_valid_public_citations": 0,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 11,
+      "exhaustive_semantic_review": false,
+      "index": 10,
+      "mechanically_valid_public_citations": 0,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 12,
+      "exhaustive_semantic_review": false,
+      "index": 11,
+      "mechanically_valid_public_citations": 0,
+      "note": "Native FULL retained; participants are partly named by surname, with completeness a scope question.",
+      "observation": "NATIVE_LABEL_SCOPE_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 13,
+      "exhaustive_semantic_review": false,
+      "index": 12,
+      "mechanically_valid_public_citations": 0,
+      "note": "No substantive answer released; operational fallback is not evidential CFAF success.",
+      "observation": "OPERATIONAL_WITHHELD",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 14,
+      "exhaustive_semantic_review": false,
+      "index": 13,
+      "mechanically_valid_public_citations": 0,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 15,
+      "exhaustive_semantic_review": false,
+      "index": 14,
+      "mechanically_valid_public_citations": 1,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 16,
+      "exhaustive_semantic_review": false,
+      "index": 15,
+      "mechanically_valid_public_citations": 0,
+      "note": "Native FULL retained; the passage does not establish the requested edition qualifier.",
+      "observation": "NATIVE_LABEL_SCOPE_REVIEW",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 17,
+      "exhaustive_semantic_review": false,
+      "index": 16,
+      "mechanically_valid_public_citations": 1,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 18,
+      "exhaustive_semantic_review": false,
+      "index": 17,
+      "mechanically_valid_public_citations": 1,
+      "note": "Public text omits the requested person although the cited passage and private typed value identify one.",
+      "observation": "REQUEST_INCOMPLETE",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 19,
+      "exhaustive_semantic_review": false,
+      "index": 18,
+      "mechanically_valid_public_citations": 1,
+      "note": "Actual infrastructure facts do not establish a necessary counterfactual consequence.",
+      "observation": "UNSUPPORTED_ASSERTION",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 20,
+      "exhaustive_semantic_review": false,
+      "index": 19,
+      "mechanically_valid_public_citations": 1,
+      "note": "A national century-scale trend is inferred from limited state examples.",
+      "observation": "TEMPORAL_GEOGRAPHIC_OVERGENERALIZATION",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 21,
+      "exhaustive_semantic_review": false,
+      "index": 20,
+      "mechanically_valid_public_citations": 0,
+      "note": "No substantive answer released; operational fallback is not evidential CFAF success.",
+      "observation": "OPERATIONAL_WITHHELD",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 22,
+      "exhaustive_semantic_review": false,
+      "index": 21,
+      "mechanically_valid_public_citations": 0,
+      "note": "No substantive answer released; operational fallback is not evidential CFAF success.",
+      "observation": "OPERATIONAL_WITHHELD",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 23,
+      "exhaustive_semantic_review": false,
+      "index": 22,
+      "mechanically_valid_public_citations": 1,
+      "note": "Listing hosting options gives little comparison of organizational needs.",
+      "observation": "REQUEST_INCOMPLETE",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 24,
+      "exhaustive_semantic_review": false,
+      "index": 23,
+      "mechanically_valid_public_citations": 4,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 25,
+      "exhaustive_semantic_review": false,
+      "index": 24,
+      "mechanically_valid_public_citations": 1,
+      "note": "A general acquisition practice replaces a risk-management account for the particular obligation.",
+      "observation": "ENTITY_SUBJECT_RELATION_MISMATCH",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 26,
+      "exhaustive_semantic_review": false,
+      "index": 25,
+      "mechanically_valid_public_citations": 0,
+      "note": "No substantive answer released; operational fallback is not evidential CFAF success.",
+      "observation": "OPERATIONAL_WITHHELD",
+      "semantic_support": "NOT_APPLICABLE_NO_PUBLIC_CITATION",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 27,
+      "exhaustive_semantic_review": false,
+      "index": 26,
+      "mechanically_valid_public_citations": 5,
+      "note": "Forecasts are merged without attribution and a material condition on the extreme scenario.",
+      "observation": "MISSING_QUALIFIERS",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 28,
+      "exhaustive_semantic_review": false,
+      "index": 27,
+      "mechanically_valid_public_citations": 5,
+      "note": "Several cited passages describe adverse news; causation of the requested rally is not established.",
+      "observation": "UNVERIFIED_CAUSAL_SUPPORT",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 29,
+      "exhaustive_semantic_review": false,
+      "index": 28,
+      "mechanically_valid_public_citations": 3,
+      "note": "No specific issue recorded; this is not a correctness certification.",
+      "observation": "NO_SPECIFIC_FLAG_IN_LIMITED_REVIEW",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    },
+    {
+      "case_number_one_based": 30,
+      "exhaustive_semantic_review": false,
+      "index": 29,
+      "mechanically_valid_public_citations": 2,
+      "note": "Selection and an operating model do not establish the causal explanation of approval.",
+      "observation": "UNVERIFIED_CAUSAL_SUPPORT",
+      "semantic_support": "NOT_INDEPENDENTLY_VERIFIED",
+      "system": "C2"
+    }
+  ],
+  "native_gold_unchanged": true,
+  "not_a_quality_accuracy_estimate": true,
+  "reviewer": "Codex, also implementer; non-independent, unblinded",
+  "scope": "All 30 C2 public outcomes screened using the query and permitted passage text (native cases) or cited text and surrounding windows (GaRAGe). Not exhaustive every-source adjudication. No new A/B/C1 answer-quality scoring."
+}

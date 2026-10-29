@@ -3,3 +3,5 @@
 *.xml -whitespace
 # Keep the frozen vendored executor verbatim; its bytes are checked against source hashes.
 src/component_cfaf/adapters/aggregate_core.py -whitespace
+# Preserve pre-inference frozen packaging bytes; only its final blank line is exempt.
+pyproject.toml whitespace=blank-at-eol,-blank-at-eof,space-before-tab,cr-at-eol

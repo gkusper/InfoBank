@@ -3,7 +3,7 @@ from graphlib import TopologicalSorter,CycleError
 from decimal import Decimal,InvalidOperation
 import re,datetime
 from .contracts import *
-from .adapters.local import digest
+from .adapters.local import digest,canonical
 from .adapters.legacy_selector import select
 
 class ContractError(ValueError):pass
@@ -13,6 +13,7 @@ def reference(evidence,source_id,span_id,aliases=True):
     if source_id not in views:raise ContractError('UNKNOWN_OR_UNSUPPLIED_SOURCE')
     view=views[source_id]
     if digest(view.text)!=view.content_sha256:raise ContractError('SOURCE_HASH_MISMATCH')
+    if len([i for i in evidence.inventory if i.source_id==source_id and i.supplied and i.content_sha256==view.content_sha256])!=1:raise ContractError('STALE_SOURCE_INVENTORY')
     original=span_id
     if aliases:
         match=re.fullmatch(re.escape(source_id)+r':span-(\d+)',span_id)
@@ -23,7 +24,29 @@ def reference(evidence,source_id,span_id,aliases=True):
     if span.content_sha256!=view.content_sha256 or not (0<=span.start<span.end<=len(view.text)):raise ContractError('INVALID_SPAN_HASH_OR_OFFSET')
     return view,span,{'original':original,'normalized':span_id}
 
+def quote_reference(evidence,source_id,quote):
+    views={v.source_id:v for v in evidence.views}
+    if source_id not in views:raise ContractError('UNKNOWN_OR_UNSUPPLIED_SOURCE')
+    view=views[source_id]
+    if digest(view.text)!=view.content_sha256:raise ContractError('SOURCE_HASH_MISMATCH')
+    entries=[i for i in evidence.inventory if i.source_id==source_id and i.supplied and i.content_sha256==view.content_sha256]
+    if len(entries)!=1:raise ContractError('STALE_SOURCE_INVENTORY')
+    if not isinstance(quote,str) or not quote.strip():raise ContractError('EMPTY_EVIDENCE_QUOTE')
+    start=view.text.find(quote)
+    if start<0:raise ContractError('QUOTE_NOT_FOUND')
+    if view.text.find(quote,start+1)>=0:raise ContractError('AMBIGUOUS_EVIDENCE_QUOTE')
+    end=start+len(quote);span=Span(span_id=f'{source_id}:quote-{start}-{end}',start=start,end=end,content_sha256=view.content_sha256)
+    return view,span,{'source_id':source_id,'start':start,'end':end,'quote_sha256':digest(quote),'reference_kind':'EXACT_UNIQUE_QUOTE'}
+
+def resolve_evidence(evidence,ref):
+    if ref.quote is not None:
+        if ref.span_id is not None:raise ContractError('AMBIGUOUS_REFERENCE_REPRESENTATION')
+        return quote_reference(evidence,ref.source_id,ref.quote)
+    if ref.span_id is None:raise ContractError('MISSING_EVIDENCE_REFERENCE')
+    return reference(evidence,ref.source_id,ref.span_id)
+
 def validate(request,evidence,proposal):
+    if evidence.request_signature and evidence.request_signature!=digest(canonical(request.model_dump(mode='json'))):raise ContractError('STALE_REQUEST_BINDING')
     base={r.requirement_id:r for r in request.requirements};reqs={r.requirement_id:r for r in proposal.requirements}
     if len(reqs)!=len(proposal.requirements) or not base.keys()<=reqs.keys():raise ContractError('REQUIRED_REQUEST_PART_REMOVED_OR_DUPLICATED')
     for key,r in reqs.items():
@@ -39,16 +62,18 @@ def validate(request,evidence,proposal):
     if len(roles)!=len(proposal.source_assessments) or not roles.keys()<=views.keys():raise ContractError('DUPLICATE_OR_UNKNOWN_ASSESSMENT')
     for a in roles.values():
         if a.role not in {'PRIMARY','CONTEXTUAL','CONTRASTIVE','IRRELEVANT'} or a.relation not in {'SUPPORTS','CONTRADICTS','NONE'}:raise ContractError('INVALID_ROLE_OR_RELATION')
-        if a.role=='PRIMARY' and not a.grounding_span_ids:raise ContractError('PRIMARY_REQUIRES_GROUNDING')
+        if a.role=='PRIMARY' and not (a.grounding_span_ids or a.grounding_quotes):raise ContractError('PRIMARY_REQUIRES_GROUNDING')
         for ref in a.grounding_span_ids:
             _,_,n=reference(evidence,a.source_id,ref);normal.append(n)
+        for quote in a.grounding_quotes:
+            _,_,n=quote_reference(evidence,a.source_id,quote);normal.append(n)
     claims={c.claim_id:c for c in proposal.claims}
     if len(claims)!=len(proposal.claims):raise ContractError('DUPLICATE_CLAIM')
     for c in claims.values():
         if not c.claim_id or not c.text.strip() or not c.requirement_ids or not set(c.requirement_ids)<=reqs.keys():raise ContractError('INVALID_CLAIM_REQUIREMENT')
         if not c.evidence:raise ContractError('CLAIM_WITHOUT_REFERENCE')
         for ref in c.evidence:
-            _,_,n=reference(evidence,ref.source_id,ref.span_id);normal.append(n)
+            _,_,n=resolve_evidence(evidence,ref);normal.append(n)
     supports={s.requirement_id:s for s in proposal.requirement_support}
     if len(supports)!=len(proposal.requirement_support) or set(supports)!=set(reqs):raise ContractError('MISSING_OR_DUPLICATE_REQUIREMENT_SUPPORT')
     for s in supports.values():
@@ -67,7 +92,7 @@ def value_compatible(requirement,claim):
         except (ValueError,TypeError):return False
     return True
 
-def decide(request,evidence,proposal,origin='MODEL_ATTRIBUTED'):
+def decide(request,evidence,proposal,origin='MODEL_ATTRIBUTED',permitted_restricted=None):
     reqs,roles,claims,supports,normal=validate(request,evidence,proposal)
     required={r.requirement_id for r in reqs.values() if r.required}
     for _ in reqs:
@@ -86,7 +111,7 @@ def decide(request,evidence,proposal,origin='MODEL_ATTRIBUTED'):
                 okay=okay and a is not None and a.role=='PRIMARY' and a.relation=='SUPPORTS'
                 view=next(v for v in evidence.views if v.source_id==ref.source_id)
                 # This minimal boundary only grants restricted structured views through explicit local syntax.
-                if view.view_kind!='content' and origin!='APPLICATION_STRUCTURED':okay=False;reason='GOVERNANCE'
+                if view.view_kind!='content' and origin!='APPLICATION_STRUCTURED' and r.requirement_id not in (permitted_restricted or {}).get(view.source_id,[]):okay=False;reason='GOVERNANCE'
             for parent in r.depends_on:
                 links=[b for b in c.dependencies if b.parent_requirement_id==parent]
                 valid=[]

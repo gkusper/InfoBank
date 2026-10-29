@@ -48,6 +48,7 @@ class RawSource(Contract):
     public_metadata: dict
     source_type: str = 'Document'
     private_markers: list[str] = []
+    catalogue_title: str | None = None
 
 class AccessDecision(Contract):
     access: str
@@ -56,6 +57,8 @@ class AccessDecision(Contract):
     aggregate_view: str | None = None
     compatible: bool = True
     clean: bool = True
+    target_names: list[str] = []
+    aggregate_spec: dict | None = None
 
 class Span(Contract):
     span_id: str
@@ -85,6 +88,9 @@ class GovernedEvidenceContract(Contract):
     cache_key: str
     processing_version: str
     complete_scope: bool = False
+    request_signature: str | None = None
+    structured_bindings: list[dict] = []
+    structured_signature: str | None = None
 
 class SourceAssessment(Contract):
     source_id: str
@@ -92,10 +98,12 @@ class SourceAssessment(Contract):
     relation: Literal['SUPPORTS','CONTRADICTS','NONE']
     grounding_span_ids: list[str]
     note: str
+    grounding_quotes: list[str] = []
 
 class EvidenceRef(Contract):
     source_id: str
-    span_id: str
+    span_id: str | None = None
+    quote: str | None = None
 
 class DependencyBinding(Contract):
     parent_requirement_id: str
@@ -143,6 +151,7 @@ class Citation(Contract):
     end: int
     content_sha256: str
     labels: list[str]
+    quote: str | None = None
     public_metadata: dict
 
 class PublicResponseContract(Contract):

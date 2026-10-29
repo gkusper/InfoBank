@@ -1,0 +1,143 @@
+{
+  "status": "OFFLINE_FICTIONAL_DEMO",
+  "records": [
+    {
+      "demo": "metadata_FULL",
+      "response": {
+        "text": "file_type: memo; created_at: 2026-05-04",
+        "mode": "FULL",
+        "execution_status": "SUCCESS",
+        "reason": null,
+        "realization": null,
+        "next_steps": [],
+        "citations": [
+          {
+            "claim_id": "structured-1",
+            "source_id": "view-0001",
+            "span_id": "view-0001:quote-27-45",
+            "start": 27,
+            "end": 45,
+            "content_sha256": "e4060e0a6748af2f0f10d7eced89746b32edc46409cf425f50f2c498aef719d2",
+            "labels": [
+              "REFERENCE_VALID",
+              "APPLICATION_STRUCTURED",
+              "SUPPORT_NOT_INDEPENDENTLY_VERIFIED"
+            ],
+            "quote": "\"file_type\":\"memo\"",
+            "public_metadata": {}
+          },
+          {
+            "claim_id": "structured-1",
+            "source_id": "view-0001",
+            "span_id": "view-0001:quote-1-26",
+            "start": 1,
+            "end": 26,
+            "content_sha256": "e4060e0a6748af2f0f10d7eced89746b32edc46409cf425f50f2c498aef719d2",
+            "labels": [
+              "REFERENCE_VALID",
+              "APPLICATION_STRUCTURED",
+              "SUPPORT_NOT_INDEPENDENTLY_VERIFIED"
+            ],
+            "quote": "\"created_at\":\"2026-05-04\"",
+            "public_metadata": {}
+          }
+        ],
+        "examined_sources": []
+      },
+      "external_calls": 0
+    },
+    {
+      "demo": "incomplete_CFAF",
+      "response": {
+        "text": "The currently usable evidence does not support the requested content.",
+        "mode": "CFAF",
+        "execution_status": "SUCCESS",
+        "reason": "EVIDENTIAL",
+        "realization": "ABSTAIN",
+        "next_steps": [
+          "Provide permitted evidence or clarify the request."
+        ],
+        "citations": [],
+        "examined_sources": []
+      },
+      "external_calls": 0
+    },
+    {
+      "demo": "aggregate_FULL",
+      "response": {
+        "text": "sum effort: 6.0 hours",
+        "mode": "FULL",
+        "execution_status": "SUCCESS",
+        "reason": null,
+        "realization": null,
+        "next_steps": [],
+        "citations": [
+          {
+            "claim_id": "structured-1",
+            "source_id": "view-0001",
+            "span_id": "view-0001:quote-0-99",
+            "start": 0,
+            "end": 99,
+            "content_sha256": "11f2e8874f84bd7b557e5934a0c80aa9ba32ae57c864e4929b3e0568b85661e9",
+            "labels": [
+              "REFERENCE_VALID",
+              "APPLICATION_STRUCTURED",
+              "SUPPORT_NOT_INDEPENDENTLY_VERIFIED"
+            ],
+            "quote": "{\"operation\": \"sum\", \"metric\": \"effort\", \"unit\": \"hours\", \"population\": \"team-alpha\", \"value\": 6.0}",
+            "public_metadata": {}
+          }
+        ],
+        "examined_sources": []
+      },
+      "external_calls": 0
+    },
+    {
+      "demo": "P5_no_view",
+      "response": {
+        "text": "The currently usable evidence does not support the requested content.",
+        "mode": "CFAF",
+        "execution_status": "SUCCESS",
+        "reason": "EVIDENTIAL",
+        "realization": "ABSTAIN",
+        "next_steps": [
+          "Provide permitted evidence or clarify the request."
+        ],
+        "citations": [],
+        "examined_sources": []
+      },
+      "external_calls": 0
+    },
+    {
+      "demo": "ordinary_single_SDK_request",
+      "response": {
+        "text": "The fictional vessel is blue.",
+        "mode": "FULL",
+        "execution_status": "SUCCESS",
+        "reason": null,
+        "realization": null,
+        "next_steps": [],
+        "citations": [
+          {
+            "claim_id": "c1",
+            "source_id": "view-0001",
+            "span_id": "view-0001:quote-0-29",
+            "start": 0,
+            "end": 29,
+            "content_sha256": "96049d7899c9ad71e709a5bdee00d2f732c6e26abdc5a895df9dcea06e7f99a4",
+            "labels": [
+              "REFERENCE_VALID",
+              "MODEL_ATTRIBUTED",
+              "SUPPORT_NOT_INDEPENDENTLY_VERIFIED"
+            ],
+            "quote": "The fictional vessel is blue.",
+            "public_metadata": {}
+          }
+        ],
+        "examined_sources": []
+      },
+      "mock_transport_requests": 1,
+      "external_calls": 0
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "status": "OFFLINE_ONLY_NO_LLM_CALL",
+  "encoding": "o200k_base",
+  "tokenizer": "tiktoken 0.12.0 development-only",
+  "synthetic_examples": [
+    {
+      "essential_claims": 1,
+      "json_tokens": 126,
+      "candidate_1024_fits": true,
+      "candidate_1536_fits": true
+    },
+    {
+      "essential_claims": 3,
+      "json_tokens": 340,
+      "candidate_1024_fits": true,
+      "candidate_1536_fits": true
+    },
+    {
+      "essential_claims": 6,
+      "json_tokens": 661,
+      "candidate_1024_fits": true,
+      "candidate_1536_fits": true
+    }
+  ],
+  "schema_prompt_tokens": {
+    "v1": {
+      "schema_tokens": 1190,
+      "prompt_tokens": 368,
+      "schema_bytes": 4151
+    },
+    "v1_1": {
+      "schema_tokens": 651,
+      "prompt_tokens": 196,
+      "schema_bytes": 2213
+    }
+  },
+  "selected_output_limit": 1536,
+  "reason": "Both candidates fit the synthetic six-claim specimen; 1536 retains margin for longer quotations/dependencies. Actual live truncation is measured and never counted as savings.",
+  "maximum_preflight_tokens": 661
+}

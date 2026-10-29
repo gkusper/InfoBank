@@ -1,0 +1,62 @@
+{
+  "all_frozen_source_and_private_original_hashes_match": true,
+  "attempts": 83,
+  "branch": "ComponentBasaedCFAF",
+  "elapsed_seconds_at_precommit": 5124.290045976639,
+  "external_calls_from_finalizer": 0,
+  "final_commit_receipt": "outputs/component_cfaf_v1_1_completion.json outside repository",
+  "known_original_failure_preserved": true,
+  "no_post_output_runtime_prompt_schema_edit": true,
+  "no_push_or_merge": true,
+  "other_worktrees_refs_tags_and_manuscript_unchanged": true,
+  "parent_v1_commit": "ca2e3e111c63fbd67ff8965e5b05f3530a85c8a0",
+  "public_privacy_scan": "PASS",
+  "pyproject_EOF_whitespace_exception": "Frozen packaging bytes retained; .gitattributes exempts only final blank-line lint for pyproject.toml, not other whitespace checks.",
+  "required_deliverables_present": true,
+  "selected_cases": 30,
+  "settled_attempts": 83,
+  "status": "READY_FOR_LOCAL_COMMIT",
+  "test_xml_summaries": {
+    "baseline_tests.xml": [
+      {
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "54"
+      }
+    ],
+    "historical_tests.xml": [
+      {
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "691"
+      }
+    ],
+    "offline_tests.xml": [
+      {
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "86"
+      }
+    ],
+    "original_tests.xml": [
+      {
+        "errors": "0",
+        "failures": "1",
+        "skipped": "0",
+        "tests": "91"
+      }
+    ],
+    "v1_compat.xml": [
+      {
+        "errors": "0",
+        "failures": "0",
+        "skipped": "0",
+        "tests": "54"
+      }
+    ]
+  },
+  "three_historical_full_cache_metadata_tests": "EXPLICIT_NOT_RUN"
+}

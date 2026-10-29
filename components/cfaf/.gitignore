@@ -1,0 +1,6 @@
+results/local/
+results/datasets/
+__pycache__/
+*.egg-info/
+.pytest_cache/
+.hypothesis/

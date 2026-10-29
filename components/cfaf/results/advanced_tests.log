@@ -1,0 +1,64 @@
+........................................................................ [ 10%]
+........................................................................ [ 20%]
+........................................................................ [ 31%]
+........................................................................ [ 41%]
+........................................................................ [ 51%]
+............................................................F........... [ 62%]
+........................................................................ [ 72%]
+..................................................................FF.... [ 82%]
+........................................................................ [ 93%]
+..............................................                           [100%]
+================================== FAILURES ===================================
+__________________ test_metadata_filter_and_authorized_pool ___________________
+
+    def test_metadata_filter_and_authorized_pool():
+>    metadata=metadata_only(SOURCE);assert sum(eligible(m) for m in metadata)==1234
+              ^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\refusalbench_iterative_dev_v1\test_framework.py:18: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/EKKE/Documents/Codex/work/rb-hf/hub/datasets--aashiqmuhamed--RefusalBench-NQ/snapshots/b3684f805563e6ce465e7e9b055b840a48f519c2/refusalbench-nq.jsonl')
+
+    def metadata_only(path):
+>    import pyarrow as pa
+E    ModuleNotFoundError: No module named 'pyarrow'
+
+evaluation\refusalbench_noncontradiction_v1\prepare_dataset.py:34: ModuleNotFoundError
+___________________ test_seed_group_and_holdout_constraints ___________________
+
+    def test_seed_group_and_holdout_constraints():
+>    metadata=metadata_only(SOURCE);allowed,used,reserved,_=boundaries();indices,pool=select_indices(metadata,allowed,used);manifest=json.loads((ROOT/'filtered_selection_manifest.json').read_text());assert indices==[r['dataset_index'] for r in manifest['selected_records']];assert len({metadata[i]['source_id'] for i in indices})==20
+              ^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\refusalbench_noncontradiction_v1\test_pilot.py:25: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/EKKE/Documents/Codex/work/rb-hf/hub/datasets--aashiqmuhamed--RefusalBench-NQ/snapshots/b3684f805563e6ce465e7e9b055b840a48f519c2/refusalbench-nq.jsonl')
+
+    def metadata_only(path):
+>    import pyarrow as pa
+E    ModuleNotFoundError: No module named 'pyarrow'
+
+evaluation\refusalbench_noncontradiction_v1\prepare_dataset.py:34: ModuleNotFoundError
+__________________ test_filtered_records_cannot_be_selected ___________________
+
+    def test_filtered_records_cannot_be_selected():
+>    metadata=metadata_only(SOURCE);allowed,used,_,_=boundaries();indices,_=select_indices(metadata,allowed,used)
+              ^^^^^^^^^^^^^^^^^^^^^
+
+evaluation\refusalbench_noncontradiction_v1\test_pilot.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+path = WindowsPath('C:/Users/EKKE/Documents/Codex/work/rb-hf/hub/datasets--aashiqmuhamed--RefusalBench-NQ/snapshots/b3684f805563e6ce465e7e9b055b840a48f519c2/refusalbench-nq.jsonl')
+
+    def metadata_only(path):
+>    import pyarrow as pa
+E    ModuleNotFoundError: No module named 'pyarrow'
+
+evaluation\refusalbench_noncontradiction_v1\prepare_dataset.py:34: ModuleNotFoundError
+=========================== short test summary info ===========================
+FAILED evaluation/refusalbench_iterative_dev_v1/test_framework.py::test_metadata_filter_and_authorized_pool
+FAILED evaluation/refusalbench_noncontradiction_v1/test_pilot.py::test_seed_group_and_holdout_constraints
+FAILED evaluation/refusalbench_noncontradiction_v1/test_pilot.py::test_filtered_records_cannot_be_selected
+3 failed, 691 passed in 46.69s

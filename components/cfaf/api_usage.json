@@ -1,0 +1,44 @@
+{
+  "B_extra_calls": 0,
+  "SDK_retries": 0,
+  "application_model_cache_hits": 0,
+  "by_system": {
+    "A": {
+      "attempts": 28,
+      "input_tokens": 72131,
+      "output_tokens": 2972,
+      "provider_errors": {},
+      "provider_reported_cached_input_tokens": 0,
+      "provider_seconds": 69.41020900034346
+    },
+    "C1": {
+      "attempts": 28,
+      "input_tokens": 100803,
+      "output_tokens": 10367,
+      "provider_errors": {},
+      "provider_reported_cached_input_tokens": 25600,
+      "provider_seconds": 140.95056150015444
+    }
+  },
+  "elapsed_task_seconds_at_scoring": 2055.5720987319946,
+  "latency_measurement_scope": "SDK-provider wrapper includes network request, response deserialization and proposal parsing; measured_non_transport_case_seconds is the remainder outside that wrapper, not all CPU processing.",
+  "maximum_C1_attempts_per_case": 1,
+  "measured_non_transport_case_seconds": 1.9526049986016005,
+  "models_observed": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "new_calls_only": true,
+  "optional_NLI_cold_warm_memory": "NOT_RUN_OPTIONAL_COMPONENT_NOT_IMPLEMENTED",
+  "optional_local_model_time_seconds": 0,
+  "price_estimate": null,
+  "renderer_ablation_new_calls": 0,
+  "status": "COMPLETED",
+  "summed_case_seconds": 212.3133754990995,
+  "totals": {
+    "attempts": 56,
+    "input_tokens": 172934,
+    "output_tokens": 13339,
+    "provider_seconds": 210.3607705004979
+  },
+  "zero_call_C1_cases": 2
+}

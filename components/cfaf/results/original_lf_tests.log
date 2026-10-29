@@ -1,0 +1,21 @@
+....................F...................................... [ 75%]
+...................                                                      [100%]
+================================== FAILURES ===================================
+_ WolalaFinalExperimentV3Tests.test_preheldout_attempt1_plan_artifacts_are_plan_only _
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_preheldout_attempt1_plan_artifacts_are_plan_only>
+
+    def test_preheldout_attempt1_plan_artifacts_are_plan_only(self) -> None:
+        plan = read_json(PREHELDOUT_DIR / "execution_plan.json")
+        self.assertEqual(plan["dataset"], HELDOUT_DATASET_V3)
+        self.assertEqual(plan["heldout_model_execution_count"], 0)
+        self.assertEqual(plan["heldout_embedding_calls"], 0)
+        self.assertEqual(plan["heldout_generation_calls"], 0)
+        self.assertEqual(plan["external_api_calls_in_plan_only"], 0)
+>       self.assertFalse((PREHELDOUT_DIR / "HELDOUT_RUN_AUTHORIZATION.json").exists())
+E       AssertionError: True is not false
+
+evaluation\tests\test_wolala_final_experiment_v3.py:146: AssertionError
+=========================== short test summary info ===========================
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only
+1 failed, 77 passed, 13 subtests passed in 27.03s

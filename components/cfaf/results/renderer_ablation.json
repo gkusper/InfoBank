@@ -1,0 +1,15 @@
+{
+  "citation_ids_in_old_public_contract": "NOT_INSTRUMENTED",
+  "mode_selection_or_semantic_accuracy_change_claimed": false,
+  "new_LLM_calls": 0,
+  "new_contract_matches": 19,
+  "old_contract_matches": 19,
+  "replayed": 19,
+  "scope": "Saved old assessment and response contract, historical 512-token generated realization versus compatibility renderer exact copying. Does not evaluate the new one-call semantic schema.",
+  "selected": 30,
+  "source_request_ledger_hashes": {
+    "original_garage_pilot": "1147d4fe249bcc5131753b5eb221eb443d9bc48b68cf04d1324e8266ad5336f2",
+    "study": "f305eb2873117d08d992270666687d214cc10ad880965c77dd219f7ea12c1805"
+  },
+  "status": "COMPLETED"
+}

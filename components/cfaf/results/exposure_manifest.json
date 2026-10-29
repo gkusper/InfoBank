@@ -1,0 +1,206 @@
+{
+  "QASPER_read_or_used": false,
+  "all_previously_exposed": true,
+  "counts": {
+    "dataset1": 10,
+    "dataset2": 10,
+    "garage": 10
+  },
+  "new_records_opened": 0,
+  "protocol": "ComponentCFAF-v1-exposed-development-only",
+  "records": [
+    {
+      "dataset": "dataset1",
+      "index": 0,
+      "original_manifest_record_sha256": "50c437f0b9dbac480d1c5ba07003dc33e341bd40d9a6be513a8f20c318f5ba6b",
+      "source_runtime_index": 0
+    },
+    {
+      "dataset": "dataset1",
+      "index": 1,
+      "original_manifest_record_sha256": "d5089ccc11efeb3d1a44a12e82390b650cfaabeb49744faee8a8192c9119575e",
+      "source_runtime_index": 1
+    },
+    {
+      "dataset": "dataset1",
+      "index": 2,
+      "original_manifest_record_sha256": "cad571f1d9a99e62fe8f59258e625c9e52679d7f00f071d2f46abcbe1c1f22be",
+      "source_runtime_index": 8
+    },
+    {
+      "dataset": "dataset1",
+      "index": 3,
+      "original_manifest_record_sha256": "0d62ae20abe5de648e475023e6cf51bf7efa4ce99a8f84e47969915e7a476ad1",
+      "source_runtime_index": 9
+    },
+    {
+      "dataset": "dataset1",
+      "index": 4,
+      "original_manifest_record_sha256": "8fa615229f32eb8a45bd60eb27dab4799f2b5bafab07061e8f35f05c72b5b6d0",
+      "source_runtime_index": 16
+    },
+    {
+      "dataset": "dataset1",
+      "index": 5,
+      "original_manifest_record_sha256": "aad4c5c8580bbdac90971fcced9c23d2dd611dc35d192296e5f13e5907fe688c",
+      "source_runtime_index": 17
+    },
+    {
+      "dataset": "dataset1",
+      "index": 6,
+      "original_manifest_record_sha256": "3c8f041d37d16a353a95399b4c10ac802ba7d5de7ca272fe468b88a98e4e3d11",
+      "source_runtime_index": 24
+    },
+    {
+      "dataset": "dataset1",
+      "index": 7,
+      "original_manifest_record_sha256": "b8c08990b98e9aa14ca6ff15cebfc1e5d4fd234f5269d3c8e66eccb06f0fce4b",
+      "source_runtime_index": 25
+    },
+    {
+      "dataset": "dataset1",
+      "index": 8,
+      "original_manifest_record_sha256": "cb4b751d3adde68b7cbdcf7f9a63d73a2f7ead3f7bec1a22f913111831240e8b",
+      "source_runtime_index": 32
+    },
+    {
+      "dataset": "dataset1",
+      "index": 9,
+      "original_manifest_record_sha256": "6c28873d0a013344bc087a71a823536b52a12d2e78b36ad5e4fb2145f5931f7d",
+      "source_runtime_index": 33
+    },
+    {
+      "dataset": "dataset2",
+      "index": 10,
+      "original_manifest_record_sha256": "0ae524337cbe1b90de7a0caeeb0e500559aba583ae4ce5baefdb3b299230ee68",
+      "source_runtime_index": 0
+    },
+    {
+      "dataset": "dataset2",
+      "index": 11,
+      "original_manifest_record_sha256": "5cb07e2c0045be21d99a53f23d15416b7da2a3e604b5127a9d32fb4ad475cd6b",
+      "source_runtime_index": 1
+    },
+    {
+      "dataset": "dataset2",
+      "index": 12,
+      "original_manifest_record_sha256": "924dc60a8b9c3d05214bdb7cd2fedc1531d3c094e91d752e6ff38739f34499b4",
+      "source_runtime_index": 2
+    },
+    {
+      "dataset": "dataset2",
+      "index": 13,
+      "original_manifest_record_sha256": "81d88284a1be1f510d20996496c6af15072e74ad012fec194d077ba9abd6d042",
+      "source_runtime_index": 3
+    },
+    {
+      "dataset": "dataset2",
+      "index": 14,
+      "original_manifest_record_sha256": "34561497653db279ebf87b6410e60c13a644080df70b832a9d4a5edc66291fda",
+      "source_runtime_index": 4
+    },
+    {
+      "dataset": "dataset2",
+      "index": 15,
+      "original_manifest_record_sha256": "57d93935b4a0b605989557411945886c15bc97c29bd1a97051ad67ee309175e2",
+      "source_runtime_index": 5
+    },
+    {
+      "dataset": "dataset2",
+      "index": 16,
+      "original_manifest_record_sha256": "48f81c6eaaeb62d9865a44d561abf150bc3f28454278d27500562aaba88dd086",
+      "source_runtime_index": 6
+    },
+    {
+      "dataset": "dataset2",
+      "index": 17,
+      "original_manifest_record_sha256": "8f824f9a0c1b8529302de5e1da853a7227824b64c1a37f27b8191e31dba8c519",
+      "source_runtime_index": 7
+    },
+    {
+      "dataset": "dataset2",
+      "index": 18,
+      "original_manifest_record_sha256": "5f45276c05436148d0d7312785a3504eff7ce5dce942818def811bec05e3ed71",
+      "source_runtime_index": 8
+    },
+    {
+      "dataset": "dataset2",
+      "index": 19,
+      "original_manifest_record_sha256": "5ec5258f02fe356764cd8106984e98b9242993f63e741f8da8540ed9b39645a9",
+      "source_runtime_index": 9
+    },
+    {
+      "dataset": "garage",
+      "index": 20,
+      "original_manifest_record_sha256": "4ea837ac2e51fbac23f73aff0a9dd25089f67d3e4b1b5355219dc8f254f4653d",
+      "source_runtime_index": 0
+    },
+    {
+      "dataset": "garage",
+      "index": 21,
+      "original_manifest_record_sha256": "2811745d7b8d8874f6e653d176cefdd19e05e920ce389b9b7e83e5b2dfa546c7",
+      "source_runtime_index": 1
+    },
+    {
+      "dataset": "garage",
+      "index": 22,
+      "original_manifest_record_sha256": "d2e655334ee2e4841be477484381df1617a8b891adc04cbc536cc1bed229d713",
+      "source_runtime_index": 2
+    },
+    {
+      "dataset": "garage",
+      "index": 23,
+      "original_manifest_record_sha256": "620c9c332101a5bae955c66ae72268fbcd3972766179522c8deede6a249addb7",
+      "source_runtime_index": 3
+    },
+    {
+      "dataset": "garage",
+      "index": 24,
+      "original_manifest_record_sha256": "2920b9489aa3f6afda2de41a7154c767e3dd4f564a184739efc93af235a83bc2",
+      "source_runtime_index": 4
+    },
+    {
+      "dataset": "garage",
+      "index": 25,
+      "original_manifest_record_sha256": "4ff57f0bce33b3f1663fb61a77e73fa4a65692726efb43b547ce6ceaa37145f6",
+      "source_runtime_index": 5
+    },
+    {
+      "dataset": "garage",
+      "index": 26,
+      "original_manifest_record_sha256": "4299da7466df09516d290f7a99c8b7a2fa94766eb94a61c24e1ce8f6ca80af44",
+      "source_runtime_index": 6
+    },
+    {
+      "dataset": "garage",
+      "index": 27,
+      "original_manifest_record_sha256": "61dbec1d67afe651537e012d2327f6b469780e41565e50e39498f8336fd38cc8",
+      "source_runtime_index": 7
+    },
+    {
+      "dataset": "garage",
+      "index": 28,
+      "original_manifest_record_sha256": "35135aaa6cc23891b40cb3f378c53a17a1127210ce60e125ccf03efcfdaec458",
+      "source_runtime_index": 8
+    },
+    {
+      "dataset": "garage",
+      "index": 29,
+      "original_manifest_record_sha256": "74ed65a2d22a92c3b4e013c15ff04d05f4954cd792d9cf56e9a0edad5f914ed1",
+      "source_runtime_index": 9
+    }
+  ],
+  "reserved_holdout_content_opened": false,
+  "selected_charged_before_API": 30,
+  "selection_rule": "First completed pair of each InfoBank P1-P5 family; first ten fixed exposed RefusalBench manifest positions; all original ten GaRAGe pilot positions. No random selection or new source records.",
+  "source_baseline": "bfd80bbfe2ccbb251da46bdc22b791dad5b9341f",
+  "source_input_hashes": {
+    "evaluation/cfaf_dataset3_garage_pilot_v1/runtime_inputs.jsonl": "fe50a8589ae875235e0ab5ecd750a2af4df38eb266d621108e7fe73563495cab",
+    "evaluation\\cfaf_contract_driven_2h_v1\\dataset1_gold.jsonl": "a53b49aefc25583248258d1bfc5c1fb11295756bfe7bec4664aeea517b1e0f61",
+    "evaluation\\cfaf_contract_driven_2h_v1\\dataset1_results_raw.jsonl": "bb0df5164a7d8a831782707c28b276341aefc318fb614f068a3ffb4a205866e8",
+    "evaluation\\cfaf_contract_driven_2h_v1\\dataset1_runtime.jsonl": "d7cd53f13da53ad1ce3c5a05528c11fec323408d33af0dbdf4c51302d0322408",
+    "evaluation\\cfaf_contract_driven_2h_v1\\dataset2_gold.jsonl": "28a183497065ac8effe0a4c9eea0cf9fe34bcc0cf4e26ff127b5820dfba82ee7",
+    "evaluation\\cfaf_contract_driven_2h_v1\\dataset2_results_raw.jsonl": "743371f975f0b1d85f4b9f5f8adc839511f045582bd986d3bf092d593642a7d7",
+    "evaluation\\cfaf_contract_driven_2h_v1\\dataset2_runtime.jsonl": "93dc96d811e1e67a72aae4be5f135d69b8305dd7ab8f24323336126b7c14375b"
+  }
+}

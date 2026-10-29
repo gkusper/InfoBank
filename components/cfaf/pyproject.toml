@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools==80.9.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "component-cfaf"
+version = "0.1.0"
+description = "Small contract-driven governed answer pipeline"
+requires-python = ">=3.11"
+license = "CC-BY-NC-4.0"
+dependencies = ["pydantic==2.12.3", "openai==1.59.9", "httpx==0.28.1"]
+
+[project.optional-dependencies]
+test = ["pytest==9.0.2", "hypothesis==6.147.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

@@ -1,0 +1,59 @@
+{
+  "all_694_advanced_checks_passed_across_initial_and_metadata_repair_runs": true,
+  "all_inference_sources_frozen_after_outputs": true,
+  "base_commit": "bfd80bbfe2ccbb251da46bdc22b791dad5b9341f",
+  "branch": "ComponentBasaedCFAF",
+  "copied_runtime_lines": 167,
+  "elapsed_seconds": 4738.866720676422,
+  "known_original_failure_preserved": true,
+  "manuscript_and_prior_worktrees_refs_unchanged": true,
+  "new_API_attempts": 56,
+  "new_runtime_lines": 531,
+  "new_selected_cases": 30,
+  "no_push_or_merge": true,
+  "postcommit_receipt": "Adjacent output: component_cfaf_v1_completion.json",
+  "runtime_AST_statements": 826,
+  "status": "PRECOMMIT_VALIDATED",
+  "test_reports": {
+    "legacy_metadata_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 3
+      }
+    ],
+    "legacy_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 3,
+        "skipped": 0,
+        "tests": 694
+      }
+    ],
+    "offline_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 0,
+        "skipped": 0,
+        "tests": 54
+      }
+    ],
+    "original_lf_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 1,
+        "skipped": 0,
+        "tests": 91
+      }
+    ],
+    "original_tests.xml": [
+      {
+        "errors": 0,
+        "failures": 6,
+        "skipped": 0,
+        "tests": 91
+      }
+    ]
+  }
+}

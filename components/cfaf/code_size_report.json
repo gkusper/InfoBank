@@ -1,0 +1,215 @@
+{
+  "adapter_subset_including_copies": {
+    "AST_statements": 324,
+    "bytes": 23334,
+    "nonblank_noncomment_nondocstring_lines": 297,
+    "physical_lines": 360
+  },
+  "all_runtime_including_copies": {
+    "AST_statements": 826,
+    "bytes": 49397,
+    "nonblank_noncomment_nondocstring_lines": 698,
+    "physical_lines": 808
+  },
+  "copied_own_runtime": {
+    "AST_statements": 141,
+    "bytes": 9126,
+    "nonblank_noncomment_nondocstring_lines": 167,
+    "physical_lines": 209
+  },
+  "counting_method": "Physical lines; nonblank/noncomment lines excluding AST docstrings; AST statement count also reported to expose semicolon/compact formatting. Adapters are a subset, not an extra additive group. Third-party library source is excluded from both own-code counts.",
+  "documentation_physical_lines": 276,
+  "experiment_tools": {
+    "AST_statements": 676,
+    "bytes": 58153,
+    "nonblank_noncomment_nondocstring_lines": 412,
+    "physical_lines": 442
+  },
+  "historical_static_local_import_closure": {
+    "caveat": "Static local imports, including conditional imports; not a measured runtime call graph. The new configuration has narrower integrations and different semantics, so this is not equivalent-functionality reduction.",
+    "files": 60,
+    "paths": [
+      "evaluation/cfaf_contract_driven_2h_v1/__init__.py",
+      "evaluation/cfaf_contract_driven_2h_v1/artifacts.py",
+      "evaluation/cfaf_contract_driven_2h_v1/deadline.py",
+      "evaluation/cfaf_contract_driven_2h_v1/measured_c.py",
+      "evaluation/cfaf_contract_driven_2h_v1/provider.py",
+      "evaluation/cfaf_contract_driven_2h_v1/systems.py",
+      "evaluation/cfaf_dataset3_garage_pilot_v1/adapter.py",
+      "evaluation/cfaf_dataset3_garage_pilot_v1/artifacts.py",
+      "evaluation/cfaf_request_evidence_verification_v1/__init__.py",
+      "evaluation/cfaf_request_evidence_verification_v1/artifacts.py",
+      "evaluation/cfaf_request_evidence_verification_v1/deadline.py",
+      "evaluation/cfaf_request_evidence_verification_v1/decision.py",
+      "evaluation/cfaf_request_evidence_verification_v1/focused_verification.py",
+      "evaluation/cfaf_request_evidence_verification_v1/integration.py",
+      "evaluation/cfaf_request_evidence_verification_v1/prepare.py",
+      "evaluation/cfaf_request_evidence_verification_v1/provider.py",
+      "evaluation/cfaf_request_evidence_verification_v1/request_evidence_coverage.py",
+      "evaluation/cfaf_request_evidence_verification_v1/runner.py",
+      "evaluation/cfaf_request_evidence_verification_v1/source_capability_rules.py",
+      "evaluation/cfaf_requirement_alignment_v1/rec_v2.py",
+      "evaluation/cfaf_requirement_alignment_v1/requirement_alignment.py",
+      "evaluation/cfaf_requirement_alignment_v1/requirement_decomposition.py",
+      "evaluation/cfaf_sparse_source_repair_v1/__init__.py",
+      "evaluation/cfaf_sparse_source_repair_v1/artifacts.py",
+      "evaluation/cfaf_sparse_source_repair_v1/deadline.py",
+      "evaluation/cfaf_sparse_source_repair_v1/gate_controls.py",
+      "evaluation/cfaf_sparse_source_repair_v1/integration.py",
+      "evaluation/cfaf_sparse_source_repair_v1/operational_failure_codes.py",
+      "evaluation/cfaf_sparse_source_repair_v1/provider.py",
+      "evaluation/cfaf_sparse_source_repair_v1/public_grounding_trace.py",
+      "evaluation/cfaf_sparse_source_repair_v1/reference_validation.py",
+      "evaluation/cfaf_sparse_source_repair_v1/source_inventory.py",
+      "evaluation/cfaf_sparse_source_repair_v1/sparse_source_assessment.py",
+      "evaluation/cfaf_target_claim_alignment_v1/__init__.py",
+      "evaluation/cfaf_target_claim_alignment_v1/claim_evidence_alignment.py",
+      "evaluation/cfaf_target_claim_alignment_v1/integration.py",
+      "evaluation/cfaf_target_claim_alignment_v1/integration_controls.py",
+      "evaluation/cfaf_target_claim_alignment_v1/metadata_value_typing.py",
+      "evaluation/cfaf_target_claim_alignment_v1/trusted_target_resolution.py",
+      "evaluation/cfaf_target_claim_alignment_v1/vendor/query_anchors.py",
+      "evaluation/cfaf_target_claim_alignment_v1/vendor/relation_anchors.py",
+      "evaluation/infobank_semantic_integration_v2/integration.py",
+      "evaluation/infobank_semantic_integration_v2/metadata_binding.py",
+      "evaluation/infobank_semantic_integration_v2/provider.py",
+      "evaluation/infobank_semantic_integration_v2/query_profile.py",
+      "evaluation/infobank_semantic_regression_v1/integration_v2.py",
+      "evaluation/infobank_semantic_regression_v1/policy_projection.py",
+      "evaluation/refusalbench_iterative_dev_v1/versions/v02/__init__.py",
+      "evaluation/refusalbench_iterative_dev_v1/versions/v02/contracts.py",
+      "evaluation/refusalbench_iterative_dev_v1/versions/v02/implementation.py",
+      "evaluation/refusalbench_iterative_dev_v1/versions/v02/metadata_binding.py",
+      "evaluation/refusalbench_iterative_dev_v1/versions/v02/query_profile.py",
+      "evaluation/refusalbench_noncontradiction_v1/public_adapter.py",
+      "evaluation/refusalbench_span_fix_v1/api_budget.py",
+      "evaluation/refusalbench_span_fix_v1/contracts.py",
+      "evaluation/refusalbench_span_fix_v1/span_references.py",
+      "evaluation/wolala2026/labels.py",
+      "evaluation/wolala2026/pipeline.py",
+      "evaluation/wolala2026/real_api.py",
+      "evaluation/wolala2026/semantic_evidence.py"
+    ],
+    "roots": [
+      "measured_c.py",
+      "provider.py",
+      "systems.py"
+    ],
+    "size": {
+      "AST_statements": 5247,
+      "bytes": 415170,
+      "nonblank_noncomment_nondocstring_lines": 4636,
+      "physical_lines": 5267
+    }
+  },
+  "new_own_runtime": {
+    "AST_statements": 685,
+    "bytes": 40271,
+    "nonblank_noncomment_nondocstring_lines": 531,
+    "physical_lines": 599
+  },
+  "per_runtime_file": {
+    "src/component_cfaf/__init__.py": {
+      "AST_statements": 0,
+      "bytes": 85,
+      "nonblank_noncomment_nondocstring_lines": 0,
+      "physical_lines": 1
+    },
+    "src/component_cfaf/adapters/__init__.py": {
+      "AST_statements": 0,
+      "bytes": 50,
+      "nonblank_noncomment_nondocstring_lines": 0,
+      "physical_lines": 1
+    },
+    "src/component_cfaf/adapters/aggregate_core.py": {
+      "AST_statements": 53,
+      "bytes": 4188,
+      "nonblank_noncomment_nondocstring_lines": 94,
+      "physical_lines": 119
+    },
+    "src/component_cfaf/adapters/legacy_projection.py": {
+      "AST_statements": 88,
+      "bytes": 4938,
+      "nonblank_noncomment_nondocstring_lines": 73,
+      "physical_lines": 90
+    },
+    "src/component_cfaf/adapters/legacy_render.py": {
+      "AST_statements": 3,
+      "bytes": 434,
+      "nonblank_noncomment_nondocstring_lines": 3,
+      "physical_lines": 4
+    },
+    "src/component_cfaf/adapters/legacy_selector.py": {
+      "AST_statements": 6,
+      "bytes": 746,
+      "nonblank_noncomment_nondocstring_lines": 5,
+      "physical_lines": 9
+    },
+    "src/component_cfaf/adapters/local.py": {
+      "AST_statements": 89,
+      "bytes": 5842,
+      "nonblank_noncomment_nondocstring_lines": 63,
+      "physical_lines": 73
+    },
+    "src/component_cfaf/adapters/openai_sdk.py": {
+      "AST_statements": 85,
+      "bytes": 7136,
+      "nonblank_noncomment_nondocstring_lines": 59,
+      "physical_lines": 64
+    },
+    "src/component_cfaf/baseline.py": {
+      "AST_statements": 8,
+      "bytes": 551,
+      "nonblank_noncomment_nondocstring_lines": 6,
+      "physical_lines": 8
+    },
+    "src/component_cfaf/contracts.py": {
+      "AST_statements": 148,
+      "bytes": 4171,
+      "nonblank_noncomment_nondocstring_lines": 148,
+      "physical_lines": 172
+    },
+    "src/component_cfaf/gate.py": {
+      "AST_statements": 140,
+      "bytes": 8026,
+      "nonblank_noncomment_nondocstring_lines": 99,
+      "physical_lines": 107
+    },
+    "src/component_cfaf/interfaces.py": {
+      "AST_statements": 22,
+      "bytes": 1045,
+      "nonblank_noncomment_nondocstring_lines": 15,
+      "physical_lines": 17
+    },
+    "src/component_cfaf/pipeline.py": {
+      "AST_statements": 103,
+      "bytes": 6589,
+      "nonblank_noncomment_nondocstring_lines": 72,
+      "physical_lines": 75
+    },
+    "src/component_cfaf/profile.py": {
+      "AST_statements": 23,
+      "bytes": 1597,
+      "nonblank_noncomment_nondocstring_lines": 17,
+      "physical_lines": 19
+    },
+    "src/component_cfaf/render.py": {
+      "AST_statements": 24,
+      "bytes": 1893,
+      "nonblank_noncomment_nondocstring_lines": 20,
+      "physical_lines": 22
+    },
+    "src/component_cfaf/structured.py": {
+      "AST_statements": 34,
+      "bytes": 2106,
+      "nonblank_noncomment_nondocstring_lines": 24,
+      "physical_lines": 27
+    }
+  },
+  "tests": {
+    "AST_statements": 246,
+    "bytes": 17194,
+    "nonblank_noncomment_nondocstring_lines": 202,
+    "physical_lines": 233
+  }
+}

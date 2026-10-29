@@ -1,0 +1,32 @@
+{
+  "assessor": "Codex task agent, non-independent and unblinded",
+  "cases_removed_or_resampled": false,
+  "flags": {
+    "APPROPRIATE_GOVERNANCE": 1,
+    "APPROPRIATE_WITHHOLDING": 4,
+    "BASELINE_EXTRA_GEOGRAPHY": 1,
+    "CAUSAL_INTERPRETATION_GAP": 2,
+    "CITATION_ATTRIBUTION_GAP": 1,
+    "CITATION_SCOPE_AND_NAME_EXPANSION": 1,
+    "OPERATIONAL_INVALID_SPAN": 3,
+    "P5_ZERO_CALL": 2,
+    "PARTIAL_BASELINE_RESPONSE": 1,
+    "QUALIFIER_AND_TEMPORAL_GAP": 1,
+    "QUALIFIER_SUPPORT_UNRESOLVED": 1,
+    "QUERY_SEGMENTATION_LIMIT": 1,
+    "REDUNDANCY_AND_RELATION_GAP": 1,
+    "REQUEST_INCOMPLETE": 2,
+    "SOURCE_QUALITY_AND_SCOPE": 1,
+    "SUPPORTED": 3,
+    "TECHNICAL_SUPPORT_NOT_ADJUDICATED": 1,
+    "UNNECESSARY_STRUCTURED_RESTRICTION": 2,
+    "UNSUPPORTED_FULL": 1
+  },
+  "gold_changed": false,
+  "independent_answer_accuracy": null,
+  "independent_support_accuracy": null,
+  "public_citation_warning": "35 mechanically valid claim-reference links do not establish semantic support; title-only hallucination, incomplete citation and relation/qualifier gaps remain.",
+  "raw_case_notes": "Ignored results/local/qualitative_review.json",
+  "reviewed_C1_cases": 30,
+  "scope": "C1 responses/questions, A excerpts, displayed citations and targeted full-context checks; not exhaustive independent adjudication"
+}

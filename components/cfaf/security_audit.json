@@ -1,0 +1,42 @@
+{
+  "QASPER_used_for_development": false,
+  "SDK_retries": 0,
+  "actual_payloads_checked": 56,
+  "all_frozen_source_prompt_schema_input_hashes_unchanged": true,
+  "all_prior_refs_unchanged": true,
+  "audit_utc": "2026-10-29T14:24:25.194842+00:00",
+  "forbidden_gold_ID_and_authority_fields_in_payloads": 0,
+  "manuscript_unchanged": true,
+  "maximum_C1_requests_per_case": 1,
+  "mechanically_validated_public_citations": 35,
+  "model_temperature_output_cap_verified": true,
+  "new_benchmark_downloads": 0,
+  "new_context_truncations": 0,
+  "optional_models_downloaded_or_used": false,
+  "original_GaRAGe_pilot_context_truncations": 0,
+  "protected_holdout_content_opened": false,
+  "protected_worktrees": [
+    {
+      "HEAD": "a22b027741a2e412f7e898783c558928077c85a4",
+      "tracked_files": 1261
+    },
+    {
+      "HEAD": "18491f48ac94f9be3ebb84db8b12ecd5c14dda40",
+      "tracked_files": 1232
+    }
+  ],
+  "public_privacy_and_staging_scan": {
+    "actual_API_key_equality_scan": true,
+    "credential_pattern_scans": 2,
+    "private_inputs_gold_API_traffic_and_model_outputs_staged": false,
+    "public_files_checked": 66,
+    "question_context_reference_encodings_checked": 399,
+    "status": "PASS"
+  },
+  "push_or_merge": false,
+  "runtime_imports_legacy_experiment_or_scorer": false,
+  "same_authorized_question_content_order_as_of_and_early_profile_A_C1": true,
+  "semantic_support_independently_verified": false,
+  "status": "PASS",
+  "zero_call_P5_pairs": 1
+}

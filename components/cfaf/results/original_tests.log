@@ -1,0 +1,100 @@
+.........F..........F..F................F............FF.... [ 75%]
+...................                                                      [100%]
+================================== FAILURES ===================================
+_ WolalaFinalExperimentV2Tests.test_scorer_parser_statistics_and_latency_checksums_are_frozen _
+
+self = <evaluation.tests.test_wolala_final_experiment_v2.WolalaFinalExperimentV2Tests testMethod=test_scorer_parser_statistics_and_latency_checksums_are_frozen>
+
+    def test_scorer_parser_statistics_and_latency_checksums_are_frozen(self) -> None:
+        checksums = self.spec["checksums"]
+>       self.assertEqual(checksums["parser"], sha256_file(ROOT / "adapters.py"))
+E       AssertionError: 'd11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9' != '31fa045a64cfcfbb99f9700c068db3872adab88b0bb0a2f96db3efe320964a20'
+E       - d11892deeec0dc3bd46de3fac7a5591d2f2a44460187e0f30cb4d3ab5739a2c9
+E       + 31fa045a64cfcfbb99f9700c068db3872adab88b0bb0a2f96db3efe320964a20
+
+evaluation\tests\test_wolala_final_experiment_v2.py:242: AssertionError
+_ WolalaFinalExperimentV3Tests.test_preheldout_attempt1_plan_artifacts_are_plan_only _
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_preheldout_attempt1_plan_artifacts_are_plan_only>
+
+    def test_preheldout_attempt1_plan_artifacts_are_plan_only(self) -> None:
+        plan = read_json(PREHELDOUT_DIR / "execution_plan.json")
+        self.assertEqual(plan["dataset"], HELDOUT_DATASET_V3)
+        self.assertEqual(plan["heldout_model_execution_count"], 0)
+        self.assertEqual(plan["heldout_embedding_calls"], 0)
+        self.assertEqual(plan["heldout_generation_calls"], 0)
+        self.assertEqual(plan["external_api_calls_in_plan_only"], 0)
+>       self.assertFalse((PREHELDOUT_DIR / "HELDOUT_RUN_AUTHORIZATION.json").exists())
+E       AssertionError: True is not false
+
+evaluation\tests\test_wolala_final_experiment_v3.py:146: AssertionError
+_____ WolalaFinalExperimentV3Tests.test_spec_checksums_match_frozen_files _____
+
+self = <evaluation.tests.test_wolala_final_experiment_v3.WolalaFinalExperimentV3Tests testMethod=test_spec_checksums_match_frozen_files>
+
+    def test_spec_checksums_match_frozen_files(self) -> None:
+        checksums = self.spec["checksums"]
+        self.assertEqual(checksums["heldout_dataset"], self.manifest["dataset_checksum"])
+        self.assertEqual(checksums["protocol_v4"], sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v4.md"))
+>       self.assertEqual(checksums["runner"], sha256_file(ROOT / "run_pilot.py"))
+E       AssertionError: '19a9fde78d9b17db610b4c7dd1be58179fabb6aacdcbf301c20181179a1a21e4' != 'c6d48171f80f881d968633b74d63c4d6e6dd7a8235aefe3b6929d9a3302a64f4'
+E       - 19a9fde78d9b17db610b4c7dd1be58179fabb6aacdcbf301c20181179a1a21e4
+E       + c6d48171f80f881d968633b74d63c4d6e6dd7a8235aefe3b6929d9a3302a64f4
+
+evaluation\tests\test_wolala_final_experiment_v3.py:210: AssertionError
+____ WolalaPilotPhase2Tests.test_protocol_and_dataset_checksums_are_stable ____
+
+self = <evaluation.tests.test_wolala_pilot_phase2.WolalaPilotPhase2Tests testMethod=test_protocol_and_dataset_checksums_are_stable>
+
+    def test_protocol_and_dataset_checksums_are_stable(self) -> None:
+>       self.assertEqual(self.baseline["protocol_checksum"], sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v1.md"))
+E       AssertionError: '91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e' != '9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206'
+E       - 91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e
+E       + 9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206
+
+evaluation\tests\test_wolala_pilot_phase2.py:58: AssertionError
+_______ WolalaProtocolV2FreezeTests.test_protocol_v1_checksum_unchanged _______
+
+self = <evaluation.tests.test_wolala_protocol_v2_freeze.WolalaProtocolV2FreezeTests testMethod=test_protocol_v1_checksum_unchanged>
+
+    def test_protocol_v1_checksum_unchanged(self) -> None:
+>       self.assertEqual(sha256_file(ROOT / "WOLALA2026_PILOT_PROTOCOL_v1.md"), "91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e")
+E       AssertionError: '9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206' != '91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e'
+E       - 9f5f98473324f71b89043349c7dc20873de54bf8bc33fb68f3c9584a5d37f206
+E       + 91c6e3279821abdd0c5b92006a4ce572293fc5ed29a77e7edbf5d1b47147f93e
+
+evaluation\tests\test_wolala_protocol_v2_freeze.py:35: AssertionError
+_ WolalaProtocolV2FreezeTests.test_protocol_v2_required_sections_and_checksums _
+
+self = <evaluation.tests.test_wolala_protocol_v2_freeze.WolalaProtocolV2FreezeTests testMethod=test_protocol_v2_required_sections_and_checksums>
+
+    def test_protocol_v2_required_sections_and_checksums(self) -> None:
+        text = PROTOCOL_V2.read_text(encoding="utf-8")
+        for phrase in [
+            "Frozen Provider And Model Configuration",
+            "Frozen Execution Counts",
+            "Frozen Hard Caps",
+            "Warm-Up Policy",
+            "Retry Policy",
+            "Invalid-Run Policy",
+            "Rerun Policy",
+            "Statistical Analysis Plan",
+            "Latency Definition",
+            "Held-Out Authorization And Execution Lock",
+        ]:
+            self.assertIn(phrase, text)
+        spec = load_execution_spec(SPEC_PATH)
+>       self.assertEqual(spec["checksums"]["protocol_v2"], sha256_file(PROTOCOL_V2))
+E       AssertionError: '34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba' != '347759bd00f162a36d486bcea52718f6ffb20eb253733418ee70bb4b54fe5b05'
+E       - 34907efae5197fa9df610a5da6fdf50067d018c56b5885d8dbdb194d7fff58ba
+E       + 347759bd00f162a36d486bcea52718f6ffb20eb253733418ee70bb4b54fe5b05
+
+evaluation\tests\test_wolala_protocol_v2_freeze.py:53: AssertionError
+=========================== short test summary info ===========================
+FAILED evaluation/tests/test_wolala_final_experiment_v2.py::WolalaFinalExperimentV2Tests::test_scorer_parser_statistics_and_latency_checksums_are_frozen
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_preheldout_attempt1_plan_artifacts_are_plan_only
+FAILED evaluation/tests/test_wolala_final_experiment_v3.py::WolalaFinalExperimentV3Tests::test_spec_checksums_match_frozen_files
+FAILED evaluation/tests/test_wolala_pilot_phase2.py::WolalaPilotPhase2Tests::test_protocol_and_dataset_checksums_are_stable
+FAILED evaluation/tests/test_wolala_protocol_v2_freeze.py::WolalaProtocolV2FreezeTests::test_protocol_v1_checksum_unchanged
+FAILED evaluation/tests/test_wolala_protocol_v2_freeze.py::WolalaProtocolV2FreezeTests::test_protocol_v2_required_sections_and_checksums
+6 failed, 72 passed, 13 subtests passed in 33.82s

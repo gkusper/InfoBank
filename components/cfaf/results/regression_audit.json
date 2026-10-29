@@ -1,0 +1,57 @@
+{
+  "API_key_removed": true,
+  "advanced_targets": [
+    "evaluation/cfaf_contract_driven_2h_v1/test_study.py",
+    "evaluation/cfaf_sparse_source_repair_v1/test_reference_alias.py",
+    "evaluation/cfaf_sparse_source_repair_v1/test_sparse.py",
+    "evaluation/cfaf_dataset3_garage_pilot_v1/test_scoring.py",
+    "evaluation/cfaf_dataset3_garage_pilot_v1/test_adapter.py",
+    "evaluation/cfaf_target_claim_alignment_v1/test_target_claim.py",
+    "evaluation/cfaf_requirement_alignment_v1/test_rda.py",
+    "evaluation/cfaf_request_evidence_verification_v1/test_verification.py",
+    "evaluation/refusalbench_iterative_dev_v1/versions/v02/test_version.py",
+    "evaluation/refusalbench_iterative_dev_v1/versions/v01/test_version.py",
+    "evaluation/refusalbench_iterative_dev_v1/test_framework.py",
+    "evaluation/refusalbench_iterative_dev_v1/test_budget_deadline.py",
+    "evaluation/infobank_semantic_integration_v2/test_integration.py",
+    "evaluation/infobank_semantic_regression_v1/test_governed.py",
+    "evaluation/refusalbench_noncontradiction_v1/test_pilot.py",
+    "evaluation/refusalbench_span_fix_v1/test_span_fix.py",
+    "evaluation/refusalbench_semantic_dev/test_semantic.py",
+    "evaluation/refusalbench_semantic_dev/test_experiment.py",
+    "evaluation/refusalbench_pilot/test_refusalbench.py"
+  ],
+  "archived_timer_rebased_only_inside_test_process": true,
+  "base_commit": "bfd80bbfe2ccbb251da46bdc22b791dad5b9341f",
+  "disposable_clone": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\component-cfaf-v1\\legacy-regression-exact",
+  "final_advanced_outcome": "691 passed initially; three missing-pyarrow metadata tests rerun separately",
+  "historical_working_byte_restorations_from_identical_normalized_committed_content": 347,
+  "known_preexisting_failure": "test_preheldout_attempt1_plan_artifacts_are_plan_only: committed HELDOUT_RUN_AUTHORIZATION.json exists; archived file preserved",
+  "metadata_dependency_repair": {
+    "component_runtime_environment_changed": false,
+    "pyarrow": "26.0.0",
+    "pytest": "9.0.2",
+    "returncode": 0,
+    "separate_venv": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\component-cfaf-v1\\legacy-venv\\Scripts\\python.exe"
+  },
+  "no_QASPER_or_reserved_content_read": true,
+  "original_environments_worktrees_and_caches_modified": false,
+  "original_exact_blob_retry": {
+    "reason": "Original protocol checksum tests require exact Git LF bytes; primary checkout CRLF formatting is irrelevant to these assertions. Reset only disposable copied working-file bytes, preserving all repository originals.",
+    "returncode": 1
+  },
+  "restoration_is_only_in_disposable_test_clone": true,
+  "runs": [
+    {
+      "returncode": 1,
+      "seconds": 50.020788999972865,
+      "suite": "advanced"
+    },
+    {
+      "returncode": 1,
+      "seconds": 37.242667299928144,
+      "suite": "original"
+    }
+  ],
+  "tracked_blob_count": 1163
+}

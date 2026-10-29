@@ -1,0 +1,268 @@
+{
+  "GaRAGe_binary_accuracy": "NOT_MEASURABLE",
+  "cohorts": {
+    "dataset1": {
+      "N": 10,
+      "native_binary_gold": true,
+      "paired_C1_B": {
+        "B_only": 2,
+        "both": 8
+      },
+      "status": "Previously exposed development only",
+      "systems": {
+        "A": {
+          "InfoBank_FULL_marker_diagnostic": {
+            "all_markers_present": 2,
+            "denominator": 4
+          },
+          "N_planned": 10,
+          "balanced_accuracy": 1.0,
+          "confusion": {
+            "CFAF->CFAF": 6,
+            "FULL->FULL": 4
+          },
+          "failures_to_restrict": 0,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": null,
+          "mode_accuracy": 1.0,
+          "mode_correct": 10,
+          "mode_counts": {
+            "CFAF": 6,
+            "FULL": 4
+          },
+          "nonoperational_FULL_answers": 4,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": null,
+          "unnecessary_refusals": 0
+        },
+        "B": {
+          "InfoBank_FULL_marker_diagnostic": {
+            "all_markers_present": 2,
+            "denominator": 4
+          },
+          "N_planned": 10,
+          "balanced_accuracy": 1.0,
+          "confusion": {
+            "CFAF->CFAF": 6,
+            "FULL->FULL": 4
+          },
+          "failures_to_restrict": 0,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": null,
+          "mode_accuracy": 1.0,
+          "mode_correct": 10,
+          "mode_counts": {
+            "CFAF": 6,
+            "FULL": 4
+          },
+          "nonoperational_FULL_answers": 4,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": null,
+          "unnecessary_refusals": 0
+        },
+        "C1": {
+          "InfoBank_FULL_marker_diagnostic": {
+            "all_markers_present": 0,
+            "denominator": 4
+          },
+          "N_planned": 10,
+          "balanced_accuracy": 0.75,
+          "confusion": {
+            "CFAF->CFAF": 6,
+            "FULL->CFAF": 2,
+            "FULL->FULL": 2
+          },
+          "failures_to_restrict": 0,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": 2,
+          "mode_accuracy": 0.8,
+          "mode_correct": 8,
+          "mode_counts": {
+            "CFAF": 8,
+            "FULL": 2
+          },
+          "nonoperational_FULL_answers": 2,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": 2,
+          "unnecessary_refusals": 2
+        }
+      }
+    },
+    "dataset2": {
+      "N": 10,
+      "native_binary_gold": true,
+      "paired_C1_B": {
+        "B_only": 1,
+        "both": 7,
+        "neither": 2
+      },
+      "status": "Previously exposed development only",
+      "systems": {
+        "A": {
+          "InfoBank_FULL_marker_diagnostic": null,
+          "N_planned": 10,
+          "balanced_accuracy": 0.8,
+          "confusion": {
+            "CFAF->CFAF": 3,
+            "CFAF->FULL": 2,
+            "FULL->FULL": 5
+          },
+          "failures_to_restrict": 2,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": null,
+          "mode_accuracy": 0.8,
+          "mode_correct": 8,
+          "mode_counts": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "nonoperational_FULL_answers": 7,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": null,
+          "unnecessary_refusals": 0
+        },
+        "B": {
+          "InfoBank_FULL_marker_diagnostic": null,
+          "N_planned": 10,
+          "balanced_accuracy": 0.8,
+          "confusion": {
+            "CFAF->CFAF": 3,
+            "CFAF->FULL": 2,
+            "FULL->FULL": 5
+          },
+          "failures_to_restrict": 2,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": null,
+          "mode_accuracy": 0.8,
+          "mode_correct": 8,
+          "mode_counts": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "nonoperational_FULL_answers": 7,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": null,
+          "unnecessary_refusals": 0
+        },
+        "C1": {
+          "InfoBank_FULL_marker_diagnostic": null,
+          "N_planned": 10,
+          "balanced_accuracy": 0.7,
+          "confusion": {
+            "CFAF->CFAF": 2,
+            "CFAF->FULL": 3,
+            "FULL->FULL": 5
+          },
+          "failures_to_restrict": 3,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": 9,
+          "mode_accuracy": 0.7,
+          "mode_correct": 7,
+          "mode_counts": {
+            "CFAF": 2,
+            "FULL": 8
+          },
+          "nonoperational_FULL_answers": 8,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": 9,
+          "unnecessary_refusals": 0
+        }
+      }
+    },
+    "garage": {
+      "N": 10,
+      "native_binary_gold": false,
+      "paired_C1_B": {},
+      "status": "Previously exposed development only",
+      "systems": {
+        "A": {
+          "InfoBank_FULL_marker_diagnostic": null,
+          "N_planned": 10,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "failures_to_restrict": null,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": null,
+          "mode_accuracy": null,
+          "mode_correct": null,
+          "mode_counts": {
+            "FULL": 10
+          },
+          "nonoperational_FULL_answers": 10,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": null,
+          "unnecessary_refusals": null
+        },
+        "B": {
+          "InfoBank_FULL_marker_diagnostic": null,
+          "N_planned": 10,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "failures_to_restrict": null,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": null,
+          "mode_accuracy": null,
+          "mode_correct": null,
+          "mode_counts": {
+            "FULL": 10
+          },
+          "nonoperational_FULL_answers": 10,
+          "operational_errors": 0,
+          "policy_violations": 0,
+          "public_citation_count": null,
+          "unnecessary_refusals": null
+        },
+        "C1": {
+          "InfoBank_FULL_marker_diagnostic": null,
+          "N_planned": 10,
+          "balanced_accuracy": null,
+          "confusion": {},
+          "failures_to_restrict": null,
+          "independent_answer_accuracy": null,
+          "independent_fulfilment_accuracy": null,
+          "independent_support_accuracy": null,
+          "mechanically_valid_public_citations": 24,
+          "mode_accuracy": null,
+          "mode_correct": null,
+          "mode_counts": {
+            "CFAF": 3,
+            "FULL": 7
+          },
+          "nonoperational_FULL_answers": 7,
+          "operational_errors": 3,
+          "policy_violations": 0,
+          "public_citation_count": 24,
+          "unnecessary_refusals": null
+        }
+      }
+    }
+  },
+  "pooled_accuracy": null,
+  "recorded": 30,
+  "review_independence": "No independent answer/support/fulfilment adjudication",
+  "selected": 30,
+  "test_outputs_used_for_tuning": false
+}

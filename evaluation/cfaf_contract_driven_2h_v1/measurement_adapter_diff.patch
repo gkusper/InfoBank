@@ -1,0 +1,52 @@
+--- sparse-source-repair-v1/integration.py
++++ contract-study/measured_c.py
+@@ -22,7 +22,7 @@
+   return True
+  return bound_guard(request,payload)
+ VERSION="sparse-source-repair-v1"
+-from .gate_controls import assess,reason_details
++from evaluation.cfaf_sparse_source_repair_v1.gate_controls import assess,reason_details
+ from evaluation.cfaf_target_claim_alignment_v1.metadata_value_typing import decompose_fixed as decompose
+ 
+ from evaluation.infobank_semantic_regression_v1.integration_v2 import ANALYSIS_SCHEMA as PREVIOUS_SCHEMA
+@@ -61,9 +61,9 @@
+  return {'answer':CANONICAL_NO_SUPPORT,'top_level_mode':'CFAF','fulfilment_status':'NONE','realization':'ABSTAIN','public_reason_class':'EVIDENTIAL','next_step_codes':[]}
+ 
+ 
+-from .source_inventory import build_inventory
+-from .sparse_source_assessment import parse_sparse
+-from .operational_failure_codes import validate_response
++from evaluation.cfaf_sparse_source_repair_v1.source_inventory import build_inventory
++from evaluation.cfaf_sparse_source_repair_v1.sparse_source_assessment import parse_sparse
++from evaluation.cfaf_sparse_source_repair_v1.operational_failure_codes import validate_response
+ 
+ def parse_analysis(raw,request):return parse_sparse(raw,request)
+ 
+@@ -187,14 +187,14 @@
+   elif stage==StageName.RESPONSE_REALIZATION:
+    if not request.documents:
+     # Both systems independently use the identical public zero-evidence rule.
+-    responses={name:deterministic_response() for name in ['semantic_cfaf','shared_control']}
++    responses={'semantic_cfaf':deterministic_response()}
+    else:
+     shared={**request.public(),'semantic_assessment':data}
+     decision=state.mode_decision;full=decision.mode==TopLevelMode.FULL
+     contract={'mode':decision.mode.value,'fulfilment_status':decision.fulfilment_status.value,'realization':None if full else realization.value,'public_reason_class':None if full else reason.value,'public_reason_text':'' if full else reason_text,'answer_candidate':state.claim_assessments[0].answer}
+     state.response_contract=ResponseContract(decision.mode,decision.fulfilment_status,None if full else realization,[],request.documents,[],None if full else reason,contract['public_reason_text'],[])
+     contracts['semantic_cfaf']=contract
+-    for name,prompt,payload in [('semantic_cfaf',CFAF_PROMPT,{**shared,'response_contract':contract}),('shared_control',CONTROL_PROMPT,shared)]:
++    for name,prompt,payload in [('semantic_cfaf',CFAF_PROMPT,{**shared,'response_contract':contract})]:
+      call=provider.call(request,name,prompt,payload,160);raw[name]=call.content
+      errors=validate_response(call.content)
+      try:response=json.loads(call.content)
+@@ -221,8 +221,8 @@
+ 
+ 
+ def run_governed(case,provider,configuration='T3',provenance=None,semantic_overrides=None):
+- from .operational_failure_codes import safe_operational_response,validate_response
+- from .public_grounding_trace import build_public_grounding_trace
++ from evaluation.cfaf_sparse_source_repair_v1.operational_failure_codes import safe_operational_response,validate_response
++ from evaluation.cfaf_sparse_source_repair_v1.public_grounding_trace import build_public_grounding_trace
+  from evaluation.cfaf_request_evidence_verification_v1.runner import request_for
+  outcome=_run_governed(case,provider,configuration,provenance,semantic_overrides)
+  request=request_for(case,outcome);inventory=build_inventory(request,getattr(provider,'private_mapping',()));verification=outcome['verification']['verification_outcome'];outcome['verification_outcome']=verification;outcome['source_inventory']=inventory.private();outcome['raw_responses']=copy.deepcopy(outcome['responses']);outcome['response_verification']={};outcome['public_grounding_trace']={}

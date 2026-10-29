@@ -1,0 +1,13 @@
+{
+  "annotated_tag": "cfaf-wolala2026-freeze-2026-10-29",
+  "checked_utc": "2026-10-29T07:58:35.726862+00:00",
+  "historical_branch": "wolala2026",
+  "local_commit": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "new_branch": "experiment/cfaf-contract-driven-v1",
+  "protection_enforced": false,
+  "remote_commit_verified_via_connected_GitHub_compare": "5f377de38312fb39c088551f9c74f8b6d4bd5080",
+  "remote_push": false,
+  "starting_commit": "69e3e1eaff9143ab350b5366a7e64645ea455d06",
+  "tag_object": "96c7a12f679075c3e47e2d198ad0cd46330805c4",
+  "tree": "f37ba4ff901952d471ee927ca7a637d82121f261"
+}

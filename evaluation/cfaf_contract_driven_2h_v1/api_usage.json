@@ -1,0 +1,115 @@
+{
+  "attempts": 462,
+  "by_dataset": {
+    "dataset1": {
+      "B_extra_model_calls": 0,
+      "B_total_postprocess_ms": 30.972599983215332,
+      "allocation": {
+        "A_shared_with_B": {
+          "calls": 32,
+          "input_tokens": 17228,
+          "output_tokens": 1691,
+          "summed_provider_ms": 38965.55079938844
+        },
+        "C": {
+          "calls": 64,
+          "input_tokens": 95444,
+          "output_tokens": 11120,
+          "summed_provider_ms": 159345.99150018767
+        }
+      },
+      "attempts": 96,
+      "errors": 0,
+      "input_tokens": 112672,
+      "kind_counts": {
+        "semantic_analysis": 32,
+        "semantic_cfaf": 32,
+        "standard_rag": 32
+      },
+      "local_overhead_ms": 822.1033998066032,
+      "output_tokens": 12811,
+      "successful": 96
+    },
+    "dataset2": {
+      "B_extra_model_calls": 0,
+      "B_total_postprocess_ms": 29.98490002937615,
+      "allocation": {
+        "A_shared_with_B": {
+          "calls": 40,
+          "input_tokens": 24260,
+          "output_tokens": 2595,
+          "summed_provider_ms": 54939.05680021271
+        },
+        "C": {
+          "calls": 85,
+          "input_tokens": 132360,
+          "output_tokens": 14753,
+          "summed_provider_ms": 201942.69330054522
+        }
+      },
+      "attempts": 125,
+      "errors": 0,
+      "input_tokens": 156620,
+      "kind_counts": {
+        "query_profile": 5,
+        "semantic_analysis": 40,
+        "semantic_cfaf": 40,
+        "standard_rag": 40
+      },
+      "local_overhead_ms": 872.2513990471498,
+      "output_tokens": 17348,
+      "successful": 125
+    },
+    "dataset3": {
+      "B_extra_model_calls": 0,
+      "B_total_postprocess_ms": 599.8677997849882,
+      "allocation": {
+        "A_shared_with_B": {
+          "calls": 80,
+          "input_tokens": 275163,
+          "output_tokens": 10739,
+          "summed_provider_ms": 177257.32829910703
+        },
+        "C": {
+          "calls": 161,
+          "input_tokens": 1149940,
+          "output_tokens": 47717,
+          "summed_provider_ms": 612561.4237971604
+        }
+      },
+      "attempts": 241,
+      "errors": 0,
+      "input_tokens": 1425103,
+      "kind_counts": {
+        "query_profile": 1,
+        "semantic_analysis": 80,
+        "semantic_cfaf": 80,
+        "standard_rag": 80
+      },
+      "local_overhead_ms": 36946.0961986133,
+      "output_tokens": 58456,
+      "successful": 241
+    }
+  },
+  "cap": 480,
+  "embeddings": 0,
+  "errors": 0,
+  "external_judges": 0,
+  "finish_reasons": {
+    "stop": 462
+  },
+  "input_tokens": 1694395,
+  "max_latency_ms": 16914.60489993915,
+  "mean_latency_ms": 2694.831265144159,
+  "models_observed": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "monetary_cost": null,
+  "one_call_ablation_executed": false,
+  "output_tokens": 88615,
+  "pricing_verified": false,
+  "provider_latency_seconds": 1245.0120444966014,
+  "retries": 0,
+  "successes": 462,
+  "unsettled_attempts": 0
+}

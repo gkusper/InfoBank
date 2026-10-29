@@ -1,0 +1,23 @@
+{
+  "dataset1": {
+    "case_wall_seconds": 200.7117223998066,
+    "definition": "Difference includes pipeline guards, parsing, durable ledger read/write and serialization; not a CPU profiler or production throughput estimate",
+    "inner_HTTP_seconds": 198.3115422995761,
+    "local_pipeline_and_provider_accounting_seconds": 2.4001801002305,
+    "reported_outside_provider_local_seconds": 0.8221033998066032
+  },
+  "dataset2": {
+    "case_wall_seconds": 261.73406639904715,
+    "definition": "Difference includes pipeline guards, parsing, durable ledger read/write and serialization; not a CPU profiler or production throughput estimate",
+    "inner_HTTP_seconds": 256.8817501007579,
+    "local_pipeline_and_provider_accounting_seconds": 4.8523162982892245,
+    "reported_outside_provider_local_seconds": 0.8722513990471498
+  },
+  "dataset3": {
+    "case_wall_seconds": 848.2388864986133,
+    "definition": "Difference includes pipeline guards, parsing, durable ledger read/write and serialization; not a CPU profiler or production throughput estimate",
+    "inner_HTTP_seconds": 789.8187520962674,
+    "local_pipeline_and_provider_accounting_seconds": 58.420134402345866,
+    "reported_outside_provider_local_seconds": 36.9460961986133
+  }
+}

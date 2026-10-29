@@ -1,0 +1,8 @@
+{
+  "B_additional_model_calls": 0,
+  "B_changed_outputs": 0,
+  "eight_P5_cases_model_free_for_all_systems": true,
+  "interpretation": "A/B outputs are identical in this cohort; no guard activation or privacy-superiority claim follows.",
+  "paired_cases": 160,
+  "underlying_A_generations": 152
+}

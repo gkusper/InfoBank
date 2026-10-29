@@ -1,0 +1,9 @@
+{
+  "cohort_label": "Exposed development, legacy HELD3 filenames retained only as provenance",
+  "current_selection_sha256": "c4e233afaf0dd3f5aa037dc3dc3833e3e2274fc296d2a3f79d78412d362b13c4",
+  "existing_exposed_cases": 40,
+  "new_independent_cases_opened": 0,
+  "new_independent_holdout_opened": 0,
+  "previous_execution_manifest_sha256": "78d4d78da6b32a4ebdc400d603feaa12fcc4cd34239dcebc4082eaed8019d1eb",
+  "reused_cases": 40
+}

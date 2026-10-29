@@ -1,0 +1,410 @@
+{
+  "FTS5_available": true,
+  "architecture_replacements_executed": false,
+  "backend_imports_executed": false,
+  "dependencies": [
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "chromadb"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "PyMuPDF"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "pydantic"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "SQLAlchemy"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "spacy"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "networkx"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "sentence-transformers"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "casbin"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "duckdb"
+    },
+    {
+      "installed": false,
+      "license": "Not verified for proposed replacement; no dependency recommended/installed",
+      "name": "haystack-ai"
+    },
+    {
+      "installed": true,
+      "license": "Apache-2.0",
+      "name": "pyarrow",
+      "recommendation": "Use only existing benchmark IO/statistics dependencies; no replacements added",
+      "version": "26.0.0"
+    },
+    {
+      "installed": true,
+      "license": "Apache 2.0",
+      "name": "datasets",
+      "recommendation": "Use only existing benchmark IO/statistics dependencies; no replacements added",
+      "version": "5.1.0"
+    },
+    {
+      "installed": true,
+      "license": "BSD-3-Clause AND 0BSD AND MIT AND Zlib AND CC0-1.0",
+      "name": "numpy",
+      "recommendation": "Use only existing benchmark IO/statistics dependencies; no replacements added",
+      "version": "2.5.4"
+    },
+    {
+      "installed": true,
+      "license": "MIT",
+      "name": "pytest",
+      "recommendation": "Use only existing benchmark IO/statistics dependencies; no replacements added",
+      "version": "9.2.0"
+    }
+  ],
+  "modules": [
+    {
+      "available": true,
+      "functions": [
+        {
+          "line": 18,
+          "name": "get_chroma_collection"
+        },
+        {
+          "line": 28,
+          "name": "LazyChromaCollection"
+        },
+        {
+          "line": 36,
+          "name": "get_openai_client"
+        },
+        {
+          "line": 48,
+          "name": "LazyOpenAIClient"
+        },
+        {
+          "line": 55,
+          "name": "chunk_text"
+        },
+        {
+          "line": 29,
+          "name": "__getattr__"
+        },
+        {
+          "line": 49,
+          "name": "__getattr__"
+        }
+      ],
+      "license": "Repository CC-BY-NC-4.0",
+      "path": "backend_python/ai_service.py",
+      "sha256": "116fb4319344e5ca7c8eb1d0d12e4791df8a5c0d8154eb1532d5a53ff32dee81"
+    },
+    {
+      "action": "Do not invent module; use actual current evaluation implementation",
+      "available": false,
+      "path": "backend_python/document_processing.py"
+    },
+    {
+      "action": "Do not invent module; use actual current evaluation implementation",
+      "available": false,
+      "path": "backend_python/routing.py"
+    },
+    {
+      "available": true,
+      "functions": [
+        {
+          "line": 26,
+          "name": "_now"
+        },
+        {
+          "line": 30,
+          "name": "_mode_value"
+        },
+        {
+          "line": 36,
+          "name": "_is_rule_active"
+        },
+        {
+          "line": 47,
+          "name": "_mode_to_use_decision"
+        },
+        {
+          "line": 58,
+          "name": "_decision_to_role"
+        },
+        {
+          "line": 68,
+          "name": "_strongest_active_rule"
+        },
+        {
+          "line": 83,
+          "name": "resolve_document_access"
+        },
+        {
+          "line": 156,
+          "name": "resolve_evidence_unit_access"
+        },
+        {
+          "line": 199,
+          "name": "resolve_document_access_bulk"
+        },
+        {
+          "line": 232,
+          "name": "resolve_evidence_unit_access_bulk"
+        },
+        {
+          "line": 262,
+          "name": "public_metadata_summary"
+        },
+        {
+          "line": 277,
+          "name": "public_evidence_metadata_summary"
+        },
+        {
+          "line": 293,
+          "name": "create_policy_rule"
+        }
+      ],
+      "license": "Repository CC-BY-NC-4.0",
+      "path": "backend_python/policy_engine.py",
+      "sha256": "208a94478fbbca5849f2eb4fa63a6c19f9a56cd3ad4ff6d701d36021451c6d1a"
+    },
+    {
+      "action": "Do not invent module; use actual current evaluation implementation",
+      "available": false,
+      "path": "backend_python/aggregate_executor.py"
+    },
+    {
+      "available": true,
+      "functions": [
+        {
+          "line": 109,
+          "name": "parse_timestamp"
+        },
+        {
+          "line": 118,
+          "name": "create_evidence_unit"
+        },
+        {
+          "line": 136,
+          "name": "import_evidence_units"
+        },
+        {
+          "line": 143,
+          "name": "_metadata"
+        },
+        {
+          "line": 150,
+          "name": "_dedupe_key"
+        },
+        {
+          "line": 162,
+          "name": "dedupe_evidence_units"
+        },
+        {
+          "line": 179,
+          "name": "_citds_role_to_action_role"
+        },
+        {
+          "line": 195,
+          "name": "is_non_action_notification"
+        },
+        {
+          "line": 200,
+          "name": "is_unowned_outbound_request"
+        },
+        {
+          "line": 211,
+          "name": "_body_excerpt"
+        },
+        {
+          "line": 218,
+          "name": "_starts_with_action_verb"
+        },
+        {
+          "line": 225,
+          "name": "has_obligation_signal"
+        },
+        {
+          "line": 240,
+          "name": "has_request_obligation_signal"
+        },
+        {
+          "line": 244,
+          "name": "has_closure_signal"
+        },
+        {
+          "line": 248,
+          "name": "has_nonclosing_signal"
+        },
+        {
+          "line": 252,
+          "name": "classify_evidence_unit"
+        },
+        {
+          "line": 360,
+          "name": "extract_due_date"
+        },
+        {
+          "line": 370,
+          "name": "_clean_action"
+        },
+        {
+          "line": 377,
+          "name": "extract_action_text"
+        },
+        {
+          "line": 403,
+          "name": "extract_object_label"
+        },
+        {
+          "line": 418,
+          "name": "summarize_text"
+        },
+        {
+          "line": 423,
+          "name": "_normalise_action_key"
+        },
+        {
+          "line": 430,
+          "name": "_group_key"
+        },
+        {
+          "line": 440,
+          "name": "_timestamp_value"
+        },
+        {
+          "line": 444,
+          "name": "_valid_later_contrastive"
+        },
+        {
+          "line": 458,
+          "name": "reconstruct_action_list"
+        },
+        {
+          "line": 597,
+          "name": "check_rag_evidence"
+        }
+      ],
+      "license": "Repository CC-BY-NC-4.0",
+      "path": "backend_python/evidence_service.py",
+      "sha256": "a26c294afe72530815757aaee144d84fb6d5403dfc610cf4360f196d3f685cbc"
+    },
+    {
+      "available": true,
+      "functions": [
+        {
+          "line": 70,
+          "name": "_now_iso"
+        },
+        {
+          "line": 74,
+          "name": "_source_ids"
+        },
+        {
+          "line": 79,
+          "name": "_matches_any"
+        },
+        {
+          "line": 84,
+          "name": "detect_prompt_injection"
+        },
+        {
+          "line": 89,
+          "name": "detect_request_risk"
+        },
+        {
+          "line": 137,
+          "name": "select_pre_generation_output_mode"
+        },
+        {
+          "line": 158,
+          "name": "safe_policy_state"
+        },
+        {
+          "line": 175,
+          "name": "evidence_state"
+        },
+        {
+          "line": 209,
+          "name": "make_controlled_failure"
+        },
+        {
+          "line": 233,
+          "name": "allowed_output"
+        },
+        {
+          "line": 242,
+          "name": "blocked_output"
+        },
+        {
+          "line": 251,
+          "name": "_question_mentions_current_status"
+        },
+        {
+          "line": 258,
+          "name": "_restricted_output"
+        },
+        {
+          "line": 263,
+          "name": "select_rag_output_mode"
+        },
+        {
+          "line": 423,
+          "name": "from_not_found_answer"
+        }
+      ],
+      "license": "Repository CC-BY-NC-4.0",
+      "path": "backend_python/controlled_failure.py",
+      "sha256": "1889142523cacf79e3455ec2c3fedd838388460ed832c8faa0bad50fd1b6450c"
+    },
+    {
+      "action": "Do not invent module; use actual current evaluation implementation",
+      "available": false,
+      "path": "backend_python/citation_service.py"
+    },
+    {
+      "available": true,
+      "license": "Not independently verified in partial cached main source; not adopted into measured pipeline",
+      "path": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\target-claim-remote-main\\backend_python\\aggregate_executor.py",
+      "reference_only": true,
+      "sha256": "2debba0b0fb83a929a4e211d28b95ef5a312fc9fdb4571bd4c96ea88fe74d1ce",
+      "source_commit": "8079f29dc3a97273f51b55b2a22f9ff896a2e758"
+    },
+    {
+      "available": true,
+      "license": "Not independently verified in partial cached main source; not adopted into measured pipeline",
+      "path": "C:\\Users\\EKKE\\Documents\\Codex\\2026-10-28\\files-pasted-by-the-user-codex\\work\\target-claim-remote-main\\backend_python\\citation_service.py",
+      "reference_only": true,
+      "sha256": "4da526c86bdb7e40a7e697446152c54684a995a12e1b4b172d44af4297458670",
+      "source_commit": "8079f29dc3a97273f51b55b2a22f9ff896a2e758"
+    }
+  ],
+  "new_packages_installed": [],
+  "one_call_ablation": "PROPOSED_ONLY",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "repository_license_sha256": "45b4049265376c911bd32da7a2d47dc70e7892bd0c2986ddb94a6c9cc3d05372",
+  "sqlite_license": "Public domain; no retrieval replacement executed",
+  "sqlite_version": "3.53.1",
+  "stdlib_license": "PSF License Version 2; retained standard runtime"
+}

@@ -1,0 +1,471 @@
+{
+  "dataset1": {
+    "P1": {
+      "A": {
+        "N": 8,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "FULL": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "None": 8
+        }
+      },
+      "B": {
+        "N": 8,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "FULL": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "None": 8
+        }
+      },
+      "C": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 3,
+          "EVIDENTIAL": 1,
+          "None": 4
+        }
+      }
+    },
+    "P2": {
+      "A": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 4,
+          "None": 4
+        }
+      },
+      "B": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 4,
+          "None": 4
+        }
+      },
+      "C": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "GOVERNANCE_PRIVACY": 4,
+          "None": 4
+        }
+      }
+    },
+    "P3": {
+      "A": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 4,
+          "None": 4
+        }
+      },
+      "B": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 4,
+          "None": 4
+        }
+      },
+      "C": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 4,
+          "None": 4
+        }
+      }
+    },
+    "P4": {
+      "A": {
+        "N": 8,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "FULL": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "None": 8
+        }
+      },
+      "B": {
+        "N": 8,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "FULL": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "None": 8
+        }
+      },
+      "C": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 4,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 4,
+          "None": 4
+        }
+      }
+    },
+    "P5": {
+      "A": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 8
+        }
+      },
+      "B": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 8
+        }
+      },
+      "C": {
+        "N": 8,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 8
+        }
+      }
+    }
+  },
+  "dataset2": {
+    "ANSWER_CORRECTLY": {
+      "A": {
+        "N": 14,
+        "nonoperational_mode_matches": 11,
+        "observed_modes": {
+          "CFAF": 3,
+          "FULL": 11
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 3,
+          "None": 11
+        }
+      },
+      "B": {
+        "N": 14,
+        "nonoperational_mode_matches": 11,
+        "observed_modes": {
+          "CFAF": 3,
+          "FULL": 11
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 3,
+          "None": 11
+        }
+      },
+      "C": {
+        "N": 14,
+        "nonoperational_mode_matches": 8,
+        "observed_modes": {
+          "CFAF": 6,
+          "FULL": 8
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 5,
+          "EVIDENTIAL": 1,
+          "None": 8
+        }
+      }
+    },
+    "REFUSE_AMBIGUOUS_QUERY": {
+      "A": {
+        "N": 5,
+        "nonoperational_mode_matches": 0,
+        "observed_modes": {
+          "FULL": 5
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "None": 5
+        }
+      },
+      "B": {
+        "N": 5,
+        "nonoperational_mode_matches": 0,
+        "observed_modes": {
+          "FULL": 5
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "None": 5
+        }
+      },
+      "C": {
+        "N": 5,
+        "nonoperational_mode_matches": 1,
+        "observed_modes": {
+          "CFAF": 1,
+          "FULL": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 1,
+          "None": 4
+        }
+      }
+    },
+    "REFUSE_FALSE_PREMISE_IN_QUERY": {
+      "A": {
+        "N": 4,
+        "nonoperational_mode_matches": 3,
+        "observed_modes": {
+          "CFAF": 3,
+          "FULL": 1
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 3,
+          "None": 1
+        }
+      },
+      "B": {
+        "N": 4,
+        "nonoperational_mode_matches": 3,
+        "observed_modes": {
+          "CFAF": 3,
+          "FULL": 1
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 3,
+          "None": 1
+        }
+      },
+      "C": {
+        "N": 4,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "CFAF": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 4
+        }
+      }
+    },
+    "REFUSE_GRANULARITY_MISMATCH": {
+      "A": {
+        "N": 8,
+        "nonoperational_mode_matches": 7,
+        "observed_modes": {
+          "CFAF": 7,
+          "FULL": 1
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 7,
+          "None": 1
+        }
+      },
+      "B": {
+        "N": 8,
+        "nonoperational_mode_matches": 7,
+        "observed_modes": {
+          "CFAF": 7,
+          "FULL": 1
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 7,
+          "None": 1
+        }
+      },
+      "C": {
+        "N": 8,
+        "nonoperational_mode_matches": 7,
+        "observed_modes": {
+          "CFAF": 7,
+          "FULL": 1
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 7,
+          "None": 1
+        }
+      }
+    },
+    "REFUSE_INFO_MISSING_IN_CONTEXT": {
+      "A": {
+        "N": 5,
+        "nonoperational_mode_matches": 5,
+        "observed_modes": {
+          "CFAF": 5
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 5
+        }
+      },
+      "B": {
+        "N": 5,
+        "nonoperational_mode_matches": 5,
+        "observed_modes": {
+          "CFAF": 5
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 5
+        }
+      },
+      "C": {
+        "N": 5,
+        "nonoperational_mode_matches": 5,
+        "observed_modes": {
+          "CFAF": 5
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 5
+        }
+      }
+    },
+    "REFUSE_NONFACTUAL_QUERY": {
+      "A": {
+        "N": 4,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "CFAF": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 4
+        }
+      },
+      "B": {
+        "N": 4,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "CFAF": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 4
+        }
+      },
+      "C": {
+        "N": 4,
+        "nonoperational_mode_matches": 4,
+        "observed_modes": {
+          "CFAF": 4
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EPISTEMIC": 4
+        }
+      }
+    }
+  },
+  "dataset3": {
+    "NO_NATIVE_MODE_GOLD": {
+      "A": {
+        "N": 80,
+        "nonoperational_mode_matches": null,
+        "observed_modes": {
+          "CFAF": 9,
+          "FULL": 71
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 9,
+          "None": 71
+        }
+      },
+      "B": {
+        "N": 80,
+        "nonoperational_mode_matches": null,
+        "observed_modes": {
+          "CFAF": 9,
+          "FULL": 71
+        },
+        "operational": 0,
+        "public_reason_classes": {
+          "EVIDENTIAL": 9,
+          "None": 71
+        }
+      },
+      "C": {
+        "N": 80,
+        "nonoperational_mode_matches": null,
+        "observed_modes": {
+          "CFAF": 27,
+          "FULL": 53
+        },
+        "operational": 9,
+        "public_reason_classes": {
+          "EPISTEMIC": 25,
+          "EVIDENTIAL": 2,
+          "None": 53
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "files": {
+    "api_events.jsonl": "00369aa86ac2c9fc10a2595a2c98ecf0f63ed610be116555d7b2b272557c2cb7",
+    "api_requests.jsonl": "f305eb2873117d08d992270666687d214cc10ad880965c77dd219f7ea12c1805",
+    "dataset1_gold.jsonl": "a53b49aefc25583248258d1bfc5c1fb11295756bfe7bec4664aeea517b1e0f61",
+    "dataset1_results_raw.jsonl": "bb0df5164a7d8a831782707c28b276341aefc318fb614f068a3ffb4a205866e8",
+    "dataset1_runtime.jsonl": "d7cd53f13da53ad1ce3c5a05528c11fec323408d33af0dbdf4c51302d0322408",
+    "dataset2_gold.jsonl": "28a183497065ac8effe0a4c9eea0cf9fe34bcc0cf4e26ff127b5820dfba82ee7",
+    "dataset2_results_raw.jsonl": "743371f975f0b1d85f4b9f5f8adc839511f045582bd986d3bf092d593642a7d7",
+    "dataset2_runtime.jsonl": "93dc96d811e1e67a72aae4be5f135d69b8305dd7ab8f24323336126b7c14375b",
+    "dataset3_gold.jsonl": "a804662e7e81cb8fd5d33a8863f8d5d374154cc653775f29a915ca4c0232b51a",
+    "dataset3_results_raw.jsonl": "49e913f3938c3fb6221ef3b9ae757592b1b75b7ee34ae934f810a60016b7f36c",
+    "dataset3_runtime.jsonl": "672f4bb3c5a0c91a05f4e3903d328021f5a15890a43641b658b0fdf857b4597c",
+    "local/CASE_REPORT.md": "00881ee7dc78938252d047b7805f62c4a1a2edaf76bd35eba10e4ffd8c98b4d1",
+    "local/dataset3_blinded_review_packet.jsonl": "c5ddf4d04e3272966b640c258331c245097eb85aa054a2a9ff634f6e55d6ab8a",
+    "local/dataset3_blinding_key.json": "39fad74969ec956d95308334132511ec0274e1bf77176330db811526e3cc1770"
+  },
+  "inference_complete_before_scoring": true,
+  "scope": "Only hashes/names of ignored original inputs, scorer data and raw traces; no raw content"
+}

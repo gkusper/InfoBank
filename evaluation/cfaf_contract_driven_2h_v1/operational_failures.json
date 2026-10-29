@@ -1,0 +1,73 @@
+{
+  "dataset1": {
+    "C_gate_outcomes": {
+      "VALIDATED_CFAF": 16,
+      "VALIDATED_RESTRICTED_NO_VIEW": 8,
+      "VERIFIED_FULFILMENT": 16
+    },
+    "C_validation_error_codes": {},
+    "execution_error_indices": [],
+    "not_executed_indices": [],
+    "per_system": {
+      "A": {
+        "MODEL_SELF_REPORTED_MODE": 32,
+        "VALIDATED_RESTRICTED_NO_VIEW": 8
+      },
+      "B": {
+        "VALID_CONTRACT_SELF_REPORTED_MODE": 40
+      },
+      "C": {
+        "GENERATED_VALID_CONTRACT": 32,
+        "VALIDATED_RESTRICTED_NO_VIEW": 8
+      }
+    },
+    "query_only_fallbacks": 0
+  },
+  "dataset2": {
+    "C_gate_outcomes": {
+      "VALIDATED_CFAF": 27,
+      "VERIFIED_FULFILMENT": 13
+    },
+    "C_validation_error_codes": {},
+    "execution_error_indices": [],
+    "not_executed_indices": [],
+    "per_system": {
+      "A": {
+        "MODEL_SELF_REPORTED_MODE": 40
+      },
+      "B": {
+        "VALID_CONTRACT_SELF_REPORTED_MODE": 40
+      },
+      "C": {
+        "GENERATED_VALID_CONTRACT": 40
+      }
+    },
+    "query_only_fallbacks": 5
+  },
+  "dataset3": {
+    "C_gate_outcomes": {
+      "OPERATIONAL_FAILURE": 9,
+      "VALIDATED_CFAF": 18,
+      "VERIFIED_FULFILMENT": 53
+    },
+    "C_validation_error_codes": {
+      "SUPPORT_SOURCE_NOT_ASSESSED": 4,
+      "UNKNOWN_SPAN_ID": 5
+    },
+    "execution_error_indices": [],
+    "not_executed_indices": [],
+    "per_system": {
+      "A": {
+        "MODEL_SELF_REPORTED_MODE": 80
+      },
+      "B": {
+        "VALID_CONTRACT_SELF_REPORTED_MODE": 80
+      },
+      "C": {
+        "GENERATED_VALID_CONTRACT": 71,
+        "OPERATIONAL_FAILURE": 9
+      }
+    },
+    "query_only_fallbacks": 1
+  }
+}

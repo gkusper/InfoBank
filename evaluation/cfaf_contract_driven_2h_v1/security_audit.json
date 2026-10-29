@@ -1,0 +1,57 @@
+{
+  "A_standard_no_CFAF_semantics_or_contract": true,
+  "B_reuses_A_one_generation": true,
+  "Dataset2_other_untouched_groups_accessed": 0,
+  "Dataset2_prior_ledger_unchanged": true,
+  "Dataset2_reserved_groups_accessed": 0,
+  "Dataset3_cumulative_exposed": 90,
+  "Dataset3_only_preregistered80_new_rows_materialized": true,
+  "Dataset3_remaining_unused": 2276,
+  "all_systems_same_authorized_evidence": true,
+  "attempt_cap_respected": true,
+  "credential_value_scan": "PASS",
+  "exact_question_and_long_source_reference_scan": "PASS",
+  "forbidden_field_or_identifier_violations": [],
+  "frozen_study_sources_unchanged": true,
+  "historical_branch_and_tag_unchanged": true,
+  "independent_claim_judgement": "PENDING",
+  "manual_push_only": true,
+  "new_architecture_or_library_replacement_claimed": false,
+  "new_embedding_or_judge_calls": 0,
+  "p5_pair_checks": [
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_01",
+      "public_responses_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_02",
+      "public_responses_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_03",
+      "public_responses_equal": true
+    },
+    {
+      "no_model_calls": true,
+      "pair_id": "H3PAIR_P5_04",
+      "public_responses_equal": true
+    }
+  ],
+  "precommit_elapsed_seconds": 4448.974739789963,
+  "preregistration_before_fresh_text": true,
+  "prior_files_unchanged": 1090,
+  "protected_files_changed": [],
+  "protected_files_checked": 1090,
+  "public_leak_scope": "Existing exact protected-value/source-name checks; broad paraphrase disclosure is not independently certified",
+  "push_performed": false,
+  "raw_artifacts_confirmed_ignored": true,
+  "requests_checked": 462,
+  "runtime_and_gold_hashes_match": true,
+  "safe_commit_scope": "evaluation/cfaf_contract_driven_2h_v1 only",
+  "source_body_hashes_match": true,
+  "status": "PASS",
+  "unmeasured_fourth_call_disabled": true
+}

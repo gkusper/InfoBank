@@ -1,0 +1,52 @@
+{
+  "dataset1": {
+    "C_query_only_fallback_count": 0,
+    "internal_reason_codes": {
+      "AMBIGUOUS_REQUEST": 11,
+      "MISSING_REQUESTED_RELATION": 1,
+      "NO_PERMITTED_EVIDENCE": 8,
+      "None": 16,
+      "REQUEST_EXCEEDS_PERMITTED_SCOPE": 4
+    },
+    "legacy_request_types": {
+      "ACTION_LOOKUP": 8,
+      "AGGREGATE_COUNT": 4,
+      "FACT_LOOKUP": 20,
+      "INDIVIDUAL_RECORD": 4,
+      "METADATA_LOOKUP": 4
+    },
+    "source_inventory_omissions_NOT_ASSESSED": 0
+  },
+  "dataset2": {
+    "C_query_only_fallback_count": 5,
+    "internal_reason_codes": {
+      "AMBIGUOUS_REQUEST": 18,
+      "NONFACTUAL_REQUEST": 8,
+      "None": 13,
+      "REQUEST_UNRESOLVED": 1
+    },
+    "legacy_request_types": {
+      "AGGREGATE_AVERAGE": 1,
+      "AGGREGATE_OTHER": 1,
+      "FACT_LOOKUP": 36,
+      "UNRESOLVED": 2
+    },
+    "source_inventory_omissions_NOT_ASSESSED": 3
+  },
+  "dataset3": {
+    "C_query_only_fallback_count": 1,
+    "internal_reason_codes": {
+      "AMBIGUOUS_REQUEST": 16,
+      "GRANULARITY_NOT_SUPPORTED": 1,
+      "INVALID_EVIDENCE_REFERENCE": 5,
+      "None": 53,
+      "SOURCE_ASSESSMENT_CONTRACT_INVALID": 4,
+      "SUPPORT_NOT_PRIMARY": 1
+    },
+    "legacy_request_types": {
+      "AGGREGATE_COUNT": 1,
+      "FACT_LOOKUP": 82
+    },
+    "source_inventory_omissions_NOT_ASSESSED": 904
+  }
+}

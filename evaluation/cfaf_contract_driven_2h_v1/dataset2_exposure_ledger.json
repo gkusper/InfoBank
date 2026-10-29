@@ -1,0 +1,9 @@
+{
+  "cumulative_eligible_exposed": 130,
+  "fallback_reason": "Existing reserved_holdout_manifest.content_policy explicitly forbids heldout content access; current task instructs obeying that rule.",
+  "new_records": 0,
+  "other_untouched_groups_consumed": 0,
+  "prior_ledger_sha256": "0cde044f73a427543c26da0acc8fbafd02b32ffa757c02b077fc010ce8bd4a5d",
+  "reserved_groups_consumed": 0,
+  "reused_records": 40
+}

@@ -1,0 +1,10 @@
+dataset,cohort,system,N_planned,N_paired_complete,mode_accuracy_nonoperational,balanced_accuracy,FULL_recall,CFAF_recall,operational_failures,FULL_outputs,CFAF_outputs,source_grounding_scope
+dataset1,Original 40 exposed development,A,40,40,0.8,0.8333333333333333,1.0,0.6666666666666666,0,24,16,actual citations only
+dataset1,Original 40 exposed development,B,40,40,0.8,0.8333333333333333,1.0,0.6666666666666666,0,24,16,actual citations only
+dataset1,Original 40 exposed development,C,40,40,1.0,1.0,1.0,1.0,0,16,24,separate raw/validated support and actual citations
+dataset2,Fixed40 exposed development fallback; reserved30 untouched,A,40,40,0.75,0.7582417582417582,0.7857142857142857,0.7307692307692307,0,18,22,actual citations only
+dataset2,Fixed40 exposed development fallback; reserved30 untouched,B,40,40,0.75,0.7582417582417582,0.7857142857142857,0.7307692307692307,0,18,22,actual citations only
+dataset2,Fixed40 exposed development fallback; reserved30 untouched,C,40,40,0.725,0.6895604395604396,0.5714285714285714,0.8076923076923077,0,13,27,separate raw/validated support and actual citations
+dataset3,Fresh80 code-frozen held-out rows; source grounding only,A,80,80,,,,,0,71,9,actual citations only
+dataset3,Fresh80 code-frozen held-out rows; source grounding only,B,80,80,,,,,0,71,9,actual citations only
+dataset3,Fresh80 code-frozen held-out rows; source grounding only,C,80,80,,,,,9,53,27,separate raw/validated support and actual citations

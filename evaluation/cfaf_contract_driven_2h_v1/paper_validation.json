@@ -1,0 +1,11 @@
+{
+  "compiler": "Codex desktop built-in LaTeX compiler",
+  "fragment_compiled_as_document": true,
+  "new_bibliography_entries_invented": false,
+  "original_CF2AF_v5_8_available_in_checked_locations": false,
+  "original_CF2AF_v5_8_modified": false,
+  "source_sha256": "1f7ce27f3526ad8436cc7311d9268506f626f0ff15bfde71e25d98e443df106e",
+  "status": "SUCCESS",
+  "wrapper_documentclass": "article,11pt,25mm margin",
+  "wrapper_sha256": "6142dd6f6d4ae7d606e570a436671dd402e8d34263ac5025c5020fd05fda718e"
+}

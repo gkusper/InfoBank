@@ -1,0 +1,46 @@
+\begin{table}[t]
+\centering
+\small
+\caption{Development-cohort mode agreement with failures retained. A is standard selective RAG; B is postprocessed A; C is the existing sparse-source CFAF pipeline. These are mode metrics, not factual-answer accuracy.}
+\label{tab:cfaf-contract-study-mode}
+\begin{tabular}{llrlll}
+\hline
+Dataset & System & $n/N$ & Mode \% [95\% CI] & Bal. \% & Op. \\
+\hline
+D1 dev & A & 40/40 & 80.0 [70.0, 90.0] & 83.3 & 0 \\
+D1 dev & B & 40/40 & 80.0 [70.0, 90.0] & 83.3 & 0 \\
+D1 dev & C & 40/40 & 100.0 [100.0, 100.0] & 100.0 & 0 \\
+D2 dev & A & 40/40 & 75.0 [62.8, 86.5] & 75.8 & 0 \\
+D2 dev & B & 40/40 & 75.0 [62.8, 86.5] & 75.8 & 0 \\
+D2 dev & C & 40/40 & 72.5 [60.5, 84.6] & 69.0 & 0 \\
+\hline
+\end{tabular}
+\end{table}
+
+\begin{table}[t]
+\centering
+\small
+\caption{Fresh GaRAGe sample: original source-label metrics only. C rows distinguish raw proposals and validated support; A/B source selection is measurable only from their actual citations. No native FULL/CFAF or independent entailment accuracy is available.}
+\label{tab:cfaf-contract-study-grounding}
+\begin{tabular}{lrrr}
+\hline
+Layer & Precision \% & Recall \% & F1 \% \\
+\hline
+C raw proposals & 87.9 & 24.4 & 38.3 \\
+C validated support & 86.8 & 21.2 & 34.1 \\
+A actual citations & -- & 0.0 & 0.0 \\
+B actual citations & -- & 0.0 & 0.0 \\
+C actual citations & -- & 0.0 & 0.0 \\
+\hline
+\end{tabular}
+\end{table}
+
+\paragraph{Results.}
+The preregistered study completed 160/160 paired cases: 40/40 on exposed InfoBank development cases, 40/40 on a fixed exposed RefusalBench-NQ fallback, and 80/80 on newly sampled GaRAGe records. The reserved 30 RefusalBench groups were not opened because an existing content-prohibition rule was retained.
+On DATASET1, C had 8 non-operational mode matches missed by B and missed 0 matches obtained by B (net 8/40). Intervals jointly resample matched pairs or source groups and do not support a population or significance claim.
+On DATASET2, C had 2 non-operational mode matches missed by B and missed 3 matches obtained by B (net -1/40). Intervals jointly resample matched pairs or source groups and do not support a population or significance claim.
+The run used 462 gpt-4o-mini calls, 1694395 input tokens and 88615 output tokens, with 0 API errors and no retries, embeddings or external model judges. B reuses A's generation; no extra B inference is charged.
+On the fresh 80 GaRAGe rows, C has 71 valid assessments and 9 operational failures. Its 53 FULL and 27 CFAF outputs are behaviors, not accuracy; A/B each produce 71 FULL and 9 CFAF. All systems emit zero actual public citations.
+
+\paragraph{Limitations.}
+D1 and D2 are exposed development cohorts; their mode agreement must not be pooled with historical 40-case results or called final answer accuracy. GaRAGe source labels do not certify complete fulfilment or claim entailment. Independent adjudication is pending; 2 of 80 cases use the preregistered whole-passage-prefix context bound. Operational fallbacks remain separate from substantively correct refusals. Exact-copy source associations are unverified and are not rendered as verified claim citations. Public-benchmark familiarity, dependent small samples, existing C short-answer constraints and a single repetition limit generalization. The compact boundary skeleton and future one-call optimization are not evaluated architecture replacements.

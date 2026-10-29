@@ -1,0 +1,20 @@
+{
+  "altered_context_cases": 2,
+  "code_frozen_before_fresh_text": true,
+  "counts": {
+    "dataset1": 40,
+    "dataset2": 40,
+    "dataset3": 80
+  },
+  "gold_sha256": {
+    "dataset1": "a53b49aefc25583248258d1bfc5c1fb11295756bfe7bec4664aeea517b1e0f61",
+    "dataset2": "28a183497065ac8effe0a4c9eea0cf9fe34bcc0cf4e26ff127b5820dfba82ee7",
+    "dataset3": "a804662e7e81cb8fd5d33a8863f8d5d374154cc653775f29a915ca4c0232b51a"
+  },
+  "prepared_utc": "2026-10-29T08:20:11.173736+00:00",
+  "runtime_sha256": {
+    "dataset1": "d7cd53f13da53ad1ce3c5a05528c11fec323408d33af0dbdf4c51302d0322408",
+    "dataset2": "93dc96d811e1e67a72aae4be5f135d69b8305dd7ab8f24323336126b7c14375b",
+    "dataset3": "672f4bb3c5a0c91a05f4e3903d328021f5a15890a43641b658b0fdf857b4597c"
+  }
+}

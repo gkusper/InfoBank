@@ -1,0 +1,18 @@
+{
+  "API_attempts": 30,
+  "branch": "experiment/cfaf-qasper-pilot-v1",
+  "code_freeze_before_API": true,
+  "completed_cases": 10,
+  "earlier_files_protected": 1163,
+  "elapsed_at_precommit_seconds": 1499.8920278549194,
+  "first_API_start_UTC": "2026-10-29T10:49:24.951311+00:00",
+  "hard_limit_seconds": 3600,
+  "last_API_start_UTC": "2026-10-29T10:50:57.003684+00:00",
+  "new_API_stop_seconds": 3000,
+  "no_push_or_merge": true,
+  "planned_cases": 10,
+  "postcommit_receipt": "outputs/cfaf_qasper_pilot_v1_completion.json outside repository; contains final commit, total elapsed and clean-state verification",
+  "prior_files_changed": 0,
+  "selection_before_API": true,
+  "starting_commit": "bfd80bbfe2ccbb251da46bdc22b791dad5b9341f"
+}

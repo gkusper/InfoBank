@@ -1,0 +1,99 @@
+{
+  "assessor": "Codex task agent, non-independent qualitative review",
+  "blinding": "Not blinded: original labels, references and system identities were visible after the single frozen execution",
+  "independent_judge_or_verification_API": false,
+  "gold_changed": false,
+  "inference_changed_after_outputs": false,
+  "cases": [
+    {
+      "runtime_index": 0,
+      "summary": "All three systems answer the static-embedding method consistently with the paper and both references. C is concise and identifies the first principal component in a given layer.",
+      "A_B": "Document-supported and addresses the question. The additional explanation about contexts is consistent with the described construction.",
+      "C": "Document-supported and substantively adequate on this review. Its selected window includes the explicit method statement.",
+      "reference_comparison": "One human uses the table caption and another uses the method paragraph. Selecting one valid alternative yields 50% union recall and 100% best-annotation F1; union recall is not answer completeness.",
+      "unsupported_entities_relations_dates_causes": "None identified in the reviewed answer claims; this is not an independent error-rate estimate.",
+      "flags": ["SUPPORTED_METHOD_ANSWER", "ALTERNATIVE_HUMAN_EVIDENCE"]
+    },
+    {
+      "runtime_index": 1,
+      "summary": "A/B give a supported but broad list of conceptual challenges; C rejects its own generic background candidate for missing requested relation, then fails to realize the contracted refusal text.",
+      "A_B": "The conceptual-validity and meaning/interpretation claims are directly supported by provided P0002. Compared with the human reference, the answer does not cover the full research-question and cross-disciplinary scope; FULL mode agreement does not establish complete answer quality.",
+      "C": "Nonoperational CFAF is a nominal unnecessary refusal against original FULL gold. The analysis selected an abstract-level restatement instead of the available research-question details. The sent contract required an evidence-relation limitation, but the final answer instead repeats the background candidate. The existing validator accepted this six-field CFAF object and did not enforce CFAF reason-text copying.",
+      "reference_comparison": "Only one of two human evidence paragraphs was retrieved (P0006); the interdisciplinary example paragraph was omitted. Related interdisciplinary motivation is still present in P0005. This is a retrieval limitation, not proof that the retained context was entirely unanswerable; gold stays FULL.",
+      "unsupported_entities_relations_dates_causes": "No new external entity/date/causal claim identified in A/B; primary concerns are scope coverage and C's unflagged realization-copy deviation.",
+      "flags": ["RETRIEVAL_EVIDENCE_OMISSION", "FULL_MODE_WITH_PARTIAL_REFERENCE_COVERAGE", "GENERIC_BACKGROUND_AS_CANDIDATE", "UNFLAGGED_CFAF_REASON_COPY_DEVIATION"]
+    },
+    {
+      "runtime_index": 2,
+      "summary": "A/B provide the exact final question total. C gives supported approximate text/question counts, with less precision than the human reference.",
+      "A_B": "The final total and the commonsense subset/count/percentage are present in the data-statistics paragraph and are supported.",
+      "C": "Approximately 2100 texts and 14000 questions is stated in the introduction. It addresses dataset size, although the more precise final 13939-question total was available. This is reduced precision, not an invented number or automatic semantic failure.",
+      "reference_comparison": "Human reference gives the exact final question count. Do not reject the C answer solely for different wording or numerically consistent rounding. Independent adequacy remains pending.",
+      "unsupported_entities_relations_dates_causes": "No unsupported numerical or causal claim identified; exact-versus-approximate precision is the material issue.",
+      "flags": ["SUPPORTED_APPROXIMATION", "AVAILABLE_PRECISION_NOT_USED"]
+    },
+    {
+      "runtime_index": 3,
+      "summary": "All systems identify the two main dataset families named by the references.",
+      "A_B": "Waseem/Hovy and Davidson are correctly identified. The added tweet counts and annotation categories are in the paper, but the answer omits the 6900-tweet extension merged into the Waseem family; its extra description should not be mistaken for the exact final merged dataset composition.",
+      "C": "Concise identification of the two main datasets is supported and adequate for the main question. Hovy/Hovey spelling variation is not treated as a semantic mismatch.",
+      "reference_comparison": "Both reference variants name the same two main dataset families. This is a semantic match, without exact-string scoring.",
+      "unsupported_entities_relations_dates_causes": "No unsupported main dataset identity found. A/B's extra collection-size description loses a merging detail.",
+      "flags": ["SUPPORTED_DATASET_IDENTITIES", "EXTRA_DETAIL_MERGE_NUANCE"]
+    },
+    {
+      "runtime_index": 4,
+      "summary": "Binary FULL gold is valid under the requested mapping, but the two usable human answers disagree about the substantive adjacent-mention interpretation. Neither generated answer resolves the window/propagation distinction well.",
+      "A_B": "The statement that the paper does not explicitly say it only uses adjacent mentions conflicts with P0054, which does say so. The paper separately defines a window over neighboring mentions, configures the neighbor window to six, and discusses chain-like propagation; a careful answer must distinguish local neighborhoods from indirect document-level influence.",
+      "C": "Adjacent and neighboring are treated as though they were different evidence scopes, without stating the configured window or indirect propagation. The response is too vague to resolve the actual contrast. One selected window is generic efficiency text, demonstrating that paragraph overlap alone is weak support evidence.",
+      "reference_comparison": "One reference says only adjacent; the other says more than adjacent. Both annotations mark answerable, so the specified initial mapping remains FULL. This is answer-content disagreement hidden by binary answerability consensus, and must not be relabelled UNKNOWN post hoc.",
+      "unsupported_entities_relations_dates_causes": "A/B contains a contradicted absence assertion; C's adjacent-versus-neighbor contrast is not clearly substantiated. No new external entity/date is introduced.",
+      "flags": ["ANSWER_CONTENT_DISAGREEMENT_WITH_BINARY_CONSENSUS", "CONTRADICTED_ABSENCE_ASSERTION", "ADJACENCY_WINDOW_SCOPE_UNRESOLVED"]
+    },
+    {
+      "runtime_index": 5,
+      "summary": "All systems are nominal failures to restrict against original CFAF gold, but the supplied paper directly explains human style-transfer evaluation and RMSE. This is a potential annotation/document discrepancy.",
+      "A_B": "Evaluation criteria correspond to P0051, while style-direction scores and RMSE are explicitly explained in P0056-P0057. The answer is document-supported and appears to address the question.",
+      "C": "The concise human-evaluation/RMSE answer is directly supported by its selected windows. It is a plausible substantive answer despite disagreement with the original unanswerable annotation.",
+      "reference_comparison": "The single original annotation is unanswerable and supplies no reference/evidence. Preserve that gold; this non-independent review flags a discrepancy rather than producing a corrected label or adjusted accuracy.",
+      "unsupported_entities_relations_dates_causes": "No unsupported external entity/date or causal claim identified. The disagreement concerns original label validity, not a demonstrated hallucination.",
+      "flags": ["POTENTIAL_GOLD_DOCUMENT_DISCREPANCY", "NOMINAL_FAILURE_TO_RESTRICT_WITH_EXPLICIT_SUPPORT"]
+    },
+    {
+      "runtime_index": 6,
+      "summary": "All systems return CFAF, agreeing with original unanswerable gold. C gives a misleading referent-ambiguity reason instead of the evidence limitation.",
+      "A_B": "Appropriate evidence-based abstention: the paper's cloze construction and downstream fine-tuning do not establish a procedure for conversion into natural questions.",
+      "C": "The analysis itself reports MISSING_EVIDENCE but also marks referent_resolved false, causing the existing gate to request referent clarification. Missing information is being conflated with ambiguous reference. This is not a technical fallback.",
+      "reference_comparison": "Both original annotations are unanswerable. Mode agrees, but original gold has no reason-class label; the reason criticism is non-independent qualitative review.",
+      "unsupported_entities_relations_dates_causes": "C asserts query ambiguity without a demonstrated competing referent. No external factual answer is supplied.",
+      "flags": ["CORRECT_CFAF_MODE", "MISSING_EVIDENCE_CONFLATED_WITH_REFERENT_AMBIGUITY"]
+    },
+    {
+      "runtime_index": 7,
+      "summary": "All systems return CFAF for the unreported average title length. C again asks for referent clarification.",
+      "A_B": "Evidence-based refusal is appropriate: the paper describes variable-length headlines and dataset construction but does not report the requested average.",
+      "C": "Mode is consistent with gold, but the requested statistic and target are understandable. The missing average does not establish ambiguous reference. The original pipeline's response is valid structurally and weak semantically.",
+      "reference_comparison": "Single unanswerable annotation, no reference answer/evidence. No label correction made.",
+      "unsupported_entities_relations_dates_causes": "The unsupported element is the ambiguity explanation; no average or date is invented.",
+      "flags": ["CORRECT_CFAF_MODE", "MISSING_EVIDENCE_CONFLATED_WITH_REFERENT_AMBIGUITY"]
+    },
+    {
+      "runtime_index": 8,
+      "summary": "All systems return CFAF for the unspecified total model-layer count. Their refusal rationales still contain quality limitations.",
+      "A_B": "Withholding an exact layer count is appropriate. However, saying the paper gives no architecture detail beyond LSTM is too broad: P0006/P0015 explicitly describe attention and softmax components. Those components alone do not establish the requested total layer count.",
+      "C": "The missing count is converted into a generic ambiguity request, despite the analysis recognizing missing evidence. This is a reason-quality defect, not an operational error.",
+      "reference_comparison": "Single unanswerable annotation, no reference answer/evidence. Caption-only input does not supply the image's full architecture details; no layer count is inferred from it.",
+      "unsupported_entities_relations_dates_causes": "A/B's blanket absence-of-architecture assertion is contradicted by provided text; C's ambiguity assertion lacks competing referents. No layer count is invented.",
+      "flags": ["CORRECT_CFAF_MODE", "OVERBROAD_ARCHITECTURE_ABSENCE_ASSERTION", "MISSING_EVIDENCE_CONFLATED_WITH_REFERENT_AMBIGUITY"]
+    },
+    {
+      "runtime_index": 9,
+      "summary": "All systems are nominal failures to restrict against CFAF gold, although the abstract explicitly describes the demonstrated painting-to-prose application. This is another potential annotation/document discrepancy.",
+      "A_B": "The demonstration of generating Shakespearean prose from paintings is explicitly stated in the abstract and illustrated/evaluated in the results. The additional creativity description aligns with the paper's aim/results, rather than introducing an outside application.",
+      "C": "Its concise application statement is directly supported by the selected abstract window. It appears to answer the question, despite the original unanswerable label.",
+      "reference_comparison": "Single original unanswerable annotation with no evidence. Gold stays CFAF. No corrected accuracy or alternate-label score is calculated.",
+      "unsupported_entities_relations_dates_causes": "No unsupported application identity or causal/date assertion identified in the reviewed output. Original label versus paper text is the material uncertainty.",
+      "flags": ["POTENTIAL_GOLD_DOCUMENT_DISCREPANCY", "NOMINAL_FAILURE_TO_RESTRICT_WITH_EXPLICIT_SUPPORT"]
+    }
+  ]
+}

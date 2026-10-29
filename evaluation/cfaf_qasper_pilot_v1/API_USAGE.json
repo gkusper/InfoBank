@@ -1,0 +1,52 @@
+{
+  "B_extra_model_calls": 0,
+  "B_summed_postprocess_ms": 27.439799858257174,
+  "LLM_judges": 0,
+  "attempt_cap": 50,
+  "attempts": 30,
+  "by_kind": {
+    "semantic_analysis": {
+      "attempts": 10,
+      "input_tokens": 204672,
+      "mean_latency_ms": 4651.908590015955,
+      "output_tokens": 3184,
+      "successes": 10,
+      "summed_latency_ms": 46519.08590015955
+    },
+    "semantic_cfaf": {
+      "attempts": 10,
+      "input_tokens": 64435,
+      "mean_latency_ms": 1856.9616499589756,
+      "output_tokens": 518,
+      "successes": 10,
+      "summed_latency_ms": 18569.616499589756
+    },
+    "standard_rag": {
+      "attempts": 10,
+      "input_tokens": 60237,
+      "mean_latency_ms": 2505.6588599691167,
+      "output_tokens": 894,
+      "successes": 10,
+      "summed_latency_ms": 25056.588599691167
+    }
+  },
+  "embeddings": 0,
+  "errors": 0,
+  "finish_reasons": {
+    "stop": 30
+  },
+  "independent_verification_APIs": 0,
+  "input_tokens": 329344,
+  "last_call_start_epoch": 1793271057.0036838,
+  "max_latency_ms": 5834.183700149879,
+  "mean_latency_ms": 3004.8430333146825,
+  "monetary_cost": "Not calculated; tokens and latency recorded without unverified pricing",
+  "observed_models": [
+    "gpt-4o-mini-2024-07-18"
+  ],
+  "output_tokens": 4596,
+  "retries": 0,
+  "successes": 30,
+  "summed_latency_seconds": 90.14529099944048,
+  "unsettled_attempts": 0
+}

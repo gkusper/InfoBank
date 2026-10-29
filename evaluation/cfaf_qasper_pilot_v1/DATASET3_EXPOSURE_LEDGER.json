@@ -1,0 +1,25 @@
+{
+  "dataset": "Dataset3-QASPER-v2-candidate",
+  "development_experiment": true,
+  "first_schema_example_question_id": "b6f15fb6279b82e34a5bf4828b7b5ddabfdf1d54",
+  "metadata_and_annotations_audited_for_labeling": 1005,
+  "new_distinct_papers": 10,
+  "new_selected_questions_charged": 10,
+  "other_dataset_ledgers_modified": false,
+  "remaining_questions_not_model_evaluated": 995,
+  "sample_not_adjusted_for_schema_example": true,
+  "schema_example_answer_seen_before_sampling": true,
+  "selected_ids": [
+    "891c2001d6baaaf0da4e65b647402acac621a7d2",
+    "b970f48d30775d3468952795bc72976baab3438e",
+    "2eb9280d72cde9de3aabbed993009a98a5fe0990",
+    "c81f215d457bdb913a5bade2b4283f19c4ee826c",
+    "b8d0e4e0e820753ffc107c1847fe1dfd48883989",
+    "a66a275a817f980c36e0b67d2e00bd823f63abf8",
+    "63c3550c6fb42f41a0c93133e9fca12ac00df9b3",
+    "252a645af9876241fb166e5822992ce17fec6eb6",
+    "8e12b5c459fa963b3e549deadb864c244879fe82",
+    "63b92dcc701ec77fdb3355ede5d37d2fbf057bcc"
+  ],
+  "selection_manifest_sha256": "702055be1bffab39fe480703e4760626f3e135eba7c88c82e0eb8371e69247d6"
+}

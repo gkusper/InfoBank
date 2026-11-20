@@ -40,11 +40,11 @@ class Pipeline:
                         decision=failure(result.status);proposal=None
                     else:proposal=result.proposal
                 if proposal:
-                    decision,gate_trace=decide(request,evidence,proposal,origin,resolution.permitted_restricted);trace.update(gate_trace)
                     trace['proposal']=proposal.model_dump(mode='json')
                     if self.checker:
                         try:trace['local_support_shadow']=self.checker.check(request,evidence,proposal)
                         except Exception as exc:trace['local_support_shadow']={'status':'ERROR','error_type':type(exc).__name__}
+                    decision,gate_trace=decide(request,evidence,proposal,origin,resolution.permitted_restricted);trace.update(gate_trace)
                 elif 'decision' not in locals():raise ContractError('SUCCESS_WITHOUT_PROPOSAL')
             if not self.governance.current(evidence.authority):raise ContractError('POLICY_REVOKED')
             response=self.renderer.render(decision,proposal,evidence)

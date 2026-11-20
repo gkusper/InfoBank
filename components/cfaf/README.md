@@ -26,7 +26,7 @@ The demo uses fictional data only, requires no API key, database, UI or NLP/NLI 
 4. Protected no-view P5 CFAF, zero calls.
 5. Ordinary content FULL, exactly one mocked SDK transport request, mechanically valid quote citation.
 
-Demo output order is metadata, incomplete, aggregate, P5, ordinary. The final path demonstrates the real SDK interface with mock transport, not live accuracy. The older fictional `examples/offline_demo.py` remains available; original v1 tests are unchanged. Current component tests: 86 pass (54 original plus 32 new). Isolated historical results and explicit exclusions/pre-existing failure are in results/v1_1/regression_audit.json.
+Demo output order is metadata, incomplete, aggregate, P5, ordinary. The final path demonstrates the real SDK interface with mock transport, not live accuracy. The older fictional `examples/offline_demo.py` remains available; original v1 tests are unchanged. Current component tests: 103 pass (54 original v1, 32 v1.1 targeted, 2 synthetic grounding, and 15 PR 1 reference support checker tests). The local shadow support checker is implemented in `component_cfaf.support_checker.ReferenceSupportChecker` with 0 external API calls. Isolated historical results and explicit exclusions/pre-existing failure are in results/v1_1/regression_audit.json.
 
 ## Application integration
 

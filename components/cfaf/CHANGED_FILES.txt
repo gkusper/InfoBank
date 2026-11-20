@@ -10,6 +10,7 @@ components/cfaf/api_usage.json
 components/cfaf/checksums.sha256
 components/cfaf/code_size_report.json
 components/cfaf/component_manifest.json
+components/cfaf/examples/dump_shadow.py
 components/cfaf/examples/offline_demo.py
 components/cfaf/pyproject.toml
 components/cfaf/requirements.lock
@@ -48,10 +49,13 @@ components/cfaf/src/component_cfaf/pipeline.py
 components/cfaf/src/component_cfaf/profile.py
 components/cfaf/src/component_cfaf/render.py
 components/cfaf/src/component_cfaf/structured.py
+components/cfaf/src/component_cfaf/support_checker.py
 components/cfaf/tests/conftest.py
 components/cfaf/tests/test_pipeline.py
 components/cfaf/tests/test_sdk.py
 components/cfaf/tests/test_selector.py
+components/cfaf/tests/test_support_checker.py
+components/cfaf/tests/test_synthetic_grounding.py
 components/cfaf/tools/audit.py
 components/cfaf/tools/common.py
 components/cfaf/tools/finalize.py

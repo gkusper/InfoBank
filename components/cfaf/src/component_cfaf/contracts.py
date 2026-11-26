@@ -65,6 +65,7 @@ class AccessDecision(Contract):
 class SourceEntityBinding(Contract):
     source_id: str
     entity_id: str | None = None
+    content_sha256: str | None = None
 
 class Span(Contract):
     span_id: str
@@ -107,6 +108,8 @@ class SourceAssessment(Contract):
     grounding_span_ids: list[str]
     note: str
     grounding_quotes: list[str] = []
+    contradicts_claim_ids: list[str] = []
+    contradicts_requirement_ids: list[str] = []
 
 class EvidenceRef(Contract):
     source_id: str

@@ -138,6 +138,7 @@ class ReferenceSupportChecker:
         proposal: LLMProposal,
         source_entity_map: dict[str, str | None],
         claim_entities_by_req: dict[str, set[str]],
+        all_cited_sources: set[str],
     ) -> ClaimAuditRecord:
         """Builds an audit record for a validated requirement that has no supporting claim."""
         anchor = QueryAnchorAudit(
@@ -148,7 +149,13 @@ class ReferenceSupportChecker:
             valid=True,
             error=None,
         )
-        assessments = {a.source_id: a for a in proposal.source_assessments}
+
+        def _assessment_applies_to_req(a) -> bool:
+            if a.relation != "CONTRADICTS" or a.source_id not in source_entity_map:
+                return False
+            if a.contradicts_claim_ids or a.contradicts_requirement_ids:
+                return req.requirement_id in a.contradicts_requirement_ids
+            return a.source_id not in all_cited_sources
 
         parent_entities: set[str] = set()
         for parent_rid in req.depends_on:
@@ -159,10 +166,13 @@ class ReferenceSupportChecker:
                 eid for eid in source_entity_map.values()
                 if eid is not None and eid not in parent_entities
             }
-            same_entity_sources = [
+            same_entity_sources = {
                 sid for sid, eid in source_entity_map.items() if eid in parent_entities
-            ]
-            if any(assessments.get(sid) and assessments[sid].relation == "CONTRADICTS" for sid in same_entity_sources):
+            }
+            if any(
+                _assessment_applies_to_req(a) and a.source_id in same_entity_sources
+                for a in proposal.source_assessments
+            ):
                 return ClaimAuditRecord(
                     case_id=case_id,
                     requirement_id=req.requirement_id,
@@ -195,7 +205,7 @@ class ReferenceSupportChecker:
                     runtime_error=None,
                 )
 
-        if any(a.relation == "CONTRADICTS" and a.source_id in source_entity_map for a in proposal.source_assessments):
+        if any(_assessment_applies_to_req(a) for a in proposal.source_assessments):
             non_null_entities = {eid for eid in source_entity_map.values() if eid is not None}
             if len(non_null_entities) > 1:
                 return ClaimAuditRecord(
@@ -262,10 +272,13 @@ class ReferenceSupportChecker:
             source_entity_map = {v.source_id: None for v in evidence.views}
 
         claims_by_id: dict[str, Claim] = {}
+        claims_by_req: dict[str, list[Claim]] = {}
         subject_groups: dict[str, list[Claim]] = {}
         for c in proposal.claims:
             if c.claim_id and c.claim_id not in claims_by_id:
                 claims_by_id[c.claim_id] = c
+            for rid in c.requirement_ids:
+                claims_by_req.setdefault(rid, []).append(c)
             if c.subject_key and c.subject_key.strip():
                 subject_groups.setdefault(c.subject_key.strip().casefold(), []).append(c)
 
@@ -285,6 +298,20 @@ class ReferenceSupportChecker:
                 "reason": entity_map_error,
                 "error_type": "ContractError",
             })
+
+        for assessment in proposal.source_assessments:
+            if not (set(assessment.contradicts_claim_ids) <= set(claims_by_id)) or not (
+                set(assessment.contradicts_requirement_ids) <= set(valid_reqs)
+            ):
+                rejections.append({
+                    "source_id": assessment.source_id,
+                    "reason": "UNKNOWN_CONTRADICTION_TARGET",
+                    "error_type": "ContractError",
+                })
+
+        # Pass 1: Validate anchors, citations, and source-bound entity bindings per claim
+        prepared_claims: list[dict[str, Any]] = []
+        claim_entities: dict[str, str | None] = {}
 
         for claim in proposal.claims:
             claims_checked += 1
@@ -485,15 +512,48 @@ class ReferenceSupportChecker:
 
                 claim_detail["references"].append(ref_record)
 
-            involved_sources, invalid_dependency = collect_involved_sources(
-                claim, claims_by_id, subject_groups
+            involved_sources, invalid_dependency, has_mandatory_req_dep = collect_involved_sources(
+                claim, claims_by_id, subject_groups, valid_reqs, claims_by_req
             )
             entity_audit = evaluate_entity_binding(
                 claim,
                 involved_sources,
                 source_entity_map,
+                has_mandatory_req_dep=has_mandatory_req_dep,
                 require_entity_binding=self.require_entity_binding,
             )
+            if claim.claim_id:
+                claim_entities[claim.claim_id] = entity_audit.claim_entity_id
+            if entity_audit.claim_entity_id is not None:
+                for rid in claim.requirement_ids:
+                    claim_entities_by_req.setdefault(rid, set()).add(entity_audit.claim_entity_id)
+
+            prepared_claims.append({
+                "claim": claim,
+                "claim_detail": claim_detail,
+                "query_anchors": query_anchors,
+                "doc_ref_audits": doc_ref_audits,
+                "claim_valid": claim_valid,
+                "claim_structural_error": claim_structural_error,
+                "first_ref_error": first_ref_error,
+                "involved_sources": involved_sources,
+                "invalid_dependency": invalid_dependency,
+                "entity_audit": entity_audit,
+            })
+
+        # Pass 2: Evaluate scoped contradictions and support statuses per claim
+        for item in prepared_claims:
+            claim = item["claim"]
+            claim_detail = item["claim_detail"]
+            query_anchors = item["query_anchors"]
+            doc_ref_audits = item["doc_ref_audits"]
+            claim_valid = item["claim_valid"]
+            claim_structural_error = item["claim_structural_error"]
+            first_ref_error = item["first_ref_error"]
+            involved_sources = item["involved_sources"]
+            invalid_dependency = item["invalid_dependency"]
+            entity_audit = item["entity_audit"]
+
             all_anchors_valid = claim_valid and all(a.valid for a in query_anchors)
             all_refs_valid = bool(doc_ref_audits) and all(r.valid for r in doc_ref_audits)
 
@@ -509,15 +569,18 @@ class ReferenceSupportChecker:
                     invalid_dependency=invalid_dependency,
                     involved_sources=involved_sources,
                     source_entity_map=source_entity_map,
+                    valid_reqs=valid_reqs,
+                    claims_by_req=claims_by_req,
+                    claim_entities=claim_entities,
                     proposal=proposal,
                 )
 
             if all_anchors_valid and all_refs_valid and entity_map_error is None:
-                if invalid_dependency:
+                if invalid_dependency or any(sid not in source_entity_map for sid in involved_sources):
                     claim_detail["valid"] = False
                     rejections.append({
                         "claim_id": claim.claim_id,
-                        "reason": "UNKNOWN_PARENT_CLAIM",
+                        "reason": "MISSING_OR_INVALID_DEPENDENCY",
                         "error_type": "ContractError",
                     })
                 elif entity_audit.status == EntityBindingStatus.MISMATCHED:
@@ -549,10 +612,6 @@ class ReferenceSupportChecker:
                         "error_type": "SupportError",
                     })
 
-            if entity_audit.claim_entity_id is not None:
-                for rid in claim.requirement_ids:
-                    claim_entities_by_req.setdefault(rid, set()).add(entity_audit.claim_entity_id)
-
             claim_detail["entity_binding"] = entity_audit.model_dump(mode="json")
             claim_detail["support_status"] = claim_support_status.value
             details.append(claim_detail)
@@ -563,7 +622,7 @@ class ReferenceSupportChecker:
                     or claim_structural_error
                     or anchor.error
                     or first_ref_error
-                    or ("UNKNOWN_PARENT_CLAIM" if invalid_dependency else None)
+                    or ("MISSING_OR_INVALID_DEPENDENCY" if invalid_dependency else None)
                 )
                 per_anchor_status = (
                     SupportStatus.INSUFFICIENT
@@ -588,6 +647,7 @@ class ReferenceSupportChecker:
                 rejections.append(rej)
         rejections.extend(global_rejections)
 
+        all_cited_sources = {r.source_id for c in proposal.claims for r in c.evidence}
         for rid, req in valid_reqs.items():
             if rid not in covered_rids:
                 audit_records.append(
@@ -598,8 +658,30 @@ class ReferenceSupportChecker:
                         proposal,
                         source_entity_map,
                         claim_entities_by_req,
+                        all_cited_sources,
                     )
                 )
+
+        # Flag any multi-requirement CONTRADICTS assessment on an active entity that failed to
+        # specify which claim or requirement it contradicts (without poisoning unrelated claims).
+        if entity_map_error is None and not any(r.support_status == SupportStatus.CONTRADICTED for r in audit_records):
+            active_entities = {eid for eid in claim_entities.values() if eid is not None}
+            any_global_entity = any(eid is not None for eid in source_entity_map.values())
+            for assessment in proposal.source_assessments:
+                if (
+                    assessment.relation == "CONTRADICTS"
+                    and assessment.source_id in source_entity_map
+                    and not assessment.contradicts_claim_ids
+                    and not assessment.contradicts_requirement_ids
+                    and assessment.source_id not in all_cited_sources
+                ):
+                    src_eid = source_entity_map[assessment.source_id]
+                    if (src_eid is not None and src_eid in active_entities) or (not any_global_entity and claims_checked > 0):
+                        rejections.append({
+                            "source_id": assessment.source_id,
+                            "reason": "UNSCOPED_CONTRADICTION_ASSESSMENT",
+                            "error_type": "ContractError",
+                        })
 
         entity_summary = {
             "matched": sum(1 for r in audit_records if r.entity_binding.status == EntityBindingStatus.MATCHED),

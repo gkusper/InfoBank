@@ -31,8 +31,9 @@ class LegacyGovernance:
         request=project_case({'query':query,'sources':raw})
         included={p['permitted_source_id']:p['original_source_id'] for p in request.internal_policy if p['included']}
         views=[make_view(d['source_id'],d['view_kind'],d['context'],{k:v for k,v in by_private[included[d['source_id']]].public_metadata.items() if k in {'title','url'} and isinstance(v,str)}) for d in request.documents]
+        view_hashes={v.source_id:v.content_sha256 for v in views}
         bindings=[{'source_id':sid,'target_names':decisions[pid].target_names,'catalogue_title':by_private[pid].catalogue_title,'aggregate_spec':decisions[pid].aggregate_spec,'policy_version':authority.policy_version,'revocation_version':authority.revocation_version,'principal':authority.principal,'purpose':authority.purpose} for sid,pid in included.items()]
-        entity_bindings=[SourceEntityBinding(source_id=sid,entity_id=decisions[pid].entity_id if decisions[pid].entity_id is not None else by_private[pid].entity_id).model_dump(mode='json') for sid,pid in included.items()]
+        entity_bindings=[SourceEntityBinding(source_id=sid,entity_id=decisions[pid].entity_id if decisions[pid].entity_id is not None else by_private[pid].entity_id,content_sha256=view_hashes[sid]).model_dump(mode='json') for sid,pid in included.items()]
         return views,{'structured_bindings':bindings,'entity_bindings':entity_bindings,'policy':request.internal_policy+excluded,'private_mapping':included,'blocked_values':request.blocked_values+blocked}
 
 class ProvidedContextRetriever:
@@ -66,6 +67,9 @@ class QuotaLedger:
                 raise ValueError('QUERY_ALREADY_CONSUMED')
             if self.used.get(key,0)>=self.limit:raise ValueError('QUERY_QUOTA_EXCEEDED')
             self.used[key]=self.used.get(key,0)+1;self.requests[rid]=signature
+
+def entity_binding_signature(authority,processing_version,complete_scope,views,inventory,entity_bindings):
+    return digest(canonical([authority.model_dump(mode='json'),processing_version,complete_scope,[(v.source_id,v.view_kind,v.content_sha256) for v in views],[(i.source_id,i.view_kind,i.content_sha256,i.supplied) for i in inventory],[b.model_dump(mode='json') for b in entity_bindings]]))
 
 def evidence_contract(authority,all_views,selected,complete_scope=False):
     byid={v.source_id:v for v in all_views}

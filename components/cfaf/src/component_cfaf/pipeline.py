@@ -42,7 +42,7 @@ class Pipeline:
                 if proposal:
                     trace['proposal']=proposal.model_dump(mode='json')
                     if self.checker:
-                        try:trace['local_support_shadow']=self.checker.check(request,evidence,proposal)
+                        try:trace['local_support_shadow']=self.checker.check(request.model_copy(deep=True),evidence.model_copy(deep=True),proposal.model_copy(deep=True))
                         except Exception as exc:trace['local_support_shadow']={'status':'ERROR','error_type':type(exc).__name__}
                     decision,gate_trace=decide(request,evidence,proposal,origin,resolution.permitted_restricted);trace.update(gate_trace)
                 elif 'decision' not in locals():raise ContractError('SUCCESS_WITHOUT_PROPOSAL')

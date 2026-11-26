@@ -16,6 +16,11 @@ Covers:
 13. Invalid span ID rejection: non-existent span reference.
 14. Missing evidence rejection: claim with empty evidence references.
 15. Ambiguous reference representation rejection: both quote and span_id provided.
+16. Mutation invariance: mutating checker cannot alter gate decision or public response.
+17. Proposal-added requirement: valid anchored requirement populates requirement_snippets.
+18. Unknown requirement ID rejection: claim referencing unknown requirement_id is rejected.
+19. Invalid query span rejection: proposal requirement with invalid query bounds is rejected.
+20. Base requirement tampering rejection: removing or weakening base requirement is rejected.
 """
 import pytest
 from component_cfaf.contracts import (
@@ -25,6 +30,7 @@ from component_cfaf.contracts import (
     LLMProposal,
     ProviderResult,
     RawSource,
+    Requirement,
     RequirementSupport,
     SourceAssessment,
     ValueType,
@@ -854,3 +860,364 @@ def test_checker_rejects_ambiguous_reference_representation(authority, governanc
     assert shadow['status'] == 'REJECTED'
     assert shadow['references_invalid'] == 1
     assert shadow['rejections'][0]['reason'] == 'AMBIGUOUS_REFERENCE_REPRESENTATION'
+
+
+# ==============================================================================
+# Review Regression & Invariance Tests (16 - 20)
+# ==============================================================================
+
+def test_mutating_checker_cannot_alter_decision_or_public_response(authority, source, governance):
+    """Test 16: A checker that mutates nested lists in-place cannot alter FULL/CFAF decision or public output."""
+    class ValidProvider:
+        def propose(self, request, evidence):
+            view = evidence.views[0]
+            quote = 'The vessel is blue.'
+            ref = EvidenceRef(source_id=view.source_id, quote=quote)
+            claim = Claim(
+                claim_id='c1',
+                requirement_ids=[request.requirements[0].requirement_id],
+                text='The vessel is blue.',
+                value_type=ValueType.TEXT,
+                value='blue',
+                subject_key=None,
+                dependencies=[],
+                evidence=[ref]
+            )
+            assessment = SourceAssessment(
+                source_id=view.source_id,
+                role='PRIMARY',
+                relation='SUPPORTS',
+                grounding_quotes=[quote],
+                grounding_span_ids=[],
+                note='Exact quote'
+            )
+            support = RequirementSupport(
+                requirement_id=request.requirements[0].requirement_id,
+                status='SUFFICIENT',
+                claim_ids=['c1'],
+                missing=''
+            )
+            proposal = LLMProposal(
+                requirements=request.requirements,
+                source_assessments=[assessment],
+                claims=[claim],
+                requirement_support=[support],
+                interpretation_limit=''
+            )
+            return ProviderResult(
+                proposal=proposal,
+                status='SUCCESS',
+                usage={'attempts': 1, 'input_tokens': 10, 'output_tokens': 10},
+                raw=None
+            )
+
+    class MutatingShadowChecker:
+        local_only = True
+
+        def check(self, request, evidence, proposal):
+            # Attempt to sabotage decision/rendering by mutating nested lists in-place
+            for sup in proposal.requirement_support:
+                sup.claim_ids.clear()
+            for clm in proposal.claims:
+                clm.evidence.clear()
+                clm.requirement_ids.clear()
+            proposal.claims.clear()
+            proposal.source_assessments.clear()
+            proposal.requirements.clear()
+            request.requirements.clear()
+            evidence.views.clear()
+            evidence.inventory.clear()
+            return {'status': 'MUTATED_SHADOW_COPIES', 'local_only': True}
+
+    query = 'What color is the vessel?'
+
+    baseline = Pipeline(governance, ValidProvider(), support_checker=None).run(query, [source], authority)
+    mutated = Pipeline(governance, ValidProvider(), support_checker=MutatingShadowChecker()).run(query, [source], authority)
+
+    assert baseline.response.mode == 'FULL'
+    assert mutated.response.mode == 'FULL'
+    assert mutated.decision == baseline.decision
+    assert mutated.response == baseline.response
+    assert mutated.private_trace['local_support_shadow']['status'] == 'MUTATED_SHADOW_COPIES'
+
+
+def test_checker_accepts_proposal_added_anchored_requirement(authority, governance):
+    """Test 17: Valid proposal-added requirement anchored to request.query populates requirement_snippets."""
+    doc = RawSource(
+        private_id='doc-added-req',
+        content='The expedition vessel is blue. It was launched in 2024.',
+        metadata={'title': 'Expedition Log'},
+        public_metadata={'title': 'Expedition Log'}
+    )
+    query = 'What color is the vessel? Give launch year.'
+
+    class AddedRequirementProvider:
+        def propose(self, request, evidence):
+            view = evidence.views[0]
+            base_req = request.requirements[0]
+            added_snippet = 'Give launch year.'
+            added_start = query.index(added_snippet)
+            added_end = added_start + len(added_snippet)
+            added_req = Requirement(
+                requirement_id='req-added-2',
+                query_start=added_start,
+                query_end=added_end,
+                required=True,
+                value_type=ValueType.DATE_TIME,
+                qualifiers=[],
+                depends_on=[],
+                exhaustive=False,
+            )
+
+            q1 = 'The expedition vessel is blue.'
+            q2 = 'It was launched in 2024.'
+            c1 = Claim(
+                claim_id='c1',
+                requirement_ids=[base_req.requirement_id],
+                text=q1,
+                value_type=ValueType.TEXT,
+                value='blue',
+                subject_key=None,
+                dependencies=[],
+                evidence=[EvidenceRef(source_id=view.source_id, quote=q1)]
+            )
+            c2 = Claim(
+                claim_id='c2',
+                requirement_ids=[added_req.requirement_id],
+                text=q2,
+                value_type=ValueType.DATE_TIME,
+                value='2024',
+                subject_key=None,
+                dependencies=[],
+                evidence=[EvidenceRef(source_id=view.source_id, quote=q2)]
+            )
+            assessment = SourceAssessment(
+                source_id=view.source_id,
+                role='PRIMARY',
+                relation='SUPPORTS',
+                grounding_quotes=[q1, q2],
+                grounding_span_ids=[],
+                note='Supports both base and proposal-added requirements'
+            )
+            supports = [
+                RequirementSupport(requirement_id=base_req.requirement_id, status='SUFFICIENT', claim_ids=['c1'], missing=''),
+                RequirementSupport(requirement_id=added_req.requirement_id, status='SUFFICIENT', claim_ids=['c2'], missing=''),
+            ]
+            proposal = LLMProposal(
+                requirements=[base_req, added_req],
+                source_assessments=[assessment],
+                claims=[c1, c2],
+                requirement_support=supports,
+                interpretation_limit=''
+            )
+            return ProviderResult(
+                proposal=proposal,
+                status='SUCCESS',
+                usage={'attempts': 1, 'input_tokens': 15, 'output_tokens': 15},
+                raw=None
+            )
+
+    checker = ReferenceSupportChecker()
+    result = Pipeline(governance, AddedRequirementProvider(), support_checker=checker).run(query, [doc], authority)
+
+    assert result.response.mode == 'FULL'
+    shadow = result.private_trace['local_support_shadow']
+    assert shadow['status'] == 'ACCEPTED'
+    assert shadow['rejections'] == []
+    assert shadow['details'][0]['requirement_snippets'] == [query]
+    assert shadow['details'][1]['requirement_snippets'] == ['Give launch year.']
+
+
+def test_checker_rejects_unknown_requirement_id(authority, governance):
+    """Test 18: A claim referencing an unknown requirement_id is rejected with UNKNOWN_REQUIREMENT_ID."""
+    doc = RawSource(
+        private_id='doc-unknown-req',
+        content='The expedition vessel is blue.',
+        metadata={},
+        public_metadata={}
+    )
+    query = 'What color is the expedition vessel?'
+
+    class UnknownRequirementProvider:
+        def propose(self, request, evidence):
+            view = evidence.views[0]
+            quote = 'The expedition vessel is blue.'
+            claim = Claim(
+                claim_id='c1',
+                requirement_ids=['req-unknown-999'],
+                text=quote,
+                value_type=ValueType.TEXT,
+                value='blue',
+                subject_key=None,
+                dependencies=[],
+                evidence=[EvidenceRef(source_id=view.source_id, quote=quote)]
+            )
+            assessment = SourceAssessment(
+                source_id=view.source_id,
+                role='PRIMARY',
+                relation='SUPPORTS',
+                grounding_quotes=[quote],
+                grounding_span_ids=[],
+                note='Unknown requirement reference'
+            )
+            support = RequirementSupport(
+                requirement_id=request.requirements[0].requirement_id,
+                status='SUFFICIENT',
+                claim_ids=['c1'],
+                missing=''
+            )
+            proposal = LLMProposal(
+                requirements=request.requirements,
+                source_assessments=[assessment],
+                claims=[claim],
+                requirement_support=[support],
+                interpretation_limit=''
+            )
+            return ProviderResult(
+                proposal=proposal,
+                status='SUCCESS',
+                usage={'attempts': 1, 'input_tokens': 10, 'output_tokens': 10},
+                raw=None
+            )
+
+    checker = ReferenceSupportChecker()
+    result = Pipeline(governance, UnknownRequirementProvider(), support_checker=checker).run(query, [doc], authority)
+
+    shadow = result.private_trace.get('local_support_shadow')
+    assert shadow is not None
+    assert shadow['status'] == 'REJECTED'
+    assert shadow['details'][0]['valid'] is False
+    assert shadow['details'][0]['requirement_snippets'] == []
+    assert len(shadow['rejections']) == 1
+    assert shadow['rejections'][0]['claim_id'] == 'c1'
+    assert shadow['rejections'][0]['requirement_id'] == 'req-unknown-999'
+    assert shadow['rejections'][0]['reason'] == 'UNKNOWN_REQUIREMENT_ID'
+
+
+def test_checker_rejects_added_requirement_with_invalid_query_span(authority, governance):
+    """Test 19: A proposal-added requirement with out-of-bounds query offsets is rejected as INVALID_QUERY_SPAN."""
+    doc = RawSource(
+        private_id='doc-bad-query-span',
+        content='The expedition vessel is blue.',
+        metadata={},
+        public_metadata={}
+    )
+    pipeline = Pipeline(governance, None)
+    request, evidence, _ = pipeline.prepare('What color is the vessel?', [doc], authority)
+    view = evidence.views[0]
+
+    bad_req = Requirement(
+        requirement_id='req-bad-span',
+        query_start=0,
+        query_end=999,
+        required=True,
+        value_type=ValueType.TEXT,
+        qualifiers=[],
+        depends_on=[],
+        exhaustive=False,
+    )
+    quote = 'The expedition vessel is blue.'
+    claim = Claim(
+        claim_id='c1',
+        requirement_ids=['req-bad-span'],
+        text=quote,
+        value_type=ValueType.TEXT,
+        value='blue',
+        subject_key=None,
+        dependencies=[],
+        evidence=[EvidenceRef(source_id=view.source_id, quote=quote)]
+    )
+    proposal = LLMProposal(
+        requirements=[*request.requirements, bad_req],
+        source_assessments=[SourceAssessment(
+            source_id=view.source_id,
+            role='PRIMARY',
+            relation='SUPPORTS',
+            grounding_quotes=[quote],
+            grounding_span_ids=[],
+            note=''
+        )],
+        claims=[claim],
+        requirement_support=[
+            RequirementSupport(requirement_id=request.requirements[0].requirement_id, status='MISSING', claim_ids=[], missing='none'),
+            RequirementSupport(requirement_id='req-bad-span', status='SUFFICIENT', claim_ids=['c1'], missing=''),
+        ],
+        interpretation_limit=''
+    )
+
+    shadow = ReferenceSupportChecker().check(request, evidence, proposal)
+    assert shadow['status'] == 'REJECTED'
+    assert shadow['details'][0]['valid'] is False
+    assert any(
+        r.get('requirement_id') == 'req-bad-span' and r.get('reason') == 'INVALID_QUERY_SPAN'
+        for r in shadow['rejections']
+    )
+
+
+def test_checker_rejects_removed_or_weakened_base_requirement(authority, governance):
+    """Test 20: Removing or weakening an explicit base requirement is rejected in the shadow audit."""
+    doc = RawSource(
+        private_id='doc-weakened-req',
+        content='The expedition vessel is blue.',
+        metadata={},
+        public_metadata={}
+    )
+    pipeline = Pipeline(governance, None)
+    request, evidence, _ = pipeline.prepare('What color is the vessel?', [doc], authority)
+    view = evidence.views[0]
+    base_req = request.requirements[0]
+
+    weakened_req = base_req.model_copy(update={'required': False})
+    quote = 'The expedition vessel is blue.'
+    claim = Claim(
+        claim_id='c1',
+        requirement_ids=[base_req.requirement_id],
+        text=quote,
+        value_type=ValueType.TEXT,
+        value='blue',
+        subject_key=None,
+        dependencies=[],
+        evidence=[EvidenceRef(source_id=view.source_id, quote=quote)]
+    )
+    proposal_weakened = LLMProposal(
+        requirements=[weakened_req],
+        source_assessments=[SourceAssessment(
+            source_id=view.source_id,
+            role='PRIMARY',
+            relation='SUPPORTS',
+            grounding_quotes=[quote],
+            grounding_span_ids=[],
+            note=''
+        )],
+        claims=[claim],
+        requirement_support=[
+            RequirementSupport(requirement_id=base_req.requirement_id, status='SUFFICIENT', claim_ids=['c1'], missing=''),
+        ],
+        interpretation_limit=''
+    )
+    shadow_weakened = ReferenceSupportChecker().check(request, evidence, proposal_weakened)
+    assert shadow_weakened['status'] == 'REJECTED'
+    assert any(r.get('reason') == 'EXPLICIT_REQUEST_WEAKENED' for r in shadow_weakened['rejections'])
+
+    added_req = Requirement(
+        requirement_id='req-replacement',
+        query_start=0,
+        query_end=len(request.query),
+        required=True,
+        value_type=ValueType.TEXT,
+        qualifiers=[],
+        depends_on=[],
+        exhaustive=False,
+    )
+    proposal_removed = proposal_weakened.model_copy(update={
+        'requirements': [added_req],
+        'claims': [claim.model_copy(update={'requirement_ids': ['req-replacement']})],
+    })
+    shadow_removed = ReferenceSupportChecker().check(request, evidence, proposal_removed)
+    assert shadow_removed['status'] == 'REJECTED'
+    assert any(
+        r.get('requirement_id') == base_req.requirement_id
+        and r.get('reason') == 'REQUIRED_REQUEST_PART_REMOVED_OR_DUPLICATED'
+        for r in shadow_removed['rejections']
+    )
+

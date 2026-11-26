@@ -1,0 +1,146 @@
+[
+  {
+    "case_id": "case-001",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "query_anchor": {
+      "start": 0,
+      "end": 36,
+      "snippet": "What color is the expedition vessel?",
+      "valid": true,
+      "error": null
+    },
+    "document_refs": [
+      {
+        "source_id": "view-0001",
+        "span_id": "view-0001:quote-0-30",
+        "start": 0,
+        "end": 30,
+        "quote": "The expedition vessel is blue.",
+        "matched_snippet": "The expedition vessel is blue.",
+        "valid": true,
+        "error": null
+      }
+    ],
+    "entity_binding": {
+      "status": "MATCHED",
+      "claim_entity_id": "entity-vessel-01",
+      "source_entity_ids": {
+        "view-0001": "entity-vessel-01"
+      },
+      "error": null
+    },
+    "support_status": "SUPPORTED",
+    "runtime_error": null
+  },
+  {
+    "case_id": "case-002",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "query_anchor": {
+      "start": 0,
+      "end": 28,
+      "snippet": "When did Zeph launch?",
+      "valid": true,
+      "error": null
+    },
+    "document_refs": [
+      {
+        "source_id": "view-0002",
+        "span_id": "view-0002:quote-10-42",
+        "start": 10,
+        "end": 42,
+        "quote": "Balloon Zeph-B launched in 2024.",
+        "matched_snippet": "Balloon Zeph-B launched in 2024.",
+        "valid": true,
+        "error": null
+      }
+    ],
+    "entity_binding": {
+      "status": "MISMATCHED",
+      "claim_entity_id": "entity-zeph-a",
+      "source_entity_ids": {
+        "view-0002": "entity-zeph-b"
+      },
+      "error": "ENTITY_ID_MISMATCH"
+    },
+    "support_status": "UNRESOLVED",
+    "runtime_error": null
+  },
+  {
+    "case_id": "case-003",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "query_anchor": {
+      "start": 0,
+      "end": 25,
+      "snippet": "How many tasks completed?",
+      "valid": true,
+      "error": null
+    },
+    "document_refs": [
+      {
+        "source_id": "view-0003",
+        "span_id": "view-0003:quote-0-22",
+        "start": 0,
+        "end": 22,
+        "quote": "14 tasks were closed.",
+        "matched_snippet": "14 tasks were closed.",
+        "valid": true,
+        "error": null
+      }
+    ],
+    "entity_binding": {
+      "status": "MISSING",
+      "claim_entity_id": null,
+      "source_entity_ids": {
+        "view-0003": null
+      },
+      "error": "MISSING_SOURCE_ENTITY_ID"
+    },
+    "support_status": "UNRESOLVED",
+    "runtime_error": null
+  },
+  {
+    "case_id": "case-004",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "query_anchor": {
+      "start": null,
+      "end": null,
+      "snippet": null,
+      "valid": false,
+      "error": "EXECUTION_ABORTED"
+    },
+    "document_refs": [],
+    "entity_binding": {
+      "status": "NOT_APPLICABLE",
+      "claim_entity_id": null,
+      "source_entity_ids": {},
+      "error": null
+    },
+    "support_status": "NOT_EVALUATED",
+    "runtime_error": "PROVIDER_TIMEOUT"
+  },
+  {
+    "case_id": "case-005",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "query_anchor": {
+      "start": 0,
+      "end": 21,
+      "snippet": "Unannotated test case",
+      "valid": true,
+      "error": null
+    },
+    "document_refs": [],
+    "entity_binding": {
+      "status": "NOT_APPLICABLE",
+      "claim_entity_id": null,
+      "source_entity_ids": {},
+      "error": null
+    },
+    "support_status": "INSUFFICIENT",
+    "runtime_error": null
+  }
+]

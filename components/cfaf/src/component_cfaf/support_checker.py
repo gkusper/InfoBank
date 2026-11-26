@@ -617,13 +617,6 @@ class ReferenceSupportChecker:
             details.append(claim_detail)
 
             for anchor in query_anchors:
-                runtime_err = (
-                    entity_map_error
-                    or claim_structural_error
-                    or anchor.error
-                    or first_ref_error
-                    or ("MISSING_OR_INVALID_DEPENDENCY" if invalid_dependency else None)
-                )
                 per_anchor_status = (
                     SupportStatus.INSUFFICIENT
                     if not anchor.valid
@@ -638,7 +631,7 @@ class ReferenceSupportChecker:
                         document_refs=doc_ref_audits,
                         entity_binding=entity_audit,
                         support_status=per_anchor_status,
-                        runtime_error=runtime_err,
+                        runtime_error=entity_map_error,
                     )
                 )
 

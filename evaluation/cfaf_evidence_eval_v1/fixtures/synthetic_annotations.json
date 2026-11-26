@@ -1,0 +1,42 @@
+[
+  {
+    "case_id": "case-001",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "expected_query_anchor_valid": true,
+    "expected_document_refs_valid": true,
+    "expected_entity_binding": "MATCHED",
+    "expected_support_status": "SUPPORTED",
+    "annotator_status": "APPROVED"
+  },
+  {
+    "case_id": "case-002",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "expected_query_anchor_valid": true,
+    "expected_document_refs_valid": true,
+    "expected_entity_binding": "MISMATCHED",
+    "expected_support_status": "UNRESOLVED",
+    "annotator_status": "APPROVED"
+  },
+  {
+    "case_id": "case-003",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "expected_query_anchor_valid": true,
+    "expected_document_refs_valid": true,
+    "expected_entity_binding": "MISSING",
+    "expected_support_status": "UNRESOLVED",
+    "annotator_status": "APPROVED"
+  },
+  {
+    "case_id": "case-004",
+    "requirement_id": "req-1",
+    "claim_id": "c1",
+    "expected_query_anchor_valid": true,
+    "expected_document_refs_valid": true,
+    "expected_entity_binding": "MATCHED",
+    "expected_support_status": "SUPPORTED",
+    "annotator_status": "APPROVED"
+  }
+]

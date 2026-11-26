@@ -43,6 +43,7 @@ components/cfaf/src/component_cfaf/adapters/local.py
 components/cfaf/src/component_cfaf/adapters/openai_sdk.py
 components/cfaf/src/component_cfaf/baseline.py
 components/cfaf/src/component_cfaf/contracts.py
+components/cfaf/src/component_cfaf/entity_binding.py
 components/cfaf/src/component_cfaf/gate.py
 components/cfaf/src/component_cfaf/interfaces.py
 components/cfaf/src/component_cfaf/pipeline.py
@@ -51,6 +52,7 @@ components/cfaf/src/component_cfaf/render.py
 components/cfaf/src/component_cfaf/structured.py
 components/cfaf/src/component_cfaf/support_checker.py
 components/cfaf/tests/conftest.py
+components/cfaf/tests/test_entity_binding.py
 components/cfaf/tests/test_pipeline.py
 components/cfaf/tests/test_sdk.py
 components/cfaf/tests/test_selector.py

@@ -26,13 +26,14 @@ class LegacyGovernance:
             if not isinstance(d,AccessDecision):raise ValueError('AUTHENTICATED_POLICY_RESULT_REQUIRED')
             if d.access=='DENY' or not d.existence_public or not d.compatible or not d.clean:
                 excluded.append({'original_source_id':s.private_id,'included':False,'access_mode':d.access})
-                blocked.extend([s.private_id,s.content,*s.private_markers]);continue
+                blocked.extend([s.private_id,s.content,*s.private_markers,*([s.entity_id] if s.entity_id else [])]);continue
             raw.append({'protected_markers':s.private_markers,'source_id':s.private_id,'content':s.content,'metadata':s.metadata,'source_type':s.source_type,'access_mode':d.access,'existence_visibility':'PUBLIC' if d.existence_public else 'NONE','allowed_metadata_fields':d.metadata_fields,'aggregate_view':d.aggregate_view,'purpose_compatibility':'compatible' if d.compatible else 'incompatible','security_status':'clean' if d.clean else 'unsafe','policy_rule_id':authority.policy_version})
         request=project_case({'query':query,'sources':raw})
         included={p['permitted_source_id']:p['original_source_id'] for p in request.internal_policy if p['included']}
         views=[make_view(d['source_id'],d['view_kind'],d['context'],{k:v for k,v in by_private[included[d['source_id']]].public_metadata.items() if k in {'title','url'} and isinstance(v,str)}) for d in request.documents]
         bindings=[{'source_id':sid,'target_names':decisions[pid].target_names,'catalogue_title':by_private[pid].catalogue_title,'aggregate_spec':decisions[pid].aggregate_spec,'policy_version':authority.policy_version,'revocation_version':authority.revocation_version,'principal':authority.principal,'purpose':authority.purpose} for sid,pid in included.items()]
-        return views,{'structured_bindings':bindings,'policy':request.internal_policy+excluded,'private_mapping':included,'blocked_values':request.blocked_values+blocked}
+        entity_bindings=[SourceEntityBinding(source_id=sid,entity_id=decisions[pid].entity_id if decisions[pid].entity_id is not None else by_private[pid].entity_id).model_dump(mode='json') for sid,pid in included.items()]
+        return views,{'structured_bindings':bindings,'entity_bindings':entity_bindings,'policy':request.internal_policy+excluded,'private_mapping':included,'blocked_values':request.blocked_values+blocked}
 
 class ProvidedContextRetriever:
     def retrieve(self,request,permitted):return list(permitted)

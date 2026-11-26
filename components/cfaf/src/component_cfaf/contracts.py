@@ -49,6 +49,7 @@ class RawSource(Contract):
     source_type: str = 'Document'
     private_markers: list[str] = []
     catalogue_title: str | None = None
+    entity_id: str | None = None
 
 class AccessDecision(Contract):
     access: str
@@ -59,6 +60,11 @@ class AccessDecision(Contract):
     clean: bool = True
     target_names: list[str] = []
     aggregate_spec: dict | None = None
+    entity_id: str | None = None
+
+class SourceEntityBinding(Contract):
+    source_id: str
+    entity_id: str | None = None
 
 class Span(Contract):
     span_id: str
@@ -91,6 +97,8 @@ class GovernedEvidenceContract(Contract):
     request_signature: str | None = None
     structured_bindings: list[dict] = []
     structured_signature: str | None = None
+    entity_bindings: list[SourceEntityBinding] = []
+    entity_signature: str | None = None
 
 class SourceAssessment(Contract):
     source_id: str
@@ -179,3 +187,51 @@ class RunResult(Contract):
 class StandardAnswer(Contract):
     mode: Literal['FULL','CFAF']
     answer: str
+
+class EntityBindingStatus(str, Enum):
+    MATCHED = 'MATCHED'
+    MISMATCHED = 'MISMATCHED'
+    MISSING = 'MISSING'
+    NOT_APPLICABLE = 'NOT_APPLICABLE'
+
+class SupportStatus(str, Enum):
+    SUPPORTED = 'SUPPORTED'
+    INSUFFICIENT = 'INSUFFICIENT'
+    CONTRADICTED = 'CONTRADICTED'
+    UNRESOLVED = 'UNRESOLVED'
+    NOT_EVALUATED = 'NOT_EVALUATED'
+
+class QueryAnchorAudit(Contract):
+    requirement_id: str
+    start: int | None = None
+    end: int | None = None
+    snippet: str | None = None
+    valid: bool
+    error: str | None = None
+
+class DocumentRefAudit(Contract):
+    source_id: str
+    span_id: str | None = None
+    start: int | None = None
+    end: int | None = None
+    quote: str | None = None
+    matched_snippet: str | None = None
+    content_sha256: str | None = None
+    valid: bool
+    error: str | None = None
+
+class EntityBindingAudit(Contract):
+    status: EntityBindingStatus
+    claim_entity_id: str | None = None
+    source_entity_ids: dict[str, str | None] = {}
+    error: str | None = None
+
+class ClaimAuditRecord(Contract):
+    case_id: str
+    requirement_id: str
+    claim_id: str | None = None
+    query_anchor: QueryAnchorAudit
+    document_refs: list[DocumentRefAudit] = []
+    entity_binding: EntityBindingAudit
+    support_status: SupportStatus
+    runtime_error: str | None = None

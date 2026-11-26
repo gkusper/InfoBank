@@ -18,8 +18,8 @@ class Pipeline:
         start=time.perf_counter();request=self.profiler.profile(query,as_of);self.quota.consume(authority,query)
         all_views,private=self.governance.project(query,sources,authority)
         selected=self.retriever.retrieve(request,all_views)
-        base=evidence_contract(authority,all_views,selected,complete_scope);bindings=private.get('structured_bindings',[]);request_sig=digest(canonical(request.model_dump(mode='json')));structured_sig=digest(canonical(bindings))
-        evidence=base.model_copy(update={'structured_bindings':bindings,'request_signature':request_sig,'structured_signature':structured_sig,'cache_key':digest(canonical([base.cache_key,request_sig,structured_sig]))})
+        base=evidence_contract(authority,all_views,selected,complete_scope);bindings=private.get('structured_bindings',[]);raw_entities=private.get('entity_bindings',[]);entity_bindings=[b if isinstance(b,SourceEntityBinding) else SourceEntityBinding.model_validate(b) for b in raw_entities];request_sig=digest(canonical(request.model_dump(mode='json')));structured_sig=digest(canonical(bindings));entity_sig=digest(canonical([b.model_dump(mode='json') for b in entity_bindings]))
+        evidence=base.model_copy(update={'structured_bindings':bindings,'request_signature':request_sig,'structured_signature':structured_sig,'entity_bindings':entity_bindings,'entity_signature':entity_sig,'cache_key':digest(canonical([base.cache_key,request_sig,structured_sig,entity_sig]))})
         private.update(stages=STAGES,physical_order=['query_only_profile','authorization_prefilter_and_projection','authorized_retrieval','proposal','local_gate','deterministic_render','validation'],prepare_ms=(time.perf_counter()-start)*1000)
         return request,evidence,private
     def complete(self,request,evidence,private):
